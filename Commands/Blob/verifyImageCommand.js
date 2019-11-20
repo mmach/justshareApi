@@ -5,7 +5,7 @@ import AuthInfrastucture from "../../Architecture/Infrastructure/authInfrastuctu
 import BlobService from "../../Services/blobService.js";
 import ValidatonInfrastructure from "../../Architecture/Infrastructure/validatonInfrastructure.js";
 import DbTransactionInfrastucture from "../../Architecture/Infrastructure/dbTransactionInfrastucture.js";
-import BlobDTO from "../../../Shared/DTO/Blob/BlobDTO.js";
+import BlobDTO from "../../Shared/DTO/Blob/BlobDTO.js";
 
 
 

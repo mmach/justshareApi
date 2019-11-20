@@ -14,6 +14,7 @@ import { URL } from "url";
 //import './../Integration/MQReciver/index.js'
 
 //TO REMOVE IN FUTURE
+console.log(process.env.UPLOAD_PATH)
 if (process.env.UPLOAD_PATH) {
   if (!fs.existsSync(process.env.UPLOAD_PATH)) {
     console.log('CREATE FOLDER');

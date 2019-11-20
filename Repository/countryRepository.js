@@ -1,6 +1,6 @@
 import BaseRepository from "../Architecture/baseRepository.js";
 import SequelizeDB from "../Database/models/index.js";
-import CountryDTO from "../../Shared/DTO/Country/CountryDTO.js";
+import CountryDTO from "../Shared/DTO/Country/CountryDTO.js";
 import PrepareSearch from "../Architecture/prepareSearch.js";
 
 

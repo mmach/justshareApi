@@ -1,6 +1,6 @@
 import BaseRepository from "../Architecture/baseRepository.js";
 import SequelizeDB from "../Database/models/index.js";
-import UserDTO from "../../Shared/DTO/User/UserDTO.js";
+import UserDTO from "../Shared/DTO/User/UserDTO.js";
 
 /**
  *

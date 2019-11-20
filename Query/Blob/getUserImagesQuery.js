@@ -1,8 +1,8 @@
 import BaseQuery from '../../Architecture/baseQuery.js';
 import LogFileInfrastructure from '../../Architecture/Infrastructure/logFileInfrastructure.js';
 import BlobService from '../../Services/blobService.js';
-import BlobDTO from '../../../Shared/DTO/Blob/BlobDTO.js';
-import BlobBase64DTO from '../../../Shared/DTO/Blob/BlobBase64DTO.js';
+import BlobDTO from '../../Shared/DTO/Blob/BlobDTO.js';
+import BlobBase64DTO from '../../Shared/DTO/Blob/BlobBase64DTO.js';
 
 
 export default class GetUserImagesQuery extends BaseQuery {

@@ -1,5 +1,5 @@
 import BaseQuery from '../../Architecture/baseQuery.js';
-import UserLoginInternalDTO from './../../../Shared/DTO/User/UserLoginInternalDTO.js'
+import UserLoginInternalDTO from './../../Shared/DTO/User/UserLoginInternalDTO.js'
 import LogFileInfrastructure from '../../Architecture/Infrastructure/logFileInfrastructure.js';
 import UserService from '../../Services/userService.js';
 

@@ -2,7 +2,7 @@
 import UnitOfWork from "../unitOfWork.js";
 import BaseRepository from "./baseRepository.js";
 import ServerException from "./Exceptions/serverException.js";
-import BaseDTO from "../../Shared/BaseObjects/baseDTO.js";
+import BaseDTO from "../Shared/BaseObjects/baseDTO.js";
 
 /**
  *

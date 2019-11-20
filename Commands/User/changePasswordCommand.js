@@ -2,12 +2,7 @@
 import BaseCommand from "./../../Architecture/baseCommand.js";
 import LogFileInfrastructure from "../../Architecture/Infrastructure/logFileInfrastructure.js";
 import UserService from "../../Services/userService.js";
-import UserDTO from "../../../Shared/DTO/User/UserDTO.js";
-import EMAIL_TEMPLATE from "./../../Static/MailsXSLT/index.js";
-import CONFIG from "../../config.js";
-import MailSender from "../../Architecture/mailSender.js";
-import CodeDictionary from "../../Architecture/Dictionary/codeDictionary.js";
-import UserLoginInternalDTO from "../../../Shared/DTO/User/UserLoginInternalDTO.js";
+import UserLoginInternalDTO from "../../Shared/DTO/User/UserLoginInternalDTO.js";
 
 /**
  *

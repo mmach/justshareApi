@@ -1,9 +1,9 @@
 import BaseQuery from '../../Architecture/baseQuery.js';
-import UserDTO from '../../../Shared/DTO/User/UserDTO.js';
+import UserDTO from '../../Shared/DTO/User/UserDTO.js';
 import LogFileInfrastructure from '../../Architecture/Infrastructure/logFileInfrastructure.js';
 import UserService from '../../Services/userService.js';
 import BlobService from '../../Services/blobService.js';
-import BlobBase64DTO from '../../../Shared/DTO/Blob/BlobBase64DTO.js';
+import BlobBase64DTO from '../../Shared/DTO/Blob/BlobBase64DTO.js';
 
 
 export default class GetUserInfoQuery extends BaseQuery {

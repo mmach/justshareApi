@@ -1,7 +1,7 @@
 import BaseService from "../Architecture/baseService.js";
-import CategoryDTO from "./../../Shared/DTO/Categories/CategoryDTO.js";
+import CategoryDTO from "./../Shared/DTO/Categories/CategoryDTO.js";
 import CategoryRepository from "./../Repository/categoryRepository.js";
-import CategoryHierarchyDTO from "./../../Shared/DTO/Categories/CategoryHierarchyDTO.js";
+import CategoryHierarchyDTO from "./../Shared/DTO/Categories/CategoryHierarchyDTO.js";
 
 /**
  *

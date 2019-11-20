@@ -1,10 +1,10 @@
 import BaseQuery from '../../Architecture/baseQuery.js';
 import LogFileInfrastructure from '../../Architecture/Infrastructure/logFileInfrastructure.js';
 import ItemService from '../../Services/itemService.js';
-import SearchItemDTO from '../../../Shared/DTO/Item/SearchItemDTO';
+import SearchItemDTO from '../../Shared/DTO/Item/SearchItemDTO';
 import ElasticSearchService from '../../Services/elasticSearchService.js';
 import BlobService from '../../Services/blobService.js';
-import BlobBase64DTO from '../../../Shared/DTO/Blob/BlobBase64DTO.js';
+import BlobBase64DTO from '../../Shared/DTO/Blob/BlobBase64DTO.js';
 import CategoryOptionService from '../../Services/categoryOptionService.js';
 import CategoryService from '../../Services/categoryService.js';
 

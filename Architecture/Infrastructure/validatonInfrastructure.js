@@ -1,7 +1,7 @@
 "use strict";
 
 import BaseInfrastracture from './../baseInfrastructure.js';
-import Enums from './../../../Shared/BaseObjects/EnumsValues.js'
+import Enums from '../../Shared/BaseObjects/EnumsValues.js'
 import ServerException from '../Exceptions/serverException.js';
 
 export default class ValidatonInfrastructure extends BaseInfrastracture {

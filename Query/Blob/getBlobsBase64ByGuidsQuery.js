@@ -1,7 +1,7 @@
 import BaseQuery from '../../Architecture/baseQuery.js';
 import LogFileInfrastructure from '../../Architecture/Infrastructure/logFileInfrastructure.js';
 import BlobService from '../../Services/blobService.js';
-import BlobMapperDTO from './../../../Shared/DTO/Blob/BlobMapperDTO.js'
+import BlobMapperDTO from './../../Shared/DTO/Blob/BlobMapperDTO.js'
 
 
 export default class GetBlobsBase64ByGuidsQuery extends BaseQuery {

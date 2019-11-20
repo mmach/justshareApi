@@ -2,7 +2,7 @@
 
 import BaseService from "../Architecture/baseService.js";
 import UnitOfWork from "../unitOfWork.js";
-import UserRegisterInternalDTO from "../../Shared/DTO/User/UserRegisterInternalDTO.js";
+import UserRegisterInternalDTO from "../Shared/DTO/User/UserRegisterInternalDTO.js";
 
 import CONFIG from "../config.js";
 import axios from 'axios'

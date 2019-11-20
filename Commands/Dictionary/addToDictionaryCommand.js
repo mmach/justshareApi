@@ -1,5 +1,5 @@
 import BaseCommand from "../../Architecture/baseCommand.js";
-import DictionaryDTO from "../../../Shared/DTO/Dictionary/DictionaryDTO.js";
+import DictionaryDTO from "../../Shared/DTO/Dictionary/DictionaryDTO.js";
 
 "use strict";
 

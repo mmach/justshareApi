@@ -1,11 +1,9 @@
 // @ts-nocheck
 import BaseCommand from "../../Architecture/baseCommand.js";
 import LogFileInfrastructure from "../../Architecture/Infrastructure/logFileInfrastructure.js";
-import CategoryService from "../../Services/categoryService.js";
-import DbTransactionInfrastucture from "../../Architecture/Infrastructure/dbTransactionInfrastucture.js";
 import AuthInfrastucture from "../../Architecture/Infrastructure/authInfrastucture.js";
 import CategoryOptionService from "../../Services/categoryOptionService.js";
-import CategoryOptionsLinkDTO from './../../../Shared/DTO/CategoryOptions/CategoryOptionsLinkDTO.js'
+import CategoryOptionsLinkDTO from './../../Shared/DTO/CategoryOptions/CategoryOptionsLinkDTO.js'
 "use strict";
 
 

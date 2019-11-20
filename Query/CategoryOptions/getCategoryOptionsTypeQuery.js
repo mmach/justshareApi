@@ -1,7 +1,7 @@
 "use strict";
 
 import BaseQuery from '../../Architecture/baseQuery.js';
-import CategoryDTO from '../../../Shared/DTO/Categories/CategoryDTO.js';
+import CategoryDTO from '../../Shared/DTO/Categories/CategoryDTO.js';
 import CategoryOptionService from '../../Services/categoryOptionService.js';
 
 

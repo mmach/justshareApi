@@ -204,7 +204,7 @@ export default class SyncItemCommand extends BaseCommand {
     }));
     // console.log(JSON.stringify(this.model));
     let addToQueue = this.addToQueue.bind(this);
-    const CONN_URL = 'amqp://kyqjanjv:6djuPiJWnpZnIMT1jZ-SvIULv8IOLw2P@hedgehog.rmq.cloudamqp.com/kyqjanjv';
+    const CONN_URL = process.env.AMQP?process.env.AMQP:'amqp://kyqjanjv:6djuPiJWnpZnIMT1jZ-SvIULv8IOLw2P@hedgehog.rmq.cloudamqp.com/kyqjanjv';
     let ch = null;
     await new Promise((res, rej) => {
       amqp.connect(CONN_URL, function (err, conn) {

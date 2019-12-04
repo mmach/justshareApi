@@ -10,8 +10,8 @@ let CONFIG = {
   UPLOAD_PATH: "C:/Programowanie/Private/stuffshare/src/JustShareApi/upload",//"F:/Private/cqrs-node/upload",//
   LOCATION_IQ: "fcfb9eb913b786",
   ELASTIC_SEARCH: {
-    production: "https://search-justshare-elastic-duvzgnhy7vsbtdpuqtv3s2v4qa.us-east-2.es.amazonaws.com/",//"https://search-justshare-elastic-duvzgnhy7vsbtdpuqtv3s2v4qa.us-east-2.es.amazonaws.com/",
-    development: "https://search-justshare-elastic-duvzgnhy7vsbtdpuqtv3s2v4qa.us-east-2.es.amazonaws.com/"//"http://localhost:9200/"//"https://25t337e5fo:xdrzi9s9z@oak-487876355.eu-west-1.bonsaisearch.net:443/"
+    production: "https://5gn69lkoe1:e53lt3rgsr@alder-283162757.eu-west-1.bonsaisearch.net:443/",//"https://search-justshare-elastic-duvzgnhy7vsbtdpuqtv3s2v4qa.us-east-2.es.amazonaws.com/",
+    development: "https://5gn69lkoe1:e53lt3rgsr@alder-283162757.eu-west-1.bonsaisearch.net:443/"//"http://localhost:9200/"//"https://25t337e5fo:xdrzi9s9z@oak-487876355.eu-west-1.bonsaisearch.net:443/"
   },
   DATABASE: {
     development: {

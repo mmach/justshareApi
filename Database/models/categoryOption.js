@@ -110,6 +110,7 @@ export default class CategoryOption extends Model {
           type: DataTypes.BOOLEAN,
           allowNull: true
         },
+        
         is_visible_view: {
           type: DataTypes.BOOLEAN,
           allowNull: true

@@ -3328,6 +3328,44 @@
             },
             "field": "",
             "toRefresh": true
+        },
+        "ITEM_SEND_MESSAGE": {
+            "id": "75be7dd3-30ae-4af6-b801-ab4ccf417be7",
+            "uid": "",
+            "code": "ITEM_SEND_MESSAGE",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Kontakt",
+                "us": "Contact",
+                "de": "Kontaktieren Sie",
+                "ru": "Свяжитесь с",
+                "fr": "Contactez",
+                "es": "Póngase en contacto con",
+                "no": "Kontakt",
+                "zh_cn": "接触"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "ITEM_SHARE_LINK": {
+            "id": "75be7dd3-30ae-4af6-b801-ab4ccf417be7",
+            "uid": "",
+            "code": "ITEM_SHARE_LINK",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Udostępnij",
+                "us": "Share",
+                "de": "Teilen",
+                "ru": "Поделиться",
+                "fr": "Partager",
+                "es": "Compartir",
+                "no": "Dele",
+                "zh_cn": "分享"
+            },
+            "field": "",
+            "toRefresh": true
         }
     },
     "PLACEHOLDER": {

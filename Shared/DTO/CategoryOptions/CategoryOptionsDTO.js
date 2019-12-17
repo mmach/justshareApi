@@ -28,7 +28,8 @@ export default class CategoryOptionsDTO extends BaseDTO {
         this.search_label = undefined
         this.search_type = undefined
         this.show_value = undefined
-        this.can_above_pin = undefined
+        this.can_above_pin = undefined;
+        this.is_visible_view= undefined;
     }
     validation(state) {
         const validator = new Validator();

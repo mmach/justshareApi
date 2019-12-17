@@ -108,8 +108,11 @@ export default class CategoryOptionsTemplate extends Model {
         },
         func:{
           type: DataTypes.STRING,
-        }
-        
+        },
+        is_visible_view: {
+          type: DataTypes.BOOLEAN,
+          allowNull: true
+        },
    
         
       },

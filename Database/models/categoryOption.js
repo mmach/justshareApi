@@ -109,7 +109,11 @@ export default class CategoryOption extends Model {
         can_above_pin:{
           type: DataTypes.BOOLEAN,
           allowNull: true
-        }
+        },
+        is_visible_view: {
+          type: DataTypes.BOOLEAN,
+          allowNull: true
+        },
       },
       { sequelize }
     );

@@ -30,7 +30,9 @@ export default class CategoryOptionsTemplateDTO extends BaseDTO {
         this.status = '';
         this.order = '';
         this.is_not_in_clob = false
-        this.func = undefined
+        this.func = undefined;
+        this.is_visible_view= undefined;
+
     }
     validation(state) {
 

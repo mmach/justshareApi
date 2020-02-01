@@ -1,6 +1,6 @@
 "use strict";
 import ValidationExceptions from "./validationExceptions.js";
-import BaseException from "../../Shared/BaseObjects/Exceptions/baseException.js";
+import {BaseException} from "justshare-shared";
 import CodeDictionary from "../Dictionary/codeDictionary.js";
 
 export default class ServerException extends BaseException {

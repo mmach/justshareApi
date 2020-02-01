@@ -1,5 +1,5 @@
 import BaseService from "../Architecture/baseService.js";
-import SearchItemDTO from './../Shared/DTO/Item/SearchItemDTO';
+import {SearchItemDTO} from 'justshare-shared';
 
 /**
  *

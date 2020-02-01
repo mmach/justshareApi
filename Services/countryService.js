@@ -4,7 +4,7 @@ import BaseService from "../Architecture/baseService.js";
 import UnitOfWork from "../unitOfWork.js";
 
 import CONFIG from "../config.js";
-import CountryDTO from "../Shared/DTO/Country/CountryDTO.js";
+import {CountryDTO} from "justshare-shared";
 
 
 /**

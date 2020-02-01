@@ -1,6 +1,6 @@
 import BaseRepository from "../Architecture/baseRepository.js";
 import SequelizeDB from "../Database/models/index.js";
-import SearchItemDTO from './../Shared/DTO/Item/SearchItemDTO.js';
+import {SearchItemDTO} from 'justshare-shared';
 import uuidv4 from "uuid/v4";
 
 /**

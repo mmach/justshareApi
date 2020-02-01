@@ -3,7 +3,7 @@
 //const BaseInfrastracture = require('./../baseInfrastructure');
 
 import JsonDB from "node-json-db";
-import "./../../Shared/BaseObjects/Helper/commonFunctions.js";
+//import "./../../Shared/BaseObjects/Helper/commonFunctions.js";
 
 export default class CodeDictionary {
   constructor() {

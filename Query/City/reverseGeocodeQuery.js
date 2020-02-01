@@ -1,6 +1,6 @@
 import BaseQuery from '../../Architecture/baseQuery.js';
 import CityService from '../../Services/cityService.js';
-import ReverseGeoDTO from './../../Shared/DTO/City/ReverseGeoDTO.js'
+import {ReverseGeoDTO} from 'justshare-shared'
 import CountryService from '../../Services/countryService.js';
 
 export default class ReverseGeocodeQuery extends BaseQuery {

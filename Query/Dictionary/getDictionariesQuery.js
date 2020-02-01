@@ -1,5 +1,5 @@
 import BaseQuery from '../../Architecture/baseQuery.js';
-import DictionaryDTO from '../../Shared/DTO/Dictionary/DictionaryDTO.js';
+import {DictionaryDTO} from 'justshare-shared';
 import CodeDictionary from '../../Architecture/Dictionary/codeDictionary.js';
 
 

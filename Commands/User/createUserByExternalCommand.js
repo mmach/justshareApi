@@ -2,13 +2,11 @@
 import BaseCommand from "./../../Architecture/baseCommand.js";
 import LogFileInfrastructure from "../../Architecture/Infrastructure/logFileInfrastructure.js";
 import UserService from "../../Services/userService.js";
-import ExternalCredentialsDTO from "../../Shared/DTO/User/ExternalCredentialsDTO.js";
 import axios from 'axios'
 import BlobService from "../../Services/blobService.js";
-import UserRegisterInternalDTO from "../../Shared/DTO/User/UserRegisterInternalDTO.js";
 import uuidv4 from 'uuid/v4';
 import CONFIG from "../../config.js";
-import BlobBase64DTO from "../../Shared/DTO/Blob/BlobBase64DTO.js";
+import {BlobBase64DTO,UserRegisterInternalDTO,ExternalCredentialsDTO} from "justshare-shared";
 import EMAIL_TEMPLATE from "./../../Static/MailsXSLT/index.js";
 import CodeDictionary from "../../Architecture/Dictionary/codeDictionary.js";
 

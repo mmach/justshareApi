@@ -1,8 +1,7 @@
 import BaseQuery from '../../Architecture/baseQuery.js';
 import LogFileInfrastructure from '../../Architecture/Infrastructure/logFileInfrastructure.js';
 import BlobService from '../../Services/blobService.js';
-import BlobDTO from '../../Shared/DTO/Blob/BlobDTO.js';
-import BlobBase64DTO from '../../Shared/DTO/Blob/BlobBase64DTO.js';
+import {BlobBase64DTO,BlobDTO} from 'justshare-shared';
 
 
 export default class GetUserImagesQuery extends BaseQuery {

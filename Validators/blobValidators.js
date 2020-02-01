@@ -1,6 +1,6 @@
 import ValidationException from './../Architecture/Exceptions/validationExceptions.js'
 import CONFIG from '../config.js';
-import BlobBase64DTO from '../Shared/DTO/Blob/BlobBase64DTO.js';
+import {BlobBase64DTO} from 'justshare-shared';
 
 async function getSizeOfUplodedFile(blob) {
     if (blob.getSize(blob) > 2000) {

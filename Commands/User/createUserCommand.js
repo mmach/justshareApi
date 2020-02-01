@@ -1,7 +1,7 @@
 "use strict";
 import BaseCommand from "./../../Architecture/baseCommand.js";
 
-import UserRegisterInternalDTO from "../../Shared/DTO/User/UserRegisterInternalDTO.js";
+import {UserRegisterInternalDTO} from "justshare-shared";
 import LogFileInfrastructure from "../../Architecture/Infrastructure/logFileInfrastructure.js";
 import UserService from "../../Services/userService.js";
 import ValidatonInfrastructure from "../../Architecture/Infrastructure/validatonInfrastructure.js";

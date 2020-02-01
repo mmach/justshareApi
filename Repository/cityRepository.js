@@ -1,6 +1,6 @@
 import BaseRepository from "../Architecture/baseRepository.js";
 import SequelizeDB from "../Database/models/index.js";
-import CityDTO from "../Shared/DTO/City/CityDTO.js";
+import {CityDTO} from "justshare-shared";
 import PrepareSearch from "../Architecture/prepareSearch.js";
 
 

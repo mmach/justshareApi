@@ -1,8 +1,7 @@
 import BaseQuery from '../../Architecture/baseQuery.js';
 import LogFileInfrastructure from '../../Architecture/Infrastructure/logFileInfrastructure.js';
 import ItemService from '../../Services/itemService.js';
-import ItemDTO from '../../Shared/DTO/Item/ItemDTO.js';
-import BlobBase64DTO from '../../Shared/DTO/Blob/BlobBase64DTO.js';
+import {BlobBase64DTO,ItemDTO} from 'justshare-shared';
 
 
 export default class GetItemQuery extends BaseQuery {

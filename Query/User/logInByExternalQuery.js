@@ -1,7 +1,7 @@
 import BaseQuery from '../../Architecture/baseQuery.js';
 import LogFileInfrastructure from '../../Architecture/Infrastructure/logFileInfrastructure.js';
 import UserService from '../../Services/userService.js';
-import ExternalCredentialsDTO from '../../Shared/DTO/User/ExternalCredentialsDTO.js';
+import {ExternalCredentialsDTO} from 'justshare-shared';
 import axios from 'axios'
 
 

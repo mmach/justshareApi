@@ -1,5 +1,5 @@
 import BaseQuery from '../../Architecture/baseQuery.js';
-import CountryDTO from '../../Shared/DTO/Country/CountryDTO.js'
+import {CountryDTO} from 'justshare-shared'
 import CityService from '../../Services/cityService.js';
 
 

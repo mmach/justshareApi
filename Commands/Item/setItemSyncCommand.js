@@ -3,7 +3,7 @@ import LogFileInfrastructure from "../../Architecture/Infrastructure/logFileInfr
 import AuthInfrastucture from "../../Architecture/Infrastructure/authInfrastucture.js";
 import DbTransactionInfrastucture from "../../Architecture/Infrastructure/dbTransactionInfrastucture.js";
 import ItemService from "../../Services/itemService.js";
-import ItemDTO from "./../../Shared/DTO/Item/ItemDTO.js";
+import {ItemDTO} from "justshare-shared";
 import BlobService from "../../Services/blobService.js";
 import CategoryService from "../../Services/categoryService.js";
 import ElasticSearchService from "../../Services/elasticSearchService.js";

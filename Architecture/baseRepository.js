@@ -2,7 +2,7 @@
 
 import ServerException from "./Exceptions/serverException.js";
 import { Model } from "sequelize";
-import BaseDTO from "../Shared/BaseObjects/baseDTO.js";
+import {BaseDTO} from "justshare-shared";
 import uuidv4 from "uuid/v4";
 
 /**

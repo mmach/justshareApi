@@ -6,7 +6,7 @@ import EMAIL_TEMPLATE from "./../../Static/MailsXSLT/index.js";
 import CONFIG from "../../config.js";
 import MailSender from "../../Architecture/mailSender.js";
 import CodeDictionary from "../../Architecture/Dictionary/codeDictionary.js";
-import UserLoginInternalDTO from "../../Shared/DTO/User/UserLoginInternalDTO.js";
+import {UserLoginInternalDTO} from "justshare-shared";
 import DbTransactionInfrastucture from "../../Architecture/Infrastructure/dbTransactionInfrastucture.js";
 import { URL } from "url";
 

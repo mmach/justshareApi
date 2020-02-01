@@ -4,7 +4,7 @@ import BaseService from "../Architecture/baseService.js";
 import UnitOfWork from "../unitOfWork.js";
 
 import CONFIG from "../config.js";
-import CityDTO from "../Shared/DTO/City/CityDTO.js";
+import {CityDTO} from "justshare-shared";
 import NodeGeocoder from 'node-geocoder';
 
 var options = {

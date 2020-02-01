@@ -3,7 +3,7 @@ import BaseCommand from "../../Architecture/baseCommand.js";
 import LogFileInfrastructure from "../../Architecture/Infrastructure/logFileInfrastructure.js";
 import AuthInfrastucture from "../../Architecture/Infrastructure/authInfrastucture.js";
 import CategoryOptionService from "../../Services/categoryOptionService.js";
-import CategoryOptionsDTO from './../../Shared/DTO/CategoryOptions/CategoryOptionsDTO.js'
+import {CategoryOptionsDTO} from 'justshare-shared'
 "use strict";
 
 

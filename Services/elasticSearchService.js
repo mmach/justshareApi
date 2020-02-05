@@ -290,7 +290,7 @@ export default class ElasticSearchService extends BaseService {
     let userGuid = user_id;
     let radius = distance;
     if (distance == 'all') {
-      radius = '1000km'
+      radius = '5000km'
     }
     let tagsTerms = null;
     if (tags != undefined) {
@@ -562,7 +562,7 @@ export default class ElasticSearchService extends BaseService {
 
           ].filter(item => { return item != null }),
           "filter": [
-            {
+            distance=='all'?undefined:{
               "geo_distance": {
                 "distance": radius,
                 "location": {

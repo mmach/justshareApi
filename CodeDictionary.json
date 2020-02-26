@@ -3366,6 +3366,177 @@
             },
             "field": "",
             "toRefresh": true
+        },
+        "ACCOUNT_LINK_LABEL": {
+            "id": "f75d942d-2d4c-4616-ab91-e488e77f2d4b",
+            "uid": "",
+            "code": "ACCOUNT_LINK_LABEL",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Użytkownik",
+                "us": "User",
+                "de": "Benutzer",
+                "ru": "Пользователь",
+                "fr": "L'utilisateur",
+                "es": "El usuario",
+                "no": "Bruker",
+                "zh_cn": "用户"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "SET_LANGUAGE_LINK_LABEL": {
+            "id": "f75d942d-2d4c-4616-ab91-e488e77f2d4b",
+            "uid": "",
+            "code": "SET_LANGUAGE_LINK_LABEL",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Język",
+                "us": "Language",
+                "de": "Sprache",
+                "ru": "Язык",
+                "fr": "La langue",
+                "es": "Idioma",
+                "no": "Språk",
+                "zh_cn": "语言"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "PROFILE_LINK_LABEL": {
+            "id": "c0c293c6-6655-428e-874c-08a4d3ca55bc",
+            "uid": "",
+            "code": "PROFILE_LINK_LABEL",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Profil",
+                "us": "Profile",
+                "de": "Profil",
+                "ru": "Профиль",
+                "fr": "Profil",
+                "es": "Perfil",
+                "no": "Profil",
+                "zh_cn": "配置文件"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "SET_AS_VERIFIED": {
+            "id": "83de6564-9a26-4f9a-89dc-36ac7611e3c9",
+            "uid": "",
+            "code": "SET_AS_VERIFIED",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Zatwierdź",
+                "us": "Confirm",
+                "de": "Bestätigen Sie",
+                "ru": "Подтвердите",
+                "fr": "Confirmez",
+                "es": "Confirme",
+                "no": "Bekrefter",
+                "zh_cn": "确认"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "ITEM_LINK_LABEL": {
+            "id": "b95e2773-ddc4-498d-a959-fe678228477e",
+            "uid": "",
+            "code": "ITEM_LINK_LABEL",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Pinezki",
+                "us": "Pins",
+                "de": "Pins",
+                "ru": "Булавки",
+                "fr": "Épingles",
+                "es": "Alfileres",
+                "no": "Pinner",
+                "zh_cn": "销"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "NEW_ITEM_LINK_LABEL": {
+            "id": "b95e2773-ddc4-498d-a959-fe678228477e",
+            "uid": "",
+            "code": "NEW_ITEM_LINK_LABEL",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Dodaj pinezke",
+                "us": "Add tag",
+                "de": "Stichwort hinzufügen",
+                "ru": "Добавить метку",
+                "fr": "Ajouter une étiquette",
+                "es": "Añadir una etiqueta",
+                "no": "Legg til nøkkelord",
+                "zh_cn": "添加标记"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "NEW_ITEM_SET_CATEGORY_HEADER": {
+            "id": "d6af4781-9af2-4990-bd3f-75fc49f8bf94",
+            "uid": "",
+            "code": "NEW_ITEM_SET_CATEGORY_HEADER",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Wybierz kategorie",
+                "us": "Select categories",
+                "de": "Wählen Sie die Kategorien",
+                "ru": "Выберите категории",
+                "fr": "Sélectionnez la catégorie",
+                "es": "Seleccione la categoría de",
+                "no": "Velg kategorier",
+                "zh_cn": "选择类别"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "NEW_ITEM_STEP_ITEM_HEADER": {
+            "id": "d6af4781-9af2-4990-bd3f-75fc49f8bf94",
+            "uid": "",
+            "code": "NEW_ITEM_STEP_ITEM_HEADER",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Krok",
+                "us": "Step",
+                "de": "Schritt",
+                "ru": "Шаг",
+                "fr": "Étape",
+                "es": "Paso",
+                "no": "Trinn",
+                "zh_cn": "步骤"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "NEXT_STEP_ITEM_LINK": {
+            "id": "d6af4781-9af2-4990-bd3f-75fc49f8bf94",
+            "uid": "",
+            "code": "NEXT_STEP_ITEM_LINK",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Krok",
+                "us": "Step",
+                "de": "Schritt",
+                "ru": "Шаг",
+                "fr": "Étape",
+                "es": "Paso",
+                "no": "Trinn",
+                "zh_cn": "步骤"
+            },
+            "field": "",
+            "toRefresh": true
         }
     },
     "PLACEHOLDER": {

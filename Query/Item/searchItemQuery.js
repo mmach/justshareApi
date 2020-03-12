@@ -3,7 +3,7 @@ import LogFileInfrastructure from '../../Architecture/Infrastructure/logFileInfr
 import ItemService from '../../Services/itemService.js';
 import ElasticSearchService from '../../Services/elasticSearchService.js';
 import BlobService from '../../Services/blobService.js';
-import {BlobBase64DTO,SearchItemDTO} from 'justshare-shared';
+import { BlobBase64DTO, SearchItemDTO } from 'justshare-shared';
 import CategoryOptionService from '../../Services/categoryOptionService.js';
 import CategoryService from '../../Services/categoryService.js';
 
@@ -59,27 +59,27 @@ export default class SearchItemQuery extends BaseQuery {
 
     }
     async action() {
-        console.log(this.model)
         let catoptions = []
         if (this.model.category_id != undefined && this.model.category_id != '') {
             let categories = await this.categoryServiceDI.setContext(this.context).getCategoriesParents({ ids: this.model.category_id })
             let ids = categories.map(item => { return item.id });
-            catoptions = await this.categoryOptionServiceDI.setContext(this.context).getRelatedOptions({category_ids:ids  });
-            catoptions=catoptions.filter(item=>{return item.is_searchable==true})
-            console.log(catoptions);
-        }
+            catoptions = await this.categoryOptionServiceDI.setContext(this.context).getRelatedOptions({ category_ids: ids });
+            catoptions = catoptions.filter(item => { return item.is_searchable == true })
+            }
         let result = await this.elasticSearchServiceDI.setContext(this.context).searchDoc({
             latitude: this.model.lat,
             longitude: this.model.lon,
             text: this.model.freetext,
             distance: this.model.distance,
-            categories: [this.model.category_id],
-            tags: this.model.tag != undefined ? this.model.tag : undefined,
+            categories: this.model.category_id != undefined ? [this.model.category_id] : undefined,
+            tags: this.model.tag,
             startDate: this.model.startDate,
             endDate: this.model.endDate,
             createdInterval: this.model.createdInterval,
-            catOptionsFilter:this.model.catOptions,
-            catoptions:catoptions
+            catOptionsFilter: this.model.catOptions,
+            catoptions: catoptions,
+            item_limit: this.model.item_limit != undefined ? this.model.item_limit : 600,
+            itemId: this.model.item_id,
         })
         let itemsResult = result.data.hits.hits.map(item => {
             return { item_id: item["_id"], user_id: item["_source"].user_id, item: JSON.parse(item["_source"].item) }
@@ -100,7 +100,6 @@ export default class SearchItemQuery extends BaseQuery {
         return {
             aggs: result.data.aggregations,
             items: JSON.stringify(resultDB)
-
         }
         //return await this.itemServiceDI.setContext(this.context).searchItem({ search: this.model });
 

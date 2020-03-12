@@ -12,6 +12,7 @@ import CircularJSON from 'circular-json';
 import { URL } from "url";
 //import './../Integration/Cron/index.js'
 //import './../Integration/MQReciver/index.js'
+import  compress from 'koa-compress';
 
 //TO REMOVE IN FUTURE
 console.log(process.env.UPLOAD_PATH)
@@ -35,7 +36,13 @@ const app = new Koa();
 const router = new KoaRouter();
 
 app.use(cors());
-
+app.use(compress({
+  filter: function (content_type) {
+  	return /text/i.test(content_type)
+  },
+  threshold: 2048,
+  flush: require('zlib').Z_SYNC_FLUSH
+}))
 
 // This installs a scoped container into our
 // context - we will use this to register our current user!

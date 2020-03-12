@@ -83,6 +83,7 @@ import TagRepository from "./Repository/tagRepository.js";
 import TagService from "./Services/tagService.js";
 import SyncItemCommand from "./Commands/Item/syncItemCommand.js";
 import SetItemSyncCommand from "./Commands/Item/setItemSyncCommand.js";
+import GetItemByIdQuery from "./Query/Item/getItemByIdQuery.js";
 
  
 
@@ -204,7 +205,7 @@ exporter[CommandList.Item.SET_SYNC]= asClass(SetItemSyncCommand);
 
 exporter[QueryList.Item.GET_ITEM] = asClass(GetItemQuery);
 exporter[QueryList.Item.SEARCH_ITEM] = asClass(SearchItemQuery);
-
+exporter[QueryList.Item.GET_ITEM_BY_ID] = asClass(GetItemByIdQuery);
 
 
 ///////////////////COUNTRY////////////////////////////////

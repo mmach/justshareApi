@@ -2,7 +2,7 @@
 
 import BaseService from "../Architecture/baseService.js";
 import UnitOfWork from "../unitOfWork.js";
-import {UserRegisterInternalDTO} from "justshare-shared";
+import { UserRegisterInternalDTO } from "justshare-shared";
 
 import CONFIG from "../config.js";
 import axios from 'axios'
@@ -283,7 +283,7 @@ export default class ElasticSearchService extends BaseService {
   async deleteDoc({ user_id }) {
 
   }
-  async searchDoc({ latitude, user_id, longitude, text, distance, tags, select, categories, itemType, expired_at, startDate, endDate, createdInterval, catoptions, catOptionsFilter }) {
+  async searchDoc({ latitude, user_id, longitude, text, distance, tags, select, categories, itemType, expired_at, startDate, endDate, createdInterval, catoptions, catOptionsFilter, item_limit,item_id }) {
 
     let fullText = text ? text : "";
     console.log(fullText);
@@ -308,7 +308,6 @@ export default class ElasticSearchService extends BaseService {
 
     let selectOptionsList = [];
     //let singleOptions =Object.keys(catOptionsFilter).map(item=>{
-    console.log('1')
     //});
     if (catOptionsFilter != undefined && catOptionsFilter != '') {
       try {
@@ -328,10 +327,8 @@ export default class ElasticSearchService extends BaseService {
         console.log(exception);
       }
     }
-    console.log('1')
     let selectOptions = null;
     if (selectOptionsList != undefined || selectOptionsList.length > 0) {
-      console.log(selectOptionsList)
 
       selectOptions = selectOptionsList.length > 0 ? {
         "terms_set": {
@@ -350,7 +347,6 @@ export default class ElasticSearchService extends BaseService {
 
         Object.keys(catOptionsFilter).map(item => {
           if (item.endsWith("_SINGLE") == true) {
-            console.log(item)
             if (catOptionsFilter[item][0] != undefined) {
               catOptionsFilter[item].forEach(element => {
                 singleOptionsList.push(
@@ -385,7 +381,6 @@ export default class ElasticSearchService extends BaseService {
       }
     }
 
-    console.log(singleOptionsList);
     let categoriesJson = null;
     if (categories != undefined) {
       categoriesJson = categories.filter(item => { return item != null && item != '' }).length > 0 ? {
@@ -493,7 +488,7 @@ export default class ElasticSearchService extends BaseService {
 
       ],
       "_source": ["user_id", "categories", "item"],
-      "size": 600,
+      "size": item_limit,
       "aggregations": {
         "select": {
           "terms": {
@@ -562,7 +557,7 @@ export default class ElasticSearchService extends BaseService {
 
           ].filter(item => { return item != null }),
           "filter": [
-            distance=='all'?undefined:{
+            distance == 'all' ? undefined : {
               "geo_distance": {
                 "distance": radius,
                 "location": {
@@ -584,7 +579,7 @@ export default class ElasticSearchService extends BaseService {
                   },
                   startDate != undefined ? {
                     "range": {
-                     
+
                       "created_at": {
                         "gte": startDate + (createdInterval != undefined && createdInterval != "" && createdInterval != null ?
                           createdInterval.includes("h") > 0 ? "||/h-" + (parseInt(createdInterval) > 1 ? Math.ceil(parseInt(createdInterval) / 2) : parseInt(createdInterval)) + "h" :
@@ -620,6 +615,18 @@ export default class ElasticSearchService extends BaseService {
       method: 'post',
       url: CONFIG.ELASTIC_SEARCH[process.env.NODE_ENV ? process.env.NODE_ENV : 'development'] + `items/_search`,
       data: body
+
+    })
+  }
+
+
+
+  async getItemById({ item_id }) {
+
+    return await axios({
+      method: 'get',
+      url: CONFIG.ELASTIC_SEARCH[process.env.NODE_ENV ? process.env.NODE_ENV : 'development'] + `items/_doc/${item_id}`
+
 
     })
   }

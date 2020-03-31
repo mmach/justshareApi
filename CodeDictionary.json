@@ -3537,6 +3537,219 @@
             },
             "field": "",
             "toRefresh": true
+        },
+        "SEARCH_DISTANCE": {
+            "id": "f41748c7-64fb-4c18-bf23-4e59f8e7a984",
+            "uid": "",
+            "code": "SEARCH_DISTANCE",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Dystans",
+                "us": "Distance",
+                "de": "Entfernung",
+                "ru": "Расстояние",
+                "fr": "Distance",
+                "es": "La distancia",
+                "no": "Avstand",
+                "zh_cn": "距离"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "SEARCH_FREETEXT": {
+            "id": "6ec95376-7463-46d8-a2c2-bf6da66a72dc",
+            "uid": "",
+            "code": "SEARCH_FREETEXT",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Fraza",
+                "us": "The phrase",
+                "de": "Satz",
+                "ru": "Фраза",
+                "fr": "La phrase",
+                "es": "La frase",
+                "no": "Uttrykket",
+                "zh_cn": "短语"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "SEARCH_SIZE": {
+            "id": "6ec95376-7463-46d8-a2c2-bf6da66a72dc",
+            "uid": "",
+            "code": "SEARCH_SIZE",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Limit",
+                "us": "Limit",
+                "de": "Limit",
+                "ru": "Лимит",
+                "fr": "La limite",
+                "es": "El límite de",
+                "no": "Grense",
+                "zh_cn": "限制",
+                "zh": "6"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "SEARCH_GROUPING_DISTANCE": {
+            "id": "6ec95376-7463-46d8-a2c2-bf6da66a72dc",
+            "uid": "",
+            "code": "SEARCH_GROUPING_DISTANCE",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Grupowanie",
+                "us": "Group",
+                "de": "Gruppierung",
+                "ru": "Группировка",
+                "fr": "Le regroupement",
+                "es": "La agrupación",
+                "no": "Gruppe",
+                "zh_cn": "小组",
+                "zh": "6"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "PREVIEW_ITEM_DETAILS": {
+            "id": "0cc1c774-d491-4488-8c63-bd54a8ce6126",
+            "uid": "",
+            "code": "PREVIEW_ITEM_DETAILS",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Szczegóły",
+                "us": "Details",
+                "de": "Details",
+                "ru": "Детали",
+                "fr": "Détails",
+                "es": "Detalles",
+                "no": "Detaljer",
+                "zh_cn": "详细信息"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "PREVIEW_ITEM_DESCRIPTION": {
+            "id": "0cc1c774-d491-4488-8c63-bd54a8ce6126",
+            "uid": "",
+            "code": "PREVIEW_ITEM_DESCRIPTION",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Opis",
+                "us": "Description",
+                "de": "Beschreibung",
+                "ru": "Описание",
+                "fr": "Description",
+                "es": "Descripción",
+                "no": "Beskrivelse",
+                "zh_cn": "描述"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "SHARECOMPONENTS_COPIED_HEADER": {
+            "id": "8437b3be-fd33-4af9-a037-13213f7afb46",
+            "uid": "",
+            "code": "SHARECOMPONENTS_COPIED_HEADER",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Udostępnij",
+                "us": "Share",
+                "de": "Teilen",
+                "ru": "Поделиться",
+                "fr": "Partager",
+                "es": "Compartir",
+                "no": "Dele",
+                "zh_cn": "分享"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "SHARECOMPONENTS_COPIED_TEXT": {
+            "id": "8437b3be-fd33-4af9-a037-13213f7afb46",
+            "uid": "",
+            "code": "SHARECOMPONENTS_COPIED_TEXT",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Skopiuj adres",
+                "us": "Copy the link",
+                "de": "Kopieren Sie den Link",
+                "ru": "Скопируйте ссылку",
+                "fr": "Copiez le lien",
+                "es": "Copie el enlace",
+                "no": "Kopier lenke",
+                "zh_cn": "复制的链接"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "SHARECOMPONENTS_COPIED_RESLT": {
+            "id": "8437b3be-fd33-4af9-a037-13213f7afb46",
+            "uid": "",
+            "code": "SHARECOMPONENTS_COPIED_RESLT",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Skopiowane do schowka",
+                "us": "Copied to the clipboard",
+                "de": "In die Zwischenablage kopiert",
+                "ru": "Скопированы в буфер обмена",
+                "fr": "Copié dans le presse-papiers",
+                "es": "Copiar en el portapapeles",
+                "no": "Kopiert til utklippstavlen",
+                "zh_cn": "复制到的剪贴板"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "PAGINATION_NEXT": {
+            "id": "f1d5078c-18ff-4760-ae8e-831ec9a47d53",
+            "uid": "",
+            "code": "PAGINATION_NEXT",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Dalej",
+                "us": "Next",
+                "de": "Next",
+                "ru": "Next",
+                "fr": "Next",
+                "es": "Next",
+                "no": "Next",
+                "zh_cn": "下",
+                "zh": "Next"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "PAGINATION_PREV": {
+            "id": "f1d5078c-18ff-4760-ae8e-831ec9a47d53",
+            "uid": "",
+            "code": "PAGINATION_PREV",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Poprzedni",
+                "us": "Previous",
+                "de": "Vorherige",
+                "ru": "Предыдущий",
+                "fr": "Précédente",
+                "es": "Anterior",
+                "no": "Tidligere",
+                "zh_cn": "以前的",
+                "zh": "Next"
+            },
+            "field": "",
+            "toRefresh": true
         }
     },
     "PLACEHOLDER": {
@@ -3992,6 +4205,46 @@
                 "es": "El número de días",
                 "no": "Antall dager",
                 "zh_cn": "天数"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "SEARCH_SIZE_PLACEHOLDER": {
+            "id": "6ec95376-7463-46d8-a2c2-bf6da66a72dc",
+            "uid": "",
+            "code": "SEARCH_SIZE_PLACEHOLDER",
+            "status": "200",
+            "type": "PLACEHOLDER",
+            "message": {
+                "pl": "600",
+                "us": "600",
+                "de": "600",
+                "ru": "600",
+                "fr": "600",
+                "es": "600",
+                "no": "600",
+                "zh_cn": "六百",
+                "zh": "6"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "SEARCH_FREETEXT_PLACEHOLDER": {
+            "id": "6ec95376-7463-46d8-a2c2-bf6da66a72dc",
+            "uid": "",
+            "code": "SEARCH_FREETEXT_PLACEHOLDER",
+            "status": "200",
+            "type": "PLACEHOLDER",
+            "message": {
+                "pl": "Szukana słowo",
+                "us": "Word search",
+                "de": "Suche das Wort",
+                "ru": "Поисковый слово",
+                "fr": "Recherche de mot",
+                "es": "La búsqueda de la palabra",
+                "no": "Ordet søk",
+                "zh_cn": "词搜索",
+                "zh": "6"
             },
             "field": "",
             "toRefresh": true

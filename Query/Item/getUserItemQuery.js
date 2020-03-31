@@ -8,11 +8,11 @@ import CategoryOptionService from '../../Services/categoryOptionService.js';
 import CategoryService from '../../Services/categoryService.js';
 
 
-export default class SearchItemQuery extends BaseQuery {
+export default class GetUserItemQuery extends BaseQuery {
     /**
      * Creates an instance of GetDictionariesQuery.
      * @param  {{ logFileInfrastructureDI:LogFileInfrastructure, itemServiceDI:ItemService ,elasticSearchServiceDI:ElasticSearchService,blobServiceDI:BlobService,categoryOptionServiceDI:CategoryOptionService,CategoryService,categoryServiceDI:CategoryService}}
-     * @memberof GetItemQuery
+     * @memberof getUserItemQuery
      */
     constructor({ logFileInfrastructureDI, itemServiceDI, authInfrastructureDI, elasticSearchServiceDI, blobServiceDI, categoryOptionServiceDI, categoryServiceDI }) {
         super({ logFileInfrastructureDI, authInfrastructureDI });
@@ -28,36 +28,7 @@ export default class SearchItemQuery extends BaseQuery {
         this.model = Object.assign(new SearchItemDTO(), dto);
     }
 
-    async getItems(uids) {
-
-        let resultList = await this.itemServiceDI.setContext(this.context).getItem({ uids: uids });
-        resultList = resultList.map(async result => {
-            if (result.blobs.length > 0) {
-                console.log(result);
-                let blobsResulst = await Promise.all(result.blobs.map(async item => {
-                    return await this.blobServiceDI.getBlobsBase64ByGuids({
-                        ids: [item.blob_min.id]
-                    });
-                }));
-                // let blobBase64 = blobsResulst.filter(element => {
-                //     return result.blobs.blob_thumbmail.id == element.id
-                // })[0]
-                result.blobs = result.blobs.map(item => {
-                    let blobBase64 = blobsResulst.filter(element => {
-
-                        return item.blob_min.id == element[0].id
-                    })[0]
-                    item.blob_min = Object.assign(new BlobBase64DTO(), blobBase64[0]);
-                    return item;
-                })
-                return result;
-            }
-            return result;
-
-        })
-        return await Promise.all(resultList);
-
-    }
+   
     async action() {
         let catoptions = []
         if (this.model.category_id != undefined && this.model.category_id != '') {
@@ -65,7 +36,7 @@ export default class SearchItemQuery extends BaseQuery {
             let ids = categories.map(item => { return item.id });
             catoptions = await this.categoryOptionServiceDI.setContext(this.context).getRelatedOptions({ category_ids: ids });
             catoptions = catoptions.filter(item => { return item.is_searchable == true })
-        }
+            }
         let result = await this.elasticSearchServiceDI.setContext(this.context).searchDoc({
             latitude: this.model.lat,
             longitude: this.model.lon,
@@ -80,7 +51,6 @@ export default class SearchItemQuery extends BaseQuery {
             catoptions: catoptions,
             size: this.model.size != undefined ? this.model.size : 600,
             itemId: this.model.item_id,
-            page: this.model.page
         })
         let itemsResult = result.data.hits.hits.map(item => {
             return { item_id: item["_id"], user_id: item["_source"].user_id, item: JSON.parse(item["_source"].item) }
@@ -102,9 +72,8 @@ export default class SearchItemQuery extends BaseQuery {
         return {
             aggs: result.data.aggregations,
             items: JSON.stringify(resultDB),
-            total: total
+            total:total
         }
-        //return await this.itemServiceDI.setContext(this.context).searchItem({ search: this.model });
 
 
 

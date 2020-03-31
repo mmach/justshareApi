@@ -283,7 +283,7 @@ export default class ElasticSearchService extends BaseService {
   async deleteDoc({ user_id }) {
 
   }
-  async searchDoc({ latitude, user_id, longitude, text, distance, tags, select, categories, itemType, expired_at, startDate, endDate, createdInterval, catoptions, catOptionsFilter, item_limit,item_id }) {
+  async searchDoc({ latitude, user_id, longitude, text, distance, tags, select, categories, itemType, expired_at, startDate, endDate, createdInterval, catoptions, catOptionsFilter, size, item_id, page }) {
 
     let fullText = text ? text : "";
     console.log(fullText);
@@ -488,7 +488,8 @@ export default class ElasticSearchService extends BaseService {
 
       ],
       "_source": ["user_id", "categories", "item"],
-      "size": item_limit,
+      "size": size,
+      "from": page ? page * size : 0,
       "aggregations": {
         "select": {
           "terms": {
@@ -520,6 +521,9 @@ export default class ElasticSearchService extends BaseService {
 
 
       },
+      "sort": [
+        { "created_at": { "order": "desc" } }
+      ],
       "query": {
         "bool": {
           "must": [

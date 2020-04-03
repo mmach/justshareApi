@@ -561,7 +561,7 @@ export default class ElasticSearchService extends BaseService {
 
           ].filter(item => { return item != null }),
           "filter": [
-            distance == 'all' ? undefined : {
+            distance == 'all' || distance == undefined ? undefined : {
               "geo_distance": {
                 "distance": radius,
                 "location": {

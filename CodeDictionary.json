@@ -3750,6 +3750,139 @@
             },
             "field": "",
             "toRefresh": true
+        },
+        "USER_ITEMS_LINK": {
+            "id": "7e52f4b5-82ba-4c2e-a4af-fef4b772ca95",
+            "uid": "",
+            "code": "USER_ITEMS_LINK",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Twoje ogłoszenia",
+                "us": "Your ads",
+                "de": "Ihre anzeigen",
+                "ru": "Ваши объявления",
+                "fr": "Vos annonces",
+                "es": "Sus anuncios",
+                "no": "Annonser",
+                "zh_cn": "你的广告"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "USER_ITEMS_PROCESSED_LINK": {
+            "id": "7e52f4b5-82ba-4c2e-a4af-fef4b772ca95",
+            "uid": "",
+            "code": "USER_ITEMS_PROCESSED_LINK",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "W kolejce",
+                "us": "In queue",
+                "de": "In der Warteschlange",
+                "ru": "В очереди",
+                "fr": "Dans la file d'attente",
+                "es": "En la cola",
+                "no": "I tråd",
+                "zh_cn": "在线"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "USER_ITEMS_EXPIRED_LINK": {
+            "id": "7e52f4b5-82ba-4c2e-a4af-fef4b772ca95",
+            "uid": "",
+            "code": "USER_ITEMS_EXPIRED_LINK",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Przeterminowane",
+                "us": "Expired",
+                "de": "Überfällig",
+                "ru": "Просроченные",
+                "fr": "Les retards de",
+                "es": "Vencidos",
+                "no": "Utløpt",
+                "zh_cn": "过期"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "USER_ITEMS_OBSERVED_LINK": {
+            "id": "7e52f4b5-82ba-4c2e-a4af-fef4b772ca95",
+            "uid": "",
+            "code": "USER_ITEMS_OBSERVED_LINK",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Obserwowane",
+                "us": "Observed",
+                "de": "Beobachtet",
+                "ru": "Наблюдается",
+                "fr": "On observe",
+                "es": "Se observa",
+                "no": "Observert",
+                "zh_cn": "观察到的"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "USER_ITEMS_PREV_LINK": {
+            "id": "6954e44c-499b-444c-8c29-cb6f643e42d3",
+            "uid": "",
+            "code": "USER_ITEMS_PREV_LINK",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Ogłoszenia",
+                "us": "Ads",
+                "de": "Anzeigen",
+                "ru": "Объявления",
+                "fr": "Annonces",
+                "es": "Anuncios",
+                "no": "Annonser",
+                "zh_cn": "广告"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "ITEMS_USER_LINKS": {
+            "id": "6954e44c-499b-444c-8c29-cb6f643e42d3",
+            "uid": "",
+            "code": "ITEMS_USER_LINKS",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Ogłoszenia",
+                "us": "Ads",
+                "de": "Anzeigen",
+                "ru": "Объявления",
+                "fr": "Annonces",
+                "es": "Anuncios",
+                "no": "Annonser",
+                "zh_cn": "广告"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "USER_LINKS": {
+            "id": "6954e44c-499b-444c-8c29-cb6f643e42d3",
+            "uid": "",
+            "code": "USER_LINKS",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Użytkownik",
+                "us": "User",
+                "de": "Benutzer",
+                "ru": "Пользователь",
+                "fr": "L'utilisateur",
+                "es": "El usuario",
+                "no": "Bruker",
+                "zh_cn": "用户"
+            },
+            "field": "",
+            "toRefresh": true
         }
     },
     "PLACEHOLDER": {

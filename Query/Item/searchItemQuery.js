@@ -80,7 +80,9 @@ export default class SearchItemQuery extends BaseQuery {
             catoptions: catoptions,
             size: this.model.size != undefined ? this.model.size : 600,
             itemId: this.model.item_id,
-            page: this.model.page
+            page: this.model.page,
+            user_id: this.model.user_id
+
         })
         let itemsResult = result.data.hits.hits.map(item => {
             return { item_id: item["_id"], user_id: item["_source"].user_id, item: JSON.parse(item["_source"].item) }

@@ -28,7 +28,7 @@ export default class GetUserItemQuery extends BaseQuery {
         this.model = Object.assign(new SearchItemDTO(), dto);
     }
 
-   
+
     async action() {
         let catoptions = []
         if (this.model.category_id != undefined && this.model.category_id != '') {
@@ -36,7 +36,7 @@ export default class GetUserItemQuery extends BaseQuery {
             let ids = categories.map(item => { return item.id });
             catoptions = await this.categoryOptionServiceDI.setContext(this.context).getRelatedOptions({ category_ids: ids });
             catoptions = catoptions.filter(item => { return item.is_searchable == true })
-            }
+        }
         let result = await this.elasticSearchServiceDI.setContext(this.context).searchDoc({
             latitude: this.model.lat,
             longitude: this.model.lon,
@@ -51,7 +51,8 @@ export default class GetUserItemQuery extends BaseQuery {
             catoptions: catoptions,
             size: this.model.size != undefined ? this.model.size : 600,
             itemId: this.model.item_id,
-            page: this.model.page
+            page: this.model.page,
+            user_id: this.model.user_id
 
         })
         let itemsResult = result.data.hits.hits.map(item => {
@@ -74,7 +75,7 @@ export default class GetUserItemQuery extends BaseQuery {
         return {
             aggs: result.data.aggregations,
             items: JSON.stringify(resultDB),
-            total:total
+            total: total
         }
 
 

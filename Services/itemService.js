@@ -1,5 +1,5 @@
 import BaseService from "../Architecture/baseService.js";
-import {SearchItemDTO} from 'justshare-shared';
+import { SearchItemDTO } from 'justshare-shared';
 
 /**
  *
@@ -25,12 +25,17 @@ export default class ItemService extends BaseService {
    */
 
   async insertTag({ item_id, tag_id }) {
-    console.log(tag_id)
     await this.unitOfWorkDI.itemRepository.insertTag({
-      
-        item_id: item_id,
-        tag_id: tag_id
-      
+
+      item_id: item_id,
+      tag_id: tag_id
+
+    });
+  }
+
+  async getItemToSync({ }) {
+    return await this.unitOfWorkDI.itemRepository.getItemToSync({
+
     });
   }
 
@@ -51,18 +56,17 @@ export default class ItemService extends BaseService {
       item_id: itemId,
     });
   }
-  async getItem({ uids ,toSync}) {
-    let result = await this.toJsonParse(this.unitOfWorkDI.itemRepository.getItem({ uids,toSync }));
+  async getItem({ uids, toSync }) {
+    let result = await this.toJsonParse(this.unitOfWorkDI.itemRepository.getItem({ uids, toSync }));
     return result.map(item => {
       let element = Object.assign({}, item)
 
       return element;
     })
   }
-  
-  async setAsSyncElastic({id})
-  {
-    return await this.unitOfWorkDI.itemRepository.setAsSyncElastic({id})
+
+  async setAsSyncElastic({ id }) {
+    return await this.unitOfWorkDI.itemRepository.setAsSyncElastic({ id })
   }
   /**
    *

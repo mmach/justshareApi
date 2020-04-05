@@ -283,7 +283,7 @@ export default class ElasticSearchService extends BaseService {
   async deleteDoc({ user_id }) {
 
   }
-  async searchDoc({ latitude, user_id, longitude, text, distance, tags, select, categories, itemType, expired_at, startDate, endDate, createdInterval, catoptions, catOptionsFilter, size, item_id, page }) {
+  async searchDoc({ latitude, user_id, longitude, text, distance, tags, select, categories, itemType, expired_at, startDate, endDate, createdInterval, catoptions, catOptionsFilter, size, item_id, page, onlyExpired }) {
 
     let fullText = text ? text : "";
     console.log(fullText);
@@ -576,9 +576,13 @@ export default class ElasticSearchService extends BaseService {
 
                   {
                     "range": {
-                      "expired_at": {
-                        "gte": new Date()
-                      }
+                      "expired_at": onlyExpired == true ?
+                        {
+                          "lte": new Date()
+                        } :
+                        {
+                          "gte": new Date()
+                        }
                     }
                   },
                   startDate != undefined ? {

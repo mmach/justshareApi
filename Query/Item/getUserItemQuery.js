@@ -52,7 +52,9 @@ export default class GetUserItemQuery extends BaseQuery {
             size: this.model.size != undefined ? this.model.size : 600,
             itemId: this.model.item_id,
             page: this.model.page,
-            user_id: this.model.user_id
+            user_id: this.model.user_id,
+            onlyExpired: this.model.onlyExpired
+
 
         })
         let itemsResult = result.data.hits.hits.map(item => {

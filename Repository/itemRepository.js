@@ -1,6 +1,6 @@
 import BaseRepository from "../Architecture/baseRepository.js";
 import SequelizeDB from "../Database/models/index.js";
-import {SearchItemDTO} from 'justshare-shared';
+import { SearchItemDTO } from 'justshare-shared';
 import uuidv4 from "uuid/v4";
 
 /**
@@ -31,9 +31,7 @@ export default class ItemRepository extends BaseRepository {
 
     //move to dynamic sql !!!
     //create new query for search by ppl
-    console.log(this.context);
     let freetext = search.prepareSearch(search.freetext, 1)
-    console.log(freetext);
     let checkCategories = search.categoryList.length > 0;
     let withQuery = [];
     if (checkCategories) {
@@ -226,9 +224,98 @@ export default class ItemRepository extends BaseRepository {
       }
     );
   }
+
+  getItemToSync({ transaction }) {
+    let userId = this.userId;
+
+    let where  = {
+      is_elastic_sync: false,
+      user_id: userId
+    }
+
+    return this.entityDAO.findAll({
+      where: where
+      ,
+      include: [
+        {
+          model: this.sequelizeDI.Category,
+          required: true,
+          as: "category"
+        },
+        {
+          model: this.sequelizeDI.Tag,
+          required: false,
+          as: "tags"
+        },
+        {
+          model: this.sequelizeDI.ItemCategoryOption,
+          required: true,
+          as: "itemCategoryOption",
+          include: [
+            {
+              model: this.sequelizeDI.CategoryOptionsLink, as: "category_link", required: true,
+              include: [
+                {
+                  model: this.sequelizeDI.CategoryOption, as: "catOption",
+                  required: true,
+                  include: [
+                    {
+                      model: this.sequelizeDI.CategoryOptionsType,
+                      as: "cat_opt",
+                      required: true,
+                      where: {
+                        status: 1
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              model: this.sequelizeDI.CategoryOptionsTemplate, as: "cat_opt_temp", required: true,
+              include: [{
+                model: this.sequelizeDI.CategoryOptionsTypeTemplate,
+                required: true,
+                as: "cat_opt_type_template"
+              }
+              ]
+            }
+          ]
+        },
+        {
+          model: this.sequelizeDI.V_User,
+          attributes: ['id', 'name'],
+          required: true,
+          as: "user"
+
+        },
+        {
+          model: this.sequelizeDI.Blob,
+          as: "blobs",
+          required: false,
+          where: {
+            status: this.sequelizeDI.sequelize.literal(`blobs.status = case when blobs.user_id='${userId ? userId : 0}' then blobs.status else 1 end`)
+          },
+          include: [
+            { model: this.sequelizeDI.BlobMapper, as: "blob_thumbmail" },
+            { model: this.sequelizeDI.BlobMapper, as: "blob_item" },
+            { model: this.sequelizeDI.BlobMapper, as: "blob_min" }
+
+          ]
+        } //,
+        // {
+        //   model: this.sequelizeDI.CategoryHierarchy,
+        //   as: "category_parent"
+        // }
+      ],
+      transaction: this.getTran({ transaction })
+    });
+  }
+
+  
   getItem({ uids, toSync, transaction }) {
-  //  console.log('this.userId')
-  //  console.log(this.userId)
+    //  console.log('this.userId')
+    //  console.log(this.userId)
     let userId = this.userId;
 
     let where = {
@@ -236,8 +323,8 @@ export default class ItemRepository extends BaseRepository {
     }
     if (toSync == 0) {
       where = {
-          is_elastic_sync: false
-        }
+        is_elastic_sync: false
+      }
     } else {
       where = {
         id: {
@@ -247,103 +334,103 @@ export default class ItemRepository extends BaseRepository {
     }
     return this.entityDAO.findAll({
       where: where
-    ,
+      ,
       include: [
-      {
-        model: this.sequelizeDI.Category,
-        required: true,
-        as: "category"
-      },
-      {
-        model: this.sequelizeDI.Tag,
-        required: false,
-        as: "tags"
-      },
-      {
-        model: this.sequelizeDI.ItemCategoryOption,
-        required: true,
-        as: "itemCategoryOption",
-        include: [
-          {
-            model: this.sequelizeDI.CategoryOptionsLink, as: "category_link", required: true,
-            include: [
-              {
-                model: this.sequelizeDI.CategoryOption, as: "catOption",
-                required: true,
-                include: [
-                  {
-                    model: this.sequelizeDI.CategoryOptionsType,
-                    as: "cat_opt",
-                    required: true,
-                    where: {
-                      status: 1
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            model: this.sequelizeDI.CategoryOptionsTemplate, as: "cat_opt_temp", required: true,
-            include: [{
-              model: this.sequelizeDI.CategoryOptionsTypeTemplate,
-              required: true,
-              as: "cat_opt_type_template"
-            }
-            ]
-          }
-        ]
-      },
-      {
-        model: this.sequelizeDI.V_User,
-        attributes: ['id', 'name'],
-        required: true,
-        as: "user"
-
-      },
-      {
-        model: this.sequelizeDI.Blob,
-        as: "blobs",
-        required: false,
-        where: {
-          status: this.sequelizeDI.sequelize.literal(`blobs.status = case when blobs.user_id='${userId ? userId : 0}' then blobs.status else 1 end`)
+        {
+          model: this.sequelizeDI.Category,
+          required: true,
+          as: "category"
         },
-        include: [
-          { model: this.sequelizeDI.BlobMapper, as: "blob_thumbmail" },
-          { model: this.sequelizeDI.BlobMapper, as: "blob_item" },
-          { model: this.sequelizeDI.BlobMapper, as: "blob_min" }
+        {
+          model: this.sequelizeDI.Tag,
+          required: false,
+          as: "tags"
+        },
+        {
+          model: this.sequelizeDI.ItemCategoryOption,
+          required: true,
+          as: "itemCategoryOption",
+          include: [
+            {
+              model: this.sequelizeDI.CategoryOptionsLink, as: "category_link", required: true,
+              include: [
+                {
+                  model: this.sequelizeDI.CategoryOption, as: "catOption",
+                  required: true,
+                  include: [
+                    {
+                      model: this.sequelizeDI.CategoryOptionsType,
+                      as: "cat_opt",
+                      required: true,
+                      where: {
+                        status: 1
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              model: this.sequelizeDI.CategoryOptionsTemplate, as: "cat_opt_temp", required: true,
+              include: [{
+                model: this.sequelizeDI.CategoryOptionsTypeTemplate,
+                required: true,
+                as: "cat_opt_type_template"
+              }
+              ]
+            }
+          ]
+        },
+        {
+          model: this.sequelizeDI.V_User,
+          attributes: ['id', 'name'],
+          required: true,
+          as: "user"
 
-        ]
-      } //,
-      // {
-      //   model: this.sequelizeDI.CategoryHierarchy,
-      //   as: "category_parent"
-      // }
-    ],
+        },
+        {
+          model: this.sequelizeDI.Blob,
+          as: "blobs",
+          required: false,
+          where: {
+            status: this.sequelizeDI.sequelize.literal(`blobs.status = case when blobs.user_id='${userId ? userId : 0}' then blobs.status else 1 end`)
+          },
+          include: [
+            { model: this.sequelizeDI.BlobMapper, as: "blob_thumbmail" },
+            { model: this.sequelizeDI.BlobMapper, as: "blob_item" },
+            { model: this.sequelizeDI.BlobMapper, as: "blob_min" }
+
+          ]
+        } //,
+        // {
+        //   model: this.sequelizeDI.CategoryHierarchy,
+        //   as: "category_parent"
+        // }
+      ],
       transaction: this.getTran({ transaction })
     });
-}
+  }
 
-deleteTag({ item_id, transaction }) {
-  return this.sequelizeDI.ItemTag.destroy({
-    where: {
-      item_id: this.toStr(item_id)
-    },
-    transaction: this.getTran({ transaction })
-  });
-}
-insertTag({ tag_id, item_id, transaction }) {
+  deleteTag({ item_id, transaction }) {
+    return this.sequelizeDI.ItemTag.destroy({
+      where: {
+        item_id: this.toStr(item_id)
+      },
+      transaction: this.getTran({ transaction })
+    });
+  }
+  insertTag({ tag_id, item_id, transaction }) {
 
-  console.log(tag_id)
-  return this.sequelizeDI.ItemTag.create(
-    {
-      id: uuidv4(),
-      item_id: item_id,
-      tag_id: tag_id
-    }, {
-    transaction: this.getTran({ transaction })
-  });
+    console.log(tag_id)
+    return this.sequelizeDI.ItemTag.create(
+      {
+        id: uuidv4(),
+        item_id: item_id,
+        tag_id: tag_id
+      }, {
+      transaction: this.getTran({ transaction })
+    });
 
-}
+  }
 
 }

@@ -21,18 +21,20 @@ export default class BaseCommand extends BaseAction {
     validationInfrastructureDI,
     privilegesInfrastructureDI,
     dictionaryDI,
-    closingInfrastructureDI
+    closingInfrastructureDI,
+    projectInfrastructureDI
   }) {
-    super({ logFileInfrastructureDI, validationInfrastructureDI, authInfrastructureDI, privilegesInfrastructureDI,dictionaryDI});
+    super({ logFileInfrastructureDI, validationInfrastructureDI, authInfrastructureDI, privilegesInfrastructureDI, dictionaryDI, projectInfrastructureDI });
     this.dbTransactionInfrastuctureDI = dbTransactionInfrastuctureDI;
-    this.closingInfrastructureDI=closingInfrastructureDI;
+    this.closingInfrastructureDI = closingInfrastructureDI;
 
   }
   get validation() { }
-  
+
   infrastructureOrder() {
     let infrastructureArray = [
       this.logFileInfrastructureDI,
+      this.projectInfrastructureDI,
       this.authInfrastructureDI,
       this.validationInfrastructureDI,
       this.privilegesInfrastructureDI,

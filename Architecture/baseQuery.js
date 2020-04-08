@@ -3,13 +3,14 @@ import BaseAction from "./baseAction.js";
 
 export default class BaseQuery extends BaseAction {
   // we can set other DbInfrastracture as more extend  CQRS pattern
-  constructor({ logFileInfrastructureDI, validationInfrastructureDI, authInfrastructureDI, privilegesInfrastructureDI }) {
-    super({ logFileInfrastructureDI, validationInfrastructureDI, authInfrastructureDI, privilegesInfrastructureDI });
+  constructor({ logFileInfrastructureDI, validationInfrastructureDI, authInfrastructureDI, privilegesInfrastructureDI,projectInfrastructureDI }) {
+    super({ logFileInfrastructureDI, validationInfrastructureDI, authInfrastructureDI, privilegesInfrastructureDI,projectInfrastructureDI });
   }
 
   infrastructureOrder() {
     let infrastructureArray = [
       this.logFileInfrastructureDI,
+      this.projectInfrastructureDI,
       this.authInfrastructureDI,
       this.privilegesInfrastructureDI
     ];

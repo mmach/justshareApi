@@ -6,6 +6,7 @@ import BlobService from '../../Services/blobService.js';
 import { BlobBase64DTO, SearchItemDTO } from 'justshare-shared';
 import CategoryOptionService from '../../Services/categoryOptionService.js';
 import CategoryService from '../../Services/categoryService.js';
+import ProjectInfrastructure from '../../Architecture/Infrastructure/projectInfrastructure.js';
 
 
 export default class SearchItemQuery extends BaseQuery {
@@ -14,8 +15,8 @@ export default class SearchItemQuery extends BaseQuery {
      * @param  {{ logFileInfrastructureDI:LogFileInfrastructure, itemServiceDI:ItemService ,elasticSearchServiceDI:ElasticSearchService,blobServiceDI:BlobService,categoryOptionServiceDI:CategoryOptionService,CategoryService,categoryServiceDI:CategoryService}}
      * @memberof GetItemQuery
      */
-    constructor({ logFileInfrastructureDI, itemServiceDI, authInfrastructureDI, elasticSearchServiceDI, blobServiceDI, categoryOptionServiceDI, categoryServiceDI }) {
-        super({ logFileInfrastructureDI, authInfrastructureDI });
+    constructor({ logFileInfrastructureDI, projectInfrastructureDI,itemServiceDI, authInfrastructureDI, elasticSearchServiceDI, blobServiceDI, categoryOptionServiceDI, categoryServiceDI }) {
+        super({ logFileInfrastructureDI, authInfrastructureDI ,projectInfrastructureDI});
         this.authInfrastructureDI.allowAnonymous();
         this.categoryOptionServiceDI = categoryOptionServiceDI;
         this.itemServiceDI = itemServiceDI;

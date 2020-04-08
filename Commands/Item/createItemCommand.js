@@ -38,7 +38,8 @@ export default class CreateItemCommand extends BaseCommand {
     blobServiceDI,
     elasticSearchServiceDI,
     tagServiceDI,
-    closingInfrastructureDI
+    closingInfrastructureDI,
+    projectInfrastructureDI
   }) {
     // @ts-ignore
     super({
@@ -46,8 +47,8 @@ export default class CreateItemCommand extends BaseCommand {
       authInfrastructureDI,
       dbTransactionInfrastuctureDI,
       validationInfrastructureDI,
-      closingInfrastructureDI
-
+      closingInfrastructureDI,
+      projectInfrastructureDI
     });
     this.itemServiceDI = itemServiceDI;
     this.blobServiceDI = blobServiceDI;
@@ -245,6 +246,8 @@ export default class CreateItemCommand extends BaseCommand {
     var tomorrow = new Date();
     tomorrow.setDate(today.getDate() + (cat.expired_day != null ? Number(cat.expired_day) : 5000));
     this.model.expired_date = tomorrow
+    this.model.project_id = this.context.project.id
+    this.model.es_operation = 'I';
     let newItem = await this.itemServiceDI.upsert({ model: this.model });
     let array = this.model.catOptions.map(item => {
       return this.itemServiceDI.upsertCategoryOption({ model: item, item_id: this.model.id })

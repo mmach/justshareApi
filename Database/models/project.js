@@ -33,6 +33,9 @@ export default class Project extends Model {
           type: DataTypes.UUID,
           defaultValue: sequelize.UUIDV4
         },
+        secretKey: {
+          type: DataTypes.STRING
+        },
         project_id: {
           type: DataTypes.UUID,
           defaultValue: sequelize.UUIDV4,
@@ -44,7 +47,7 @@ export default class Project extends Model {
     );
   }
   static associate(models) {
- 
+
   }
 }
 

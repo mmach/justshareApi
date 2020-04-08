@@ -13,9 +13,7 @@ module.exports = {
           ADD external_id nvarchar(300);
 
           ALTER TABLE [dbo].[CategoryExternals]
-            ADD  source_id char(36);
-
-        
+            ADD  source_id char(36);     
       
         `
       )

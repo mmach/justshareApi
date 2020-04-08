@@ -17,10 +17,11 @@ export default class BaseAction {
     validationInfrastructureDI,
     authInfrastructureDI,
     privilegesInfrastructureDI,
-    dictionaryDI
+    dictionaryDI,
+    projectInfrastructureDI
   }) {
     this.model = {};
-    this.dictionaryDI=dictionaryDI
+    this.dictionaryDI = dictionaryDI
     this.context = {
       language: '',
       user: {
@@ -33,6 +34,7 @@ export default class BaseAction {
     this.validationInfrastructureDI = validationInfrastructureDI;
     this.privilegesInfrastructureDI = privilegesInfrastructureDI;
     this.authInfrastructureDI = authInfrastructureDI;
+    this.projectInfrastructureDI = projectInfrastructureDI;
   }
   init(dto) {
     this.model = dto;

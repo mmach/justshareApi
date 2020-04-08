@@ -4703,6 +4703,25 @@
             },
             "field": "",
             "toRefresh": true
+        },
+        "AUTHORIZATION_PROJECT_ERROR": {
+            "id": "875dbb5b-635a-4aa3-8b00-acae3dcfa126",
+            "uid": "",
+            "code": "AUTHORIZATION_PROJECT_ERROR",
+            "status": "200",
+            "type": "ERROR",
+            "message": {
+                "pl": "Autentykacja projektu nie powiodła sie",
+                "us": "Authentication project failed",
+                "de": "Authentifizierung des Projektes nicht gelungen ist",
+                "ru": "Аутентификация проекта не удалась",
+                "fr": "L'authentification du projet a échoué",
+                "es": "La autenticación de un proyecto no tuvo éxito",
+                "no": "Godkjenning mislyktes prosjektet",
+                "zh_cn": "认证项目失败了"
+            },
+            "field": "",
+            "toRefresh": true
         }
     },
     "SUCCESS_GLOBAL": {

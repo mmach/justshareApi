@@ -6,7 +6,7 @@ import CategoryRepository from "./Repository/categoryRepository.js";
 import UserRepository from "./Repository/userRepository.js";
 import UserService from "./Services/userService.js";
 import UnitOfWork from "./unitOfWork.js";
-import {CommandList,QueryList} from "justshare-shared";
+import { CommandList, QueryList } from "justshare-shared";
 import GetCategoryQuery from "./Query/Category/getCategoryQuery.js";
 import AddToDictionaryCommand from "./Commands/Dictionary/addToDictionaryCommand.js";
 import RemoveDictionaryCommand from "./Commands/Dictionary/removeDictionaryCommand.js";
@@ -86,9 +86,12 @@ import SetItemSyncCommand from "./Commands/Item/setItemSyncCommand.js";
 import GetItemByIdQuery from "./Query/Item/getItemByIdQuery.js";
 import GetUserItemQuery from "./Query/Item/getUserItemQuery.js";
 import GetUserItemToSyncQuery from "./Query/Item/getUserItemToSyncQuery.js";
+import ProjectService from "./Services/projectService.js";
+import ProjectRepository from "./Repository/projectRepository.js";
+import LoginProjectQuery from "./Query/Project/LoginProjectQuery/loginProjectQuery.js";
+import LoginJustshareProjectQuery from "./Query/Project/LoginJustshareProjectQuery/loginJustshareProjectQuery.js";
 
 
- 
 
 
 
@@ -120,11 +123,14 @@ let exporter = {
   cityServiceDI: asClass(CityService),
   categoryOptionsRepositoryDI: asClass(CategoryOptionsRepository),
   categoryOptionServiceDI: asClass(CategoryOptionService),
-  itemCategoryOptionRepositoryDI:asClass(ItemCategoryOptionRepository),
+  itemCategoryOptionRepositoryDI: asClass(ItemCategoryOptionRepository),
   userAuthRepositoryDI: asClass(UserAuthRepository),
-  elasticSearchServiceDI:asClass(ElasticSearchService),
-  tagServiceDI:asClass(TagService),
-  tagRepositoryDI:asClass(TagRepository),
+  elasticSearchServiceDI: asClass(ElasticSearchService),
+  tagServiceDI: asClass(TagService),
+  tagRepositoryDI: asClass(TagRepository),
+  projectRepositoryDI: asClass(ProjectRepository),
+  projectServiceDI: asClass(ProjectService),
+
   sequelizeDI: asValue(SequelizeDB)
 };
 exporter[CommandList.Dictionary.ADD_DICTIONARY] = asClass(
@@ -202,8 +208,8 @@ exporter[QueryList.Blob.GET_UNVERIFIED] = asClass(GetUnverifiedBlobsQuery);
 ///////////////////////ITEM//////////////////////////////////////
 exporter[CommandList.Item.NEW_ITEM] = asClass(CreateItemCommand);
 exporter[CommandList.Item.EDIT_ITEM] = asClass(EditItemCommand);
-exporter[CommandList.Item.SYNC_ITEM]= asClass(SyncItemCommand);
-exporter[CommandList.Item.SET_SYNC]= asClass(SetItemSyncCommand);
+exporter[CommandList.Item.SYNC_ITEM] = asClass(SyncItemCommand);
+exporter[CommandList.Item.SET_SYNC] = asClass(SetItemSyncCommand);
 
 
 exporter[QueryList.Item.GET_ITEM] = asClass(GetItemQuery);
@@ -222,8 +228,8 @@ exporter[QueryList.Country.GET_COUNTRY_BY_ID] = asClass(GetCountriesByIdQuery);
 
 
 exporter[QueryList.City.GET_CITY] = asClass(GetCitiesQuery);
-exporter[QueryList.City.REVERSE_GEO]= asClass(ReverseGeocodeQuery)
-exporter[QueryList.City.REVERSE_LATLNG_GEO]= asClass(GeocodeQuery)
+exporter[QueryList.City.REVERSE_GEO] = asClass(ReverseGeocodeQuery)
+exporter[QueryList.City.REVERSE_LATLNG_GEO] = asClass(GeocodeQuery)
 
 
 
@@ -234,6 +240,26 @@ exporter[QueryList.City.REVERSE_LATLNG_GEO]= asClass(GeocodeQuery)
 
 
 ///////////////////////////////////////////////////////////
+
+///////////////////PROJECT////////////////////////////////
+
+
+
+exporter[QueryList.Project.LOGIN] = asClass(LoginProjectQuery);
+exporter[QueryList.Project.LOGIN_JS] = asClass(LoginJustshareProjectQuery)
+
+
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////
+
+
+
 ContainerAwlix.register(exporter);
 let container = ContainerAwlix;
 export default container;

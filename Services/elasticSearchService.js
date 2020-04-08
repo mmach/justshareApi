@@ -618,10 +618,11 @@ export default class ElasticSearchService extends BaseService {
 
 
     }
+    console.log(CONFIG.ELASTIC_SEARCH[process.env.NODE_ENV ? process.env.NODE_ENV : 'development'] + String(this.context.project.id).toLowerCase() + `-items/_search`)
     console.log(JSON.stringify(body));
     return await axios({
       method: 'post',
-      url: CONFIG.ELASTIC_SEARCH[process.env.NODE_ENV ? process.env.NODE_ENV : 'development'] + `items/_search`,
+      url: CONFIG.ELASTIC_SEARCH[process.env.NODE_ENV ? process.env.NODE_ENV : 'development'] + String(this.context.project.id).toLowerCase() + `-items/_search`,
       data: body
 
     })
@@ -633,7 +634,7 @@ export default class ElasticSearchService extends BaseService {
 
     return await axios({
       method: 'get',
-      url: CONFIG.ELASTIC_SEARCH[process.env.NODE_ENV ? process.env.NODE_ENV : 'development'] + `items/_doc/${item_id}`
+      url: CONFIG.ELASTIC_SEARCH[process.env.NODE_ENV ? process.env.NODE_ENV : 'development'] + String(this.context.project.id).toLowerCase() + `-items/_doc/${item_id}`
 
 
     })

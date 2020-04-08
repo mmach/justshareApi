@@ -3,7 +3,7 @@ import LogFileInfrastructure from "../../Architecture/Infrastructure/logFileInfr
 import AuthInfrastucture from "../../Architecture/Infrastructure/authInfrastucture.js";
 import DbTransactionInfrastucture from "../../Architecture/Infrastructure/dbTransactionInfrastucture.js";
 import ItemService from "../../Services/itemService.js";
-import {ItemDTO} from "justshare-shared";
+import { ItemDTO } from "justshare-shared";
 import BlobService from "../../Services/blobService.js";
 import CategoryService from "../../Services/categoryService.js";
 import BlobValidators from "../../Validators/blobValidators.js";
@@ -186,7 +186,10 @@ export default class SyncItemCommand extends BaseCommand {
         categories: item.categories,
         created_at: item.created_at ? item.created_at : today.toISOString(),
         expired_at: (item.expired_date != undefined && item.expired_date != null) ? item.expired_date : expired.toISOString(),
-        item: item
+        item: item,
+        project_id: item.project_id,
+        es_operations: item.operations,
+        external_id: item.external_id
       });
     });
     return await Promise.all(array)
@@ -204,7 +207,7 @@ export default class SyncItemCommand extends BaseCommand {
     }));
     // console.log(JSON.stringify(this.model));
     let addToQueue = this.addToQueue.bind(this);
-    const CONN_URL = process.env.AMQP?process.env.AMQP:'amqp://kyqjanjv:6djuPiJWnpZnIMT1jZ-SvIULv8IOLw2P@hedgehog.rmq.cloudamqp.com/kyqjanjv';
+    const CONN_URL = process.env.AMQP ? process.env.AMQP : 'amqp://kyqjanjv:6djuPiJWnpZnIMT1jZ-SvIULv8IOLw2P@hedgehog.rmq.cloudamqp.com/kyqjanjv';
     let ch = null;
     await new Promise((res, rej) => {
       amqp.connect(CONN_URL, function (err, conn) {

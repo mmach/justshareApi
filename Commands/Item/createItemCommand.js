@@ -3,7 +3,7 @@ import LogFileInfrastructure from "../../Architecture/Infrastructure/logFileInfr
 import AuthInfrastucture from "../../Architecture/Infrastructure/authInfrastucture.js";
 import DbTransactionInfrastucture from "../../Architecture/Infrastructure/dbTransactionInfrastucture.js";
 import ItemService from "../../Services/itemService.js";
-import {ItemDTO} from "justshare-shared";
+import { ItemDTO } from "justshare-shared";
 import BlobService from "../../Services/blobService.js";
 import CategoryService from "../../Services/categoryService.js";
 import Promise from "bluebird";
@@ -175,7 +175,10 @@ export default class CreateItemCommand extends BaseCommand {
       categories: this.model.categories,
       created_at: this.model.created_at ? this.model.created_at : today.toISOString(),
       expired_at: this.model.expired_at ? this.model.expired_at : expired.toISOString(),
-      item: this.model.item
+      item: this.model.item,
+      project_id: this.model.item.project_id,
+      external_id: this.model.item.external_id,
+      es_operation: this.model.item.es_operation
 
     });
   }

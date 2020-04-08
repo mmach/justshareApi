@@ -57,9 +57,14 @@ export default class Item extends Model {
         longitude: DataTypes.FLOAT,
         latitude: DataTypes.FLOAT,
         category_type: DataTypes.INTEGER,
-        is_elastic_sync:DataTypes.BOOLEAN,
-        expired_date:DataTypes.DATEONLY
-
+        is_elastic_sync: DataTypes.BOOLEAN,
+        expired_date: DataTypes.DATEONLY,
+        project_id: {
+          type: DataTypes.UUID,
+          allowNull: false
+        },
+        es_operations: DataTypes.STRING,
+        external_id: DataTypes.STRING,
       },
       { sequelize }
     );
@@ -79,6 +84,11 @@ export default class Item extends Model {
       as: "category",
       targetKey: "id",
       foreignKey: "category_id"
+    });
+    Item.belongsTo(models.Project, {
+      as: "project",
+      targetKey: "id",
+      foreignKey: "project_id"
     });
     Item.hasMany(models.Blob, {
       as: "blobs",

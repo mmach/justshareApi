@@ -9,9 +9,17 @@ let CONFIG = {
   ],
   UPLOAD_PATH: "C:/Programowanie/Private/stuffshare/src/JustShareApi/upload",//"F:/Private/cqrs-node/upload",//
   LOCATION_IQ: "fcfb9eb913b786",
+  TRANSLATE:{
+    engine:'yandex',
+    key:'trnsl.1.1.20190525T222610Z.47a7d82b340b189e.59764ef074ae84f21bed0836d101d4743a754577'
+  },
   ELASTIC_SEARCH: {
-    production: "https://5gn69lkoe1:e53lt3rgsr@alder-283162757.eu-west-1.bonsaisearch.net:443/",//"https://search-justshare-elastic-duvzgnhy7vsbtdpuqtv3s2v4qa.us-east-2.es.amazonaws.com/",
-    development: "https://5gn69lkoe1:e53lt3rgsr@alder-283162757.eu-west-1.bonsaisearch.net:443/"//"http://localhost:9200/"//"https://25t337e5fo:xdrzi9s9z@oak-487876355.eu-west-1.bonsaisearch.net:443/"
+    production: "https://search-justshare-es-prpllmtm2nibj3jnky5rdtjfga.us-east-2.es.amazonaws.com/",//"https://search-justshare-elastic-duvzgnhy7vsbtdpuqtv3s2v4qa.us-east-2.es.amazonaws.com/",
+    development: "https://search-justshare-es-prpllmtm2nibj3jnky5rdtjfga.us-east-2.es.amazonaws.com/"//"http://localhost:9200/"//"https://25t337e5fo:xdrzi9s9z@oak-487876355.eu-west-1.bonsaisearch.net:443/"
+  },
+  JS_CRED: {
+    secretKey: 'CEE71DFE-63C2-4755-B449-26355B5DBF04',
+    cliendId: '9C4D23EE-898C-49A7-94FC-DDA5596F1F00'
   },
   DATABASE: {
     development: {

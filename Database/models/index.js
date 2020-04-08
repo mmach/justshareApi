@@ -25,6 +25,9 @@ import CategoryOptionsLink from "./categoryOptionsLink.js";
 import ItemCategoryOption from "./itemCategoryOption.js";
 import Tag from "./tag.js";
 import ItemTag from "./itemTag.js";
+import Project from "./project";
+
+
 
 
 
@@ -79,7 +82,8 @@ let models = {
   CategoryOptionsLink:CategoryOptionsLink.init(sequelize,Sequelize),
   ItemCategoryOption:ItemCategoryOption.init(sequelize,Sequelize),
   Tag:Tag.init(sequelize,Sequelize),
-  ItemTag:ItemTag.init(sequelize,Sequelize)
+  ItemTag:ItemTag.init(sequelize,Sequelize),
+  Project:Project.init(sequelize,Sequelize)
 
 };
 

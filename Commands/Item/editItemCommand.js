@@ -3,7 +3,7 @@ import LogFileInfrastructure from "../../Architecture/Infrastructure/logFileInfr
 import AuthInfrastucture from "../../Architecture/Infrastructure/authInfrastucture.js";
 import DbTransactionInfrastucture from "../../Architecture/Infrastructure/dbTransactionInfrastucture.js";
 import ItemService from "../../Services/itemService.js";
-import {ItemDTO,BlobBase64DTO} from "justshare-shared";
+import { ItemDTO, BlobBase64DTO } from "justshare-shared";
 import BlobService from "../../Services/blobService.js";
 import CategoryService from "../../Services/categoryService.js";
 import BlobValidators from "../../Validators/blobValidators.js";
@@ -28,14 +28,16 @@ export default class EditItemCommand extends BaseCommand {
     itemServiceDI,
     validationInfrastructureDI,
     categoryServiceDI,
-    blobServiceDI
+    blobServiceDI,
+    projectInfrastructureDI
   }) {
     // @ts-ignore
     super({
       logFileInfrastructureDI,
       authInfrastructureDI,
       dbTransactionInfrastuctureDI,
-      validationInfrastructureDI
+      validationInfrastructureDI,
+      projectInfrastructureDI
     });
     this.itemServiceDI = itemServiceDI;
     this.blobServiceDI = blobServiceDI;
@@ -120,7 +122,7 @@ export default class EditItemCommand extends BaseCommand {
 
   async removeCategory(itemId) {
     let removeCategories = this.model.categories.remove.map(async item => {
-      return await this.categoryServiceDI.removeCategory({ id: item.id });
+      return await this.categoryServiceDI.setContext(this.context).removeCategory({ id: item.id });
     });
     await Promise.all(removeCategories);
     let unlinkCategories = this.model.categories.remove.filter(item => {
@@ -136,7 +138,7 @@ export default class EditItemCommand extends BaseCommand {
     this.createSearchClob();
     console.log(this.model.clobSearch_pl);
     //this.model.expired_date
-    let item = await this.itemServiceDI.update({ model: this.model });
+    let item = await this.itemServiceDI.setContext(this.context).update({ model: this.model });
     //await this.insertBlobs(item.id);
     await this.removeCategory(this.model.id);
     await this.insertCategories(this.model.id);

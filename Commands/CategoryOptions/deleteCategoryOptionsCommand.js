@@ -20,8 +20,8 @@ export default class DeleteCategoryOptionsCommand extends BaseCommand {
      * @param  {{logFileInfrastructureDI : LogFileInfrastructure,  categoryOptionServiceDI:CategoryOptionService ,authInfrastructureDI:AuthInfrastucture}}
      * @memberof InsertCategoryCommand
      */
-    constructor({ logFileInfrastructureDI, categoryOptionServiceDI, authInfrastructureDI }) {
-        super({ logFileInfrastructureDI, authInfrastructureDI });
+    constructor({ logFileInfrastructureDI, categoryOptionServiceDI, authInfrastructureDI,projectInfrastructureDI }) {
+        super({ logFileInfrastructureDI, authInfrastructureDI,projectInfrastructureDI });
         this.categoryOptionServiceDI = categoryOptionServiceDI
 
     };
@@ -29,7 +29,7 @@ export default class DeleteCategoryOptionsCommand extends BaseCommand {
         this.model = Object.assign(new CategoryOptionsDTO(), dto);
     }
     async action() {
-       await this.categoryOptionServiceDI.setContext(this.context).delete({ model:this.model });
+       await this.categoryOptionServiceDI.setContext(this.context).delete({ model:this.model,withProject:true });
 
     }
 };

@@ -1,7 +1,7 @@
 "use strict";
 import BaseCommand from "./../../Architecture/baseCommand.js";
 
-import {UserRegisterInternalDTO} from "justshare-shared";
+import { UserRegisterInternalDTO } from "justshare-shared";
 import LogFileInfrastructure from "../../Architecture/Infrastructure/logFileInfrastructure.js";
 import UserService from "../../Services/userService.js";
 import ValidatonInfrastructure from "../../Architecture/Infrastructure/validatonInfrastructure.js";
@@ -30,12 +30,14 @@ export default class CreateUserCommand extends BaseCommand {
     userServiceDI,
     validationInfrastructureDI,
     dbTransactionInfrastuctureDI,
-    mailSenderDI
+    mailSenderDI,
+    projectInfrastructureDI
   }) {
     super({
       logFileInfrastructureDI,
       validationInfrastructureDI,
-      dbTransactionInfrastuctureDI
+      dbTransactionInfrastuctureDI,
+      projectInfrastructureDI
     });
     this.mailSenderDI = mailSenderDI;
     this.userServiceDI = userServiceDI;
@@ -46,13 +48,13 @@ export default class CreateUserCommand extends BaseCommand {
 
   get validation() {
     return [
-      ()=>{this.checkDTO.bind(this)(this.model)},
-      ()=>{UserValidators.checkIfMailExistInDb.bind(this)()}]
+      () => { this.checkDTO.bind(this)(this.model) },
+      () => { UserValidators.checkIfMailExistInDb.bind(this)() }]
   }
 
 
   async action() {
-    let result = await this.userServiceDI.newInternalUser({
+    let result = await this.userServiceDI.setContext(this.context).newInternalUser({
       model: this.model
     });
     let model = {
@@ -60,16 +62,16 @@ export default class CreateUserCommand extends BaseCommand {
         name: result.name,
         email: result.email,
         uid: result.uid,
-        href: this.referer?(new URL(this.referer)).origin:'http://localhost.8080'//this.referer,//CONFIG.FRONT_END_URL,
+        href: this.referer ? (new URL(this.referer)).origin : 'http://localhost.8080'//this.referer,//CONFIG.FRONT_END_URL,
       }
     };
-    
+
     this.mailSenderDI.mailSend({
       xslt_file: EMAIL_TEMPLATE.authorization,
       model,
       email_to: model.body.email,
       language: result.language,
-      mail_title: new CodeDictionary().get_trans("AUTHORIZATION_TITLE", "EMAIL",  result.language)
+      mail_title: new CodeDictionary().get_trans("AUTHORIZATION_TITLE", "EMAIL", result.language)
 
     });
   }

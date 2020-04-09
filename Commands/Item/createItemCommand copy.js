@@ -28,14 +28,16 @@ export default class CreateItemCommand extends BaseCommand {
     itemServiceDI,
     validationInfrastructureDI,
     categoryServiceDI,
-    blobServiceDI
+    blobServiceDI,
+    projectInfrastructureDI
   }) {
     // @ts-ignore
     super({
       logFileInfrastructureDI,
       authInfrastructureDI,
       dbTransactionInfrastuctureDI,
-      validationInfrastructureDI
+      validationInfrastructureDI,
+      projectInfrastructureDI
     });
     this.itemServiceDI = itemServiceDI;
     this.blobServiceDI = blobServiceDI;
@@ -114,7 +116,7 @@ export default class CreateItemCommand extends BaseCommand {
   }
   async action() {
     this.createSearchClob();
-    let item = await this.itemServiceDI.insert({ model: this.model });
+    let item = await this.itemServiceDI.setContext(this.context).insert({ model: this.model,withProject:true });
     await this.insertBlobs(item.id);
     await this.insertCategories(item.id);
 

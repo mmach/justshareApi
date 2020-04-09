@@ -166,7 +166,10 @@ export default class ElasticSearchService extends BaseService {
     tags,
     status,
     type,
-    category, categories, created_at, expired_at, item }) {
+    category, categories, created_at, expired_at, item,
+    project_id,
+    es_operations,
+    external_id }) {
     //console.log(JSON.stringify(catOptions, true))
 
     let singleGeo = catOptions.filter(item => {
@@ -242,7 +245,7 @@ export default class ElasticSearchService extends BaseService {
     });
     let data = {
       "location": [longitude, latitude],
-
+      "external_id": external_id,
       "user_id": user_id,
       "title": title,
       "description": description,
@@ -276,6 +279,8 @@ export default class ElasticSearchService extends BaseService {
     //await this.itemRepositoryDI.setAsSyncElastic({ id: item_id })
     return {
       id: item_id,
+      project_id: project_id,
+      es_operations: es_operations,
       data: data
     }
   }

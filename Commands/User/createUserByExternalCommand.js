@@ -6,7 +6,7 @@ import axios from 'axios'
 import BlobService from "../../Services/blobService.js";
 import uuidv4 from 'uuid/v4';
 import CONFIG from "../../config.js";
-import {BlobBase64DTO,UserRegisterInternalDTO,ExternalCredentialsDTO} from "justshare-shared";
+import { BlobBase64DTO, UserRegisterInternalDTO, ExternalCredentialsDTO } from "justshare-shared";
 import EMAIL_TEMPLATE from "./../../Static/MailsXSLT/index.js";
 import CodeDictionary from "../../Architecture/Dictionary/codeDictionary.js";
 
@@ -28,12 +28,14 @@ export default class CreateUserByExternalCommand extends BaseCommand {
     userServiceDI,
     blobServiceDI,
     dbTransactionInfrastuctureDI,
-    mailSenderDI
+    mailSenderDI,
+    projectInfrastructureDI
 
   }) {
     super({
       logFileInfrastructureDI,
-      dbTransactionInfrastuctureDI
+      dbTransactionInfrastuctureDI,
+      projectInfrastructureDI
     });
     this.userServiceDI = userServiceDI;
     this.blobServiceDI = blobServiceDI;
@@ -76,7 +78,7 @@ export default class CreateUserByExternalCommand extends BaseCommand {
     blob.blob = img.data;
     blob.type = img.headers["content-type"];
     blob.uid = uuidv4();
-    let result = await this.blobServiceDI.setContext(this.context).uploadUserImage({ blob: blob });
+    let result = await this.blobServiceDI.setContext(this.context).setContext(this.context).uploadUserImage({ blob: blob });
 
     await this.blobServiceDI.setContext(this.context).verifyImage({ blob: result.dataValues });
     return result.dataValues.id
@@ -116,7 +118,7 @@ export default class CreateUserByExternalCommand extends BaseCommand {
     if (fbCred != undefined) {
       return;
     } else {
-      return await this.userServiceDI.addExternalCredentials({
+      return await this.userServiceDI.setContext(this.context).addExternalCredentials({
         cred: {
           id: fbCred != undefined ? fbCred.id : 0,
           user_id: userInfo.id,
@@ -133,7 +135,7 @@ export default class CreateUserByExternalCommand extends BaseCommand {
     console.log(result);
     const userInfo = await this.userServiceDI.toJsonParse(this.userServiceDI.setContext(this.context).checkMailInDb({ email: result.email }));
     console.log(userInfo)
-    if (userInfo != null && userInfo.id !='') {
+    if (userInfo != null && userInfo.id != '') {
       await this.checkIfExistAndLink(result, userInfo, this.model.provider);
       return;
     } else {

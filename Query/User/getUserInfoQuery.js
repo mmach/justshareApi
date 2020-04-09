@@ -10,8 +10,8 @@ export default class GetUserInfoQuery extends BaseQuery {
      * @param  {{ logFileInfrastructureDI:LogFileInfrastructure,  dictionaryDI,userServiceDI:UserService,blobServiceDI: BlobService}}
      * @memberof GetUserInfoQuery
      */
-    constructor({ logFileInfrastructureDI, userServiceDI, authInfrastructureDI, blobServiceDI }) {
-        super({ logFileInfrastructureDI, authInfrastructureDI });
+    constructor({ logFileInfrastructureDI, userServiceDI, authInfrastructureDI, blobServiceDI,projectInfrastructureDI }) {
+        super({ logFileInfrastructureDI, authInfrastructureDI,projectInfrastructureDI });
 
         this.userServiceDI = userServiceDI;
         this.blobServiceDI = blobServiceDI

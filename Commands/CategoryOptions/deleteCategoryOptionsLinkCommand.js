@@ -20,8 +20,8 @@ export default class DeleteCategoryOptionsLinkCommand extends BaseCommand {
      * @param  {{logFileInfrastructureDI : LogFileInfrastructure,  categoryOptionServiceDI:CategoryOptionService ,authInfrastructureDI:AuthInfrastucture}}
      * @memberof InsertCategoryCommand
      */
-    constructor({ logFileInfrastructureDI, categoryOptionServiceDI, authInfrastructureDI }) {
-        super({ logFileInfrastructureDI, authInfrastructureDI });
+    constructor({ logFileInfrastructureDI, categoryOptionServiceDI, authInfrastructureDI,projectInfrastructureDI }) {
+        super({ logFileInfrastructureDI, authInfrastructureDI,projectInfrastructureDI });
         this.categoryOptionServiceDI = categoryOptionServiceDI
 
     };

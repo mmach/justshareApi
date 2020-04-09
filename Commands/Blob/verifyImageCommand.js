@@ -26,10 +26,12 @@ export default class VerifyImageCommand extends BaseCommand {
     logFileInfrastructureDI,
     authInfrastructureDI,
     blobServiceDI,
+    projectInfrastructureDI
   }) {
     super({
       logFileInfrastructureDI,
       authInfrastructureDI,
+      projectInfrastructureDI
     });
     this.blobServiceDI = blobServiceDI;
   }

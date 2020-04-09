@@ -12,8 +12,8 @@ export default class GetUnverifiedBlobsQuery extends BaseQuery {
      * @param  {{ logFileInfrastructureDI:LogFileInfrastructure,blobServiceDI:BlobService }}
      * @memberof UserLogInInternalQuery
      */
-    constructor({ logFileInfrastructureDI, blobServiceDI, authInfrastructureDI }) {
-        super({ logFileInfrastructureDI, authInfrastructureDI });
+    constructor({ logFileInfrastructureDI, blobServiceDI, authInfrastructureDI,projectInfrastructureDI }) {
+        super({ logFileInfrastructureDI, authInfrastructureDI,projectInfrastructureDI });
         this.blobServiceDI = blobServiceDI;
     };
 
@@ -30,7 +30,7 @@ export default class GetUnverifiedBlobsQuery extends BaseQuery {
         if (uidList == null || uidList.length == 0) {
             return result;
         }
-        let blobsResulst = await this.blobServiceDI.getBlobsBase64ByGuids({ ids: uidList });
+        let blobsResulst = await this.blobServiceDI.setContext(this.context).getBlobsBase64ByGuids({ ids: uidList });
         let combainBlobs = result.map(item => {
             let blobBase64 = blobsResulst.filter(element => {
                 return item.blob_thumbmail.id == element.id

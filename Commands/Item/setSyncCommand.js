@@ -34,15 +34,18 @@ export default class setItemSyncCommand extends BaseCommand {
     logFileInfrastructureDI,
     dbTransactionInfrastuctureDI,
     itemServiceDI,
-    validationInfrastructureDI
+    validationInfrastructureDI,
+    projectInfrastructureDI
   }) {
     // @ts-ignore
     super({
       logFileInfrastructureDI,
+      projectInfrastructureDI,
    //   authInfrastructureDI,
       dbTransactionInfrastuctureDI,
       validationInfrastructureDI,
     });
+    this.projectInfrastructureDI.allowForAllProjects();
     this.itemServiceDI = itemServiceDI;
       }
 

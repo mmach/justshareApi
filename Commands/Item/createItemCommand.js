@@ -160,7 +160,7 @@ export default class CreateItemCommand extends BaseCommand {
     var expired = new Date(Date.now() + 120965);
     var dateExpired = expired.getFullYear() + '-' + (expired.getMonth() + 1) + '-' + expired.getDate();
 
-    return await this.elasticSearchServiceDI.upsertItemDoc({
+    return await this.elasticSearchServiceDI.setContext(this.context).upsertItemDoc({
       item_id: this.model.id,
       longitude: this.model.longitude,
       latitude: this.model.latitude,
@@ -210,7 +210,7 @@ export default class CreateItemCommand extends BaseCommand {
       item.id = uuidv4()
       return item
     })
-    let idNewTagsArray = await this.tagServiceDI.insertUniq({ newTags: newTags });
+    let idNewTagsArray = await this.tagServiceDI.setContext(this.context).insertUniq({ newTags: newTags });
 
 
 
@@ -227,7 +227,7 @@ export default class CreateItemCommand extends BaseCommand {
 
     let tagsArray = await tagsId.map(tag => {
       console.log(tag);
-      return this.itemServiceDI.insertTag({
+      return this.itemServiceDI.setContext(this.context).insertTag({
         item_id: this.model.id, tag_id: tag
       })
     })
@@ -238,7 +238,7 @@ export default class CreateItemCommand extends BaseCommand {
     // console.log(this.model);
     this.clobs = this.createSearchClob.bind(this)();
     this.getCategoriesValue.bind(this)();
-    this.model.categories = await this.categoryServiceDI.getCategoriesParents({ ids: this.model.category_id })
+    this.model.categories = await this.categoryServiceDI.setContext(this.context).getCategoriesParents({ ids: this.model.category_id })
     let cat = this.model.categories.filter(item => { return item.id == this.model.category_id })[0]
 
     console.log(this.model);
@@ -246,11 +246,10 @@ export default class CreateItemCommand extends BaseCommand {
     var tomorrow = new Date();
     tomorrow.setDate(today.getDate() + (cat.expired_day != null ? Number(cat.expired_day) : 5000));
     this.model.expired_date = tomorrow
-    this.model.project_id = this.context.project.id
     this.model.es_operations = 'I';
-    let newItem = await this.itemServiceDI.upsert({ model: this.model });
+    let newItem = await this.itemServiceDI.setContext(this.context).upsert({ model: this.model,withProject:true });
     let array = this.model.catOptions.map(item => {
-      return this.itemServiceDI.upsertCategoryOption({ model: item, item_id: this.model.id })
+      return this.itemServiceDI.setContext(this.context).upsertCategoryOption({ model: item, item_id: this.model.id })
     })
 
     await Promise.all(array)

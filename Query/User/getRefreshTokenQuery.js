@@ -12,8 +12,8 @@ export default class GetRefreshTokenQuery extends BaseQuery {
      * @param  {{ logFileInfrastructureDI:LogFileInfrastructure,  dictionaryDI,userServiceDI:UserService,authInfrastructureDI:AuthInfrastucture }}
      * @memberof UserLogInInternalQuery
      */
-    constructor({ logFileInfrastructureDI, userServiceDI, authInfrastructureDI }) {
-        super({ logFileInfrastructureDI, authInfrastructureDI });
+    constructor({ logFileInfrastructureDI, userServiceDI, authInfrastructureDI,projectInfrastructureDI }) {
+        super({ logFileInfrastructureDI, authInfrastructureDI,projectInfrastructureDI });
 
         this.userServiceDI = userServiceDI;
     };

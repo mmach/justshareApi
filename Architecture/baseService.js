@@ -2,7 +2,7 @@
 import UnitOfWork from "../unitOfWork.js";
 import BaseRepository from "./baseRepository.js";
 import ServerException from "./Exceptions/serverException.js";
-import {BaseDTO} from "justshare-shared";
+import { BaseDTO } from "justshare-shared";
 
 /**
  *
@@ -22,6 +22,9 @@ export default class BaseService {
       user: {
         id: undefined,
         uid: undefined
+      },
+      project: {
+        id: undefined
       }
     };
   }
@@ -63,6 +66,10 @@ export default class BaseService {
   get userId() {
     return this.context.user.id;
   }
+  get projectId() {
+    return this.context.project.id;
+
+  }
   setContext(context) {
     if (context) {
       this.context = context;
@@ -77,8 +84,8 @@ export default class BaseService {
    * @return {Promise<any>}
    * @memberof BaseService
    */
-  async getById({ id }) {
-    return await this.toJsonParse(this.unitOfWorkDI[this.repository].getById({ id }));
+  async getById({ id, withProject }) {
+    return await this.toJsonParse(this.unitOfWorkDI[this.repository].getById({ id, withProject }));
   }
   /**
    *
@@ -87,8 +94,8 @@ export default class BaseService {
    * @returns
    * @memberof BaseService
    */
-  async getByGuid({ uid }) {
-    return await this.toJsonParse(this.unitOfWorkDI[this.repository].getByGuid({ uid }));
+  async getByGuid({ uid, withProject }) {
+    return await this.toJsonParse(this.unitOfWorkDI[this.repository].getByGuid({ uid, withProject }));
   }
   /**
    *
@@ -96,8 +103,8 @@ export default class BaseService {
    * @return {Promise<any>}
    * @memberof BaseService
    */
-  async insert({ model }) {
-    return await this.toJsonParse(this.unitOfWorkDI[this.repository].insert({ model }));
+  async insert({ model, withProject }) {
+    return await this.toJsonParse(this.unitOfWorkDI[this.repository].insert({ model, withProject }));
   }
   /**
    *
@@ -105,8 +112,8 @@ export default class BaseService {
    * @return {Promise<any>}
    * @memberof BaseService
    */
-  async update({ model }) {
-    return await this.unitOfWorkDI[this.repository].update({ model });
+  async update({ model, withProject }) {
+    return await this.unitOfWorkDI[this.repository].update({ model, withProject });
   }
 
   /**
@@ -115,8 +122,8 @@ export default class BaseService {
      * @return {Promise<any>}
      * @memberof BaseService
      */
-  async upsert({ model }) {
-    return await this.unitOfWorkDI[this.repository].upsert({ model });
+  async upsert({ model, withProject }) {
+    return await this.unitOfWorkDI[this.repository].upsert({ model, withProject });
 
   }
   /**
@@ -125,11 +132,11 @@ export default class BaseService {
    * @return {Promise<any>}
    * @memberof BaseService
    */
-  async delete({ model }) {
-    return await this.unitOfWorkDI[this.repository].delete({ model });
+  async delete({ model, withProject }) {
+    return await this.unitOfWorkDI[this.repository].delete({ model, withProject });
   }
 
-  async deleteByGuid({ uid, transaction }) {
-    return await this.unitOfWorkDI[this.repository].deleteByGuid({ uid });
+  async deleteByGuid({ uid, withProject, transaction }) {
+    return await this.unitOfWorkDI[this.repository].deleteByGuid({ uid, withProject });
   }
 }

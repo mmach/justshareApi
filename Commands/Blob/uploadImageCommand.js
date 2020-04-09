@@ -31,13 +31,15 @@ export default class UploadImageCommand extends BaseCommand {
     blobServiceDI,
     dbTransactionInfrastuctureDI,
     validationInfrastructureDI,
-    userServiceDI
+    userServiceDI,
+    projectInfrastructureDI
   }) {
     super({
       logFileInfrastructureDI,
       authInfrastructureDI,
       dbTransactionInfrastuctureDI,
-      validationInfrastructureDI
+      validationInfrastructureDI,
+      projectInfrastructureDI
     });
     this.blobServiceDI = blobServiceDI;
     this.userServiceDI = userServiceDI;

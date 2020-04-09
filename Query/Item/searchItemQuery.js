@@ -15,8 +15,8 @@ export default class SearchItemQuery extends BaseQuery {
      * @param  {{ logFileInfrastructureDI:LogFileInfrastructure, itemServiceDI:ItemService ,elasticSearchServiceDI:ElasticSearchService,blobServiceDI:BlobService,categoryOptionServiceDI:CategoryOptionService,CategoryService,categoryServiceDI:CategoryService}}
      * @memberof GetItemQuery
      */
-    constructor({ logFileInfrastructureDI, projectInfrastructureDI,itemServiceDI, authInfrastructureDI, elasticSearchServiceDI, blobServiceDI, categoryOptionServiceDI, categoryServiceDI }) {
-        super({ logFileInfrastructureDI, authInfrastructureDI ,projectInfrastructureDI});
+    constructor({ logFileInfrastructureDI, projectInfrastructureDI, itemServiceDI, authInfrastructureDI, elasticSearchServiceDI, blobServiceDI, categoryOptionServiceDI, categoryServiceDI }) {
+        super({ logFileInfrastructureDI, authInfrastructureDI, projectInfrastructureDI });
         this.authInfrastructureDI.allowAnonymous();
         this.categoryOptionServiceDI = categoryOptionServiceDI;
         this.itemServiceDI = itemServiceDI;
@@ -29,36 +29,7 @@ export default class SearchItemQuery extends BaseQuery {
         this.model = Object.assign(new SearchItemDTO(), dto);
     }
 
-    async getItems(uids) {
-
-        let resultList = await this.itemServiceDI.setContext(this.context).getItem({ uids: uids });
-        resultList = resultList.map(async result => {
-            if (result.blobs.length > 0) {
-                console.log(result);
-                let blobsResulst = await Promise.all(result.blobs.map(async item => {
-                    return await this.blobServiceDI.getBlobsBase64ByGuids({
-                        ids: [item.blob_min.id]
-                    });
-                }));
-                // let blobBase64 = blobsResulst.filter(element => {
-                //     return result.blobs.blob_thumbmail.id == element.id
-                // })[0]
-                result.blobs = result.blobs.map(item => {
-                    let blobBase64 = blobsResulst.filter(element => {
-
-                        return item.blob_min.id == element[0].id
-                    })[0]
-                    item.blob_min = Object.assign(new BlobBase64DTO(), blobBase64[0]);
-                    return item;
-                })
-                return result;
-            }
-            return result;
-
-        })
-        return await Promise.all(resultList);
-
-    }
+ 
     async action() {
         let catoptions = []
         if (this.model.category_id != undefined && this.model.category_id != '') {

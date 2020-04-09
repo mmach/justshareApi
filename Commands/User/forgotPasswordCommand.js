@@ -26,11 +26,13 @@ export default class ForgotPasswordCommand extends BaseCommand {
     logFileInfrastructureDI,
     userServiceDI,
     mailSenderDI,
-    dbTransactionInfrastuctureDI
+    dbTransactionInfrastuctureDI,
+    projectInfrastructureDI
   }) {
     super({
       logFileInfrastructureDI,
-      dbTransactionInfrastuctureDI
+      dbTransactionInfrastuctureDI,
+      projectInfrastructureDI
     });
     this.mailSenderDI = mailSenderDI;
     this.userServiceDI = userServiceDI;
@@ -44,7 +46,7 @@ export default class ForgotPasswordCommand extends BaseCommand {
   }
   //////////////////ROLLBACK IF Mail will not send
   async action() {
-    let result = await this.userServiceDI.forgotPassword({
+    let result = await this.userServiceDI.setContext(this.context).forgotPassword({
       uid: this.model.uid
     });
     if (result != null) {

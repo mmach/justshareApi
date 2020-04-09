@@ -28,12 +28,14 @@ export default class RemoveBlobCommand extends BaseCommand {
         logFileInfrastructureDI,
         authInfrastructureDI,
         blobServiceDI,
-        privilegesInfrastructureDI
+        privilegesInfrastructureDI,
+        projectInfrastructureDI
     }) {
         super({
             logFileInfrastructureDI,
             authInfrastructureDI,
-            privilegesInfrastructureDI
+            privilegesInfrastructureDI,
+            projectInfrastructureDI
         });
         this.blobServiceDI = blobServiceDI;
     }
@@ -52,6 +54,6 @@ export default class RemoveBlobCommand extends BaseCommand {
     }
 
     async action() {
-        await this.blobServiceDI.delete({model:this.model});
+        await this.blobServiceDI.setContext(this.context).delete({model:this.model});
     }
 }

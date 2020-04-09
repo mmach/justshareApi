@@ -14,7 +14,7 @@ export default class CategoryOptionService extends BaseService {
      * Creates an instance of UserService.
      * @param   {{ unitOfWorkDI: UnitOfWork, categoryOptionsRepositoryDI:CategoryOptionsRepository}}
      */
-    constructor({ unitOfWorkDI, blobRepositoryDI }) {
+    constructor({ unitOfWorkDI }) {
         super({ unitOfWorkDI, repository: 'categoryOptionsRepository' });
     }
 
@@ -48,11 +48,7 @@ export default class CategoryOptionService extends BaseService {
 
     }
 
-  //  async upsertCategoryOptionsForCategoryCommand({model})
-    //{
-   //     return await this.unitOfWorkDI.categoryOptionsRepository.upsertCategoryOptionsForCategoryCommand({model})
-
-   // }
+  
     async removeCategoryOptionsForCategory({id})
     {
         return await this.unitOfWorkDI.categoryOptionsRepository.removeCategoryOptionsForCategory({id})

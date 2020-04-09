@@ -14,8 +14,8 @@ export default class GetUserItemToSyncQuery extends BaseQuery {
      * @param  {{ logFileInfrastructureDI:LogFileInfrastructure, itemServiceDI:ItemService ,elasticSearchServiceDI:ElasticSearchService,blobServiceDI:BlobService,categoryOptionServiceDI:CategoryOptionService,CategoryService,categoryServiceDI:CategoryService}}
      * @memberof getUserItemQuery
      */
-    constructor({ logFileInfrastructureDI, itemServiceDI, blobServiceDI, authInfrastructureDI }) {
-        super({ logFileInfrastructureDI, authInfrastructureDI });
+    constructor({ logFileInfrastructureDI, itemServiceDI, blobServiceDI, authInfrastructureDI, projectInfrastructureDI }) {
+        super({ logFileInfrastructureDI, authInfrastructureDI, projectInfrastructureDI });
         this.itemServiceDI = itemServiceDI;
         this.blobServiceDI = blobServiceDI
     };

@@ -2,7 +2,7 @@
 import BaseCommand from "./../../Architecture/baseCommand.js";
 import LogFileInfrastructure from "../../Architecture/Infrastructure/logFileInfrastructure.js";
 import UserService from "../../Services/userService.js";
-import {BaseDTO} from "justshare-shared";
+import { BaseDTO } from "justshare-shared";
 import AuthInfrastucture from "../../Architecture/Infrastructure/authInfrastucture.js";
 import MailSender from "../../Architecture/mailSender.js";
 import CONFIG from "../../config.js";
@@ -27,11 +27,13 @@ export default class RemoveUserCommand extends BaseCommand {
     logFileInfrastructureDI,
     userServiceDI,
     authInfrastructureDI,
-    mailSenderDI
+    mailSenderDI,
+    projectInfrastructureDI
   }) {
     super({
       logFileInfrastructureDI,
-      authInfrastructureDI
+      authInfrastructureDI,
+      projectInfrastructureDI
     });
     this.mailSenderDI = mailSenderDI;
     this.userServiceDI = userServiceDI;
@@ -59,7 +61,7 @@ export default class RemoveUserCommand extends BaseCommand {
       model,
       email_to: model.body.email,
       language: this.context.language,
-      mail_title: new CodeDictionary().get_trans("REMOVE_USER_TITLE", "EMAIL",  this.context.language)
+      mail_title: new CodeDictionary().get_trans("REMOVE_USER_TITLE", "EMAIL", this.context.language)
 
     });
   }

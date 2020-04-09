@@ -22,14 +22,14 @@ export default class TagRepository extends BaseRepository {
   async insertUniq({ tag, id, transaction }) {
 
     let item = await this.entityDAO.findOne(
-      { where: { tag: this.toStr(tag.trim()) } },
+      { where: { tag: this.toStr(tag.trim()), project_id: this.context.project.id } },
       { transaction: this.getTran({ transaction }) }
     );
     if (item != null) {
       return item.dataValues.id
     }
 
-    this.insert({ model: { id: id, tag: tag }, tranaction: transaction })
+    this.insert({ model: { id: id, tag: tag, project_id: this.context.project.id  }, tranaction: transaction })
     return id;
 
   }

@@ -1,6 +1,6 @@
 import BaseService from "../Architecture/baseService.js";
 import CategoryRepository from "./../Repository/categoryRepository.js";
-import {CategoryHierarchyDTO,CategoryDTO} from "justshare-shared";
+import { CategoryHierarchyDTO, CategoryDTO } from "justshare-shared";
 
 /**
  *
@@ -79,7 +79,7 @@ export default class CategoryService extends BaseService {
     //}
     console.log(this.model);
     let result = await this.toJsonParse(
-      this.unitOfWorkDI.categoryRepository.insert({ model })
+      this.unitOfWorkDI.categoryRepository.insert({ model, withProject: true })
     );
     let obj = new CategoryHierarchyDTO();
     if (model.CategoryHierarchy && model.CategoryHierarchy.category_parent_id) {
@@ -118,7 +118,7 @@ export default class CategoryService extends BaseService {
       status: status
     }
     if (idParent != null) {
-      parent = await this.getById({ id: idParent });
+      parent = await this.getById({ id: idParent, withProject: true });
     }
     await this.setAsVerified({ id: id, status: parent.status }),
 

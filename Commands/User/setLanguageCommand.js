@@ -22,11 +22,13 @@ export default class SetLanguageCommand extends BaseCommand {
   constructor({
     logFileInfrastructureDI,
     userServiceDI,
-    authInfrastructureDI
+    authInfrastructureDI,
+    projectInfrastructureDI
   }) {
     super({
       logFileInfrastructureDI,
-      authInfrastructureDI
+      authInfrastructureDI,
+      projectInfrastructureDI
     });
     this.userServiceDI = userServiceDI;
   }

@@ -2,7 +2,7 @@
 import BaseCommand from "./../../Architecture/baseCommand.js";
 import LogFileInfrastructure from "../../Architecture/Infrastructure/logFileInfrastructure.js";
 import UserService from "../../Services/userService.js";
-import {UserDTO} from "justshare-shared";
+import { UserDTO } from "justshare-shared";
 import EMAIL_TEMPLATE from "./../../Static/MailsXSLT/index.js";
 import CONFIG from "../../config.js";
 import MailSender from "../../Architecture/mailSender.js";
@@ -21,9 +21,10 @@ export default class AuthorizeUserCommand extends BaseCommand {
    * @param  {{logFileInfrastructureDI:LogFileInfrastructure ,userServiceDI: UserService,mailSenderDI:MailSender}}
    * @memberof CreateUserCommand
    */
-  constructor({ logFileInfrastructureDI, userServiceDI, mailSenderDI }) {
+  constructor({ logFileInfrastructureDI, userServiceDI, mailSenderDI, projectInfrastructureDI }) {
     super({
-      logFileInfrastructureDI
+      logFileInfrastructureDI,
+      projectInfrastructureDI
     });
     this.mailSenderDI = mailSenderDI;
     this.userServiceDI = userServiceDI;
@@ -34,7 +35,7 @@ export default class AuthorizeUserCommand extends BaseCommand {
 
 
   async action() {
-    let result = await this.userServiceDI.authorizeUser({
+    let result = await this.userServiceDI.setContext(this.context).authorizeUser({
       guid: this.model.uid
     });
     if (result != null) {

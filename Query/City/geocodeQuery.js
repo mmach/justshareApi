@@ -10,8 +10,8 @@ export default class GeocodeQuery extends BaseQuery {
   * @param  {{ logFileInfrastructureDI:LogFileInfrastructure, cityServiceDI:CityService ,countryServiceDI:CountryService ,authInfrastructureDI:AuthInfrastucture}}
   * @memberof GetCountriesQuery
   */
-    constructor({ logFileInfrastructureDI, cityServiceDI, authInfrastructureDI, countryServiceDI }) {
-        super({ logFileInfrastructureDI, authInfrastructureDI });
+    constructor({ logFileInfrastructureDI, cityServiceDI, authInfrastructureDI, countryServiceDI,projectInfrastructureDI }) {
+        super({ logFileInfrastructureDI, authInfrastructureDI,projectInfrastructureDI });
         this.cityServiceDI = cityServiceDI;
         this.countryServiceDI = countryServiceDI
 

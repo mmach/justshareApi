@@ -11,8 +11,8 @@ export default class LogInByExternalQuery extends BaseQuery {
      * @param  {{ logFileInfrastructureDI:LogFileInfrastructure,  dictionaryDI,userServiceDI:UserService }}
      * @memberof LogInByExternalQuery
      */
-    constructor({ logFileInfrastructureDI, userServiceDI }) {
-        super({ logFileInfrastructureDI });
+    constructor({ logFileInfrastructureDI, userServiceDI,projectInfrastructureDI }) {
+        super({ logFileInfrastructureDI,projectInfrastructureDI });
 
         this.userServiceDI = userServiceDI;
     };
@@ -35,7 +35,7 @@ export default class LogInByExternalQuery extends BaseQuery {
     }
     async action() {
         let externalResult = await this.getApiResult(this.model.token, this.model.userId, this.model.provider);
-        return await this.userServiceDI.loginByExternalUserId({ email: externalResult.data.email, externalUserId: externalResult.data.id, provider: this.model.provider });
+        return await this.userServiceDI.setContext(this.context).loginByExternalUserId({ email: externalResult.data.email, externalUserId: externalResult.data.id, provider: this.model.provider });
 
     }
 };

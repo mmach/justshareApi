@@ -2,7 +2,7 @@
 
 import ServerException from "./Exceptions/serverException.js";
 import { Model } from "sequelize";
-import {BaseDTO} from "justshare-shared";
+import { BaseDTO } from "justshare-shared";
 import uuidv4 from "uuid/v4";
 
 /**
@@ -25,6 +25,9 @@ export default class BaseRepository {
       user: {
         id: 0,
         uid: undefined
+      },
+      project: {
+        id: undefined
       }
     };
   }
@@ -65,10 +68,15 @@ export default class BaseRepository {
    * @memberof BaseRepository
    */
   // @ts-ignore
-  getById({ id, transaction }) {
+  getById({ id, withProject, transaction }) {
     let db = this.entityDAO;
+    let where = { id: this.toStr(id) }
+    if (withProject) {
+      where.project_id = this.context.project.id
+    }
+
     return db.findOne(
-      { where: { id: this.toStr(id) } },
+      { where: where },
       { transaction: this.getTran({ transaction }) }
     );
   }
@@ -80,15 +88,24 @@ export default class BaseRepository {
    * @returns
    * @memberof BaseRepository
    */
-  getByGuid({ uid, transaction }) {
+  getByGuid({ uid, withProject, transaction }) {
+    let where = { uid: this.toStr(uid) }
+    if (withProject) {
+      where.project_id = this.context.project.id
+    }
+
     return this.entityDAO.findOne({
-      where: { uid: this.toStr(uid) },
+      where: where,
       transaction: this.getTran({ transaction })
     });
   }
-  deleteByGuid({ uid, transaction }) {
+  deleteByGuid({ uid, withProject, transaction }) {
+    let where = { uid: this.toStr(uid) }
+    if (withProject) {
+      where.project_id = this.context.project.id
+    }
     return this.entityDAO.destroy({
-      where: { uid: this.toStr(model.uid) },
+      where: where,
       transaction: this.getTran({ transaction })
     });
   }
@@ -99,10 +116,13 @@ export default class BaseRepository {
    * @memberof BaseRepository
    */
   // @ts-ignore
-  insert({ model, transaction }) {
+  insert({ model, withProject, transaction }) {
     let item = model;
     if (!model.id) {
       item.id = uuidv4();
+    }
+    if (withProject) {
+      item.project_id = this.context.project.id;
     }
     return this.entityDAO.create(item, {
       transaction: this.getTran({ transaction })
@@ -115,9 +135,13 @@ export default class BaseRepository {
    * @memberof BaseRepository
    */
   // @ts-ignore
-  update({ model, transaction }) {
+  update({ model, withProject, transaction }) {
+    let where = { id: this.toStr(model.id) }
+    if (withProject) {
+      where.project_id = this.context.project.id
+    }
     return this.entityDAO.update(model, {
-      where: { id: this.toStr(model.id) },
+      where: where,
       transaction: this.getTran({ transaction })
     });
   }
@@ -129,8 +153,13 @@ export default class BaseRepository {
    * @memberof BaseRepository
    */
   // @ts-ignore
-  upsert({ model, transaction }) {
-    return this.entityDAO.upsert(model, {
+  upsert({ model, withProject, transaction }) {
+    let item = {...model}; 
+    if (withProject) {
+      item.project_id = this.context.project.id
+    }
+  
+    return this.entityDAO.upsert(item, {
 
       transaction: this.getTran({ transaction })
     });
@@ -143,9 +172,13 @@ export default class BaseRepository {
    * @memberof BaseRepository
    */
   // @ts-ignore
-  delete({ model, transaction }) {
+  delete({ model, withProject, transaction }) {
+    let where = { id: this.toStr(model.id) }
+    if (withProject) {
+      where.project_id = this.context.project.id
+    }
     return this.entityDAO.destroy({
-      where: { id: this.toStr(model.id) },
+      where: where,
       transaction: this.getTran({ transaction })
     });
   }

@@ -1,13 +1,13 @@
 "use strict";
 
 import BaseQuery from '../../Architecture/baseQuery.js';
-import {CategoryDTO} from 'justshare-shared';
+import { CategoryDTO } from 'justshare-shared';
 
 
 export default class GetCategoryTreeQuery extends BaseQuery {
 
-    constructor({ logFileInfrastructureDI, categoryServiceDI }) {
-        super({ logFileInfrastructureDI });
+    constructor({ logFileInfrastructureDI, categoryServiceDI, projectInfrastructureDI }) {
+        super({ logFileInfrastructureDI, projectInfrastructureDI });
 
         this.categoryServiceDI = categoryServiceDI;
     };
@@ -15,11 +15,10 @@ export default class GetCategoryTreeQuery extends BaseQuery {
         this.model = Object.assign(new CategoryDTO(), dto);
     }
     async action() {
-        let result =  await this.categoryServiceDI.getCategoryTree({ id: this.model.id,parent:this.model.parent })
-        if(result.length==0)
-        {
-           return await this.categoryServiceDI.getCategoryTree({ id: this.model.parent }) 
-        }else{
+        let result = await this.categoryServiceDI.setContext(this.context).getCategoryTree({ id: this.model.id, parent: this.model.parent })
+        if (result.length == 0) {
+            return await this.categoryServiceDI.setContext(this.context).getCategoryTree({ id: this.model.parent })
+        } else {
             return result
         }
 

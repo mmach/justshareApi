@@ -6,7 +6,7 @@ import EMAIL_TEMPLATE from "./../../Static/MailsXSLT/index.js";
 import CONFIG from "../../config.js";
 import MailSender from "../../Architecture/mailSender.js";
 import CodeDictionary from "../../Architecture/Dictionary/codeDictionary.js";
-import {UserLoginInternalDTO} from "justshare-shared";
+import { UserLoginInternalDTO } from "justshare-shared";
 import DbTransactionInfrastucture from "../../Architecture/Infrastructure/dbTransactionInfrastucture.js";
 import { URL } from "url";
 
@@ -27,11 +27,13 @@ export default class SendMailForgotPasswordCommand extends BaseCommand {
     logFileInfrastructureDI,
     userServiceDI,
     mailSenderDI,
-    dbTransactionInfrastuctureDI
+    dbTransactionInfrastuctureDI,
+    projectInfrastructureDI
   }) {
     super({
       logFileInfrastructureDI,
-      dbTransactionInfrastuctureDI
+      dbTransactionInfrastuctureDI,
+      projectInfrastructureDI
     });
     this.mailSenderDI = mailSenderDI;
     this.userServiceDI = userServiceDI;
@@ -45,7 +47,7 @@ export default class SendMailForgotPasswordCommand extends BaseCommand {
   }
   ///////////////////CREATE SERVICE FOR SEND ONLY MAIL TO this Action BUT WITHOUT LOG OUT !
   async action() {
-    let result = await this.userServiceDI.checkMailInDb({
+    let result = await this.userServiceDI.setContext(this.context).checkMailInDb({
       email: this.model.email
     });
     if (result != null) {

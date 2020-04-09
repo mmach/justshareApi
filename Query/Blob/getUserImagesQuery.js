@@ -10,8 +10,8 @@ export default class GetUserImagesQuery extends BaseQuery {
      * @param  {{ logFileInfrastructureDI:LogFileInfrastructure,  dictionaryDI,blobServiceDI:BlobService }}
      * @memberof UserLogInInternalQuery
      */
-    constructor({ logFileInfrastructureDI, blobServiceDI, authInfrastructureDI }) {
-        super({ logFileInfrastructureDI, authInfrastructureDI });
+    constructor({ logFileInfrastructureDI, blobServiceDI, authInfrastructureDI,projectInfrastructureDI }) {
+        super({ logFileInfrastructureDI, authInfrastructureDI,projectInfrastructureDI });
         this.authInfrastructureDI.allowAnonymous();
         this.blobServiceDI = blobServiceDI;
     };

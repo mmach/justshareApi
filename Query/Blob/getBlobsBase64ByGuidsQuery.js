@@ -10,8 +10,8 @@ export default class GetBlobsBase64ByGuidsQuery extends BaseQuery {
      * @param  {{ logFileInfrastructureDI:LogFileInfrastructure,  dictionaryDI,blobServiceDI:BlobService }}
      * @memberof UserLogInInternalQuery
      */
-    constructor({ logFileInfrastructureDI, blobServiceDI }) {
-        super({ logFileInfrastructureDI });
+    constructor({ logFileInfrastructureDI, blobServiceDI,projectInfrastructureDI }) {
+        super({ logFileInfrastructureDI,projectInfrastructureDI });
 
         this.blobServiceDI = blobServiceDI;
     };
@@ -26,7 +26,7 @@ export default class GetBlobsBase64ByGuidsQuery extends BaseQuery {
         let uidList = this.model.map(item => {
             return item.id;
         })
-        return await this.blobServiceDI.getBlobsBase64ByGuids({ ids: uidList });
+        return await this.blobServiceDI.setContext(this.context).getBlobsBase64ByGuids({ ids: uidList });
 
     }
 };

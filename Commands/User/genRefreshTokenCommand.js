@@ -2,7 +2,7 @@
 import BaseCommand from "./../../Architecture/baseCommand.js";
 import LogFileInfrastructure from "../../Architecture/Infrastructure/logFileInfrastructure.js";
 import UserService from "../../Services/userService.js";
-import {UserDTO} from "justshare-shared";
+import { UserDTO } from "justshare-shared";
 
 
 
@@ -22,11 +22,13 @@ export default class GenRefreshTokenCommand extends BaseCommand {
    */
   constructor({
     logFileInfrastructureDI,
-    userServiceDI
+    userServiceDI,
+    projectInfrastructureDI
 
   }) {
     super({
-      logFileInfrastructureDI
+      logFileInfrastructureDI,
+      projectInfrastructureDI
 
     });
     this.userServiceDI = userServiceDI;
@@ -36,10 +38,10 @@ export default class GenRefreshTokenCommand extends BaseCommand {
   }
 
   get validation() {
-    return [()=>{this.checkDTO.bind(this)()}];
+    return [() => { this.checkDTO.bind(this)() }];
   }
 
   async action() {
-    await this.userServiceDI.genRefreshToken({ guid: this.model.uid });
+    await this.userServiceDI.setContext(this.context).genRefreshToken({ guid: this.model.uid });
   }
 }

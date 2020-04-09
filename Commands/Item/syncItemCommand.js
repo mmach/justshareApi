@@ -13,6 +13,8 @@ import TagService from './../../Services/tagService.js'
 import uuidv4 from "uuid/v4";
 import ClosingInfrastructure from "../../Architecture/Infrastructure/closingInfrastructure.js";
 import amqp from 'amqplib/callback_api';
+import CONFIG from "../../config.js";
+
 
 ("use strict");
 
@@ -39,15 +41,16 @@ export default class SyncItemCommand extends BaseCommand {
     blobServiceDI,
     elasticSearchServiceDI,
     tagServiceDI,
-    closingInfrastructureDI
+    closingInfrastructureDI,
+    projectInfrastructureDI
   }) {
     // @ts-ignore
     super({
       logFileInfrastructureDI,
       dbTransactionInfrastuctureDI,
       validationInfrastructureDI,
-      closingInfrastructureDI
-
+      closingInfrastructureDI,
+      projectInfrastructureDI
     });
     this.itemServiceDI = itemServiceDI;
     this.blobServiceDI = blobServiceDI;
@@ -55,6 +58,7 @@ export default class SyncItemCommand extends BaseCommand {
     this.elasticSearchServiceDI = elasticSearchServiceDI;
     this.tagServiceDI = tagServiceDI;
     this.clobs = {}
+    this.projectInfrastructureDI.allowForAllProjects();
   }
 
   get validation() {
@@ -111,7 +115,7 @@ export default class SyncItemCommand extends BaseCommand {
           catOption: catValue.cat_opt_temp
         }
       })
-      return await this.elasticSearchServiceDI.upsertItemDoc({
+      return await this.elasticSearchServiceDI.setContext(this.context).upsertItemDoc({
         item_id: item.id,
         longitude: item.longitude,
         latitude: item.latitude,
@@ -170,7 +174,7 @@ export default class SyncItemCommand extends BaseCommand {
         }
       })
       console.log(item.expired_date);
-      return await this.elasticSearchServiceDI.toQueueItemDoc({
+      return await this.elasticSearchServiceDI.setContext(this.context).toQueueItemDoc({
         item_id: item.id,
         longitude: item.longitude,
         latitude: item.latitude,
@@ -188,7 +192,7 @@ export default class SyncItemCommand extends BaseCommand {
         expired_at: (item.expired_date != undefined && item.expired_date != null) ? item.expired_date : expired.toISOString(),
         item: item,
         project_id: item.project_id,
-        es_operations: item.operations,
+        es_operations: item.es_operations,
         external_id: item.external_id
       });
     });
@@ -202,12 +206,12 @@ export default class SyncItemCommand extends BaseCommand {
     // console.log(this.model);
     this.model = await this.itemServiceDI.setContext(this.context).getItem({ toSync: 0 });
     this.mdoel = await Promise.all(this.model.map(async item => {
-      item.categories = await this.categoryServiceDI.getCategoriesParents({ ids: item.category_id })
+      item.categories = await this.categoryServiceDI.setContext(this.context).getCategoriesParents({ ids: item.category_id })
       return item;
     }));
     // console.log(JSON.stringify(this.model));
     let addToQueue = this.addToQueue.bind(this);
-    const CONN_URL = process.env.AMQP ? process.env.AMQP : 'amqp://kyqjanjv:6djuPiJWnpZnIMT1jZ-SvIULv8IOLw2P@hedgehog.rmq.cloudamqp.com/kyqjanjv';
+    const CONN_URL = process.env.AMQP ? process.env.AMQP : CONFIG.MQRABBIT.link;
     let ch = null;
     await new Promise((res, rej) => {
       amqp.connect(CONN_URL, function (err, conn) {

@@ -2,7 +2,7 @@
 import BaseCommand from "./../../Architecture/baseCommand.js";
 import LogFileInfrastructure from "../../Architecture/Infrastructure/logFileInfrastructure.js";
 import UserService from "../../Services/userService.js";
-import {BaseDTO} from "justshare-shared";
+import { BaseDTO } from "justshare-shared";
 import AuthInfrastucture from "../../Architecture/Infrastructure/authInfrastucture.js";
 
 
@@ -22,11 +22,13 @@ export default class LogOutCommand extends BaseCommand {
   constructor({
     logFileInfrastructureDI,
     userServiceDI,
-    authInfrastructureDI
+    authInfrastructureDI,
+    projectInfrastructureDI
   }) {
     super({
       logFileInfrastructureDI,
-      authInfrastructureDI
+      authInfrastructureDI,
+      projectInfrastructureDI
     });
     this.userServiceDI = userServiceDI;
   }
@@ -39,6 +41,6 @@ export default class LogOutCommand extends BaseCommand {
   }
 
   async action() {
-    await this.userServiceDI.setContext(this.context).logOut({id:this.context.user.id});
+    await this.userServiceDI.setContext(this.context).logOut({ id: this.context.user.id });
   }
 }

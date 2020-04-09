@@ -17,8 +17,12 @@ export default class ProjectInfrastructure extends BaseInfrastracture {
     constructor({ projectRepositoryDI }) {
         super();
         this.projectRepositoryDI = projectRepositoryDI;
+        this.allowForAll = false;
     }
 
+    allowForAllProjects() {
+        this.allowForAll = true;
+    }
     getDecodedToken(pToken) {
         let token = ''
         if (pToken) {
@@ -40,8 +44,14 @@ export default class ProjectInfrastructure extends BaseInfrastracture {
                 throw 'AUTHORIZATION_PROJECT_ERROR'
             }
             action.context.project = project.dataValues;
+            action.context.project.allowForAll = false;
             return await action;
         } catch (ex) {
+            if (this.allowForAll) {
+                action.context.project.allowForAll = true;
+                return await action;
+
+            }
             throw (new ServerException()).throw({ code: "AUTHORIZATION_PROJECT_ERROR", type: "ERROR" });
         }
     }

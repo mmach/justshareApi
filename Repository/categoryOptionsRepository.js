@@ -47,8 +47,9 @@ export default class CategoryOptionsRepository extends BaseRepository {
     });
   }
   getRelatedOptions({ category_ids, transaction }) {
+    console.log(this);
     return this.categoryOptionDB.findAll({
-      // where: { category_id: category_ids },
+      where: { project_id: this.context.project.id },
       order: [['name', 'ASC'], ['cat_opt_temp', 'value', 'ASC']],
       include: [
         {
@@ -138,7 +139,7 @@ export default class CategoryOptionsRepository extends BaseRepository {
 
   getAllCategoriesOption({ id, transaction }) {
     console.log(id);
-    let whereClaus = id ? { id: id } : {};
+    let whereClaus = id ? { id: id, project_id: this.context.project.id } : { project_id: this.context.project.id };
 
     return this.categoryOptionDB.findAll({
       where: whereClaus,
@@ -151,8 +152,8 @@ export default class CategoryOptionsRepository extends BaseRepository {
           include: [
             {
               model: this.sequelizeDI.Category,
-              as: "category"
-
+              as: "category",
+              where: { project_id: this.context.project.id }
 
             },
           ],
@@ -198,13 +199,16 @@ export default class CategoryOptionsRepository extends BaseRepository {
    */
   // @ts-ignore
   upsertCategoryOptionsForCategory({ model, transaction }) {
+    model.project_id = this.context.project.id;
+
     return this.sequelizeDI.CategoryOptionsLink.upsert(model, {
       transaction: this.getTran({ transaction })
     });
   }
   removeCategoryOptionsForCategory({ id, transaction }) {
+
     return this.sequelizeDI.CategoryOptionsLink.destroy({
-      where: { id: this.toStr(id) },
+      where: { id: this.toStr(id), project_id: this.context.project.id },
       transaction: this.getTran({ transaction })
     });
   }

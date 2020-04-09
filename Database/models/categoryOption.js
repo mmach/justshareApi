@@ -115,6 +115,8 @@ export default class CategoryOption extends Model {
           type: DataTypes.BOOLEAN,
           allowNull: true
         },
+        project_id:DataTypes.UUID
+
       },
       { sequelize }
     );

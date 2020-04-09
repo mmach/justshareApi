@@ -2,7 +2,7 @@
 import BaseCommand from "./../../Architecture/baseCommand.js";
 import LogFileInfrastructure from "../../Architecture/Infrastructure/logFileInfrastructure.js";
 import UserService from "../../Services/userService.js";
-import {UserLoginInternalDTO} from "justshare-shared";
+import { UserLoginInternalDTO } from "justshare-shared";
 
 /**
  *
@@ -21,11 +21,13 @@ export default class ChangePasswordCommand extends BaseCommand {
     logFileInfrastructureDI,
     userServiceDI,
     mailSenderDI,
-    authInfrastructureDI
+    authInfrastructureDI,
+    projectInfrastructureDI
   }) {
     super({
       logFileInfrastructureDI,
-      authInfrastructureDI
+      authInfrastructureDI,
+      projectInfrastructureDI
     });
     this.mailSenderDI = mailSenderDI;
     this.userServiceDI = userServiceDI;
@@ -36,7 +38,7 @@ export default class ChangePasswordCommand extends BaseCommand {
 
   get validation() {
     return [
-      ()=>{this.checkDTO.bind(this)(this.model)}];
+      () => { this.checkDTO.bind(this)(this.model) }];
   }
 
   async action() {

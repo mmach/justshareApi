@@ -27,10 +27,11 @@ export default class CategoryRepository extends BaseRepository {
         Categories.*
       FROM Categories LEFT  JOIN CategoryHierarchies ON Categories.id = CategoryHierarchies.category_child_id
       WHERE status=ISNULL(NULLIF(:status,0),status)
+      AND project_id=:project_id
        order by category  
       `,
       {
-        replacements: { status: model.status },
+        replacements: { status: model.status, project_id: this.context.project.id },
         transaction: this.getTran({ transaction }),
         type: this.sequelizeDI.sequelize.QueryTypes.SELECT
       }
@@ -43,18 +44,18 @@ export default class CategoryRepository extends BaseRepository {
    * @memberof CategoryRepository
    */
   getCategoryTree({ ids, parent, transaction }) {
-    let where = { id: ids };
+    let where = { id: ids, project_id: this.context.project.id };
 
     if (ids[0] == '_ROOT') {
-      where = { category: "_ROOT" }
+      where = { category: "_ROOT", project_id: this.context.project.id }
     }
     let parentWhere = undefined
     if (parent != undefined) {
-      where = { status: 1 }
+      where = { status: 1, project_id: this.context.project.id }
       if (parent == '_ROOT') {
-        parentWhere = { category: '_ROOT' }
+        parentWhere = { category: '_ROOT', project_id: this.context.project.id }
       } else {
-        parentWhere = { id: parent }
+        parentWhere = { id: parent, project_id: this.context.project.id }
       }
 
     }
@@ -93,7 +94,7 @@ export default class CategoryRepository extends BaseRepository {
   }
   removeCategory({ id, transaction }) {
     return this.entityDAO.destroy({
-      where: { id: id },
+      where: { id: id, project_id: this.context.project.id },
       transaction: this.getTran({ transaction })
     });
   }
@@ -104,7 +105,7 @@ export default class CategoryRepository extends BaseRepository {
         status: this.toStr(status)
       },
       {
-        where: { id: this.toStr(id) },
+        where: { id: this.toStr(id), project_id: this.context.project.id },
         transaction: this.getTran({ transaction })
       }
     );
@@ -130,7 +131,7 @@ export default class CategoryRepository extends BaseRepository {
         
     `,
       {
-        replacements: { id: id },
+        replacements: { id: id, project_id: this.context.project.id },
         transaction: this.getTran({ transaction }),
         type: this.sequelizeDI.sequelize.QueryTypes.SELECT
       }
@@ -166,6 +167,7 @@ export default class CategoryRepository extends BaseRepository {
           ,[category_zh_cn]
           ,[expired_day]
           FROM union_recus JOIN Categories ON Id = category_id
+          WHERE ${this.context.project.allowForAll ? 'project_id=:project_id' : '1=1'}
           GROUP BY id,category,category_pl,category_us,  [category_de]
           ,[category_ru]
           ,[category_fr]
@@ -176,7 +178,7 @@ export default class CategoryRepository extends BaseRepository {
         
     `,
       {
-        replacements: { id: ids },
+        replacements: { id: ids, project_id: this.context.project.id },
         transaction: this.getTran({ transaction }),
         type: this.sequelizeDI.sequelize.QueryTypes.SELECT
       }

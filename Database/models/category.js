@@ -44,7 +44,9 @@ export default class Category extends Model {
         forSell: DataTypes.INTEGER,
         forEvent: DataTypes.INTEGER,
         icon: DataTypes.STRING,
-        expired_day:DataTypes.INTEGER
+        expired_day:DataTypes.INTEGER,
+        project_id:DataTypes.UUID
+
 
 
       },

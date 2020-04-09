@@ -30,7 +30,8 @@ export default class SetItemSyncCommand extends BaseCommand {
     logFileInfrastructureDI,
     dbTransactionInfrastuctureDI,
     itemServiceDI,
-    validationInfrastructureDI
+    validationInfrastructureDI,
+    
   }) {
     // @ts-ignore
     super({

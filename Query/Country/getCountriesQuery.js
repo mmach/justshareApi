@@ -11,8 +11,8 @@ export default class GetCountriesQuery extends BaseQuery {
   * @param  {{ logFileInfrastructureDI:LogFileInfrastructure, countryServiceDI:CountryService }}
   * @memberof GetCountriesQuery
   */
-    constructor({ logFileInfrastructureDI, countryServiceDI }) {
-        super({ logFileInfrastructureDI });
+    constructor({ logFileInfrastructureDI, countryServiceDI,projectInfrastructureDI }) {
+        super({ logFileInfrastructureDI,projectInfrastructureDI });
         this.countryServiceDI=countryServiceDI;
 
     };

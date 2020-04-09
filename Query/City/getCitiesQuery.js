@@ -1,5 +1,5 @@
 import BaseQuery from '../../Architecture/baseQuery.js';
-import {CountryDTO} from 'justshare-shared'
+import { CountryDTO } from 'justshare-shared'
 import CityService from '../../Services/cityService.js';
 
 
@@ -11,9 +11,9 @@ export default class GetCitiesQuery extends BaseQuery {
   * @param  {{ logFileInfrastructureDI:LogFileInfrastructure, cityServiceDI:CityService }}
   * @memberof GetCountriesQuery
   */
-    constructor({ logFileInfrastructureDI, cityServiceDI }) {
-        super({ logFileInfrastructureDI });
-        this.cityServiceDI=cityServiceDI;
+    constructor({ logFileInfrastructureDI, cityServiceDI, projectInfrastructureDI }) {
+        super({ logFileInfrastructureDI, projectInfrastructureDI });
+        this.cityServiceDI = cityServiceDI;
 
     };
     init(dto) {
@@ -22,6 +22,6 @@ export default class GetCitiesQuery extends BaseQuery {
 
     async action() {
         console.log(this.countryServiceDI)
-        return await this.cityServiceDI.setContext(this.context).getCities({city:this.model});
+        return await this.cityServiceDI.setContext(this.context).getCities({ city: this.model });
     }
 };

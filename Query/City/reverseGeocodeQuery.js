@@ -1,6 +1,6 @@
 import BaseQuery from '../../Architecture/baseQuery.js';
 import CityService from '../../Services/cityService.js';
-import {ReverseGeoDTO} from 'justshare-shared'
+import { ReverseGeoDTO } from 'justshare-shared'
 import CountryService from '../../Services/countryService.js';
 
 export default class ReverseGeocodeQuery extends BaseQuery {
@@ -10,8 +10,8 @@ export default class ReverseGeocodeQuery extends BaseQuery {
   * @param  {{ logFileInfrastructureDI:LogFileInfrastructure, cityServiceDI:CityService ,countryServiceDI:CountryService ,authInfrastructureDI:AuthInfrastucture}}
   * @memberof GetCountriesQuery
   */
-    constructor({ logFileInfrastructureDI, cityServiceDI, authInfrastructureDI, countryServiceDI }) {
-        super({ logFileInfrastructureDI, authInfrastructureDI });
+    constructor({ logFileInfrastructureDI, cityServiceDI, authInfrastructureDI, countryServiceDI, projectInfrastructureDI }) {
+        super({ logFileInfrastructureDI, authInfrastructureDI, projectInfrastructureDI });
         this.cityServiceDI = cityServiceDI;
         this.countryServiceDI = countryServiceDI
 
@@ -22,6 +22,6 @@ export default class ReverseGeocodeQuery extends BaseQuery {
 
     async action() {
         let reverseResult = await this.cityServiceDI.setContext(this.context).getReverse({ address: this.model.address, city: this.model.city, country: this.model.country });
-       return reverseResult;
+        return reverseResult;
     }
 };

@@ -22,8 +22,8 @@ export default class InsertCategoryCommand extends BaseCommand {
      * @param  {{logFileInfrastructureDI : LogFileInfrastructure,  categoryServiceDI:CategoryService ,dbTransactionInfrastuctureDI:DbTransactionInfrastucture,authInfrastructureDI:AuthInfrastucture}}
      * @memberof InsertCategoryCommand
      */
-    constructor({ logFileInfrastructureDI, categoryServiceDI, dbTransactionInfrastuctureDI, authInfrastructureDI }) {
-        super({ logFileInfrastructureDI, dbTransactionInfrastuctureDI, authInfrastructureDI });
+    constructor({ logFileInfrastructureDI, categoryServiceDI, dbTransactionInfrastuctureDI, authInfrastructureDI ,projectInfrastructureDI}) {
+        super({ logFileInfrastructureDI, dbTransactionInfrastuctureDI, authInfrastructureDI,projectInfrastructureDI });
         this.categoryServiceDI = categoryServiceDI
 
     };

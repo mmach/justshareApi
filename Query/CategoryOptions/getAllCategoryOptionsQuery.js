@@ -13,8 +13,8 @@ export default class GetAllCategoriesOptionQuery extends BaseQuery {
      * @param  {{ logFileInfrastructureDI:LogFileInfrastructure,categoryOptionServiceDI:CategoryOptionService,categoryServiceDI:CategoryService }}
      * @memberof GetCategoryOptionsTypeQuery
      */
-    constructor({ logFileInfrastructureDI, categoryOptionServiceDI,categoryServiceDI }) {
-        super({ logFileInfrastructureDI });
+    constructor({ logFileInfrastructureDI, categoryOptionServiceDI,projectInfrastructureDI }) {
+        super({ logFileInfrastructureDI,projectInfrastructureDI });
         this.categoryOptionServiceDI = categoryOptionServiceDI;
     };
     init(dto) {

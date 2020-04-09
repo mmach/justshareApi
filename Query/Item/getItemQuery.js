@@ -10,8 +10,8 @@ export default class GetItemQuery extends BaseQuery {
      * @param  {{ logFileInfrastructureDI:LogFileInfrastructure, itemServiceDI:ItemService }}
      * @memberof GetItemQuery
      */
-    constructor({ logFileInfrastructureDI, itemServiceDI, authInfrastructureDI, blobServiceDI }) {
-        super({ logFileInfrastructureDI, authInfrastructureDI });
+    constructor({ logFileInfrastructureDI, itemServiceDI, authInfrastructureDI, blobServiceDI,projectInfrastructureDI }) {
+        super({ logFileInfrastructureDI, authInfrastructureDI,projectInfrastructureDI });
         this.authInfrastructureDI.allowAnonymous();
         this.itemServiceDI = itemServiceDI;
         this.blobServiceDI = blobServiceDI;

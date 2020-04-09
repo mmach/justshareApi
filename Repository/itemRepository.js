@@ -228,7 +228,7 @@ export default class ItemRepository extends BaseRepository {
   getItemToSync({ transaction }) {
     let userId = this.userId;
 
-    let where  = {
+    let where = {
       is_elastic_sync: false,
       user_id: userId
     }
@@ -312,7 +312,7 @@ export default class ItemRepository extends BaseRepository {
     });
   }
 
-  
+
   getItem({ uids, toSync, transaction }) {
     //  console.log('this.userId')
     //  console.log(this.userId)
@@ -329,7 +329,8 @@ export default class ItemRepository extends BaseRepository {
       where = {
         id: {
           [SequelizeDB.Sequelize.Op.in]: uids
-        }
+        },
+        project_id: this.context.project.id
       }
     }
     return this.entityDAO.findAll({
@@ -414,7 +415,9 @@ export default class ItemRepository extends BaseRepository {
   deleteTag({ item_id, transaction }) {
     return this.sequelizeDI.ItemTag.destroy({
       where: {
-        item_id: this.toStr(item_id)
+        item_id: this.toStr(item_id),
+        project_id: this.context.project.id
+
       },
       transaction: this.getTran({ transaction })
     });
@@ -426,7 +429,8 @@ export default class ItemRepository extends BaseRepository {
       {
         id: uuidv4(),
         item_id: item_id,
-        tag_id: tag_id
+        tag_id: tag_id,
+        project_id: this.context.project.id
       }, {
       transaction: this.getTran({ transaction })
     });

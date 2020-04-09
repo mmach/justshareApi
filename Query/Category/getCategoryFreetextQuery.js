@@ -11,8 +11,8 @@ export default class GetCategoryFreetextQuery extends BaseQuery {
      * @param  {{ logFileInfrastructureDI:LogFileInfrastructure,categoryServiceDI:CategoryService }}
      * @memberof GetCategoryFreetextQuery
      */
-    constructor({ logFileInfrastructureDI, categoryServiceDI }) {
-        super({ logFileInfrastructureDI });
+    constructor({ logFileInfrastructureDI, categoryServiceDI ,projectInfrastructureDI}) {
+        super({ logFileInfrastructureDI,projectInfrastructureDI });
         this.categoryServiceDI = categoryServiceDI;
     };
     init(dto) {

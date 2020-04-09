@@ -1,7 +1,7 @@
 
 
 async function checkIfUserHaveAccessToRemoveBlob() {
-    let blob = await this.blobServiceDI.getById({ id: this.model.id })
+    let blob = await this.blobServiceDI.setContext(this.context).getById({ id: this.model.id })
     if (blob == null) {
         return false;
     }

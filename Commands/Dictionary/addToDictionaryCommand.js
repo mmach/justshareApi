@@ -6,7 +6,7 @@ import {DictionaryDTO} from "justshare-shared";
 
 export default class AddToDictionaryCommand extends BaseCommand {
 
-    constructor({ logFileInfrastructureDI ,dictionaryDI,authInfrastructureDI}) {
+    constructor({ logFileInfrastructureDI ,dictionaryDI,authInfrastructureDI,projectInfrastructureDI}) {
         // @ts-ignore
         super({ logFileInfrastructureDI,dictionaryDI,authInfrastructureDI});
     };

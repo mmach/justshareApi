@@ -3,7 +3,7 @@ import BaseCommand from "../../Architecture/baseCommand.js";
 import LogFileInfrastructure from "../../Architecture/Infrastructure/logFileInfrastructure.js";
 import AuthInfrastucture from "../../Architecture/Infrastructure/authInfrastucture.js";
 import CategoryOptionService from "../../Services/categoryOptionService.js";
-import {CategoryOptionsDTO} from 'justshare-shared'
+import { CategoryOptionsDTO } from 'justshare-shared'
 "use strict";
 
 
@@ -20,8 +20,8 @@ export default class UpsertCategoryOptionsCommand extends BaseCommand {
      * @param  {{logFileInfrastructureDI : LogFileInfrastructure,  categoryOptionServiceDI:CategoryOptionService ,authInfrastructureDI:AuthInfrastucture}}
      * @memberof InsertCategoryCommand
      */
-    constructor({ logFileInfrastructureDI, categoryOptionServiceDI, authInfrastructureDI }) {
-        super({ logFileInfrastructureDI, authInfrastructureDI });
+    constructor({ logFileInfrastructureDI, categoryOptionServiceDI, authInfrastructureDI, projectInfrastructureDI }) {
+        super({ logFileInfrastructureDI, authInfrastructureDI, projectInfrastructureDI });
         this.categoryOptionServiceDI = categoryOptionServiceDI
 
     };
@@ -29,8 +29,8 @@ export default class UpsertCategoryOptionsCommand extends BaseCommand {
         this.model = Object.assign(new CategoryOptionsDTO(), dto);
     }
     async action() {
-           
-       await this.categoryOptionServiceDI.setContext(this.context).upsert({ model:this.model });
-//await this.categoryOptionServiceDI.setContext(this.context).upsertToCategory({model:this.model.category_link})
+
+        await this.categoryOptionServiceDI.setContext(this.context).upsert({ model: this.model, withProject: true });
+        //await this.categoryOptionServiceDI.setContext(this.context).upsertToCategory({model:this.model.category_link})
     }
 };

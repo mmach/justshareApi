@@ -3,10 +3,12 @@ import ValidationException from './../Architecture/Exceptions/validationExceptio
 
 
 async function checkIfMailExistInDb() {
-    let validationResult = await this.userServiceDI.checkMailInDb({
-        email: this.model.email
+    let validationResult = await this.userServiceDI.setContext(this.context).checkMailInDb({
+        email: this.model.email,
+        withoutAuth:true
     });
-    if (validationResult != null) {
+    console.log(validationResult)
+    if (validationResult) {
         let exception = new ValidationException();
         exception.throw({ field: "email", code: "EMAIL_EXIST_IN_DB" }, [
             this.model.email

@@ -48,15 +48,15 @@ export default class CreateUserCommand extends BaseCommand {
 
   get validation() {
     return [
-      () => { this.checkDTO.bind(this)(this.model) },
-      () => { UserValidators.checkIfMailExistInDb.bind(this)() }]
+      async () => { await this.checkDTO.bind(this)(this.model) },
+      async () => { await UserValidators.checkIfMailExistInDb.bind(this)() }]
   }
-
 
   async action() {
     let result = await this.userServiceDI.setContext(this.context).newInternalUser({
       model: this.model
     });
+
     let model = {
       body: {
         name: result.name,
@@ -66,7 +66,7 @@ export default class CreateUserCommand extends BaseCommand {
       }
     };
 
-    this.mailSenderDI.mailSend({
+    await this.mailSenderDI.mailSend({
       xslt_file: EMAIL_TEMPLATE.authorization,
       model,
       email_to: model.body.email,

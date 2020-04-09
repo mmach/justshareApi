@@ -55,8 +55,7 @@ export default class RemoveUserCommand extends BaseCommand {
         href: (new URL(this.referer)).origin//this.referer,//CONFIG.FRONT_END_URL,
       }
     };
-    console.log(this.referer);
-    this.mailSenderDI.mailSend({
+    await this.mailSenderDI.mailSend({
       xslt_file: EMAIL_TEMPLATE.remove_user,
       model,
       email_to: model.body.email,

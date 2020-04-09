@@ -65,8 +65,8 @@ let CONFIG = {
     CERT_PATH: "./cert.key",
     SMTP: "ssl0.ovh.net",
     EMAIL: {
-      login: "stuffshare@apptruth.pl",
-      password: "testtest123"
+      login: "no-reply@justshare.it",
+      password: "MiszkaKiszka66"
     },
     LOGIN: {
       FACEBOOK: {},

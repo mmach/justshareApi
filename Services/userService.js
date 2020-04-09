@@ -3,7 +3,7 @@
 import bcrypt from "bcryptjs";
 import uuidv4 from "uuid/v4";
 import BaseService from "../Architecture/baseService.js";
-import {UserDTO,UserLoginInternalDTO,UserRegisterInternalDTO} from "justshare-shared";
+import { UserDTO, UserLoginInternalDTO, UserRegisterInternalDTO } from "justshare-shared";
 import UnitOfWork from "../unitOfWork.js";
 import ServerException from "../Architecture/Exceptions/serverException.js";
 import UserRepository from "../Repository/userRepository.js";
@@ -45,10 +45,10 @@ export default class UserService extends BaseService {
     return await this.unitOfWorkDI.userRepository.insert({ model: dto });
   }
 
-  async checkMailInDb({ email }) {
+  async checkMailInDb({ email, withoutAuth }) {
     try {
       return await this.unitOfWorkDI.userRepository.checkMailInDb({
-        email
+        email, withoutAuth
       });
     } catch (ex) {
       throw ex;

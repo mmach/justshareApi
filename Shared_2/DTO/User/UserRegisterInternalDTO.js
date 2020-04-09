@@ -53,7 +53,6 @@ export default class UserRegisterInternalDTO extends BaseDTO {
             .isString()
             .notEmpty();
 
-        console.log('dupaaaaa')
         validator(state.birthDate ? state.birthDate.toString() : '')
             .display("birthDate")
             .required()

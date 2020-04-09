@@ -88,7 +88,7 @@ export default class UnitOfWork extends BaseUnitOfWork {
     get tagRepository() {
         return this.repositories.tagRepositoryDI;
     }
-    tagRepositoryDI
+    
     /**
      * 
      * @return {ItemCategoryOptionRepository}

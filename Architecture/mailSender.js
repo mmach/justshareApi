@@ -8,7 +8,7 @@ import * as xsltProcess from "xslt-processor";
 import ServerException from "./Exceptions/serverException.js";
 
 export default class MailSender {
-  constructor() {}
+  constructor() { }
 
   /**
    *
@@ -51,12 +51,12 @@ export default class MailSender {
    * @return {void}@memberof MailSender
    */
   async send({ email_to, language, mail_title, body }) {
-    
+
     // create reusable transporter object using the default SMTP transport
     let transporter = nodemailer.createTransport({
       host: CONFIG.SECURITY.SMTP,
-      port: 587,
-      secure: false, // true for 465, false for other ports
+      port: 465,
+      secure: true, // true for 465, false for other ports
       auth: {
         user: CONFIG.SECURITY.EMAIL.login, // generated ethereal user
         pass: CONFIG.SECURITY.EMAIL.password // generated ethereal password
@@ -64,22 +64,29 @@ export default class MailSender {
     });
     // setup email data with unicode symbols
     let mailOptions = {
-      from: '" StuffShare" <postmaster@apptruth.pl>', // sender address
+      from: '"justShare.it" <no-reply@justshare.it>', // sender address
       to: email_to, // list of receivers
       subject: mail_title, // Subject line
       html: body
     };
-    try {
+    let prom = new Promise((res, rej) => {
       // send mail with defined transport object
-      return await transporter.sendMail(mailOptions);
-    } catch (ex) {
-      console.log(ex);
-      throw new ServerException().throw({
-        type: "ERROR",
-        code: "EMAIL_EXCEPTION",
-        error: ex
+      transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+          console.log(ex);
+          throw new ServerException().throw({
+            type: "ERROR",
+            code: "EMAIL_EXCEPTION",
+            error: ex
+          });
+        }
+        console.log('Message sent: ' + info.response);
+        res()
+
+
       });
-    }
+    })
+    await prom;
   }
 }
 

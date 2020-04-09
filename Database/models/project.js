@@ -29,10 +29,7 @@ export default class Project extends Model {
           type: DataTypes.STRING,
           allowNull: true
         },
-        user_id: {
-          type: DataTypes.UUID,
-          defaultValue: sequelize.UUIDV4
-        },
+        
         secretKey: {
           type: DataTypes.STRING
         },

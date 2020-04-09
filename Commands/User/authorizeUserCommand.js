@@ -47,7 +47,7 @@ export default class AuthorizeUserCommand extends BaseCommand {
           href: CONFIG.FRONT_END_URL
         }
       };
-      this.mailSenderDI.mailSend({
+      await this.mailSenderDI.mailSend({
         xslt_file: EMAIL_TEMPLATE.new_user,
         model,
         email_to: model.body.email,

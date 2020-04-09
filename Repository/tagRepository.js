@@ -29,7 +29,7 @@ export default class TagRepository extends BaseRepository {
       return item.dataValues.id
     }
 
-    this.insert({ model: { id: id, tag: tag, project_id: this.context.project.id  }, tranaction: transaction })
+    this.insert({ model: { id: id, tag: tag, project_id: this.context.project.id }, withProject: true, tranaction: transaction })
     return id;
 
   }

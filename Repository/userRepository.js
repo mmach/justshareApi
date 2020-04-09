@@ -1,6 +1,6 @@
 import BaseRepository from "../Architecture/baseRepository.js";
 import SequelizeDB from "../Database/models/index.js";
-import {UserDTO} from "justshare-shared";
+import { UserDTO } from "justshare-shared";
 
 /**
  *
@@ -62,13 +62,20 @@ export default class UserRepository extends BaseRepository {
    * @return {Promise<UserDTO>}
    * @memberof UserRepository
    */
-  checkMailInDb({ email, transaction }) {
-    return this.entityDAO.findOne({
-      where: {
-        email: this.toStr(email),
-        is_authorized: true
+  checkMailInDb({ email, withoutAuth, transaction }) {
+    let where = {
+      email: this.toStr(email),
+      is_authorized: true
 
-      }, include: [
+    }
+    if (withoutAuth == true) {
+      where = {
+        email: this.toStr(email)
+      }
+    }
+    return this.entityDAO.findOne({
+      where: where
+      , include: [
         {
           model: this.sequelizeDI.UserAuths,
           as: "user_auths",

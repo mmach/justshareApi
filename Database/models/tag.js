@@ -29,7 +29,8 @@ export default class Tag extends Model {
           type: DataTypes.STRING,
           allowNull: false
         },
-       
+        project_id:DataTypes.UUID
+
       },
       { sequelize }
     );

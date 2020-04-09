@@ -5,8 +5,8 @@ module.exports = {
     return queryInterface.sequelize
       .query(
         `
-     --  DROP TABLE CategoryProjects
-     --  DROP TABLE CategoryOptionsProjects
+       DROP TABLE CategoryProjects
+       DROP TABLE CategoryOptionsProjects
 
  ALTER TABLE Categories
  ADD  project_id char(36)

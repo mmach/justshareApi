@@ -85,7 +85,7 @@ export default class CreateUserByExternalCommand extends BaseCommand {
 
   }
 
-  sendMail(newUser) {
+  async sendMail(newUser) {
     let model = {
       body: {
         name: newUser.name,
@@ -94,7 +94,7 @@ export default class CreateUserByExternalCommand extends BaseCommand {
         href: CONFIG.FRONT_END_URL
       }
     };
-    this.mailSenderDI.mailSend({
+    await this.mailSenderDI.mailSend({
       xslt_file: EMAIL_TEMPLATE.new_user,
       model,
       email_to: model.body.email,
@@ -133,11 +133,19 @@ export default class CreateUserByExternalCommand extends BaseCommand {
     const resultReq = await this.getApiResult(this.model.token, this.model.userId, this.model.provider);
     const result = resultReq.data;
     console.log(result);
-    const userInfo = await this.userServiceDI.toJsonParse(this.userServiceDI.setContext(this.context).checkMailInDb({ email: result.email }));
+    const userInfo = await this.userServiceDI.toJsonParse(this.userServiceDI.setContext(this.context).checkMailInDb({
+      email: result.email, withoutAuth: true
+    }));
     console.log(userInfo)
     if (userInfo != null && userInfo.id != '') {
+      if (userInfo.is_authorized == false) {
+        await this.userServiceDI.authorizeUser({ guid: userInfo.uid })
+
+      }
       await this.checkIfExistAndLink(result, userInfo, this.model.provider);
       return;
+    } else if (userInfo) {
+
     } else {
       let userRegister = Object.assign(new UserRegisterInternalDTO(), {
         email: result.email,
@@ -170,7 +178,7 @@ export default class CreateUserByExternalCommand extends BaseCommand {
           }
         })
       }
-      this.sendMail(newUser);
+      await this.sendMail(newUser);
 
 
 

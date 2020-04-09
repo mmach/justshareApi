@@ -21,7 +21,7 @@
                            <br />
                            <center>
                               <a href="{$url}">
-							   <img style="width:15%" src="http://apptruth.pl/logo.png" />
+							   <img style="width:15%" src="https://www.justshare.it/assets/android-chrome-384x384.png" />
                              
                               </a>
                               <br />

@@ -7,11 +7,10 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
-            "program": "${workspaceFolder}\\index.js"
+            "name": "Launch App.js",
+            "program": "${workspaceRoot}/src/index.js",
+            "outFiles": ["${workspaceRoot}/.compiled/src/*.js"],
+            "preLaunchTask": "runwebpack"
         }
     ]
 }

@@ -3883,6 +3883,25 @@
             },
             "field": "",
             "toRefresh": true
+        },
+        "USER_ITEMS_BANNED_LINK": {
+            "id": "68e1262c-ff34-42b4-b350-ad859a0594f4",
+            "uid": "",
+            "code": "USER_ITEMS_BANNED_LINK",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Zablokowane ogłoszenia",
+                "us": "Blocked ads",
+                "de": "Blockierte anzeigen",
+                "ru": "Заблокированные объявления",
+                "fr": "Annonces bloquées",
+                "es": "Bloqueados los anuncios",
+                "no": "Blokkert annonser",
+                "zh_cn": "阻止广告"
+            },
+            "field": "",
+            "toRefresh": true
         }
     },
     "PLACEHOLDER": {
@@ -4722,6 +4741,25 @@
             },
             "field": "",
             "toRefresh": true
+        },
+        "CREATE_USER_ERROR": {
+            "id": "68e1262c-ff34-42b4-b350-ad859a0594f4",
+            "uid": "",
+            "code": "CREATE_USER_ERROR",
+            "status": "200",
+            "type": "ERROR",
+            "message": {
+                "pl": "Nie udało się stworzyć użytkownika",
+                "us": "Failed to create user",
+                "de": "Benutzer konnte nicht erstellt werden",
+                "ru": "Не удалось создать пользователя",
+                "fr": "Impossible de créer l'utilisateur",
+                "es": "No se pudo crear el usuario",
+                "no": "Klarte ikke å opprett bruker",
+                "zh_cn": "无法创建户"
+            },
+            "field": "",
+            "toRefresh": true
         }
     },
     "SUCCESS_GLOBAL": {
@@ -4873,6 +4911,82 @@
                 "es": "La categoría se ha establecido",
                 "no": "Kategorien ble opprettet",
                 "zh_cn": "该分类被创造了"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "CREATE_USER_SUCCESS": {
+            "id": "84996bf7-1716-4854-8b9e-4e703fe9b7a7",
+            "uid": "",
+            "code": "CREATE_USER_SUCCESS",
+            "status": "200",
+            "type": "SUCCESS_GLOBAL",
+            "message": {
+                "pl": "Użytkownik został utworzony. Sprawdź emaila",
+                "us": "The user was created. Check your email",
+                "de": "Der Benutzer erstellt wurde. Überprüfen Sie die E-Mail",
+                "ru": "Пользователь был создан. Проверьте электронную почту",
+                "fr": "L'utilisateur a été créé. Vérifiez votre e-mail",
+                "es": "El usuario ha creado. Revise su correo electrónico",
+                "no": "Brukeren ble opprettet. Sjekk din e-post",
+                "zh_cn": "用户创建的。 检查你的电子邮件"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "AUTHORIZE_USER_SUCCESS": {
+            "id": "95b2c89b-2cfd-436e-9361-a8592a9bb0fb",
+            "uid": "",
+            "code": "AUTHORIZE_USER_SUCCESS",
+            "status": "200",
+            "type": "SUCCESS_GLOBAL",
+            "message": {
+                "pl": "Mail został potwierdzony",
+                "us": "Mail has been confirmed",
+                "de": "Mail bestätigt wurde",
+                "ru": "Mail был подтвержден",
+                "fr": "Mail a été confirmée",
+                "es": "Mail ha sido confirmado",
+                "no": "E-post har blitt bekreftet",
+                "zh_cn": "邮件已经证实"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "PASSWORD_HAS_BEEN_SEND_SUCCESS": {
+            "id": "d8f4b313-3569-4b52-8a45-36248bca923f",
+            "uid": "",
+            "code": "PASSWORD_HAS_BEEN_SEND_SUCCESS",
+            "status": "200",
+            "type": "SUCCESS_GLOBAL",
+            "message": {
+                "pl": "Hasło zostało wysłane",
+                "us": "The password was sent",
+                "de": "Das Passwort wurde gesendet",
+                "ru": "Пароль был отправлен",
+                "fr": "Le mot de passe a été envoyé",
+                "es": "La contraseña se ha enviado",
+                "no": "Passordet ble sendt",
+                "zh_cn": "密码发送"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "FORGOT_PASSWORD_SEND_MAIL_SUCCESS": {
+            "id": "995fdefc-e33a-4fcb-b7d9-4f2adbe4ff26",
+            "uid": "",
+            "code": "FORGOT_PASSWORD_SEND_MAIL_SUCCESS",
+            "status": "200",
+            "type": "SUCCESS_GLOBAL",
+            "message": {
+                "pl": "Wygeneruj hasło z linku przesłanego na maila",
+                "us": "Generate the password via the link sent by email",
+                "de": "Generieren Sie das Passwort auf den Link auf E-Mail",
+                "ru": "Сгенерируйте пароль по ссылке, отправленной на email",
+                "fr": "Générez un mot de passe sur un lien envoyé par e-mail",
+                "es": "Genere la contraseña de un enlace enviado por correo electrónico",
+                "no": "Generere passord via lenken sendt via e-post",
+                "zh_cn": "生成密码通过链接通过电子邮件发送的"
             },
             "field": "",
             "toRefresh": true

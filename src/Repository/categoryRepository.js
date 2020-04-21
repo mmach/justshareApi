@@ -212,7 +212,7 @@ export default class CategoryRepository extends BaseRepository {
           ,[category_zh_cn]
           ,[expired_day]
           FROM union_recus JOIN Categories ON Id = category_id
-          WHERE ${this.context.project.allowForAll ? 'project_id=:project_id' : '1=1'}
+          WHERE ${!this.context.project.allowForAll ? 'project_id=:project_id' : '1=1'}
           GROUP BY id,category,category_pl,category_us,  [category_de]
           ,[category_ru]
           ,[category_fr]

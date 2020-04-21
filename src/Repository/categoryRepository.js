@@ -186,7 +186,7 @@ export default class CategoryRepository extends BaseRepository {
 
     let replacements = { id: ids };
     if (!this.context.project.allowForAll) {
-      project_id = this.context.project.id
+      replacements.project_id = this.context.project.id
     }
     return this.sequelizeDI.sequelize.query(
       `

@@ -48,6 +48,7 @@ export default class ProjectInfrastructure extends BaseInfrastracture {
             return await action;
         } catch (ex) {
             if (this.allowForAll) {
+                action.context.project={}
                 action.context.project.allowForAll = true;
                 return await action;
 

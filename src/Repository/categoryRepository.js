@@ -37,7 +37,7 @@ export default class CategoryRepository extends BaseRepository {
       }
     );
   }
-  updateIcon({category_id, old_icon_id, new_icon_id, transaction}) {
+  updateIcon({ category_id, old_icon_id, new_icon_id, transaction }) {
     let where = {}
     if (old_icon_id) {
       where = { blob_id: old_icon_id }
@@ -183,6 +183,11 @@ export default class CategoryRepository extends BaseRepository {
 
 
   getCategoriesParents({ ids, transaction }) {
+
+    let replacements = { id: ids };
+    if (!this.context.project.allowForAll) {
+      project_id = this.context.project.id
+    }
     return this.sequelizeDI.sequelize.query(
       `
       WITH recus(category_id) AS (
@@ -218,7 +223,7 @@ export default class CategoryRepository extends BaseRepository {
         
     `,
       {
-        replacements: { id: ids, project_id: this.context.project.id },
+        replacements: replacements,
         transaction: this.getTran({ transaction }),
         type: this.sequelizeDI.sequelize.QueryTypes.SELECT
       }

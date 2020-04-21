@@ -50,6 +50,8 @@ export default class ProjectInfrastructure extends BaseInfrastracture {
             if (this.allowForAll) {
                 action.context.project={}
                 action.context.project.allowForAll = true;
+                action.context.project.id = null;
+
                 return await action;
 
             }

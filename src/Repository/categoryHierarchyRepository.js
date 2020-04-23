@@ -14,7 +14,9 @@ export default class CategoryHierarchyRepository extends BaseRepository {
     removeParent({ id, transaction }) {
         return this.entityDAO.destroy({
             where: { category_child_id: this.toStr(id) },
-            transaction: this.getTran({ transaction })
+            transaction: this.getTran({ transaction }),
+            individualHooks: true
+
         });
     }
     in

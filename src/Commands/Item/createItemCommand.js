@@ -131,7 +131,7 @@ export default class CreateItemCommand extends BaseCommand {
         return ['SINGLE', 'SELECT', 'MULTISELECT', 'GEO'].includes(cat.type)
       }).forEach(cat => {
         //console.log(cat)
-        console.log(cat.catOption);
+        //console.log(cat.catOption);
         if ((cat.catOption ? cat.catOption.is_not_in_clob : false) != true) {
           clobs[item] += (cat.select ? cat.select["value_" + item] : cat.val) + " ; "
 
@@ -141,7 +141,7 @@ export default class CreateItemCommand extends BaseCommand {
         clobs[item] += tag.label + ' ; ';
       })
     })
-    console.log(clobs)
+    //console.log(clobs)
     Object.keys(clobs).forEach(item => {
       this.model["clobSearch_" + item] = clobs[item];
     })
@@ -226,7 +226,6 @@ export default class CreateItemCommand extends BaseCommand {
     })
 
     let tagsArray = await tagsId.map(tag => {
-      console.log(tag);
       return this.itemServiceDI.setContext(this.context).insertTag({
         item_id: this.model.id, tag_id: tag
       })
@@ -241,7 +240,6 @@ export default class CreateItemCommand extends BaseCommand {
     this.model.categories = await this.categoryServiceDI.setContext(this.context).getCategoriesParents({ ids: this.model.category_id })
     let cat = this.model.categories.filter(item => { return item.id == this.model.category_id })[0]
 
-    console.log(this.model);
     var today = new Date();
     var tomorrow = new Date();
     tomorrow.setDate(today.getDate() + (cat.expired_day != null ? Number(cat.expired_day) : 5000));

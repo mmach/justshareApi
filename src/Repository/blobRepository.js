@@ -144,7 +144,9 @@ export default class BlobRepository extends BaseRepository {
       },
       {
         where: { id: this.toStr(blob.id) },
-        transaction: this.getTran({ transaction })
+        transaction: this.getTran({ transaction }),
+        individualHooks: true
+
       }
     );
   }

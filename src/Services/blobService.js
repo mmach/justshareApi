@@ -137,6 +137,7 @@ export default class BlobService extends BaseService {
       throw exception.parent.message
     } finally {
       console.log(newBlob.path)
+      
       await fs.unlink(`${newBlob.path}`);
 
     }

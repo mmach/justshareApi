@@ -1,5 +1,8 @@
 "use strict";
 import { Model } from "sequelize";
+import uuidv4 from "uuid/v4";
+
+
 
 /**
  *
@@ -68,6 +71,23 @@ export default class Item extends Model {
       },
       { sequelize }
     );
+  }
+  static hooks(models) {
+   
+    Item.afterUpsert(async (item, options) => {
+ 
+      await models.EsItemSync.create({
+        id: uuidv4(),
+        item_id: item[0].dataValues.id,
+        project_id: item[0].dataValues.project_id,
+        operation: 'I'
+      },
+      {
+        transaction: options.transaction,
+      });
+    });
+  
+
   }
   static associate(models) {
     /*  Item.belongsToMany(models.Category, {

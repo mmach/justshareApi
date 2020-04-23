@@ -123,12 +123,9 @@ export default class CategoryService extends BaseService {
       parent = await this.getById({ id: idParent, withProject: true });
     }
     await this.setAsVerified({ id: id, status: parent.status }),
+    await this.unitOfWorkDI.categoryHierarchyRepository.removeParent({ id }),
+    await this.unitOfWorkDI.categoryHierarchyRepository.insert({ model: { category_child_id: id, category_parent_id: idParent } })
 
-      await Promise.all([
-        this.unitOfWorkDI.categoryHierarchyRepository.removeParent({ id }),
-        this.unitOfWorkDI.categoryHierarchyRepository.insert({ model: { category_child_id: id, category_parent_id: idParent } })
-
-      ]);
 
 
   }

@@ -125,7 +125,10 @@ export default class BaseRepository {
       item.project_id = this.context.project.id;
     }
     return this.entityDAO.create(item, {
-      transaction: this.getTran({ transaction })
+      transaction: this.getTran({ transaction }),
+      returning: true,
+      individualHooks: true,
+      plain: true
     });
   }
   /**
@@ -142,7 +145,9 @@ export default class BaseRepository {
     }
     return this.entityDAO.update(model, {
       where: where,
-      transaction: this.getTran({ transaction })
+      transaction: this.getTran({ transaction }),
+   
+      individualHooks: true
     });
   }
 
@@ -161,7 +166,10 @@ export default class BaseRepository {
 
     return this.entityDAO.upsert(item, {
 
-      transaction: this.getTran({ transaction })
+      transaction: this.getTran({ transaction }),
+      returning: true,
+      individualHooks: true,
+      plain: true
     });
   }
 
@@ -179,7 +187,10 @@ export default class BaseRepository {
     }
     return this.entityDAO.destroy({
       where: where,
-      transaction: this.getTran({ transaction })
+      transaction: this.getTran({ transaction }),
+      returning: true,
+      individualHooks: true,
+      plain: true
     });
   }
 
@@ -195,7 +206,10 @@ export default class BaseRepository {
 
     return this.entityDAO.destroy({
       where: where,
-      transaction: this.getTran({ transaction })
+      transaction: this.getTran({ transaction }),
+      returning: true,
+      individualHooks: true,
+      plain: true
     });
 
 

@@ -125,7 +125,8 @@ export default class CategoryOptionsRepository extends BaseRepository {
   deleteTemplate({ model, transaction }) {
     return this.categoryOptionsTemplateDB.destroy({
       where: { id: this.toStr(model.id) },
-      transaction: this.getTran({ transaction })
+      transaction: this.getTran({ transaction }),
+
     });
   }
 
@@ -133,7 +134,10 @@ export default class CategoryOptionsRepository extends BaseRepository {
   upsertToCategory({ model, transaction }) {
     return this.sequelizeDI.CategoryOptionsLink.upsert(model, {
 
-      transaction: this.getTran({ transaction })
+      transaction: this.getTran({ transaction }),
+      returning: true,
+      individualHooks: true,
+      plain: true
     });
   }
 
@@ -202,14 +206,18 @@ export default class CategoryOptionsRepository extends BaseRepository {
     model.project_id = this.context.project.id;
 
     return this.sequelizeDI.CategoryOptionsLink.upsert(model, {
-      transaction: this.getTran({ transaction })
+      transaction: this.getTran({ transaction }),
+      individualHooks: true
+
     });
   }
   removeCategoryOptionsForCategory({ id, transaction }) {
 
     return this.sequelizeDI.CategoryOptionsLink.destroy({
       where: { id: this.toStr(id), project_id: this.context.project.id },
-      transaction: this.getTran({ transaction })
+      transaction: this.getTran({ transaction }),
+      individualHooks: true
+
     });
   }
 }

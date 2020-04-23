@@ -129,7 +129,7 @@ export default class MailSender {
     if (sendGrid) {
 
       transporter = nodemailer.createTransport(nodemailerSendgrid({
-        apiKey: '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'
+        apiKey: sendGrid
       }));
     } else {
       transporter = nodemailer.createTransport(smtpTransport({

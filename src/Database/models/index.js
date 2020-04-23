@@ -29,7 +29,7 @@ import Project from "./project.js";
 import Config from './config.js';
 import UserProjectPrivileges from './userProjectPrivileges.js'
 import Privilege from './privilege.js'
-
+import EsItemSync from './esItemSync.js'
 var env = process.env.NODE_ENV || "development";
 var config = configJSON[env];
 if (config.use_env_variable) {
@@ -83,13 +83,17 @@ let models = {
   Project: Project.init(sequelize, Sequelize),
   Config: Config.init(sequelize, Sequelize),
   UserProjectPrivileges: UserProjectPrivileges.init(sequelize, Sequelize),
-  Privilege: Privilege.init(sequelize, Sequelize)
+  Privilege: Privilege.init(sequelize, Sequelize),
+  EsItemSync:EsItemSync.init(sequelize,Sequelize)
 
 };
 
 Object.keys(models).forEach(modelName => {
   if (models[modelName].associate) {
     models[modelName].associate(models);
+  }
+  if (models[modelName].hooks) {
+    models[modelName].hooks(models,sequelize);
   }
 });
 

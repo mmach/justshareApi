@@ -73,20 +73,56 @@ export default class Item extends Model {
     );
   }
   static hooks(models) {
-   
+
     Item.afterUpsert(async (item, options) => {
- 
+
       await models.EsItemSync.create({
         id: uuidv4(),
         item_id: item[0].dataValues.id,
         project_id: item[0].dataValues.project_id,
         operation: 'I'
       },
-      {
-        transaction: options.transaction,
-      });
+        {
+          transaction: options.transaction,
+        });
     });
-  
+    Item.beforeDestroy(async (item, options) => {
+
+      console.log('beforeDestroyItem')
+      console.log(item)
+
+
+      await models.ItemCategoryOption.destroy({
+        where: { item_id: item.id },
+        transaction: options.transaction,
+        individualHooks: true
+
+      })
+
+     
+      await models.Blob.destroy({
+        where: { item_id: item.id },
+        transaction: options.transaction,
+        individualHooks: true
+
+      })
+      await models.ItemTag.destroy({
+        where: { item_id: item.id },
+        transaction: options.transaction,
+        individualHooks: true
+
+      })
+
+      await models.EsItemSync.create({
+        id: uuidv4(),
+        item_id: item.id,
+        project_id: '',
+        operation: 'D'
+      },
+        {
+          transaction: options.transaction,
+        });
+    })
 
   }
   static associate(models) {

@@ -28,12 +28,14 @@ export default class RemoveUserCommand extends BaseCommand {
     userServiceDI,
     authInfrastructureDI,
     mailSenderDI,
-    projectInfrastructureDI
+    projectInfrastructureDI,
+    dbTransactionInfrastuctureDI
   }) {
     super({
       logFileInfrastructureDI,
       authInfrastructureDI,
-      projectInfrastructureDI
+      projectInfrastructureDI,
+      dbTransactionInfrastuctureDI
     });
     this.mailSenderDI = mailSenderDI;
     this.userServiceDI = userServiceDI;
@@ -54,7 +56,7 @@ export default class RemoveUserCommand extends BaseCommand {
       await this.userServiceDI.setContext(this.context).deleteUserPriv({ user_id: this.context.user.id });
 
     } else {
-      await this.userServiceDI.setContext(this.context).deleteUserPriv({user_id: this.context.user.id });
+    //  await this.userServiceDI.setContext(this.context).deleteUserPriv({ user_id: this.context.user.id });
 
       await this.userServiceDI.setContext(this.context).delete({ model: this.context.user });
     }
@@ -62,7 +64,7 @@ export default class RemoveUserCommand extends BaseCommand {
     // await this.userServiceDI.setContext(this.context).deleteUserPriv({ model: this.context.user });
 
     // await this.userServiceDI.setContext(this.context).delete({ model: this.context.user });
-
+    //throw 'dupa'
     let model = {
       body: {
         name: this.context.user.name,

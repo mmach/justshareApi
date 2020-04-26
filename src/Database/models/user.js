@@ -74,6 +74,50 @@ export default class Users extends Model {
       { sequelize }
     );
   }
+
+  static hooks(models, sequelize) {
+
+    Users.beforeDestroy(async (item, options) => {
+
+      console.log('beforeDestroyUser')
+    
+
+      await models.Item.destroy({
+        where: { user_id: item.id },
+        transaction: options.transaction,
+        individualHooks: true
+
+      })
+      await models.Blob.destroy({
+        where: { user_id: item.id },
+        transaction: options.transaction,
+        individualHooks: true
+
+      })
+      await models.UserProjectPrivileges.destroy({
+        where: { user_id: item.id },
+        transaction: options.transaction,
+        individualHooks: true
+
+      })
+
+      await models.UserAuths.destroy({
+        where: { user_id: item.id },
+        transaction: options.transaction,
+        individualHooks: true
+
+      })
+      
+   /*   await models.UserConversations.destroy({
+        where: { user_id: item.id },
+        transaction: options.transaction,
+        individualHooks: true
+
+      })*/
+  
+    })
+  }
+
   static associate(models) {
     // Users.hasOne(models.Blob, { as: "blob_profile", targetKey: 'id', foreignKey: "blob_id" });
     Users.belongsTo(models.Blob, { as: "blob_profile", targetKey: 'id', foreignKey: "blob_id" });

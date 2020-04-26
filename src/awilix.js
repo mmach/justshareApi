@@ -95,6 +95,10 @@ import ConfigService from "./Services/configService.js";
 import UpsertConfigCommand from "./Commands/Config/upsertConfigCommand.js";
 import PrivilegeRepository from "./Repository/privilegeRepository.js";
 import UserProjectPrivilegesRepository from "./Repository/userProjectPrivilegesRepository.js";
+import LoginBliskonasProjectQuery from "./Query/Project/LoginBliskoNasProjectQuery/loginBliskoNasProjectQuery.js";
+import LoginLogisticProjectQuery from "./Query/Project/LoginLogisticProjectQuery/loginLogisticProjectQuery.js";
+import RemoveItemCommand from "./Commands/Item/removeItemCommand.js";
+
 
 
 
@@ -218,6 +222,7 @@ exporter[CommandList.Item.NEW_ITEM] = asClass(CreateItemCommand);
 exporter[CommandList.Item.EDIT_ITEM] = asClass(EditItemCommand);
 exporter[CommandList.Item.SYNC_ITEM] = asClass(SyncItemCommand);
 exporter[CommandList.Item.SET_SYNC] = asClass(SetItemSyncCommand);
+exporter[CommandList.Item.REMOVE_ITEM] = asClass(RemoveItemCommand);
 
 
 exporter[QueryList.Item.GET_ITEM] = asClass(GetItemQuery);
@@ -251,10 +256,10 @@ exporter[QueryList.City.REVERSE_LATLNG_GEO] = asClass(GeocodeQuery)
 
 ///////////////////PROJECT////////////////////////////////
 
-
-
 exporter[QueryList.Project.LOGIN] = asClass(LoginProjectQuery);
 exporter[QueryList.Project.LOGIN_JS] = asClass(LoginJustshareProjectQuery)
+exporter[QueryList.Project.LOGIN_LOGISTIC] = asClass(LoginLogisticProjectQuery)
+exporter[QueryList.Project.LOGIN_BLISKO_NAS] = asClass(LoginBliskonasProjectQuery)
 
 
 

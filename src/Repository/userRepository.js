@@ -84,7 +84,7 @@ export default class UserRepository extends BaseRepository {
         {
           model: this.sequelizeDI.UserProjectPrivileges,
           as: "user_projects",
-          required: true,
+          required: false,
           include: [
             {
               model: this.sequelizeDI.Project,

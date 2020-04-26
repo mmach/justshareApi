@@ -109,62 +109,39 @@ export default class Category extends Model {
     Category.beforeDestroy(async (item, options) => {
 
       console.log('beforeDestroy')
-      console.log(item)
-      let results = await sequelize.query(
-        `
-       
-         WITH recus(category_id) AS (
-          SELECT category_child_id FROM CategoryHierarchies
-          WHERE Category_parent_id IN (:category_id)
-          UNION ALL
-          SELECT CategoryHierarchies.category_child_id  FROM recus JOIN CategoryHierarchies ON Category_parent_id=recus.category_id
-          ),
-          union_recus AS (
-          SELECT category_id FROM recus
-          UNION 
-          SELECT :category_id
-          )
-          SELECT  category_id FROM union_recus 
-          
-      `,
-        {
-          replacements: { category_id: item.id, project_id: item.project_id },
-          transaction: options.transaction,
-          type: sequelize.QueryTypes.SELECT
-        }
-      );
+    
 
       await models.CategoryHierarchy.destroy({
-        where: { category_parent_id: results.map(item => { return item.category_id }) },
+        where: { category_parent_id: item.id },
         transaction: options.transaction,
         individualHooks: true
 
       })
 
       await models.CategoryHierarchy.destroy({
-        where: { category_child_id: results.map(item => { return item.category_id }) },
+        where: { category_child_id:item.id },
         transaction: options.transaction,
         individualHooks: true
 
       })
       await models.Item.destroy({
-        where: { category_id: results.map(item => { return item.category_id }) },
+        where: { category_id: item.id },
         transaction: options.transaction,
         individualHooks: true,
       })
 
       await models.CategoryOptionsLink.destroy({
-        where: { category_id: results.map(item => { return item.category_id }) },
+        where: { category_id: item.id },
         transaction: options.transaction,
         individualHooks: true,
       })
 
         await models.Blob.destroy({
-          where: { category_id: results.map(item=>{return item.category_id})  },
+          where: { category_id: item.id  },
           transaction: options.transaction,
           individualHooks: true,
         })
-
+    
     })
   }
 

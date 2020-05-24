@@ -39,12 +39,12 @@ import Privileges from "./privileges.js";
 import PrivilegesProject from "./privilegesProject.js";
 import UserTypes from './userTypes.js'
 import Roles from "./roles.js";
-import RolesProject from "./RolesProject";
-import UserRoles from "./userRoles";
-import UserTypeRoles from "./userTypeRoles";
-import Dimensions from "./dimensions";
-import DimensionsProject from './dimensionsProject'
-import V_Project from "./v_project";
+import RolesProject from "./RolesProject.js";
+import UserRoles from "./userRoles.js";
+import UserTypeRoles from "./userTypeRoles.js";
+import Dimensions from "./dimensions.js";
+import DimensionsProject from './dimensionsProject.js'
+import V_Project from "./v_project.js";
 
 
 

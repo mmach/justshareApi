@@ -15,16 +15,15 @@ export default class PrivilegeRepository extends BaseRepository {
    * @memberof UserRepository
    */
   constructor({ sequelizeDI }) {
-    super(sequelizeDI.Privilege);
+    super(sequelizeDI.Privileges);
     this.sequelizeDI = sequelizeDI;
   }
 
-  getPrivByName({ name, transaction }) {
-    return this.entityDAO.findOne({
+  getPrivileges({  transaction }) {
+    return this.entityDAO.findAll({
       where:
       {
-        name: name,
-        status: 1
+        
       },
       transaction: this.getTran({ transaction })
     });

@@ -39,20 +39,3 @@ export default class BlobMapper extends Model {
     //BlobMapper.belongsTo(models.Blobs, { foreignKey: "blob_id" })
   }
 }
-
-
-/*'use strict';
-module.exports = (sequelize, DataTypes) => {
-  var BlobMapper = sequelize.define('BlobMappers', {
-    stream_guid: DataTypes.STRING(50),
-  }, {underscored: true});
-
-  BlobMapper.associate = function(models) {
-    BlobMapper.hasOne(models.Blobs,{foreignKey:"blob_id_thumbmail"});
-    BlobMapper.hasOne(models.Blobs,{foreignKey:"blob_id"})
-    // associations can be defined here
-  };
-  return BlobMapper;
-};
-
-*/

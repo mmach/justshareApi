@@ -44,7 +44,7 @@ export default class Category extends Model {
         forThing: DataTypes.INTEGER,
         forSell: DataTypes.INTEGER,
         forEvent: DataTypes.INTEGER,
-        icon: DataTypes.STRING,
+       // icon: DataTypes.STRING,
         expired_day: DataTypes.INTEGER,
         project_id: DataTypes.UUID,
         blob_id: DataTypes.UUID
@@ -165,31 +165,3 @@ export default class Category extends Model {
   }
 }
 
-
-/*
-
-
-module.exports = (sequelize, DataTypes) => {
-  var Category = sequelize.define('Category', {
-    category: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    category_pl: DataTypes.STRING,
-    category_us: DataTypes.STRING
-  }, { underscored: true });
-  Category.associate = function (models) {
-
-    Category.belongsTo(models.CategoryHierarchy, { as: "category_parent", targetKey: 'category_child_id', foreignKey: "id" });
-    Category.belongsToMany(models.Category, {
-      through: { model: models.CategoryHierarchy },
-      as: 'category_children',
-      targetKey: 'id',
-      foreignKey: "category_parent_id"
-    });
-  };
-
-  return Category;
-};
-
-*/

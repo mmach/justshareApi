@@ -42,13 +42,15 @@ export default class UserService extends BaseService {
     dto.salt = passwordSalt;
     dto.is_admin = false;
     dto.is_root = false;
-    return await this.unitOfWorkDI.userRepository.insert({ model: dto });
+    return await this.unitOfWorkDI.userRepository.insert({ model: dto, withProject: true });
   }
-
-  async checkMailInDb({ email, withoutAuth }) {
+  async getUsersProject({ }) {
+    return await this.unitOfWorkDI.userRepository.getUsersProject({})
+  }
+  async checkMailInDb({ email, withoutAuth, usertypeId }) {
     try {
       return await this.unitOfWorkDI.userRepository.checkMailInDb({
-        email, withoutAuth
+        email, withoutAuth, usertypeId
       });
     } catch (ex) {
       throw ex;

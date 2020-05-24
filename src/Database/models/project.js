@@ -29,7 +29,7 @@ export default class Project extends Model {
           type: DataTypes.STRING,
           allowNull: true
         },
-        
+
         secretKey: {
           type: DataTypes.STRING
         },
@@ -39,12 +39,92 @@ export default class Project extends Model {
           allowNull: true
 
         }
+        , categories_from_parent: {
+          type: DataTypes.BOOLEAN
+        }
+        , theme_color: {
+          type: DataTypes.STRING
+        }
+        , root_category_id: {
+          type: DataTypes.UUID
+        }
+        , item_to_parent: {
+          type: DataTypes.BOOLEAN
+        }
+        , logo_url: {
+          type: DataTypes.STRING
+        }
+        , status: {
+          type: DataTypes.BOOLEAN
+        }
+        , base_url: {
+          type: DataTypes.STRING
+        }
+        , contact_mail: {
+          type: DataTypes.STRING
+        }
+        , blob_logo_id: {
+          type: DataTypes.UUID
+        }
+        , blob_logo_hor_id: {
+          type: DataTypes.UUID
+        }
+        , blob_logo_ver_id: {
+          type: DataTypes.UUID
+        }
+        , blob_main_id: {
+          type: DataTypes.UUID
+        }
+        , description: {
+          type: DataTypes.STRING
+        }
+        , user_id: {
+          type: DataTypes.UUID
+        }
+        , plan_id: {
+          type: DataTypes.UUID
+        }
+        , auth_url: {
+          type: DataTypes.STRING
+        }
+        , blob_main_phone_id: {
+          type: DataTypes.UUID
+        }
       },
       { sequelize }
     );
   }
   static associate(models) {
-
+    Project.belongsTo(models.Blob, {
+      as: "logo",
+      targetKey: "id",
+      foreignKey: "blob_logo_id"
+    });
+    Project.belongsTo(models.Blob, {
+      as: "logo_hor",
+      targetKey: "id",
+      foreignKey: "blob_logo_hor_id"
+    });
+    Project.belongsTo(models.Blob, {
+      as: "img_main_phone",
+      targetKey: "id",
+      foreignKey: "blob_main_phone_id"
+    });
+    Project.belongsTo(models.Blob, {
+      as: "logo_ver",
+      targetKey: "id",
+      foreignKey: "blob_logo_ver_id"
+    });
+    Project.belongsTo(models.Blob, {
+      as: "img_main",
+      targetKey: "id",
+      foreignKey: "blob_main_id"
+    });
+    Project.hasMany(models.V_User, {
+      as: "users",
+      targetKey: "id",
+      foreignKey: "project_id"
+    });
   }
 }
 

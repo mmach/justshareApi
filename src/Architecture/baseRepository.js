@@ -47,6 +47,7 @@ export default class BaseRepository {
     if (context) {
       this.context = context;
     }
+    return this;
   }
 
   async setTransaction({ transaction }) {

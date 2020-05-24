@@ -66,9 +66,9 @@ export default class Users extends Model {
         address: DataTypes.STRING,
         city_id: DataTypes.UUID,
         country_id: DataTypes.UUID,
-        city: DataTypes.STRING
-
-
+        city: DataTypes.STRING,
+        project_id: DataTypes.UUID,
+        usertype_id: DataTypes.UUID
 
       },
       { sequelize }
@@ -94,7 +94,7 @@ export default class Users extends Model {
         individualHooks: true
 
       })
-      await models.UserProjectPrivileges.destroy({
+      await models.UserTypesUser.destroy({
         where: { user_id: item.id },
         transaction: options.transaction,
         individualHooks: true
@@ -122,7 +122,8 @@ export default class Users extends Model {
     // Users.hasOne(models.Blob, { as: "blob_profile", targetKey: 'id', foreignKey: "blob_id" });
     Users.belongsTo(models.Blob, { as: "blob_profile", targetKey: 'id', foreignKey: "blob_id" });
     Users.hasMany(models.UserAuths, { as: "user_auths", targetKey: 'id', foreignKey: "user_id" });
-    Users.hasMany(models.UserProjectPrivileges, { as: "user_projects", targetKey: 'id', foreignKey: "user_id" });
+    Users.belongsTo(models.UserTypes, { as: "user_type", targetKey: 'id', foreignKey: "usertype_id" });
+    Users.hasMany(models.UserRoles, { as: "user_roles", targetKey: 'id', foreignKey: "user_id" });
 
 
     // Users.hasMany(models.UserAuth)

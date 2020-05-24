@@ -98,12 +98,91 @@ import UserProjectPrivilegesRepository from "./Repository/userProjectPrivilegesR
 import LoginBliskonasProjectQuery from "./Query/Project/LoginBliskoNasProjectQuery/loginBliskoNasProjectQuery.js";
 import LoginLogisticProjectQuery from "./Query/Project/LoginLogisticProjectQuery/loginLogisticProjectQuery.js";
 import RemoveItemCommand from "./Commands/Item/removeItemCommand.js";
-
-
-
-
-
-
+import GetCategoryLinkQuery from './Query/CategoryOptions/getCategoryLinkQuery.js'
+import ActionPrivilegesRepository from "./Repository/actionPrivilegesRepository.js";
+import ActionProjectRepository from "./Repository/actionProjectRepository.js";
+import ActionRepository from "./Repository/actionRepository.js";
+import CategoryActionsRepository from "./Repository/categoryActionsRepository.js";
+import PrivilegeProjectRepository from "./Repository/privilegeProjectRepository.js";
+import RolesProjectRepository from "./Repository/rolesProjectRepository.js";
+import UserRolesRepository from "./Repository/userRolesRepository.js";
+import UserTypesRepository from "./Repository/userTypesRepository.js";
+import UserTypesRolesRepository from "./Repository/userTypesRolesRepository.js";
+import RolesRepository from "./Repository/rolesRepository.js";
+import TranslationRepository from "./Repository/translationRepository.js";
+import DeleteActionsProjectCommand from "./Commands/Actions/deleteActionsProjectCommand.js";
+import DeleteActionCommand from "./Commands/Actions/deleteActionCommand.js";
+import DeleteActionPrivilegesCommand from "./Commands/Actions/deleteActionPrivilegesCommand.js";
+import UpsertActionCommand from "./Commands/Actions/upsertActionCommand.js";
+import UpsertActionPrivilegesCommand from "./Commands/Actions/upsertActionPrivilegesCommand.js";
+import UpsertActionsProjectCommand from "./Commands/Actions/upsertActionsProjectCommand.js";
+import InsertCategoryActionCommand from "./Commands/Category/insertCategoryActionCommand.js";
+import RemoveCategoryActionCommand from "./Commands/Category/removeCategoryActionCommand.js";
+import DeleteCategoryOptionsLinkCommand from "./Commands/CategoryOptions/deleteCategoryOptionsLinkCommand.js";
+import DeleteLanguageFromProjectCommand from "./Commands/Language/deleteLanguageFromProjectCommand.js";
+import InsertLanguageCommand from "./Commands/Language/insertLanguageCommand.js";
+import InsertLanguageToProjectCommand from "./Commands/Language/insertLanguageToProjectCommand.js";
+import UpsertTranslateCommand from "./Commands/Language/upsertTranslateCommand.js";
+import SetAsMainLanguageCommand from "./Commands/Language/setAsMainLanguageCommand.js";
+import GrantUserRoleCommand from "./Commands/User/grantUserRoleCommand.js";
+import GrantUserTypeRoleCommand from "./Commands/User/grantUserTypeRoleCommand.js";
+import RemoveUserTypeCommand from "./Commands/User/removeUserTypeCommand.js";
+import RevokeUserRoleCommand from "./Commands/User/revokeUserRoleCommand.js";
+import RevokeUserTypeRoleCommand from "./Commands/User/revokeUserTypeRoleCommand.js";
+import UpsertUserTypeCommand from "./Commands/User/upsertUserTypeCommand.js";
+import UpsertCategoryOptionsLinkCommand from "./Commands/CategoryOptions/upsertCategoryOptionsLinkCommand.js";
+import RevokeRoleFromProjectCommand from "./Commands/Roles/revokeRoleFromProjectCommand.js";
+import CreateRoleCommand from "./Commands/Roles/createRoleCommand.js";
+import GrantRoleToProjectCommand from "./Commands/Roles/grantRoleToProjectCommand.js";
+import DeletePrivilegesCommand from "./Commands/Privileges/deletePrivilegesCommand.js";
+import DeletePrivilegesProjectCommand from "./Commands/Privileges/deletePrivilegesProjectCommand.js";
+import UpsertPrivilegesCommand from "./Commands/Privileges/upsertPrivilegesCommand.js";
+import UpsertPrivilegesProjectCommand from "./Commands/Privileges/upsertPrivilegesProjectCommand.js";
+import GetActionsQuery from "./Query/Actions/getActionsQuery.js";
+import GetProjectActionsQuery from "./Query/Actions/getProjectActionsQuery.js";
+import GetLanguagesQuery from "./Query/Language/getLanguagesQuery.js";
+import GetProjectLanguagesQuery from "./Query/Language/getProjectLanguagesQuery.js";
+//import TranslateQuery from "./Query/Common/translateQuery.js";
+import GetPrivilegesQuery from "./Query/Privileges/getPrivilegesQuery.js";
+import GetProjectPrivilegesQuery from "./Query/Privileges/getProjectPrivilegesQuery.js";
+import GetProjectRolesQuery from "./Query/Roles/getProjectRolesQuery.js";
+import GetRolesQuery from "./Query/Roles/getRolesQuery.js";
+import GetUserTypesQuery from "./Query/User/getUserTypesQuery.js";
+import ActionService from "./Services/actionService.js";
+import ActionPrivilegesService from "./Services/ActionPrivilegesService.js";
+import ActionProjectService from "./Services/actionProjectService.js";
+import PrivilegeProjectService from "./Services/privilegeProjectService.js";
+import PrivilegeService from "./Services/privilegeService.js";
+import LanguageProjectRepository from "./Repository/languageProjectRepository.js";
+import LanguageRepository from "./Repository/languageRepository.js";
+import LanguageService from "./Services/languageService.js";
+import LanguageProjectService from "./Services/languageProjectService.js";
+import TranslationService from "./Services/translationService.js";
+import RoleService from "./Services/roleService.js";
+import RoleProjectService from "./Services/roleProjectService.js";
+import UserTypesService from "./Services/userTypesService.js";
+import UserTypesRolesService from "./Services/userTypesRolesService.js";
+import UserRolesService from "./Services/userRoleService.js";
+import TranslateQuery from "./Query/Language/translateQuery.js";
+import DimensionsProjectRepository from "./Repository/dimensionsProjectRepository.js";
+import DimensionsRepository from "./Repository/dimensionsRepository.js";
+import DimensionsProjectService from "./Services/dimensionsProjectService.js";
+import DimensionsService from "./Services/dimensionsService.js";
+import DeleteDimensionCommand from "./Commands/Dimensions/deleteDimensionCommand.js";
+import DeleteDimensionProjectCommand from "./Commands/Dimensions/deleteDimensionProjectCommand.js";
+import UpsertDimensionCommand from "./Commands/Dimensions/upsertDimensionCommand.js";
+import UpsertDimensionProjectCommand from "./Commands/Dimensions/upsertDimensionProjectCommand.js";
+import GetDimensionsQuery from "./Query/Dimensions/getDimensionsQuery.js";
+import GetProjectDimensiosQuery from "./Query/Dimensions/getProjectDimensiosQuery.js";
+import GetProjectUsersQuery from "./Query/Project/getProjectUsersQuery.js";
+import GetUsersProjectsQuery from "./Query/Project/getUsersProjectsQuery.js";
+import GetProjectQuery from "./Query/Project/getProjectQuery.js";
+import ChoosePlanCommand from "./Commands/Projects/choosePlanCommand.js";
+import InsertProjectCommand from "./Commands/Projects/insertProjectCommand.js";
+import UpdateProjectCommand from "./Commands/Projects/updateProjectCommand.js";
+import SetProjectBuildProgressCommand from "./Commands/Projects/setProjectBuildProgressCommand.js";
+import RunBuildCommand from "./Commands/Projects/runBuildCommand.js";
+import UploadBlobProjectCommand from "./Commands/Projects/uploadBlobProjectCommand.js";
 
 
 /**
@@ -141,9 +220,38 @@ let exporter = {
   configRepositoryDI: asClass(ConfigRepository),
   configServiceDI: asClass(ConfigService),
   sequelizeDI: asValue(SequelizeDB),
-  userProjectPrivilegesRepositoryDI:asClass(UserProjectPrivilegesRepository),
-  privilegeRepositoryDI:asClass(PrivilegeRepository)
-
+  userProjectPrivilegesRepositoryDI: asClass(UserProjectPrivilegesRepository),
+  privilegeRepositoryDI: asClass(PrivilegeRepository),
+  actionPrivilegesRepositoryDI: asClass(ActionPrivilegesRepository),
+  actionProjectRepositoryDI: asClass(ActionProjectRepository),
+  actionRepositoryDI: asClass(ActionRepository),
+  categoryActionsRepositoryDI: asClass(CategoryActionsRepository),
+  privilegeProjectRepositoryDI: asClass(PrivilegeProjectRepository),
+  rolesProjectRepositoryDI: asClass(RolesProjectRepository),
+  userRolesRepositoryDI: asClass(UserRolesRepository),
+  userTypesRepositoryDI: asClass(UserTypesRepository),
+  userTypesRolesRepositoryDI: asClass(UserTypesRolesRepository),
+  rolesRepositoryDI: asClass(RolesRepository),
+  translationRepositoryDI: asClass(TranslationRepository),
+  actionServiceDI: asClass(ActionService),
+  actionPrivilegesServiceDI: asClass(ActionPrivilegesService),
+  actionProjectServiceDI: asClass(ActionProjectService),
+  privilegeProjectServiceDI: asClass(PrivilegeProjectService),
+  privilegeServiceDI: asClass(PrivilegeService),
+  languageProjectRepositoryDI: asClass(LanguageProjectRepository),
+  languageRepositoryDI: asClass(LanguageRepository),
+  languageServiceDI: asClass(LanguageService),
+  languageProjectServiceDI: asClass(LanguageProjectService),
+  translationServiceDI: asClass(TranslationService),
+  roleServiceDI: asClass(RoleService),
+  roleProjectServiceDI: asClass(RoleProjectService),
+  userTypesServiceDI: asClass(UserTypesService),
+  userTypesRolesServiceDI: asClass(UserTypesRolesService),
+  userRolesServiceDI: asClass(UserRolesService),
+  dimensionsProjectRepositoryDI: asClass(DimensionsProjectRepository),
+  dimensionsRepositoryDI: asClass(DimensionsRepository),
+  dimensionsProjectServiceDI: asClass(DimensionsProjectService),
+  dimensionsServiceDI: asClass(DimensionsService)
 };
 exporter[CommandList.Dictionary.ADD_DICTIONARY] = asClass(
   AddToDictionaryCommand
@@ -152,6 +260,58 @@ exporter[QueryList.Dictionary.GET_DICTIONARY] = asClass(GetDictionariesQuery);
 exporter[CommandList.Dictionary.REMOVE_DICTIONARY] = asClass(
   RemoveDictionaryCommand
 );
+///////////////////////DIMENSIONS////////////////////////////////////////
+exporter[CommandList.Dimensions.DELETE_DIM_GLOBALLY] = asClass(DeleteDimensionCommand);
+exporter[CommandList.Dimensions.DELETE_DIM] = asClass(DeleteDimensionProjectCommand);
+exporter[CommandList.Dimensions.UPSERT_DIM] = asClass(UpsertDimensionProjectCommand);
+exporter[CommandList.Dimensions.UPSERT_DIM_GLOBALLY] = asClass(UpsertDimensionCommand);
+
+exporter[QueryList.Dimensions.GET_GLOBAL_DIM] = asClass(GetDimensionsQuery);
+exporter[QueryList.Dimensions.GET_DIM] = asClass(GetProjectDimensiosQuery);
+
+///////////////////////LANGUAGES////////////////////////////////////////
+exporter[CommandList.Languages.DELETE_LANGUAGE] = asClass(DeleteLanguageFromProjectCommand);
+exporter[CommandList.Languages.INSERT_LANGUAGE] = asClass(InsertLanguageToProjectCommand);
+exporter[CommandList.Languages.INSERT_LANGUAGE_GLOBAL] = asClass(InsertLanguageCommand);
+exporter[CommandList.Languages.UPSERT_TRANSLATION] = asClass(UpsertTranslateCommand);
+exporter[CommandList.Languages.SET_AS_MAIN_LANG] = asClass(SetAsMainLanguageCommand);
+
+exporter[QueryList.Languages.GET_GLOBAL_LANGUAGES] = asClass(GetLanguagesQuery);
+exporter[QueryList.Languages.GET_LANGUAGES] = asClass(GetProjectLanguagesQuery);
+exporter[QueryList.Languages.TRANSLATE] = asClass(TranslateQuery);
+
+///////////////////////ACTIONS////////////////////////////////////////
+exporter[CommandList.Actions.DELETE_GLOBAL_ACTIONS] = asClass(DeleteActionCommand);
+exporter[CommandList.Actions.DELETE_ACTIONS] = asClass(DeleteActionsProjectCommand);
+exporter[CommandList.Actions.DELETE_ACTIONS_PRIVS] = asClass(DeleteActionPrivilegesCommand);
+exporter[CommandList.Actions.UPSERT_GLOBAL_ACTIONS] = asClass(UpsertActionCommand);
+exporter[CommandList.Actions.UPSERT_ACTIONS] = asClass(UpsertActionsProjectCommand);
+exporter[CommandList.Actions.UPSERT_ACTIONS_PRIVS] = asClass(UpsertActionPrivilegesCommand);
+
+
+exporter[QueryList.Actions.GET_GLOBAL_ACTIONS] = asClass(GetActionsQuery);
+exporter[QueryList.Actions.GET_ACTIONS] = asClass(GetProjectActionsQuery);
+
+///////////////////////PRIVILEGES////////////////////////////////////////
+exporter[CommandList.Privileges.DELETE_PRIV_GLOBALLY] = asClass(DeletePrivilegesCommand);
+exporter[CommandList.Privileges.DELETE_PRIV] = asClass(DeletePrivilegesProjectCommand);
+exporter[CommandList.Privileges.UPSERT_PRIV_GLOBALLY] = asClass(UpsertPrivilegesCommand);
+exporter[CommandList.Privileges.UPSERT_PRIV] = asClass(UpsertPrivilegesProjectCommand);
+
+
+exporter[QueryList.Privileges.GET_PRIVS] = asClass(GetProjectPrivilegesQuery);
+exporter[QueryList.Privileges.GET_GLOBAL_PRIVS] = asClass(GetPrivilegesQuery);
+
+
+///////////////////////ROLES////////////////////////////////////////
+exporter[CommandList.Roles.CREATE_ROLE_GLOBAL] = asClass(CreateRoleCommand);
+exporter[CommandList.Roles.GRANT_ROLE_TO_PROJECT] = asClass(GrantRoleToProjectCommand);
+exporter[CommandList.Roles.REVOKE_ROLE_TO_PROJECT] = asClass(RevokeRoleFromProjectCommand);
+
+
+exporter[QueryList.Roles.GET_ROLES] = asClass(GetProjectRolesQuery);
+exporter[QueryList.Roles.GET_GLOBAL_ROLES] = asClass(GetRolesQuery);
+
 
 ///////////////////////USER////////////////////////////////////////
 exporter[CommandList.User.CREATE_USER] = asClass(CreateUserCommand);
@@ -168,6 +328,13 @@ exporter[CommandList.User.SET_LANGUAGE] = asClass(SetLanguageCommand);
 exporter[CommandList.User.SET_COORDIATES] = asClass(SetCoordinatesCommand);
 exporter[CommandList.User.SET_PROFILE_IMAGE] = asClass(SetProfileImageCommand)
 exporter[CommandList.User.CREATE_USER_EXTERNAL_PROV] = asClass(CreateUserByExternalCommand)
+exporter[CommandList.User.GRANT_USER_ROLE] = asClass(GrantUserRoleCommand)
+exporter[CommandList.User.GRANT_USERTYPE_ROLE] = asClass(GrantUserTypeRoleCommand)
+exporter[CommandList.User.REMOVE_USERTYPE] = asClass(RemoveUserTypeCommand)
+exporter[CommandList.User.REVOKE_USER_ROLE] = asClass(RevokeUserRoleCommand)
+exporter[CommandList.User.REVOKE_USERTYPE_ROLE] = asClass(RevokeUserTypeRoleCommand)
+
+exporter[CommandList.User.UPSERT_USERTYPE] = asClass(UpsertUserTypeCommand)
 
 
 exporter[QueryList.User.USER_INFO] = asClass(GetUserInfoQuery)
@@ -177,6 +344,7 @@ exporter[QueryList.User.LOG_IN_BY_REFRESH_TOKEN] = asClass(
 );
 exporter[QueryList.User.LOGIN_BY_EXTERNAL] = asClass(LogInByExternalQuery)
 exporter[QueryList.User.GET_REFRESH_TOKEN] = asClass(GetRefreshTokenQuery);
+exporter[QueryList.User.GET_USER_TYPES] = asClass(GetUserTypesQuery);
 
 ////////////////////////////////Category/////////////////////////////////////////
 exporter[CommandList.Category.ADD_CATEGORY] = asClass(InsertCategoryCommand);
@@ -188,15 +356,23 @@ exporter[QueryList.Category.GET_CATEGORIES] = asClass(GetCategoryQuery);
 exporter[QueryList.Category.GET_CATEGORIES_HIERARCHY] = asClass(
   GetCategoryTreeQuery
 );
+exporter[QueryList.Category.INSERT_CATEGORY_ACTION] = asClass(InsertCategoryActionCommand);
+exporter[QueryList.Category.REMOVE_CATEGORY_ACTION] = asClass(RemoveCategoryActionCommand);
+
+
+
 exporter[QueryList.Category.GET_CATEGORIES_ALL_TREE] = asClass(GetCategoriesAllQuery)
 
 exporter[QueryList.Category.GET_CATEGORIES_FREETEXT] = asClass(GetCategoryFreetextQuery)
+
 ///////////////////////////////////////////////////////////////////////////
 ////////////////////////////////CategoryOptions/////////////////////////////////////////
 
 exporter[QueryList.CategoryOptions.GET_OPTIONS_TYPE] = asClass(GetCategoryOptionsTypeQuery);
 exporter[QueryList.CategoryOptions.GET_CATEGORY_OPTION] = asClass(GetCategoryOptionsQuery)
 exporter[QueryList.CategoryOptions.GET_ALL_CETEGORIES_OPTIONS] = asClass(GetAllCategoriesOptionQuery);
+exporter[QueryList.CategoryOptions.GET_CATEGORY_LINK_BY_ID] = asClass(GetCategoryLinkQuery);
+
 
 exporter[CommandList.Category_Options.UPSERT_CATEGORY_OPTIONS] = asClass(UpsertCategoryOptionsCommand);
 exporter[CommandList.Category_Options.DELETE_CATEGORY_OPTIONS] = asClass(DeleteCategoryOptionsCommand);
@@ -255,17 +431,20 @@ exporter[QueryList.City.REVERSE_LATLNG_GEO] = asClass(GeocodeQuery)
 ///////////////////////////////////////////////////////////
 
 ///////////////////PROJECT////////////////////////////////
+exporter[CommandList.Project.CHOOSE_PLAN] = asClass(ChoosePlanCommand);
+exporter[CommandList.Project.INSERT_PROJECT] = asClass(InsertProjectCommand);
+exporter[CommandList.Project.RUN_BUILD] = asClass(RunBuildCommand);
+exporter[CommandList.Project.SET_PROGRESS] = asClass(SetProjectBuildProgressCommand);
+exporter[CommandList.Project.UPDATE_PROJECT] = asClass(UpdateProjectCommand);
+exporter[CommandList.Project.UPLOAD_BLOB] = asClass(UploadBlobProjectCommand);
 
 exporter[QueryList.Project.LOGIN] = asClass(LoginProjectQuery);
 exporter[QueryList.Project.LOGIN_JS] = asClass(LoginJustshareProjectQuery)
 exporter[QueryList.Project.LOGIN_LOGISTIC] = asClass(LoginLogisticProjectQuery)
 exporter[QueryList.Project.LOGIN_BLISKO_NAS] = asClass(LoginBliskonasProjectQuery)
-
-
-
-
-
-
+exporter[QueryList.Project.GET_PROJECT_INFO] = asClass(GetProjectQuery)
+exporter[QueryList.Project.GET_USERS_PROJECTS] = asClass(GetUsersProjectsQuery)
+exporter[QueryList.Project.GET_PROJECT_USERS] = asClass(GetProjectUsersQuery)
 
 
 

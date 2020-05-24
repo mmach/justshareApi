@@ -74,5 +74,15 @@ export default class ProjectService extends BaseService {
     }
   }
 
+  async getProjctInfo({ id }) {
+    let result = await this.toJsonParse(this.unitOfWorkDI.projectRepository.getProjectDetails({ id }));
+    return result 
+  }
+
+  async getProjctUsers({  }) {
+    let result = await this.toJsonParse(this.unitOfWorkDI.projectRepository.getProjctUsers({  }));
+    return result 
+  }
+
 
 }

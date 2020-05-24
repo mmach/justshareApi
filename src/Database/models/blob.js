@@ -41,6 +41,9 @@ export default class Blob extends Model {
         status: DataTypes.INTEGER,
         category_id: {
           type: DataTypes.UUID
+        },
+        project_id: {
+          type: DataTypes.UUID
         }
       },
       { sequelize }
@@ -78,33 +81,7 @@ export default class Blob extends Model {
     Blob.belongsTo(models.BlobMapper, { as: "blob_thumbmail", targetKey: 'id', foreignKey: "blob_thumbmail_id" });
     Blob.belongsTo(models.BlobMapper, { as: "blob_min", targetKey: 'id', foreignKey: "blob_min_id" });
 
-    //  Blob.belongsTo(models.User);
   }
 }
 
 
-
-
-
-/*
-'use strict';
-module.exports = (sequelize, DataTypes) => {
-  var Blob = sequelize.define('Blobs', {
-    blob_id: DataTypes.INTEGER,
-    item_id: DataTypes.INTEGER,
-    blob_id_thumbmail: DataTypes.INTEGER,
-    user_id:{
-      type: DataTypes.INTEGER
-    },
-  }, {underscored: true});
-  Blob.associate = function(models) {
-    // associations can be defined here
-    console.log(models);
-    Blob.belongsTo(models.BlobMappers);
-    Blob.belongsTo(models.Item);
-    Blob.belongsTo(models.User);
-  };
-  return Blob;
-};
-
-*/

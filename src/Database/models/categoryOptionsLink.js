@@ -80,7 +80,10 @@ export default class CategoryOptionsLink extends Model {
           type: DataTypes.BOOLEAN,
           allowNull: true
         },
-
+        project_id: {
+          type: DataTypes.UUID,
+          allowNull: true
+        },
       },
       { sequelize }
     );
@@ -135,6 +138,7 @@ export default class CategoryOptionsLink extends Model {
       );
 
     });
+
 
 
   }

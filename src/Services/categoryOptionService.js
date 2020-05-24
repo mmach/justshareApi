@@ -47,7 +47,11 @@ export default class CategoryOptionService extends BaseService {
         return await this.unitOfWorkDI.categoryOptionsRepository.getAllCategoriesOption({id})
 
     }
+    async getCategoryLinkQuery({id})
+    {
+        return await this.unitOfWorkDI.categoryOptionsRepository.getCategoryLinkQuery({id})
 
+    }
   
     async removeCategoryOptionsForCategory({id})
     {

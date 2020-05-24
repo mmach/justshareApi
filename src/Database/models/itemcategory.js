@@ -32,23 +32,6 @@ export default class ItemCategory extends Model {
     );
   }
   static associate(models) {
-  //  ItemCategory.belongsTo(models.Item);
-    //  Blob.belongsTo(models.User);
+ 
   }
 }
-
-/*
-module.exports = (sequelize, DataTypes) => {
-  var ItemCategory = sequelize.define('ItemCategory', {
-    item_id: DataTypes.INTEGER,
-    category_id: DataTypes.INTEGER
-  }, {underscored: true});
-  ItemCategory.associate = function(models) {
-
-    ItemCategory.belongsTo(models.Item);
-   //  ItemCategory.hasMany(models.Category)
-    // associations can be defined here
-  };
-  return ItemCategory;
-};
-*/

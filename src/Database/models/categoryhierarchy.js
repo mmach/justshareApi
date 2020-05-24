@@ -97,22 +97,3 @@ export default class CategoryHierarchy extends Model {
 
 
 
-
-/*
-'use strict';
-
-
-
-module.exports = (sequelize, DataTypes) => {
-  var CategoryHierarchy = sequelize.define('CategoryHierarchy', {
-
-  }, {underscored: true});
-  CategoryHierarchy.associate = function (models) {
-   // CategoryHierarchy.hasOne(models.Category, { as: "category_parent",targetKey: 'category_id_parent', foreignKey: "id" });
-    CategoryHierarchy.hasOne(models.Category, { as: "category_parent",targetKey: 'category_parent_id', foreignKey: "id" });
-    CategoryHierarchy.hasMany(models.Category, { as: "category_children",targetKey: 'category_child_id', foreignKey: "id" });
-  };
-  return CategoryHierarchy;
-};
-
-*/

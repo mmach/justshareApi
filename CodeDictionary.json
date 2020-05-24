@@ -3902,6 +3902,698 @@
             },
             "field": "",
             "toRefresh": true
+        },
+        "USERTYPE_FORM_HEADER": {
+            "id": "41d5ccfa-866c-4508-849d-830644d62f56",
+            "uid": "",
+            "code": "USERTYPE_FORM_HEADER",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Typy użytkowników",
+                "us": "User types",
+                "de": "Benutzertypen",
+                "ru": "Типы пользователей",
+                "fr": "Les types d'utilisateurs",
+                "es": "Tipos de usuarios",
+                "no": "Brukeren typer",
+                "zh_cn": "用户类型"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "USER_TYPE_LABEL": {
+            "id": "41d5ccfa-866c-4508-849d-830644d62f56",
+            "uid": "",
+            "code": "USER_TYPE_LABEL",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Typ",
+                "us": "Type",
+                "de": "Art",
+                "ru": "Тип",
+                "fr": "Type",
+                "es": "El tipo de",
+                "no": "Type",
+                "zh_cn": "类型"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "LANG_BUTTON": {
+            "id": "41d5ccfa-866c-4508-849d-830644d62f56",
+            "uid": "",
+            "code": "LANG_BUTTON",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Tekst",
+                "us": "Text",
+                "de": "Text",
+                "ru": "Текст",
+                "fr": "Le texte",
+                "es": "El texto",
+                "no": "Tekst",
+                "zh_cn": "文本"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "LANG_DEFAULT_NAME": {
+            "id": "41d5ccfa-866c-4508-849d-830644d62f56",
+            "uid": "",
+            "code": "LANG_DEFAULT_NAME",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Tekst",
+                "us": "Text",
+                "de": "Text",
+                "ru": "Текст",
+                "fr": "Le texte",
+                "es": "El texto",
+                "no": "Tekst",
+                "zh_cn": "文本"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "LANG_TEXTBOX": {
+            "id": "41d5ccfa-866c-4508-849d-830644d62f56",
+            "uid": "",
+            "code": "LANG_TEXTBOX",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Tłumaczenia",
+                "us": "Translation",
+                "de": "Übersetzung",
+                "ru": "Перевод",
+                "fr": "Traduction",
+                "es": "Traducción",
+                "no": "Oversettelse",
+                "zh_cn": "翻译"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "LANG_BUTTON_ALL": {
+            "id": "41d5ccfa-866c-4508-849d-830644d62f56",
+            "uid": "",
+            "code": "LANG_BUTTON_ALL",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Tłumacz",
+                "us": "Translator",
+                "de": "Übersetzer",
+                "ru": "Переводчик",
+                "fr": "Traducteur",
+                "es": "Traductor",
+                "no": "Oversetter",
+                "zh_cn": "翻译"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "LANG_TEXT_ALL": {
+            "id": "41d5ccfa-866c-4508-849d-830644d62f56",
+            "uid": "",
+            "code": "LANG_TEXT_ALL",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Wszystkie",
+                "us": "All",
+                "de": "Alle",
+                "ru": "Все",
+                "fr": "Tous les",
+                "es": "Todos",
+                "no": "Alle",
+                "zh_cn": "所有"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "USERTYPE_BUTTON_SAVE": {
+            "id": "41d5ccfa-866c-4508-849d-830644d62f56",
+            "uid": "",
+            "code": "USERTYPE_BUTTON_SAVE",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Zapisz",
+                "us": "Save",
+                "de": "Speichern",
+                "ru": "Сохранить",
+                "fr": "Enregistrer",
+                "es": "Guardar",
+                "no": "Lagre",
+                "zh_cn": "保存"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "USER_TYPES_LIST": {
+            "id": "41d5ccfa-866c-4508-849d-830644d62f56",
+            "uid": "",
+            "code": "USER_TYPES_LIST",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Lista typów",
+                "us": "The list of types",
+                "de": "Liste der Arten",
+                "ru": "Список типов",
+                "fr": "La liste des types de",
+                "es": "La lista de tipos de",
+                "no": "Listen over typer",
+                "zh_cn": "名单的类型"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "USERTTYPE_NEW_USERTYPE": {
+            "id": "41d5ccfa-866c-4508-849d-830644d62f56",
+            "uid": "",
+            "code": "USERTTYPE_NEW_USERTYPE",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Dodaj",
+                "us": "Add",
+                "de": "Hinzufügen",
+                "ru": "Добавить",
+                "fr": "Ajouter",
+                "es": "Agregar",
+                "no": "Legg til",
+                "zh_cn": "添加"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "USER_TYPE_ROLE_NAME_HEADER": {
+            "id": "41d5ccfa-866c-4508-849d-830644d62f56",
+            "uid": "",
+            "code": "USER_TYPE_ROLE_NAME_HEADER",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Rola",
+                "us": "The role",
+                "de": "Rolle",
+                "ru": "Роль",
+                "fr": "Le rôle de la",
+                "es": "El papel de la",
+                "no": "Rollen",
+                "zh_cn": "的作用"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "USER_TYPE_ROLE_ACTION_HEADER": {
+            "id": "7cabf0a4-8ca8-4577-908a-3e35a2b727df",
+            "uid": "",
+            "code": "USER_TYPE_ROLE_ACTION_HEADER",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Akcja",
+                "us": "Action",
+                "de": "Aktion",
+                "ru": "Действие",
+                "fr": "L'action",
+                "es": "La acción",
+                "no": "Handling",
+                "zh_cn": "动作"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "USERTYPE_BUTTON_DELETE": {
+            "id": "1259620a-8ea2-4594-9ca8-6fbf5b27567e",
+            "uid": "",
+            "code": "USERTYPE_BUTTON_DELETE",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Usuń",
+                "us": "Remove",
+                "de": "Entfernen",
+                "ru": "Удалить",
+                "fr": "Supprimer",
+                "es": "Eliminar",
+                "no": "For å fjerne",
+                "zh_cn": "删除"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "USERTTYPE_SHOW_ALL_USERS": {
+            "id": "1259620a-8ea2-4594-9ca8-6fbf5b27567e",
+            "uid": "",
+            "code": "USERTTYPE_SHOW_ALL_USERS",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Użytkownicy",
+                "us": "Users",
+                "de": "Benutzer",
+                "ru": "Пользователи",
+                "fr": "Les utilisateurs",
+                "es": "Los usuarios",
+                "no": "Brukere",
+                "zh_cn": "用户"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "USERTYPE_LINK_LABEL": {
+            "id": "ea231e40-15f5-46b9-a424-7d47eb79c268",
+            "uid": "",
+            "code": "USERTYPE_LINK_LABEL",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Typy użytkowników",
+                "us": "User types",
+                "de": "Benutzertypen",
+                "ru": "Типы пользователей",
+                "fr": "Les types d'utilisateurs",
+                "es": "Tipos de usuarios",
+                "no": "Brukeren typer",
+                "zh_cn": "用户类型"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "TOPROJECT_LINK_LABEL": {
+            "id": "5ced86f9-4403-42a9-8b01-a449a54122f7",
+            "uid": "",
+            "code": "TOPROJECT_LINK_LABEL",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Ustawienia projektu",
+                "us": "Project settings",
+                "de": "Projekteinstellungen",
+                "ru": "Настройки проекта",
+                "fr": "Les paramètres du projet",
+                "es": "La configuración del proyecto",
+                "no": "Prosjektet innstillinger",
+                "zh_cn": "项目设置"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "PROJECT_MAIN_FREE_TIER_PLAN": {
+            "id": "c3b4886b-55fd-4d70-b80c-9ed52e45e180",
+            "uid": "",
+            "code": "PROJECT_MAIN_FREE_TIER_PLAN",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "FREE",
+                "us": "FREE",
+                "de": "FREE",
+                "ru": "FREE",
+                "fr": "FREE",
+                "es": "FREE",
+                "no": "GRATIS",
+                "zh_cn": "免费的"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "PROJECT_MAIN_BASIC_TIER_PLAN": {
+            "id": "6dc9fecd-05a5-42b5-a82f-f48e3764ef1d",
+            "uid": "",
+            "code": "PROJECT_MAIN_BASIC_TIER_PLAN",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "BASIC",
+                "us": "BASIC",
+                "de": "BASIC",
+                "ru": "BASIC",
+                "fr": "BASIC",
+                "es": "BASIC",
+                "no": "BASIC",
+                "zh_cn": "基本的",
+                "zh": "BASIC"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "PROJECT_MAIN_PREMIUM_TIER_PLAN": {
+            "id": "6dc9fecd-05a5-42b5-a82f-f48e3764ef1d",
+            "uid": "",
+            "code": "PROJECT_MAIN_PREMIUM_TIER_PLAN",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "PREMIUM",
+                "us": "PREMIUM",
+                "de": "PREMIUM",
+                "ru": "ПРЕМИУМ",
+                "fr": "PREMIUM",
+                "es": "PREMIUM",
+                "no": "PREMIUM",
+                "zh_cn": "高级",
+                "zh": "BASIC"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "PROJECT_MAIN_ENTERPRISE_TIER_PLAN": {
+            "id": "6dc9fecd-05a5-42b5-a82f-f48e3764ef1d",
+            "uid": "",
+            "code": "PROJECT_MAIN_ENTERPRISE_TIER_PLAN",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "ENTERPRISE",
+                "us": "ENTERPRISE",
+                "de": "ENTERPRISE",
+                "ru": "ENTERPRISE",
+                "fr": "ENTERPRISE",
+                "es": "ENTERPRISE",
+                "no": "ENTERPRISE",
+                "zh_cn": "企业",
+                "zh": "BASIC"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "PROJECT_MAIN_FREE_TIER_TEXT": {
+            "id": "c3b4886b-55fd-4d70-b80c-9ed52e45e180",
+            "uid": "",
+            "code": "PROJECT_MAIN_FREE_TIER_TEXT",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "<ul><li>dupa</li></ul>",
+                "us": "the <ul><li>ass</li></ul>",
+                "de": "<ul><li>ass</li></ul>",
+                "ru": "<ul><li>жопа</li></ul>",
+                "fr": "<ul><li>cul</li></ul>",
+                "es": "<ul><li>culo</li></ul>",
+                "no": "<ul><li>ass</li></ul>",
+                "zh_cn": "<ul><李>的屁股</li></ul>"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "PROJECT_MAIN_MODULE_WEBSITE": {
+            "id": "1166cb29-9fea-4427-bd2d-9df3f3eb90ed",
+            "uid": "",
+            "code": "PROJECT_MAIN_MODULE_WEBSITE",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Strona internetowa",
+                "us": "Website",
+                "de": "Webseite",
+                "ru": "Сайт",
+                "fr": "Site",
+                "es": "El sitio",
+                "no": "Nettstedet",
+                "zh_cn": "该网站"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "PROJECT_MAIN_MODULE_PWA": {
+            "id": "1166cb29-9fea-4427-bd2d-9df3f3eb90ed",
+            "uid": "",
+            "code": "PROJECT_MAIN_MODULE_PWA",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Progressive Web App",
+                "us": "Progressive Web App",
+                "de": "Progressive Web App",
+                "ru": "Progressive Web App",
+                "fr": "Progressive Web App",
+                "es": "Progresivas Web App",
+                "no": "Progressive Web App",
+                "zh_cn": "渐进网络应用程序",
+                "zh": "Progressive Web App"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "PROJECT_MAIN_MODULE_WEBCOMPONENT": {
+            "id": "1166cb29-9fea-4427-bd2d-9df3f3eb90ed",
+            "uid": "",
+            "code": "PROJECT_MAIN_MODULE_WEBCOMPONENT",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "WebComponents",
+                "us": "WebComponents",
+                "de": "WebComponents",
+                "ru": "WebComponents",
+                "fr": "WebComponents",
+                "es": "WebComponents",
+                "no": "WebComponents",
+                "zh_cn": "WebComponents",
+                "zh": "Progressive Web App"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "PROJECT_MAIN_MODULE_APPLICATION": {
+            "id": "1166cb29-9fea-4427-bd2d-9df3f3eb90ed",
+            "uid": "",
+            "code": "PROJECT_MAIN_MODULE_APPLICATION",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Google Store i Apple Store",
+                "us": "Google Store and Apple Store",
+                "de": "Google Store und Apple Store",
+                "ru": "Google Store и Apple Store",
+                "fr": "Google Store et Apple Store",
+                "es": "Google Store y Apple Store",
+                "no": "Lagres av Google og Apple Store",
+                "zh_cn": "谷歌储存和苹果店",
+                "zh": "Progressive Web App"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "PROJECT_MAIN_MODULE_CERTIFICATE": {
+            "id": "1166cb29-9fea-4427-bd2d-9df3f3eb90ed",
+            "uid": "",
+            "code": "PROJECT_MAIN_MODULE_CERTIFICATE",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Indywidualny certyfikat",
+                "us": "Individual certificate",
+                "de": "Das individuelle Zertifikat",
+                "ru": "Индивидуальный сертификат",
+                "fr": "Un certificat individuel",
+                "es": "Certificado individual",
+                "no": "Enkelte sertifikat",
+                "zh_cn": "个人证书",
+                "zh": "Progressive Web App"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "PROJECT_MAIN_MODULE_IOT": {
+            "id": "1166cb29-9fea-4427-bd2d-9df3f3eb90ed",
+            "uid": "",
+            "code": "PROJECT_MAIN_MODULE_IOT",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Internet of Things",
+                "us": "Internet of Things",
+                "de": "Internet of Things",
+                "ru": "Internet of Things",
+                "fr": "Internet of Things",
+                "es": "Internet of Things",
+                "no": "Internet of Things",
+                "zh_cn": "互联网的东西",
+                "zh": "Internet of Things"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "PROJECT_MAIN_HEADER": {
+            "id": "71f48a97-6508-4c0e-bbf9-865f09e239f6",
+            "uid": "",
+            "code": "PROJECT_MAIN_HEADER",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Nasza oferta",
+                "us": "Our offer",
+                "de": "Unser Angebot",
+                "ru": "Наше предложение",
+                "fr": "Notre offre",
+                "es": "Nuestra propuesta",
+                "no": "Vårt tilbud",
+                "zh_cn": "我们提供"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "PROJECT_MAIN_DESCRIPTION": {
+            "id": "71f48a97-6508-4c0e-bbf9-865f09e239f6",
+            "uid": "",
+            "code": "PROJECT_MAIN_DESCRIPTION",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Zobacz więcej informacji odnośnie naszych produktów i jakie możliwości nasz system oferuje.",
+                "us": "To get more information about our products and what opportunities our system offers.",
+                "de": "Weitere Informationen zu unseren Produkten und welche Möglichkeiten unser System bietet.",
+                "ru": "Получить больше информации о наших продуктах и какие возможности наша система предлагает.",
+                "fr": "Plus d'informations sur nos produits et les possibilités de notre système offre.",
+                "es": "Obtener más información acerca de nuestros productos y de las oportunidades de nuestro sistema ofrece.",
+                "no": "For å få mer informasjon om våre produkter, og hvilke muligheter vårt system tilbyr.",
+                "zh_cn": "获得更多的信息，我们的产品和什么样的机会我们的系统提供。"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "LANG_PRICE_DETAILS_LINK": {
+            "id": "c8ee5eaf-fa3b-4222-9f94-0726924fa715",
+            "uid": "",
+            "code": "LANG_PRICE_DETAILS_LINK",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Cennik",
+                "us": "Price list",
+                "de": "Das prajs-Blatt",
+                "ru": "Прайс-лист",
+                "fr": "Liste de prix",
+                "es": "Lista de precios",
+                "no": "Prisliste",
+                "zh_cn": "价格表"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "LANG_LEARN_MORE_LINK": {
+            "id": "c8ee5eaf-fa3b-4222-9f94-0726924fa715",
+            "uid": "",
+            "code": "LANG_LEARN_MORE_LINK",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Opis produktu",
+                "us": "Description of product",
+                "de": "Produktbeschreibung",
+                "ru": "Описание продукта",
+                "fr": "Description du produit",
+                "es": "Descripción del producto",
+                "no": "Beskrivelse av produkt",
+                "zh_cn": "说明产品"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "MAPPS_PROJECT_DESCRIPTION_SLIDER_2_HEADER": {
+            "id": "5c7f375e-64e7-46fa-be8c-f0f3eafc23eb",
+            "uid": "",
+            "code": "MAPPS_PROJECT_DESCRIPTION_SLIDER_2_HEADER",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Progressive Web App",
+                "us": "Progressive Web App",
+                "de": "Progressive Web App",
+                "ru": "Progressive Web App",
+                "fr": "Progressive Web App",
+                "es": "Progresivas Web App",
+                "no": "Progressive Web App",
+                "zh_cn": "渐进网络应用程序"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "MAPPS_PROJECT_DESCRIPTION_SLIDER_1_HEADER": {
+            "id": "4d002e55-851b-44a0-a663-35c438831b7b",
+            "uid": "",
+            "code": "MAPPS_PROJECT_DESCRIPTION_SLIDER_1_HEADER",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Zaawansowane wyszukiwanie",
+                "us": "Advanced search",
+                "de": "Erweiterte Suche",
+                "ru": "Расширенный поиск",
+                "fr": "Recherche avancée",
+                "es": "Búsqueda avanzada",
+                "no": "Avansert søk",
+                "zh_cn": "先进的搜索"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "MAPPS_PROJECT_DESCRIPTION_SLIDER_3_HEADER": {
+            "id": "f8fe77db-7252-4717-ac2b-55e160284301",
+            "uid": "",
+            "code": "MAPPS_PROJECT_DESCRIPTION_SLIDER_3_HEADER",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Internet of Things",
+                "us": "Internet of Things",
+                "de": "Internet of Things",
+                "ru": "Internet of Things",
+                "fr": "Internet of Things",
+                "es": "Internet of Things",
+                "no": "Tingenes internett",
+                "zh_cn": "互联网的东西"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "MAPPS_PROJECT_DESCRIPTION_SLIDER_4_HEADER": {
+            "id": "35eeaa47-838d-40b2-875c-aa99bb760e42",
+            "uid": "",
+            "code": "MAPPS_PROJECT_DESCRIPTION_SLIDER_4_HEADER",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "WebComponents",
+                "us": "WebComponents",
+                "de": "WebComponents",
+                "ru": "WebComponents",
+                "fr": "WebComponents",
+                "es": "WebComponents",
+                "no": "WebComponents",
+                "zh_cn": "WebComponents"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "GO_TO_USER_PROFILE_LINK": {
+            "id": "8ba3dc67-74cc-4618-82b8-8c6ce1b3c12b",
+            "uid": "",
+            "code": "GO_TO_USER_PROFILE_LINK",
+            "status": "200",
+            "type": "LABEL",
+            "message": {
+                "pl": "Profil użytkownika",
+                "us": "User profile",
+                "de": "Benutzerprofil",
+                "ru": "Профиль пользователя",
+                "fr": "Le profil de l'utilisateur",
+                "es": "El perfil de usuario",
+                "no": "Brukerprofil",
+                "zh_cn": "用户配置文件"
+            },
+            "field": "",
+            "toRefresh": true
         }
     },
     "PLACEHOLDER": {
@@ -4397,6 +5089,44 @@
                 "no": "Ordet søk",
                 "zh_cn": "词搜索",
                 "zh": "6"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "LANG_DEFAULT_VALUE": {
+            "id": "41d5ccfa-866c-4508-849d-830644d62f56",
+            "uid": "",
+            "code": "LANG_DEFAULT_VALUE",
+            "status": "200",
+            "type": "PLACEHOLDER",
+            "message": {
+                "pl": "tekst",
+                "us": "text",
+                "de": "Text",
+                "ru": "текст",
+                "fr": "le texte",
+                "es": "el texto",
+                "no": "tekst",
+                "zh_cn": "文本"
+            },
+            "field": "",
+            "toRefresh": true
+        },
+        "USER_TYPE_PLACEHOLDER": {
+            "id": "41d5ccfa-866c-4508-849d-830644d62f56",
+            "uid": "",
+            "code": "USER_TYPE_PLACEHOLDER",
+            "status": "200",
+            "type": "PLACEHOLDER",
+            "message": {
+                "pl": "Użytkownik",
+                "us": "The user",
+                "de": "Benutzer",
+                "ru": "Пользователь",
+                "fr": "L'utilisateur",
+                "es": "El usuario",
+                "no": "Bruker",
+                "zh_cn": "用户"
             },
             "field": "",
             "toRefresh": true

@@ -132,6 +132,8 @@ export default class CategoryOptionsRepository extends BaseRepository {
 
 
   upsertToCategory({ model, transaction }) {
+    model.project_id = this.context.project.id;
+    
     return this.sequelizeDI.CategoryOptionsLink.upsert(model, {
 
       transaction: this.getTran({ transaction }),
@@ -217,6 +219,13 @@ export default class CategoryOptionsRepository extends BaseRepository {
       where: { id: this.toStr(id), project_id: this.context.project.id },
       transaction: this.getTran({ transaction }),
       individualHooks: true
+
+    });
+  }
+  getCategoryLinkQuery({ id, transaction }) {
+    return this.sequelizeDI.CategoryOptionsLink.find({
+      where: { id: this.toStr(id), project_id: this.context.project.id },
+      transaction: this.getTran({ transaction }),
 
     });
   }

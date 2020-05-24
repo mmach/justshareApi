@@ -27,9 +27,27 @@ import Tag from "./tag.js";
 import ItemTag from "./itemTag.js";
 import Project from "./project.js";
 import Config from './config.js';
-import UserProjectPrivileges from './userProjectPrivileges.js'
-import Privilege from './privilege.js'
 import EsItemSync from './esItemSync.js'
+import Translations from "./translations.js";
+import Language from "./language.js";
+import LanguageProject from "./languageProject.js";
+import Actions from "./actions.js";
+import ActionPrivileges from "./actionPrivileges.js";
+import ActionsProject from "./actionsProject.js";
+import CategoryActions from "./categoryActions.js";
+import Privileges from "./privileges.js";
+import PrivilegesProject from "./privilegesProject.js";
+import UserTypes from './userTypes.js'
+import Roles from "./roles.js";
+import RolesProject from "./RolesProject";
+import UserRoles from "./userRoles";
+import UserTypeRoles from "./userTypeRoles";
+import Dimensions from "./dimensions";
+import DimensionsProject from './dimensionsProject'
+import V_Project from "./v_project";
+
+
+
 var env = process.env.NODE_ENV || "development";
 var config = configJSON[env];
 if (config.use_env_variable) {
@@ -82,18 +100,33 @@ let models = {
   ItemTag: ItemTag.init(sequelize, Sequelize),
   Project: Project.init(sequelize, Sequelize),
   Config: Config.init(sequelize, Sequelize),
-  UserProjectPrivileges: UserProjectPrivileges.init(sequelize, Sequelize),
-  Privilege: Privilege.init(sequelize, Sequelize),
-  EsItemSync:EsItemSync.init(sequelize,Sequelize)
+  UserTypes: UserTypes.init(sequelize, Sequelize),
+  EsItemSync: EsItemSync.init(sequelize, Sequelize),
+  Translations: Translations.init(sequelize, Sequelize),
+  Language: Language.init(sequelize, Sequelize),
+  LanguageProject: LanguageProject.init(sequelize, Sequelize),
+  Actions: Actions.init(sequelize, Sequelize),
+  ActionPrivileges: ActionPrivileges.init(sequelize, Sequelize),
+  ActionsProject: ActionsProject.init(sequelize, Sequelize),
+  CategoryActions: CategoryActions.init(sequelize, Sequelize),
+  Privileges: Privileges.init(sequelize, Sequelize),
+  PrivilegesProject: PrivilegesProject.init(sequelize, Sequelize),
+  Roles: Roles.init(sequelize, Sequelize),
+  RolesProject: RolesProject.init(sequelize, Sequelize),
+  UserRoles: UserRoles.init(sequelize, Sequelize),
+  UserTypeRoles: UserTypeRoles.init(sequelize, Sequelize),
+  DimensionsProject: DimensionsProject.init(sequelize, Sequelize),
+  Dimensions: Dimensions.init(sequelize, Sequelize),
+  V_Project: V_Project.init(sequelize, Sequelize)
+
 
 };
-
 Object.keys(models).forEach(modelName => {
   if (models[modelName].associate) {
     models[modelName].associate(models);
   }
   if (models[modelName].hooks) {
-    models[modelName].hooks(models,sequelize);
+    models[modelName].hooks(models, sequelize);
   }
 });
 

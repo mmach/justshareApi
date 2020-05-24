@@ -1,7 +1,7 @@
 "use strict";
 import BaseCommand from "./../../Architecture/baseCommand.js";
 
-import { UserRegisterInternalDTO } from "justshare-shared";
+import { UserRegisterInternalDTO, UserRolesDTO } from "justshare-shared";
 import LogFileInfrastructure from "../../Architecture/Infrastructure/logFileInfrastructure.js";
 import UserService from "../../Services/userService.js";
 import ValidatonInfrastructure from "../../Architecture/Infrastructure/validatonInfrastructure.js";
@@ -11,6 +11,7 @@ import CodeDictionary from "../../Architecture/Dictionary/codeDictionary.js";
 import EMAIL_TEMPLATE from "../../Static/MailsXSLT/index.js"
 import UserValidators from './../../Validators/userValidators.js';
 import { URL } from "url";
+import uuidv4 from "uuid/v4";
 
 /**
  *
@@ -31,7 +32,9 @@ export default class CreateUserCommand extends BaseCommand {
     validationInfrastructureDI,
     dbTransactionInfrastuctureDI,
     mailSenderDI,
-    projectInfrastructureDI
+    projectInfrastructureDI,
+    userTypesServiceDI,
+    userRolesServiceDI
   }) {
     super({
       logFileInfrastructureDI,
@@ -41,6 +44,8 @@ export default class CreateUserCommand extends BaseCommand {
     });
     this.mailSenderDI = mailSenderDI;
     this.userServiceDI = userServiceDI;
+    this.userTypesServiceDI = userTypesServiceDI;
+    this.userRolesServiceDI = userRolesServiceDI;
   }
   init(dto) {
     this.model = Object.assign(new UserRegisterInternalDTO(), dto);
@@ -48,15 +53,17 @@ export default class CreateUserCommand extends BaseCommand {
 
   get validation() {
     return [
-      async () => { await this.checkDTO.bind(this)(this.model) }
-    ]
-    //async () => { await UserValidators.checkIfMailExistInDb.bind(this)() }]
+      async () => { await this.checkDTO.bind(this)(this.model) },
+      async () => { await UserValidators.checkIfMailExistInDb.bind(this)() }]
+
+
   }
 
   async action() {
 
     let result = {}
-    const userInfo = await this.userServiceDI.toJsonParse(this.userServiceDI.setContext(this.context).checkMailInDb({
+    let userType = await this.userTypesServiceDI.setContext(this.context).getUserType({ model: { id: this.model.usertype_id } })
+    /*const userInfo = await this.userServiceDI.toJsonParse(this.userServiceDI.setContext(this.context).checkMailInDb({
       email: this.model.email, withoutAuth: true
     }));
     result = userInfo
@@ -64,24 +71,6 @@ export default class CreateUserCommand extends BaseCommand {
       let proj = await userInfo.user_projects.find(item => {
         return item.project_id == this.context.project.id;
       });
-
-      if (proj == undefined) {
-
-        await this.userServiceDI.setContext(this.context).grantPrivByName({
-
-          user_id: userInfo.id,
-          project_id: this.context.project.id,
-          name: 'USER'
-
-        })
-      } else {
-        let exception = new ValidationException();
-        exception.throw({ field: "email", code: "EMAIL_EXIST_IN_DB" }, [
-          this.model.email
-        ]);
-      }
-
-    } else {
 
       result = await this.userServiceDI.setContext(this.context).newInternalUser({
         model: this.model
@@ -92,8 +81,25 @@ export default class CreateUserCommand extends BaseCommand {
         project_id: this.context.project.id,
         name: 'USER'
 
+      })*/
+      this.model.id=uuidv4();
+    result = await this.userServiceDI.setContext(this.context).newInternalUser({
+      model: this.model
+    });
+    if (userType[0]) {
+      let prom = userType[0].usertype_roles.map(item => {
+        let priv = {
+          ...new UserRolesDTO(),
+          usertype_id: userType[0].id,
+          role_id: item.role_id,
+          user_id: this.model.id
+        }
+        return this.userRolesServiceDI.setContext(this.context).insert({ model: priv, withProject: true });
+
       })
+      await Promise.all(prom)
     }
+
 
     let model = {
       body: {
@@ -113,5 +119,4 @@ export default class CreateUserCommand extends BaseCommand {
     });
   }
 }
-
 

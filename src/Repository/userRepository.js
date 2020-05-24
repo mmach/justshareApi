@@ -56,21 +56,66 @@ export default class UserRepository extends BaseRepository {
       transaction: this.getTran({ transaction })
     })
   }
+
+
+  getUsersProject({ transaction }) {
+
+    return this.UserVDB.findAll({
+      where: {
+        email: this.context.user.email
+      }
+      , include: [
+        
+        {
+          model: this.sequelizeDI.V_Project,
+          as: "project",
+          required: false
+        },
+        {
+          model: this.sequelizeDI.UserTypes,
+          as: "user_type",
+          required: false
+        },
+        {
+          model: this.sequelizeDI.UserRoles,
+          as: "user_roles",
+          required: false,
+          include: [
+            {
+              model: this.sequelizeDI.RolesProject,
+              as: "roles",
+              required: true,
+              include: [
+                {
+                  model: this.sequelizeDI.Roles,
+                  as: "role_detail",
+                  required: true
+                }
+              ],
+            }
+          ],
+        }
+      ],
+      transaction: this.getTran({ transaction })
+    });
+  }
   /**
    *
    * @param  {any} { email, transaction }
    * @return {Promise<UserDTO>}
    * @memberof UserRepository
    */
-  checkMailInDb({ email, withoutAuth, transaction }) {
+  checkMailInDb({ email, withoutAuth, usertypeId, transaction }) {
     let where = {
       email: this.toStr(email),
-      is_authorized: true
-
+      is_authorized: true,
+      project_id: this.context.project.id
     }
     if (withoutAuth == true) {
       where = {
-        email: this.toStr(email)
+        email: this.toStr(email),
+        project_id: this.context.project.id
+
       }
     }
     return this.entityDAO.findOne({
@@ -82,19 +127,26 @@ export default class UserRepository extends BaseRepository {
           required: false
         },
         {
-          model: this.sequelizeDI.UserProjectPrivileges,
-          as: "user_projects",
+          model: this.sequelizeDI.UserTypes,
+          as: "user_type",
+          required: false
+        },
+        {
+          model: this.sequelizeDI.UserRoles,
+          as: "user_roles",
           required: false,
           include: [
             {
-              model: this.sequelizeDI.Project,
-              as: "project",
-              required: true
-            },
-            {
-              model: this.sequelizeDI.Privilege,
-              as: "privilege",
-              required: true
+              model: this.sequelizeDI.RolesProject,
+              as: "roles",
+              required: true,
+              include: [
+                {
+                  model: this.sequelizeDI.Roles,
+                  as: "role_detail",
+                  required: true
+                }
+              ],
             }
           ],
         }

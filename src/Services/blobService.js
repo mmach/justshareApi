@@ -18,7 +18,9 @@ let saveBlobToFile = async ({ blob }) => {
       return {
         path: `${upload_path}/${newUid}.jpg`,
         id: newUid,
-        filename: `${newUid}.jpg`
+        filename: `${newUid}.jpg`,
+        type: 'jpg'
+
       };
       break;
     }
@@ -31,7 +33,38 @@ let saveBlobToFile = async ({ blob }) => {
       return {
         path: `${upload_path}/${newUid}.png`,
         id: newUid,
-        filename: `${newUid}.png`
+        filename: `${newUid}.png`,
+        type: 'png'
+
+      };
+      break;
+    }
+    case "image/webp": {
+      let fd = await fs.open(`${upload_path}/${newUid}.webp`, "w+");
+      let result = await fs.write(fd, new Buffer(blob.blob, "base64"));
+      await fs.close(fd);
+
+
+      return {
+        path: `${upload_path}/${newUid}.webp`,
+        id: newUid,
+        filename: `${newUid}.webp`,
+        type: 'webp'
+
+      };
+      break;
+    }
+    case "image/svg+xml": {
+      let fd = await fs.open(`${upload_path}/${newUid}.svg`, "w+");
+      let result = await fs.write(fd, new Buffer(blob.blob, "base64"));
+      await fs.close(fd);
+
+
+      return {
+        path: `${upload_path}/${newUid}.svg`,
+        id: newUid,
+        filename: `${newUid}.svg`,
+        type: 'svg'
       };
       break;
     }
@@ -66,46 +99,68 @@ export default class BlobService extends BaseService {
     let newBlob = {};
     try {
       newBlob = await saveBlobToFile.bind(this)({ blob });
-      let imgNormal = await Jimp.read(newBlob.path);
-      await imgNormal
-        .contain(300, 300) // resize
-        .quality(60) // set JPEG quality
-        .writeAsync(`${upload_path}/${newBlob.id}-thumb.png`); // save
+      console.log(newBlob)
+      if (newBlob.type != 'svg' && newBlob.type != 'webp') {
+        console.log(newBlob.path)
+        let imgNormal = await Jimp.read(newBlob.path);
+        console.log('dupaa')
 
-      await imgNormal
-        .contain(100, 100) // resize
-        .quality(60) // set JPEG quality
-        .writeAsync(`${upload_path}/${newBlob.id}-min.png`); // save
+        await imgNormal
+          .contain(300, 300) // resize
+          .quality(60) // set JPEG quality
+          .writeAsync(`${upload_path}/${newBlob.id}-thumb.` + newBlob.type); // save
+
+        await imgNormal
+          .contain(100, 100) // resize
+          .quality(60) // set JPEG quality
+          .writeAsync(`${upload_path}/${newBlob.id}-min.` + newBlob.type); // save
+        console.log('dupaa')
+
+      }
       let blob_id = await this.insertFile({
         id: blob.id,
         path: newBlob.path,
         fileName: newBlob.filename
       });
-      let uid_min = uuidv4()
-      let blob_min_id = await this.insertFile({
-        id: uid_min,
-        path: `${upload_path}/${newBlob.id}-min.png`,
-        fileName: `${newBlob.id}-min.png`
-      });
-      let uid_thumb = uuidv4()
-      let blob_thumb_id = await this.insertFile({
-        id: uid_thumb,
-        path: `${upload_path}/${newBlob.id}-thumb.png`,
-        fileName: `${newBlob.id}-thumb.png`
-      });
-      return {
-        blob_id: blob_id,
-        blob_min_id: blob_min_id,
-        blob_thumb_id: blob_thumb_id
-      };
+      if (newBlob.type != 'svg' && newBlob.type != 'webp') {
+        let uid_min = uuidv4()
+        let blob_min_id = await this.insertFile({
+          id: uid_min,
+          path: `${upload_path}/${newBlob.id}-min.` + newBlob.type,
+          fileName: `${newBlob.id}-min.` + newBlob.type
+        });
+        let uid_thumb = uuidv4()
+        let blob_thumb_id = await this.insertFile({
+          id: uid_thumb,
+          path: `${upload_path}/${newBlob.id}-thumb.` + newBlob.type,
+          fileName: `${newBlob.id}-thumb.` + newBlob.type
+        });
+        return {
+          blob_id: blob_id,
+          blob_min_id: blob_min_id,
+          blob_thumb_id: blob_thumb_id
+        };
+      } else {
+
+        return {
+          blob_id: blob_id,
+          blob_min_id: blob_id,
+          blob_thumb_id: blob_id
+        }
+      }
       ///write to db
     } catch (exception) {
+      console.log(exception)
+
       console.log(exception.parent.message);
       throw exception.parent.message
     } finally {
       await fs.unlink(`${newBlob.path}`);
-      await fs.unlink(`${upload_path}/${newBlob.id}-min.png`);
-      await fs.unlink(`${upload_path}/${newBlob.id}-thumb.png`);
+
+      if (newBlob.type != 'svg' && newBlob.type != 'webp') {
+        await fs.unlink(`${upload_path}/${newBlob.id}-min.` + newBlob.type);
+        await fs.unlink(`${upload_path}/${newBlob.id}-thumb.` + newBlob.type);
+      }
 
     }
   }
@@ -137,7 +192,7 @@ export default class BlobService extends BaseService {
       throw exception.parent.message
     } finally {
       console.log(newBlob.path)
-      
+
       await fs.unlink(`${newBlob.path}`);
 
     }
@@ -195,7 +250,7 @@ export default class BlobService extends BaseService {
       order: getUsersBlob.length + 1,
       status: 0
     };
-    return await this.unitOfWorkDI.blobRepository.insert({ model: result });
+    return await this.unitOfWorkDI.blobRepository.insert({ model: result, withProject: true });
   }
 
   async uploadCategoriesIconAndSave({ blob, category_id }) {
@@ -203,8 +258,7 @@ export default class BlobService extends BaseService {
 
       category_id: category_id
     });
-    console.log(categoryBlob);
-    let newImages = await this.uploadIcon({ blob });
+    let newImages = await this.uploadImage({ blob });
     let result = {
       id: uuidv4(),
       blob_id: newImages.blob_id,
@@ -216,17 +270,40 @@ export default class BlobService extends BaseService {
       status: 1,
       category_id: category_id
     };
-    await this.unitOfWorkDI.blobRepository.insert({ model: result });
+    await this.unitOfWorkDI.blobRepository.insert({ model: result, withProject: true });
     await this.unitOfWorkDI.categoryRepository.updateIcon({ category_id: category_id, new_icon_id: result.id })
 
     if (categoryBlob.length > 0) {
 
       await this.unitOfWorkDI.categoryRepository.updateIcon({ new_icon_id: result.id, old_icon_id: categoryBlob.map(item => { return item.id }) })
       let delItems = categoryBlob.map(item => {
-        return this.delete({ model: item });
+        return this.delete({ model: item, withProject: true });
       });
       await Promise.all(delItems);
     }
+
+
+  }
+
+  async uploadProjectImage({ blob }) {
+    let blob_id = this.context.project[blob.dest];
+    let newImages = await this.uploadImage({ blob });
+    let result = {
+      id: uuidv4(),
+      blob_id: newImages.blob_id,
+      blob_thumbmail_id: newImages.blob_id,
+      blob_min_id: newImages.blob_id,
+      user_id: null,
+      item_id: null,
+      order: 0,
+      status: 1,
+      category_id: null
+    };
+    this.context.project[blob.dest] = result.id
+    await this.unitOfWorkDI.blobRepository.insert({ model: result, withProject: true });
+    await this.unitOfWorkDI.projectRepository.update({ model: this.context.project, withProject: false })
+
+    return await this.delete({ model: { id: blob_id }, withProject: true });
 
 
   }

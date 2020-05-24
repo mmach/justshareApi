@@ -96,7 +96,6 @@ export default class Item extends Model {
         where: { item_id: item.id },
         transaction: options.transaction,
         individualHooks: true
-
       })
 
      
@@ -126,16 +125,7 @@ export default class Item extends Model {
 
   }
   static associate(models) {
-    /*  Item.belongsToMany(models.Category, {
-        through: {
-          model: models.ItemCategory,
-          targetKey: "id",
-          foreignKey: "category_id"
-        },
-        as: "categories",
-        targetKey: "id",
-        foreignKey: "item_id"
-      });*/
+
     Item.belongsTo(models.Category, {
       as: "category",
       targetKey: "id",
@@ -167,37 +157,6 @@ export default class Item extends Model {
       targetKey: 'id',
       foreignKey: "item_id"
     });
-    //  Item.belongsTo(models.User);
-    // Item.hasMany(models.ItemCategory)
-    //  Blob.belongsTo(models.User);
+   
   }
 }
-
-/*
-
-
-module.exports = (sequelize, DataTypes) => {
-  var Item = sequelize.define('Item', {
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    description: {
-      type: DataTypes.STRING(1024),
-      allowNull: false,
-    },
-    user_id: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    clobSearch: DataTypes.TEXT,
-    clobSearch_pl: DataTypes.TEXT,
-    clobSearch_us: DataTypes.TEXT
-  }, {underscored: true});
-  Item.associate = function(models) {
-    Item.belongsTo(models.User);
-    Item.hasMany(models.ItemCategory)
-    // associations can be defined here
-  };
-  return Item;
-};*/

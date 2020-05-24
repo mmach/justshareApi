@@ -3,10 +3,9 @@ import LogFileInfrastructure from '../../Architecture/Infrastructure/logFileInfr
 import ItemService from '../../Services/itemService.js';
 import ElasticSearchService from '../../Services/elasticSearchService.js';
 import BlobService from '../../Services/blobService.js';
-import { BlobBase64DTO, SearchItemDTO } from 'justshare-shared';
+import { BlobBase64DTO, SearchItemDTO,ItemDTO } from 'justshare-shared';
 import CategoryOptionService from '../../Services/categoryOptionService.js';
 import CategoryService from '../../Services/categoryService.js';
-import ItemDTO from '../../Shared_2/DTO/Item/ItemDTO.js';
 
 
 export default class GetItemByIdQuery extends BaseQuery {

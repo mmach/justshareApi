@@ -149,7 +149,7 @@ import GetProjectRolesQuery from "./Query/Roles/getProjectRolesQuery.js";
 import GetRolesQuery from "./Query/Roles/getRolesQuery.js";
 import GetUserTypesQuery from "./Query/User/getUserTypesQuery.js";
 import ActionService from "./Services/actionService.js";
-import ActionPrivilegesService from "./Services/ActionPrivilegesService.js";
+import ActionPrivilegesService from "./Services/actionPrivilegesService.js";
 import ActionProjectService from "./Services/actionProjectService.js";
 import PrivilegeProjectService from "./Services/privilegeProjectService.js";
 import PrivilegeService from "./Services/privilegeService.js";

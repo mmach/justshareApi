@@ -81,7 +81,7 @@
     "nodemailer-sendgrid-transport": "^0.2.0",
     "nodemailer-smtp-transport": "^2.7.4",
     "nodemon": "^1.18.4",
-    "npm": "^5.2.0",
+    "npm": "^6.13.4",
     "query-string": "^6.8.3",
     "sendmail": "^1.6.1",
     "sequelize": "^4.39.0",

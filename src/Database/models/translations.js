@@ -35,7 +35,12 @@ export default class Translations extends Model {
         fr: DataTypes.TEXT,
         es: DataTypes.TEXT,
         ru: DataTypes.TEXT,
-        project_id:DataTypes.UUID
+        project_id:DataTypes.UUID,
+        token:DataTypes.STRING,
+        respStatus:DataTypes.STRING,
+        type:DataTypes.STRING
+
+
       },
       { sequelize }
     );

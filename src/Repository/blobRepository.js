@@ -42,6 +42,100 @@ export default class BlobRepository extends BaseRepository {
     );
 
   }
+
+  getProjectsItemsStorage({ model, transaction }) {
+    return this.entityDAO.findAll({
+      where: {
+        project_id: this.context.project.id,
+        item_id :this.sequelizeDI.sequelize.literal(`item_id IS NOT NULL`),
+       
+        category_id: null
+      },
+      include: [
+        {
+          model: this.sequelizeDI.BlobMapper,
+          as: "blob_item",
+          required: true
+        },
+        {
+          model: this.sequelizeDI.BlobMapper,
+          as: "blob_min",
+          required: true
+        }
+      ],
+      transaction: this.getTran({ transaction })
+    })
+  }
+  
+  getProjectsCategoriesStorage({ model, transaction }) {
+    return this.entityDAO.findAll({
+      where: {
+        project_id: this.context.project.id,
+        category_id :this.sequelizeDI.sequelize.literal(`category_id IS NOT NULL`),
+       
+      },
+      include: [
+        {
+          model: this.sequelizeDI.BlobMapper,
+          as: "blob_item",
+          required: true
+        },
+        {
+          model: this.sequelizeDI.BlobMapper,
+          as: "blob_min",
+          required: true
+        }
+      ],
+      transaction: this.getTran({ transaction })
+    })
+  }
+  getProjectsUsersStorage({ model, transaction }) {
+    return this.entityDAO.findAll({
+      where: {
+        project_id: this.context.project.id,
+        user_id :this.sequelizeDI.sequelize.literal(`user_id IS NOT NULL`),
+        item_id: null,
+        category_id: null
+      },
+      include: [
+        {
+          model: this.sequelizeDI.BlobMapper,
+          as: "blob_item",
+          required: true
+        },
+        {
+          model: this.sequelizeDI.BlobMapper,
+          as: "blob_min",
+          required: true
+        }
+      ],
+      transaction: this.getTran({ transaction })
+    })
+  }
+
+  getProjectsStorage({ model, transaction }) {
+    return this.entityDAO.findAll({
+      where: {
+        project_id: this.context.project.id,
+        item_id: null,
+        user_id: null,
+        category_id: null
+      },
+      include: [
+        {
+          model: this.sequelizeDI.BlobMapper,
+          as: "blob_item",
+          required: true
+        },
+        {
+          model: this.sequelizeDI.BlobMapper,
+          as: "blob_min",
+          required: true
+        }
+      ],
+      transaction: this.getTran({ transaction })
+    })
+  }
   insertFile({ id, path, name, transaction }) {
     var blob = fs.readFileSync(path);
     return this.sequelizeDI.sequelize.query(
@@ -155,7 +249,7 @@ export default class BlobRepository extends BaseRepository {
   }) {
     return this.entityDAO.findAll(
       {
-     
+
         where: { category_id: this.toStr(category_id) },
         transaction: this.getTran({ transaction })
       }

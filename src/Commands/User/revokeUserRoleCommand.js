@@ -21,7 +21,7 @@ export default class RevokeUserRoleCommand extends BaseCommand {
    */
   constructor({
     logFileInfrastructureDI,
-    userTypesRolesServiceDI,
+    userRolesServiceDI,
     authInfrastructureDI,
     projectInfrastructureDI
   }) {
@@ -30,7 +30,7 @@ export default class RevokeUserRoleCommand extends BaseCommand {
       authInfrastructureDI,
       projectInfrastructureDI
     });
-    this.userTypesRolesServiceDI = userTypesRolesServiceDI;
+    this.userRolesServiceDI = userRolesServiceDI;
   }
   init(dto) {
     this.model = Object.assign(new UserRolesDTO(), dto);

@@ -157,7 +157,7 @@ export default class CategoryOptionsRepository extends BaseRepository {
           required: false,
           include: [
             {
-              model: this.sequelizeDI.Category,
+              model: this.sequelizeDI.V_Category,
               as: "category",
               where: { project_id: this.context.project.id }
 

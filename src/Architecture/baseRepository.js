@@ -81,6 +81,18 @@ export default class BaseRepository {
       { transaction: this.getTran({ transaction }) }
     );
   }
+  // @ts-ignore
+  getByProject({ transaction }) {
+    let db = this.entityDAO;
+    let where = {}
+    where.project_id = this.context.project.id
+
+
+    return db.findAll(
+      { where: where },
+      { transaction: this.getTran({ transaction }) }
+    );
+  }
 
   /**
    *
@@ -147,7 +159,7 @@ export default class BaseRepository {
     return this.entityDAO.update(model, {
       where: where,
       transaction: this.getTran({ transaction }),
-   
+
       individualHooks: true
     });
   }

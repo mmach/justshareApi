@@ -15,7 +15,7 @@ module.exports = {
         REFERENCES [dbo].[Categories] ([id]) 
 
         ALTER TABLE [dbo].[CategoryActions]  WITH CHECK ADD  CONSTRAINT [FK_CategoryActions_ActionsProject] FOREIGN KEY([actions_project_id])
-        REFERENCES [dbo].[Categories] ([id]) 
+        REFERENCES [dbo].[ActionsProjects] ([id]) 
         `
 
 

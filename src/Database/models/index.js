@@ -45,6 +45,12 @@ import UserTypeRoles from "./userTypeRoles.js";
 import Dimensions from "./dimensions.js";
 import DimensionsProject from './dimensionsProject.js'
 import V_Project from "./v_project.js";
+import MailParts from "./mailParts";
+import MailSenders from "./mailSenders";
+import MailTypes from "./mailTypes";
+import MailTypesProjects from "./mailTypesProject";
+import Seos from "./seos";
+import V_Category from "./v_category";
 
 
 
@@ -117,10 +123,16 @@ let models = {
   UserTypeRoles: UserTypeRoles.init(sequelize, Sequelize),
   DimensionsProject: DimensionsProject.init(sequelize, Sequelize),
   Dimensions: Dimensions.init(sequelize, Sequelize),
-  V_Project: V_Project.init(sequelize, Sequelize)
-
-
+  V_Project: V_Project.init(sequelize, Sequelize),
+  MailParts: MailParts.init(sequelize, Sequelize),
+  MailSenders: MailSenders.init(sequelize, Sequelize),
+  MailTypes: MailTypes.init(sequelize, Sequelize),
+  MailTypesProjects: MailTypesProjects.init(sequelize, Sequelize),
+  Seos: Seos.init(sequelize, Sequelize),
+  V_Category: V_Category.init(sequelize, Sequelize)
 };
+
+
 Object.keys(models).forEach(modelName => {
   if (models[modelName].associate) {
     models[modelName].associate(models);

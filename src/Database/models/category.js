@@ -28,26 +28,29 @@ export default class Category extends Model {
           defaultValue: sequelize.UUIDV4
 
         },
-        category: {
-          type: DataTypes.STRING,
-          allowNull: false,
-        },
-        category_pl: DataTypes.STRING,
-        category_us: DataTypes.STRING,
-        category_de: DataTypes.STRING,
-        category_ru: DataTypes.STRING,
-        category_fr: DataTypes.STRING,
-        category_es: DataTypes.STRING,
-        category_no: DataTypes.STRING,
-        category_zh_cn: DataTypes.STRING,
+        /*category: {
+         type: DataTypes.STRING,
+         allowNull: false,
+       },
+      category_pl: DataTypes.STRING,
+       category_us: DataTypes.STRING,
+       category_de: DataTypes.STRING,
+       category_ru: DataTypes.STRING,
+       category_fr: DataTypes.STRING,
+       category_es: DataTypes.STRING,
+       category_no: DataTypes.STRING,
+       category_zh_cn: DataTypes.STRING,*/
         status: DataTypes.INTEGER,
         forThing: DataTypes.INTEGER,
         forSell: DataTypes.INTEGER,
         forEvent: DataTypes.INTEGER,
-       // icon: DataTypes.STRING,
+        // icon: DataTypes.STRING,
         expired_day: DataTypes.INTEGER,
         project_id: DataTypes.UUID,
-        blob_id: DataTypes.UUID
+        blob_id: DataTypes.UUID,
+        color: DataTypes.STRING,
+        translation_id: DataTypes.UUID
+
 
 
 
@@ -104,12 +107,19 @@ export default class Category extends Model {
       })
       );
     })
+    Category.afterDestroy(async (item, options) => {
+      await models.Translations.destroy({
+        where: { id: item.translation_id },
+        transaction: options.transaction,
+        individualHooks: true
 
+      })
+    })
 
     Category.beforeDestroy(async (item, options) => {
 
       console.log('beforeDestroy')
-    
+
 
       await models.CategoryHierarchy.destroy({
         where: { category_parent_id: item.id },
@@ -119,7 +129,7 @@ export default class Category extends Model {
       })
 
       await models.CategoryHierarchy.destroy({
-        where: { category_child_id:item.id },
+        where: { category_child_id: item.id },
         transaction: options.transaction,
         individualHooks: true
 
@@ -136,12 +146,12 @@ export default class Category extends Model {
         individualHooks: true,
       })
 
-        await models.Blob.destroy({
-          where: { category_id: item.id  },
-          transaction: options.transaction,
-          individualHooks: true,
-        })
-    
+      await models.Blob.destroy({
+        where: { category_id: item.id },
+        transaction: options.transaction,
+        individualHooks: true,
+      })
+
     })
   }
 
@@ -162,6 +172,9 @@ export default class Category extends Model {
       targetKey: 'id',
       foreignKey: "category_child_id"
     });
+    
+    Category.belongsTo(models.Translations, { as: "translation", targetKey: 'id', foreignKey: "translation_id" });
+
   }
 }
 

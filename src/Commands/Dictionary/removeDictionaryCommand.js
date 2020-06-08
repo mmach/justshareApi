@@ -1,35 +1,22 @@
 import BaseCommand from "../../Architecture/baseCommand.js";
-import {DictionaryDTO} from "justshare-shared";
+import { DictionaryDTO } from "justshare-shared";
 
 ("use strict");
 
 
 
 export default class RemoveDictionaryCommand extends BaseCommand {
-  constructor({
-    logFileInfrastructureDI,
-    //validationInfrastructureDI,
-    authInfrastructureDI,
-    dictionaryDI
-  }) {
-    super({
-      logFileInfrastructureDI,
-    //  validationInfrastructureDI,
-      authInfrastructureDI,
-      dictionaryDI
-    });
-
-  }
+  constructor({ logFileInfrastructureDI,  authInfrastructureDI, projectInfrastructureDI, translationServiceDI }) {
+    super({ logFileInfrastructureDI,  projectInfrastructureDI, authInfrastructureDI });
+    this.translationServiceDI = translationServiceDI;
+  };
   init(dto) {
     this.model = Object.assign(new DictionaryDTO(), dto);
   }
-  get validation() {
-  //  return [()=>{return this.checkDTO.bind(this)()}];
-  }
-
-
   async action() {
-    //   throw this.serverExceptionDI.throw({ code: 'CANNOT_REMOVE', type: Enums.CODE.ERROR_GLOBAL });
-    this.dictionaryDI.remove(this.model.code, this.model.type);
+
+    this.translationServiceDI.setContext(this.context).delete({ model: this.model, withProject: true })
+    //this.dictionaryDI.set(this.model.code, this.model.type, this.model);
+
   }
 }

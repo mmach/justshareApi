@@ -34,6 +34,11 @@ import LanguageProjectRepository from "./Repository/languageProjectRepository.js
 import LanguageRepository from "./Repository/languageRepository.js";
 import DimensionsRepository from "./Repository/dimensionsRepository.js";
 import DimensionsProjectRepository from "./Repository/dimensionsProjectRepository.js";
+import MailTypesRepository from "./Repository/mailTypesRepository.js";
+import MailPartsRepository from "./Repository/mailPartsRepository.js";
+import MailTypesProjectRepository from "./Repository/mailTypesProjectRepository.js";
+import MailSendersRepository from "./Repository/mailSendersRepository.js";
+import SeoRepository from "./Repository/seoRepository.js";
 
 
 
@@ -87,8 +92,13 @@ export default class UnitOfWork extends BaseUnitOfWork {
         languageRepositoryDI,
         languageProjectRepositoryDI,
         dimensionsProjectRepositoryDI,
-        dimensionsRepositoryDI
-     }) {
+        dimensionsRepositoryDI,
+        mailTypesRepositoryDI,
+        mailPartsRepositoryDI,
+        mailTypesProjectRepositoryDI,
+        mailSendersRepositoryDI,
+        seoRepositoryDI
+    }) {
         super()
 
         this.transaction = null;
@@ -124,11 +134,63 @@ export default class UnitOfWork extends BaseUnitOfWork {
             languageRepositoryDI,
             languageProjectRepositoryDI,
             dimensionsRepositoryDI,
-            dimensionsProjectRepositoryDI
+            dimensionsProjectRepositoryDI,
+            mailTypesRepositoryDI,
+            mailPartsRepositoryDI,
+            mailTypesProjectRepositoryDI,
+            mailSendersRepositoryDI,
+            seoRepositoryDI
         }
     };
 
 
+
+    /**
+        * 
+        * @return {SeoRepository}
+        * @readonly
+        * @memberof UnitOfWork
+        */
+    get seoRepository() {
+        return this.repositories.seoRepositoryDI;
+    }
+    /**
+     * 
+     * @return {MailSendersRepository}
+     * @readonly
+     * @memberof UnitOfWork
+     */
+    get mailSendersRepository() {
+        return this.repositories.mailSendersRepositoryDI;
+    }
+    /**
+     * 
+     * @return {MailTypesProjectRepository}
+     * @readonly
+     * @memberof UnitOfWork
+     */
+    get mailTypesProjectRepository() {
+        return this.repositories.mailTypesProjectRepositoryDI;
+    }
+    /**
+     * 
+     * @return {MailPartsRepository}
+     * @readonly
+     * @memberof UnitOfWork
+     */
+    get mailPartsRepository() {
+        return this.repositories.mailPartsRepositoryDI;
+    }
+
+    /**
+     * 
+     * @return {MailTypesRepository}
+     * @readonly
+     * @memberof UnitOfWork
+     */
+    get mailTypesRepository() {
+        return this.repositories.mailTypesRepositoryDI;
+    }
     /**
      * 
      * @return {DimensionsProjectRepository}

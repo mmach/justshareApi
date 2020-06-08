@@ -142,7 +142,7 @@ import GetActionsQuery from "./Query/Actions/getActionsQuery.js";
 import GetProjectActionsQuery from "./Query/Actions/getProjectActionsQuery.js";
 import GetLanguagesQuery from "./Query/Language/getLanguagesQuery.js";
 import GetProjectLanguagesQuery from "./Query/Language/getProjectLanguagesQuery.js";
-//import TranslateQuery from "./Query/Common/translateQuery.js";
+import MjmlCompileQuery from "./Query/Common/mjmlCompileQuery.js";
 import GetPrivilegesQuery from "./Query/Privileges/getPrivilegesQuery.js";
 import GetProjectPrivilegesQuery from "./Query/Privileges/getProjectPrivilegesQuery.js";
 import GetProjectRolesQuery from "./Query/Roles/getProjectRolesQuery.js";
@@ -183,6 +183,36 @@ import UpdateProjectCommand from "./Commands/Projects/updateProjectCommand.js";
 import SetProjectBuildProgressCommand from "./Commands/Projects/setProjectBuildProgressCommand.js";
 import RunBuildCommand from "./Commands/Projects/runBuildCommand.js";
 import UploadBlobProjectCommand from "./Commands/Projects/uploadBlobProjectCommand.js";
+import MailTypesRepository from "./Repository/mailTypesRepository.js";
+import MailTypesService from "./Services/mailTypesService.js";
+import MailSendersService from "./Services/mailSendersService.js";
+import MailSendersRepository from "./Repository/mailSendersRepository.js";
+import MailPartsRepository from "./Repository/mailPartsRepository.js";
+import MailPartsService from "./Services/mailPartsService.js";
+import MailTypesProjectRepository from "./Repository/mailTypesProjectRepository.js";
+import MailTypesProjectService from "./Services/mailTypesProjectService.js";
+import RemoveMailSenderCommand from "./Commands/Mails/RemoveMailSenderCommand.js";
+import RemoveMailTypeCommand from "./Commands/Mails/removeMailTypeCommand.js";
+import RemoveMailTypeProjectCommand from "./Commands/Mails/removeMailTypeProjectCommand.js";
+import RemoveMailPartCommand from "./Commands/Mails/removeMailPartCommand.js";
+import UpsertMailSenderCommand from "./Commands/Mails/upsertMailSenderCommand.js";
+import UpsertMailTypeCommand from "./Commands/Mails/upsertMailTypeCommand.js";
+import UpsertMailTypeProjectCommand from "./Commands/Mails/upsertMailTypeProjectCommand.js";
+import UpsertMailPartCommand from "./Commands/Mails/upsertMailPartCommand.js";
+import GetMailTypeProjectQuery from "./Query/Mails/getMailTypeProjectQuery.js";
+import GetMailTypesQuery from "./Query/Mails/getMailTypesQuery.js";
+import GetMailPartQuery from "./Query/Mails/getMailPartQuery.js";
+import GetMailSendersQuery from "./Query/Mails/getMailSendersQuery.js";
+import GetProjectsStorageQuery from "./Query/Blob/getProjectsStorageQuery.js";
+import UploadBlobToProjectsStorageCommand from "./Commands/Blob/uploadBlobToProjectsStorageCommand.js";
+import SeoService from "./Services/seoService.js";
+import SeoRepository from "./Repository/seoRepository.js";
+import UpsertSeoCommand from "./Commands/Seo/upsertSeoCommand.js";
+import GetSeoQuery from "./Query/Seo/getSeoQuery.js";
+import GetUsersQuery from "./Query/User/getUsersQuery.js";
+import GetCategoryActionsQuery from "./Query/Category/getCategoryActionsQuery.js";
+
+
 
 
 /**
@@ -251,8 +281,23 @@ let exporter = {
   dimensionsProjectRepositoryDI: asClass(DimensionsProjectRepository),
   dimensionsRepositoryDI: asClass(DimensionsRepository),
   dimensionsProjectServiceDI: asClass(DimensionsProjectService),
-  dimensionsServiceDI: asClass(DimensionsService)
+  dimensionsServiceDI: asClass(DimensionsService),
+  mailTypesServiceDI: asClass(MailTypesService),
+  mailTypesRepositoryDI: asClass(MailTypesRepository),
+  mailSendersServiceDI: asClass(MailSendersService),
+  mailSendersRepositoryDI: asClass(MailSendersRepository),
+  mailPartsRepositoryDI: asClass(MailPartsRepository),
+  mailPartsServiceDI: asClass(MailPartsService),
+  mailTypesProjectRepositoryDI: asClass(MailTypesProjectRepository),
+  mailTypesProjectServiceDI: asClass(MailTypesProjectService),
+  seoServiceDI: asClass(SeoService),
+  seoRepositoryDI: asClass(SeoRepository),
+
+
 };
+
+
+
 exporter[CommandList.Dictionary.ADD_DICTIONARY] = asClass(
   AddToDictionaryCommand
 );
@@ -260,6 +305,33 @@ exporter[QueryList.Dictionary.GET_DICTIONARY] = asClass(GetDictionariesQuery);
 exporter[CommandList.Dictionary.REMOVE_DICTIONARY] = asClass(
   RemoveDictionaryCommand
 );
+////////////////////////COMMON///////////////////////////////////////////
+exporter[QueryList.Common.MJML_COMPILE] = asClass(MjmlCompileQuery);
+
+////////////////////////SEO///////////////////////////////////////////
+
+exporter[QueryList.Seo.GET_SEO] = asClass(GetSeoQuery);
+exporter[CommandList.Seo.UPSERT_SEO] = asClass(UpsertSeoCommand);
+
+//////////////////////MAILS/////////////////////////////////////////////
+exporter[CommandList.Mail.DELETE_MAIL_SENDER] = asClass(RemoveMailSenderCommand);
+exporter[CommandList.Mail.DELETE_MAIL_TYPE] = asClass(RemoveMailTypeCommand);
+exporter[CommandList.Mail.DELETE_MAIL_TYPE_PROJECT] = asClass(RemoveMailTypeProjectCommand);
+exporter[CommandList.Mail.DELETE_MAIL_PART] = asClass(RemoveMailPartCommand);
+exporter[CommandList.Mail.UPSERT_MAIL_SENDER] = asClass(UpsertMailSenderCommand);
+exporter[CommandList.Mail.UPSERTE_MAIL_TYPE] = asClass(UpsertMailTypeCommand);
+exporter[CommandList.Mail.UPSERT_MAIL_TYPE_PROJECT] = asClass(UpsertMailTypeProjectCommand);
+exporter[CommandList.Mail.UPSERT_MAIL_PART] = asClass(UpsertMailPartCommand);
+
+
+exporter[QueryList.Mail.GET_MAIL_TYPE_PROJECT] = asClass(GetMailTypeProjectQuery);
+exporter[QueryList.Mail.GET_MAIL_SENDER] = asClass(GetMailSendersQuery);
+exporter[QueryList.Mail.GET_MAIL_TYPE] = asClass(GetMailTypesQuery);
+exporter[QueryList.Mail.GET_MAIL_PART] = asClass(GetMailPartQuery);
+
+
+
+
 ///////////////////////DIMENSIONS////////////////////////////////////////
 exporter[CommandList.Dimensions.DELETE_DIM_GLOBALLY] = asClass(DeleteDimensionCommand);
 exporter[CommandList.Dimensions.DELETE_DIM] = asClass(DeleteDimensionProjectCommand);
@@ -345,6 +417,8 @@ exporter[QueryList.User.LOG_IN_BY_REFRESH_TOKEN] = asClass(
 exporter[QueryList.User.LOGIN_BY_EXTERNAL] = asClass(LogInByExternalQuery)
 exporter[QueryList.User.GET_REFRESH_TOKEN] = asClass(GetRefreshTokenQuery);
 exporter[QueryList.User.GET_USER_TYPES] = asClass(GetUserTypesQuery);
+exporter[QueryList.User.GET_ALL_USERS] = asClass(GetUsersQuery);
+
 
 ////////////////////////////////Category/////////////////////////////////////////
 exporter[CommandList.Category.ADD_CATEGORY] = asClass(InsertCategoryCommand);
@@ -356,8 +430,12 @@ exporter[QueryList.Category.GET_CATEGORIES] = asClass(GetCategoryQuery);
 exporter[QueryList.Category.GET_CATEGORIES_HIERARCHY] = asClass(
   GetCategoryTreeQuery
 );
-exporter[QueryList.Category.INSERT_CATEGORY_ACTION] = asClass(InsertCategoryActionCommand);
-exporter[QueryList.Category.REMOVE_CATEGORY_ACTION] = asClass(RemoveCategoryActionCommand);
+exporter[QueryList.Category.GET_CATEGORY_ACTIONS] = asClass(
+  GetCategoryActionsQuery
+);
+exporter[CommandList.Category.INSERT_CATEGORY_ACTION] = asClass(InsertCategoryActionCommand);
+exporter[CommandList.Category.REMOVE_CATEGORY_ACTION] = asClass(RemoveCategoryActionCommand);
+
 
 
 
@@ -387,12 +465,18 @@ exporter[CommandList.Category_Options.DELETE_CATEGORY_OPTIONS_TEMPLATE] = asClas
 exporter[CommandList.Blob.UPLOAD_IMAGE] = asClass(UploadImageCommand);
 exporter[CommandList.Blob.REMOVE_BLOB] = asClass(RemoveBlobCommand);
 exporter[CommandList.Blob.VERIFY_IMAGE] = asClass(VerifyImageCommand);
+exporter[CommandList.Blob.UPLOAD_BLOB_TO_PROJECT] = asClass(UploadBlobToProjectsStorageCommand);
+
 
 exporter[QueryList.Blob.GET_BLOBS_BY_GUIDS] = asClass(
   GetBlobsBase64ByGuidsQuery
 );
 exporter[QueryList.Blob.GET_USER_IMAGES] = asClass(GetUserImagesQuery);
 exporter[QueryList.Blob.GET_UNVERIFIED] = asClass(GetUnverifiedBlobsQuery);
+exporter[QueryList.Blob.GET_PROJECT_STORAGE] = asClass(GetProjectsStorageQuery);
+
+
+
 ///////////////////////ITEM//////////////////////////////////////
 exporter[CommandList.Item.NEW_ITEM] = asClass(CreateItemCommand);
 exporter[CommandList.Item.EDIT_ITEM] = asClass(EditItemCommand);

@@ -16,16 +16,40 @@ export default class CategoryRepository extends BaseRepository {
    */
   constructor({ sequelizeDI }) {
     super(sequelizeDI.Category);
+    this.CategoryVDB = sequelizeDI.V_Category;
+    this.CategoryActionsDB = sequelizeDI.CategoryActions;
+
     this.sequelizeDI = sequelizeDI;
+  }
+
+
+  deleteAction({ model, transaction }) {
+    let where = { id: this.toStr(model.id) }
+
+    return this.CategoryActionsDB.destroy({
+      where: where,
+      transaction: this.getTran({ transaction })
+    });
+  }
+
+  insertAction({ model, transaction }) {
+    let item = model;
+
+    return this.CategoryActionsDB.create(item, {
+      transaction: this.getTran({ transaction }),
+      returning: true,
+      individualHooks: true,
+      plain: true
+    });
   }
   getAllCategoriesFlat({ model, transaction }) {
     return this.sequelizeDI.sequelize.query(
       `
       SELECT
-       Categories.id  as category_child_id,
+       V_Categories.id  as category_child_id,
         category_parent_id,category as title,
-        Categories.*
-      FROM Categories LEFT  JOIN CategoryHierarchies ON Categories.id = CategoryHierarchies.category_child_id
+        V_Categories.*
+      FROM V_Categories LEFT  JOIN CategoryHierarchies ON V_Categories.id = CategoryHierarchies.category_child_id
       WHERE status=ISNULL(NULLIF(:status,0),status)
       AND project_id=:project_id
        order by category  
@@ -60,6 +84,16 @@ export default class CategoryRepository extends BaseRepository {
     );
 
   }
+
+  getAllActions({ ids, transaction }) {
+    return this.CategoryActionsDB.findAll({
+      where: {
+        category_id: ids
+      },
+      transaction: this.getTran({ transaction })
+
+    })
+  }
   /**
    *
    *
@@ -82,11 +116,11 @@ export default class CategoryRepository extends BaseRepository {
       }
 
     }
-    return this.entityDAO.findAll({
+    return this.CategoryVDB.findAll({
       where: where,
       include: [
         {
-          model: this.sequelizeDI.Category,
+          model: this.sequelizeDI.V_Category,
           as: "category_children"
           /* include: [{
              model: this.sequelizeDI.Category,
@@ -99,12 +133,16 @@ export default class CategoryRepository extends BaseRepository {
           as: "icon_blob"
         },
         {
-          model: this.sequelizeDI.Category,
+          model: this.sequelizeDI.Translations,
+          as: "translation"
+        },
+        {
+          model: this.sequelizeDI.V_Category,
           as: "category_parent",
           where: parentWhere,
           include: [
             {
-              model: this.sequelizeDI.Category,
+              model: this.sequelizeDI.V_Category,
               as: "category_parent",
               required: false,
               include: [
@@ -113,13 +151,21 @@ export default class CategoryRepository extends BaseRepository {
                   model: this.sequelizeDI.Blob,
                   as: "icon_blob"
 
-                }
+                },
+                {
+                  model: this.sequelizeDI.Translations,
+                  as: "translation"
+                },
               ]
             },
             {
               model: this.sequelizeDI.Blob,
               as: "icon_blob"
-            }
+            },
+            {
+              model: this.sequelizeDI.Translations,
+              as: "translation"
+            },
 
           ]
           /* include: [{
@@ -168,7 +214,7 @@ export default class CategoryRepository extends BaseRepository {
         UNION ALL
         SELECT :id
         )
-          SELECT  id,category,category_pl,category_us FROM union_recus JOIN Categories ON Id = category_id
+          SELECT  id,category,category_pl,category_us FROM union_recus JOIN V_Categories ON Id = category_id
           GROUP BY id,category,category_pl,category_us
         
     `,
@@ -213,7 +259,7 @@ export default class CategoryRepository extends BaseRepository {
           ,[category_no]
           ,[category_zh_cn]
           ,[expired_day]
-          FROM union_recus JOIN Categories ON Id = category_id
+          FROM union_recus JOIN V_Categories ON Id = category_id
           WHERE ${!this.context.project.allowForAll ? 'project_id=:project_id' : '1=1'}
           GROUP BY id,category,category_pl,category_us,  [category_de]
           ,[category_ru]

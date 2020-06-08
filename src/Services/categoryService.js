@@ -29,6 +29,21 @@ export default class CategoryService extends BaseService {
       this.unitOfWorkDI.categoryRepository.getCategoryTree({ ids: [id], parent: parent })
     );
   }
+  async getCategoryActions({ category_id }) {
+    console.log(category_id)
+    let categories = await this.getCategoriesParents({ ids: category_id })
+    let ids = categories.map(item => { return item.id });
+    return await this.unitOfWorkDI.categoryRepository.getAllActions({ ids: ids })
+  }
+  async insertAction({ model }) {
+    return await this.toJsonParse(
+      this.unitOfWorkDI.categoryRepository.insertAction({ model: model })
+    );
+  }
+  async deleteAction({ model }) {
+    return await this.unitOfWorkDI.categoryRepository.deleteAction({ model: model })
+
+  }
 
   /**
    *
@@ -123,8 +138,8 @@ export default class CategoryService extends BaseService {
       parent = await this.getById({ id: idParent, withProject: true });
     }
     await this.setAsVerified({ id: id, status: parent.status }),
-    await this.unitOfWorkDI.categoryHierarchyRepository.removeParent({ id }),
-    await this.unitOfWorkDI.categoryHierarchyRepository.insert({ model: { category_child_id: id, category_parent_id: idParent } })
+      await this.unitOfWorkDI.categoryHierarchyRepository.removeParent({ id }),
+      await this.unitOfWorkDI.categoryHierarchyRepository.insert({ model: { category_child_id: id, category_parent_id: idParent } })
 
 
 

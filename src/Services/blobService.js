@@ -88,6 +88,15 @@ export default class BlobService extends BaseService {
     super({ unitOfWorkDI, repository: 'blobRepository' });
   }
 
+  async getProjectsStorage({ model }) {
+    switch (model.type) {
+      case 'ITEMS': return await this.unitOfWorkDI.blobRepository.getProjectsItemsStorage({ model })
+      case 'PROJECT': return await this.unitOfWorkDI.blobRepository.getProjectsStorage({ model })
+      case 'USERS': return await this.unitOfWorkDI.blobRepository.getProjectsUsersStorage({ model })
+      case 'CATEGORIES': return await this.unitOfWorkDI.blobRepository.getProjectsCategoriesStorage({ model })
+
+    }
+  }
   /**
    * Save blob to file , create thumbmail save into database
    *
@@ -224,6 +233,21 @@ export default class BlobService extends BaseService {
    */
   async uploadUserImage({ blob }) {
     return await this.uploadImageAndSave({ blob, itemId: null })
+
+  }
+
+  async uploadUserProject({ blob }) {
+    let newImages = await this.uploadImage({ blob });
+    let result = {
+      blob_id: newImages.blob_id,
+      blob_thumbmail_id: newImages.blob_thumb_id,
+      blob_min_id: newImages.blob_min_id,
+      user_id: null,
+      item_id: null,
+      order: null,
+      status: 1
+    };
+    return await this.unitOfWorkDI.blobRepository.insert({ model: result, withProject: true });
 
   }
 

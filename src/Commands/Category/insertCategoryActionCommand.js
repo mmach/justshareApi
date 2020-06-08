@@ -1,6 +1,6 @@
 // @ts-nocheck
 import BaseCommand from "../../Architecture/baseCommand.js";
-import { CategoryDTO } from "justshare-shared";
+import { CategoryActionsDTO } from "justshare-shared";
 import LogFileInfrastructure from "../../Architecture/Infrastructure/logFileInfrastructure.js";
 import CategoryService from "../../Services/categoryService.js";
 import DbTransactionInfrastucture from "../../Architecture/Infrastructure/dbTransactionInfrastucture.js";
@@ -29,19 +29,13 @@ export default class InsertCategoryActionCommand extends BaseCommand {
             logFileInfrastructureDI, dbTransactionInfrastuctureDI, authInfrastructureDI, projectInfrastructureDI
         });
         this.categoryServiceDI = categoryServiceDI
-        this.blobServiceDI = blobServiceDI;
 
     };
     init(dto) {
-        this.model = Object.assign(new CategoryDTO(), dto);
+        this.model = Object.assign(new CategoryActionsDTO(), dto);
     }
     async action() {
-        console.log(this.model);
-        await this.categoryServiceDI.setContext(this.context).newCategory({ model: this.model });
-        if (this.model.blob) {
-          
-
-            await this.blobServiceDI.setContext(this.context).uploadCategoriesIconAndSave({ category_id: this.model.id, blob: this.model.blob })
-        }
+        await this.categoryServiceDI.setContext(this.context).insertAction({ model: this.model });
+      
     }
 };

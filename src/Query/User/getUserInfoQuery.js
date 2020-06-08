@@ -24,7 +24,7 @@ export default class GetUserInfoQuery extends BaseQuery {
 
         let user_Id = this.model.id !=''? this.model.id : this.context.user.id;
         let result = await this.userServiceDI.setContext(this.context).getUserInfo({ user_id: user_Id });
-        if (result.blob_profile != null) {
+        /*if (result.blob_profile != null) {
             let blobsResulst = await this.blobServiceDI.getBlobsBase64ByGuids({
                 ids: [result.blob_profile.blob_thumbmail.id
                 ]
@@ -35,7 +35,7 @@ export default class GetUserInfoQuery extends BaseQuery {
             })[0]
             result.blob_profile.blob_thumbmail = Object.assign(new BlobBase64DTO(), blobBase64);
 
-        }
+        }*/
         return result;
 
 

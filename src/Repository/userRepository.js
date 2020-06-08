@@ -35,6 +35,31 @@ export default class UserRepository extends BaseRepository {
       },
       include: [
         {
+          model: this.sequelizeDI.UserTypes,
+          as: "user_type",
+          required: false
+        },
+        {
+          model: this.sequelizeDI.UserRoles,
+          as: "user_roles",
+          required: true,
+          include: [
+            {
+              model: this.sequelizeDI.RolesProject,
+              as: "roles",
+              required: true,
+              include: [
+                {
+                  model: this.sequelizeDI.Roles,
+                  as: "role_detail",
+                  required: true
+                }]
+            },
+
+
+          ]
+        },
+        {
           model: this.sequelizeDI.Blob,
           as: "blob_profile",
           required: false,
@@ -65,7 +90,7 @@ export default class UserRepository extends BaseRepository {
         email: this.context.user.email
       }
       , include: [
-        
+
         {
           model: this.sequelizeDI.V_Project,
           as: "project",

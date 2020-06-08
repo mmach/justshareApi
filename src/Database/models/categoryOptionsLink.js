@@ -143,7 +143,7 @@ export default class CategoryOptionsLink extends Model {
 
   }
   static associate(models) {
-    CategoryOptionsLink.belongsTo(models.Category, { as: "category", targetKey: 'id', foreignKey: "category_id" });
+    CategoryOptionsLink.belongsTo(models.V_Category, { as: "category", targetKey: 'id', foreignKey: "category_id" });
     CategoryOptionsLink.belongsTo(models.CategoryOption, { as: "catOption", targetKey: 'id', foreignKey: "co_id" });
 
 

@@ -22,17 +22,21 @@ export default class EditCategoryCommand extends BaseCommand {
      * @param  {{logFileInfrastructureDI : LogFileInfrastructure,  categoryServiceDI:CategoryService ,dbTransactionInfrastuctureDI:DbTransactionInfrastucture,authInfrastructureDI:AuthInfrastucture}}
      * @memberof InsertCategoryCommand
      */
-    constructor({ logFileInfrastructureDI, categoryServiceDI, dbTransactionInfrastuctureDI, authInfrastructureDI, projectInfrastructureDI, blobServiceDI }) {
+    constructor({ logFileInfrastructureDI,translationServiceDI, categoryServiceDI, dbTransactionInfrastuctureDI, authInfrastructureDI, projectInfrastructureDI, blobServiceDI }) {
         super({ logFileInfrastructureDI, dbTransactionInfrastuctureDI, authInfrastructureDI, projectInfrastructureDI });
         this.categoryServiceDI = categoryServiceDI;
         this.blobServiceDI = blobServiceDI;
+        this.translationServiceDI = translationServiceDI
 
     };
     init(dto) {
         this.model = Object.assign(new CategoryDTO(), dto);
     }
     async action() {
-        await this.categoryServiceDI.setContext(this.context).update({ model: this.model });
+        await this.categoryServiceDI.setContext(this.context).update({ model: this.model,withProject:true });
+        await   this.translationServiceDI.setContext(this.context).update({ model: this.model.translation,withProject:true });
+       
+       
         if (this.model.blob) {
 
 

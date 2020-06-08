@@ -87,6 +87,18 @@ export default class BaseService {
   async getById({ id, withProject }) {
     return await this.toJsonParse(this.unitOfWorkDI[this.repository].getById({ id, withProject }));
   }
+
+  /**
+   *
+   * @param  {{ id:number }}
+   * @return {Promise<any>}
+   * @memberof BaseService
+   */
+  async getByProject({ id }) {
+    return await this.toJsonParse(this.unitOfWorkDI[this.repository].getByProject({}));
+  }
+
+
   /**
    *
    *

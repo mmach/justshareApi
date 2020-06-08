@@ -191,7 +191,7 @@ import MailPartsRepository from "./Repository/mailPartsRepository.js";
 import MailPartsService from "./Services/mailPartsService.js";
 import MailTypesProjectRepository from "./Repository/mailTypesProjectRepository.js";
 import MailTypesProjectService from "./Services/mailTypesProjectService.js";
-import RemoveMailSenderCommand from "./Commands/Mails/RemoveMailSenderCommand.js";
+import RemoveMailSenderCommand from "./Commands/Mails/removeMailSenderCommand.js";
 import RemoveMailTypeCommand from "./Commands/Mails/removeMailTypeCommand.js";
 import RemoveMailTypeProjectCommand from "./Commands/Mails/removeMailTypeProjectCommand.js";
 import RemoveMailPartCommand from "./Commands/Mails/removeMailPartCommand.js";

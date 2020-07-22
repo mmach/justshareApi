@@ -6,7 +6,8 @@ import SequelizeDB from '../Database/models/index.js';
 import {itemSync} from './consume/item_sync.js'
 
 let amqpFunc = async () => {
-    var connection = amqp.connect([process.env.amqp ? process.env.amqp : CONFIG.MQRABBIT.link]);
+    console.log(process.env.amqp)
+    var connection = amqp.connect([process.env.AMQP ? process.env.AMQP : CONFIG.MQRABBIT.link]);
 
     let obj = await SequelizeDB.Project.findAll();
     // console.log(obj)

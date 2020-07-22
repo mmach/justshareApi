@@ -37,22 +37,22 @@ export default class UserRepository extends BaseRepository {
         {
           model: this.sequelizeDI.UserTypes,
           as: "user_type",
-          required: false
+          //required: false
         },
         {
           model: this.sequelizeDI.UserRoles,
           as: "user_roles",
-          required: true,
+         // required: true,
           include: [
             {
               model: this.sequelizeDI.RolesProject,
               as: "roles",
-              required: true,
+              //required: true,
               include: [
                 {
                   model: this.sequelizeDI.Roles,
                   as: "role_detail",
-                  required: true
+                 // required: true
                 }]
             },
 

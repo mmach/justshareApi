@@ -40,20 +40,19 @@ export default class AuthorizeUserCommand extends BaseCommand {
     });
     if (result != null) {
       let model = {
-        body: {
-          name: result.name,
-          email: result.email,
-          uid: result.uid,
-          href: CONFIG.FRONT_END_URL
-        }
+        name: result.name,
+        email: result.email,
+        uid: result.uid,
+        href: CONFIG.FRONT_END_URL
+
       };
       await this.mailSenderDI.setContext(this.context).mailSend({
-        xslt_file: 'NEW_USER_MAIL_BODY',
-        model,
-        email_to: model.body.email,
-        language: result.language,
-        mail_title: 'NEW_USER_MAIL_TITLE'
+        type: 'NEW_USER_MAIL',
+        model: model,
+        email_to: model.email,
+        language: result.language
       });
+
     }
   }
 }

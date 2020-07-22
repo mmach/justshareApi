@@ -51,8 +51,13 @@ import MailTypes from "./mailTypes";
 import MailTypesProjects from "./mailTypesProject";
 import Seos from "./seos";
 import V_Category from "./v_category";
-
-
+import ItemUserAction from "./itemUserAction";
+import ItemTransactionCategoryOptions from "./itemTransactionCategoryOptions";
+import ItemTransaction from './itemTransaction'
+import Conversation from "./conversation";
+import UserConversation from "./userconversation";
+import ConversationMessages from "./conversationmessages";
+import ConversationMessageMembers from "./conversationmessagesmembers";
 
 var env = process.env.NODE_ENV || "development";
 var config = configJSON[env];
@@ -129,7 +134,14 @@ let models = {
   MailTypes: MailTypes.init(sequelize, Sequelize),
   MailTypesProjects: MailTypesProjects.init(sequelize, Sequelize),
   Seos: Seos.init(sequelize, Sequelize),
-  V_Category: V_Category.init(sequelize, Sequelize)
+  V_Category: V_Category.init(sequelize, Sequelize),
+  ItemUserAction: ItemUserAction.init(sequelize, Sequelize),
+  ItemTransactionCategoryOptions: ItemTransactionCategoryOptions.init(sequelize, Sequelize),
+  ItemTransaction: ItemTransaction.init(sequelize, Sequelize),
+  Conversation: Conversation.init(sequelize, Sequelize),
+  UserConversation: UserConversation.init(sequelize, Sequelize),
+  ConversationMessages: ConversationMessages.init(sequelize, Sequelize),
+  ConversationMessageMembers: ConversationMessageMembers.init(sequelize, Sequelize)
 };
 
 

@@ -42,13 +42,14 @@ export default class ItemService extends BaseService {
   async upsertCategoryOption({ model, item_id }) {
     await this.unitOfWorkDI.itemCategoryOptionRepository.upsert({
       model: {
-        id: model.id,
-        value: model.val,
-        co_id: model.element,
-        co_temp_id: model.cat_opt_id,
+        ...model,
         item_id: item_id,
-        col_id: model.col_id
+        value: model.value? model.value: model.val,
+        co_id: model.element? model.element: model.co_id,
+        co_temp_id: model.cat_opt_id? model.cat_opt_id: model.co_temp_id
       }
+
+
     });
   }
   async deleteTags({ itemId }) {

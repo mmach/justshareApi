@@ -1,24 +1,37 @@
 "use strict";
-import Koa from "koa";
-import KoaRouter from "koa-router";
-import { scopePerRequest, makeInvoker } from "awilix-koa";
-import container from "./awilix.js";
-import koaBodyImport from "koa-body";
-import cors from "koa2-cors";
-import fs from 'fs';
-import path from 'path'
-import serve from 'koa-static';
+import { makeInvoker, scopePerRequest } from "awilix-koa";
 import CircularJSON from 'circular-json';
-import { URL } from "url";
+import fs from 'fs';
+import Koa from "koa";
+import koaBodyImport from "koa-body";
 //import './../Integration/Cron/index.js'
 //import './../Integration/MQReciver/index.js'
 import compress from 'koa-compress';
+import KoaRouter from "koa-router";
+import cors from "koa2-cors";
+import { URL } from "url";
+import container from "./awilix.js";
+import SequelizeDB from "./Database/models/index.js";
+import CONFIG from './config.js';
+import io from 'socket.io-emitter'
+import redis from 'ioredis'
+import { uuid } from '../node_modules/uuidv4/build/lib/uuidv4.js';
+import { amqpFunc } from './Queues/index.js'
+let Redis = redis
+
+global.ioredis = new Redis({ host: process.env.REDIS_HOST || 'redis-13184.c78.eu-west-1-2.ec2.cloud.redislabs.com', port: process.env.REDIS_PORT || 13184, password: process.env.REDIS_PASSWORD || "oERk63TBgqihQWMYHakRnyCQoi0MSni7" })
+global.socket = io(ioredis);
+
+//io({ host: process.env.REDIS_HOST || 'redis-13184.c78.eu-west-1-2.ec2.cloud.redislabs.com', port: process.env.REDIS_PORT || 13184, auth_pass: process.env.REDIS_PASSWORD || "oERk63TBgqihQWMYHakRnyCQoi0MSni7" });
 
 //TO REMOVE IN FUTURE
-console.log(process.env.UPLOAD_PATH)
+
+
+
+amqpFunc()
+
 if (process.env.UPLOAD_PATH) {
   if (!fs.existsSync(process.env.UPLOAD_PATH)) {
-    console.log('CREATE FOLDER');
     fs.mkdirSync(process.env.UPLOAD_PATH);
   }
 }
@@ -122,5 +135,9 @@ router.get("/query", api("queryExecAsync"));
 router.post("/command", koaBody, api("commandExecAsync"));
 app.use(router.routes());
 app.listen(process.env.PORT || 1337);
+
+
+
+// Create a new connection manager
 
 module.exports = cqrsPreprocess;

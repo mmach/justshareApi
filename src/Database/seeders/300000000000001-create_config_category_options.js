@@ -337,6 +337,38 @@ module.exports = {
 
     }]
 
+
+    id = uuidv4();
+    category = {
+      id: id,
+      name: "NOT BETWEEN DATE",
+      type: "NOT_BETWEEN",
+      status: 1,
+      created_at: date,
+      updated_at: date,
+    }
+    template = [{
+      id: uuidv4(),
+      cot_id: id,
+      type: "datetime",
+      status: 1,
+      order: "1",
+      created_at: date,
+      updated_at: date
+
+    }, {
+      id: uuidv4(),
+      cot_id: id,
+      type: "datetime",
+      status: 1,
+      order: "2",
+      created_at: date,
+      updated_at: date
+
+    }]
+
+    await save(queryInterface, category, template);
+
     id = uuidv4();
     category = {
       id: id,
@@ -601,6 +633,46 @@ module.exports = {
       created_at: date,
       updated_at: date
 
+    },
+  {
+      id: uuidv4(),
+      cot_id: id,
+      type: "nvarchar",
+      status: 1,
+      order: "8",
+      created_at: date,
+      updated_at: date
+
+    },
+  {
+      id: uuidv4(),
+      cot_id: id,
+      type: "nvarchar",
+      status: 1,
+      order: "9",
+      created_at: date,
+      updated_at: date
+
+    },
+    {
+      id: uuidv4(),
+      cot_id: id,
+      type: "nvarchar",
+      status: 1,
+      order: "10",
+      created_at: date,
+      updated_at: date
+
+    },
+    {
+      id: uuidv4(),
+      cot_id: id,
+      type: "nvarchar",
+      status: 1,
+      order: "11",
+      created_at: date,
+      updated_at: date
+
     }]
     await save(queryInterface, category, template);
 
@@ -632,9 +704,70 @@ module.exports = {
       updated_at: date
 
     }]
+    await save(queryInterface, category, template);
+
+    id = uuidv4();
+    category = {
+      id: id,
+      name: "SINGLE_DEPENDENCY",
+      type: "SINGLE_DEPENDENCY_FLOAT",
+      status: 1,
+      created_at: date,
+      updated_at: date,
+    }
+    template = [{
+      id: uuidv4(),
+      cot_id: id,
+      type: "float",
+      status: 1,
+      order: "1",
+      created_at: date,
+      updated_at: date
+
+    }, {
+      id: uuidv4(),
+      cot_id: id,
+      type: "nvarchar",
+      status: 1,
+      order: "2",
+      created_at: date,
+      updated_at: date
+
+    }
+    , {
+      id: uuidv4(),
+      cot_id: id,
+      type: "nvarchar",
+      status: 1,
+      order: "3",
+      created_at: date,
+      updated_at: date
+
+    }]
 
     await save(queryInterface, category, template);
 
+    id = uuidv4();
+    category = {
+      id: id,
+      name: "CASE",
+      type: "CASE_NUMBER",
+      status: 1,
+      created_at: date,
+      updated_at: date,
+    }
+    template = [{
+      id: uuidv4(),
+      cot_id: id,
+      type: "long",
+      status: 1,
+      order: "1",
+      created_at: date,
+      updated_at: date
+
+    }]
+
+    await save(queryInterface, category, template);
 
 
 

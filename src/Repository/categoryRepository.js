@@ -128,6 +128,8 @@ export default class CategoryRepository extends BaseRepository {
            }
            ]*/
         },
+       
+      
         {
           model: this.sequelizeDI.Blob,
           as: "icon_blob"

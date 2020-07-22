@@ -11,6 +11,7 @@ import CodeDictionary from "../../Architecture/Dictionary/codeDictionary.js";
 import EMAIL_TEMPLATE from "../../Static/MailsXSLT/index.js"
 import UserValidators from './../../Validators/userValidators.js';
 import { URL } from "url";
+import bcrypt from "bcryptjs";
 
 /**
  *
@@ -50,6 +51,8 @@ export default class InsertProjectCommand extends BaseCommand {
   }
 
   async action() {
+  this.model.salt = bcrypt.getSalt(10)
+
     await this.projectRepositoryDI.setContext(this.context).update({ model: this.model, withProject: false })
   }
 

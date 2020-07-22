@@ -165,6 +165,7 @@ export default class Category extends Model {
     });
 
     Category.belongsTo(models.Blob, { as: "icon_blob", targetKey: 'id', foreignKey: "blob_id" });
+    Category.hasMany(models.CategoryActions, { as: "actions", targetKey: 'id', foreignKey: "category_id" });
 
     Category.belongsToMany(models.Category, {
       through: { model: models.CategoryHierarchy },

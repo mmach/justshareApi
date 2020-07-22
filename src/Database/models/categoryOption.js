@@ -30,7 +30,7 @@ export default class CategoryOption extends Model {
           type: DataTypes.UUID,
           allowNull: true
         },
-     
+
         name: {
           type: DataTypes.STRING,
           allowNull: false
@@ -76,7 +76,7 @@ export default class CategoryOption extends Model {
         },
         is_searchable: {
           type: DataTypes.BOOLEAN,
-        },is_require: {
+        }, is_require: {
           type: DataTypes.BOOLEAN,
         },
         limit_of: {
@@ -86,48 +86,52 @@ export default class CategoryOption extends Model {
           type: DataTypes.BOOLEAN,
           allowNull: true
         },
-        is_on_map:{
+        is_on_map: {
           type: DataTypes.BOOLEAN,
           allowNull: true
         },
-        is_form_hidden:{
+        is_form_hidden: {
           type: DataTypes.BOOLEAN,
           allowNull: true
         },
-        search_label:{
+        search_label: {
           type: DataTypes.STRING,
           allowNull: true
         },
-        search_type:{
+        search_type: {
           type: DataTypes.STRING,
           allowNull: true
         },
-        show_value:{
+        show_value: {
           type: DataTypes.STRING,
           allowNull: true
         },
-        can_above_pin:{
+        can_above_pin: {
           type: DataTypes.BOOLEAN,
           allowNull: true
         },
-        
+
         is_visible_view: {
           type: DataTypes.BOOLEAN,
           allowNull: true
         },
-        project_id:DataTypes.UUID
+        project_id: DataTypes.UUID,
+        dim_id: DataTypes.UUID,
+        order_search: DataTypes.INTEGER,
 
       },
       { sequelize }
     );
   }
+
+
   static associate(models) {
 
     CategoryOption.belongsTo(models.CategoryOptionsType, { as: "cat_opt", targetKey: 'id', foreignKey: "cot_id" });
     CategoryOption.hasMany(models.CategoryOptionsTemplate, { as: "cat_opt_temp", targetKey: 'co_id', foreignKey: "co_id" });
     CategoryOption.hasMany(models.CategoryOptionsLink, { as: "category_link", targetKey: 'co_id', foreignKey: "co_id" });
 
-  
+
     /* Item.belongsToMany(models.Category, {
        through: {
          model: models.ItemCategory,

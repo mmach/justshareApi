@@ -21,6 +21,11 @@ export default class MailTypesProjectRepository extends BaseRepository {
   }
 
   getAll({ model, transaction }) {
+    let typeWhere = {}
+    if (model && model.mailtype) {
+      typeWhere.token = model.mailtype
+    }
+    console.log(typeWhere)
     return this.entityDAO.findAll({
       where:
       {
@@ -30,33 +35,34 @@ export default class MailTypesProjectRepository extends BaseRepository {
         {
           model: this.sequelizeDI.Translations,
           as: "translation"
-        
+
         },
         {
           model: this.sequelizeDI.MailParts,
           as: "body"
-        
+
         }, {
           model: this.sequelizeDI.MailParts,
           as: "template"
-          
+
         },
         {
           model: this.sequelizeDI.MailSenders,
           as: "mailsender",
-         
-           include: [
+
+          include: [
             {
               model: this.sequelizeDI.Translations,
               as: "translation"
-              
+
             },
           ]
         },
         {
           model: this.sequelizeDI.MailTypes,
-          as: "mailtype"
-          
+          as: "mailtype",
+          where: typeWhere
+
         },
       ],
 

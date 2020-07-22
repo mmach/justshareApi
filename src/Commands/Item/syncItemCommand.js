@@ -81,63 +81,6 @@ export default class SyncItemCommand extends BaseCommand {
   }
 
 
-  async elasticClosingFunc() {
-    var today = new Date();
-    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-    var expired = new Date(Date.now() + 120965);
-    var dateExpired = expired.getFullYear() + '-' + (expired.getMonth() + 1) + '-' + expired.getDate();
-    let array = this.model.map(async item => {
-      let clobs = {
-        pl: "",
-        us: "",
-        de: "",
-        ru: "",
-        fr: "",
-        es: "",
-        no: "",
-        zh_cn: ""
-      }
-      clobs = Object.keys(clobs).forEach(clob => {
-        return item["clobSearch_" + clob]
-      });
-      let catOptions = item.itemCategoryOption.map(catValue => {
-
-        return {
-          cat_opt_id: catValue.cat_opt_temp.id,
-          type: catValue.category_link.catOption.cat_opt.type,
-          dataType: catValue.cat_opt_temp.cat_opt_type_template.type,
-          order: catValue.cat_opt_temp.order,
-          cat_opt_temp_id: catValue.co_temp_id,
-          co_id: catValue.cat_opt_temp.co_id,
-          val: catValue.value,
-          conc: catValue.cat_opt_temp.co_id + ";" + String(catValue.value),
-          select: catValue.cat_opt_temp,
-          catOption: catValue.cat_opt_temp
-        }
-      })
-      return await this.elasticSearchServiceDI.setContext(this.context).upsertItemDoc({
-        item_id: item.id,
-        longitude: item.longitude,
-        latitude: item.latitude,
-        user_id: item.user_id,
-        clobs: clobs,
-        title: item.name,
-        description: item.description,
-        catOptions: catOptions,
-        status: item.status,
-        type: item.type,
-        category: item.category_id,
-        tags: item.tags.map((tag) => { return { label: tag.tag } }),
-        categories: item.categories,
-        created_at: item.created_at ? item.created_at : today.toISOString(),
-        expired_at: item.expired_at ? item.expired_at : expired.toISOString(),
-        item: item
-      });
-    });
-    return await Promise.all(array)
-
-  }
-
   async addToQueue() {
     var today = new Date();
     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
@@ -211,8 +154,23 @@ export default class SyncItemCommand extends BaseCommand {
     }));
     // console.log(JSON.stringify(this.model));
     let addToQueue = this.addToQueue.bind(this);
-    const CONN_URL = process.env.AMQP ? process.env.AMQP : CONFIG.MQRABBIT.link;
-    let ch = null;
+
+    let queue = await addToQueue();
+
+    queue.forEach(item => {
+
+
+      global.queueChannel.publish(CONFIG.ITEM_ES_QUEUE, this.context.project.id,
+        item
+        , {
+          contentType: 'application/json', persistent: true, expiration: 20 * 1000, messageId: this.model.id, headers: {
+            Authorization: 'Bearer ' + this.token,
+            ProjectAuthorization: 'Bearer ' + this.projectToken
+          }
+        })
+    })
+
+    /*
     await new Promise((res, rej) => {
       amqp.connect(CONN_URL, function (err, conn) {
         if (err) {
@@ -242,7 +200,7 @@ export default class SyncItemCommand extends BaseCommand {
 
         }, 60000)
       });
-    });
+    });*/
     // this.closingInfrastructureDI.addClosingFunction(
     //  this.elasticClosingFunc.bind(this)
     // )

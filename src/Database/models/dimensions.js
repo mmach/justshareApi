@@ -43,8 +43,15 @@ export default class Dimensions extends Model {
           type: DataTypes.UUID,
           allowNull: true
 
+        },
+        cott_id:{
+          type: DataTypes.UUID,
+          allowNull: true
+
+        },
+        as_cat_ref:{
+          type:DataTypes.BOOLEAN
         }
-      
       },
       { sequelize }
     );

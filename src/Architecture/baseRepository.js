@@ -144,6 +144,22 @@ export default class BaseRepository {
       plain: true
     });
   }
+  bulkInsert({ model, withProject, transaction }) {
+    let item = model;
+    item = item.map(i=>{
+      return {...i,
+          id:i.id?i.id:uuidv4(),
+          project_id:withProject?this.context.project.id:undefined
+      }
+    })
+  
+    return this.entityDAO.bulkCreate(item, {
+      transaction: this.getTran({ transaction }),
+      returning: true,
+      individualHooks: true,
+      plain: true
+    });
+  }
   /**
    *
    * @param  {{ model : BaseDTO}}

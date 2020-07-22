@@ -11,6 +11,7 @@ import CodeDictionary from "../../Architecture/Dictionary/codeDictionary.js";
 import EMAIL_TEMPLATE from "../../Static/MailsXSLT/index.js"
 import UserValidators from './../../Validators/userValidators.js';
 import { URL } from "url";
+import BaseQuery from "../../Architecture/baseQuery.js";
 
 /**
  *
@@ -19,7 +20,7 @@ import { URL } from "url";
  * @class CreateRoleCommand
  * @extends {BaseCommand}
  */
-export default class GetMailTypesQuery extends BaseCommand {
+export default class GetMailTypesQuery extends BaseQuery {
   /**
    * Creates an instance of CreateUserCommand.
    * @param  {{logFileInfrastructureDI:LogFileInfrastructure , dbTransactionInfrastuctureDI:DbTransactionInfrastucture }}

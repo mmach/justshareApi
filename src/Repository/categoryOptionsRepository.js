@@ -47,10 +47,9 @@ export default class CategoryOptionsRepository extends BaseRepository {
     });
   }
   getRelatedOptions({ category_ids, transaction }) {
-    console.log(this);
     return this.categoryOptionDB.findAll({
       where: { project_id: this.context.project.id },
-      order: [['name', 'ASC'], ['cat_opt_temp', 'value', 'ASC']],
+      order: [['name', 'ASC'], ['cat_opt_temp', 'order', 'ASC']],
       include: [
         {
           model: this.sequelizeDI.CategoryOptionsLink,
@@ -144,7 +143,6 @@ export default class CategoryOptionsRepository extends BaseRepository {
   }
 
   getAllCategoriesOption({ id, transaction }) {
-    console.log(id);
     let whereClaus = id ? { id: id, project_id: this.context.project.id } : { project_id: this.context.project.id };
 
     return this.categoryOptionDB.findAll({

@@ -90,6 +90,9 @@ export default class Project extends Model {
         , blob_main_phone_id: {
           type: DataTypes.UUID
         }
+        , salt: {
+          type: DataTypes.STRING
+        }
       },
       { sequelize }
     );

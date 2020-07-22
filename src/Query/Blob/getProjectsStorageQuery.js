@@ -6,8 +6,11 @@ import BlobService from "../../Services/blobService.js";
 import ValidatonInfrastructure from "../../Architecture/Infrastructure/validatonInfrastructure.js";
 import DbTransactionInfrastucture from "../../Architecture/Infrastructure/dbTransactionInfrastucture.js";
 import { BlobDTO } from "justshare-shared";
+import BaseQuery from "../../Architecture/baseQuery.js";
 
 //BlobStorageFilterDTOF
+
+  
 
 /**
  *
@@ -16,7 +19,7 @@ import { BlobDTO } from "justshare-shared";
  * @class CreateUserCommand
  * @extends {BaseCommand}
  */
-export default class getProjectsStorageQuery extends BaseCommand {
+export default class getProjectsStorageQuery extends BaseQuery {
   /**
    * Creates an instance of CreateUserCommand.
    * @param  {{logFileInfrastructureDI:LogFileInfrastructure ,dbTransactionInfrastuctureDI:DbTransactionInfrastucture,authInfrastructureDI:AuthInfrastucture,blobServiceDI:BlobService,validationInfrastructureDI:ValidatonInfrastructure }}

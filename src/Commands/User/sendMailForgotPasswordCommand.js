@@ -52,19 +52,17 @@ export default class SendMailForgotPasswordCommand extends BaseCommand {
     });
     if (result != null) {
       let model = {
-        body: {
-          email: this.model.email,
-          uid: result.uid,
-          href: (new URL(this.referer)).origin,//this.referer,//CONFIG.FRONT_END_URL,
-          name: result.name
-        }
+        email: this.model.email,
+        uid: result.uid,
+        href: (new URL(this.referer)).origin,//this.referer,//CONFIG.FRONT_END_URL,
+        name: result.name
+
       };
       await this.mailSenderDI.setContext(this.context).mailSend({
-        xslt_file:'GENERATE_NEW_PASSWORD_MAIL_BODY',
-        model,
-        email_to: this.model.email,
+        type: 'GENERATE_NEW_PASSWORD',
+        model: model,
+        email_to: model.email,
         language: result.language,
-        mail_title: 'FORGOT_PASSWORD_MAIL_TITLE'
       });
     }
   }

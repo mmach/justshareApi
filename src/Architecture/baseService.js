@@ -138,6 +138,17 @@ export default class BaseService {
     return await this.unitOfWorkDI[this.repository].upsert({ model, withProject });
 
   }
+
+    /**
+     *
+     * @param  {{ model : BaseDTO }}
+     * @return {Promise<any>}
+     * @memberof BaseService
+     */
+    async bulkInsert({ model, withProject }) {
+      return await this.unitOfWorkDI[this.repository].bulkInsert({ model, withProject });
+  
+    }
   /**
    *
    * @param  {{ model : BaseDTO }}

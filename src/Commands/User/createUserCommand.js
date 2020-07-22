@@ -82,7 +82,7 @@ export default class CreateUserCommand extends BaseCommand {
         name: 'USER'
 
       })*/
-      this.model.id=uuidv4();
+    this.model.id = uuidv4();
     result = await this.userServiceDI.setContext(this.context).newInternalUser({
       model: this.model
     });
@@ -102,20 +102,19 @@ export default class CreateUserCommand extends BaseCommand {
 
 
     let model = {
-      body: {
-        name: result.name,
-        email: result.email,
-        uid: result.uid,
-        href: this.referer ? (new URL(this.referer)).origin : 'http://localhost.8080'//this.referer,//CONFIG.FRONT_END_URL,
-      }
-    };
-    await this.mailSenderDI.setContext(this.context).mailSend({
-      xslt_file: 'AUTH_MAIL_BODY',
-      model,
-      email_to: model.body.email,
-      language: result.language,
-      mail_title: "AUTH_MAIL_TITLE"
 
+      name: result.name,
+      email: result.email,
+      uid: result.uid,
+      href: this.referer ? (new URL(this.referer)).origin : 'http://localhost.8080'//this.referer,//CONFIG.FRONT_END_URL,
+
+    };
+
+    await this.mailSenderDI.setContext(this.context).mailSend({
+      type: 'AUTHORIZATION_MAIL',
+      model: model,
+      email_to: model.email,
+      language: result.language
     });
   }
 }

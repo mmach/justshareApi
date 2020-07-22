@@ -166,7 +166,9 @@ export default class ElasticSearchService extends BaseService {
     tags,
     status,
     type,
-    category, categories, created_at, expired_at, item,
+    category,
+    categories,
+    created_at, expired_at, item,
     project_id,
     es_operations,
     external_id }) {
@@ -243,6 +245,26 @@ export default class ElasticSearchService extends BaseService {
         }
       }
     });
+    let cleanItem = {
+      ...item,
+
+      categories: [...categories.map(i => {
+        return { id: i.id }
+      })],
+      itemCategoryOption: [...item.itemCategoryOption.map(i => {
+
+        i.category_link = undefined
+        i.cat_opt_temp = undefined
+        return i;
+      })]
+    };
+    Object.keys(cleanItem).filter(i => {
+      return i.startsWith('clobSearch_')
+    }).forEach(i => {
+      cleanItem[i] = undefined
+    });
+      console.log(cleanItem)
+
     let data = {
       "location": [longitude, latitude],
       "external_id": external_id,
@@ -265,7 +287,7 @@ export default class ElasticSearchService extends BaseService {
       "select": singleSELECT,
       "type": type,
       "categories": categoriesArray,
-      "item": JSON.stringify(item),
+      "item": JSON.stringify(cleanItem),
       "category": {
         "id": category,
       }

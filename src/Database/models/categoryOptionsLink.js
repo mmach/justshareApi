@@ -90,7 +90,18 @@ export default class CategoryOptionsLink extends Model {
   }
 
   static hooks(models, sequelize) {
+    CategoryOptionsLink.beforeDestroy(async (item, options) => {
 
+      console.log('beforeDestroy')
+
+      await models.ItemCategoryOption.destroy({
+        where: { col_id: item.id },
+        transaction: options.transaction,
+        individualHooks: true,
+      })
+
+
+    })
     CategoryOptionsLink.afterUpsert(async (item, options) => {
       console.log('afterUpdate')
       console.log(item)

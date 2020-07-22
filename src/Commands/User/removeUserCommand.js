@@ -56,7 +56,7 @@ export default class RemoveUserCommand extends BaseCommand {
       await this.userServiceDI.setContext(this.context).deleteUserPriv({ user_id: this.context.user.id });
 
     } else {
-    //  await this.userServiceDI.setContext(this.context).deleteUserPriv({ user_id: this.context.user.id });
+      //  await this.userServiceDI.setContext(this.context).deleteUserPriv({ user_id: this.context.user.id });
 
       await this.userServiceDI.setContext(this.context).delete({ model: this.context.user });
     }
@@ -66,19 +66,18 @@ export default class RemoveUserCommand extends BaseCommand {
     // await this.userServiceDI.setContext(this.context).delete({ model: this.context.user });
     //throw 'dupa'
     let model = {
-      body: {
-        name: this.context.user.name,
-        email: this.context.user.email,
-        href: (new URL(this.referer)).origin//this.referer,//CONFIG.FRONT_END_URL,
-      }
-    };
-    await this.mailSenderDI.setContext(this.context).mailSend({
-      xslt_file: 'USER_REMOVED_MAIL_BODY',
-      model,
-      email_to: model.body.email,
-      language: this.context.language,
-      mail_title: 'USER_REMOVED_MAIL_TITLE'
 
+      name: this.context.user.name,
+      email: this.context.user.email,
+      href: (new URL(this.referer)).origin//this.referer,//CONFIG.FRONT_END_URL,
+
+    };
+
+    await this.mailSenderDI.setContext(this.context).mailSend({
+      type: 'REMOVE_USER',
+      model: model,
+      email_to: model.email,
+      language: this.context.language,
     });
   }
 }

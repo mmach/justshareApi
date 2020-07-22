@@ -45,12 +45,14 @@ export default class ProjectInfrastructure extends BaseInfrastracture {
             }
             action.context.project = project.dataValues;
             action.context.project.allowForAll = false;
+
             return await action;
         } catch (ex) {
             if (this.allowForAll) {
                 action.context.project={}
                 action.context.project.allowForAll = true;
                 action.context.project.id = null;
+                
 
                 return await action;
 

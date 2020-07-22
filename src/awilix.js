@@ -211,6 +211,27 @@ import UpsertSeoCommand from "./Commands/Seo/upsertSeoCommand.js";
 import GetSeoQuery from "./Query/Seo/getSeoQuery.js";
 import GetUsersQuery from "./Query/User/getUsersQuery.js";
 import GetCategoryActionsQuery from "./Query/Category/getCategoryActionsQuery.js";
+import ItemTransactionsRepository from "./Repository/ItemTransactionsRepository.js";
+import ItemUserActionRepository from "./Repository/itemUserActionRepository.js";
+import ItemTransactionCategoryOptionsRepository from "./Repository/itemTransactionCategoryOptionsRepository.js";
+import ItemTransactionService from "./Services/itemTransactionsService.js";
+import ItemUserActionService from "./Services/itemUserActionService.js";
+import ItemTransactionCategoryOptionsService from "./Services/itemTransactionCategoryOptionsService.js";
+import ReservationItemCommand from "./Commands/Item/reservationItemCommand.js";
+import ConversationMessagesRepository from "./Repository/conversationMessagesRepository.js";
+import ConversationRepository from "./Repository/conversationRepository.js";
+import UserConversationsRepository from "./Repository/userConversationsRepository.js";
+import UserConversationService from "./Services/userConversationService.js";
+import ConversationMessagesService from "./Services/conversationMessagesService.js";
+import ConversationService from "./Services/conversationService.js";
+import GetProjectSocketsQuery from "./Query/Project/getProjectsSocketsQuery.js";
+import GetConversationsQuery from "./Query/Messages/getConversationsQuery.js";
+import GetConversationQuery from "./Query/Messages/getConversationQuery.js";
+import SendMessageCommand from "./Commands/Messages/sendMessageCommand.js";
+import ConversationMessagesMembersRepository from "./Repository/conversationMessagesMembersRepository.js";
+import ConversationMessageMembersService from "./Services/conversationMessagesMemberService.js";
+import GetToReadMessagesQuery from "./Query/Messages/getToReadMessagesQuery.js";
+import ReadMessageCommand from "./Commands/Messages/readMessageCommand.js";
 
 
 
@@ -292,11 +313,23 @@ let exporter = {
   mailTypesProjectServiceDI: asClass(MailTypesProjectService),
   seoServiceDI: asClass(SeoService),
   seoRepositoryDI: asClass(SeoRepository),
+  itemTransactionRepositoryDI: asClass(ItemTransactionsRepository),
+  itemUserActionRepositoryDI: asClass(ItemUserActionRepository),
+  itemTransactionCategoryOptionsRepositoryDI: asClass(ItemTransactionCategoryOptionsRepository),
+  itemTransactionsServiceDI: asClass(ItemTransactionService),
+  itemUserActionServiceDI: asClass(ItemUserActionService),
+  itemTransactionCategoryOptionsServiceDI: asClass(ItemTransactionCategoryOptionsService),
+  conversationMessagesRepositoryDI: asClass(ConversationMessagesRepository),
+  conversationRepositoryDI: asClass(ConversationRepository),
+  userConversationsRepositoryDI: asClass(UserConversationsRepository),
+  userConversationServiceDI: asClass(UserConversationService),
+  conversationMessagesServiceDI: asClass(ConversationMessagesService),
+  conversationServiceDI: asClass(ConversationService),
+  conversationMessagesMembersRepositoryDI:asClass(ConversationMessagesMembersRepository),
+  conversationMessageMembersServiceDI:asClass(ConversationMessageMembersService)
 
-
+  
 };
-
-
 
 exporter[CommandList.Dictionary.ADD_DICTIONARY] = asClass(
   AddToDictionaryCommand
@@ -483,6 +516,7 @@ exporter[CommandList.Item.EDIT_ITEM] = asClass(EditItemCommand);
 exporter[CommandList.Item.SYNC_ITEM] = asClass(SyncItemCommand);
 exporter[CommandList.Item.SET_SYNC] = asClass(SetItemSyncCommand);
 exporter[CommandList.Item.REMOVE_ITEM] = asClass(RemoveItemCommand);
+exporter[CommandList.Item.RESERVATION_ITEM] = asClass(ReservationItemCommand);
 
 
 exporter[QueryList.Item.GET_ITEM] = asClass(GetItemQuery);
@@ -529,11 +563,23 @@ exporter[QueryList.Project.LOGIN_BLISKO_NAS] = asClass(LoginBliskonasProjectQuer
 exporter[QueryList.Project.GET_PROJECT_INFO] = asClass(GetProjectQuery)
 exporter[QueryList.Project.GET_USERS_PROJECTS] = asClass(GetUsersProjectsQuery)
 exporter[QueryList.Project.GET_PROJECT_USERS] = asClass(GetProjectUsersQuery)
-
+exporter[QueryList.Project.GET_PROJECT_SOCKETS] = asClass(GetProjectSocketsQuery)
 
 
 ///////////////////////////////////////////////////////////
+///////////////////MESSAGS////////////////////////////////
+exporter[CommandList.Messages.CLOSE_CONVERSATION] = asClass(ChoosePlanCommand);
+exporter[CommandList.Messages.CREATE_CONVERSATION] = asClass(InsertProjectCommand);
+exporter[CommandList.Messages.SEND_MESSAGE] = asClass(SendMessageCommand);
+exporter[CommandList.Messages.READ_MSG] = asClass(ReadMessageCommand);
 
+
+exporter[QueryList.Messages.GET_CONV_MESSAGES] = asClass(GetConversationQuery);
+exporter[QueryList.Messages.GET_CONVERSATION] = asClass(GetConversationsQuery)
+exporter[QueryList.Messages.GET_UNREAD_MSG] = asClass(GetToReadMessagesQuery)
+
+
+///////////////////////////////////////////////////////////
 
 ///////////////////CONFIG////////////////////////////////
 

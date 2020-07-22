@@ -28,7 +28,10 @@ export default class ItemCategoryOption extends Model {
         col_id: DataTypes.UUID,
         co_temp_id: DataTypes.UUID,
         value: DataTypes.TEXT,
-       // is_visible:DataTypes.INTEGER
+        status: DataTypes.STRING,
+        iua_id: DataTypes.UUID,
+        dim_id: DataTypes.UUID
+
       },
       { sequelize }
     );
@@ -44,5 +47,6 @@ export default class ItemCategoryOption extends Model {
       targetKey: "id",
       foreignKey: "co_temp_id"
     });
+ 
   }
 }

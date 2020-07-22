@@ -39,7 +39,13 @@ import MailPartsRepository from "./Repository/mailPartsRepository.js";
 import MailTypesProjectRepository from "./Repository/mailTypesProjectRepository.js";
 import MailSendersRepository from "./Repository/mailSendersRepository.js";
 import SeoRepository from "./Repository/seoRepository.js";
-
+import ItemTransactionCategoryOptionsRepository from "./Repository/itemTransactionCategoryOptionsRepository.js";
+import ItemTransactionsRepository from "./Repository/ItemTransactionsRepository.js";
+import ItemUserActionRepository from "./Repository/itemUserActionRepository.js";
+import ConversationMessagesRepository from "./Repository/conversationMessagesRepository.js";
+import ConversationRepository from "./Repository/conversationRepository.js";
+import UserConversationsRepository from "./Repository/userConversationsRepository.js";
+import ConversationMessagesMembersRepository from "./Repository/conversationMessagesMembersRepository.js";
 
 
 
@@ -97,401 +103,488 @@ export default class UnitOfWork extends BaseUnitOfWork {
         mailPartsRepositoryDI,
         mailTypesProjectRepositoryDI,
         mailSendersRepositoryDI,
-        seoRepositoryDI
+        seoRepositoryDI,
+        itemTransactionCategoryOptionsRepositoryDI,
+        itemUserActionRepositoryDI,
+        itemTransactionRepositoryDI,
+        conversationMessagesRepositoryDI,
+        conversationRepositoryDI,
+        userConversationsRepositoryDI,
+        conversationMessagesMembersRepositoryDI
+
     }) {
-        super()
+    super()
 
-        this.transaction = null;
-        this.repositories = {
-            textRepositoryDI,
-            userRepositoryDI,
-            categoryRepositoryDI,
-            categoryHierarchyRepositoryDI,
-            blobRepositoryDI,
-            blobMapperRepositoryDI,
-            itemCategoryRepositoryDI,
-            itemRepositoryDI,
-            countryRepositoryDI,
-            cityRepositoryDI,
-            userAuthRepositoryDI,
-            categoryOptionsRepositoryDI,
-            itemCategoryOptionRepositoryDI,
-            tagRepositoryDI,
-            projectRepositoryDI,
-            configRepositoryDI,
-            privilegeRepositoryDI,
-            actionPrivilegesRepositoryDI,
-            actionProjectRepositoryDI,
-            actionRepositoryDI,
-            categoryActionsRepositoryDI,
-            privilegeProjectRepositoryDI,
-            rolesProjectRepositoryDI,
-            userRolesRepositoryDI,
-            userTypesRepositoryDI,
-            userTypesRolesRepositoryDI,
-            rolesRepositoryDI,
-            translationRepositoryDI,
-            languageRepositoryDI,
-            languageProjectRepositoryDI,
-            dimensionsRepositoryDI,
-            dimensionsProjectRepositoryDI,
-            mailTypesRepositoryDI,
-            mailPartsRepositoryDI,
-            mailTypesProjectRepositoryDI,
-            mailSendersRepositoryDI,
-            seoRepositoryDI
-        }
-    };
-
-
-
-    /**
-        * 
-        * @return {SeoRepository}
-        * @readonly
-        * @memberof UnitOfWork
-        */
-    get seoRepository() {
-        return this.repositories.seoRepositoryDI;
+    this.transaction = null;
+    this.repositories = {
+        textRepositoryDI,
+        userRepositoryDI,
+        categoryRepositoryDI,
+        categoryHierarchyRepositoryDI,
+        blobRepositoryDI,
+        blobMapperRepositoryDI,
+        itemCategoryRepositoryDI,
+        itemRepositoryDI,
+        countryRepositoryDI,
+        cityRepositoryDI,
+        userAuthRepositoryDI,
+        categoryOptionsRepositoryDI,
+        itemCategoryOptionRepositoryDI,
+        tagRepositoryDI,
+        projectRepositoryDI,
+        configRepositoryDI,
+        privilegeRepositoryDI,
+        actionPrivilegesRepositoryDI,
+        actionProjectRepositoryDI,
+        actionRepositoryDI,
+        categoryActionsRepositoryDI,
+        privilegeProjectRepositoryDI,
+        rolesProjectRepositoryDI,
+        userRolesRepositoryDI,
+        userTypesRepositoryDI,
+        userTypesRolesRepositoryDI,
+        rolesRepositoryDI,
+        translationRepositoryDI,
+        languageRepositoryDI,
+        languageProjectRepositoryDI,
+        dimensionsRepositoryDI,
+        dimensionsProjectRepositoryDI,
+        mailTypesRepositoryDI,
+        mailPartsRepositoryDI,
+        mailTypesProjectRepositoryDI,
+        mailSendersRepositoryDI,
+        seoRepositoryDI,
+        itemTransactionCategoryOptionsRepositoryDI,
+        itemUserActionRepositoryDI,
+        itemTransactionRepositoryDI,
+        conversationMessagesRepositoryDI,
+        conversationRepositoryDI,
+        userConversationsRepositoryDI,
+        conversationMessagesMembersRepositoryDI
     }
-    /**
+};
+/**
      * 
-     * @return {MailSendersRepository}
+     * @return {ConversationMessagesMembersRepository}
      * @readonly
      * @memberof UnitOfWork
      */
-    get mailSendersRepository() {
-        return this.repositories.mailSendersRepositoryDI;
+    get conversationMessagesMembersRepository() {
+        return this.repositories.conversationMessagesMembersRepositoryDI;
     }
-    /**
+
+/**
      * 
-     * @return {MailTypesProjectRepository}
+     * @return {UserConversationsRepository}
      * @readonly
      * @memberof UnitOfWork
      */
-    get mailTypesProjectRepository() {
-        return this.repositories.mailTypesProjectRepositoryDI;
-    }
-    /**
-     * 
-     * @return {MailPartsRepository}
-     * @readonly
-     * @memberof UnitOfWork
-     */
-    get mailPartsRepository() {
-        return this.repositories.mailPartsRepositoryDI;
-    }
-
-    /**
-     * 
-     * @return {MailTypesRepository}
-     * @readonly
-     * @memberof UnitOfWork
-     */
-    get mailTypesRepository() {
-        return this.repositories.mailTypesRepositoryDI;
-    }
-    /**
-     * 
-     * @return {DimensionsProjectRepository}
-     * @readonly
-     * @memberof UnitOfWork
-     */
-    get dimensionsProjectRepository() {
-        return this.repositories.dimensionsProjectRepositoryDI;
-    }
-    /**
-     * 
-     * @return {DimensionsRepository}
-     * @readonly
-     * @memberof UnitOfWork
-     */
-    get dimensionsRepository() {
-        return this.repositories.dimensionsRepositoryDI;
-    }
-    /**
-     * 
-     * @return {LanguageRepository}
-     * @readonly
-     * @memberof UnitOfWork
-     */
-    get languageRepository() {
-        return this.repositories.languageRepositoryDI;
-    }
-    /**
-     * 
-     * @return {LanguageProjectRepository}
-     * @readonly
-     * @memberof UnitOfWork
-     */
-    get languageProjectRepository() {
-        return this.repositories.languageProjectRepositoryDI;
-    }
-
-    /**
-     * 
-     * @return {ActionPrivilegesRepository}
-     * @readonly
-     * @memberof UnitOfWork
-     */
-    get actionPrivilegesRepository() {
-        return this.repositories.actionPrivilegesRepositoryDI;
-    }
-
-    /**
-     * 
-     * @return {ActionProjectRepository}
-     * @readonly
-     * @memberof UnitOfWork
-     */
-    get actionProjectRepository() {
-        return this.repositories.actionProjectRepositoryDI;
-    }
-    /**
-     * 
-     * @return {ActionRepository}
-     * @readonly
-     * @memberof UnitOfWork
-     */
-    get actionRepository() {
-        return this.repositories.actionRepositoryDI;
-    }
-
-    /**
-      * 
-      * @return {CategoryActionsRepository}
-      * @readonly
-      * @memberof UnitOfWork
-      */
-    get categoryActionsRepository() {
-        return this.repositories.categoryActionsRepositoryDI;
-    }
-
-    /**
-      * 
-      * @return {PrivilegeProjectRepository}
-      * @readonly
-      * @memberof UnitOfWork
-      */
-    get privilegeProjectRepository() {
-        return this.repositories.privilegeProjectRepositoryDI;
-    }
-
-    /**
-      * 
-      * @return {RolesProjectRepository}
-      * @readonly
-      * @memberof UnitOfWork
-      */
-    get rolesProjectRepository() {
-        return this.repositories.rolesProjectRepositoryDI;
-    }
-
-
-
-    /**
-    * 
-    * @return {UserRolesRepository}
-    * @readonly
-    * @memberof UnitOfWork
-    */
-    get userRolesRepository() {
-        return this.repositories.userRolesRepositoryDI;
-    }
-
-
-    /**
-     * 
-     * @return {UserTypesRepository}
-     * @readonly
-     * @memberof UnitOfWork
-     */
-    get userTypesRepository() {
-        return this.repositories.userTypesRepositoryDI;
-    }
-
-
-    /**
-          * 
-          * @return {UserTypesRolesRepository}
-          * @readonly
-          * @memberof UnitOfWork
-          */
-    get userTypesRolesRepository() {
-        return this.repositories.userTypesRolesRepositoryDI;
-    }
-
-    /**
-       * 
-       * @return {RolesRepository}
-       * @readonly
-       * @memberof UnitOfWork
-       */
-    get rolesRepository() {
-        return this.repositories.rolesRepositoryDI;
-    }
-
-    /**
-     * 
-     * @return {TranslationRepository}
-     * @readonly
-     * @memberof UnitOfWork
-     */
-    get translationRepository() {
-        return this.repositories.translationRepositoryDI;
-    }
-
-    /**
-     * 
-     * @return {UserRepository}
-     * @readonly
-     * @memberof UnitOfWork
-     */
-    get userRepository() {
-        return this.repositories.userRepositoryDI;
-    }
-
-    /**
-   * 
-   * @return {PrivilegeRepository}
-   * @readonly
-   * @memberof UnitOfWork
-   */
-    get privilegeRepository() {
-        return this.repositories.privilegeRepositoryDI;
-    }
-
-    /**
-     * 
-     * @return {ProjectRepository}
-     * @readonly
-     * @memberof UnitOfWork
-     */
-    get projectRepository() {
-        return this.repositories.projectRepositoryDI;
-    }
-
-    /**
-    * 
-    * @return {ConfigRepository}
-    * @readonly
-    * @memberof UnitOfWork
-    */
-    get configRepository() {
-        return this.repositories.configRepositoryDI;
-
-    }
-
-    /**
-     * 
-     * @return {TagRepository}
-     * @readonly
-     * @memberof UnitOfWork
-     */
-    get tagRepository() {
-        return this.repositories.tagRepositoryDI;
-    }
-
-    /**
-     * 
-     * @return {ItemCategoryOptionRepository}
-     * @readonly
-     * @memberof UnitOfWork
-     */
-    get itemCategoryOptionRepository() {
-        return this.repositories.itemCategoryOptionRepositoryDI;
-    }
-
-    /**
-   * 
-   * @return {CategoryOptionsRepository}
-   * @readonly
-   * @memberof UnitOfWork
-   */
-    get categoryOptionsRepository() {
-        return this.repositories.categoryOptionsRepositoryDI
-    }
-
-    /**
+get userConversationsRepository() {
+    return this.repositories.userConversationsRepositoryDI;
+}
+/**
  * 
- * @return {UserAuthRepository}
+ * @return {ConversationRepository}
  * @readonly
  * @memberof UnitOfWork
  */
-    get userAuthRepository() {
-        return this.repositories.userAuthRepositoryDI;
-    }
+get conversationRepository() {
+    return this.repositories.conversationRepositoryDI;
+}
+/**
+ * 
+ * @return {ConversationMessagesRepository}
+ * @readonly
+ * @memberof UnitOfWork
+ */
+get conversationMessagesRepository() {
+    return this.repositories.conversationMessagesRepositoryDI;
+}
 
-    /**
+
+/**
     * 
-    * @return {BlobRepository}
-    * @readonly 
+    * @return {ItemTransactionCategoryOptionsRepository}
+    * @readonly
     * @memberof UnitOfWork
     */
-    get blobRepository() {
-        return this.repositories.blobRepositoryDI;
-    }
-    /**
-       * 
-       * @return {BlobMapperRepository}
-       * @readonly
-       * @memberof UnitOfWork
-       */
-    get blobMapperRepository() {
-        return this.repositories.blobMapperRepositoryDI;
-    }
+get itemTransactionCategoryOptionsRepository() {
+    return this.repositories.itemTransactionCategoryOptionsRepositoryDI;
+}
+/**
+* 
+* @return {ItemUserActionRepository}
+* @readonly
+* @memberof UnitOfWork
+*/
+get itemUserActionRepository() {
+    return this.repositories.itemUserActionRepositoryDI;
+}
+/**
+* 
+* @return {ItemTransactionsRepository}
+* @readonly
+* @memberof UnitOfWork
+*/
+get itemTransactionRepository() {
+    return this.repositories.itemTransactionRepositoryDI;
+}
+/**
+* 
+* @return {SeoRepository}
+* @readonly
+* @memberof UnitOfWork
+*/
+get seoRepository() {
+    return this.repositories.seoRepositoryDI;
+}
+/**
+    * 
+    * @return {SeoRepository}
+    * @readonly
+    * @memberof UnitOfWork
+    */
+get seoRepository() {
+    return this.repositories.seoRepositoryDI;
+}
+/**
+ * 
+ * @return {MailSendersRepository}
+ * @readonly
+ * @memberof UnitOfWork
+ */
+get mailSendersRepository() {
+    return this.repositories.mailSendersRepositoryDI;
+}
+/**
+ * 
+ * @return {MailTypesProjectRepository}
+ * @readonly
+ * @memberof UnitOfWork
+ */
+get mailTypesProjectRepository() {
+    return this.repositories.mailTypesProjectRepositoryDI;
+}
+/**
+ * 
+ * @return {MailPartsRepository}
+ * @readonly
+ * @memberof UnitOfWork
+ */
+get mailPartsRepository() {
+    return this.repositories.mailPartsRepositoryDI;
+}
 
-    /**
-     * @return {CategoryHierarchyRepository}
-     * @readonly
-     * @memberof UnitOfWork
-     */
-    get categoryHierarchyRepository() {
-        return this.repositories.categoryHierarchyRepositoryDI;
-    }
+/**
+ * 
+ * @return {MailTypesRepository}
+ * @readonly
+ * @memberof UnitOfWork
+ */
+get mailTypesRepository() {
+    return this.repositories.mailTypesRepositoryDI;
+}
+/**
+ * 
+ * @return {DimensionsProjectRepository}
+ * @readonly
+ * @memberof UnitOfWork
+ */
+get dimensionsProjectRepository() {
+    return this.repositories.dimensionsProjectRepositoryDI;
+}
+/**
+ * 
+ * @return {DimensionsRepository}
+ * @readonly
+ * @memberof UnitOfWork
+ */
+get dimensionsRepository() {
+    return this.repositories.dimensionsRepositoryDI;
+}
+/**
+ * 
+ * @return {LanguageRepository}
+ * @readonly
+ * @memberof UnitOfWork
+ */
+get languageRepository() {
+    return this.repositories.languageRepositoryDI;
+}
+/**
+ * 
+ * @return {LanguageProjectRepository}
+ * @readonly
+ * @memberof UnitOfWork
+ */
+get languageProjectRepository() {
+    return this.repositories.languageProjectRepositoryDI;
+}
+
+/**
+ * 
+ * @return {ActionPrivilegesRepository}
+ * @readonly
+ * @memberof UnitOfWork
+ */
+get actionPrivilegesRepository() {
+    return this.repositories.actionPrivilegesRepositoryDI;
+}
+
+/**
+ * 
+ * @return {ActionProjectRepository}
+ * @readonly
+ * @memberof UnitOfWork
+ */
+get actionProjectRepository() {
+    return this.repositories.actionProjectRepositoryDI;
+}
+/**
+ * 
+ * @return {ActionRepository}
+ * @readonly
+ * @memberof UnitOfWork
+ */
+get actionRepository() {
+    return this.repositories.actionRepositoryDI;
+}
+
+/**
+  * 
+  * @return {CategoryActionsRepository}
+  * @readonly
+  * @memberof UnitOfWork
+  */
+get categoryActionsRepository() {
+    return this.repositories.categoryActionsRepositoryDI;
+}
+
+/**
+  * 
+  * @return {PrivilegeProjectRepository}
+  * @readonly
+  * @memberof UnitOfWork
+  */
+get privilegeProjectRepository() {
+    return this.repositories.privilegeProjectRepositoryDI;
+}
+
+/**
+  * 
+  * @return {RolesProjectRepository}
+  * @readonly
+  * @memberof UnitOfWork
+  */
+get rolesProjectRepository() {
+    return this.repositories.rolesProjectRepositoryDI;
+}
 
 
-    /**
-     *  
-     * @return {CategoryRepository}
-     * @readonly
-     * @memberof UnitOfWork
-     */
-    get categoryRepository() {
-        return this.repositories.categoryRepositoryDI;
-    }
+
+/**
+* 
+* @return {UserRolesRepository}
+* @readonly
+* @memberof UnitOfWork
+*/
+get userRolesRepository() {
+    return this.repositories.userRolesRepositoryDI;
+}
 
 
-    /**
-     * 
-     * @return {ItemRepository}
-     * @readonly
-     * @memberof UnitOfWork
-     */
-    get itemRepository() {
-        return this.repositories.itemRepositoryDI;
-    }
+/**
+ * 
+ * @return {UserTypesRepository}
+ * @readonly
+ * @memberof UnitOfWork
+ */
+get userTypesRepository() {
+    return this.repositories.userTypesRepositoryDI;
+}
 
 
-    /**
-     * 
-     * @return {CountryRepository}
-     * @readonly
-     * @memberof UnitOfWork
-     */
-    get countryRepository() {
-        return this.repositories.countryRepositoryDI;
-    }
-
-    /**
+/**
       * 
-      * @return {CityRepository}
+      * @return {UserTypesRolesRepository}
       * @readonly
       * @memberof UnitOfWork
       */
-    get cityRepository() {
-        return this.repositories.cityRepositoryDI;
-    }   /**
+get userTypesRolesRepository() {
+    return this.repositories.userTypesRolesRepositoryDI;
+}
+
+/**
+   * 
+   * @return {RolesRepository}
+   * @readonly
+   * @memberof UnitOfWork
+   */
+get rolesRepository() {
+    return this.repositories.rolesRepositoryDI;
+}
+
+/**
+ * 
+ * @return {TranslationRepository}
+ * @readonly
+ * @memberof UnitOfWork
+ */
+get translationRepository() {
+    return this.repositories.translationRepositoryDI;
+}
+
+/**
+ * 
+ * @return {UserRepository}
+ * @readonly
+ * @memberof UnitOfWork
+ */
+get userRepository() {
+    return this.repositories.userRepositoryDI;
+}
+
+/**
+* 
+* @return {PrivilegeRepository}
+* @readonly
+* @memberof UnitOfWork
+*/
+get privilegeRepository() {
+    return this.repositories.privilegeRepositoryDI;
+}
+
+/**
+ * 
+ * @return {ProjectRepository}
+ * @readonly
+ * @memberof UnitOfWork
+ */
+get projectRepository() {
+    return this.repositories.projectRepositoryDI;
+}
+
+/**
+* 
+* @return {ConfigRepository}
+* @readonly
+* @memberof UnitOfWork
+*/
+get configRepository() {
+    return this.repositories.configRepositoryDI;
+
+}
+
+/**
+ * 
+ * @return {TagRepository}
+ * @readonly
+ * @memberof UnitOfWork
+ */
+get tagRepository() {
+    return this.repositories.tagRepositoryDI;
+}
+
+/**
+ * 
+ * @return {ItemCategoryOptionRepository}
+ * @readonly
+ * @memberof UnitOfWork
+ */
+get itemCategoryOptionRepository() {
+    return this.repositories.itemCategoryOptionRepositoryDI;
+}
+
+/**
+* 
+* @return {CategoryOptionsRepository}
+* @readonly
+* @memberof UnitOfWork
+*/
+get categoryOptionsRepository() {
+    return this.repositories.categoryOptionsRepositoryDI
+}
+
+/**
+* 
+* @return {UserAuthRepository}
+* @readonly
+* @memberof UnitOfWork
+*/
+get userAuthRepository() {
+    return this.repositories.userAuthRepositoryDI;
+}
+
+/**
+* 
+* @return {BlobRepository}
+* @readonly 
+* @memberof UnitOfWork
+*/
+get blobRepository() {
+    return this.repositories.blobRepositoryDI;
+}
+/**
+   * 
+   * @return {BlobMapperRepository}
+   * @readonly
+   * @memberof UnitOfWork
+   */
+get blobMapperRepository() {
+    return this.repositories.blobMapperRepositoryDI;
+}
+
+/**
+ * @return {CategoryHierarchyRepository}
+ * @readonly
+ * @memberof UnitOfWork
+ */
+get categoryHierarchyRepository() {
+    return this.repositories.categoryHierarchyRepositoryDI;
+}
+
+
+/**
+ *  
+ * @return {CategoryRepository}
+ * @readonly
+ * @memberof UnitOfWork
+ */
+get categoryRepository() {
+    return this.repositories.categoryRepositoryDI;
+}
+
+
+/**
+ * 
+ * @return {ItemRepository}
+ * @readonly
+ * @memberof UnitOfWork
+ */
+get itemRepository() {
+    return this.repositories.itemRepositoryDI;
+}
+
+
+/**
+ * 
+ * @return {CountryRepository}
+ * @readonly
+ * @memberof UnitOfWork
+ */
+get countryRepository() {
+    return this.repositories.countryRepositoryDI;
+}
+
+/**
+  * 
+  * @return {CityRepository}
+  * @readonly
+  * @memberof UnitOfWork
+  */
+get cityRepository() {
+    return this.repositories.cityRepositoryDI;
+}   /**
 
 
     
@@ -501,19 +594,19 @@ export default class UnitOfWork extends BaseUnitOfWork {
      * @readonly
      * @memberof UnitOfWork
      */
-    get itemCategoryRepository() {
-        return this.repositories.itemCategoryRepositoryDI;
-    }
+get itemCategoryRepository() {
+    return this.repositories.itemCategoryRepositoryDI;
+}
 
-    /**
-     *  
-     * @return {TextRepository}
-     * @readonly
-     * @memberof UnitOfWork
-     */
-    get textRepository() {
-        return this.repositories.textRepositoryDI;
-    }
+/**
+ *  
+ * @return {TextRepository}
+ * @readonly
+ * @memberof UnitOfWork
+ */
+get textRepository() {
+    return this.repositories.textRepositoryDI;
+}
 
 
 }

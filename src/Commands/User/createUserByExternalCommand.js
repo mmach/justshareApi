@@ -87,22 +87,21 @@ export default class CreateUserByExternalCommand extends BaseCommand {
 
   async sendMail(newUser) {
     let model = {
-      body: {
-        name: newUser.name,
-        email: newUser.email,
-        uid: newUser.uid,
-        href: CONFIG.FRONT_END_URL
-      }
+
+      name: newUser.name,
+      email: newUser.email,
+      uid: newUser.uid,
+      href: CONFIG.FRONT_END_URL
+
     };
     console.log(model.body.email)
-    await this.mailSenderDI.setContext(this.context).mailSend({
-      xslt_file: 'NEW_USER_MAIL_BODY',
-      model,
-      email_to: model.body.email,
-      language: newUser.language,
-      mail_title: 'NEW_USER_MAIL_TITLE'
-    });
 
+    await this.mailSenderDI.setContext(this.context).mailSend({
+      type: 'NEW_USER_MAIL',
+      model: model,
+      email_to: model.email,
+      language: result.language
+    });
   }
   async checkIfExistAndLink(externalCred, userInfo, provider) {
     let fbCred = undefined;

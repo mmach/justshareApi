@@ -88,6 +88,7 @@ export default class V_Project extends Model {
         , blob_main_phone_id: {
           type: DataTypes.UUID
         }
+      
         
       },
       { sequelize }

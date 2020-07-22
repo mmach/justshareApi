@@ -113,8 +113,21 @@ export default class CategoryOptionsTemplate extends Model {
           type: DataTypes.BOOLEAN,
           allowNull: true
         },
-   
-        
+        is_visible_form: {
+          type: DataTypes.BOOLEAN,
+          allowNull: true
+        },
+        is_visible_search: {
+          type: DataTypes.BOOLEAN,
+          allowNull: true
+        },
+        dim_ref_id: {
+          type: DataTypes.UUID,
+          allowNull: true
+        },
+        dim_id:DataTypes.UUID,
+        is_readOnly:DataTypes.BOOLEAN,
+        is_from_url:DataTypes.BOOLEAN
       },
       { sequelize }
     );

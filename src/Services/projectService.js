@@ -62,9 +62,8 @@ export default class ProjectService extends BaseService {
           { expiresIn: CONFIG.SECURITY.TOKEN_EXPIRATION }
         ),
         expiresIn: expiresDate,
+        socketChannel: bcrypt.hashSync(project_id, result.salt).replace(result.salt, '')
 
-
-        //,language:
       };
     } else {
       throw new ServerException().throw({
@@ -74,14 +73,22 @@ export default class ProjectService extends BaseService {
     }
   }
 
-  async getProjctInfo({ id }) {
-    let result = await this.toJsonParse(this.unitOfWorkDI.projectRepository.getProjectDetails({ id }));
-    return result 
+  async getProjectsSockets({ }) {
+    let result = await this.toJsonParse(this.unitOfWorkDI.projectRepository.getProjectsSockets({}));
+    return result.map(i => {
+      return { id: i.id, socket: bcrypt.hashSync(i.id, i.salt).replace(i.salt, '') }
+    })
   }
 
-  async getProjctUsers({  }) {
-    let result = await this.toJsonParse(this.unitOfWorkDI.projectRepository.getProjctUsers({  }));
-    return result 
+
+  async getProjctInfo({ id }) {
+    let result = await this.toJsonParse(this.unitOfWorkDI.projectRepository.getProjectDetails({ id }));
+    return result
+  }
+
+  async getProjctUsers({ }) {
+    let result = await this.toJsonParse(this.unitOfWorkDI.projectRepository.getProjctUsers({}));
+    return result
   }
 
 

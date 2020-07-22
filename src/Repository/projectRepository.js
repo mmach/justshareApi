@@ -29,16 +29,16 @@ export default class ProjectRepository extends BaseRepository {
     * @return {Promise<UserDTO>}
     *  @memberof UserRepository
    */
- 
 
 
-   /**
-   *
-   *
-   * @param {*} { user_id, transaction }
-    * @return {Promise<UserDTO>}
-    *  @memberof UserRepository
-   */
+
+  /**
+  *
+  *
+  * @param {*} { user_id, transaction }
+   * @return {Promise<UserDTO>}
+   *  @memberof UserRepository
+  */
   getProjectInfo({ project_id, transaction }) {
     return this.V_ProjectDB.findOne({
       where: {
@@ -83,7 +83,7 @@ export default class ProjectRepository extends BaseRepository {
           required: false,
           as: "img_main_phone"
         },
-        
+
       ],
       transaction: this.getTran({ transaction })
     })
@@ -100,6 +100,15 @@ export default class ProjectRepository extends BaseRepository {
       }
     );
   }
+  getProjectsSockets({ transaction }) {
+    return this.entityDAO.findAll(
+      {
+        attributes: ['salt', 'id'],
+        transaction: this.getTran({ transaction })
+      }
+    );
+  }
+
   getProjctUsers({ transaction }) {
     return this.V_ProjectDB.findOne({
       where: {

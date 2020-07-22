@@ -18,7 +18,7 @@ export default class MailTypesProjectService extends BaseService {
   }
 
   async getAll({ model }) {
-    let result = await this.unitOfWorkDI.mailTypesProjectRepository.getAll({})
+    let result = await this.toJsonParse(this.unitOfWorkDI.mailTypesProjectRepository.getAll({model}))
 
     return result;
   }

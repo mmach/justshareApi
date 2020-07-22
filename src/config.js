@@ -4,18 +4,22 @@ let CONFIG = {
   PATH: {
     mails: "./Static/MailsXSLT/"
   },
+  ITEM_ES_QUEUE: 'elasticsearch-items',
+  CHAT_QUEUE: 'chat-messages',
+  CHAT_READ_QUEUE: 'chat-read-message',
   UPLOADED_TYPE: [
     "image/png", "image/jpeg"
   ],
   UPLOAD_PATH: "C:/Programowanie/Private/stuffshare/src/JustShareApi/upload",//"F:/Private/cqrs-node/upload",//
   LOCATION_IQ: "fcfb9eb913b786",
-  TRANSLATE:{
-    engine:'yandex',
-    key:'trnsl.1.1.20190525T222610Z.47a7d82b340b189e.59764ef074ae84f21bed0836d101d4743a754577'
+  TRANSLATE: {
+    engine: 'yandex',
+    key: 'trnsl.1.1.20190525T222610Z.47a7d82b340b189e.59764ef074ae84f21bed0836d101d4743a754577'
   },
-  MQRABBIT:{
-    link:'amqp://kyqjanjv:6djuPiJWnpZnIMT1jZ-SvIULv8IOLw2P@hedgehog.rmq.cloudamqp.com/kyqjanjv'
+  MQRABBIT: {
+    link: 'amqp://kyqjanjv:6djuPiJWnpZnIMT1jZ-SvIULv8IOLw2P@hedgehog.rmq.cloudamqp.com/kyqjanjv'
   },
+  BLOB_LINK: "https://justshare.it/",
   ELASTIC_SEARCH: {
     production: "https://search-justshare-es-prpllmtm2nibj3jnky5rdtjfga.us-east-2.es.amazonaws.com/",//"https://search-justshare-elastic-duvzgnhy7vsbtdpuqtv3s2v4qa.us-east-2.es.amazonaws.com/",
     development: "https://search-justshare-es-prpllmtm2nibj3jnky5rdtjfga.us-east-2.es.amazonaws.com/"//"http://localhost:9200/"//"https://25t337e5fo:xdrzi9s9z@oak-487876355.eu-west-1.bonsaisearch.net:443/"

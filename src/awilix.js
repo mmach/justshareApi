@@ -211,7 +211,7 @@ import UpsertSeoCommand from "./Commands/Seo/upsertSeoCommand.js";
 import GetSeoQuery from "./Query/Seo/getSeoQuery.js";
 import GetUsersQuery from "./Query/User/getUsersQuery.js";
 import GetCategoryActionsQuery from "./Query/Category/getCategoryActionsQuery.js";
-import ItemTransactionsRepository from "./Repository/ItemTransactionsRepository.js";
+import ItemTransactionsRepository from "./Repository/itemTransactionsRepository.js";
 import ItemUserActionRepository from "./Repository/itemUserActionRepository.js";
 import ItemTransactionCategoryOptionsRepository from "./Repository/itemTransactionCategoryOptionsRepository.js";
 import ItemTransactionService from "./Services/itemTransactionsService.js";

@@ -40,7 +40,7 @@ import MailTypesProjectRepository from "./Repository/mailTypesProjectRepository.
 import MailSendersRepository from "./Repository/mailSendersRepository.js";
 import SeoRepository from "./Repository/seoRepository.js";
 import ItemTransactionCategoryOptionsRepository from "./Repository/itemTransactionCategoryOptionsRepository.js";
-import ItemTransactionsRepository from "./Repository/ItemTransactionsRepository.js";
+import ItemTransactionsRepository from "./Repository/itemTransactionsRepository.js";
 import ItemUserActionRepository from "./Repository/itemUserActionRepository.js";
 import ConversationMessagesRepository from "./Repository/conversationMessagesRepository.js";
 import ConversationRepository from "./Repository/conversationRepository.js";

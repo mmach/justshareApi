@@ -5,7 +5,7 @@
     "password": "Crunum123",
     "database": "mappsDB",
     "encrypt":true,
-    "logging":true,
+    "logging":false,
     "dialect": "mssql",
     "dialectOptions": {
       "encrypt":true,
@@ -15,7 +15,7 @@
       }
         },
     "define": {
-      "logging":true,
+      "logging":false,
       "underscored": true
     }
   },
@@ -37,14 +37,18 @@
     "username": "mapps",
     "password": "Crunum123",
     "database": "mappsDB",
-    "logging":true,
+    "encrypt":true,
+    "logging":false,
     "dialect": "mssql",
     "dialectOptions": {
+      "encrypt":true,
+
       "requestTimeout": 300000,
-      "options": { "requestTimeout": 300000 }
+      "options": { "requestTimeout": 300000,    "encrypt":true
+      }
         },
     "define": {
-      "logging":true,
+      "logging":false,
       "underscored": true
     }
   }

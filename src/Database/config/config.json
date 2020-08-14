@@ -4,18 +4,19 @@
     "username": "mapps",
     "password": "Crunum123",
     "database": "mappsDB",
-    "encrypt":true,
-    "logging":false,
+    "encrypt": true,
+    "logging": false,
     "dialect": "mssql",
     "dialectOptions": {
-      "encrypt":true,
-
+      "encrypt": true,
       "requestTimeout": 300000,
-      "options": { "requestTimeout": 300000,    "encrypt":true
+      "options": {
+        "requestTimeout": 300000,
+        "encrypt": true
       }
-        },
+    },
     "define": {
-      "logging":false,
+      "logging": false,
       "underscored": true
     }
   },
@@ -25,7 +26,9 @@
     "dialect": "mssql",
     "dialectOptions": {
       "requestTimeout": 300000,
-      "options": { "requestTimeout": 300000 },
+      "options": {
+        "requestTimeout": 300000
+      },
       "connectionString": "Server=localhost\\SQLEXPRESS;Database=stuffShareDB;Trusted_Connection=yes;"
     },
     "define": {
@@ -37,18 +40,19 @@
     "username": "mapps",
     "password": "Crunum123",
     "database": "mappsDB",
-    "encrypt":true,
-    "logging":false,
+    "encrypt": true,
+    "logging": false,
     "dialect": "mssql",
     "dialectOptions": {
-      "encrypt":true,
-
+      "encrypt": true,
       "requestTimeout": 300000,
-      "options": { "requestTimeout": 300000,    "encrypt":true
+      "options": {
+        "requestTimeout": 300000,
+        "encrypt": true
       }
-        },
+    },
     "define": {
-      "logging":false,
+      "logging": false,
       "underscored": true
     }
   }

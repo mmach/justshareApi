@@ -47,7 +47,7 @@ REFERENCES [dbo].[DimensionsProjects] ([id])
 ALTER TABLE [dbo].[ItemTransactionCategoryOptions] CHECK CONSTRAINT [FK_ItemTransactionCategoryOptions_DimensionsProjects]
 
 ALTER TABLE [dbo].[ItemTransactionCategoryOptions]  WITH CHECK ADD  CONSTRAINT [FK_ItemTransactionCategoryOptions_ItemUserAction] FOREIGN KEY([iua_id])
-REFERENCES [dbo].[ItemUserActions] ([id])
+REFERENCES [dbo].[ItemUserAction] ([id])
 
 ALTER TABLE [dbo].[ItemTransactionCategoryOptions] CHECK CONSTRAINT [FK_ItemTransactionCategoryOptions_ItemUserAction]
 

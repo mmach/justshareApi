@@ -47,7 +47,7 @@ export default class SyncItemCommand extends BaseCommand {
     // @ts-ignore
     super({
       logFileInfrastructureDI,
-      dbTransactionInfrastuctureDI,
+      //dbTransactionInfrastuctureDI,
       validationInfrastructureDI,
       closingInfrastructureDI,
       projectInfrastructureDI
@@ -148,26 +148,21 @@ export default class SyncItemCommand extends BaseCommand {
   async action() {
     // console.log(this.model);
     this.model = await this.itemServiceDI.setContext(this.context).getItem({ toSync: 0 });
-    this.mdoel = await Promise.all(this.model.map(async item => {
-      item.categories = await this.categoryServiceDI.setContext(this.context).getCategoriesParents({ ids: item.category_id })
-      return item;
-    }));
+
     // console.log(JSON.stringify(this.model));
-    let addToQueue = this.addToQueue.bind(this);
+    //  let addToQueue = this.addToQueue.bind(this);
 
-    let queue = await addToQueue();
+    // let queue = await addToQueue();
 
-    queue.forEach(item => {
+    await Promise.mapSeries(this.model, async (item) => {
+      try {
+        this.context.project.id = item.project_id;
+       let obj =  await this.elasticSearchServiceDI.setContext(this.context).addToQueue({ item_id: item.id })
 
+      } catch (er) {
+        console.log(er)
+      }
 
-      global.queueChannel.publish(CONFIG.ITEM_ES_QUEUE, this.context.project.id,
-        item
-        , {
-          contentType: 'application/json', persistent: true, expiration: 20 * 1000, messageId: this.model.id, headers: {
-            Authorization: 'Bearer ' + this.token,
-            ProjectAuthorization: 'Bearer ' + this.projectToken
-          }
-        })
     })
 
     /*

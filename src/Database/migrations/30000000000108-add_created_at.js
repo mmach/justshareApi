@@ -14,14 +14,7 @@ module.exports = {
         ADD  
         [updated_at] [datetimeoffset](7) 
 
-        ALTER TABLE UserTypeRoles
-        ADD  
-        [created_at] [datetimeoffset](7) 
-
-        ALTER TABLE UserTypeRoles
-        ADD  
-        [updated_at] [datetimeoffset](7) 
-
+       
 
         ALTER TABLE RolesProject
         ADD  

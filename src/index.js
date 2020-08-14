@@ -108,6 +108,8 @@ const cqrsPreprocess = () => {
       action.referer = ctx.request.header.referer ? (new URL(ctx.request.header.referer)).origin : 'http://localhost.8080'
       action.language = lang;
       action.context.language = lang;
+      action.context.token = token;
+      action.context.projectToken = ctx.request.header.projectauthorization
       result = await action.run();
       ctx.body = CircularJSON.stringify(result);;
       ctx.status = 200;

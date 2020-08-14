@@ -60,7 +60,8 @@ export default class V_User extends Model {
         country_id: DataTypes.UUID,
         city: DataTypes.STRING,
         project_id: DataTypes.UUID,
-        usertype_id: DataTypes.UUID
+        usertype_id: DataTypes.UUID,
+        user_invoice_data_id: DataTypes.UUID
 
       },
       { sequelize }
@@ -72,7 +73,7 @@ export default class V_User extends Model {
     V_User.belongsTo(models.UserTypes, { as: "user_type", targetKey: 'id', foreignKey: "usertype_id" });
     V_User.hasMany(models.UserRoles, { as: "user_roles", targetKey: 'id', foreignKey: "user_id" });
     V_User.belongsTo(models.V_Project, { as: "project", targetKey: 'id', foreignKey: "project_id" });
-  
+
     // Users.hasMany(models.UserAuth)
   }
 }

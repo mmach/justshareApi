@@ -138,6 +138,8 @@ export default class BlobRepository extends BaseRepository {
   }
   insertFile({ id, path, name, transaction }) {
     var blob = fs.readFileSync(path);
+    let file_type = name.split('.')[name.split('.').length-1]
+    let size =  stringToBytesFaster(blob.toString('base64')).length;
     return this.sequelizeDI.sequelize.query(
       `SET NOCOUNT ON
         DECLARE @result TABLE 
@@ -154,26 +156,31 @@ export default class BlobRepository extends BaseRepository {
             )
         ) with(blob varbinary(max)))
 
-        INSERT INTO [BlobStore]([file_stream], [name]) 
+        INSERT INTO [BlobStore](stream_id,[file_stream], [name],file_type,cached_file_size,creation_time) 
         OUTPUT 
          CONVERT(nvarchar(50),inserted.stream_id)
          INTO @result
         Values (
-          @file
-         ,'${name}')
+          :id
+          ,@file
+         ,:name
+         ,:file_type
+        ,:size,
+        GETDATE()
+         )
          
         INSERT INTO dbo.BlobMappers
          (id, stream_id,created_at,updated_at)    
-         SELECT '${id}' , stream_id,GETDATE(),GETDATE()
+         SELECT :id , stream_id,GETDATE(),GETDATE()
          FROM @result;   
         DELETE @result   
         SET NOCOUNT OFF
         SELECT TOP 1 id,id  FROM BlobMappers
-        WHERE id = '${id}'
+        WHERE id = :id
         SET NOCOUNT ON`,
       {
         logging: false,
-        replacements: { blob: blob },
+        replacements: { blob: blob,id:id,name:name ,file_type:file_type,size:size},
         transaction: this.getTran({ transaction }),
         type: this.sequelizeDI.sequelize.QueryTypes.SELECT,
 

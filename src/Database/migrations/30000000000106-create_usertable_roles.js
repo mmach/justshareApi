@@ -10,7 +10,7 @@ module.exports = {
           name nvarchar(150) ,
           role_id char(36),
           project_id char(36),
-          user_id char(36)
+          user_id char(36),
           [created_at] [datetimeoffset](7) NULL,
           [updated_at] [datetimeoffset](7) NULL
                ) ON [PRIMARY]   

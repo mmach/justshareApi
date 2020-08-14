@@ -32,7 +32,7 @@ module.exports = {
               ,[plan_id]
               ,[auth_url]
             ,[salt]
-          FROM [DB_A43E8B_stuffshare].[dbo].[Projects]
+          FROM .[dbo].[Projects]
         `
 
 
@@ -67,7 +67,7 @@ module.exports = {
             ,[user_id]
             ,[plan_id]
             ,[auth_url]
-        FROM [DB_A43E8B_stuffshare].[dbo].[Projects]   
+        FROM [dbo].[Projects]   
 
     
 

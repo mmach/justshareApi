@@ -29,14 +29,16 @@ export default class SearchItemQuery extends BaseQuery {
         this.model = Object.assign(new SearchItemDTO(), dto);
     }
 
- 
+
     async action() {
         let catoptions = []
+        let catoptionsAll = []
         if (this.model.category_id != undefined && this.model.category_id != '') {
             let categories = await this.categoryServiceDI.setContext(this.context).getCategoriesParents({ ids: this.model.category_id })
             let ids = categories.map(item => { return item.id });
             catoptions = await this.categoryOptionServiceDI.setContext(this.context).getRelatedOptions({ category_ids: ids });
-            catoptions = catoptions.filter(item => { return item.is_searchable == true })
+            catoptionsAll = catoptions;
+            catoptions = catoptions.filter(item => { return item.is_searchable == true || item.category_link[0].is_searchable == true })
         }
         let result = await this.elasticSearchServiceDI.setContext(this.context).searchDoc({
             latitude: this.model.lat,
@@ -50,6 +52,7 @@ export default class SearchItemQuery extends BaseQuery {
             createdInterval: this.model.createdInterval,
             catOptionsFilter: this.model.catOptions,
             catoptions: catoptions,
+            catoptionsAll: catoptionsAll,
             size: this.model.size != undefined ? this.model.size : 600,
             itemId: this.model.item_id,
             page: this.model.page,

@@ -68,7 +68,8 @@ export default class Users extends Model {
         country_id: DataTypes.UUID,
         city: DataTypes.STRING,
         project_id: DataTypes.UUID,
-        usertype_id: DataTypes.UUID
+        usertype_id: DataTypes.UUID,
+        user_invoice_data_id: DataTypes.UUID
 
       },
       { sequelize }
@@ -80,7 +81,7 @@ export default class Users extends Model {
     Users.beforeDestroy(async (item, options) => {
 
       console.log('beforeDestroyUser')
-    
+
 
       await models.Item.destroy({
         where: { user_id: item.id },
@@ -107,14 +108,14 @@ export default class Users extends Model {
         individualHooks: true
 
       })
-      
-   /*   await models.UserConversations.destroy({
-        where: { user_id: item.id },
-        transaction: options.transaction,
-        individualHooks: true
 
-      })*/
-  
+      /*   await models.UserConversations.destroy({
+           where: { user_id: item.id },
+           transaction: options.transaction,
+           individualHooks: true
+   
+         })*/
+
     })
   }
 

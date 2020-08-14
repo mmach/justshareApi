@@ -31,12 +31,15 @@ export default class ItemUserAction extends Model {
         comment: DataTypes.TEXT,
         rating: DataTypes.INTEGER,
         status: DataTypes.STRING,
-        iua_id: DataTypes.UUID     
+        iua_id: DataTypes.UUID,
+        iua_prev_id: DataTypes.UUID,
+        status_id: DataTypes.UUID,
+        uniq_number:DataTypes.STRING
       },
       { sequelize }
     );
   }
   static associate(models) {
-  
+
   }
 }

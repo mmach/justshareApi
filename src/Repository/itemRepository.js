@@ -18,6 +18,7 @@ export default class ItemRepository extends BaseRepository {
   constructor({ sequelizeDI }) {
     super(sequelizeDI.Item);
     this.sequelizeDI = sequelizeDI;
+    this.itemCategoryOptionTermDB = sequelizeDI.ItemCategoryOptionTerm
   }
 
   /**
@@ -350,6 +351,14 @@ export default class ItemRepository extends BaseRepository {
           ]
         },
         {
+          model: this.sequelizeDI.ItemCategoryOptionTerm,
+          required: false,
+          as: "itemCategoryOptionTerms",
+
+        }
+
+        ,
+        {
           model: this.sequelizeDI.Tag,
           required: false,
           as: "tags"
@@ -441,6 +450,62 @@ export default class ItemRepository extends BaseRepository {
       }, {
       transaction: this.getTran({ transaction })
     });
+
+  }
+  addCategoryOptionTerm({ model, transaction }) {
+
+    return this.itemCategoryOptionTermDB.create(
+      {
+        ...model,
+        project_id: this.context.project.id
+      }, {
+      transaction: this.getTran({ transaction })
+    });
+
+  }
+
+  removeCategoryOptionTerm({ id, iua_id, transaction }) {
+
+    let where = { project_id: this.context.project.id };
+    if (iua_id) {
+      where.iua_id == iua_id;
+    }
+    if (id) {
+      where.id == id
+    }
+    return this.itemCategoryOptionTermDB.destroy({
+      where: where,
+      transaction: this.getTran({ transaction })
+    });
+  }
+
+
+
+  isFreeTerm({ model, transaction }) {
+
+    return this.sequelizeDI.sequelize.query(
+      `WITH getAllReservation AS ( 
+        SELECT* FROM [ItemCategoryOptionTerms] 
+        WHERE item_id=:item_id
+        AND dim_id=:dim_id
+        ),
+        frameTime AS ( 
+        SELECT* FROM getAllReservation 
+        WHERE start_date<:end_date 
+            AND end_date>:start_date
+        )
+        SELECT id,iua_id FROM frameTime`
+      ,
+      {
+        replacements: {
+          end_date: model.end_date
+          , start_date: model.start_date
+          , item_id: model.item_id
+          , dim_id: model.dim_id
+        },
+        transaction: this.getTran({ transaction }),
+        type: this.sequelizeDI.sequelize.QueryTypes.SELECT
+      });
 
   }
 

@@ -29,6 +29,18 @@ export default class ActionProjectRepository extends BaseRepository {
           as: "action_details"
 
         },
+        {
+          model: this.sequelizeDI.StatusActions,
+          as: "statuses",
+          include: [{
+            model: this.sequelizeDI.StatusProjects,
+            as: "status",
+            include: [{
+              model: this.sequelizeDI.Status,
+              as: "status",
+            }]
+          }]
+        },
 
         {
           model: this.sequelizeDI.ActionPrivileges,

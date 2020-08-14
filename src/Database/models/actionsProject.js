@@ -46,7 +46,9 @@ export default class ActionsProject extends Model {
   static associate(models) {
     ActionsProject.belongsTo(models.Actions, { as: "action_details", targetKey: 'id', foreignKey: "action_id" });
     ActionsProject.hasMany(models.ActionPrivileges, { as: "action_privileges", targetKey: 'id', foreignKey: "action_id" });
+    ActionsProject.hasMany(models.StatusActions, { as: "statuses", targetKey: 'id', foreignKey: "action_id" });
 
+    
     // Users.hasOne(models.Blob, { as: "blob_profile", targetKey: 'id', foreignKey: "blob_id" });
 
 

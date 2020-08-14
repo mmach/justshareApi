@@ -5,10 +5,10 @@ module.exports = {
     return queryInterface.sequelize
       .query(
         `
-        ALTER TABLE [dbo].[UserProjectsPrivileges]
+        ALTER TABLE [dbo].[UserProjectPrivileges]
         ADD privilege_id char(36)
 
-        ALTER TABLE [dbo].[UserProjectsPrivileges]  WITH CHECK ADD  CONSTRAINT [FK_UserProjectsPrivileges_PRIVILEGES] FOREIGN KEY([privilege_id])
+        ALTER TABLE [dbo].[UserProjectPrivileges]  WITH CHECK ADD  CONSTRAINT [FK_UserProjectsPrivileges_PRIVILEGES] FOREIGN KEY([privilege_id])
         REFERENCES [dbo].[Privileges] ([id])
       
         
@@ -21,7 +21,7 @@ module.exports = {
   down: (queryInterface, Sequelize) => {
     return queryInterface.sequelize
       .query(`
-      ALTER TABLE [dbo].[UserProjectsPrivileges]
+      ALTER TABLE [dbo].[UserProjectPrivileges]
       DROP COLUMN privilege_id `
       )
   }

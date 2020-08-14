@@ -94,11 +94,11 @@ export default class ReservationItemCommand extends BaseCommand {
     let fromUrl = this.model.item.itemCategoryOption.filter(item => { return item.cat_opt_temp.is_from_url == true }).map(item => { return { id: item.co_temp_id, val: item.value } })
     let res = BuildItem(itemsResult.item, catOptions, fromUrl, dimensions, this.context.language)
     // console.log(res)
-    let r = res.itemCategoryOption.filter(i => {
+    let r = itemsResult.item.itemCategoryOption.filter(i => {
       return this.model.item.itemCategoryOption.filter(l => { return i.co_temp_id == l.co_temp_id && i.value == l.value }).length > 0
     })
     let user = await this.userServiceDI.setContext(this.context).getUserInfo({ user_id: this.model.item.user_id });
-
+let uniq_number = new Date().getTime()
     if (r.length == res.itemCategoryOption.length) {
       let uai_id = uuid()
       await this.itemUserActionServiceDI.upsert({
@@ -108,7 +108,9 @@ export default class ReservationItemCommand extends BaseCommand {
           user_id: this.context.user.id,
           action_id: this.model.action_id,
           status: 'N',
-          comment: this.model.message
+          comment: this.model.message,
+          uniq_number:uniq_number
+          
         },
         withProject: true
 
@@ -247,7 +249,7 @@ export default class ReservationItemCommand extends BaseCommand {
         message: this.model.message,
         user_dest: [user],
         iua_id: uai_id,
-        title: undefined
+        title: "IUA."+uniq_number
 
 
 

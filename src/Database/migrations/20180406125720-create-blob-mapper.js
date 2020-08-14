@@ -4,7 +4,7 @@ module.exports = {
     return migration.sequelize.query(`
     CREATE TABLE [dbo].[BlobMappers](
       [id] [char](36) NOT NULL,
-      [stream_id] [uniqueidentifier] NOT NULL,
+      [stream_id] [char](36) NOT NULL,
       [created_at] [datetimeoffset](7) NOT NULL,
       [updated_at] [datetimeoffset](7) NOT NULL,
      CONSTRAINT [PK_BlobMappers] PRIMARY KEY CLUSTERED 
@@ -16,7 +16,6 @@ module.exports = {
     
     ALTER TABLE [dbo].[BlobMappers]  WITH CHECK ADD  CONSTRAINT [FK_BlobMapper_BlobStore] FOREIGN KEY([stream_id])
     REFERENCES [dbo].[BlobStore] ([stream_id])
-    ON DELETE CASCADE
    
     ALTER TABLE [dbo].[BlobMappers] CHECK CONSTRAINT [FK_BlobMapper_BlobStore]
 

@@ -44,7 +44,7 @@ export default class ConversationService extends BaseService {
       iua_id: iua_id,
       status: 'O',
       title: title,
-      created_at:new Date(),
+      created_at: new Date(),
       project_id: this.context.project.id
     }
 
@@ -90,7 +90,7 @@ export default class ConversationService extends BaseService {
       is_newest: true,
       message_triggered_id: null,
       project_id: this.context.project.id,
-      created_at:new Date()
+      created_at: new Date()
 
 
     }]
@@ -121,7 +121,64 @@ export default class ConversationService extends BaseService {
       conversation)
   }
 
+  async sendMessageToUser({ iua_id, msg_id, msg, syncSocket }) {
+    let conv = await this.toJsonParse(this.unitOfWorkDI.conversationRepository.getUserConversations({
+      iua_id
+    }))
+    let proj = await this.projectServiceDI.getProjectsSockets({})
+    proj = proj.filter(item => { return item.id == this.context.project.id })[0]
+
+    conv = conv[0]
+    let hash = Buffer.from(proj.socket).toString('base64').replace(/=/g, '');
+   // console.log(conv.messages[0].id);
+    let obj = {
+      id: msg_id,
+      project_id: this.context.project.id,
+      user_id: this.context.user.id,
+      conversation_id: conv.id,
+      conv_id: conv.id,
+      message: msg,
+      is_newest: true,
+      message_triggered_id: conv.messages[0].id,
+      created_at: new Date(),
+      socket_user_id: '/socket_' + hash,
+      users: conv.users.map(i => { return { ...i, id: uuid() } }),
+    }
+    global.queueChannel.publish(CONFIG.CHAT_QUEUE, this.context.project.id,
+      obj, {
+      contentType: 'application/json', persistent: true, expiration: 20 * 1000, messageId: msg_id, headers: {
+        Authorization: 'Bearer ' + this.context.token,
+        ProjectAuthorization: 'Bearer ' + this.context.projectToken
+      }
+    })
+    conv.users.forEach(i => {
+      global.socket.of("/socket_" + hash).emit(i.user_id + '-newmssg',
+        obj)
+    })
+
+  }
+
+
+  async closeConversation({ id, iua_id }) {
+    return await this.unitOfWorkDI.conversationRepository.closeConversation({ id, iua_id })
+
+  }
+  /*
+  await this.conversationMessagesServiceDI.setContext(this.context).insert({
+    model: conversation.messages[0]
+    , withProject: true
+  })*/
+  /*
+  conversation.messages[0].users = [{
+    id: uuid(),
+    user_id: user_dest[0].id,
+    conversation_id: id,
+    message_id: msg_id,
+    status: 'N'
+  }]*/
 }
+
+
 
 
 

@@ -336,11 +336,12 @@ export default class CreateItemCommand extends BaseCommand {
     item=item[0]
     this.model = { ...item,
       categories:categories };
+    await this.elasticSearchServiceDI.setContext(this.context).addToQueue({ item_id: this.model.id, operation: 'I' })
 
     // this.model.item=item[0]
-    this.closingInfrastructureDI.addClosingFunction(
-      this.addToQueue.bind(this)
-    )
+   // this.closingInfrastructureDI.addClosingFunction(
+   //   this.addToQueue.bind(this)
+  //  )
     //await this.insertCategories(item.id);
 
     //  console.log(categories);

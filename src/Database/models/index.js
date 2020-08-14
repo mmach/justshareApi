@@ -58,6 +58,15 @@ import Conversation from "./conversation";
 import UserConversation from "./userconversation";
 import ConversationMessages from "./conversationmessages";
 import ConversationMessageMembers from "./conversationmessagesmembers";
+import Status from "./status";
+import StatusActions from "./statusActions";
+import StatusProjects from "./statusProjects";
+import ItemCategoryOptionTerm from "./itemCategoryOptionTerm.js";
+import Comment from "./comments";
+import Invoice from './invoices.js'
+import InvoiceUser from "./invoicesUsers";
+import InvoiceItem from "./invoicesItems";
+import UserInvoiceValue from "./userInvoicesValue";
 
 var env = process.env.NODE_ENV || "development";
 var config = configJSON[env];
@@ -141,7 +150,16 @@ let models = {
   Conversation: Conversation.init(sequelize, Sequelize),
   UserConversation: UserConversation.init(sequelize, Sequelize),
   ConversationMessages: ConversationMessages.init(sequelize, Sequelize),
-  ConversationMessageMembers: ConversationMessageMembers.init(sequelize, Sequelize)
+  ConversationMessageMembers: ConversationMessageMembers.init(sequelize, Sequelize),
+  Status: Status.init(sequelize, Sequelize),
+  StatusActions: StatusActions.init(sequelize, Sequelize),
+  StatusProjects: StatusProjects.init(sequelize, Sequelize),
+  ItemCategoryOptionTerm: ItemCategoryOptionTerm.init(sequelize, Sequelize),
+  Comment: Comment.init(sequelize, Sequelize),
+  Invoice: Invoice.init(sequelize, Sequelize),
+  InvoiceUser: InvoiceUser.init(sequelize, Sequelize),
+  InvoiceItem: InvoiceItem.init(sequelize, Sequelize),
+  UserInvoiceValue: UserInvoiceValue.init(sequelize, Sequelize)
 };
 
 

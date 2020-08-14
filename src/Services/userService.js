@@ -56,6 +56,9 @@ export default class UserService extends BaseService {
       throw ex;
     }
   }
+  async getUserInvoiceData({ user_id }) {
+    return await this.toJsonParse(this.unitOfWorkDI.userInvoiceValuesRepository.getUserInvoiceData({ user_id }))
+  }
   /**
    *
    * @param   {{model:UserLoginInternalDTO}}

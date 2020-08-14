@@ -25,7 +25,7 @@ module.exports = {
                 ,[expired_day]
                 ,[blob_id]
                 ,[Categories].[project_id]
-                ,[icon]
+                ,'' as [icon]
                 ,[color]
                 ,[translation_id]
             FROM [dbo].[Categories]

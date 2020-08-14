@@ -232,7 +232,32 @@ import ConversationMessagesMembersRepository from "./Repository/conversationMess
 import ConversationMessageMembersService from "./Services/conversationMessagesMemberService.js";
 import GetToReadMessagesQuery from "./Query/Messages/getToReadMessagesQuery.js";
 import ReadMessageCommand from "./Commands/Messages/readMessageCommand.js";
-
+import StatusActionsRepository from "./Repository/statusActionsRepository.js";
+import StatusProjectsRepository from "./Repository/statusProjectsRepository.js";
+import StatusRepository from "./Repository/statusRepository.js";
+import StatusProjectService from "./Services/statusProjectService.js";
+import UpsertStatusCommand from "./Commands/Status/upsertStatusCommand.js";
+import UpsertStatusGlobalCommand from "./Commands/Status/upsertStatusGlobalCommand.js";
+import UnlinkStatusActionCommand from "./Commands/Status/unlinkStatusActionCommand.js";
+import LinkStatusActionCommand from "./Commands/Status/linkStatusActionCommand.js";
+import RemoveStatusCommand from "./Commands/Status/removeStatusCommand.js";
+import GetStatusGlobalQuery from "./Query/Status/getStatusGlobalQuery.js";
+import GetStatusQuery from "./Query/Status/getStatusQuery.js";
+import GetItemTransactionQuery from "./Query/Item/getItemTransactionQuery.js";
+import ItemActionsReservationAcceptCommand from "./Commands/Item/Actions/Reservation/itemActionsReservationAcceptCommand.js";
+import ItemActionsReservationCancelCommand from "./Commands/Item/Actions/Reservation/itemActionsReservationCancelCommand.js";
+import ItemActionsReservationPaidCommand from "./Commands/Item/Actions/Reservation/itemActionsReservationPaidCommand.js";
+import ItemActionsReservationRejectCommand from "./Commands/Item/Actions/Reservation/itemActionsReservationRejectCommand.js";
+import InvoiceService from "./Services/invoiceService.js";
+import InvoiceRepository from "./Repository/invoiceRepository.js";
+import CommentRepository from "./Repository/commentRepository.js";
+import CommentService from "./Services/commentService.js";
+import ItemActionsReservationCompleteCommand from "./Commands/Item/Actions/Reservation/itemActionsReservationCompletCommand.js";
+import ItemActionsReservationWaitingForCustomerCommand from "./Commands/Item/Actions/Reservation/itemActionsReservationWaitingForCustomerCommand.js";
+import ItemActionsReservationWaitingForClientCommand from "./Commands/Item/Actions/Reservation/itemActionsReservationWaitingForClientCommand.js";
+import InvoiceItemRepository from "./Repository/invoiceItemsRepository.js";
+import InvoiceUserRepository from "./Repository/invoiceUserRepository.js";
+import UserInvoiceValuesRepository from "./Repository/UserInvoiceValuesRepository.js";
 
 
 
@@ -325,12 +350,21 @@ let exporter = {
   userConversationServiceDI: asClass(UserConversationService),
   conversationMessagesServiceDI: asClass(ConversationMessagesService),
   conversationServiceDI: asClass(ConversationService),
-  conversationMessagesMembersRepositoryDI:asClass(ConversationMessagesMembersRepository),
-  conversationMessageMembersServiceDI:asClass(ConversationMessageMembersService)
+  conversationMessagesMembersRepositoryDI: asClass(ConversationMessagesMembersRepository),
+  conversationMessageMembersServiceDI: asClass(ConversationMessageMembersService),
+  statusActionsRepositoryDI: asClass(StatusActionsRepository),
+  statusProjectsRepositoryDI: asClass(StatusProjectsRepository),
+  statusRepositoryDI: asClass(StatusRepository),
+  statusProjectServiceDI: asClass(StatusProjectService),
+  invoiceServiceDI: asClass(InvoiceService),
+  invoiceRepositoryDI: asClass(InvoiceRepository),
+  commentServiceDI: asClass(CommentService),
+  commentRepositoryDI: asClass(CommentRepository),
+  invoiceItemRepositoryDI: asClass(InvoiceItemRepository),
+  invoiceUserRepositoryDI: asClass(InvoiceUserRepository),
+  userInvoiceValuesRepositoryDI: asClass(UserInvoiceValuesRepository)
 
-  
 };
-
 exporter[CommandList.Dictionary.ADD_DICTIONARY] = asClass(
   AddToDictionaryCommand
 );
@@ -524,7 +558,23 @@ exporter[QueryList.Item.SEARCH_ITEM] = asClass(SearchItemQuery);
 exporter[QueryList.Item.GET_ITEM_BY_ID] = asClass(GetItemByIdQuery);
 exporter[QueryList.Item.GET_USER_ITEMS] = asClass(GetUserItemQuery);
 exporter[QueryList.Item.GET_USER_ITEMS_TO_SYNC] = asClass(GetUserItemToSyncQuery);
+exporter[QueryList.Item.GET_USER_TRANSACTIONS] = asClass(GetItemTransactionQuery);
 
+
+
+
+//ACTIONS
+//RESERVATIONS
+
+
+exporter[CommandList.Item.Actions.Reservation.ACCEPT] = asClass(ItemActionsReservationAcceptCommand);
+exporter[CommandList.Item.Actions.Reservation.CANCELLED] = asClass(ItemActionsReservationCancelCommand);
+exporter[CommandList.Item.Actions.Reservation.PAID] = asClass(ItemActionsReservationPaidCommand);
+exporter[CommandList.Item.Actions.Reservation.REJECT] = asClass(ItemActionsReservationRejectCommand);
+exporter[CommandList.Item.Actions.Reservation.COMPLETE] = asClass(ItemActionsReservationCompleteCommand);
+
+exporter[CommandList.Item.Actions.Reservation.WAITING_FOR_RATE_CUSTOMER] = asClass(ItemActionsReservationWaitingForCustomerCommand);
+exporter[CommandList.Item.Actions.Reservation.WAITING_FOR_RATE_CLIENT] = asClass(ItemActionsReservationWaitingForClientCommand);
 
 
 
@@ -591,7 +641,18 @@ exporter[CommandList.Config.UPSERT_CONFIG] = asClass(UpsertConfigCommand);
 
 
 
+/////////////////STATUS/////////////////////////
 
+
+exporter[CommandList.Status.UPSERT_STATUS] = asClass(UpsertStatusCommand);
+exporter[CommandList.Status.UPSERT_STATUS_GLOBAL] = asClass(UpsertStatusGlobalCommand);
+
+exporter[CommandList.Status.UNLINK_STATUS_ACTION] = asClass(UnlinkStatusActionCommand);
+exporter[CommandList.Status.LINK_STATUS_ACTION] = asClass(LinkStatusActionCommand);
+exporter[CommandList.Status.REMOVE_STATUS] = asClass(RemoveStatusCommand);
+
+exporter[QueryList.Status.GET_GLOBAL_STATUSES] = asClass(GetStatusGlobalQuery);
+exporter[QueryList.Status.GET_STATUS] = asClass(GetStatusQuery);
 
 
 

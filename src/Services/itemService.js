@@ -44,14 +44,15 @@ export default class ItemService extends BaseService {
       model: {
         ...model,
         item_id: item_id,
-        value: model.value? model.value: model.val,
-        co_id: model.element? model.element: model.co_id,
-        co_temp_id: model.cat_opt_id? model.cat_opt_id: model.co_temp_id
+        value: model.value ? model.value : model.val,
+        co_id: model.element ? model.element : model.co_id,
+        co_temp_id: model.cat_opt_id ? model.cat_opt_id : model.co_temp_id
       }
 
 
     });
   }
+  
   async deleteTags({ itemId }) {
     return await this.unitOfWorkDI.itemRepository.deleteTags({
       item_id: itemId,
@@ -81,4 +82,22 @@ export default class ItemService extends BaseService {
     return await this.unitOfWorkDI.itemRepository.getAll()
     //  return await this.toJsonParse(this.unitOfWorkDI.itemRepository.getItem({ uids: result, transaction }))
   }
+
+  async addCategoryOptionTerm({ model }) {
+    //  search.prepareSearch = await this.unitOfWorkDI.textRepository.prepareSearch({ text: search.freetext, wildecard: 1 })
+    //let result = this.unitOfWorkDI.itemRepository.search({ search });
+    return await this.unitOfWorkDI.itemRepository.addCategoryOptionTerm({ model })
+    //  return await this.toJsonParse(this.unitOfWorkDI.itemRepository.getItem({ uids: result, transaction }))
+  }
+  async removeCategoryOptionTerm({ id, iua_id, }) {
+    //  search.prepareSearch = await this.unitOfWorkDI.textRepository.prepareSearch({ text: search.freetext, wildecard: 1 })
+    //let result = this.unitOfWorkDI.itemRepository.search({ search });
+    return await this.unitOfWorkDI.itemRepository.removeCategoryOptionTerm({ id: id, iua_id: iua_id })
+    //  return await this.toJsonParse(this.unitOfWorkDI.itemRepository.getItem({ uids: result, transaction }))
+  }
+  async isFreeTerm({ model }) {
+    return await this.unitOfWorkDI.itemRepository.isFreeTerm({ model })
+
+  }
+
 }

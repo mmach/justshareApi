@@ -157,6 +157,12 @@ export default class Item extends Model {
       targetKey: 'id',
       foreignKey: "item_id"
     });
+
+    Item.hasMany(models.ItemCategoryOptionTerm, {
+      as: 'itemCategoryOptionTerms',
+      targetKey: 'id',
+      foreignKey: "item_id"
+    });
    
   }
 }

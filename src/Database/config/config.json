@@ -1,17 +1,21 @@
 {
   "development": {
-    "host": "SQL6003.site4now.net",
-    "username": "DB_A43E8B_stuffshare_admin",
-    "password": "stuffShare123",
-    "database": "DB_A43E8B_stuffshare",
-    "logging":false,
+    "host": "mappsdb.database.windows.net",
+    "username": "mapps",
+    "password": "Crunum123",
+    "database": "mappsDB",
+    "encrypt":true,
+    "logging":true,
     "dialect": "mssql",
     "dialectOptions": {
+      "encrypt":true,
+
       "requestTimeout": 300000,
-      "options": { "requestTimeout": 300000 }
+      "options": { "requestTimeout": 300000,    "encrypt":true
+      }
         },
     "define": {
-      "logging":false,
+      "logging":true,
       "underscored": true
     }
   },
@@ -29,18 +33,18 @@
     }
   },
   "production": {
-    "host": "SQL6003.site4now.net",
-    "username": "DB_A43E8B_stuffshare_admin",
-    "password": "stuffShare123",
-    "database": "DB_A43E8B_stuffshare",
-    "logging":false,
+    "host": "mappsdb.database.windows.net",
+    "username": "mapps",
+    "password": "Crunum123",
+    "database": "mappsDB",
+    "logging":true,
     "dialect": "mssql",
     "dialectOptions": {
       "requestTimeout": 300000,
       "options": { "requestTimeout": 300000 }
         },
     "define": {
-      "logging":false,
+      "logging":true,
       "underscored": true
     }
   }

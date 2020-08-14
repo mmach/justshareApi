@@ -21,9 +21,11 @@ export default class ElasticSearchService extends BaseService {
    * Creates an instance of UserService.
    * @param   {{ unitOfWorkDI: UnitOfWork}}
    */
-  constructor({ unitOfWorkDI, itemRepositoryDI }) {
+  constructor({ unitOfWorkDI, itemRepositoryDI, itemServiceDI, categoryServiceDI }) {
     super({ unitOfWorkDI });
     this.itemRepositoryDI = itemRepositoryDI;
+    this.itemServiceDI = itemServiceDI;
+    this.categoryServiceDI = categoryServiceDI
   }
   /**
      * 
@@ -44,134 +46,6 @@ export default class ElasticSearchService extends BaseService {
     status,
     type,
     category, categories, created_at, expired_at, item }) {
-    console.log(JSON.stringify(catOptions, true))
-
-    let singleGeo = catOptions.filter(item => {
-      return item.type == 'SINGLE'
-    }).map(item => {
-      var value = {};
-      // value[item.catOption.cat_opt_type_template.type] = ['float', 'long'].includes(item.catOption.cat_opt_type_template.type) ? parseFloat(item.val) : item.val
-      value = item.val;
-      value = ['float', 'date', 'text', 'long'].map(item => {
-        return {}[item] = item.val;
-      })
-      return {
-        cat_opt_id: item.cat_opt_id,
-        type: item.type,
-        dataType: item.catOption.cat_opt_type_template.type,
-        order: item.catOption.cat_opt_type_template.order,
-        cat_opt_temp_id: item.catOption.id,
-        co_id: item.co_id,
-        value: {
-          float: parseFloat(item.val),
-          date: Date.parse(item.val),
-          text: item.val,
-          long: parseInt(item.val)
-
-        }
-        // conc: item.cat_opt_id + ";" + String(value)
-      }
-
-    })
-
-    let singleSELECT = catOptions.filter(item => {
-      return ['SELECT', 'MULTI_SELECT'].includes(item.type)
-    }).map(item => {
-      var value = {};
-      value = {
-        "pl": item.select["value_pl"],
-        "us": item.select["value_us"],
-        "no": item.select["value_no"],
-        "es": item.select["value_es"],
-        "ru": item.select["value_ru"],
-        "fr": item.select["value_fr"],
-        "zh_cn": item.select["value_zh_cn"],
-        "de": item.select["value_de"]
-      }
-      return {
-
-        cat_opt_id: item.cat_opt_id,
-        type: item.type,
-        dataType: item.select.cat_opt_type_template.type,
-        order: item.select.cat_opt_type_template.order,
-        cat_opt_temp_id: item.select.id,
-        co_id: item.co_id,
-        value: value
-      }
-
-    })
-
-    let categoriesArray = categories.map(item => {
-      return {
-        id: item.id, category: {
-          "pl": item.category_pl,
-          "us": item.category_us,
-          "no": item.category_no,
-          "es": item.category_es,
-          "ru": item.category_ru,
-          "fr": item.category_zh_cn,
-          "zh_cn": item.category_zh_cn,
-          "de": item.category_de
-
-
-        }
-      }
-    });
-    console.log(tags);
-    let data = {
-      "location": [longitude, latitude],
-
-      "user_id": user_id,
-      "title": title,
-      "description": description,
-      "clob": clobs,
-      "status": status,
-      "created_at": created_at,
-      "expired_at": expired_at,
-      "tags": tags.map(item => {
-        return {
-          tag: item.label
-        }
-      }),
-      "tagsArray": tags.map(item => {
-        return { tag: item.label }
-      }),
-      "single": singleGeo,
-      "select": singleSELECT,
-      "type": type,
-      "categories": categoriesArray,
-      "item": JSON.stringify(item),
-      "category": {
-        "id": category,
-      }
-    };
-    console.log(JSON.stringify(data))
-    let result = await axios({
-      method: 'post',
-      url: CONFIG.ELASTIC_SEARCH[process.env.NODE_ENV ? process.env.NODE_ENV : 'development'] + `items/_doc/${item_id}?refresh`,
-      data: data
-    })
-    return this.itemRepositoryDI.setAsSyncElastic({ id: item_id })
-  }
-
-
-  async toQueueItemDoc({ item_id,
-    clobs,
-    longitude,
-    latitude,
-    user_id,
-    catOptions,
-    description,
-    title,
-    tags,
-    status,
-    type,
-    category,
-    categories,
-    created_at, expired_at, item,
-    project_id,
-    es_operations,
-    external_id }) {
     //console.log(JSON.stringify(catOptions, true))
 
     let singleGeo = catOptions.filter(item => {
@@ -245,6 +119,214 @@ export default class ElasticSearchService extends BaseService {
         }
       }
     });
+    // console.log(tags);
+    let data = {
+      "location": [longitude, latitude],
+
+      "user_id": user_id,
+      "title": title,
+      "description": description,
+      "clob": clobs,
+      "status": status,
+      "created_at": created_at,
+      "expired_at": expired_at,
+      "tags": tags.map(item => {
+        return {
+          tag: item.label
+        }
+      }),
+      "tagsArray": tags.map(item => {
+        return { tag: item.label }
+      }),
+      "single": singleGeo,
+      "select": singleSELECT,
+      "type": type,
+      "categories": categoriesArray,
+      "item": JSON.stringify(item),
+      "category": {
+        "id": category,
+      }
+    };
+    console.log(JSON.stringify(data))
+    let result = await axios({
+      method: 'post',
+      url: CONFIG.ELASTIC_SEARCH[process.env.NODE_ENV ? process.env.NODE_ENV : 'development'] + `items/_doc/${item_id}?refresh`,
+      data: data
+    })
+    return this.itemRepositoryDI.setAsSyncElastic({ id: item_id })
+  }
+
+
+  async toQueueItemDoc({ item_id,
+    clobs,
+    longitude,
+    latitude,
+    user_id,
+    catOptions,
+    description,
+    title,
+    tags,
+    status,
+    terms,
+    type,
+    category,
+    categories,
+    created_at, expired_at, item,
+    project_id,
+    es_operations,
+    external_id }) {
+    //console.log(JSON.stringify(catOptions, true))
+
+    let singleGeo = catOptions.filter(item => {
+      return item.type == 'SINGLE'
+    }).map(item => {
+      var value = {};
+      // value[item.catOption.cat_opt_type_template.type] = ['float', 'long'].includes(item.catOption.cat_opt_type_template.type) ? parseFloat(item.val) : item.val
+      value = item.val;
+      value = ['float', 'date', 'text', 'long'].map(item => {
+        return {}[item] = item.val;
+      })
+      return {
+        cat_opt_id: item.cat_opt_id,
+        type: item.type,
+        dataType: item.catOption.cat_opt_type_template.type,
+        order: item.catOption.cat_opt_type_template.order,
+        cat_opt_temp_id: item.catOption.id,
+        co_id: item.co_id,
+        value: {
+          float: parseFloat(item.val),
+          date: Date.parse(item.val),
+          text: item.val,
+          long: parseInt(item.val)
+
+        }
+        // conc: item.cat_opt_id + ";" + String(value)
+      }
+
+    })
+
+    let singleSELECT = catOptions.filter(item => {
+      return ['SELECT', 'MULTI_SELECT'].includes(item.type)
+    }).map(item => {
+      var value = {};
+      value = {
+        "pl": item.select["value_pl"],
+        "us": item.select["value_us"],
+        "no": item.select["value_no"],
+        "es": item.select["value_es"],
+        "ru": item.select["value_ru"],
+        "fr": item.select["value_fr"],
+        "zh_cn": item.select["value_zh_cn"],
+        "de": item.select["value_de"]
+      }
+      return {
+
+        cat_opt_id: item.cat_opt_id,
+        type: item.type,
+        dataType: item.select.cat_opt_type_template.type,
+        order: item.select.cat_opt_type_template.order,
+        cat_opt_temp_id: item.select.id,
+        co_id: item.co_id,
+        value: value
+      }
+
+    })
+
+    let singleDep = catOptions.filter(item => {
+      return ['SINGLE_DEPENDENCY'].includes(item.type)
+    })
+
+    let singleDepHASH = {}
+    singleDep.forEach(i => {
+      if (!singleDepHASH[i.co_id]) { singleDepHASH[i.co_id] = [{}, {}, {}] }
+      singleDepHASH[i.co_id][i.catOption.cat_opt_type_template.order - 1] = i;
+    })
+    let singleDepRes = []
+    Object.keys(singleDepHASH).forEach(i => {
+
+      let obj = singleDepHASH[i]
+
+      let res = {
+
+        cat_opt_id_dep: obj[1].cat_opt_id,
+        cat_opt_id_dep_val: obj[1].val,
+        cat_opt_id: obj[0].cat_opt_id,
+        type: obj[0].type,
+        dataType: obj[0].catOption.cat_opt_type_template.type,
+        order: obj[0].catOption.cat_opt_type_template.order,
+        co_id: obj[0].co_id,
+        value: {
+          float: parseFloat(obj[0].val),
+          date: Date.parse(obj[0].val),
+          text: obj[0].val,
+          long: parseInt(obj[0].val)
+
+        }
+
+      }
+      singleDepRes.push(res)
+    })
+
+
+
+    let termsHash = {}
+    terms.forEach(i => {
+      if (!termsHash[i.col_id]) { termsHash[i.co_id] = [] }
+      termsHash[i.co_id].push({
+        ...i,
+        min: {
+          float: parseFloat(i.start_date),
+          date: i.start_date,
+          text: i.start_date,
+          long: parseInt(i.start_date)
+
+        },
+        max: {
+          float: parseFloat(i.end_date),
+          date: i.end_date,
+          text: i.end_date,
+          long: parseInt(i.end_date)
+        }
+      });
+    })
+
+    let termsObj = Object.keys(termsHash).map(i => {
+      let obj = termsHash[i].map(i => {
+        return { min: i.min, max: i.max }
+      })
+      let details = termsHash[i][0]
+      return {
+        ...details,
+        start_date: undefined,
+        end_date: undefined,
+        project_id: undefined,
+        col_id: undefined,
+        min: undefined,
+        max: undefined,
+        values: obj,
+        values_nested: obj
+
+      }
+    })
+
+
+    console.log(termsObj)
+    let categoriesArray = categories.map(item => {
+      return {
+        id: item.id, category: {
+          "pl": item.category_pl,
+          "us": item.category_us,
+          "no": item.category_no,
+          "es": item.category_es,
+          "ru": item.category_ru,
+          "fr": item.category_zh_cn,
+          "zh_cn": item.category_zh_cn,
+          "de": item.category_de
+
+
+        }
+      }
+    });
     let cleanItem = {
       ...item,
 
@@ -263,7 +345,7 @@ export default class ElasticSearchService extends BaseService {
     }).forEach(i => {
       cleanItem[i] = undefined
     });
-      console.log(cleanItem)
+    console.log(cleanItem)
 
     let data = {
       "location": [longitude, latitude],
@@ -275,6 +357,8 @@ export default class ElasticSearchService extends BaseService {
       "status": status,
       "created_at": created_at,
       "expired_at": expired_at,
+      "single_dependencies": singleDepRes,
+      "between": termsObj,
       "tags": tags.map(item => {
         return {
           tag: item.label
@@ -310,10 +394,10 @@ export default class ElasticSearchService extends BaseService {
   async deleteDoc({ user_id }) {
 
   }
-  async searchDoc({ latitude, user_id, longitude, text, distance, tags, select, categories, itemType, expired_at, startDate, endDate, createdInterval, catoptions, catOptionsFilter, size, item_id, page, onlyExpired }) {
+  async searchDoc({ latitude, user_id, longitude, text, distance, tags, select, categories, itemType, expired_at, start_date, end_date, createdInterval, catoptions, catOptionsFilter, size, item_id, page, onlyExpired, catoptionsAll }) {
 
     let fullText = text ? text : "";
-    console.log(fullText);
+    // console.log(fullText);
     let userGuid = user_id;
     let radius = distance;
     if (distance == 'all') {
@@ -336,6 +420,7 @@ export default class ElasticSearchService extends BaseService {
     let selectOptionsList = [];
     //let singleOptions =Object.keys(catOptionsFilter).map(item=>{
     //});
+
     if (catOptionsFilter != undefined && catOptionsFilter != '') {
       try {
         console.log(catOptionsFilter)
@@ -373,6 +458,7 @@ export default class ElasticSearchService extends BaseService {
       try {
 
         Object.keys(catOptionsFilter).map(item => {
+          console.log(item)
           if (item.endsWith("_SINGLE") == true) {
             if (catOptionsFilter[item][0] != undefined) {
               catOptionsFilter[item].forEach(element => {
@@ -402,6 +488,124 @@ export default class ElasticSearchService extends BaseService {
               })
             }
           }
+          if (item.endsWith("_SINGLE_DEP") == true) {
+            if (catOptionsFilter[item][0] != undefined) {
+              catOptionsFilter[item].forEach(element => {
+                singleOptionsList.push(
+                  {
+                    "nested": {
+                      "path": "single_dependencies",
+                      "query": {
+                        "bool": {
+                          "must": [
+                            {
+                              "match": {
+                                "single_dependencies.co_id": item.replace('_SINGLE_DEP', '')
+                              }
+                            },
+                            {
+                              "match": {
+                                "single_dependencies.cat_opt_id_dep_val.keyword": element.id
+                              }
+                            },
+                            {
+                              "range": {
+                                "single_dependencies.value.float": {
+                                  "gte": element.min,
+                                  "lte": element.max
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+
+                )
+              })
+            }
+          }
+          if (item.endsWith("_NOT_BETWEEN") == true) {
+            if (catOptionsFilter[item][0] != undefined) {
+              console.log(item)
+              catOptionsFilter[item].forEach(element => {
+                console.log(element)
+
+                singleOptionsList.push(
+                  {
+                    "bool": {
+                      "should": [
+                        {
+                          "bool": {
+                            "must_not": {
+
+                              "nested": {
+                                "path": "between",
+                                "query": {
+                                  "bool": {
+                                    "must": [
+                                      {
+                                        "match": {
+                                          "between.co_id": item.replace('_NOT_BETWEEN', '')
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+
+                            }
+                          }
+                        },
+
+                        {
+                          "nested": {
+                            "path": "between",
+                            "query": {
+                              "bool": {
+
+                                "must": [
+                                  {
+
+                                    "match": {
+                                      "between.co_id": item.replace('_NOT_BETWEEN', '')
+                                    }
+                                  }
+                                ],
+                                "must_not": [
+                                  {
+                                    "range": {
+                                      "between.values.min.date": {
+                                        "lte": element.max,
+                                        "gte": element.min
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "range": {
+                                      "between.values.max.date": {
+                                        "lte": element.max,
+                                        "gte": element.min
+
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+
+
+                )
+              })
+            }
+          }
+
         })
       } catch (exception) {
         console.log(exception);
@@ -480,7 +684,10 @@ export default class ElasticSearchService extends BaseService {
       } : null
 
     let aggs = {};
-    catoptions.forEach(item => {
+    console.log('CREATE AGGS')
+    catoptions.filter(i => { return ['SINGLE'].includes(i.cat_opt.type) }).forEach(item => {
+      console.log(item)
+
       aggs[item.id] = {
         "nested": {
           "path": "single"
@@ -497,7 +704,7 @@ export default class ElasticSearchService extends BaseService {
                 "scripted_metric": {
                   "init_script": "state.value = []",
                   "map_script": "state.value.add(doc['single.value.long'].value)",
-                  "combine_script": "def score_min = -1; def score_max = 0; def interval=0.8;def uniqValues=[];def bucket=40;def size=0;for (el in state.value) {if (score_min == -1) {score_min = el} else if (el < score_min) {score_min = el}} for (el in state.value) {if (el > score_max) {score_max = el}} state.buckets=[];state.size=state.value.length; if(state.size<bucket){bucket=state.size} if(bucket==0){bucket=-1;}interval=score_max-score_min;interval=interval/bucket;if(interval==0){interval=1} state.score_min=score_min;state.interval=interval;state.score_max=score_max;for(def i=0;i<bucket;i++){state.buckets.add([i,0,state.score_min+(i*state.interval),state.score_min+((1+i)*state.interval)])}state.buckets.add([state.buckets.length,0,score_max,score_max+interval]);for(def i=0;i<state.value.length;i++){for(def y=0;y<state.buckets.length;y++){if(state.buckets[y][2]<=state.value[i] && state.buckets[y][3]>=state.value[i] ){state.buckets[y][1]++;break;}}} return state",
+                  "combine_script": { "id": "single_agg_hist" },
                   "reduce_script": " return states"
                 }
               }
@@ -507,6 +714,59 @@ export default class ElasticSearchService extends BaseService {
         }
 
       }
+    })
+
+    catoptions.filter(i => { return ['SINGLE_DEPENDENCY'].includes(i.cat_opt.type) }).forEach(item => {
+      //  console.log(item)
+      let uom_dic = item.cat_opt_temp.sort((a, b) => { return a.order > b.order })[1].dim_ref_id
+      let co_ref = catoptionsAll.filter(co => {
+        return co.dim_id == uom_dic
+      })[0]
+      if (co_ref.length == 0) {
+        return;
+      }
+      let aggregations = {};
+      co_ref.cat_opt_temp.forEach(ref => {
+        aggregations[ref.id] = {
+          "filter": {
+            "bool": {
+              "must": [
+                {
+                  "term": {
+                    "single_dependencies.co_id.keyword": item.id
+                  }
+                },
+                {
+                  "term": {
+                    "single_dependencies.cat_opt_id_dep_val.keyword": ref.id
+                  }
+                }
+              ]
+            }
+          },
+          "aggregations": {
+            "hist_values": {
+              "scripted_metric": {
+                "init_script": "state.value = []",
+                "map_script": "state.value.add(doc['single_dependencies.value.float'].value)",
+                "combine_script": { "id": "single_dep_agg_hist" },
+                "reduce_script": " return states"
+              }
+            }
+          }
+        }
+
+
+      })
+      aggs[item.id] = {
+
+        "nested": {
+          "path": "single_dependencies"
+        },
+        "aggregations": aggregations
+
+      }
+      //console.log(aggs[item.id])
     })
     let body = {
       "stored_fields": [
@@ -612,11 +872,11 @@ export default class ElasticSearchService extends BaseService {
                         }
                     }
                   },
-                  startDate != undefined ? {
+                  start_date != undefined ? {
                     "range": {
 
                       "created_at": {
-                        "gte": startDate + (createdInterval != undefined && createdInterval != "" && createdInterval != null ?
+                        "gte": start_date + (createdInterval != undefined && createdInterval != "" && createdInterval != null ?
                           createdInterval.includes("h") > 0 ? "||/h-" + (parseInt(createdInterval) > 1 ? Math.ceil(parseInt(createdInterval) / 2) : parseInt(createdInterval)) + "h" :
                             createdInterval.includes("d") > 0 ? "||/d-" + (parseInt(createdInterval) > 1 ? Math.ceil(parseInt(createdInterval) / 2) : parseInt(createdInterval)) + "d" :
                               createdInterval.includes("w") > 0 ? "||/w-" + (parseInt(createdInterval) > 1 ? Math.ceil(parseInt(createdInterval) / 2) : parseInt(createdInterval)) + "w" :
@@ -625,7 +885,7 @@ export default class ElasticSearchService extends BaseService {
                                     createdInterval.includes("M") > 0 ? "||/M-" + (parseInt(createdInterval) > 1 ? Math.ceil(parseInt(createdInterval) / 2) : parseInt(createdInterval)) + "M" :
                                       createdInterval.includes("s") > 0 ? "||/s-" + (parseInt(createdInterval) > 1 ? Math.ceil(parseInt(createdInterval) / 2) : parseInt(createdInterval)) + "s" : "" : ""),
 
-                        "lte": endDate + (createdInterval != undefined && createdInterval != "" && createdInterval != null ?
+                        "lte": end_date + (createdInterval != undefined && createdInterval != "" && createdInterval != null ?
                           createdInterval.includes("h") > 0 ? "||/h+" + (parseInt(createdInterval) > 1 ? Math.ceil(parseInt(createdInterval) / 2) : parseInt(createdInterval)) + "h" :
                             createdInterval.includes("d") > 0 ? "||/d+" + (parseInt(createdInterval) > 1 ? Math.ceil(parseInt(createdInterval) / 2) : parseInt(createdInterval)) + "d" :
                               createdInterval.includes("w") > 0 ? "||/w+" + (parseInt(createdInterval) > 1 ? Math.ceil(parseInt(createdInterval) / 2) : parseInt(createdInterval)) + "w" :
@@ -665,6 +925,92 @@ export default class ElasticSearchService extends BaseService {
 
 
     })
+  }
+
+
+
+
+  async addToQueue({ item_id, operation }) {
+    let item = await this.itemServiceDI.setContext(this.context).getItem({ uids: [item_id] })
+    item = item[0];
+    let categories = await this.categoryServiceDI.setContext(this.context).getCategoriesParents({ ids: item.category_id })
+    categories = [...categories];
+    item = {
+      ...item,
+      categories: categories
+    };
+    var today = new Date();
+    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    var expired = new Date(Date.now() + 120965);
+    var dateExpired = expired.getFullYear() + '-' + (expired.getMonth() + 1) + '-' + expired.getDate();
+    let clobs = {
+      pl: "",
+      us: "",
+      de: "",
+      ru: "",
+      fr: "",
+      es: "",
+      no: "",
+      zh_cn: ""
+    }
+    clobs = Object.keys(clobs).forEach(clob => {
+      return item["clobSearch_" + clob]
+    });
+
+    let catOptions = item.itemCategoryOption.map(catValue => {
+
+      return {
+        cat_opt_id: catValue.cat_opt_temp.id,
+        type: catValue.category_link.catOption.cat_opt.type,
+        dataType: catValue.cat_opt_temp.cat_opt_type_template.type,
+        order: catValue.cat_opt_temp.order,
+        cat_opt_temp_id: catValue.co_temp_id,
+        co_id: catValue.cat_opt_temp.co_id,
+        val: catValue.value,
+        conc: catValue.cat_opt_temp.co_id + ";" + String(catValue.value),
+        select: catValue.cat_opt_temp,
+        catOption: catValue.cat_opt_temp
+
+      }
+    })
+    try {
+      let newItem = await this.toQueueItemDoc({
+        item_id: item.id,
+        longitude: item.longitude,
+        latitude: item.latitude,
+        user_id: item.user_id,
+        clobs: clobs,
+        title: item.name,
+        description: item.description,
+        catOptions: catOptions,
+        terms: item.itemCategoryOptionTerms.filter(i => {
+          return new Date() < new Date(i.end_date)
+        }),
+        status: item.status,
+        type: item.type,
+        category: item.category_id,
+        tags: item.tags.map((tag) => { return { label: tag.tag } }),
+        categories: item.categories,
+        created_at: item.created_at ? item.created_at : today.toISOString(),
+        expired_at: (item.expired_date != undefined && item.expired_date != null) ? item.expired_date : expired.toISOString(),
+        item: item,
+        project_id: item.project_id,
+        es_operations: operation ? operation : item.es_operations,
+        external_id: item.external_id
+      });
+      //   console.log(newItem)
+      global.queueChannel.publish(CONFIG.ITEM_ES_QUEUE, this.context.project.id,
+        newItem
+        , {
+          contentType: 'application/json', persistent: true, expiration: 500 * 1000, messageId: item_id, headers: {
+            Authorization: 'Bearer ' + this.context.token,
+            ProjectAuthorization: 'Bearer ' + this.context.projectToken
+          }
+        }
+      )
+    } catch (er) {
+      console.log(er)
+    }
   }
 }
 /*

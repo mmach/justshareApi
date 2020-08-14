@@ -21,7 +21,7 @@ export default class ConversationRepository extends BaseRepository {
     super(sequelizeDI.Conversation);
     this.sequelizeDI = sequelizeDI;
   }
-  getUserConversation({ conv_id, last_msg, size, transaction }) {
+  getUserConversation({ conv_id, iua_id, last_msg, size, transaction }) {
     let replacements = {
       conv_id: conv_id,
       last_msg: last_msg, size: size,
@@ -76,16 +76,35 @@ export default class ConversationRepository extends BaseRepository {
     }
     );
   }
-  getUserConversations({ page, size, transaction }) {
 
+  getUserConversations({ conv_id, iua_id, page, size, transaction }) {
+
+    console.log(iua_id)
     let offset = page * size;
     let limit = size
+    let where = { project_id: this.context.project.id }
+    if (iua_id) {
+      where = {
+        ...where,
+        iua_id: iua_id,
+      }
+      offset = 0;
+      limit = 1
+    }
+    if (conv_id) {
+      offset = 0;
+      limit = 1;
+      where = {
+        ...where,
+        id: conv_id
+      }
+
+    }
+    console.log(where)
     return this.entityDAO.findAll({
       offset,
       limit,
-      where: {
-
-      },
+      where: where,
       order: [['messages', 'created_at', 'DESC']]
       ,
       include: [
@@ -141,6 +160,19 @@ export default class ConversationRepository extends BaseRepository {
       transaction: this.getTran({ transaction })
     });
   }
-
+  closeConversation({ id, iua_id, transaction }) {
+    return this.entityDAO.update(
+      {
+        status: 'C'
+      },
+      {
+        where: {
+          iua_id: this.toStr(iua_id),
+          project_id: this.context.project.id
+        },
+        transaction: this.getTran({ transaction })
+      }
+    );
+  }
 }
 

@@ -20,6 +20,18 @@ export default class ItemUserActionRepository extends BaseRepository {
     this.sequelizeDI = sequelizeDI;
   }
 
+
+
+
+  getItemUserActions({ item_id, iua_id, status, transaction }) {
+    let where = { project_id: this.context.project.id }
+    where.id = iua_id
+    return this.entityDAO.findAll({
+      where: where,
+      transaction: this.getTran({ transaction })
+
+    })
+  }
   /**
    *
    *

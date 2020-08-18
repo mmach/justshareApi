@@ -19,7 +19,7 @@ let CONFIG = {
   MQRABBIT: {
     link: 'amqp://kyqjanjv:6djuPiJWnpZnIMT1jZ-SvIULv8IOLw2P@hedgehog.rmq.cloudamqp.com/kyqjanjv'
   },
-  BLOB_LINK: "https://justshare.it/",
+  BLOB_LINK: "https://api.mapps.io/",
   ELASTIC_SEARCH: {
     production: "https://search-justshare-es-prpllmtm2nibj3jnky5rdtjfga.us-east-2.es.amazonaws.com/",//"https://search-justshare-elastic-duvzgnhy7vsbtdpuqtv3s2v4qa.us-east-2.es.amazonaws.com/",
     development: "https://search-justshare-es-prpllmtm2nibj3jnky5rdtjfga.us-east-2.es.amazonaws.com/"//"http://localhost:9200/"//"https://25t337e5fo:xdrzi9s9z@oak-487876355.eu-west-1.bonsaisearch.net:443/"

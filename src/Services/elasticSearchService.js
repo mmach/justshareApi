@@ -499,12 +499,13 @@ export default class ElasticSearchService extends BaseService {
                         "bool": {
                           "must": [
                             {
-                              "match": {
-                                "single_dependencies.co_id": item.replace('_SINGLE_DEP', '')
+
+                              "term": {
+                                "single_dependencies.co_id.keyword": item.replace('_SINGLE_DEP', '')
                               }
                             },
                             {
-                              "match": {
+                              "term": {
                                 "single_dependencies.cat_opt_id_dep_val.keyword": element.id
                               }
                             },
@@ -703,9 +704,9 @@ export default class ElasticSearchService extends BaseService {
               "hist_values": {
                 "scripted_metric": {
                   "init_script": "state.value = []",
-                  "map_script": "state.value.add(doc['single.value.long'].value)",
-                  "combine_script": { "id": "single_agg_hist" },
-                  "reduce_script": " return states"
+                  "map_script": "if(doc['single.value.float'].size()!=0){state.value.add(doc['single.value.float'].value)}",
+                  "combine_script": "return state",
+                  "reduce_script":{ "id": "single_reduce_agg_hist" },
                 }
               }
 
@@ -740,6 +741,11 @@ export default class ElasticSearchService extends BaseService {
                   "term": {
                     "single_dependencies.cat_opt_id_dep_val.keyword": ref.id
                   }
+                },
+                {
+                  "exists": {
+                    "field": "single_dependencies.value.float"
+                  }
                 }
               ]
             }
@@ -748,9 +754,9 @@ export default class ElasticSearchService extends BaseService {
             "hist_values": {
               "scripted_metric": {
                 "init_script": "state.value = []",
-                "map_script": "state.value.add(doc['single_dependencies.value.float'].value)",
-                "combine_script": { "id": "single_dep_agg_hist" },
-                "reduce_script": " return states"
+                "map_script": "if(doc['single_dependencies.value.float'].size()!=0){state.value.add(doc['single_dependencies.value.float'].value)}",
+                "combine_script": "return state",
+                "reduce_script":{ "id": "single_reduce_agg_hist" },
               }
             }
           }

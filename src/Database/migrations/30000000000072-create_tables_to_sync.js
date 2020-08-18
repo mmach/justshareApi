@@ -11,7 +11,7 @@ module.exports = {
   item_id char(36),
   project_id char(36),
 	operation char(1),
-  created_date datetimeoffset(7),
+  created_at datetimeoffset(7),
   updated_at datetimeoffset(7)
  )
         

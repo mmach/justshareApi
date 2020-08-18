@@ -3,7 +3,7 @@ import LogFileInfrastructure from "../../Architecture/Infrastructure/logFileInfr
 import AuthInfrastucture from "../../Architecture/Infrastructure/authInfrastucture.js";
 import DbTransactionInfrastucture from "../../Architecture/Infrastructure/dbTransactionInfrastucture.js";
 import ItemService from "../../Services/itemService.js";
-import { ItemDTO, BuildItem, ShowOptionValue } from "justshare-shared";
+import { ItemDTO, BuildItem, ShowOptionValue,StatusesList } from "justshare-shared";
 import BlobService from "../../Services/blobService.js";
 import CategoryService from "../../Services/categoryService.js";
 import Promise from "bluebird";
@@ -43,7 +43,8 @@ export default class ReservationItemCommand extends BaseCommand {
     mailSenderDI,
     userServiceDI,
     conversationServiceDI,
-    translationServiceDI
+    translationServiceDI,
+    statusProjectServiceDI
   }) {
     // @ts-ignore
     super({
@@ -65,6 +66,7 @@ export default class ReservationItemCommand extends BaseCommand {
     this.userServiceDI = userServiceDI;
     this.conversationServiceDI = conversationServiceDI
     this.translationServiceDI = translationServiceDI;
+    this.statusProjectServiceDI = statusProjectServiceDI;
 
 
   }
@@ -98,9 +100,11 @@ export default class ReservationItemCommand extends BaseCommand {
       return this.model.item.itemCategoryOption.filter(l => { return i.co_temp_id == l.co_temp_id && i.value == l.value }).length > 0
     })
     let user = await this.userServiceDI.setContext(this.context).getUserInfo({ user_id: this.model.item.user_id });
-let uniq_number = new Date().getTime()
+    let uniq_number = new Date().getTime()
     if (r.length == res.itemCategoryOption.length) {
       let uai_id = uuid()
+      let status = await this.statusProjectServiceDI.setContext(this.context).getByToken({ name: StatusesList.NEW })
+      console.log(status)
       await this.itemUserActionServiceDI.upsert({
         model: {
           id: uai_id,
@@ -109,8 +113,9 @@ let uniq_number = new Date().getTime()
           action_id: this.model.action_id,
           status: 'N',
           comment: this.model.message,
-          uniq_number:uniq_number
-          
+          uniq_number: uniq_number,
+          status_id: status.id
+
         },
         withProject: true
 
@@ -249,7 +254,7 @@ let uniq_number = new Date().getTime()
         message: this.model.message,
         user_dest: [user],
         iua_id: uai_id,
-        title: "IUA."+uniq_number
+        title: "IUA." + uniq_number
 
 
 

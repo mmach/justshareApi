@@ -258,6 +258,7 @@ import ItemActionsReservationWaitingForClientCommand from "./Commands/Item/Actio
 import InvoiceItemRepository from "./Repository/invoiceItemsRepository.js";
 import InvoiceUserRepository from "./Repository/invoiceUserRepository.js";
 import UserInvoiceValuesRepository from "./Repository/userInvoiceValuesRepository.js";
+import GetItemUserActionsQuery from "./Query/Item/getItemUserActionsQuery.js";
 
 
 
@@ -561,7 +562,7 @@ exporter[QueryList.Item.GET_USER_ITEMS_TO_SYNC] = asClass(GetUserItemToSyncQuery
 exporter[QueryList.Item.GET_USER_TRANSACTIONS] = asClass(GetItemTransactionQuery);
 
 
-
+exporter[QueryList.Item.GET_ITEM_USER_ACTIONS]=asClass(GetItemUserActionsQuery)
 
 //ACTIONS
 //RESERVATIONS

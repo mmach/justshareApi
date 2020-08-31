@@ -485,14 +485,20 @@ export default class ItemRepository extends BaseRepository {
 
     return this.sequelizeDI.sequelize.query(
       `WITH getAllReservation AS ( 
-        SELECT* FROM [ItemCategoryOptionTerms] 
-        WHERE item_id=:item_id
-        AND dim_id=:dim_id
+          SELECT* FROM [ItemCategoryOptionTerms] 
+          WHERE item_id=:item_id
+          AND dim_id=:dim_id
         ),
         frameTime AS ( 
-        SELECT* FROM getAllReservation 
-        WHERE start_date<:end_date 
-            AND end_date>:start_date
+          SELECT* FROM getAllReservation 
+          WHERE  (
+              (start_date<=:end_date
+              AND start_date>=:start_date)
+            AND 
+              (end_date>=:start_date
+              AND end_date<=:end_date
+              )
+              )
         )
         SELECT id,iua_id FROM frameTime`
       ,

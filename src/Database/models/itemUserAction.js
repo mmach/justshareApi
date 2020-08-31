@@ -40,6 +40,10 @@ export default class ItemUserAction extends Model {
     );
   }
   static associate(models) {
-
+    ItemUserAction.hasOne(models.Conversation, {
+      as: "conversation",
+      targetKey: "id",
+      foreignKey: "iua_id"
+    });
   }
 }

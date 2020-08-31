@@ -68,6 +68,20 @@ let saveBlobToFile = async ({ blob }) => {
       };
       break;
     }
+    case "application/pdf": {
+      let fd = await fs.open(`${upload_path}/${newUid}.pdf`, "w+");
+      let result = await fs.write(fd, new Buffer(blob.blob, "base64"));
+      await fs.close(fd);
+      console.log('PDF')
+
+      return {
+        path: `${upload_path}/${newUid}.pdf`,
+        id: newUid,
+        filename: `${newUid}.pdf`,
+        type: 'pdf'
+      };
+      break;
+    }
     default:
       throw new ServerException();
   }
@@ -109,10 +123,8 @@ export default class BlobService extends BaseService {
     try {
       newBlob = await saveBlobToFile.bind(this)({ blob });
       console.log(newBlob)
-      if (newBlob.type != 'svg' && newBlob.type != 'webp') {
-        console.log(newBlob.path)
+      if (newBlob.type != 'svg' && newBlob.type != 'webp' && newBlob.type != 'pdf') {
         let imgNormal = await Jimp.read(newBlob.path);
-        console.log('dupaa')
 
         await imgNormal
           .contain(300, 300) // resize
@@ -123,7 +135,6 @@ export default class BlobService extends BaseService {
           .contain(100, 100) // resize
           .quality(60) // set JPEG quality
           .writeAsync(`${upload_path}/${newBlob.id}-min.` + newBlob.type); // save
-        console.log('dupaa')
 
       }
       let blob_id = await this.insertFile({
@@ -131,7 +142,7 @@ export default class BlobService extends BaseService {
         path: newBlob.path,
         fileName: newBlob.filename
       });
-      if (newBlob.type != 'svg' && newBlob.type != 'webp') {
+      if (newBlob.type != 'svg' && newBlob.type != 'webp' && newBlob.type != 'pdf') {
         let uid_min = uuidv4()
         let blob_min_id = await this.insertFile({
           id: uid_min,
@@ -166,7 +177,7 @@ export default class BlobService extends BaseService {
     } finally {
       await fs.unlink(`${newBlob.path}`);
 
-      if (newBlob.type != 'svg' && newBlob.type != 'webp') {
+      if (newBlob.type != 'svg' && newBlob.type != 'webp' && newBlob.type != 'pdf') {
         await fs.unlink(`${upload_path}/${newBlob.id}-min.` + newBlob.type);
         await fs.unlink(`${upload_path}/${newBlob.id}-thumb.` + newBlob.type);
       }

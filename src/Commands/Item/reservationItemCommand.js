@@ -3,7 +3,7 @@ import LogFileInfrastructure from "../../Architecture/Infrastructure/logFileInfr
 import AuthInfrastucture from "../../Architecture/Infrastructure/authInfrastucture.js";
 import DbTransactionInfrastucture from "../../Architecture/Infrastructure/dbTransactionInfrastucture.js";
 import ItemService from "../../Services/itemService.js";
-import { ItemDTO, BuildItem, ShowOptionValue,StatusesList } from "justshare-shared";
+import { ItemDTO, BuildItem, ShowOptionValue, StatusesList } from "justshare-shared";
 import BlobService from "../../Services/blobService.js";
 import CategoryService from "../../Services/categoryService.js";
 import Promise from "bluebird";
@@ -190,7 +190,6 @@ export default class ReservationItemCommand extends BaseCommand {
         ]
 
       }
-
       await this.mailSenderDI.setContext(this.context).mailSend({
         type: 'RESERVATION_MAIL',
         model: model,
@@ -240,12 +239,13 @@ export default class ReservationItemCommand extends BaseCommand {
         ]
 
       }
-      await this.mailSenderDI.setContext(this.context).mailSend({
-        type: 'RESERVATION_SOURCE_MAIL',
-        model: model,
-        email_to: this.context.user.email,
-        language: this.context.language
-      });
+      //TO UNCOMMENT
+       await this.mailSenderDI.setContext(this.context).mailSend({
+         type: 'RESERVATION_SOURCE_MAIL',
+         model: model,
+         email_to: this.context.user.email,
+         language: this.context.language
+       });
       //let transalte = await this.translationServiceDI.setContext(this.context).getTokens({ code: 'LABEL', token: 'RESERVATION_MESSAGE_TITLE' })
 
       await this.conversationServiceDI.setContext(this.context).createConversation({

@@ -86,7 +86,7 @@ export default class MailSender {
    * @return {void} 
    * @memberof MailSender
    */
-  async mailSend({ type, model, email_to, language }) {
+  async mailSend({ type, model, email_to, language, attachments }) {
     let templateMOdel = {};
     let bodyXml = ''//await this.configServiceDI.setContext(this.context).getByName({ name: xslt_file })
     let title = ''//await this.configServiceDI.setContext(this.context).getByName({ name: mail_title, lang: language })
@@ -118,17 +118,16 @@ export default class MailSender {
         mail_template = mail_template.replace(new RegExp(item, "g"), results.EMAIL[item].message[language]);
       })
     }
-   // console.log(this.context)
+    // console.log(this.context)
     // console.log(mail_template)
     // console.log(templateTranslate)
-    templateTranslate = Array.from(new Set(bodyXml.match(/(#TRAN_)\w*#/g)))
+    templateTranslate = Array.from(new Set(bodyXml.match(/(#)\w*#/g)))
     if (templateTranslate.length > 0) {
       let results = await this.translationServiceDI.setContext(this.context).getTokens({ code: 'EMAIL', token: templateTranslate })
       Object.keys(results.EMAIL).forEach((item) => {
         //   console.log(results.EMAIL[item].message)
         bodyXml = bodyXml.replace(new RegExp(item, "g"), results.EMAIL[item].message[language]);
       })
-
     }
     templateMOdel.color = this.context.project.theme_color;
     templateMOdel.base_url = this.context.project.base_url;
@@ -137,7 +136,7 @@ export default class MailSender {
     mail_template = mail_template.replace('#body#', bodyMail)
     let body = await this.xsltToHtml({ xslt: mail_template, xml: json2xml(templateMOdel) });
     const htmlOutput = mjml2html(body, { minify: true })
-    return await this.send({ email_to, model: results, body: htmlOutput.html, language: language });
+    return await this.send({ email_to, model: results, body: htmlOutput.html, language: language, attachments: attachments });
   }
   /**
    *
@@ -168,8 +167,8 @@ export default class MailSender {
    * @param  {any} { email_to, language, mail_title, body }
    * @return {void}@memberof MailSender
    */
-  async send({ email_to, model, body, language }) {
-   // console.log(model)
+  async send({ email_to, model, body, language, attachments }) {
+    // console.log(model)
     let port = model.mailsender.smtp_port//await this.configServiceDI.setContext(this.context).getByName({ name: 'SMTP_PORT' })
     let secure = model.mailsender.smtp_security//await this.configServiceDI.setContext(this.context).getByName({ name: 'SMTP_SECURE' })
     let password = model.mailsender.password//await this.configServiceDI.setContext(this.context).getByName({ name: 'SMTP_PASSWORD' })
@@ -200,6 +199,7 @@ export default class MailSender {
       transporter = nodemailer.createTransport(smtpTransport({
         host: host,
         port: port,
+        use_authentication: true,
         maxConnections: 6,
         pool: true,
         authMethod: 'PLAIN',
@@ -218,7 +218,7 @@ export default class MailSender {
     //console.log(email_to);
     //console.log(model.translation[language])
     //console.log(sendGrid)
-   // console.log(login)
+    // console.log(login)
     //let str = new String(body);
     let mailOptions = {
       from: from, // sender address
@@ -227,6 +227,8 @@ export default class MailSender {
       html: body,
       encoding: 'base64',
       textEncoding: 'base64',
+      attachments: attachments && attachments.length > 0 ? attachments : []
+
       // headers: {
       //   'X-Laziness-level': 1000
       //  }
@@ -244,7 +246,7 @@ export default class MailSender {
             error: error
           });
         }
-      //  console.log(JSON.stringify(info));
+        //  console.log(JSON.stringify(info));
         console.log('Message sent: ' + info.response);
         res()
 

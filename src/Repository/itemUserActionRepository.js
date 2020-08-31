@@ -28,6 +28,21 @@ export default class ItemUserActionRepository extends BaseRepository {
     where.id = iua_id
     return this.entityDAO.findAll({
       where: where,
+      include: [
+        {
+          model: this.sequelizeDI.Conversation,
+          required: true,
+          as: "conversation",
+          include: [
+            {
+              model: this.sequelizeDI.UserConversation,
+              required: true,
+              as: "users"
+            }
+          ]
+        }
+
+      ],
       transaction: this.getTran({ transaction })
 
     })

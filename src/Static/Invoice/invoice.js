@@ -110,15 +110,16 @@ let genInvoice = (model) => {
             {
                 columns: [
                     {
-                        text: `${model.userFrom.name} \n ${model.userFrom.nip && "Tax ID:" + model.userFrom.nip}`,
+                        text: `${model.userFrom.name} \n ${model.userFrom.nip && "Tax ID: " + model.userFrom.nip}`,
                         style: 'invoiceBillingDetails'
                     },
                     {
-                        text: `${model.userTo.name} \n ${model.userTo.nip && "Tax ID:" + model.userTo.nip}`,
+                        text: `${model.userTo.name} \n ${model.userTo.nip && "Tax ID: " + model.userTo.nip} \n`,
                         style: 'invoiceBillingDetails'
                     },
                 ]
             },
+
             // Billing Address Title
             {
                 columns: [
@@ -136,11 +137,11 @@ let genInvoice = (model) => {
             {
                 columns: [
                     {
-                        text: `${model.userFrom.street} \n ${model.userFrom.city} ${model.userFrom.zip} \n   ${model.userFrom.country}`,
+                        text: `${model.userFrom.street} \n ${model.userFrom.city}, ${model.userFrom.zip} \n   ${model.userFrom.country}`,
                         style: 'invoiceBillingAddress'
                     },
                     {
-                        text: `${model.userTo.street} \n ${model.userTo.city} ${model.userTo.zip} \n   ${model.userTo.country}`,
+                        text: `${model.userTo.street} \n ${model.userTo.city}, ${model.userTo.zip} \n   ${model.userTo.country}`,
                         style: 'invoiceBillingAddress'
                     },
                 ]
@@ -153,7 +154,7 @@ let genInvoice = (model) => {
                     // headers are automatically repeated if the table spans over multiple pages
                     // you can declare how many rows should be treated as headers
                     headerRows: 1,
-                    widths: ['*', 40, 'auto', 40, 'auto', 80],
+                    widths: ['*', 40, 80, 40, 'auto', 80],
 
                     body: [[
                         {
@@ -180,43 +181,43 @@ let genInvoice = (model) => {
                             text: 'Total',
                             style: ['itemsHeader', 'center']
                         }
-                    ],
+                    ]
                         , ...model.items.map(i => {
 
-                            return [
-                                [
-                                    {
-                                        text: i.title,
-                                        style: 'itemTitle'
-                                    },
-                                    {
-                                        text: i.description,
-                                        style: 'itemSubTitle'
+                            return [[
+                                {
+                                    text: i.title,
+                                    style: 'itemTitle'
+                                },
+                                {
+                                    text: i.description,
+                                    style: 'itemSubTitle'
 
-                                    }
-                                ],
-                                {
-                                    text: '1',
-                                    style: 'itemNumber'
-                                },
-                                {
-                                    text: i.price_net + " " + model.currency,
-                                    style: 'itemNumber'
-                                },
-                                {
-                                    text: i.tax + "%",
-                                    style: 'itemNumber'
-                                },
-                                {
-                                    text: (i.discount ? i.discount : "0") + "%",
-                                    style: 'itemNumber'
-                                },
-                                {
-                                    text: i.price + " " + i.price,
-                                    style: 'itemTotal'
                                 }
+                            ],
+                            {
+                                text: '1',
+                                style: 'itemNumber'
+                            },
+                            {
+                                text: i.price_net + " " + i.currency,
+                                style: 'itemNumber'
+                            },
+                            {
+                                text: i.tax + "%",
+                                style: 'itemNumber'
+                            },
+                            {
+                                text: (i.discount ? i.discount : "0") + "%",
+                                style: 'itemNumber'
+                            },
+                            {
+                                text: (i.price_net + i.price_tax) + " " + i.currency,
+                                style: 'itemTotal'
+                            }
                             ]
-                        }),
+
+                        })
 
                         // Table Header
 
@@ -246,7 +247,7 @@ let genInvoice = (model) => {
                                 style: 'itemsFooterSubTitle'
                             },
                             {
-                                text:model.price_net + " " + model.currency,
+                                text: model.price_net + " " + model.currency,
                                 style: 'itemsFooterSubValue'
                             },
                         ],
@@ -257,7 +258,7 @@ let genInvoice = (model) => {
                                 style: 'itemsFooterSubTitle'
                             },
                             {
-                                text: model.price_tax + " " + model.currency,
+                                text: (model.price_tax + " " + model.currency),
                                 style: 'itemsFooterSubValue'
                             },
                         ], [
@@ -266,7 +267,7 @@ let genInvoice = (model) => {
                                 style: 'itemsFooterTotalTitle'
                             },
                             {
-                                text: model.price + " " + model.currency,
+                                text: (model.price + " " + model.currency),
 
                                 style: 'itemsFooterTotalValue'
                             }
@@ -276,7 +277,38 @@ let genInvoice = (model) => {
                 }, // table
                 layout: 'lightHorizontalLines'
             },
+            '\n\n',
+            {
+                columns: [
+                    {
+                        bold: true,
 
+                        text: ` Account Number:`
+                    },
+                    {
+
+                        text: ` ${model.userTo.bank_account_nr}`
+                    }
+                ]
+            },
+            '\n\n',
+
+            {
+                columns: [
+                    {
+                        text: model.userFrom.user_name,
+                        style: 'invoiceBillingTitle',
+
+                    },
+                    {
+                        text: model.userTo.user_name,
+                        style: 'invoiceBillingTitle',
+                        alignment: 'right'
+
+
+                    },
+                ]
+            },
             // Signature
 
 
@@ -423,8 +455,13 @@ let genInvoice = (model) => {
     }
     var now = new Date();
     var pdfDoc = printer.createPdfKitDocument(docDefinition);
-    pdfDoc.pipe(fs.createWriteStream('upload/' + new Date().getTime().toString() + '.pdf'));
+    let name = 'upload/' + new Date().getTime().toString() + '.pdf';
+    pdfDoc.pipe(fs.createWriteStream(name));
     pdfDoc.end();
+    return {
+        ...model,
+        invoicePath: name
+    }
 }
 
 module.exports = { genInvoice }

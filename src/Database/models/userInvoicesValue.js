@@ -29,11 +29,11 @@ export default class UserInvoiceValue extends Model {
           defaultValue: sequelize.UUIDV4
 
         },
-        name: DataTypes.FLOAT,
-        address: DataTypes.FLOAT,
-        tax_number: DataTypes.FLOAT,
-        country: DataTypes.DATE,
-        city: DataTypes.FLOAT,
+        name: DataTypes.TEXT,
+        address: DataTypes.TEXT,
+        tax_number: DataTypes.TEXT,
+        country: DataTypes.TEXT,
+        city: DataTypes.TEXT,
         zip_code: DataTypes.TEXT,
         user_name: DataTypes.TEXT,
         bank_account_nr: DataTypes.TEXT,

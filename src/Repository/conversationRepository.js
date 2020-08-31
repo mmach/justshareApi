@@ -77,7 +77,7 @@ export default class ConversationRepository extends BaseRepository {
     );
   }
 
-  getUserConversations({ conv_id, iua_id, page, size, transaction }) {
+  async getUserConversations({ conv_id, iua_id, page, size, transaction }) {
 
     console.log(iua_id)
     let offset = page * size;
@@ -100,13 +100,42 @@ export default class ConversationRepository extends BaseRepository {
       }
 
     }
-    console.log(where)
-    return this.entityDAO.findAll({
-      offset,
-      limit,
-      where: where,
-      order: [['messages', 'created_at', 'DESC']]
+
+    let obj = await this.sequelizeDI.sequelize.query(
+      `WITH getUsersConv as ( 
+        SELECT  conversation_id FROM UserConversations 
+        WHERE user_id=:user_id
+        AND project_id=:project_id
+        )
+        SELECT  Conversations.id FROM ConversationMessages 
+        JOIN getUsersConv ON getUsersConv.conversation_id =   ConversationMessages.conversation_id
+        JOIN Conversations ON Conversations.id =ConversationMessages.conversation_id 
+        WHERE ConversationMessages.is_newest=1
+        AND Conversations.Status=:status
+        AND Conversations.project_id=:project_id
+        ${conv_id ? 'AND Conversations.id=:conv_id':''}
+        ${iua_id ? 'AND Conversations.iua_id=:iua_id':''}
+        ORDER BY ConversationMessages.created_at DESC offset :offset rows FETCH next :limit rows only`
       ,
+      {
+        replacements: {
+          user_id: this.context.user.id,
+          iua_id: iua_id,
+          conv_id: conv_id,
+          project_id: this.context.project.id,
+          status: 'O',
+          offset: offset,
+          limit: limit
+        },
+        transaction: this.getTran({ transaction }),
+        type: this.sequelizeDI.sequelize.QueryTypes.SELECT
+      });
+
+    console.log(obj)
+    return this.entityDAO.findAll({
+      where: {
+        id: obj.map(i => i.id)
+      },
       include: [
         {
           model: this.sequelizeDI.UserConversation,
@@ -131,20 +160,12 @@ export default class ConversationRepository extends BaseRepository {
             },
           ]
         },
-        {
-          model: this.sequelizeDI.UserConversation,
-          attributes: [],
-          as: "user_filter",
-          required: true,
-          where: {
-            user_id: this.context.user.id
-          }
-        }
-        ,
+
+
         {
           model: this.sequelizeDI.ConversationMessages,
           as: "messages",
-          required: false,
+          required: true,
           where: {
             is_newest: true
           },

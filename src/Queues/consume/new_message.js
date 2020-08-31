@@ -2,8 +2,10 @@
 import SequelizeDB from '../../Database/models/index.js';
 
 
-const onSendMessage = async  data => {
+const onSendMessage = async data => {
+  try {
     let obj = JSON.parse(data.content.toString())
+    obj.message = obj.message.substring(0, 8000);
     await SequelizeDB.ConversationMessages.create(
       obj
 
@@ -36,7 +38,9 @@ const onSendMessage = async  data => {
     } catch (er) {
       console.log(er)
     }
-
-    global.queueChannel.ack(data);
+  } catch (err) {
+    console.log(err);
   }
-  module.exports={onSendMessage}
+  global.queueChannel.ack(data);
+}
+module.exports = { onSendMessage }

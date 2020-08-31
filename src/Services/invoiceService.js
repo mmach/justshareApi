@@ -60,7 +60,7 @@ export default class InvoiceService extends BaseService {
           model: {
             ...i,
             id: uuid(),
-
+            price: i.price_full_tax,
             invoice_id: invocie_id
           }, withProject: true
         })
@@ -90,6 +90,7 @@ export default class InvoiceService extends BaseService {
     //console.log(img)
     //console.log(img)
     let model = {
+      ...invoice,
       project: {
         logo: img.data
       },
@@ -97,6 +98,7 @@ export default class InvoiceService extends BaseService {
       dateIssued: invoice.created_at.toLocaleDateString(),
       dateDue: invoice.dueDate.toLocaleDateString(),
       userFrom: {
+        ...invoice.user_src,
         name: invoice.user_src.user_name,
         nip: invoice.user_src.tax_number,
         street: invoice.user_src.address,
@@ -107,6 +109,7 @@ export default class InvoiceService extends BaseService {
 
       },
       userTo: {
+        ...invoice.user_dest,
         name: invoice.user_dest.user_name,
         nip: invoice.user_dest.tax_number,
         street: invoice.user_dest.address,

@@ -17,8 +17,8 @@ export default class GetStatusQuery extends BaseQuery {
      * @param  {{ logFileInfrastructureDI:LogFileInfrastructure,  dictionaryDI,userServiceDI:UserService,authInfrastructureDI:AuthInfrastucture }}
      * @memberof UserLogInInternalQuery
      */
-    constructor({ logFileInfrastructureDI,  authInfrastructureDI, projectInfrastructureDI, statusProjectServiceDI }) {
-        super({ logFileInfrastructureDI, authInfrastructureDI, projectInfrastructureDI  });
+    constructor({ logFileInfrastructureDI, projectInfrastructureDI, statusProjectServiceDI }) {
+        super({ logFileInfrastructureDI, projectInfrastructureDI  });
         this.statusProjectServiceDI = statusProjectServiceDI;
     };
     init(dto) {

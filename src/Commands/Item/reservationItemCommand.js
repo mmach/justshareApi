@@ -104,7 +104,6 @@ export default class ReservationItemCommand extends BaseCommand {
     if (r.length == res.itemCategoryOption.length) {
       let uai_id = uuid()
       let status = await this.statusProjectServiceDI.setContext(this.context).getByToken({ name: StatusesList.NEW })
-      console.log(status)
       await this.itemUserActionServiceDI.upsert({
         model: {
           id: uai_id,
@@ -114,7 +113,8 @@ export default class ReservationItemCommand extends BaseCommand {
           status: 'N',
           comment: this.model.message,
           uniq_number: uniq_number,
-          status_id: status.id
+          status_id: status.id,
+          created_date: new Date()
 
         },
         withProject: true

@@ -5,7 +5,7 @@
     "password": "Crunum123",
     "database": "mappsDB",
     "encrypt": true,
-    "logging": false,
+    "logging": true,
     "dialect": "mssql",
     "dialectOptions": {
       "encrypt": true,
@@ -41,7 +41,7 @@
     "password": "Crunum123",
     "database": "mappsDB",
     "encrypt": true,
-    "logging": false,
+    "logging": true,
     "dialect": "mssql",
     "dialectOptions": {
       "encrypt": true,

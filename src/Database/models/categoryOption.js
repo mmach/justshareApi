@@ -86,7 +86,23 @@ export default class CategoryOption extends Model {
           type: DataTypes.BOOLEAN,
           allowNull: true
         },
+        is_on_iua: {
+          type: DataTypes.BOOLEAN,
+          allowNull: true
+        },
+        is_on_iua_request: {
+          type: DataTypes.BOOLEAN,
+          allowNull: true
+        },
+        is_params: {
+          type: DataTypes.BOOLEAN,
+          allowNull: true
+        },
         is_on_map: {
+          type: DataTypes.BOOLEAN,
+          allowNull: true
+        },
+        is_on_main_page: {
           type: DataTypes.BOOLEAN,
           allowNull: true
         },

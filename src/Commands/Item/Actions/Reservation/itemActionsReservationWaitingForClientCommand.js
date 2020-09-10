@@ -113,7 +113,9 @@ export default class ItemActionsReservationWaitingForClientCommand extends BaseC
           user_id: this.context.user.id,
           status: 'W',
           iua_prev_id: id,
-          status_id: status.id
+          status_id: status.id,
+          created_date: new Date()
+
         }, withProject: true
       })
       await this.commentServiceDI.setContext(this.context).insert({

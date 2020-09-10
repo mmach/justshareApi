@@ -34,7 +34,9 @@ export default class ItemUserAction extends Model {
         iua_id: DataTypes.UUID,
         iua_prev_id: DataTypes.UUID,
         status_id: DataTypes.UUID,
-        uniq_number:DataTypes.STRING
+        uniq_number: DataTypes.STRING,
+        created_date: DataTypes.DATE
+
       },
       { sequelize }
     );
@@ -44,6 +46,11 @@ export default class ItemUserAction extends Model {
       as: "conversation",
       targetKey: "id",
       foreignKey: "iua_id"
+    });
+    ItemUserAction.belongsTo(models.V_User, {
+      as: "users",
+      targetKey: "id",
+      foreignKey: "user_id"
     });
   }
 }

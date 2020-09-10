@@ -259,6 +259,8 @@ import InvoiceItemRepository from "./Repository/invoiceItemsRepository.js";
 import InvoiceUserRepository from "./Repository/invoiceUserRepository.js";
 import UserInvoiceValuesRepository from "./Repository/userInvoiceValuesRepository.js";
 import GetItemUserActionsQuery from "./Query/Item/getItemUserActionsQuery.js";
+import GetItemUserActionsListQuery from "./Query/Item/getItemUserActionsListQuery.js";
+import GetItemUserActionsHistoryQuery from "./Query/Item/getItemUserActionsHistoryQuery.js";
 
 
 
@@ -563,6 +565,9 @@ exporter[QueryList.Item.GET_USER_TRANSACTIONS] = asClass(GetItemTransactionQuery
 
 
 exporter[QueryList.Item.GET_ITEM_USER_ACTIONS]=asClass(GetItemUserActionsQuery)
+exporter[QueryList.Item.GET_ITEM_USER_ACTIONS_LIST]=asClass(GetItemUserActionsListQuery)
+exporter[QueryList.Item.GET_ITEM_USER_ACTIONS_HISTORY]=asClass(GetItemUserActionsHistoryQuery)
+
 
 //ACTIONS
 //RESERVATIONS

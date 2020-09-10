@@ -49,8 +49,11 @@ export default class Category extends Model {
         project_id: DataTypes.UUID,
         blob_id: DataTypes.UUID,
         color: DataTypes.STRING,
-        translation_id: DataTypes.UUID
-
+        translation_id: DataTypes.UUID,
+        is_root: {
+          type: DataTypes.BOOLEAN,
+          allowNull: true
+        },
 
 
 
@@ -62,7 +65,7 @@ export default class Category extends Model {
 
   static hooks(models, sequelize) {
 
-  
+
     Category.beforeDestroy(async (item, options) => {
 
       console.log('beforeDestroy')
@@ -120,7 +123,7 @@ export default class Category extends Model {
       targetKey: 'id',
       foreignKey: "category_child_id"
     });
-    
+
     Category.belongsTo(models.Translations, { as: "translation", targetKey: 'id', foreignKey: "translation_id" });
 
   }

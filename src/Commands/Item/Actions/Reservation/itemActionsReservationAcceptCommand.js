@@ -181,12 +181,12 @@ export default class ItemActionsReservationAcceptCommand extends BaseCommand {
 
       //#endregion
       //#region set acceptd status
-      let id = uuid();
+      /*let id = uuid();
       await this.itemUserActionServiceDI.setContext(this.context).insert({
         model: {
           ...IUA,
           id: id,
-          iua_id: IUA.id,
+          iua_id: IUA.id
         }, withProject: true,
       })
       await this.itemUserActionServiceDI.setContext(this.context).update({
@@ -196,9 +196,10 @@ export default class ItemActionsReservationAcceptCommand extends BaseCommand {
           user_id: this.context.user.id,
           status: 'A',
           iua_prev_id: id,
-          status_id: status.id
+          status_id: status.id,
+          created_date: new Date()
         }, withProject: true
-      })
+      })*/
 
       //#endregion
 
@@ -206,7 +207,7 @@ export default class ItemActionsReservationAcceptCommand extends BaseCommand {
 
       //#region udpate for WAIT_FOR_PAY status
       status = await this.statusProjectServiceDI.setContext(this.context).getByToken({ name: StatusesList.WAITING_FOR_PAY })
-      id = uuid();
+      let id = uuid();
       await this.itemUserActionServiceDI.setContext(this.context).insert({
         model: {
           ...IUA,
@@ -221,7 +222,9 @@ export default class ItemActionsReservationAcceptCommand extends BaseCommand {
           user_id: this.context.user.id,
           status: 'W',
           iua_prev_id: id,
-          status_id: status.id
+          status_id: status.id,
+          created_date: new Date()
+
         }, withProject: true
       })
       //#endregion
@@ -239,7 +242,7 @@ export default class ItemActionsReservationAcceptCommand extends BaseCommand {
       fs.unlinkSync(invoice.invoicePath);
 
       //#region mail sender
-   
+
 
       this.invoiceServiceDI.setContext(this.context).update({
         model: {
@@ -250,7 +253,7 @@ export default class ItemActionsReservationAcceptCommand extends BaseCommand {
 
       await this.conversationServiceDI.setContext(this.context).sendMessageToUser({ iua_id: IUA.id, msg_id: this.model.msg_id, msg: this.model.message, syncSocket: true });
 
-      
+
       await this.mailSenderDI.setContext(this.context).mailSend({
         type: 'NEW_INVOICE',
         model: {
@@ -264,42 +267,42 @@ export default class ItemActionsReservationAcceptCommand extends BaseCommand {
         ]
       });
 
-        await this.mailSenderDI.setContext(this.context).mailSend({
-          type: 'NEW_INVOICE',
-          model: {
-            ...invoice,
-            blob_id: createBlobResult.dataValues.blob_id,
-          },
-          email_to: user_dest.user.email,
-          language: user_dest.user.language,
-          attachments: [
-            { 'filename': 'invoice.pdf', 'content': content }
-          ]
-        });
-       await this.mailSenderDI.setContext(this.context).mailSend({
-         type: 'CHANGE_IUA_STATUS',
-         model: {
-           iua_nr: IUA.uniq_number,
-           iua_id: IUA.id,
-           comment: this.model.message,
-           status: status.translation[user_src.user.language],
-         },
-         email_to: user_src.user.email,
-         language: user_src.user.language,
-       });
- 
- 
-       await this.mailSenderDI.setContext(this.context).mailSend({
-         type: 'CHANGE_IUA_STATUS',
-         model: {
-           iua_nr: IUA.uniq_number,
-           iua_id: IUA.id,
-           comment: this.model.message,
-           status: status.translation[this.context.language],
-         },
-         email_to: this.context.user.email,
-         language: this.context.language,
-       });
+      await this.mailSenderDI.setContext(this.context).mailSend({
+        type: 'NEW_INVOICE',
+        model: {
+          ...invoice,
+          blob_id: createBlobResult.dataValues.blob_id,
+        },
+        email_to: user_dest.user.email,
+        language: user_dest.user.language,
+        attachments: [
+          { 'filename': 'invoice.pdf', 'content': content }
+        ]
+      });
+      await this.mailSenderDI.setContext(this.context).mailSend({
+        type: 'CHANGE_IUA_STATUS',
+        model: {
+          iua_nr: IUA.uniq_number,
+          iua_id: IUA.id,
+          comment: this.model.message,
+          status: status.translation[user_src.user.language],
+        },
+        email_to: user_src.user.email,
+        language: user_src.user.language,
+      });
+
+
+      await this.mailSenderDI.setContext(this.context).mailSend({
+        type: 'CHANGE_IUA_STATUS',
+        model: {
+          iua_nr: IUA.uniq_number,
+          iua_id: IUA.id,
+          comment: this.model.message,
+          status: status.translation[this.context.language],
+        },
+        email_to: this.context.user.email,
+        language: this.context.language,
+      });
 
       //#endregion
       await this.itemTransactionsServiceDI.setContext(this.context).setStatus({ iua_id: IUA.id, status_id: status.id });

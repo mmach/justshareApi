@@ -79,7 +79,6 @@ export default class ConversationRepository extends BaseRepository {
 
   async getUserConversations({ conv_id, iua_id, page, size, transaction }) {
 
-    console.log(iua_id)
     let offset = page * size;
     let limit = size
     let where = { project_id: this.context.project.id }
@@ -172,7 +171,7 @@ export default class ConversationRepository extends BaseRepository {
           include: [{
             model: this.sequelizeDI.ConversationMessageMembers,
             as: "users",
-            required: true,
+            required: false,
           }],
 
         },

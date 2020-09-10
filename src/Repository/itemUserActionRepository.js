@@ -26,12 +26,13 @@ export default class ItemUserActionRepository extends BaseRepository {
   getItemUserActions({ item_id, iua_id, status, transaction }) {
     let where = { project_id: this.context.project.id }
     where.id = iua_id
+    where.project_id = this.context.project.id;
     return this.entityDAO.findAll({
       where: where,
       include: [
         {
           model: this.sequelizeDI.Conversation,
-          required: true,
+          required: false,
           as: "conversation",
           include: [
             {
@@ -40,13 +41,103 @@ export default class ItemUserActionRepository extends BaseRepository {
               as: "users"
             }
           ]
+        },
+
+        {
+          model: this.sequelizeDI.V_User,
+          required: true,
+          as: "users",
+          include: [
+            {
+              model: this.sequelizeDI.Blob,
+              as: "blob_profile",
+              required: false
+
+            },
+          ]
         }
+
 
       ],
       transaction: this.getTran({ transaction })
 
     })
   }
+
+
+
+
+  getItemUserActionsList({ action_id, status_id, size, page, transaction }) {
+
+    //move to dynamic sql !!!
+    //create new query for search by ppl
+    let p_page = Number(page) * Number(size)
+
+    return this.sequelizeDI.sequelize.query(
+      `WITH getUsersConv AS ( 
+      SELECT conversation_id,iua_id,user_Id FROM Conversations JOIN UserConversations ON Conversations.id=UserConversations.conversation_id  
+      WHERE user_id=:user_id
+       AND Conversations.project_id=:project_id
+   )
+   ,getIUA as ( 
+   SELECT ItemUserActions.* , conversation_id FROM ItemUserActions
+   JOIN getUsersConv ON getUsersConv.iua_id=ItemUserActions.id
+   WHERE ItemUserActions.project_id=:project_id
+    ${status_id ? ' AND status_id=:status_id ' : ''}
+    ${action_id ? ' AND action_id= :action_id ' : ''}
+   
+    )
+   SELECT  getIUA.updated_at as date, * ,COUNT(1) OVER(PARTITION BY NULL ) AS total FROM getIUA
+   JOIN ItemTransactions ON getIUA.id=ItemTransactions.iua_Id
+   AND ItemTransactions.project_Id=:project_id
+   ORDER BY getIUA.updated_at DESC
+   OFFSET ${p_page} ROWS 
+  FETCH NEXT ${Number(size)} ROWS ONLY;
+   `
+      ,
+      {
+        replacements: {
+          project_id: this.context.project.id
+          , action_id: action_id
+          , status_id: status_id
+          , user_id: this.context.user.id
+        },
+        transaction: this.getTran({ transaction }),
+        type: this.sequelizeDI.sequelize.QueryTypes.SELECT
+      });
+
+  }
+
+  getItemUserActionHistory({ iua_id, transaction }) {
+
+    return this.sequelizeDI.sequelize.query(
+
+      `   
+    WITH recus(iua_id) AS (
+    SELECT iua_prev_id FROM ItemUserActions
+    WHERE id IN (:iua_id)
+    UNION ALL
+    SELECT ItemUserActions.iua_prev_id  FROM recus JOIN ItemUserActions ON id=recus.iua_id
+    ),
+    union_recus AS (
+    SELECT iua_id FROM recus
+    WHERE iua_id IS NOT NULL
+    UNION ALL
+    SELECT :iua_id
+    )
+    SELECT union_recus.* FROM union_recus
+ `
+      ,
+      {
+        replacements: {
+          iua_id: iua_id
+
+        },
+        transaction: this.getTran({ transaction }),
+        type: this.sequelizeDI.sequelize.QueryTypes.SELECT
+      });
+  }
+
   /**
    *
    *

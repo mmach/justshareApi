@@ -109,7 +109,9 @@ export default class ItemActionsReservationWaitingForCustomerCommand extends Bas
           user_id: this.context.user.id,
           status: 'W',
           iua_prev_id: id,
-          status_id: status.id
+          status_id: status.id,
+          created_date: new Date()
+
         }, withProject: true
       })
       let obj = await this.commentServiceDI.setContext(this.context).getByIUA({ iua_id: IUA.id })

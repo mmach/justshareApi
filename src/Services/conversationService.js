@@ -26,9 +26,9 @@ export default class ConversationService extends BaseService {
     this.projectServiceDI = projectServiceDI
 
   }
-  async getUserConversations({ page, size }) {
+  async getUserConversations({ conv_id, page, size }) {
     return await this.unitOfWorkDI.conversationRepository.getUserConversations({
-      page, size
+      page, size, conv_id
     })
   }
   async getUserConversation({ conv_id, last_msg, size }) {
@@ -130,7 +130,7 @@ export default class ConversationService extends BaseService {
 
     conv = conv[0]
     let hash = Buffer.from(proj.socket).toString('base64').replace(/=/g, '');
-   // console.log(conv.messages[0].id);
+    // console.log(conv.messages[0].id);
     let obj = {
       id: msg_id,
       project_id: this.context.project.id,

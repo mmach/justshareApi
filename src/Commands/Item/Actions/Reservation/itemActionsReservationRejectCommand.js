@@ -114,7 +114,9 @@ export default class ItemActionsReservationRejectCommand extends BaseCommand {
           user_id: this.context.user.id,
           status: 'R',
           iua_prev_id: id,
-          status_id: status.id
+          status_id: status.id,
+          created_date: new Date()
+
         }, withProject: true
       })
       await this.conversationServiceDI.setContext(this.context).sendMessageToUser({ iua_id: IUA.id, msg_id: this.model.msg_id, msg: this.model.message, syncSocket: true });

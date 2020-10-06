@@ -18,11 +18,14 @@ export default class ActionProjectRepository extends BaseRepository {
     super(sequelizeDI.ActionsProject);
     this.sequelizeDI = sequelizeDI;
   }
-  async getActions({ transaction }) {
+  async getActions({ id, transaction }) {
 
-
+    let where = { project_id: this.context.project.id };
+    if (id) {
+      where.id = id
+    }
     return this.entityDAO.findAll({
-      where: { project_id: this.context.project.id },
+      where: where,
       include: [
         {
           model: this.sequelizeDI.Actions,

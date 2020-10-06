@@ -7,7 +7,7 @@ import { Model } from "sequelize";
  * @class Item
  * @extends Sequelize.Model
  */
-export default class V_Project extends Model {
+export default class vProject extends Model {
   /**
    *
    * @static
@@ -95,37 +95,37 @@ export default class V_Project extends Model {
     );
   }
   static associate(models) {
-    V_Project.belongsTo(models.Blob, {
+    vProject.belongsTo(models.Blob, {
       as: "logo",
       targetKey: "id",
       foreignKey: "blob_logo_id"
     });
-    V_Project.belongsTo(models.Blob, {
+    vProject.belongsTo(models.Blob, {
       as: "logo_hor",
       targetKey: "id",
       foreignKey: "blob_logo_hor_id"
     });
-    V_Project.belongsTo(models.Blob, {
+    vProject.belongsTo(models.Blob, {
       as: "logo_ver",
       targetKey: "id",
       foreignKey: "blob_logo_ver_id"
     });
-    V_Project.belongsTo(models.Blob, {
+    vProject.belongsTo(models.Blob, {
       as: "img_main",
       targetKey: "id",
       foreignKey: "blob_main_id"
     });
-    V_Project.belongsTo(models.Blob, {
+    vProject.belongsTo(models.Blob, {
       as: "img_main_phone",
       targetKey: "id",
       foreignKey: "blob_main_phone_id"
     });
-    V_Project.belongsTo(models.V_User, {
+    vProject.belongsTo(models.V_User, {
       as: "owner",
       targetKey: "id",
       foreignKey: "user_id"
     });
-    V_Project.hasMany(models.V_User, {
+    vProject.hasMany(models.V_User, {
       as: "users",
       targetKey: "id",
       foreignKey: "project_id"

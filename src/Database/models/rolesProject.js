@@ -31,7 +31,9 @@ export default class RolesProject extends Model {
 
 
       },
-      { sequelize }
+      { sequelize ,
+        tableName: 'RolesProjects'
+      }
     );
   }
   static associate(models) {

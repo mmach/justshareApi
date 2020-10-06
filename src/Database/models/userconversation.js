@@ -40,7 +40,9 @@ export default class UserConversation extends Model {
         }
 
       },
-      { sequelize }
+      { sequelize,
+        tableName: 'UserConversations'
+      }
     );
   }
 

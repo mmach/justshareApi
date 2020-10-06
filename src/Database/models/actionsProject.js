@@ -37,18 +37,26 @@ export default class ActionsProject extends Model {
         status: {
           type: DataTypes.STRING,
           allowNull: true
-        }
-
+        },
+        func: {
+          type: DataTypes.STRING,
+        },
+        process_id: {
+          type: DataTypes.UUID,
+        },
       },
-      { sequelize }
+      { sequelize,
+        tableName: 'ActionsProjects'
+      }
     );
   }
   static associate(models) {
     ActionsProject.belongsTo(models.Actions, { as: "action_details", targetKey: 'id', foreignKey: "action_id" });
     ActionsProject.hasMany(models.ActionPrivileges, { as: "action_privileges", targetKey: 'id', foreignKey: "action_id" });
     ActionsProject.hasMany(models.StatusActions, { as: "statuses", targetKey: 'id', foreignKey: "action_id" });
+    ActionsProject.belongsTo(models.Process, { as: "process", targetKey: 'id', foreignKey: "process_id" });
 
-    
+
     // Users.hasOne(models.Blob, { as: "blob_profile", targetKey: 'id', foreignKey: "blob_id" });
 
 

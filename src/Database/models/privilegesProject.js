@@ -38,7 +38,9 @@ export default class PrivilegesProject extends Model {
         },
       
       },
-      { sequelize }
+      { sequelize ,
+        tableName: 'PrivilegesProjects'
+      }
     );
   }
   static associate(models) {

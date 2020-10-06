@@ -40,7 +40,9 @@ export default class DimensionsProject extends Model {
         }
 
       },
-      { sequelize }
+      { sequelize,
+        tableName: 'DimensionsProjects'
+      }
     );
   }
   static associate(models) {

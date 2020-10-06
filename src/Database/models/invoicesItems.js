@@ -46,7 +46,9 @@ export default class InvoiceItem extends Model {
        
 
       },
-      { sequelize }
+      { sequelize,
+        tableName: 'InvoiceItems'
+      }
     );
   }
   static hooks(models, sequelize) {

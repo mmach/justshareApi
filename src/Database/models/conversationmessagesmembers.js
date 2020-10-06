@@ -48,7 +48,9 @@ export default class ConversationMessageMembers extends Model {
           allowNull: true
         },
       },
-      { sequelize }
+      { sequelize ,
+        tableName: 'ConversationMessageMembers'
+      }
     );
   }
 

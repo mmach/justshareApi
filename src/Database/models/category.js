@@ -41,9 +41,21 @@ export default class Category extends Model {
        category_no: DataTypes.STRING,
        category_zh_cn: DataTypes.STRING,*/
         status: DataTypes.INTEGER,
-        forThing: DataTypes.INTEGER,
-        forSell: DataTypes.INTEGER,
-        forEvent: DataTypes.INTEGER,
+        forThing: {
+          field: 'forThing',
+          type: DataTypes.INTEGER
+        },
+        forSell: {
+          field: 'forSell',
+          type: DataTypes.INTEGER
+        },
+        forEvent: {
+          field: 'forEvent',
+          type: DataTypes.INTEGER
+        },
+        view_type: DataTypes.STRING,
+
+
         // icon: DataTypes.STRING,
         expired_day: DataTypes.INTEGER,
         project_id: DataTypes.UUID,

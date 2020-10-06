@@ -75,6 +75,8 @@ const cqrsPreprocess = () => {
   const commandExec = async ctx => {
     const body = ctx.request.body;
     const action = ctx.state.container.resolve(body.action);
+    action.container = ctx.state.container;
+
     let model = {};
     if (typeof (body.model) == "object") {
       model = body.model
@@ -88,6 +90,7 @@ const cqrsPreprocess = () => {
 
     const query = JSON.parse(ctx.request.query.action);
     const action = ctx.state.container.resolve(query.action);
+    action.container = ctx.state.container;
     let model = {};
     if (typeof (query.model) == "object") {
       model = query.model
@@ -119,6 +122,7 @@ const cqrsPreprocess = () => {
     }
     return ctx;
   };
+
   return {
     queryExecAsync: async ctx => {
       return await queryExec(ctx);

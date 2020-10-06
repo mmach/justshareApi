@@ -43,7 +43,9 @@ export default class LanguageProject extends Model {
           allowNull: true
         }
       },
-      { sequelize }
+      { sequelize,
+        tableName: 'LanguageProjects'
+      }
     );
   }
   static associate(models) {

@@ -35,10 +35,14 @@ export default class ItemUserAction extends Model {
         iua_prev_id: DataTypes.UUID,
         status_id: DataTypes.UUID,
         uniq_number: DataTypes.STRING,
-        created_date: DataTypes.DATE
+        created_date: DataTypes.DATE,
+        process_id: DataTypes.UUID,
+        process_chain_id: DataTypes.UUID
 
       },
-      { sequelize }
+      { sequelize ,
+        tableName: 'ItemUserActions'
+      }
     );
   }
   static associate(models) {

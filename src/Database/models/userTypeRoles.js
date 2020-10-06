@@ -32,7 +32,9 @@ export default class UserTypeRoles extends Model {
 
         name: DataTypes.STRING,
       },
-      { sequelize }
+      { sequelize ,
+        tableName: 'UserTypeRoles'
+      }
     );
   }
   static associate(models) {

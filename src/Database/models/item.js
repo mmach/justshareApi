@@ -49,14 +49,47 @@ export default class Item extends Model {
           type: DataTypes.UUID,
           allowNull: false
         },
-        clobSearch_pl: DataTypes.TEXT,
-        clobSearch_us: DataTypes.TEXT,
-        clobSearch_de: DataTypes.TEXT,
-        clobSearch_fr: DataTypes.TEXT,
-        clobSearch_ru: DataTypes.TEXT,
-        clobSearch_no: DataTypes.TEXT,
-        clobSearch_es: DataTypes.TEXT,
-        clobSearch_zh_cn: DataTypes.TEXT,
+        clobSearch_pl: {
+          field: 'clobSearch_pl',
+          type: DataTypes.TEXT
+        },
+
+        clobSearch_us: {
+          field: 'clobSearch_us',
+          type: DataTypes.TEXT
+        },
+
+        clobSearch_de: {
+          field: 'clobSearch_de',
+          type: DataTypes.TEXT
+        },
+
+        clobSearch_fr: {
+          field: 'clobSearch_fr',
+          type: DataTypes.TEXT
+        },
+
+        clobSearch_ru: {
+          field: 'clobSearch_ru',
+          type: DataTypes.TEXT
+        },
+
+        clobSearch_no: {
+          field: 'clobSearch_no',
+          type: DataTypes.TEXT
+        },
+
+        clobSearch_es: {
+          field: 'clobSearch_es',
+          type: DataTypes.TEXT
+        },
+
+        clobSearch_zh_cn: {
+          field: 'clobSearch_zh_cn',
+          type: DataTypes.TEXT
+        },
+
+
         longitude: DataTypes.FLOAT,
         latitude: DataTypes.FLOAT,
         category_type: DataTypes.INTEGER,
@@ -98,7 +131,7 @@ export default class Item extends Model {
         individualHooks: true
       })
 
-     
+
       await models.Blob.destroy({
         where: { item_id: item.id },
         transaction: options.transaction,
@@ -163,6 +196,6 @@ export default class Item extends Model {
       targetKey: 'id',
       foreignKey: "item_id"
     });
-   
+
   }
 }

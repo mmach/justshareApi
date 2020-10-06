@@ -344,6 +344,7 @@ export default class ItemRepository extends BaseRepository {
           as: "category",
           include: [
             {
+              required: false,
               model: this.sequelizeDI.Blob,
               as: "icon_blob"
 
@@ -378,7 +379,7 @@ export default class ItemRepository extends BaseRepository {
                     {
                       model: this.sequelizeDI.CategoryOptionsType,
                       as: "cat_opt",
-                      required: true,
+                      required: false,
                       where: {
                         status: 1
                       }

@@ -51,21 +51,24 @@ export default class InvoiceService extends BaseService {
       invoice_user_src_id: src.id,
       invoice_user_dest_id: dest.id,
     }
+    console.log('co_tu_sie_dzieje')
+
     await this.unitOfWorkDI.invoiceRepository.insert({
       model: obj, withProject: true
     })
-    await Promise.all(
-      model.items.map(i => {
-        return this.unitOfWorkDI.invoiceItemRepository.insert({
-          model: {
-            ...i,
-            id: uuid(),
-            price: i.price_full_tax,
-            invoice_id: invocie_id
-          }, withProject: true
-        })
-      }))
+    console.log('to jest kruwa tu')
+    let bi = model.items.map(i => {
+      return {
+        ...i,
+        id: uuid(),
+        price: i.price_full_tax,
+        invoice_id: invocie_id
+      }
+    })
+    console.log(bi)
+    await this.unitOfWorkDI.invoiceItemRepository.bulkInsert({ model: bi, withProject: true })
 
+    console.log('wtef')
     return invocie_id
   }
 
@@ -95,7 +98,7 @@ export default class InvoiceService extends BaseService {
         logo: img.data
       },
       invoiceNumber: invoice.number_string,
-      dateIssued: invoice.created_at.toLocaleDateString(),
+      dateIssued: invoice.createdAt.toLocaleDateString(),
       dateDue: invoice.dueDate.toLocaleDateString(),
       userFrom: {
         ...invoice.user_src,
@@ -119,7 +122,22 @@ export default class InvoiceService extends BaseService {
       },
       items: invoice.items
     };
-    return genInvoice(model)
+    return await genInvoice(model)
+
+
+
+  }
+
+
+
+
+  async getUserInvoices({ iua_id, status, page, size, month, year, asAdmin }) {
+
+
+    let invoice = await this.toJsonParse(this.unitOfWorkDI.invoiceRepository.getUserInvoices({ iua_id, status, page, size, month, year, asAdmin }))
+    console.log(invoice)
+    //console.log(this.context.project)
+    return invoice
 
 
 

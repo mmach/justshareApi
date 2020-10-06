@@ -36,7 +36,9 @@ export default class MailSenders extends Model {
         project_id: DataTypes.UUID
 
       },
-      { sequelize }
+      { sequelize,
+        tableName: 'MailSenders'
+      }
     );
   } static associate(models) {
     MailSenders.belongsTo(models.Translations, { as: "translation", targetKey: 'id', foreignKey: "translation_id" });

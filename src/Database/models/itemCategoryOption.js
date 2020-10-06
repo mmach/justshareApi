@@ -33,7 +33,9 @@ export default class ItemCategoryOption extends Model {
         dim_id: DataTypes.UUID
 
       },
-      { sequelize }
+      { sequelize,
+        tableName: 'ItemCategoryOptions'
+      }
     );
   }
   static associate(models) {

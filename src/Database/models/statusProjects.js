@@ -35,7 +35,9 @@ export default class StatusProjects extends Model {
         
 
       },
-      { sequelize }
+      { sequelize ,
+        tableName: 'StatusProjects'
+      }
     );
   }
   static associate(models) {

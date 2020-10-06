@@ -32,7 +32,9 @@ export default class MailParts extends Model {
         body: DataTypes.TEXT,
 
       },
-      { sequelize }
+      { sequelize,
+        tableName: 'MailParts'
+      }
     );
   }
   static associate(models) {

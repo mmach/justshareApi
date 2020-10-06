@@ -13,7 +13,7 @@ import Blob from "./blob.js";
 import BlobMapper from "./blobMapper.js";
 import Item from "./item.js";
 import ItemCategory from "./itemcategory.js";
-import V_User from "./v_user.js";
+import vUser from "./v_user.js";
 import Country from "./country.js";
 import City from "./city.js";
 import UserAuths from "./userauth.js";
@@ -44,7 +44,7 @@ import UserRoles from "./userRoles.js";
 import UserTypeRoles from "./userTypeRoles.js";
 import Dimensions from "./dimensions.js";
 import DimensionsProject from './dimensionsProject.js'
-import V_Project from "./v_project.js";
+import vProject from "./v_project.js";
 import MailParts from "./mailParts";
 import MailSenders from "./mailSenders";
 import MailTypes from "./mailTypes";
@@ -67,6 +67,9 @@ import Invoice from './invoices.js'
 import InvoiceUser from "./invoicesUsers";
 import InvoiceItem from "./invoicesItems";
 import UserInvoiceValue from "./userInvoicesValue";
+import ProcessChain from "./processChain";
+import Process from "./process";
+import ProcessChainState from "./processChainState";
 
 var env = process.env.NODE_ENV || "development";
 var config = configJSON[env];
@@ -106,7 +109,7 @@ let models = {
   Item: Item.init(sequelize, Sequelize),
   ItemCategory: ItemCategory.init(sequelize, Sequelize),
   Blob: Blob.init(sequelize, Sequelize),
-  V_User: V_User.init(sequelize, Sequelize),
+  V_User: vUser.init(sequelize, Sequelize),
   Country: Country.init(sequelize, Sequelize),
   City: City.init(sequelize, Sequelize),
   UserAuths: UserAuths.init(sequelize, Sequelize),
@@ -137,7 +140,7 @@ let models = {
   UserTypeRoles: UserTypeRoles.init(sequelize, Sequelize),
   DimensionsProject: DimensionsProject.init(sequelize, Sequelize),
   Dimensions: Dimensions.init(sequelize, Sequelize),
-  V_Project: V_Project.init(sequelize, Sequelize),
+  V_Project: vProject.init(sequelize, Sequelize),
   MailParts: MailParts.init(sequelize, Sequelize),
   MailSenders: MailSenders.init(sequelize, Sequelize),
   MailTypes: MailTypes.init(sequelize, Sequelize),
@@ -159,7 +162,10 @@ let models = {
   Invoice: Invoice.init(sequelize, Sequelize),
   InvoiceUser: InvoiceUser.init(sequelize, Sequelize),
   InvoiceItem: InvoiceItem.init(sequelize, Sequelize),
-  UserInvoiceValue: UserInvoiceValue.init(sequelize, Sequelize)
+  UserInvoiceValue: UserInvoiceValue.init(sequelize, Sequelize),
+  ProcessChain: ProcessChain.init(sequelize, Sequelize),
+  Process: Process.init(sequelize, Sequelize),
+  ProcessChainState: ProcessChainState.init(sequelize, Sequelize)
 };
 
 

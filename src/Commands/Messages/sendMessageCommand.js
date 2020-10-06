@@ -46,7 +46,7 @@ export default class SendMessageCommand extends BaseCommand {
         message: this.model.message,
         is_newest: true,
         message_triggered_id: this.model.message_triggered_id,
-        created_at: this.model.created_at,
+        createdAt: this.model.createdAt,
         socket_user_id: this.model.socket_user_id,
         users: this.model.users,
 

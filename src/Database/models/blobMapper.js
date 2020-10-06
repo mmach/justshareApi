@@ -31,7 +31,9 @@ export default class BlobMapper extends Model {
 
         }
       },
-      { sequelize }
+      { sequelize,
+        tableName: 'BlobMappers'
+      }
     );
   }
   static associate(models) {

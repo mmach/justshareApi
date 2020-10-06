@@ -36,7 +36,9 @@ export default class CategoryActions extends Model {
         }
         
       },
-      { sequelize }
+      { sequelize ,
+        tableName: 'CategoryActions'
+      }
     );
   }
   static associate(models) {

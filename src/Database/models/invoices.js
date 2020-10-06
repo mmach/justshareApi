@@ -46,7 +46,10 @@ export default class Invoice extends Model {
         price_net: DataTypes.FLOAT,
         price_tax: DataTypes.FLOAT,
         tax: DataTypes.FLOAT,
-        dueDate: DataTypes.DATE,
+        dueDate: {
+          field: 'dueDate',
+          type: DataTypes.DATE
+        },
 
         currency: DataTypes.TEXT,
         title: DataTypes.TEXT,
@@ -56,7 +59,10 @@ export default class Invoice extends Model {
         year: DataTypes.INTEGER,
 
         status: DataTypes.STRING,
-
+        status_id: {
+          type: DataTypes.UUID,
+          allowNull: false
+        },
         project_id: {
           type: DataTypes.UUID,
           allowNull: false
@@ -88,6 +94,8 @@ export default class Invoice extends Model {
             month: invoice.month,
             year: invoice.year
           },
+         // transaction: options.transaction,
+
           type: sequelize.QueryTypes.SELECT
         }
       );
@@ -114,6 +122,11 @@ export default class Invoice extends Model {
       as: "user_dest",
       targetKey: "id",
       foreignKey: "invoice_user_dest_id"
+    });
+    Invoice.belongsTo(models.Blob, {
+      as: "blob",
+      targetKey: "id",
+      foreignKey: "blob_id"
     });
   }
 }

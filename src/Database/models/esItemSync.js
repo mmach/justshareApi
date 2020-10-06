@@ -33,7 +33,9 @@ export default class EsItemSync extends Model {
         operation:DataTypes.STRING,
 
       },
-      { sequelize }
+      { sequelize,
+        tableName: 'EsItemSyncs'
+      }
     );
   }
   static associate(models) {

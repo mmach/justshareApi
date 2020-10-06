@@ -131,7 +131,7 @@ export default class SyncItemCommand extends BaseCommand {
         category: item.category_id,
         tags: item.tags.map((tag) => { return { label: tag.tag } }),
         categories: item.categories,
-        created_at: item.created_at ? item.created_at : today.toISOString(),
+        createdAt: item.createdAt ? item.createdAt : today.toISOString(),
         expired_at: (item.expired_date != undefined && item.expired_date != null) ? item.expired_date : expired.toISOString(),
         item: item,
         project_id: item.project_id,

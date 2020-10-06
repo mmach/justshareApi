@@ -31,7 +31,9 @@ export default class StatusActions extends Model {
 
 
       },
-      { sequelize }
+      { sequelize,
+        tableName: 'StatusActions'
+      }
     );
   }
   static associate(models) {

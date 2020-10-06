@@ -31,7 +31,9 @@ export default class CategoryHierarchy extends Model {
         category_child_id: DataTypes.UUID,
         category_parent_id: DataTypes.UUID
       },
-      { sequelize }
+      { sequelize,
+        tableName: 'CategoryHierarchies'
+      }
     );
   }
 

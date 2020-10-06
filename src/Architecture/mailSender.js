@@ -112,11 +112,14 @@ export default class MailSender {
     let templateTranslate = Array.from(new Set(results.template.body.match(/(#TRAN_)\w*#/g)))
     if (templateTranslate.length > 0) {
       let results = await this.translationServiceDI.setContext(this.context).getTokens({ code: 'EMAIL', token: templateTranslate })
-
-      Object.keys(results.EMAIL).forEach((item) => {
-        //   console.log(results.EMAIL[item].message)
-        mail_template = mail_template.replace(new RegExp(item, "g"), results.EMAIL[item].message[language]);
-      })
+      if (results.EMAIL) {
+        Object.keys(results.EMAIL).forEach((item) => {
+          //   console.log(results.EMAIL[item].message)
+          if (results.EMAIL[item]) {
+            mail_template = mail_template.replace(new RegExp(item, "g"), results.EMAIL[item].message[language]);
+          }
+        })
+      }
     }
     // console.log(this.context)
     // console.log(mail_template)
@@ -124,10 +127,14 @@ export default class MailSender {
     templateTranslate = Array.from(new Set(bodyXml.match(/(#)\w*#/g)))
     if (templateTranslate.length > 0) {
       let results = await this.translationServiceDI.setContext(this.context).getTokens({ code: 'EMAIL', token: templateTranslate })
-      Object.keys(results.EMAIL).forEach((item) => {
-        //   console.log(results.EMAIL[item].message)
-        bodyXml = bodyXml.replace(new RegExp(item, "g"), results.EMAIL[item].message[language]);
-      })
+      if (results.EMAIL) {
+        Object.keys(results.EMAIL).forEach((item) => {
+          //   console.log(results.EMAIL[item].message)
+          if (results.EMAIL[item]) {
+            bodyXml = bodyXml.replace(new RegExp(item, "g"), results.EMAIL[item].message[language]);
+          }
+        })
+      }
     }
     templateMOdel.color = this.context.project.theme_color;
     templateMOdel.base_url = this.context.project.base_url;

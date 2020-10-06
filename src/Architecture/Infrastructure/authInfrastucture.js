@@ -41,8 +41,11 @@ export default class AuthInfrastucture extends BaseInfrastracture {
 
   async executeLayer(action) {
     try {
+      if (action.context.user.id) {
+        return await action
+      }
       let context = this.getDecodedToken(action.token);
-        let user = await this.userRepositoryDI.setContext({ context: action.context }).getByGuid({ uid: context.uid, withProject: true })
+      let user = await this.userRepositoryDI.setContext({ context: action.context }).getByGuid({ uid: context.uid, withProject: true })
 
       if (user == undefined || user.relogin_require == true) {
         throw 'AUTHORIZATION_ERROR'

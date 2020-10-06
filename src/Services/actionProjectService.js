@@ -21,8 +21,8 @@ export default class ActionProjectService extends BaseService {
     super({ unitOfWorkDI, repository: 'actionProjectRepository' });
   }
 
-  async getActions({ }) {
-    let result = await this.unitOfWorkDI.actionProjectRepository.getActions({})
+  async getActions({ id }) {
+    let result = await this.toJsonParse(this.unitOfWorkDI.actionProjectRepository.getActions({ id }))
 
     return result;
   }

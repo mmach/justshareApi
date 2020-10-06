@@ -77,7 +77,7 @@ export default class ConversationRepository extends BaseRepository {
     );
   }
 
-  async getUserConversations({ conv_id, iua_id, page, size, transaction }) {
+  async getUserConversations({ conv_id, iua_id, page, size, status, transaction }) {
 
     let offset = page * size;
     let limit = size
@@ -103,17 +103,18 @@ export default class ConversationRepository extends BaseRepository {
     let obj = await this.sequelizeDI.sequelize.query(
       `WITH getUsersConv as ( 
         SELECT  conversation_id FROM UserConversations 
-        WHERE user_id=:user_id
-        AND project_id=:project_id
+        WHERE
+         project_id=:project_id
+          ${this.context.user.is_root || this.context.user.is_admin ? ` ` : 'AND user_id=:user_id '}
         )
         SELECT  Conversations.id FROM ConversationMessages 
         JOIN getUsersConv ON getUsersConv.conversation_id =   ConversationMessages.conversation_id
         JOIN Conversations ON Conversations.id =ConversationMessages.conversation_id 
         WHERE ConversationMessages.is_newest=1
-        AND Conversations.Status=:status
         AND Conversations.project_id=:project_id
-        ${conv_id ? 'AND Conversations.id=:conv_id':''}
-        ${iua_id ? 'AND Conversations.iua_id=:iua_id':''}
+        ${conv_id ? 'AND Conversations.id=:conv_id' : ''}
+        ${iua_id ? 'AND Conversations.iua_id=:iua_id' : ''}
+        ${status ? ' AND Conversations.status=:status ' : ''}
         ORDER BY ConversationMessages.created_at DESC offset :offset rows FETCH next :limit rows only`
       ,
       {
@@ -122,7 +123,7 @@ export default class ConversationRepository extends BaseRepository {
           iua_id: iua_id,
           conv_id: conv_id,
           project_id: this.context.project.id,
-          status: 'O',
+          status: status,
           offset: offset,
           limit: limit
         },
@@ -180,10 +181,27 @@ export default class ConversationRepository extends BaseRepository {
       transaction: this.getTran({ transaction })
     });
   }
+
   closeConversation({ id, iua_id, transaction }) {
     return this.entityDAO.update(
       {
         status: 'C'
+      },
+      {
+        where: {
+          iua_id: this.toStr(iua_id),
+          project_id: this.context.project.id
+        },
+        transaction: this.getTran({ transaction })
+      }
+    );
+  }
+
+
+  setStatusConversation({ iua_id, status, transaction }) {
+    return this.entityDAO.update(
+      {
+        status: status
       },
       {
         where: {

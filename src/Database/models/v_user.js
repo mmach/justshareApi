@@ -6,13 +6,13 @@ import { Model } from "sequelize";
  * @class Users
  * @extends Sequelize.Model
  */
-export default class V_User extends Model {
+export default class vUser extends Model {
   /**
    *
    * @static
    * @param  {any} sequelize
    * @param  {any} DataTypes
-   * @return {V_User|Model}
+   * @return {vUser|Model}
    * @memberof Users
    */
   static init(sequelize, DataTypes) {
@@ -69,10 +69,10 @@ export default class V_User extends Model {
   }
   static associate(models) {
     // V_User.hasOne(models.Blob, { as: "blob_profile", targetKey: 'blob_id', foreignKey: "id" });
-    V_User.belongsTo(models.Blob, { as: "blob_profile", targetKey: 'id', foreignKey: "blob_id" });
-    V_User.belongsTo(models.UserTypes, { as: "user_type", targetKey: 'id', foreignKey: "usertype_id" });
-    V_User.hasMany(models.UserRoles, { as: "user_roles", targetKey: 'id', foreignKey: "user_id" });
-    V_User.belongsTo(models.V_Project, { as: "project", targetKey: 'id', foreignKey: "project_id" });
+    vUser.belongsTo(models.Blob, { as: "blob_profile", targetKey: 'id', foreignKey: "blob_id" });
+    vUser.belongsTo(models.UserTypes, { as: "user_type", targetKey: 'id', foreignKey: "usertype_id" });
+    vUser.hasMany(models.UserRoles, { as: "user_roles", targetKey: 'id', foreignKey: "user_id" });
+    vUser.belongsTo(models.V_Project, { as: "project", targetKey: 'id', foreignKey: "project_id" });
 
     // Users.hasMany(models.UserAuth)
   }

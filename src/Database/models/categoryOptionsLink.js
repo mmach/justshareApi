@@ -105,7 +105,9 @@ export default class CategoryOptionsLink extends Model {
           allowNull: true
         },
       },
-      { sequelize }
+      { sequelize ,
+        tableName: 'CategoryOptionsLinks'
+      }
     );
   }
 

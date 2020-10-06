@@ -47,4 +47,9 @@ export default class StatusProjectService extends BaseService {
     return await this.toJsonParse(this.unitOfWorkDI.statusProjectsRepository.getByToken({ name: name, withProject: true }))
 
   }
+  async getByStatusId({ id }) {
+    return await this.toJsonParse(this.unitOfWorkDI.statusProjectsRepository.getByStatusId({ id, withProject: true }))
+
+  }
+
 }

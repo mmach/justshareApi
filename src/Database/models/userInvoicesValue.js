@@ -44,7 +44,9 @@ export default class UserInvoiceValue extends Model {
 
 
       },
-      { sequelize }
+      { sequelize,
+        tableName: 'UserInvoiceValues'
+      }
     );
   }
   static hooks(models, sequelize) {

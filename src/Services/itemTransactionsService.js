@@ -50,16 +50,17 @@ export default class ItemTransactionService extends BaseService {
     // console.log(conv)
     let hash = Buffer.from(proj.socket).toString('base64').replace(/=/g, '');
     // console.log(conv.messages[0].id);
+    console.log(conv)
     let obj = {
       project_id: this.context.project.id,
       user_id: this.context.user.id,
       status_id: status_id,
       iua_id: iua_id,
-      created_at: new Date(),
+      createdAt: new Date(),
       socket_user_id: '/socket_' + hash,
       users: conv.users.map(i => { return { ...i, id: uuid() } }),
     }
-   
+
     conv.users.forEach(i => {
       global.socket.of("/socket_" + hash).emit(i.user_id + '-iua_status',
         obj)

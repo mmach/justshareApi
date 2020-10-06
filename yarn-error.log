@@ -1,0 +1,139 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js
+
+PATH: 
+  C:\Program Files\Python37\Scripts\;C:\Program Files\Python37\;C:\ProgramData\DockerDesktop\version-bin;C:\Program Files\Docker\Docker\Resources\bin;C:\Program Files (x86)\Python37-32\Scripts\;C:\Program Files (x86)\Python37-32\;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Microsoft MPI\Bin\;C:\Program Files\Intel\iCLS Client\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\Client SDK\ODBC\130\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\140\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\140\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\140\Tools\Binn\ManagementStudio\;C:\Program Files\Microsoft SQL Server\140\Tools\Binn\;C:\Program Files\Microsoft SQL Server\140\DTS\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\130\Tools\Binn\;C:\Program Files\Microsoft\Web Platform Installer\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Users\michal_mach\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\OpenVPN\bin;C:\Program Files\PuTTY\;C:\Program Files\Git\cmd;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files (x86)\Yarn\bin\;C:\Users\michal_mach\AppData\Local\Microsoft\WindowsApps;C:\Users\michal_mach\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\michal_mach\AppData\Roaming\npm;C:\Users\michal_mach\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Program Files (x86)\MSBuild\14.0\Bin;C:\Program Files\heroku\bin;C:\Program Files (x86)\Nmap;C:\Users\michal_mach\.dotnet\tools;C:\Users\michal_mach\AppData\Local\Yarn\bin
+
+Yarn version: 
+  1.22.5
+
+Node version: 
+  12.13.0
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/core-js/-/core-js-2.6.11.tgz: ESOCKETTIMEDOUT
+      at ClientRequest.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:141376:19)
+      at Object.onceWrapper (events.js:299:28)
+      at ClientRequest.emit (events.js:210:5)
+      at TLSSocket.emitRequestTimeout (_http_client.js:690:9)
+      at Object.onceWrapper (events.js:299:28)
+      at TLSSocket.emit (events.js:210:5)
+      at TLSSocket.Socket._onTimeout (net.js:468:8)
+      at listOnTimeout (internal/timers.js:531:17)
+      at processTimers (internal/timers.js:475:7)
+
+npm manifest: 
+  {
+    "name": "justshareapi",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "start": "babel-node --presets es2017,stage-2 ./src/index.js ",
+      "server": "babel ./src  -d ./.compiled/src --source-maps --copy-files    --exec babel-node --presets es2017,stage-2 ./src/index.js ",
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/mmach/justshareApi.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+      "url": "https://github.com/mmach/justshareApi/issues"
+    },
+    "homepage": "https://github.com/mmach/justshareApi#readme",
+    "babel": {
+      "presets": [
+        "es2015",
+        "react",
+        "stage-2"
+      ]
+    },
+    "dependencies": {
+      "amqp-connection-manager": "^3.2.0",
+      "amqplib": "^0.5.6",
+      "awilix": "^2.12.0",
+      "awilix-koa": "^0.1.1",
+      "axios": "^0.16.2",
+      "babel-cli": "^6.26.0",
+      "babel-core": "^6.26.3",
+      "babel-eslint": "^7.2.3",
+      "babel-plugin-react-html-attrs": "^2.0.0",
+      "babel-plugin-transform-es2015-destructuring": "^6.23.0",
+      "babel-plugin-transform-object-rest-spread": "^6.23.0",
+      "babel-plugin-transform-runtime": "^6.23.0",
+      "babel-preset-es2015": "^6.24.1",
+      "babel-preset-es2015-node5": "^1.2.0",
+      "babel-preset-es2015-riot": "^1.1.0",
+      "babel-preset-es2017": "^6.24.1",
+      "babel-preset-node6": "^11.0.0",
+      "babel-preset-react": "^6.24.1",
+      "babel-preset-stage-2": "^6.24.1",
+      "babel-regenerator-runtime": "^6.5.0",
+      "babel-runtime": "^6.23.0",
+      "bcryptjs": "^2.4.3",
+      "better-validator": "^2.1.3",
+      "bluebird": "^3.5.3",
+      "btoa": "^1.2.1",
+      "circular-json": "^0.5.9",
+      "crawler": "^1.2.1",
+      "cron": "^1.7.2",
+      "d3-array": "^2.3.1",
+      "d3-format": "^1.4.1",
+      "d3-scale": "^3.1.0",
+      "find": "^0.3.0",
+      "fs": "0.0.1-security",
+      "fs-extra": "^7.0.0",
+      "geocoder": "^0.2.3",
+      "install": "^0.10.1",
+      "ioredis": "^4.17.3",
+      "jimp": "^0.5.6",
+      "json2xml": "^0.1.3",
+      "jsonwebtoken": "^8.3.0",
+      "justshare-shared": "^1.0.163",
+      "koa": "^2.8.1",
+      "koa-body": "^2.6.0",
+      "koa-compress": "^3.0.0",
+      "koa-cors": "0.0.16",
+      "koa-router": "^7.1.1",
+      "koa-static": "^5.0.0",
+      "koa2-cors": "^2.0.3",
+      "mjml": "^4.6.2",
+      "mjml-location": "^3.3.5",
+      "node-geocoder": "^3.23.0",
+      "node-gyp": "^3.6.1",
+      "node-gzip": "^1.1.2",
+      "node-json-db": "^0.7.3",
+      "nodemailer": "^6.4.6",
+      "nodemailer-sendgrid": "^1.0.3",
+      "nodemailer-sendgrid-transport": "^0.2.0",
+      "nodemailer-smtp-transport": "^2.7.4",
+      "nodemon": "^1.18.4",
+      "npm": "^5.2.0",
+      "pdfmake": "^0.1.68",
+      "query-string": "^6.8.3",
+      "sendmail": "^1.6.1",
+      "sequelize": "^4.39.0",
+      "sequelize-cli": "^4.0.0",
+      "socket.io-emitter": "^3.1.1",
+      "tedious": "^2.0.0",
+      "translate": "^1.1.2",
+      "uuid": "^3.3.2",
+      "uuidv4": "^6.1.1",
+      "validator": "^7.0.0",
+      "winston": "^2.3.1",
+      "winston-daily-rotate-file": "^1.4.6",
+      "xml2js": "^0.4.22",
+      "xslt-processor": "^0.10.0"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

@@ -16,7 +16,7 @@ let fonts = {
 
 };
 var printer = new PdfPrinter(fonts);
-let genInvoice = (model) => {
+let genInvoice = async (model) => {
 
     let docDefinition = {
 
@@ -456,8 +456,16 @@ let genInvoice = (model) => {
     var now = new Date();
     var pdfDoc = printer.createPdfKitDocument(docDefinition);
     let name = 'upload/' + new Date().getTime().toString() + '.pdf';
-    pdfDoc.pipe(fs.createWriteStream(name));
-    pdfDoc.end();
+    await new Promise((res, rej) => {
+
+        let stream = fs.createWriteStream(name)
+        stream.on('finish', () => res());
+        stream.on('error', rej);
+        pdfDoc.pipe(stream);
+        pdfDoc.end();
+
+    })
+
     return {
         ...model,
         invoicePath: name

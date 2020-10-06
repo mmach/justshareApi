@@ -52,7 +52,9 @@ export default class ConversationMessages extends Model {
           allowNull: true
         },
       },
-      { sequelize }
+      { sequelize ,
+        tableName: 'ConversationMessages'
+      }
     );
   }
 

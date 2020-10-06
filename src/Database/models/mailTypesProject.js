@@ -34,7 +34,9 @@ export default class MailTypesProjects extends Model {
         project_id: DataTypes.UUID,
 
       },
-      { sequelize }
+      { sequelize,
+        tableName: 'MailTypesProjects'
+      }
     );
   }
   static associate(models) {

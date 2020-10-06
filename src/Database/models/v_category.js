@@ -29,21 +29,30 @@ export default class V_Category extends Model {
 
         },
         category: {
-         type: DataTypes.STRING,
-         allowNull: false,
-       },
-      category_pl: DataTypes.STRING,
-       category_us: DataTypes.STRING,
-       category_de: DataTypes.STRING,
-       category_ru: DataTypes.STRING,
-       category_fr: DataTypes.STRING,
-       category_es: DataTypes.STRING,
-       category_no: DataTypes.STRING,
-       category_zh_cn: DataTypes.STRING,
+          type: DataTypes.STRING,
+          allowNull: false,
+        },
+        category_pl: DataTypes.STRING,
+        category_us: DataTypes.STRING,
+        category_de: DataTypes.STRING,
+        category_ru: DataTypes.STRING,
+        category_fr: DataTypes.STRING,
+        category_es: DataTypes.STRING,
+        category_no: DataTypes.STRING,
+        category_zh_cn: DataTypes.STRING,
         status: DataTypes.INTEGER,
-        forThing: DataTypes.INTEGER,
-        forSell: DataTypes.INTEGER,
-        forEvent: DataTypes.INTEGER,
+        forThing: {
+          field: 'forThing',
+          type: DataTypes.INTEGER
+        },
+        forSell: {
+          field: 'forSell',
+          type: DataTypes.INTEGER
+        },
+        forEvent: {
+          field: 'forEvent',
+          type: DataTypes.INTEGER
+        },
         // icon: DataTypes.STRING,
         expired_day: DataTypes.INTEGER,
         project_id: DataTypes.UUID,
@@ -55,12 +64,15 @@ export default class V_Category extends Model {
 
 
       },
-      { sequelize }
+      {
+        sequelize,
+        tableName: 'V_Categories'
+      }
     );
   }
 
 
-  
+
 
   static associate(models) {
     //  Category.belongsTo(models.CategoryHierarchy, { as: "category_parent", targetKey: 'category_child_id', foreignKey: "id" });
@@ -73,7 +85,7 @@ export default class V_Category extends Model {
 
     V_Category.belongsTo(models.Blob, { as: "icon_blob", targetKey: 'id', foreignKey: "blob_id" });
     V_Category.hasMany(models.CategoryActions, { as: "actions", targetKey: 'id', foreignKey: "category_id" });
-   
+
     V_Category.belongsToMany(models.V_Category, {
       through: { model: models.CategoryHierarchy },
       as: 'category_parent',

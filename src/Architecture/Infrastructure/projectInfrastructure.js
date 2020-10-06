@@ -38,6 +38,9 @@ export default class ProjectInfrastructure extends BaseInfrastracture {
 
     async executeLayer(action) {
         try {
+            if (action.context.project && action.context.project.id) {
+                return await action
+            }
             let context = this.getDecodedToken(action.projectToken);
             let project = await this.projectRepositoryDI.getProjectInfo({ project_id: context.id })
             if (!project) {/*|| user.relogin_require == true) {*/
@@ -48,11 +51,12 @@ export default class ProjectInfrastructure extends BaseInfrastracture {
 
             return await action;
         } catch (ex) {
+            console.log(ex)
             if (this.allowForAll) {
-                action.context.project={}
+                action.context.project = {}
                 action.context.project.allowForAll = true;
                 action.context.project.id = null;
-                
+
 
                 return await action;
 

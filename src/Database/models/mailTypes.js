@@ -28,13 +28,25 @@ export default class MailTypes extends Model {
         },
         token: DataTypes.STRING,
         description: DataTypes.TEXT,
-        bodyPayload: DataTypes.TEXT,
-        templatePayload: DataTypes.TEXT,
+        bodyPayload: {
+          field: 'bodyPayload',
+          type: DataTypes.TEXT
+        },
+        templatePayload: {
+          field: 'templatePayload',
+          type: DataTypes.TEXT
+        },
         body: DataTypes.TEXT,
-        templateBody: DataTypes.TEXT,
+        templateBody: {
+          field: 'templateBody',
+          type: DataTypes.TEXT
+        },
 
       },
-      { sequelize }
+      {
+        sequelize,
+        tableName: 'MailTypes'
+      }
     );
   }
   static associate(models) {

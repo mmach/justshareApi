@@ -28,7 +28,9 @@ export default class ItemCategory extends Model {
         category_id: DataTypes.UUID,
         is_visible:DataTypes.INTEGER
       },
-      { sequelize }
+      { sequelize ,
+        tableName: 'ItemCategories'
+      }
     );
   }
   static associate(models) {

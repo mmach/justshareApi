@@ -45,7 +45,20 @@ export default class Actions extends Model {
         action_type: {
           type: DataTypes.STRING,
           allowNull: true
-        }
+        },
+        as_process: {
+          type: DataTypes.BOOLEAN,
+          allowNull: true
+        },
+        is_process_invoker: {
+          type: DataTypes.BOOLEAN,
+          allowNull: true
+        },
+        is_process_start: {
+          type: DataTypes.BOOLEAN,
+          allowNull: true
+        },
+
       },
       { sequelize }
     );

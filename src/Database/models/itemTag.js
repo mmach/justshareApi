@@ -35,7 +35,9 @@ export default class ItemTag extends Model {
         }
        
       },
-      { sequelize }
+      { sequelize,
+        tableName: 'ItemTags'
+      }
     );
   }
   static associate(models) {

@@ -35,7 +35,9 @@ export default class ItemCategoryOptionTerm extends Model {
         co_id:DataTypes.UUID,
 
       },
-      { sequelize }
+      { sequelize ,
+        tableName: 'ItemCategoryOptionTerms'
+      }
     );
   }
   static associate(models) {

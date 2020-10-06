@@ -6,7 +6,7 @@ import CategoryRepository from "./Repository/categoryRepository.js";
 import UserRepository from "./Repository/userRepository.js";
 import UserService from "./Services/userService.js";
 import UnitOfWork from "./unitOfWork.js";
-import { CommandList, QueryList } from "justshare-shared";
+import { CommandList, QueryList, ProcessList } from "justshare-shared";
 import GetCategoryQuery from "./Query/Category/getCategoryQuery.js";
 import AddToDictionaryCommand from "./Commands/Dictionary/addToDictionaryCommand.js";
 import RemoveDictionaryCommand from "./Commands/Dictionary/removeDictionaryCommand.js";
@@ -261,8 +261,34 @@ import UserInvoiceValuesRepository from "./Repository/userInvoiceValuesRepositor
 import GetItemUserActionsQuery from "./Query/Item/getItemUserActionsQuery.js";
 import GetItemUserActionsListQuery from "./Query/Item/getItemUserActionsListQuery.js";
 import GetItemUserActionsHistoryQuery from "./Query/Item/getItemUserActionsHistoryQuery.js";
-
-
+import GetUserInvoicesQuery from "./Query/Invoice/getUserInvoicesQuery.js";
+import ProcessChainRepository from "./Repository/processChainRepository.js";
+import ProcessRepository from "./Repository/processRepository.js";
+import ProcessService from "./Services/processService.js";
+import UpsertProcessCommand from "./Commands/Process/upsertProcessCommand.js";
+import UpsertProcessChainElementCommand from "./Commands/Process/upsertProcessChainElementCommand.js";
+import UpsertProcessElementStateCommand from "./Commands/Process/upsertProcessElementStateCommand.js";
+import InvokeProcessCommand from "./Commands/Process/invokeProcessCommand.js";
+import GetProcessQuery from "./Query/Process/getProcessQuery.js";
+import ProcessChainStateRepository from "./Repository/processChainStateRepository.js";
+import DeleteProcessCommand from "./Commands/Process/deleteProcessCommand.js";
+import DeleteProcessElementStateCommand from "./Commands/Process/deleteProcessElementStateCommand.js";
+import DeleteProcessChainElementCommand from "./Commands/Process/deleteProcessChainElementCommand.js";
+import IUA_NewProcess from "./Processes/iua_NewProcess.js";
+import IUA_ReservationAcceptProcess from "./Processes/iua_ReservationAcceptProcess.js";
+import IUA_WaitingForPayProcess from "./Processes/iua_WaitingForPayProcess.js";
+import IUA_CancelledByOwnerProcess from "./Processes/iua_CancelledByOwnerProcess.js";
+import IUA_CancelledByAdminProcess from "./Processes/iua_CancelledByAdminProcess.js";
+import IUA_CancelledByClientProcess from "./Processes/iua_CancelledByClientProcess.js";
+import IUA_RejectProcess from "./Processes/iua_RejectProcess.js";
+import IUA_PaidProcess from "./Processes/iua_PaidProcess.js";
+import IUA_ReadyProcess from "./Processes/iua_ReadyProcess.js";
+import IUA_EndProcess from "./Processes/iua_EndProcess.js";
+import IUA_StartProcess from "./Processes/iua_StartProcess.js";
+import IUA_WaitingForCommentToItemProcess from "./Processes/iua_WaitingForCommentToItemProcess.js";
+import IUA_ItemSyncProcess from "./Processes/iua_ItemSyncProcess.js";
+import IUA_UnblockChatProcess from "./Processes/iua_UnblockChatProcess.js";
+import IUA_SetToItemCommentProcess from "./Processes/iua_SetToItemCommentProcess.js";
 
 /**
  * 
@@ -365,7 +391,11 @@ let exporter = {
   commentRepositoryDI: asClass(CommentRepository),
   invoiceItemRepositoryDI: asClass(InvoiceItemRepository),
   invoiceUserRepositoryDI: asClass(InvoiceUserRepository),
-  userInvoiceValuesRepositoryDI: asClass(UserInvoiceValuesRepository)
+  userInvoiceValuesRepositoryDI: asClass(UserInvoiceValuesRepository),
+  processChainRepositoryDI: asClass(ProcessChainRepository),
+  processRepositoryDI: asClass(ProcessRepository),
+  processChainStateRepositoryDI: asClass(ProcessChainStateRepository),
+  processServiceDI: asClass(ProcessService)
 
 };
 exporter[CommandList.Dictionary.ADD_DICTIONARY] = asClass(
@@ -564,9 +594,9 @@ exporter[QueryList.Item.GET_USER_ITEMS_TO_SYNC] = asClass(GetUserItemToSyncQuery
 exporter[QueryList.Item.GET_USER_TRANSACTIONS] = asClass(GetItemTransactionQuery);
 
 
-exporter[QueryList.Item.GET_ITEM_USER_ACTIONS]=asClass(GetItemUserActionsQuery)
-exporter[QueryList.Item.GET_ITEM_USER_ACTIONS_LIST]=asClass(GetItemUserActionsListQuery)
-exporter[QueryList.Item.GET_ITEM_USER_ACTIONS_HISTORY]=asClass(GetItemUserActionsHistoryQuery)
+exporter[QueryList.Item.GET_ITEM_USER_ACTIONS] = asClass(GetItemUserActionsQuery)
+exporter[QueryList.Item.GET_ITEM_USER_ACTIONS_LIST] = asClass(GetItemUserActionsListQuery)
+exporter[QueryList.Item.GET_ITEM_USER_ACTIONS_HISTORY] = asClass(GetItemUserActionsHistoryQuery)
 
 
 //ACTIONS
@@ -583,6 +613,8 @@ exporter[CommandList.Item.Actions.Reservation.WAITING_FOR_RATE_CUSTOMER] = asCla
 exporter[CommandList.Item.Actions.Reservation.WAITING_FOR_RATE_CLIENT] = asClass(ItemActionsReservationWaitingForClientCommand);
 
 
+///////////////////INVOICE////////////////////////////////
+exporter[QueryList.Invoice.GET_USER_INVOICES] = asClass(GetUserInvoicesQuery);
 
 ///////////////////COUNTRY////////////////////////////////
 
@@ -662,7 +694,56 @@ exporter[QueryList.Status.GET_STATUS] = asClass(GetStatusQuery);
 
 
 
+///////////////////PROCESS//////////////////////////////
+exporter[CommandList.Process.UPSERT_PROCESS] = asClass(UpsertProcessCommand);
+exporter[CommandList.Process.UPSERT_CHAIN_ELEMENT] = asClass(UpsertProcessChainElementCommand);
+exporter[CommandList.Process.UPSERT_CHAIN_STATE] = asClass(UpsertProcessElementStateCommand);
+exporter[CommandList.Process.INVOKE_PROCESS] = asClass(InvokeProcessCommand);
+exporter[CommandList.Process.DELETE_CHAIN_ELEMENT] = asClass(DeleteProcessChainElementCommand);
+exporter[CommandList.Process.DELETE_CHAIN_STATE] = asClass(DeleteProcessElementStateCommand);
+exporter[CommandList.Process.DELETE_PROCESS] = asClass(DeleteProcessCommand);
+exporter[QueryList.Process.GET_PROCESS] = asClass(GetProcessQuery);
+
+
 ///////////////////////////////////////////////////////////
+
+
+
+//////////////////PROCESSES_TYPE////////////
+exporter[ProcessList.Item.IUA_NEW] = asClass(IUA_NewProcess);
+exporter[ProcessList.Item.IUA_RESERVATION_ACCEPT] = asClass(IUA_ReservationAcceptProcess);
+exporter[ProcessList.Item.IUA_WAITING_FOR_PAY] = asClass(IUA_WaitingForPayProcess);
+exporter[ProcessList.Item.IUA_CANCELLED_BY_CLIENT] = asClass(IUA_CancelledByClientProcess);
+exporter[ProcessList.Item.IUA_REJECT] = asClass(IUA_RejectProcess);
+exporter[ProcessList.Item.IUA_CANCELLED_BY_ADMIN] = asClass(IUA_CancelledByAdminProcess);
+exporter[ProcessList.Item.IUA_CANCELLED_BY_OWNER] = asClass(IUA_CancelledByOwnerProcess);
+exporter[ProcessList.Item.IUA_PAID] = asClass(IUA_PaidProcess);
+exporter[ProcessList.Item.IUA_READY] = asClass(IUA_ReadyProcess);
+exporter[ProcessList.Item.IUA_START] = asClass(IUA_StartProcess);
+exporter[ProcessList.Item.IUA_END] = asClass(IUA_EndProcess);
+exporter[ProcessList.Item.IUA_WAITING_TO_ITEM_COMMENT] = asClass(IUA_WaitingForCommentToItemProcess);
+exporter[ProcessList.Item.IUA_ITEM_SYNC] = asClass(IUA_ItemSyncProcess);
+exporter[ProcessList.Item.IUA_UNBLOCK_CHAT] = asClass(IUA_UnblockChatProcess);
+exporter[ProcessList.Item.IUA_SET_TO_ITEM_COMMENT] = asClass(IUA_SetToItemCommentProcess);
+
+
+
+
+/*
+IUA_RESERVATION_ACCEPT: 'iua_ReservationAcceptProcess',
+IUA_RESERVATION_WAITING_FOR_PAY: 'iua_WaitingForPayProcess',
+IUA_RESERVATION_REJECT: 'iua_RejectReservationProcess',
+IUA_RESERVATION_NEW: 'iua_NewReservationProcess',
+IUA_PAID: 'iua_PaidProcess',
+IUA_READY: 'iua_ReadyProcess',
+IUA_START: 'iua_StartProcess',
+IUA_END: 'iua_EndProcess',
+IUA_WAITING_CLIENT_COMMENT: 'iua_WaitingForCommentClientProcess',
+IUA_WAITING_OWNER_COMMENT: 'iua_WaitingForCommentOwnerProcess',
+IUA_CLOSE: 'iua_CloseProcess',*/
+
+
+
 
 ContainerAwlix.register(exporter);
 let container = ContainerAwlix;

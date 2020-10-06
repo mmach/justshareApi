@@ -26,7 +26,11 @@ export default class ItemTransactionCategoryOptions extends Model {
         },
         item_id: DataTypes.UUID,
         ico_id: DataTypes.UUID,
-        itemTransaction_id: DataTypes.UUID,
+        itemTransaction_id: {
+          field: 'itemTransaction_id',
+          type: DataTypes.UUID
+        }
+        ,
 
         col_id: DataTypes.UUID,
         co_temp_id: DataTypes.UUID,
@@ -36,7 +40,10 @@ export default class ItemTransactionCategoryOptions extends Model {
         dim_id: DataTypes.UUID
 
       },
-      { sequelize }
+      {
+        sequelize,
+        tableName: 'ItemTransactionCategoryOptions'
+      }
     );
   }
   static associate(models) {
@@ -50,6 +57,6 @@ export default class ItemTransactionCategoryOptions extends Model {
       targetKey: "id",
       foreignKey: "co_temp_id"
     });
- 
+
   }
 }

@@ -26,9 +26,9 @@ export default class ConversationService extends BaseService {
     this.projectServiceDI = projectServiceDI
 
   }
-  async getUserConversations({ conv_id, page, size }) {
+  async getUserConversations({ conv_id, page, size,status }) {
     return await this.unitOfWorkDI.conversationRepository.getUserConversations({
-      page, size, conv_id
+      page, size, conv_id,status
     })
   }
   async getUserConversation({ conv_id, last_msg, size }) {
@@ -37,14 +37,14 @@ export default class ConversationService extends BaseService {
     })
     return await this.unitOfWorkDI.conversationRepository.getMessages({ conv_id, message_list_id })
   }
-  async createConversation({ id, title, user_owner, message, iua_id, user_dest }) {
+  async createConversation({ id, title, user_owner, message, iua_id, user_dest ,status}) {
     let conversation = {
       id: id,
       user_owner_id: user_owner.id,
       iua_id: iua_id,
-      status: 'O',
+      status: status,
       title: title,
-      created_at: new Date(),
+      createdAt: new Date(),
       project_id: this.context.project.id
     }
 
@@ -90,7 +90,7 @@ export default class ConversationService extends BaseService {
       is_newest: true,
       message_triggered_id: null,
       project_id: this.context.project.id,
-      created_at: new Date()
+      createdAt: new Date()
 
 
     }]
@@ -140,7 +140,7 @@ export default class ConversationService extends BaseService {
       message: msg,
       is_newest: true,
       message_triggered_id: conv.messages[0].id,
-      created_at: new Date(),
+      createdAt: new Date(),
       socket_user_id: '/socket_' + hash,
       users: conv.users.map(i => { return { ...i, id: uuid() } }),
     }
@@ -161,6 +161,11 @@ export default class ConversationService extends BaseService {
 
   async closeConversation({ id, iua_id }) {
     return await this.unitOfWorkDI.conversationRepository.closeConversation({ id, iua_id })
+
+  }
+
+  async setStatusConversation({ id, iua_id,status }) {
+    return await this.unitOfWorkDI.conversationRepository.setStatusConversation({ id, iua_id ,status})
 
   }
   /*

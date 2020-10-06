@@ -136,7 +136,9 @@ export default class CategoryOption extends Model {
         order_search: DataTypes.INTEGER,
 
       },
-      { sequelize }
+      { sequelize,
+        tableName: 'CategoryOptions'
+      }
     );
   }
 

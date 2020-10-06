@@ -64,7 +64,31 @@ export default class StatusProjectsRepository extends BaseRepository {
       transaction: this.getTran({ transaction })
     });
   }
+  getByStatusId({ id, transaction }) {
+    return this.entityDAO.findOne({
+      where: {
+        project_id: this.context.project.id,
+        id:id
+      },
+      include: [
+        {
+          model: this.sequelizeDI.Translations,
+          as: "translation",
+          required: false
+        },
+        {
+          model: this.sequelizeDI.Status,
+          as: "status",
+          required: true
+         // where: {
+          //  token: name
+         // }
+        },
 
+      ],
+      transaction: this.getTran({ transaction })
+    });
+  }
 }
   /* getPrivByName({ name, transaction }) {
    return this.entityDAO.findOne({

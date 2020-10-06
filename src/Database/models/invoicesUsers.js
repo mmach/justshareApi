@@ -47,7 +47,9 @@ export default class InvoiceUser extends Model {
         }
 
       },
-      { sequelize }
+      { sequelize,
+        tableName: 'InvoiceUsers'
+      }
     );
   }
   static hooks(models, sequelize) {

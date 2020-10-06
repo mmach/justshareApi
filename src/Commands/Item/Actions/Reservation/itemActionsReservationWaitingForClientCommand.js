@@ -129,7 +129,6 @@ export default class ItemActionsReservationWaitingForClientCommand extends BaseC
           action_id: IUA.action_id,
           status: 'P'
         }
-
         , withProject: true
       })
 

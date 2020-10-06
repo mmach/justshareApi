@@ -68,7 +68,9 @@ export default class ItemTransaction extends Model {
         },
         external_id: DataTypes.STRING,
       },
-      { sequelize }
+      { sequelize,
+        tableName: 'ItemTransactions'
+      }
     );
   }
   static hooks(models) {

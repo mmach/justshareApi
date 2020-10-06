@@ -44,7 +44,9 @@ export default class CategoryOptionsTypeTemplate extends Model {
        
 
       },
-      { sequelize }
+      { sequelize,
+        tableName: 'CategoryOptionsTypeTemplates'
+      }
     );
   }
   static associate(models) {

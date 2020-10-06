@@ -29,84 +29,84 @@ export default class CategoryOptionsTemplate extends Model {
         co_id: {
           type: DataTypes.UUID
         },
-        cott_id:{
+        cott_id: {
           type: DataTypes.UUID
         },
         value: {
           type: DataTypes.STRING,
-        }, 
-         value_pl: {
-          type: DataTypes.STRING,
-        }, 
-        value_us:{
-          type: DataTypes.STRING,
-  
         },
-        value_de:{
+        value_pl: {
           type: DataTypes.STRING,
-  
         },
-        value_ru:{
+        value_us: {
           type: DataTypes.STRING,
-  
+
         },
-        value_fr:{
+        value_de: {
           type: DataTypes.STRING,
-  
-        },value_es:{
-          type: DataTypes.STRING,
-  
+
         },
-        value_no:{
+        value_ru: {
           type: DataTypes.STRING,
-  
+
         },
-        value_zh_cn:{
+        value_fr: {
+          type: DataTypes.STRING,
+
+        }, value_es: {
+          type: DataTypes.STRING,
+
+        },
+        value_no: {
+          type: DataTypes.STRING,
+
+        },
+        value_zh_cn: {
           type: DataTypes.STRING,
         },
         placeholder: {
           type: DataTypes.STRING,
-        }, 
-         placeholder_pl: {
-          type: DataTypes.STRING,
-        }, 
-        placeholder_us:{
-          type: DataTypes.STRING,
-  
         },
-        placeholder_de:{
+        placeholder_pl: {
           type: DataTypes.STRING,
-  
         },
-        placeholder_ru:{
+        placeholder_us: {
           type: DataTypes.STRING,
-  
+
         },
-        placeholder_fr:{
+        placeholder_de: {
           type: DataTypes.STRING,
-  
-        },placeholder_es:{
-          type: DataTypes.STRING,
-  
+
         },
-        placeholder_no:{
+        placeholder_ru: {
           type: DataTypes.STRING,
-  
+
         },
-        placeholder_zh_cn:{
+        placeholder_fr: {
+          type: DataTypes.STRING,
+
+        }, placeholder_es: {
+          type: DataTypes.STRING,
+
+        },
+        placeholder_no: {
+          type: DataTypes.STRING,
+
+        },
+        placeholder_zh_cn: {
           type: DataTypes.STRING,
         }
-        ,status: {
+        , status: {
           type: DataTypes.BOOLEAN,
         },
         order: {
           type: DataTypes.INTEGER,
         },
-        is_not_in_clob:{
+        is_not_in_clob: {
           type: DataTypes.BOOLEAN,
           allowNull: true
         },
-        func:{
+        func: {
           type: DataTypes.STRING,
         },
         is_visible_view: {
@@ -125,11 +125,17 @@ export default class CategoryOptionsTemplate extends Model {
           type: DataTypes.UUID,
           allowNull: true
         },
-        dim_id:DataTypes.UUID,
-        is_readOnly:DataTypes.BOOLEAN,
-        is_from_url:DataTypes.BOOLEAN
+        dim_id: DataTypes.UUID,
+        is_readOnly: {
+          field: 'is_readOnly',
+          type: DataTypes.BOOLEAN
+        },
+        is_from_url: DataTypes.BOOLEAN
       },
-      { sequelize }
+      {
+        sequelize,
+        tableName: 'CategoryOptionsTemplates'
+      }
     );
   }
   static associate(models) {

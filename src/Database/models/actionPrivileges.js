@@ -41,7 +41,9 @@ export default class ActionPrivileges extends Model {
           type: DataTypes.BOOLEAN
         },
       },
-      { sequelize }
+      { sequelize ,
+        tableName: 'ActionPrivileges'
+      }
     );
   }
   static associate(models) {

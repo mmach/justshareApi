@@ -45,7 +45,7 @@ export default class ElasticSearchService extends BaseService {
     tags,
     status,
     type,
-    category, categories, created_at, expired_at, item }) {
+    category, categories, createdAt, expired_at, item }) {
     //console.log(JSON.stringify(catOptions, true))
 
     let singleGeo = catOptions.filter(item => {
@@ -128,7 +128,7 @@ export default class ElasticSearchService extends BaseService {
       "description": description,
       "clob": clobs,
       "status": status,
-      "created_at": created_at,
+      "created_at": createdAt,
       "expired_at": expired_at,
       "tags": tags.map(item => {
         return {
@@ -171,7 +171,7 @@ export default class ElasticSearchService extends BaseService {
     type,
     category,
     categories,
-    created_at, expired_at, item,
+    createdAt, expired_at, item,
     project_id,
     es_operations,
     external_id }) {
@@ -355,7 +355,7 @@ export default class ElasticSearchService extends BaseService {
       "description": description,
       "clob": clobs,
       "status": status,
-      "created_at": created_at,
+      "created_at": createdAt,
       "expired_at": expired_at,
       "single_dependencies": singleDepRes,
       "between": termsObj,
@@ -706,7 +706,7 @@ export default class ElasticSearchService extends BaseService {
                   "init_script": "state.value = []",
                   "map_script": "if(doc['single.value.float'].size()!=0){state.value.add(doc['single.value.float'].value)}",
                   "combine_script": "return state",
-                  "reduce_script":{ "id": "single_reduce_agg_hist" },
+                  "reduce_script": { "id": "single_reduce_agg_hist" },
                 }
               }
 
@@ -756,7 +756,7 @@ export default class ElasticSearchService extends BaseService {
                 "init_script": "state.value = []",
                 "map_script": "if(doc['single_dependencies.value.float'].size()!=0){state.value.add(doc['single_dependencies.value.float'].value)}",
                 "combine_script": "return state",
-                "reduce_script":{ "id": "single_reduce_agg_hist" },
+                "reduce_script": { "id": "single_reduce_agg_hist" },
               }
             }
           }
@@ -937,8 +937,10 @@ export default class ElasticSearchService extends BaseService {
 
 
   async addToQueue({ item_id, operation }) {
+    console.log(item_id)
     let item = await this.itemServiceDI.setContext(this.context).getItem({ uids: [item_id] })
     item = item[0];
+    console.log(item)
     let categories = await this.categoryServiceDI.setContext(this.context).getCategoriesParents({ ids: item.category_id })
     categories = [...categories];
     item = {
@@ -997,7 +999,7 @@ export default class ElasticSearchService extends BaseService {
         category: item.category_id,
         tags: item.tags.map((tag) => { return { label: tag.tag } }),
         categories: item.categories,
-        created_at: item.created_at ? item.created_at : today.toISOString(),
+        createdAt: item.createdAt ? item.createdAt : today.toISOString(),
         expired_at: (item.expired_date != undefined && item.expired_date != null) ? item.expired_date : expired.toISOString(),
         item: item,
         project_id: item.project_id,

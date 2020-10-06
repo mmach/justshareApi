@@ -54,6 +54,9 @@ import InvoiceRepository from "./Repository/invoiceRepository.js";
 import InvoiceItemRepository from "./Repository/invoiceItemsRepository.js";
 import InvoiceUserRepository from "./Repository/invoiceUserRepository.js";
 import UserInvoiceValuesRepository from "./Repository/userInvoiceValuesRepository.js";
+import ProcessRepository from "./Repository/processRepository.js";
+import ProcessChainRepository from "./Repository/processChainRepository.js";
+import ProcessChainStateRepository from "./Repository/processChainStateRepository.js";
 
 
 
@@ -126,7 +129,10 @@ export default class UnitOfWork extends BaseUnitOfWork {
         commentRepositoryDI,
         invoiceItemRepositoryDI,
         invoiceUserRepositoryDI,
-        userInvoiceValuesRepositoryDI
+        userInvoiceValuesRepositoryDI,
+        processChainRepositoryDI,
+        processRepositoryDI,
+        processChainStateRepositoryDI,
 
     }) {
         super()
@@ -184,11 +190,41 @@ export default class UnitOfWork extends BaseUnitOfWork {
             commentRepositoryDI,
             invoiceItemRepositoryDI,
             invoiceUserRepositoryDI,
-            userInvoiceValuesRepositoryDI
+            userInvoiceValuesRepositoryDI,
+            processChainRepositoryDI,
+            processRepositoryDI,
+            processChainStateRepositoryDI,
         }
     };
 
+    /**
+        * 
+        * @return {ProcessChainStateRepository}
+        * @readonly
+        * @memberof UnitOfWork
+        */
+    get processChainStateRepository() {
+        return this.repositories.processChainStateRepositoryDI;
+    }
 
+    /**
+                     * 
+                     * @return {ProcessChainRepository}
+                     * @readonly
+                     * @memberof UnitOfWork
+                     */
+    get processChainRepository() {
+        return this.repositories.processChainRepositoryDI;
+    }
+    /**
+                     * 
+                     * @return {ProcessRepository}
+                     * @readonly
+                     * @memberof UnitOfWork
+                     */
+    get processRepository() {
+        return this.repositories.processRepositoryDI;
+    }
     /**
           * 
           * @return {UserInvoiceValuesRepository}

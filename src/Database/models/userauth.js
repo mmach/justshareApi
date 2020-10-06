@@ -26,11 +26,20 @@ export default class UserAuths extends Model {
           defaultValue: sequelize.UUIDV4
 
         },
-        user_id:DataTypes.UUID,
-        socialUser_id: DataTypes.STRING,
-        socialType: DataTypes.INTEGER
+        user_id: DataTypes.UUID,
+        socialUser_id: {
+          field: 'socialUser_id',
+          type: DataTypes.INTEGER
+        },
+        socialType: {
+          field: 'socialType',
+          type: DataTypes.INTEGER
+        }
       },
-      { sequelize }
+      {
+        sequelize,
+        tableName: 'UserAuths'
+      }
     );
   }
   static associate(models) {

@@ -6,7 +6,7 @@ import UnitOfWork from "../unitOfWork.js";
 import CONFIG from "../config.js";
 import {CityDTO} from "justshare-shared";
 import NodeGeocoder from 'node-geocoder';
-
+import axios from 'axios'
 var options = {
   provider: 'locationiq',
 
@@ -56,16 +56,23 @@ export default class CityService extends BaseService {
    * @returns {{Promise<CityDTO[]>}}
    * @memberof CityService
    */
-  async getReverse({ country, city, address }) {
+  async getReverse({ country_code, city, address }) {
 
     var geocoder = NodeGeocoder(options);
-
     // Using callback
+    console.log(country_code)
     let result = await new Promise((resolve, rej) => {
-      geocoder.geocode({ address: address, country: country, city: city, limit: 100 }, function (err, res) {
+     axios.get(`https://api.locationiq.com/v1/autocomplete.php?key=${ CONFIG.LOCATION_IQ}&format=json&q=${encodeURI(address)}&countrycodes=${country_code}&limit=5&normalizeaddress=1`).then(succ=>{
 
-        resolve(res);
-      });
+      resolve(succ.data);
+
+
+     })
+     // geocoder.geocode({ q: address, country: country, city: city, limit: 5,"accept-language":this.context.language }, function (err, res) {
+     //   console.log(res)
+//
+     //   resolve(res);
+    //  });
 
     });
     return result;
@@ -76,12 +83,17 @@ export default class CityService extends BaseService {
     var geocoder = NodeGeocoder(options);
 
     let result = await new Promise((resolve, rej) => {
-      geocoder.reverse({ lat: latitude, lon: longitude }, function (err, res) {
+
+      axios.get(`https://us1.locationiq.com/v1/reverse.php?key=${ CONFIG.LOCATION_IQ}&format=json&lat=${latitude}8&lon=${longitude}&normalizeaddress=1`).then(succ=>{
+        resolve(succ.data);
+      });
+/*
+      geocoder.reverse({ lat: latitude, lon: longitude,"accept-language":this.context.language }, function (err, res) {
 
         console.log(res)
         resolve(res);
       });
-
+*/
     });
     return result;
   }

@@ -30,9 +30,10 @@ export default class EditCategoryCommand extends BaseCommand {
 
     };
     init(dto) {
-        this.model = Object.assign(new CategoryDTO(), dto);
+        this.model = {...dto};
     }
     async action() {
+        console.log(this.model)
         await this.categoryServiceDI.setContext(this.context).update({ model: this.model,withProject:true });
         await   this.translationServiceDI.setContext(this.context).update({ model: this.model.translation,withProject:true });
        

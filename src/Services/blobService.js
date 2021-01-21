@@ -125,15 +125,17 @@ export default class BlobService extends BaseService {
       console.log(newBlob)
       if (newBlob.type != 'svg' && newBlob.type != 'webp' && newBlob.type != 'pdf') {
         let imgNormal = await Jimp.read(newBlob.path);
-
+        let height = imgNormal.bitmap.height;
+        let width = 
+        
         await imgNormal
-          .contain(300, 300) // resize
-          .quality(60) // set JPEG quality
+          .contain(800,800*imgNormal.bitmap.height/imgNormal.bitmap.width)//300, 300) // resize
+          .quality(100) // set JPEG quality
           .writeAsync(`${upload_path}/${newBlob.id}-thumb.` + newBlob.type); // save
 
         await imgNormal
-          .contain(100, 100) // resize
-          .quality(60) // set JPEG quality
+        .contain(300,300*imgNormal.bitmap.height/imgNormal.bitmap.width) // resize
+          .quality(100) // set JPEG quality
           .writeAsync(`${upload_path}/${newBlob.id}-min.` + newBlob.type); // save
 
       }

@@ -22,20 +22,27 @@ export default class GeocodeQuery extends BaseQuery {
 
     async action() {
         let reverseResult = await this.cityServiceDI.setContext(this.context).getReverseByLatLng({ latitude: this.model.latitude, longitude: this.model.longitude });
-        if (reverseResult.length > 0) {
-            let country_result = await this.countryServiceDI.setContext(this.context).getCountryByName({ country: { name: reverseResult[0].country } })
-            let city_result = await this.cityServiceDI.setContext(this.context).getCities({ city: { country_id: country_result[0].id, name: reverseResult[0].city } })
-            let city = city_result.filter(item => { return item.name == reverseResult[0].city || item.name_clear == reverseResult[0].city });
-            if (city.length == 0) {
-                city = city_result.filter(item => { return item.name_clob.includes(reverseResult[0].city) });
+        console.log(reverseResult)
+        if (reverseResult.address ) {
+            try{
+                let country_result = await this.countryServiceDI.setContext(this.context).getCountryByName({ country: { name: reverseResult.address.country } })
+                let city_result = await this.cityServiceDI.setContext(this.context).getCities({ city: { country_id: country_result[0].id, name: reverseResult.address.city } })
+                let city = city_result && city_result.filter(item => { return item.name == reverseResult.address.city || item.name_clear == reverseResult.address.city });
+                if (city && city.length == 0) {
+                    city = city_result.filter(item => { return item.name_clob.includes(reverseResult.address.city) });
 
+                }
+                reverseResult.address.country_id = country_result[0].id
+
+                if (city.length > 0) {
+                    reverseResult.address.city_id = city[0].id;
+                    reverseResult.address.country_id = country_result[0].id
+
+                }
             }
-            reverseResult[0].country_id = country_result[0].id
-
-            if (city.length > 0) {
-                reverseResult[0].city_id = city[0].id;
-                reverseResult[0].country_id = country_result[0].id
-
+            catch(err)
+            {
+                console.log(err)
             }
         }
 

@@ -201,6 +201,16 @@ export default class UserService extends BaseService {
     });
   }
 
+  async comparePassword({user, password})
+  {
+    let userDb = await this.checkMailInDb({
+      email: user.email
+    });
+    let hash = bcrypt.hashSync(password, userDb.salt);
+
+    return hash == userDb.passwordHash
+   
+  }
   async changePassword({ user, password }) {
     user.passwordHash = bcrypt.hashSync(password, user.salt);
     await this.unitOfWorkDI.userRepository.update({
@@ -340,5 +350,9 @@ export default class UserService extends BaseService {
     return await this.unitOfWorkDI.userProjectPrivilegesRepository.deleteByUserId({
       user_id: user_id
     });
+  }
+  async upsertUserInvoice({model})
+  {
+    return await this.unitOfWorkDI.userInvoiceValuesRepository.upsert({model,withProject:true})
   }
 }

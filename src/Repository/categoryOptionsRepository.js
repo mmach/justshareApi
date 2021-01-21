@@ -221,7 +221,8 @@ export default class CategoryOptionsRepository extends BaseRepository {
     });
   }
   getCategoryLinkQuery({ id, transaction }) {
-    return this.sequelizeDI.CategoryOptionsLink.find({
+    console.log(this.sequelizeDI.CategoryOptionsLink)
+    return this.sequelizeDI.CategoryOptionsLink.findOne({
       where: { id: this.toStr(id), project_id: this.context.project.id },
       transaction: this.getTran({ transaction }),
 

@@ -62,6 +62,10 @@ export default class Category extends Model {
         blob_id: DataTypes.UUID,
         color: DataTypes.STRING,
         translation_id: DataTypes.UUID,
+        process_id: DataTypes.UUID,    
+        params: DataTypes.STRING,
+        preview_desktop: DataTypes.STRING,
+        preview_mobile: DataTypes.STRING,
         is_root: {
           type: DataTypes.BOOLEAN,
           allowNull: true

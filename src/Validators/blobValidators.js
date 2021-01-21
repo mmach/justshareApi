@@ -3,7 +3,7 @@ import CONFIG from '../config.js';
 import {BlobBase64DTO} from 'justshare-shared';
 
 async function getSizeOfUplodedFile(blob) {
-    if (blob.getSize(blob) > 2000) {
+    if (blob.getSize(blob) > 10000) {
         new ValidationException().throw({
             code: "FILE_IS_TOO_BIG",
             field: "type"

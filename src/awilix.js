@@ -289,6 +289,10 @@ import IUA_WaitingForCommentToItemProcess from "./Processes/iua_WaitingForCommen
 import IUA_ItemSyncProcess from "./Processes/iua_ItemSyncProcess.js";
 import IUA_UnblockChatProcess from "./Processes/iua_UnblockChatProcess.js";
 import IUA_SetToItemCommentProcess from "./Processes/iua_SetToItemCommentProcess.js";
+import EditUserCommand from "./Commands/User/editUserCommand.js";
+import UpsertUsersInvoiceDataCommand from "./Commands/User/upsertUsersInvoiceDataCommand.js";
+import GetUsersInvoiceDataQuery from "./Query/User/getUsersInvoiceDataQuery.js";
+import Item_CreateItemProcess from "./Processes/item_CreateItemProcess.js";
 
 /**
  * 
@@ -505,6 +509,9 @@ exporter[CommandList.User.GRANT_USERTYPE_ROLE] = asClass(GrantUserTypeRoleComman
 exporter[CommandList.User.REMOVE_USERTYPE] = asClass(RemoveUserTypeCommand)
 exporter[CommandList.User.REVOKE_USER_ROLE] = asClass(RevokeUserRoleCommand)
 exporter[CommandList.User.REVOKE_USERTYPE_ROLE] = asClass(RevokeUserTypeRoleCommand)
+exporter[CommandList.User.EDIT_USER] = asClass(EditUserCommand)
+exporter[CommandList.User.UPSERT_USERS_INVOICE_DATA] = asClass(UpsertUsersInvoiceDataCommand)
+
 
 exporter[CommandList.User.UPSERT_USERTYPE] = asClass(UpsertUserTypeCommand)
 
@@ -518,6 +525,7 @@ exporter[QueryList.User.LOGIN_BY_EXTERNAL] = asClass(LogInByExternalQuery)
 exporter[QueryList.User.GET_REFRESH_TOKEN] = asClass(GetRefreshTokenQuery);
 exporter[QueryList.User.GET_USER_TYPES] = asClass(GetUserTypesQuery);
 exporter[QueryList.User.GET_ALL_USERS] = asClass(GetUsersQuery);
+exporter[QueryList.User.GET_USER_INVOICE_DATA] = asClass(GetUsersInvoiceDataQuery);
 
 
 ////////////////////////////////Category/////////////////////////////////////////
@@ -726,6 +734,7 @@ exporter[ProcessList.Item.IUA_ITEM_SYNC] = asClass(IUA_ItemSyncProcess);
 exporter[ProcessList.Item.IUA_UNBLOCK_CHAT] = asClass(IUA_UnblockChatProcess);
 exporter[ProcessList.Item.IUA_SET_TO_ITEM_COMMENT] = asClass(IUA_SetToItemCommentProcess);
 
+exporter[ProcessList.Item.ITEM_CREATE_ITEM] = asClass(Item_CreateItemProcess);
 
 
 

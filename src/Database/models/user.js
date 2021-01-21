@@ -33,6 +33,10 @@ export default class Users extends Model {
           type: DataTypes.STRING,
           allowNull: true
         },
+        nickname: {
+          type: DataTypes.STRING,
+          allowNull: true
+        },
         email: {
           type: DataTypes.STRING,
           allowNull: false,

@@ -7,7 +7,7 @@ let createIUA = async function (item, message) {
     let uniq_number = new Date().getTime()
     let iua_id = uuid()
     //   let status = await this.statusProjectServiceDI.setContext(this.context).getByToken({ name: StatusesList.NEW })
-    await this.itemUserActionServiceDI.upsert({
+    await this.itemUserActionServiceDI.setContext(this.context).upsert({
         model: {
             id: iua_id,
             item_id: item.id,
@@ -28,7 +28,7 @@ let createIUA = async function (item, message) {
     })
     let transaction_id = uuid()
 
-    await this.itemTransactionsServiceDI.upsert({
+    await this.itemTransactionsServiceDI.setContext(this.context).upsert({
         model: {
 
 
@@ -42,7 +42,7 @@ let createIUA = async function (item, message) {
 
     })
 
-    await this.itemTransactionCategoryOptionsServiceDI.bulkInsert({
+    await this.itemTransactionCategoryOptionsServiceDI.setContext(this.context).bulkInsert({
         model: item.itemCategoryOption.map(i => {
             return {
 

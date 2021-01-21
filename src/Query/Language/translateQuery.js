@@ -6,7 +6,7 @@ import BlobService from '../../Services/blobService.js';
 import { ToTranslateDTO } from 'justshare-shared';
 import CategoryOptionService from '../../Services/categoryOptionService.js';
 import CategoryService from '../../Services/categoryService.js';
-import translate from 'translate';
+import translate from 'google-translate-free';
 import CONFIG from "../../config.js";
 
 export default class TranslateQuery extends BaseQuery {
@@ -38,15 +38,15 @@ export default class TranslateQuery extends BaseQuery {
         } else if (destlang == 'US') {
             destlang = 'en';
         }
-        console.log(this.model);
+        
+
         let text = await translate(this.model.src,
             {
-                engine: CONFIG.TRANSLATE.engine, key: CONFIG.TRANSLATE.key,
+            //    engine: CONFIG.TRANSLATE.engine, key: CONFIG.TRANSLATE.key,
                 from: lang, to: destlang
             })
 
-        console.log(text);
-        return text;
+        return text.text;
         //return await this.itemServiceDI.setContext(this.context).searchItem({ search: this.model });
     }
 };

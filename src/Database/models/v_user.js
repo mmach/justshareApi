@@ -29,6 +29,10 @@ export default class vUser extends Model {
           type: DataTypes.STRING,
           allowNull: false
         },
+        nickname: {
+          type: DataTypes.STRING,
+          allowNull: true
+        },
         surname: {
           type: DataTypes.STRING,
           allowNull: false

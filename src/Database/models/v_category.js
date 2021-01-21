@@ -58,7 +58,11 @@ export default class V_Category extends Model {
         project_id: DataTypes.UUID,
         blob_id: DataTypes.UUID,
         color: DataTypes.STRING,
-        translation_id: DataTypes.UUID
+        translation_id: DataTypes.UUID,
+        process_id: DataTypes.UUID,    
+        params: DataTypes.STRING,
+        preview_desktop: DataTypes.STRING,
+        preview_mobile: DataTypes.STRING
 
 
 

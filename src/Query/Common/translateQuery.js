@@ -1,9 +1,8 @@
 import BaseQuery from '../../Architecture/baseQuery.js';
-import { UserDTO } from 'justshare-shared';
-import LogFileInfrastructure from '../../Architecture/Infrastructure/logFileInfrastructure.js';
-import UserService from '../../Services/userService.js';
 import AuthInfrastucture from '../../Architecture/Infrastructure/authInfrastucture.js';
+import LogFileInfrastructure from '../../Architecture/Infrastructure/logFileInfrastructure.js';
 import CONFIG from "../../config.js";
+import UserService from '../../Services/userService.js';
 
 
 
@@ -26,6 +25,7 @@ export default class TranslateQuery extends BaseQuery {
 
     async action() {
 
+        try{
         let lang = this.model.text;
         let langFrom = this.model.fromLang
         if (langFrom == 'zh_cn') {
@@ -33,6 +33,9 @@ export default class TranslateQuery extends BaseQuery {
         } else if (langFrom == 'us') {
             langFrom = 'en';
         }
+        console.log('TESTTT')
+        console.log(CONFIG.TRANSLATE.engine);
+        console.log(CONFIG.TRANSLATE.key)
         let text = await translate(this.model.text, {
             engine: CONFIG.TRANSLATE.engine, key: CONFIG.TRANSLATE.key, from: langFrom, to: this.model.toLang
         });
@@ -44,6 +47,11 @@ export default class TranslateQuery extends BaseQuery {
             lang = 'us';
         }
         return text;
+    }
+    catch(er)
+    {
+        console.log(er);
+    }
 
 
 

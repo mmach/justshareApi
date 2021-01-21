@@ -88,8 +88,9 @@ export default class Item extends Model {
           field: 'clobSearch_zh_cn',
           type: DataTypes.TEXT
         },
-
-
+        process_id: DataTypes.UUID,    
+        process_chain_id:DataTypes.UUID,
+        process_updated_date:DataTypes.DATE,
         longitude: DataTypes.FLOAT,
         latitude: DataTypes.FLOAT,
         category_type: DataTypes.INTEGER,

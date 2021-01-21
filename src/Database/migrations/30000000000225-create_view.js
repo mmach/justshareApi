@@ -34,6 +34,7 @@ SELECT [id]
       ,project_id
       ,usertype_id
       ,user_invoice_data_id
+      ,nickname
   FROM [dbo].[Users]
   WHERE is_authorized=1
 
@@ -52,7 +53,7 @@ SELECT [id]
       ,[surname]
       ,[email]
       ,[phone]
-      ,[birthDate]  
+      ,[birth_date]  
       ,[longitude]
       ,[latitude]
       ,[created_at]
@@ -70,6 +71,8 @@ SELECT [id]
       ,project_id
       ,usertype_id
       ,user_invoice_data_id
+      ,nickname
+
   FROM [dbo].[Users]
   WHERE is_authorized=1
 

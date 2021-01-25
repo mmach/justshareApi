@@ -13,7 +13,7 @@ const itemSync = async (msg) => {
       try {
         await Axios({
           method: 'post',
-          url: `https://search-justshare-es-prpllmtm2nibj3jnky5rdtjfga.us-east-2.es.amazonaws.com/${String(obj.project_id).toLowerCase()}-items/_doc/${obj.id}`,
+          url: `${CONFIG.ELASTIC_SEARCH.production}${String(obj.project_id).toLowerCase()}-items/_doc/${obj.id}`,
           data: obj.data
         })
         console.log('OK')
@@ -59,7 +59,7 @@ const itemSync = async (msg) => {
       try {
         await Axios({
           method: 'POST',
-          url: `https://search-justshare-es-prpllmtm2nibj3jnky5rdtjfga.us-east-2.es.amazonaws.com/${String(obj.project_id).toLowerCase()}-items/_update/${obj.id}`,
+          url: `${CONFIG.ELASTIC_SEARCH.production}${String(obj.project_id).toLowerCase()}-items/_update/${obj.id}`,
           data: { "doc": obj.data }
         })
         console.log('OK')
@@ -79,7 +79,7 @@ const itemSync = async (msg) => {
       try {
         await Axios({
           method: 'DELETE',
-          url: `https://search-justshare-es-prpllmtm2nibj3jnky5rdtjfga.us-east-2.es.amazonaws.com/${String(obj.project_id).toLowerCase()}-items/_doc/${obj.id}?refresh`,
+          url: `${CONFIG.ELASTIC_SEARCH.production}${String(obj.project_id).toLowerCase()}-items/_doc/${obj.id}?refresh`,
           data: obj.data
         })
         console.log('OK')

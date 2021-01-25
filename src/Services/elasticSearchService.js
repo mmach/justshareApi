@@ -7,7 +7,121 @@ import { UserRegisterInternalDTO } from "justshare-shared";
 import CONFIG from "../config.js";
 import axios from 'axios'
 
+let value = `
+def arrays = [];
+for (a in states){
+        for (b in a.value)
+    {
+            arrays.add(b)
+    }
+} 
+def score_min = -1;
+def score_max = 0;
+def interval = 0.8;
+def uniqValues = [];
+def bucket = 40;
+def size = 0;
+def buckets=[];
+for (el in arrays) {
+        if (score_min == -1) {
+            score_min = el
+    } else if (el < score_min) {
+            score_min = el
+    }
+}
+for (el in arrays) {
+        if (el > score_max) {
+            score_max = el
+    }
+}
+if (arrays.length < bucket) {
+        bucket = arrays.length
+}
+if (bucket == 0) {
+        bucket = -1;
+}
+interval = score_max - score_min;
+interval = interval / bucket;
+if (interval <= 0) {
+        interval = -1
+}
 
+for (def i = 0; i < bucket; i++) {
+        buckets.add([i, 0, score_min + (i * interval), score_min + ((1 + i) * interval)])
+}
+buckets.add([buckets.length, 0, score_max, score_max + interval]);
+for (def i = 0; i < arrays.length; i++) {
+        for (def y = 0; y < buckets.length; y++) {
+            if (buckets[y][2] <= arrays[i] && buckets[y][3] > arrays[i]) {
+                buckets[y][1]++;
+            break;
+        }
+    }
+}
+return buckets`
+value=value.replace(/\n/g,'');
+value=value.replace(/\r/g,'');
+value=value.replace(String.fromCharCode(10),'');
+
+let scriptAgg = value
+
+
+
+let value2 = `
+            def score_min = -1;
+            def score_max = 0;
+            def interval = 0.8;
+            def uniqValues = [];
+            def bucket = 40;
+            def size = 0;
+            for (el in state.value) {
+                if (score_min == -1) {
+                    score_min = el
+                } else if (el < score_min) {
+                    score_min = el
+                }
+            }
+            for (el in state.value) {
+                if (el > score_max) {
+                    score_max = el
+                }
+            }
+            state.buckets = [];
+            state.size = state.value.length;
+            if (state.size < bucket) {
+                bucket = state.size
+            }
+            if (bucket == 0) {
+                bucket = -1;
+            }
+            interval = score_max - score_min;
+            interval = interval / bucket;
+            if (interval <= 0) {
+                interval = -1
+            }
+            state.score_min = score_min;
+            state.interval = interval;
+
+            state.score_max = score_max;
+            for (def i = 0; i < bucket; i++) {
+                state.buckets.add([i, 0, state.score_min + (i * state.interval), state.score_min + ((1 + i) * state.interval)])
+            }
+            state.buckets.add([state.buckets.length, 0, score_max, score_max + interval]);
+            for (def i = 0; i < state.value.length; i++) {
+                for (def y = 0; y < state.buckets.length; y++) {
+                    if (state.buckets[y][2] <= state.value[i] && state.buckets[y][3] > state.value[i]) {
+                        state.buckets[y][1]++;
+                        break;
+                    }
+                }
+            }
+            return state`
+
+value2=value2.replace(/\n/g,'');
+value2=value2.replace(/\r/g,'');
+value2=value2.replace(String.fromCharCode(10),'');
+
+let scriptDeppAgg = value2
 
 
 /**
@@ -706,7 +820,7 @@ export default class ElasticSearchService extends BaseService {
                   "init_script": "state.value = []",
                   "map_script": "if(doc['single.value.float'].size()!=0){state.value.add(doc['single.value.float'].value)}",
                   "combine_script": "return state",
-                  "reduce_script": { "id": "single_reduce_agg_hist" },
+                  "reduce_script": scriptAgg //{ "id": "single_reduce_agg_hist" },
                 }
               }
 
@@ -756,7 +870,7 @@ export default class ElasticSearchService extends BaseService {
                 "init_script": "state.value = []",
                 "map_script": "if(doc['single_dependencies.value.float'].size()!=0){state.value.add(doc['single_dependencies.value.float'].value)}",
                 "combine_script": "return state",
-                "reduce_script": { "id": "single_reduce_agg_hist" },
+                "reduce_script": scriptAgg//{ "id": "single_reduce_agg_hist" },
               }
             }
           }

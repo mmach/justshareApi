@@ -508,7 +508,7 @@ export default class ElasticSearchService extends BaseService {
   async deleteDoc({ user_id }) {
 
   }
-  async searchDoc({ latitude, user_id, longitude, text, distance, tags, select, categories, itemType, expired_at, start_date, end_date, createdInterval, catoptions, catOptionsFilter, size, item_id, page, onlyExpired, catoptionsAll }) {
+  async searchDoc({ latitude, user_id, longitude, text, distance, tags, select, categories, itemType, expired_at, startDate, endDate, createdInterval, catoptions, catOptionsFilter, size, item_id, page, onlyExpired, catoptionsAll }) {
 
     let fullText = text ? text : "";
     // console.log(fullText);
@@ -992,11 +992,11 @@ export default class ElasticSearchService extends BaseService {
                         }
                     }
                   },
-                  start_date != undefined ? {
+                  startDate != undefined ? {
                     "range": {
 
                       "created_at": {
-                        "gte": start_date + (createdInterval != undefined && createdInterval != "" && createdInterval != null ?
+                        "gte": startDate + (createdInterval != undefined && createdInterval != "" && createdInterval != null ?
                           createdInterval.includes("h") > 0 ? "||/h-" + (parseInt(createdInterval) > 1 ? Math.ceil(parseInt(createdInterval) / 2) : parseInt(createdInterval)) + "h" :
                             createdInterval.includes("d") > 0 ? "||/d-" + (parseInt(createdInterval) > 1 ? Math.ceil(parseInt(createdInterval) / 2) : parseInt(createdInterval)) + "d" :
                               createdInterval.includes("w") > 0 ? "||/w-" + (parseInt(createdInterval) > 1 ? Math.ceil(parseInt(createdInterval) / 2) : parseInt(createdInterval)) + "w" :
@@ -1005,7 +1005,7 @@ export default class ElasticSearchService extends BaseService {
                                     createdInterval.includes("M") > 0 ? "||/M-" + (parseInt(createdInterval) > 1 ? Math.ceil(parseInt(createdInterval) / 2) : parseInt(createdInterval)) + "M" :
                                       createdInterval.includes("s") > 0 ? "||/s-" + (parseInt(createdInterval) > 1 ? Math.ceil(parseInt(createdInterval) / 2) : parseInt(createdInterval)) + "s" : "" : ""),
 
-                        "lte": end_date + (createdInterval != undefined && createdInterval != "" && createdInterval != null ?
+                        "lte": endDate + (createdInterval != undefined && createdInterval != "" && createdInterval != null ?
                           createdInterval.includes("h") > 0 ? "||/h+" + (parseInt(createdInterval) > 1 ? Math.ceil(parseInt(createdInterval) / 2) : parseInt(createdInterval)) + "h" :
                             createdInterval.includes("d") > 0 ? "||/d+" + (parseInt(createdInterval) > 1 ? Math.ceil(parseInt(createdInterval) / 2) : parseInt(createdInterval)) + "d" :
                               createdInterval.includes("w") > 0 ? "||/w+" + (parseInt(createdInterval) > 1 ? Math.ceil(parseInt(createdInterval) / 2) : parseInt(createdInterval)) + "w" :

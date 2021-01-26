@@ -40,6 +40,7 @@ export default class SearchItemQuery extends BaseQuery {
             catoptionsAll = catoptions;
             catoptions = catoptions.filter(item => { return item.is_searchable == true || item.category_link[0].is_searchable == true })
         }
+        console.log(this.model)
         let result = await this.elasticSearchServiceDI.setContext(this.context).searchDoc({
             latitude: this.model.lat,
             longitude: this.model.lon,

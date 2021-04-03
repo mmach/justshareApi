@@ -60,11 +60,11 @@ export default class V_Category extends Model {
         color: DataTypes.STRING,
         translation_id: DataTypes.UUID,
         process_id: DataTypes.UUID,    
-        params: DataTypes.STRING,
-        preview_desktop: DataTypes.STRING,
-        preview_mobile: DataTypes.STRING
-
-
+    
+        cms_preview : DataTypes.STRING,
+        cms_create : DataTypes.STRING,
+        cms_edit : DataTypes.STRING,
+        cms_search : DataTypes.STRING
 
 
       },

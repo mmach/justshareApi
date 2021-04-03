@@ -70,7 +70,10 @@ export default class Category extends Model {
           type: DataTypes.BOOLEAN,
           allowNull: true
         },
-
+        cms_preview : DataTypes.STRING,
+        cms_create : DataTypes.STRING,
+        cms_edit : DataTypes.STRING,
+        cms_search : DataTypes.STRING
 
 
       },

@@ -24,7 +24,7 @@ export default class DeletePrivilegesCommand extends BaseCommand {
      */
     constructor({ logFileInfrastructureDI, privilegeServiceDI, dbTransactionInfrastuctureDI, authInfrastructureDI,projectInfrastructureDI }) {
         super({ logFileInfrastructureDI, dbTransactionInfrastuctureDI,
-       //      authInfrastructureDI,
+             authInfrastructureDI,
              projectInfrastructureDI });
         this.privilegeServiceDI = privilegeServiceDI
 
@@ -33,7 +33,7 @@ export default class DeletePrivilegesCommand extends BaseCommand {
         this.model = Object.assign(new PrivilegesDTO(), dto);
     }
     async action() {
-       await this.privilegeServiceDI.setContext(this.context).delete({ model:this.model,withProject:false });
+       await this.privilegeServiceDI.setContext(this.context).delete({ model:this.model,withProject:true });
 
     }
 };

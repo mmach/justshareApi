@@ -52,7 +52,7 @@ export default class Actions extends Model {
           allowNull: true
         },
         project_id: {
-          type: DataTypes.BOOLEAN,
+          type: DataTypes.STRING,
           allowNull: true
         },
       },

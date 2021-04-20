@@ -26,7 +26,7 @@ export default class DeleteActionCommand extends BaseCommand {
         super({
             logFileInfrastructureDI,
             dbTransactionInfrastuctureDI,
-            //     authInfrastructureDI,
+            authInfrastructureDI,
             projectInfrastructureDI
         });
         this.actionServiceDI = actionServiceDI
@@ -36,7 +36,7 @@ export default class DeleteActionCommand extends BaseCommand {
         this.model = Object.assign(new ActionsDTO(), dto);
     }
     async action() {
-        await this.actionServiceDI.setContext(this.context).delete({ model: this.model, withProject: false })
+        await this.actionServiceDI.setContext(this.context).delete({ model: this.model, withProject: true })
         // await this.categoryServiceDI.setContext(this.context).removeCategory({ id:this.model.id });
 
     }

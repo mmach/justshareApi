@@ -24,7 +24,7 @@ export default class UpsertPrivilegesCommand extends BaseCommand {
      */
     constructor({ logFileInfrastructureDI, privilegeServiceDI, dbTransactionInfrastuctureDI, authInfrastructureDI,projectInfrastructureDI }) {
         super({ logFileInfrastructureDI, dbTransactionInfrastuctureDI, 
-        //    authInfrastructureDI,
+            authInfrastructureDI,
             projectInfrastructureDI });
         this.privilegeServiceDI = privilegeServiceDI
 
@@ -33,6 +33,6 @@ export default class UpsertPrivilegesCommand extends BaseCommand {
         this.model = Object.assign(new PrivilegesDTO(), dto);
     }
     async action() {
-       await this.privilegeServiceDI.setContext(this.context).upsert({ model:this.model,withProject:false });
+       await this.privilegeServiceDI.setContext(this.context).upsert({ model:this.model,withProject:true });
     }
 };

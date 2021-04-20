@@ -33,6 +33,10 @@ export default class Privileges extends Model {
         status: {
           type: DataTypes.BOOLEAN
         },
+        project_id: {
+          type: DataTypes.STRING,
+          allowNull: true
+        },
       
       },
       { sequelize }

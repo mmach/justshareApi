@@ -26,7 +26,7 @@ export default class UpsertActionCommand extends BaseCommand {
         super({
             logFileInfrastructureDI,
             dbTransactionInfrastuctureDI,
-            //     authInfrastructureDI,
+                 authInfrastructureDI,
             projectInfrastructureDI
         });
         this.actionServiceDI = actionServiceDI
@@ -36,7 +36,7 @@ export default class UpsertActionCommand extends BaseCommand {
         this.model = Object.assign(new ActionsDTO(), dto);
     }
     async action() {
-        await this.actionServiceDI.setContext(this.context).upsert({ model: this.model, withProject: false })
+        await this.actionServiceDI.setContext(this.context).upsert({ model: this.model, withProject: true })
         // await this.categoryServiceDI.setContext(this.context).removeCategory({ id:this.model.id });
 
     }

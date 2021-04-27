@@ -1,5 +1,7 @@
 
 
+
+
 "use strict";
 module.exports = {
   up: (queryInterface, Sequelize) => {
@@ -8,10 +10,10 @@ module.exports = {
       .query(
         `
      
-      ALTER TABLE Privileges
+      ALTER TABLE Roles
         ADD  project_id char(36)
 
-      ALTER TABLE [dbo].[Privileges]  WITH CHECK ADD  CONSTRAINT [FK_Privileges_Project] FOREIGN KEY([project_id])  REFERENCES [dbo].[Projects] ([id])
+      ALTER TABLE [dbo].[Roles]  WITH CHECK ADD  CONSTRAINT [FK_Roles_Project] FOREIGN KEY([project_id])  REFERENCES [dbo].[Projects] ([id])
 
       `
       )
@@ -21,15 +23,17 @@ module.exports = {
       .query(`
     
 
-      ALTER TABLE [dbo].[Actions]  DROP  CONSTRAINT [FK_Privileges_Project] 
+      ALTER TABLE [dbo].[Roles]  DROP  CONSTRAINT [FK_Roles_Project] 
       
-      ALTER TABLE Privileges
+      ALTER TABLE Roles
         DROP COLUMN  project_id
    
            `
       )
   }
 };
+
+
 
 
 

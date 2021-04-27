@@ -24,7 +24,7 @@ export default class UpsertPrivilegesProjectCommand extends BaseCommand {
      */
     constructor({ logFileInfrastructureDI, privilegeProjectServiceDI, dbTransactionInfrastuctureDI, authInfrastructureDI, projectInfrastructureDI }) {
         super({ logFileInfrastructureDI, dbTransactionInfrastuctureDI,
-           //  authInfrastructureDI,
+             authInfrastructureDI,
               projectInfrastructureDI });
         this.privilegeProjectServiceDI = privilegeProjectServiceDI
 

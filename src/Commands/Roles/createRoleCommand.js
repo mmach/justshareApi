@@ -1,16 +1,9 @@
 "use strict";
+import { RolesDTO } from "justshare-shared";
+import DbTransactionInfrastucture from "../../Architecture/Infrastructure/dbTransactionInfrastucture.js";
+import LogFileInfrastructure from "../../Architecture/Infrastructure/logFileInfrastructure.js";
 import BaseCommand from "./../../Architecture/baseCommand.js";
 
-import { RolesDTO } from "justshare-shared";
-import LogFileInfrastructure from "../../Architecture/Infrastructure/logFileInfrastructure.js";
-import UserService from "../../Services/userService.js";
-import ValidatonInfrastructure from "../../Architecture/Infrastructure/validatonInfrastructure.js";
-import DbTransactionInfrastucture from "../../Architecture/Infrastructure/dbTransactionInfrastucture.js";
-import MailSender from "../../Architecture/mailSender.js";
-import CodeDictionary from "../../Architecture/Dictionary/codeDictionary.js";
-import EMAIL_TEMPLATE from "../../Static/MailsXSLT/index.js"
-import UserValidators from './../../Validators/userValidators.js';
-import { URL } from "url";
 
 /**
  *
@@ -29,12 +22,14 @@ export default class CreateRoleCommand extends BaseCommand {
     logFileInfrastructureDI,
     dbTransactionInfrastuctureDI,
     projectInfrastructureDI,
+    authInfrastructureDI,
     roleServiceDI
   }) {
     super({
       logFileInfrastructureDI,
       dbTransactionInfrastuctureDI,
-      projectInfrastructureDI
+      projectInfrastructureDI,
+      authInfrastructureDI
     });
     this.roleServiceDI = roleServiceDI;
   }
@@ -50,7 +45,7 @@ export default class CreateRoleCommand extends BaseCommand {
   }
 
   async action() {
-    await this.roleServiceDI.setContext(this.context).insert({ model: this.model, withProject: false })
+    await this.roleServiceDI.setContext(this.context).insert({ model: this.model, withProject: true })
   }
 
 }

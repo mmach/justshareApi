@@ -28,8 +28,11 @@ export default class Roles extends Model {
         },
         name:DataTypes.STRING,
         status: DataTypes.BOOLEAN,
-        description: DataTypes.TEXT
-
+        description: DataTypes.TEXT,
+        project_id: {
+          type: DataTypes.STRING,
+          allowNull: true
+        },
 
       },
       { sequelize }

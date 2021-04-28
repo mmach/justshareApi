@@ -18,7 +18,7 @@ export default class UpsertStatusGlobalCommand extends BaseQuery {
      * @memberof UserLogInInternalQuery
      */
     constructor({ logFileInfrastructureDI, userServiceDI, authInfrastructureDI, statusProjectServiceDI }) {
-        super({ logFileInfrastructureDI });
+        super({ logFileInfrastructureDI ,authInfrastructureDI});
         this.statusProjectServiceDI = statusProjectServiceDI;
     };
     init(dto) {
@@ -28,6 +28,6 @@ export default class UpsertStatusGlobalCommand extends BaseQuery {
     async action() {
 
         console.log(this.model)
-        await this.statusProjectServiceDI.setContext(this.context).upsertGlobal({ model: this.model, withProject: false })
+        await this.statusProjectServiceDI.setContext(this.context).upsertGlobal({ model: this.model, withProject: true })
     }
 };

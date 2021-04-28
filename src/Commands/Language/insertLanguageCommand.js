@@ -25,7 +25,7 @@ export default class InsertLanguageCommand extends BaseCommand {
     constructor({ logFileInfrastructureDI, languageServiceDI, dbTransactionInfrastuctureDI, authInfrastructureDI, projectInfrastructureDI }) {
         super({
             logFileInfrastructureDI, dbTransactionInfrastuctureDI,
-            // authInfrastructureDI,
+             authInfrastructureDI,
             projectInfrastructureDI
         });
         this.languageServiceDI = languageServiceDI

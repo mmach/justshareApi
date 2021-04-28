@@ -1,6 +1,6 @@
 // @ts-nocheck
 import BaseCommand from "../../Architecture/baseCommand.js";
-import {DimensionsDTO} from "justshare-shared";
+import { DimensionsDTO } from "justshare-shared";
 import LogFileInfrastructure from "../../Architecture/Infrastructure/logFileInfrastructure.js";
 import CategoryService from "../../Services/categoryService.js";
 import DbTransactionInfrastucture from "../../Architecture/Infrastructure/dbTransactionInfrastucture.js";
@@ -22,10 +22,12 @@ export default class UpsertDimensionCommand extends BaseCommand {
      * @param  {{logFileInfrastructureDI : LogFileInfrastructure,  categoryServiceDI:CategoryService ,dbTransactionInfrastuctureDI:DbTransactionInfrastucture,authInfrastructureDI:AuthInfrastucture}}
      * @memberof InsertCategoryCommand
      */
-    constructor({ logFileInfrastructureDI, dimensionsServiceDI, dbTransactionInfrastuctureDI, authInfrastructureDI,projectInfrastructureDI }) {
-        super({ logFileInfrastructureDI, dbTransactionInfrastuctureDI, 
-        //    authInfrastructureDI,
-            projectInfrastructureDI });
+    constructor({ logFileInfrastructureDI, dimensionsServiceDI, dbTransactionInfrastuctureDI, authInfrastructureDI, projectInfrastructureDI }) {
+        super({
+            logFileInfrastructureDI, dbTransactionInfrastuctureDI,
+            authInfrastructureDI,
+            projectInfrastructureDI
+        });
         this.dimensionsServiceDI = dimensionsServiceDI
 
     };
@@ -33,6 +35,6 @@ export default class UpsertDimensionCommand extends BaseCommand {
         this.model = Object.assign(new DimensionsDTO(), dto);
     }
     async action() {
-       await this.dimensionsServiceDI.setContext(this.context).upsert({ model:this.model,withProject:false });
+        await this.dimensionsServiceDI.setContext(this.context).upsert({ model: this.model, withProject: true });
     }
 };

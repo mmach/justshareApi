@@ -18,7 +18,7 @@ export default class RemoveStatusCommand extends BaseQuery {
      * @memberof UserLogInInternalQuery
      */
     constructor({ logFileInfrastructureDI, userServiceDI, authInfrastructureDI, projectInfrastructureDI, statusProjectServiceDI }) {
-        super({ logFileInfrastructureDI, projectInfrastructureDI });
+        super({ logFileInfrastructureDI, projectInfrastructureDI ,authInfrastructureDI});
         this.statusProjectServiceDI = statusProjectServiceDI;
     };
     init(dto) {

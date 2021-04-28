@@ -33,7 +33,11 @@ export default class Language extends Model {
          code: {
           type: DataTypes.STRING,
           allowNull: true
-        }
+        },
+        project_id: {
+          type: DataTypes.STRING,
+          allowNull: true
+        },
       },
       { sequelize }
     );

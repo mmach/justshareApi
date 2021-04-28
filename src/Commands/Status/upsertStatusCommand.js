@@ -18,7 +18,7 @@ export default class UpsertStatusCommand extends BaseQuery {
      * @memberof UserLogInInternalQuery
      */
     constructor({ logFileInfrastructureDI, userServiceDI, authInfrastructureDI, projectInfrastructureDI, statusProjectServiceDI, translationServiceDI }) {
-        super({ logFileInfrastructureDI, projectInfrastructureDI });
+        super({ logFileInfrastructureDI, projectInfrastructureDI ,authInfrastructureDI});
         this.statusProjectServiceDI = statusProjectServiceDI;
         this.translationServiceDI = translationServiceDI
     };

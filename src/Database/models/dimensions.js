@@ -51,7 +51,11 @@ export default class Dimensions extends Model {
         },
         as_cat_ref:{
           type:DataTypes.BOOLEAN
-        }
+        },
+        project_id: {
+          type: DataTypes.STRING,
+          allowNull: true
+        },
       },
       { sequelize }
     );

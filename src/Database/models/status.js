@@ -27,6 +27,10 @@ export default class Status extends Model {
 
         },
         token: DataTypes.STRING,
+        project_id: {
+          type: DataTypes.STRING,
+          allowNull: true
+        },
 
       },
       { sequelize }

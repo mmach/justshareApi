@@ -24,7 +24,7 @@ export default class DeleteDimensionCommand extends BaseCommand {
      */
     constructor({ logFileInfrastructureDI, dimensionsServiceDI, dbTransactionInfrastuctureDI, authInfrastructureDI,projectInfrastructureDI }) {
         super({ logFileInfrastructureDI, dbTransactionInfrastuctureDI,
-       //      authInfrastructureDI,
+             authInfrastructureDI,
              projectInfrastructureDI });
              this.dimensionsServiceDI = dimensionsServiceDI
 
@@ -33,7 +33,7 @@ export default class DeleteDimensionCommand extends BaseCommand {
         this.model = Object.assign(new DimensionsDTO(), dto);
     }
     async action() {
-       await this.dimensionsServiceDI.setContext(this.context).delete({ model:this.model,withProject:false });
+       await this.dimensionsServiceDI.setContext(this.context).delete({ model:this.model,withProject:true });
 
     }
 };

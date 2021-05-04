@@ -60,6 +60,18 @@ export default class Dimensions extends Model {
       { sequelize }
     );
   }
+  static hooks(models, sequelize) {
+
+    Dimensions.beforeDestroy(async (item, options) => {
+
+      await models.DimensionsProject.destroy({
+        where: { dimension_id: item.id },
+        transaction: options.transaction,
+        individualHooks: true
+
+      })
+    })
+  }
   static associate(models) {
 
     // Users.hasOne(models.Blob, { as: "blob_profile", targetKey: 'id', foreignKey: "blob_id" });

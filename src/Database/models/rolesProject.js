@@ -44,6 +44,7 @@ export default class RolesProject extends Model {
 
     // Users.hasMany(models.UserAuth)
   }
+  
 }
 
 /*

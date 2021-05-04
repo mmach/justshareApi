@@ -38,6 +38,19 @@ export default class Roles extends Model {
       { sequelize }
     );
   }
+
+  static hooks(models, sequelize) {
+
+    Roles.beforeDestroy(async (item, options) => {
+
+      await models.RolesProject.destroy({
+        where: { role_id: item.id },
+        transaction: options.transaction,
+        individualHooks: true
+
+      })
+    })
+  }
   static associate(models) {
     
    

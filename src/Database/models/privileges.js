@@ -45,4 +45,16 @@ export default class Privileges extends Model {
   static associate(models) {
 
   }
+  static hooks(models, sequelize) {
+
+    Privileges.beforeDestroy(async (item, options) => {
+
+      await models.PrivilegesProject.destroy({
+        where: { privilege_id: item.id },
+        transaction: options.transaction,
+        individualHooks: true
+
+      })
+    })
+  }
 }

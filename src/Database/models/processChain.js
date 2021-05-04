@@ -37,7 +37,6 @@ export default class ProcessChain extends Model {
         autorun: DataTypes.BOOLEAN,
         is_start: DataTypes.BOOLEAN,
         is_last: DataTypes.BOOLEAN,
-        with_notification: DataTypes.BOOLEAN,
         has_reminder: DataTypes.BOOLEAN,
         change_status : DataTypes.BOOLEAN,
         use_es : DataTypes.BOOLEAN,

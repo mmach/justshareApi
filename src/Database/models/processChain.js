@@ -39,10 +39,9 @@ export default class ProcessChain extends Model {
         is_last: DataTypes.BOOLEAN,
         with_notification: DataTypes.BOOLEAN,
         has_reminder: DataTypes.BOOLEAN,
-        popup_type: DataTypes.STRING,
-        action_view_id: DataTypes.BOOLEAN,
-        with_iua_status_change : DataTypes.BOOLEAN,
-        get_iua_es : DataTypes.BOOLEAN,
+        change_status : DataTypes.BOOLEAN,
+        use_es : DataTypes.BOOLEAN,
+        params:DataTypes.STRING
    
       },
       { sequelize ,

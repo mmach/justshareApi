@@ -42,6 +42,9 @@ export default class ProjectInfrastructure extends BaseInfrastracture {
                 return await action
             }
             let context = this.getDecodedToken(action.projectToken);
+            console.log(action.projectToken)
+            console.log(context)
+
             let project = await this.projectRepositoryDI.getProjectInfo({ project_id: context.id })
             if (!project) {/*|| user.relogin_require == true) {*/
                 throw 'AUTHORIZATION_PROJECT_ERROR'

@@ -7,10 +7,11 @@ let CONFIG = {
   ITEM_ES_QUEUE: 'elasticsearch-items',
   CHAT_QUEUE: 'chat-messages',
   CHAT_READ_QUEUE: 'chat-read-message',
+  REMINDER_QUEUE: 'reminder-process-message',
   UPLOADED_TYPE: [
     "image/png", "image/jpeg"
   ],
-  UPLOAD_PATH: "C:/Programowanie/Private/stuffshare/src/JustShareApi/upload",//"F:/Private/cqrs-node/upload",//
+  UPLOAD_PATH: "C:/Repos/Private/mapps-io-api/upload",//"F:/Private/cqrs-node/upload",//
   LOCATION_IQ: "fcfb9eb913b786",
   TRANSLATE: {
     engine: 'yandex',

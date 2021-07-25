@@ -293,6 +293,19 @@ import EditUserCommand from "./Commands/User/editUserCommand.js";
 import UpsertUsersInvoiceDataCommand from "./Commands/User/upsertUsersInvoiceDataCommand.js";
 import GetUsersInvoiceDataQuery from "./Query/User/getUsersInvoiceDataQuery.js";
 import Item_CreateItemProcess from "./Processes/item_CreateItemProcess.js";
+import Item_ESSyncProcess from "./Processes/item_ESSyncProcess.js";
+import Item_GoToStepProcess from "./Processes/item_GoToStepProcess.js";
+import Item_VerificationProcess from "./Processes/item_VerificationProcess.js";
+import Item_UpdateExpiredItemProcess from './Processes/item_UpdateExpiredItemProcess.js'
+import RunCronQueueCommand from "./Commands/Process/runCronQueueCommand.js";
+import Item_Cron_ReminderDaysProcess from "./Processes/item_cron_reminderDaysProcess.js";
+import Item_SetExpiredProcess from "./Processes/item_SetExpiredProcess.js";
+import ProcessChainActionInjectionRepository from "./Repository/processChainActionInjectionRepository.js";
+import ProcessChainPrivilegesRepository from "./Repository/processChainPrivilegesRepository.js";
+import UpsertProcessElementActionCommand from "./Commands/Process/upsertProcessElementActionCommand.js";
+import UpsertProcessActionPrivilegeCommand from "./Commands/Process/upsertProcessActionPrivilegeCommand.js";
+import DeleteProcessActionPrivilegeCommand from "./Commands/Process/deleteProcessActionPrivilegeCommand.js";
+import DeleteProcessElementActionCommand from "./Commands/Process/deleteProcessElementActionCommand.js";
 
 /**
  * 
@@ -399,7 +412,10 @@ let exporter = {
   processChainRepositoryDI: asClass(ProcessChainRepository),
   processRepositoryDI: asClass(ProcessRepository),
   processChainStateRepositoryDI: asClass(ProcessChainStateRepository),
-  processServiceDI: asClass(ProcessService)
+  processServiceDI: asClass(ProcessService),
+  processChainActionInjectionRepositoryDI: asClass(ProcessChainActionInjectionRepository),
+  processChainPrivilegesRepositoryDI: asClass(ProcessChainPrivilegesRepository),
+
 
 };
 exporter[CommandList.Dictionary.ADD_DICTIONARY] = asClass(
@@ -710,6 +726,13 @@ exporter[CommandList.Process.INVOKE_PROCESS] = asClass(InvokeProcessCommand);
 exporter[CommandList.Process.DELETE_CHAIN_ELEMENT] = asClass(DeleteProcessChainElementCommand);
 exporter[CommandList.Process.DELETE_CHAIN_STATE] = asClass(DeleteProcessElementStateCommand);
 exporter[CommandList.Process.DELETE_PROCESS] = asClass(DeleteProcessCommand);
+exporter[CommandList.Process.RUN_CRON_QUEUE] = asClass(RunCronQueueCommand);
+exporter[CommandList.Process.UPSERT_CHAIN_ACTION] = asClass(UpsertProcessElementActionCommand);
+exporter[CommandList.Process.UPSERT_CHAIN_PRIVILEGE] = asClass(UpsertProcessActionPrivilegeCommand);
+exporter[CommandList.Process.DELETE_CHAIN_PRIVILEGE] = asClass(DeleteProcessActionPrivilegeCommand);
+exporter[CommandList.Process.DELETE_CHAIN_ACTION] = asClass(DeleteProcessElementActionCommand);
+
+
 exporter[QueryList.Process.GET_PROCESS] = asClass(GetProcessQuery);
 
 
@@ -735,6 +758,13 @@ exporter[ProcessList.Item.IUA_UNBLOCK_CHAT] = asClass(IUA_UnblockChatProcess);
 exporter[ProcessList.Item.IUA_SET_TO_ITEM_COMMENT] = asClass(IUA_SetToItemCommentProcess);
 
 exporter[ProcessList.Item.ITEM_CREATE_ITEM] = asClass(Item_CreateItemProcess);
+exporter['item_ESSyncProcess'] = asClass(Item_ESSyncProcess);
+exporter['item_GoToStepProcess'] = asClass(Item_GoToStepProcess);
+exporter['item_VerificationProcess'] = asClass(Item_VerificationProcess)
+exporter['item_UpdateExpiredItemProcess'] = asClass(Item_UpdateExpiredItemProcess)
+exporter['item_cron_reminderDaysProcess'] = asClass(Item_Cron_ReminderDaysProcess)
+exporter['item_SetExpiredProcess'] = asClass(Item_SetExpiredProcess)
+
 
 
 

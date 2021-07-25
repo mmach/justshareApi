@@ -52,7 +52,7 @@ export default class ItemService extends BaseService {
 
     });
   }
-  
+
   async deleteTags({ itemId }) {
     return await this.unitOfWorkDI.itemRepository.deleteTags({
       item_id: itemId,
@@ -99,5 +99,9 @@ export default class ItemService extends BaseService {
     return await this.unitOfWorkDI.itemRepository.isFreeTerm({ model })
 
   }
+  async setItemProcessChain({ id,item_id, process_id, process_chain_id }) {
+    return await this.unitOfWorkDI.itemRepository.setItemProcessChain({ id,item_id, process_id, process_chain_id })
 
+
+  }
 }

@@ -57,6 +57,8 @@ import UserInvoiceValuesRepository from "./Repository/userInvoiceValuesRepositor
 import ProcessRepository from "./Repository/processRepository.js";
 import ProcessChainRepository from "./Repository/processChainRepository.js";
 import ProcessChainStateRepository from "./Repository/processChainStateRepository.js";
+import ProcessChainPrivilegesRepository from "./Repository/processChainPrivilegesRepository.js";
+import ProcessChainActionInjectionRepository from "./Repository/processChainActionInjectionRepository.js";
 
 
 
@@ -133,7 +135,8 @@ export default class UnitOfWork extends BaseUnitOfWork {
         processChainRepositoryDI,
         processRepositoryDI,
         processChainStateRepositoryDI,
-
+        processChainPrivilegesRepositoryDI,
+        processChainActionInjectionRepositoryDI
     }) {
         super()
 
@@ -194,9 +197,29 @@ export default class UnitOfWork extends BaseUnitOfWork {
             processChainRepositoryDI,
             processRepositoryDI,
             processChainStateRepositoryDI,
+            processChainPrivilegesRepositoryDI,
+            processChainActionInjectionRepositoryDI
         }
     };
+    /**
+             * 
+             * @return {ProcessChainActionInjectionRepository}
+             * @readonly
+             * @memberof UnitOfWork
+             */
+    get processChainActionInjectionRepository() {
+        return this.repositories.processChainActionInjectionRepositoryDI;
+    }
 
+    /**
+            * 
+            * @return {ProcessChainPrivilegesRepository}
+            * @readonly
+            * @memberof UnitOfWork
+            */
+    get processChainPrivilegesRepository() {
+        return this.repositories.processChainPrivilegesRepositoryDI;
+    }
     /**
         * 
         * @return {ProcessChainStateRepository}

@@ -1,4 +1,4 @@
-import BaseCommand from "../Architecture/baseCommand.js";
+import BaseProcess from "../Architecture/baseProcess.js";
 import AuthInfrastucture from "../Architecture/Infrastructure/authInfrastucture.js";
 import ClosingInfrastructure from "../Architecture/Infrastructure/closingInfrastructure.js";
 import DbTransactionInfrastucture from "../Architecture/Infrastructure/dbTransactionInfrastucture.js";
@@ -6,17 +6,13 @@ import LogFileInfrastructure from "../Architecture/Infrastructure/logFileInfrast
 import BlobService from "../Services/blobService.js";
 import CategoryService from "../Services/categoryService.js";
 import ElasticSearchService from "../Services/elasticSearchService.js";
-import { uuid } from "../../node_modules/uuidv4/build/lib/uuidv4.js";
-import { LinkItem, GetValueByDim, DimensionsList, StatusesList } from 'justshare-shared'
-import fs from 'fs';
 import ItemService from "../Services/itemService.js";
-import BaseProcess from "../Architecture/baseProcess.js";
-import { createItem } from './commonFunctions/createItem.js'
+import { getItem } from "./commonFunctions/getItem.js";
 import { updateItemChain } from "./commonFunctions/updateItemChain.js";
 
 
 ("use strict");
-export default class Item_CreateItemProcess extends BaseProcess {
+export default class Item_Cron_ReminderDaysProcess extends BaseProcess {
   /**
     * Creates an instance of CreateItemCommand.
     * @param   {{ logFileInfrastructureDI:LogFileInfrastructure ,
@@ -33,31 +29,27 @@ export default class Item_CreateItemProcess extends BaseProcess {
   constructor({
     logFileInfrastructureDI,
     authInfrastructureDI,
- //   dbTransactionInfrastuctureDI,
-    itemServiceDI,
+    //   dbTransactionInfrastuctureDI,
     validationInfrastructureDI,
-    categoryServiceDI,
-    blobServiceDI,
     elasticSearchServiceDI,
-    tagServiceDI,
     closingInfrastructureDI,
-    projectInfrastructureDI
+    projectInfrastructureDI,
+    mailSenderDI,
+    itemServiceDI
   }) {
     // @ts-ignore
     super({
       logFileInfrastructureDI,
       authInfrastructureDI,
-    //  dbTransactionInfrastuctureDI,
+      //  dbTransactionInfrastuctureDI,
       validationInfrastructureDI,
       closingInfrastructureDI,
       projectInfrastructureDI
     });
-    this.itemServiceDI = itemServiceDI;
-    this.blobServiceDI = blobServiceDI;
-    this.categoryServiceDI = categoryServiceDI;
     this.elasticSearchServiceDI = elasticSearchServiceDI;
-    this.tagServiceDI = tagServiceDI;
-    this.clobs = {}
+    this.itemServiceDI = itemServiceDI
+    this.mailSenderDI = mailSenderDI
+
   }
 
   get validation() {
@@ -74,10 +66,25 @@ export default class Item_CreateItemProcess extends BaseProcess {
 
   async action() {
     try {
+      let item = await getItem.bind(this)(this.model.item_id, this.process_chain.use_es)
 
-      let item = await createItem.bind(this)(this.model)
-    //  console.log(item);
-      await updateItemChain.bind(this)(this.model, this.process_chain.process_id, this.process_chain.id)
+      const estDate = new Date().addDays(this.process_chain.days_before).setHours(0, 0, 0, 0)
+      console.log(new Date().addDays(this.process_chain.days_before))
+      console.log(item.expired_date)
+      if (true) {//(new Date(item.expired_date).setHours(0,0,0,0) < (new Date().setHours(0,0,0,0))) {
+        console.log('true')
+        return true
+      }
+      if (estDate > (new Date(item.expired_date).setHours(0, 0, 0, 0))) {
+        await updateItemChain.bind(this)(item, this.process_chain.process_id, this.process_chain.id)
+        return false
+      }
+
+      console.log('undefined')
+      return null
+
+
+
     } catch (err) {
       console.log(err)
       throw err;
@@ -96,7 +103,9 @@ export default class Item_CreateItemProcess extends BaseProcess {
 
 
 
-    
+
+
+
 
 
 

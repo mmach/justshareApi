@@ -70,6 +70,9 @@ import UserInvoiceValue from "./userInvoicesValue";
 import ProcessChain from "./processChain";
 import Process from "./process";
 import ProcessChainState from "./processChainState";
+import ItemProcessState from "./itemProcessState";
+import ProcessChainPrivilege from "./processChainPrivilege";
+import ProcessChainActionInjection from "./processChainActionInjection";
 
 var env = process.env.NODE_ENV || "development";
 var config = configJSON[env];
@@ -165,7 +168,10 @@ let models = {
   UserInvoiceValue: UserInvoiceValue.init(sequelize, Sequelize),
   ProcessChain: ProcessChain.init(sequelize, Sequelize),
   Process: Process.init(sequelize, Sequelize),
-  ProcessChainState: ProcessChainState.init(sequelize, Sequelize)
+  ProcessChainState: ProcessChainState.init(sequelize, Sequelize),
+  ItemProcessState: ItemProcessState.init(sequelize, Sequelize),
+  ProcessChainActionInjection: ProcessChainActionInjection.init(sequelize, Sequelize),
+  ProcessChainPrivilege: ProcessChainPrivilege.init(sequelize, Sequelize)
 };
 
 

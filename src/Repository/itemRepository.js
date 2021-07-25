@@ -19,6 +19,8 @@ export default class ItemRepository extends BaseRepository {
     super(sequelizeDI.Item);
     this.sequelizeDI = sequelizeDI;
     this.itemCategoryOptionTermDB = sequelizeDI.ItemCategoryOptionTerm
+    this.itemProcessStateDB = sequelizeDI.ItemProcessState
+
   }
 
   /**
@@ -480,7 +482,37 @@ export default class ItemRepository extends BaseRepository {
     });
   }
 
+  async setItemProcessChain({ id, item_id, process_id, process_chain_id, transaction }) {
+    let obj = await this.entityDAO.findAll({
+      where: { id: item_id },
+      transaction: this.getTran({ transaction })
+    })
+    let step_order = 0;
+    if (obj[0].dataValues.item_process_id) {
+      let processChain = await this.itemProcessStateDB.findAll({
+        where: { id: obj[0].dataValues.item_process_id },
+        transaction: this.getTran({ transaction })
+      })
+      step_order = processChain[0].dataValues.step_order+1
+ 
+    }
 
+    await this.itemProcessStateDB.create({
+      id: id,
+      item_id: item_id,
+      process_chain_id: process_chain_id,
+      process_id: process_id,
+      user_id: this.context.user.id,
+      project_id: this.context.project.id,
+      step_order: step_order
+    }, {
+      transaction: this.getTran({ transaction }),
+      returning: true,
+      individualHooks: true,
+      plain: true
+    })
+
+  }
 
   isFreeTerm({ model, transaction }) {
 

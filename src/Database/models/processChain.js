@@ -38,23 +38,45 @@ export default class ProcessChain extends Model {
         is_start: DataTypes.BOOLEAN,
         is_last: DataTypes.BOOLEAN,
         has_reminder: DataTypes.BOOLEAN,
-        change_status : DataTypes.BOOLEAN,
-        use_es : DataTypes.BOOLEAN,
-        params:DataTypes.STRING
-   
+        change_status: DataTypes.BOOLEAN,
+        use_es: DataTypes.BOOLEAN,
+        params: DataTypes.STRING,
+        reminder_cron: DataTypes.STRING
+
       },
-      { sequelize ,
+      {
+        sequelize,
         tableName: 'ProcessChains'
-}
+      }
     );
   }
   static associate(models) {
     ProcessChain.hasMany(models.ProcessChainState, { as: "process_chain_state", targetKey: 'id', foreignKey: "process_chain_id" });
+    ProcessChain.hasMany(models.ProcessChainActionInjection, { as: "process_chain_actions", targetKey: 'id', foreignKey: "process_chain_id" });
 
     // Users.hasMany(models.UserAuth)
   }
   static hooks(models, sequelize) {
+    ProcessChain.beforeDestroy(async (process, options) => {
 
+
+      await models.ProcessChainActionInjection.destroy({
+        where: { process_chain_id: process.id },
+        transaction: options.transaction,
+        individualHooks: true
+      })
+      await models.ProcessChainState.destroy({
+        where: { process_chain_id: process.id },
+        transaction: options.transaction,
+        individualHooks: true
+      })
+      await models.ProcessChainState.destroy({
+        where: { next_process_chain_id: process.id },
+        transaction: options.transaction,
+        individualHooks: true
+      })
+     
+    })
 
   }
 }

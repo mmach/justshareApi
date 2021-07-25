@@ -40,7 +40,17 @@ export default class Process extends Model {
   }
   static hooks(models, sequelize) {
 
+    Process.beforeDestroy(async (process, options) => {
 
+
+      await models.ProcessChain.destroy({
+        where: { process_id: process.id },
+        transaction: options.transaction,
+        individualHooks: true
+      })
+
+
+    })
   }
 }
 

@@ -4,6 +4,7 @@ import { onSendMessage } from './consume/new_message.js'
 import CONFIG from '../config.js';
 import SequelizeDB from '../Database/models/index.js';
 import {itemSync} from './consume/item_sync.js'
+import {processReminder} from './consume/process_reminder.js'
 
 let amqpFunc = async () => {
     console.log(process.env.amqp)
@@ -18,10 +19,12 @@ let amqpFunc = async () => {
     const QUEUE_NAME = 'items-es-sync-'
     const MSG_QUEUE_NAME = 'chat-message-queue-'
     const MSG_READ_QUEUE_NAME = 'chat-message-read-'
+    const REMINDER_QUEUE_NAME = 'process-cron-message-read-'
 
     const EXCHANGE_NAME = CONFIG.ITEM_ES_QUEUE;
     const EXCHANGE_MSG_QUEUE_NAME = CONFIG.CHAT_QUEUE;
     const EXCHANGE_CHAT_READ_QUEUE = CONFIG.CHAT_READ_QUEUE;
+    const EXCHANGE_REMINDER_QUEUE = CONFIG.REMINDER_QUEUE;
 
     connection.on('connect', () => console.log('Connected!'));
     connection.on('disconnect', err => console.log('Disconnected.', err));
@@ -34,6 +37,7 @@ let amqpFunc = async () => {
             channel.assertExchange(EXCHANGE_NAME, 'topic');
             channel.assertExchange(EXCHANGE_MSG_QUEUE_NAME, 'topic');
             channel.assertExchange(EXCHANGE_CHAT_READ_QUEUE, 'topic');
+            channel.assertExchange(EXCHANGE_REMINDER_QUEUE, 'topic');
 
             let channels = projects.map(proj => {
                 let i = proj.dataValues
@@ -47,7 +51,14 @@ let amqpFunc = async () => {
                     channel.consume(MSG_QUEUE_NAME + i.id, onSendMessage),
                     channel.assertQueue(MSG_READ_QUEUE_NAME + i.id, { durable: true, autoDelete: true }),
                     channel.bindQueue(MSG_READ_QUEUE_NAME + i.id, EXCHANGE_CHAT_READ_QUEUE, i.id),
-                    channel.consume(MSG_READ_QUEUE_NAME + i.id, onReadMessage)
+                    channel.consume(MSG_READ_QUEUE_NAME + i.id, onReadMessage),
+                    channel.assertQueue(REMINDER_QUEUE_NAME + i.id, { durable: true, autoDelete: true }),
+                    channel.bindQueue(REMINDER_QUEUE_NAME + i.id, EXCHANGE_REMINDER_QUEUE, i.id),
+                    channel.consume(REMINDER_QUEUE_NAME + i.id, processReminder)
+
+
+
+                    
                 ])
             })
             return Promise.all([

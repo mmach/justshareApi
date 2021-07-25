@@ -43,7 +43,7 @@ export default class Item extends Model {
         },
         blob_id: {
           type: DataTypes.UUID,
-          allowNull: false
+          allowNull: true
         },
         category_id: {
           type: DataTypes.UUID,
@@ -102,6 +102,7 @@ export default class Item extends Model {
         },
         es_operations: DataTypes.STRING,
         external_id: DataTypes.STRING,
+        item_process_id:DataTypes.UUID
       },
       { sequelize }
     );

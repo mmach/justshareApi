@@ -22,11 +22,28 @@ export default class ProcessService extends BaseService {
   }
 
   async upsertChain({ model }) {
-    return await this.unitOfWorkDI.processChainRepository.upsert({ model, withProject: true })
+    await this.unitOfWorkDI.processChainRepository.upsert({ model, withProject: true })
+    let actions = model.process_chain_actions.map(i => this.upsertChainAction({ model: i, withProject: true }))
+    await Promise.all(actions)
   }
 
   async upsertChainState({ model }) {
     return await this.unitOfWorkDI.processChainStateRepository.upsert({ model, withProject: true })
+  }
+  async upsertChainAction({ model }) {
+    console.log(model)
+    return await this.unitOfWorkDI.processChainActionInjectionRepository.upsert({ model, withProject: true })
+  }
+  async upsertChainActionPrivilege({ model }) {
+    return await this.unitOfWorkDI.processChainPrivilegesRepository.upsert({ model, withProject: true })
+  }
+  async deleteChainActionPrivilege({ model }) {
+    return await this.unitOfWorkDI.processChainPrivilegesRepository.delete({ model, withProject: true })
+
+  }
+  async deleteChainAction({ model }) {
+    return await this.unitOfWorkDI.processChainActionInjectionRepository.delete({ model, withProject: true })
+
   }
   async deleteChain({ model }) {
     return await this.unitOfWorkDI.processChainRepository.delete({ model, withProject: true })
@@ -40,4 +57,12 @@ export default class ProcessService extends BaseService {
     return await this.toJsonParse(this.unitOfWorkDI.processRepository.getProcess({ id, withProject: true }));
 
   }
+
+
+
+  async getItemReminder({ id }) {
+    return await this.unitOfWorkDI.processRepository.getItemReminder({});
+
+  }
+
 }

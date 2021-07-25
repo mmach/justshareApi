@@ -42,8 +42,7 @@ export default class InvokeProcessCommand extends BaseCommand {
         this.action_id = action_id
 
     }
-    async runProcessChain(chain_id,result) {
-        console.log(chain_id)
+    async runProcessChain(chain_id, result) {
         let chain = {}
         if (!chain_id) {
             chain = this.process.process_chain.filter(i => i.is_start)[0]
@@ -71,17 +70,51 @@ export default class InvokeProcessCommand extends BaseCommand {
             invoked.context.user = this.context.user;
             invoked.context.project = this.context.project
             invoked.process_chain = chain;
-            invoked.process_chain.model=result
+            invoked.process_chain.model = result
             process_result = await invoked.run();
         }
         console.log(chain)
+        if (chain.is_reminder) {
+            if (process_result == true) {
+                let next_process = chain.process_chain_state.filter(i => i.is_accept == true)[0]
+                console.log('next chain')
+
+                console.log(next_process)
+                return {
+                    next_chain_id: next_process.next_process_chain_id,
+                    result: process_result,
+                    autorun: next_process.next_process_chain_id ? true : false,
+                }
+            } else if (process_result == false) {
+           
+
+                let next_process = chain.process_chain_state.filter(i => i.is_accept != true)[0]
+                console.log(next_process)
+                return {
+                    next_chain_id: next_process && next_process.next_process_chain_id,
+                    result: process_result,
+                    autorun: next_process ? true : false,
+                }
+            }
+            return {
+                next_chain_id: undefined,
+                result: process_result,
+                autorun: false
+
+            }
+        }
+
 
         if (chain.autorun == true) {
+
+            let next_process = chain.process_chain_state.filter(i => i.is_accept == true)[0]
+            console.log(next_process)
             return {
-                next_chain_id: chain.process_chain_state.filter(i => i.is_accept == true)[0].next_process_chain_id,
+                next_chain_id: next_process && next_process.next_process_chain_id,
                 result: process_result,
-                autorun: true,
+                autorun: next_process ? true : false,
             }
+
         } else {
             return {
                 next_chain_id: undefined,
@@ -98,11 +131,12 @@ export default class InvokeProcessCommand extends BaseCommand {
         let chain_id = this.chain_id
         let result_process = {}
         while (autorun_loop == true) {
-            console.log(chain_id)
-            let { next_chain_id, result, autorun } = await this.runProcessChain(chain_id,result_process)
+
+            let { next_chain_id, result, autorun } = await this.runProcessChain(chain_id, result_process)
             autorun_loop = autorun;
             chain_id = next_chain_id
             result_process = result
+            console.log(autorun_loop)
         }
 
         //return result

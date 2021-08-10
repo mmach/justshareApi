@@ -34,9 +34,9 @@ export default class ProcessChainActionInjection extends Model {
         func:DataTypes.STRING,
         sort_order:DataTypes.STRING,
         show_on_current:DataTypes.BOOLEAN,
-        show_on_next:DataTypes.BOOLEAN
-
-
+        show_on_next:DataTypes.BOOLEAN,
+        external_process_id:DataTypes.UUID,
+        external_process_chain_id:DataTypes.UUID
       },
       { sequelize ,
         tableName: 'ProcessChainActionInjections'

@@ -182,6 +182,59 @@ export default class ConversationRepository extends BaseRepository {
     });
   }
 
+
+
+
+  async getUserConversationInfo({ conversation_id, iua_id,  transaction }) {
+
+    let where = { project_id: this.context.project.id }
+    if (iua_id) {
+      where = {
+        ...where,
+        iua_id: iua_id,
+      }
+
+    }
+    if (conversation_id) {
+    
+      where = {
+        ...where,
+        id: conversation_id
+      }
+
+    }
+
+    return this.entityDAO.findAll({
+      where,
+      include: [
+        {
+          model: this.sequelizeDI.UserConversation,
+          as: "users",
+
+          required: false,
+          include: [
+            {
+              model: this.sequelizeDI.V_User,
+              as: "user_detail",
+              required: true,
+              include: [
+                {
+                  model: this.sequelizeDI.Blob,
+                  as: "blob_profile",
+                  required: false
+
+                },
+
+
+              ],
+            },
+          ]
+        }
+      ]
+      ,
+      transaction: this.getTran({ transaction })
+    });
+  }
   closeConversation({ id, iua_id, transaction }) {
     return this.entityDAO.update(
       {

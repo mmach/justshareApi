@@ -24,7 +24,7 @@ export default class GetItemUserActionsHistoryQuery extends BaseQuery {
     async action() {
 
         let resultList = await this.itemUserActionServiceDI.setContext(this.context).getItemUserActionHistory({ iua_id: this.model.iua_id});
-
+        console.log(resultList)
         return resultList
 
     }

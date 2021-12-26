@@ -2,10 +2,10 @@ import { uuid } from "../../../node_modules/uuidv4/build/lib/uuidv4"
 
 
 
-let createIUA = async function (item, message) {
+let createIUA = async function (iua_id,item, message) {
 
     let uniq_number = new Date().getTime()
-    let iua_id = uuid()
+    //let iua_id = uuid()
     //   let status = await this.statusProjectServiceDI.setContext(this.context).getByToken({ name: StatusesList.NEW })
     await this.itemUserActionServiceDI.setContext(this.context).upsert({
         model: {

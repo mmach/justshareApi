@@ -13,18 +13,52 @@ import { URL } from "url";
 import container from "./awilix.js";
 import SequelizeDB from "./Database/models/index.js";
 import CONFIG from './config.js';
-import io from 'socket.io-emitter'
-import redis from 'ioredis'
+//import io from 'socket.io-emitter'
 import { uuid } from '../node_modules/uuidv4/build/lib/uuidv4.js';
 import { amqpFunc } from './Queues/index.js'
-let Redis = redis
+const { Emitter } = require("@socket.io/redis-emitter");
+//const { createClient } = require("redis"); // not included, needs to be explicitly installed
+//const redisAdapter = require('socket.io-redis');
 
-global.ioredis = new Redis({ host: process.env.REDIS_HOST || 'redis-13184.c78.eu-west-1-2.ec2.cloud.redislabs.com', port: process.env.REDIS_PORT || 13184, password: process.env.REDIS_PASSWORD || "oERk63TBgqihQWMYHakRnyCQoi0MSni7" })
-global.socket = io(ioredis);
+//const redisClient = redisAdapter({ host: process.env.REDIS_HOST || 'redis-18388.c243.eu-west-1-3.ec2.cloud.redislabs.com', port: process.env.REDIS_PORT || 18388, auth_pass: process.env.REDIS_PASSWORD || "eFpYn6jmtNf8pDlLM60607S6BjIdMqLH" });
+//const io = new Emitter(redisClient);
+//global.ioredis = new Redis({ host: process.env.REDIS_HOST || 'soapfish.redistogo.com', port: process.env.REDIS_PORT || 11656, auth_pass: process.env.REDIS_PASSWORD || "fc3881610ce65a10691e43ea92b2c7bb" })
+//global.ioredis = new Redis({ host: process.env.REDIS_HOST || 'redis-13184.c78.eu-west-1-2.ec2.cloud.redislabs.com', port: process.env.REDIS_PORT || 13184, password: process.env.REDIS_PASSWORD || "oERk63TBgqihQWMYHakRnyCQoi0MSni7" })
+const client = require('redis').createClient({
+  host: process.env.REDIS_HOST || 'redis-18388.c243.eu-west-1-3.ec2.cloud.redislabs.com',
+  port: process.env.REDIS_PORT || 18388,
+  password: process.env.REDIS_PASSWORD || 'eFpYn6jmtNf8pDlLM60607S6BjIdMqLH',
+});
+const io = new Emitter(client);
+
+//global.socket = io(ioredis);
+global.socket = io;// io({ host: process.env.REDIS_HOST || 'redis-18388.c243.eu-west-1-3.ec2.cloud.redislabs.com', port: process.env.REDIS_PORT || 18388, auth_pass: process.env.REDIS_PASSWORD || "eFpYn6jmtNf8pDlLM60607S6BjIdMqLH" });
 
 //io({ host: process.env.REDIS_HOST || 'redis-13184.c78.eu-west-1-2.ec2.cloud.redislabs.com', port: process.env.REDIS_PORT || 13184, auth_pass: process.env.REDIS_PASSWORD || "oERk63TBgqihQWMYHakRnyCQoi0MSni7" });
 
 //TO REMOVE IN FUTURE
+/*
+setInterval(() => {
+  io.of('/socket_Z3NWUmJhbnc4UXcwUFUvTDlZNDNEeDRzbVpqVHVJTw').emit("time", new Date);
+}, 1000);
+
+setInterval(() => {
+  io.of('/socket_dGh0ZVk1aW1PdExONDRsdXN6bzNWdHR5SGIxeDlBLg').emit("time", new Date);
+}, 1000);
+setInterval(() => {
+  io.of('/socket_SjN3bVVJTHVEUmlXWFZuNzBzNHU5L2ZiSW12b0l0Vw').emit("time", new Date);
+}, 1000);
+setInterval(() => {
+  io.of('/socket_d0Q0dEVtNEJiZ09iRGhad0cxbzlTS3pHNEhVa21RLg').emit("time", new Date);
+}, 1000);
+setInterval(() => {
+  io.of('/socket_L0VGLnFjdkEweTR4Y2Frbm9ER0ZDUXBsVk54WkNoNg').emit("time", new Date);
+}, 1000);
+setInterval(() => {
+  io.of('/socket_SXpmSjYycTZIcDFBMTZ3OXJpQ3ZNSnNrb0FlTGlzbQ').emit("time", new Date);
+}, 1000);
+*/
+
 
 
 

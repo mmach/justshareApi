@@ -41,8 +41,10 @@ export default class ProcessChain extends Model {
         change_status: DataTypes.BOOLEAN,
         use_es: DataTypes.BOOLEAN,
         params: DataTypes.STRING,
-        reminder_cron: DataTypes.STRING
-
+        reminder_cron: DataTypes.STRING,
+        invoke_only:DataTypes.BOOLEAN,
+        is_condition: DataTypes.BOOLEAN,
+        
       },
       {
         sequelize,

@@ -38,7 +38,7 @@ export default class GetConversationsQuery extends BaseQuery {
     projectInfrastructureDI,
 
 
-
+    conversationMessageMembersServiceDI,
     conversationServiceDI,
     translationServiceDI
   }) {
@@ -52,6 +52,7 @@ export default class GetConversationsQuery extends BaseQuery {
       projectInfrastructureDI,
     });
     this.conversationServiceDI = conversationServiceDI
+    this.conversationMessageMembersServiceDI = conversationMessageMembersServiceDI
 
 
   }
@@ -68,7 +69,7 @@ export default class GetConversationsQuery extends BaseQuery {
 
 
   async action() {
-    return await this.conversationServiceDI.setContext(this.context).getUserConversations({conv_id:this.model.conv_id, page: this.model.page, size: this.model.size })
+    return await this.conversationMessageMembersServiceDI.setContext(this.context).getConversations({conv_id:this.model.conv_id, page: this.model.page, size: this.model.size })
   }
 
 

@@ -26,9 +26,9 @@ export default class ConversationService extends BaseService {
     this.projectServiceDI = projectServiceDI
 
   }
-  async getUserConversations({ conv_id, page, size,status }) {
+  async getUserConversations({ conv_id, page, size, status }) {
     return await this.unitOfWorkDI.conversationRepository.getUserConversations({
-      page, size, conv_id,status
+      page, size, conv_id, status
     })
   }
   async getUserConversation({ conv_id, last_msg, size }) {
@@ -37,7 +37,13 @@ export default class ConversationService extends BaseService {
     })
     return await this.unitOfWorkDI.conversationRepository.getMessages({ conv_id, message_list_id })
   }
-  async createConversation({ id, title, user_owner, message, iua_id, user_dest ,status}) {
+
+  async getUserConversationInfo({ conversation_id }) {
+    return await this.unitOfWorkDI.conversationRepository.getUserConversationInfo({
+      conversation_id
+    })
+  }
+  async createConversation({ id, title, user_owner, message, iua_id, user_dest, status }) {
     let conversation = {
       id: id,
       user_owner_id: user_owner.id,
@@ -115,10 +121,37 @@ export default class ConversationService extends BaseService {
 
     let hash = Buffer.from(proj.socket).toString('base64').replace(/=/g, '');
     console.log(hash)
-    global.socket.of("/socket_" + hash).emit(user_owner.id + '-invite',
-      conversation)
-    global.socket.of("/socket_" + hash).emit(user_dest[0].id + '-invite',
-      conversation)
+    let obj = {
+      id: msg_id,
+      project_id: this.context.project.id,
+      user_id: this.context.user.id,
+      conversation_id: conversation.id,
+      //  conv_id: conv.id,
+      conversation_title: conversation.title,
+      conversation_status: conversation.status,
+      number_of_unreaded: 1,
+      message: message,
+      //is_newest: true,
+      message_triggered_id: conversation.messages[0].id,
+      created_at: new Date(),
+      project_hash: '/socket_' + hash,
+      //participant_user_id: user.user_id,
+      //participant_name: user.name,
+      //participant_blob_id: user.blob_profile ? user.blob_profile.blob_min_id : '',
+      conv_members_count: conversation.users.length,
+      users: conversation.users.map(i => { return { ...i.user_details } }),
+    }
+    global.socket.of("/socket_" + hash).to('USER-' + user_owner.id).emit('invite',
+      {
+        conversation_id: obj.conversation_id,
+        conversation: obj
+      })
+    global.socket.of("/socket_" + hash).to('USER-' + user_dest[0].id).emit('invite',
+      {
+        conversation_id: obj.conversation_id,
+        conversation: obj
+
+      })
   }
 
   async sendMessageToUser({ iua_id, msg_id, msg, syncSocket }) {
@@ -129,6 +162,15 @@ export default class ConversationService extends BaseService {
     proj = proj.filter(item => { return item.id == this.context.project.id })[0]
 
     conv = conv[0]
+    let users = {}
+    conv.messages.forEach(i => {
+      users[i.user_id] = users[i.user_id] ? 0 : users[i.user_id]++
+    })
+    let user_id = Object.keys(users).filter(i => i != this.context.user.id).sort((a, b) => {
+      users[a] > users[b] ? 1 : -1
+    })[0]
+    let user = conv.users.find(i => i.user_id == user_id)
+    console.log(user)
     let hash = Buffer.from(proj.socket).toString('base64').replace(/=/g, '');
     // console.log(conv.messages[0].id);
     let obj = {
@@ -136,13 +178,20 @@ export default class ConversationService extends BaseService {
       project_id: this.context.project.id,
       user_id: this.context.user.id,
       conversation_id: conv.id,
-      conv_id: conv.id,
+      //  conv_id: conv.id,
+      conversation_title: conv.title,
+      conversation_status: conv.status,
+      number_of_unreaded: 1,
       message: msg,
-      is_newest: true,
+      //is_newest: true,
       message_triggered_id: conv.messages[0].id,
-      createdAt: new Date(),
-      socket_user_id: '/socket_' + hash,
-      users: conv.users.map(i => { return { ...i, id: uuid() } }),
+      created_at: new Date(),
+      project_hash: '/socket_' + hash,
+      //participant_user_id: user.user_id,
+      //participant_name: user.name,
+      //participant_blob_id: user.blob_profile ? user.blob_profile.blob_min_id : '',
+      conv_members_count: conv.users.length,
+      users: conv.users,
     }
     global.queueChannel.publish(CONFIG.CHAT_QUEUE, this.context.project.id,
       obj, {
@@ -151,10 +200,15 @@ export default class ConversationService extends BaseService {
         ProjectAuthorization: 'Bearer ' + this.context.projectToken
       }
     })
-    conv.users.forEach(i => {
-      global.socket.of("/socket_" + hash).emit(i.user_id + '-newmssg',
-        obj)
+    conv.users.forEach(u => {
+      global.socket.of("/socket_" + hash).to('USER-' + u.id).to('invite', {
+        conversation_id: obj.conversation_id,
+        conversation: obj
+      });
+
+
     })
+
 
   }
 
@@ -164,8 +218,8 @@ export default class ConversationService extends BaseService {
 
   }
 
-  async setStatusConversation({ id, iua_id,status }) {
-    return await this.unitOfWorkDI.conversationRepository.setStatusConversation({ id, iua_id ,status})
+  async setStatusConversation({ id, iua_id, status }) {
+    return await this.unitOfWorkDI.conversationRepository.setStatusConversation({ id, iua_id, status })
 
   }
   /*

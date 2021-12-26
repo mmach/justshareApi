@@ -11,9 +11,10 @@ export default class GetItemTransactionQuery extends BaseQuery {
      * @param  {{ logFileInfrastructureDI:LogFileInfrastructure, itemTransactionsServiceDI:ItemTransactionService }}
      * @memberof GetItemQuery
      */
-    constructor({ logFileInfrastructureDI, itemTransactionsServiceDI, authInfrastructureDI, projectInfrastructureDI }) {
+    constructor({ logFileInfrastructureDI, itemTransactionsServiceDI, authInfrastructureDI, projectInfrastructureDI, conversationServiceDI }) {
         super({ logFileInfrastructureDI, authInfrastructureDI, projectInfrastructureDI });
         this.itemTransactionsServiceDI = itemTransactionsServiceDI;
+        this.conversationServiceDI = conversationServiceDI
 
     };
 
@@ -23,7 +24,8 @@ export default class GetItemTransactionQuery extends BaseQuery {
 
     async action() {
 
-        let resultList = await this.itemTransactionsServiceDI.setContext(this.context).getItemTransaction({ iua_id: [this.model.iua_id] ,status_id:undefined});
+
+        let resultList = await this.itemTransactionsServiceDI.setContext(this.context).getItemTransaction({ iua_id: [this.model.iua_id], status_id: undefined, conversation_id: [this.model.conversation_id] });
 
         return resultList
 

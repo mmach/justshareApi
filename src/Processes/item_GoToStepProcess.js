@@ -66,9 +66,7 @@ export default class Item_GoToStepProcess extends BaseProcess {
 
   async action() {
     try {
-      console.log(this.process_chain)
       let item = await getItem.bind(this)(this.model.id,this.process_chain.use_es)
-      console.log(item.item_id)
       await updateItemChain.bind(this)(item, this.process_chain.process_id, this.process_chain.id)
 
     } catch (err) {

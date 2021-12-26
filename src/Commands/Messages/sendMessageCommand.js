@@ -10,7 +10,7 @@ export default class SendMessageCommand extends BaseCommand {
     authInfrastructureDI,
     logFileInfrastructureDI,
     projectInfrastructureDI,
-
+    projectServiceDI
 
   }) {
     // @ts-ignore
@@ -19,7 +19,7 @@ export default class SendMessageCommand extends BaseCommand {
       authInfrastructureDI,
       projectInfrastructureDI,
     });
-    //this.conversationMessagesService = conversationMessagesService
+    this.projectServiceDI = projectServiceDI
 
 
   }
@@ -36,6 +36,7 @@ export default class SendMessageCommand extends BaseCommand {
 
 
   async action() {
+    let project = await this.projectServiceDI.setContext(this.context).getProjectSocketChannel({ project_id: this.context.project.id })
 
     global.queueChannel.publish(CONFIG.CHAT_QUEUE, this.context.project.id,
       {
@@ -49,6 +50,7 @@ export default class SendMessageCommand extends BaseCommand {
         createdAt: this.model.createdAt,
         socket_user_id: this.model.socket_user_id,
         users: this.model.users,
+        project_socket: project.socket
 
 
       }, {

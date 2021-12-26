@@ -27,11 +27,12 @@ const onSendMessage = async data => {
     try {
       //global.socket.to('join-room', new Date());
 
-      global.socket.of(obj.socket_user_id.split('#')[0]).to(obj.conversation_id).emit(obj.user_id + '-msg-saved',
+      global.socket.of(obj.project_socket).to('USER-'+obj.user_id).emit('msg-saved',
         {
           conversation_id: obj.conversation_id,
           message_id: obj.id
         })
+  
       //console.log(tmp)
 
 

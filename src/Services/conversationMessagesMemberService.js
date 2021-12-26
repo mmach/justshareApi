@@ -22,7 +22,10 @@ export default class ConversationMessageMembersService extends BaseService {
   }
 
   async getUnreadMsg({ }) {
-    return await this.toJsonParse(this.unitOfWorkDI.conversationMessagesMembersRepository.getUnreadMsg({}))
+    return await this.unitOfWorkDI.conversationMessagesMembersRepository.getUnreadMsg({})
+  }
+  async getConversations({ conv_id, iua_id, page = 0, size = 20, status = 'O' }) {
+    return await this.unitOfWorkDI.conversationMessagesMembersRepository.getConversations({ conv_id, iua_id, page, size, status })
   }
 
 }

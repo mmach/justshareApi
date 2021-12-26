@@ -60,6 +60,6 @@ export default class ConversationMessageMembers extends Model {
   }
 
   static associate(models) {
- 
+
   }
 }

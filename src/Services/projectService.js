@@ -79,6 +79,15 @@ export default class ProjectService extends BaseService {
       return { id: i.id, socket: bcrypt.hashSync(i.id, i.salt).replace(i.salt, '') }
     })
   }
+  async getProjectSocketChannel({ project_id }) {
+    let result = await this.toJsonParse(this.unitOfWorkDI.projectRepository.getProjectsSockets({}));
+    return result.filter(i => i.id == project_id).map(i => {
+      let sock = bcrypt.hashSync(i.id, i.salt).replace(i.salt, '');
+      let socket = Buffer.from(sock).toString('base64').replace(/=/g, '')
+
+      return { id: i.id, socket: `/socket_${socket}` }
+    })[0]
+  }
 
 
   async getProjctInfo({ id }) {

@@ -15,9 +15,11 @@ export default class ItemTransactionService extends BaseService {
    * Creates an instance of UserService.
    * @param   {{ unitOfWorkDI: UnitOfWork}}
    */
-  constructor({ unitOfWorkDI, projectServiceDI }) {
+  constructor({ unitOfWorkDI, projectServiceDI, conversationServiceDI }) {
     super({ unitOfWorkDI, repository: "itemTransactionRepository" });
     this.projectServiceDI = projectServiceDI;
+    this.conversationServiceDI = conversationServiceDI
+
   }
 
   /**
@@ -30,7 +32,12 @@ export default class ItemTransactionService extends BaseService {
 
 
 
-  async getItemTransaction({ iua_id, status_id }) {
+  async getItemTransaction({ iua_id, status_id, conversation_id }) {
+
+    if (conversation_id) {
+      let obj = await this.conversationServiceDI.setContext(this.context).getById({ id: conversation_id })
+      iua_id = [obj.iua_id]
+    }
     let result = await this.toJsonParse(this.unitOfWorkDI.itemTransactionRepository.getItemTransaction({ iua_id, status_id }));
     return result.map(item => {
       let element = Object.assign({}, item)

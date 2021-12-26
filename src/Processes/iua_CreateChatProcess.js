@@ -1,4 +1,4 @@
-import BaseCommand from "../Architecture/baseCommand.js";
+import BaseProcess from "../Architecture/baseProcess.js";
 import AuthInfrastucture from "../Architecture/Infrastructure/authInfrastucture.js";
 import ClosingInfrastructure from "../Architecture/Infrastructure/closingInfrastructure.js";
 import DbTransactionInfrastucture from "../Architecture/Infrastructure/dbTransactionInfrastucture.js";
@@ -6,29 +6,28 @@ import LogFileInfrastructure from "../Architecture/Infrastructure/logFileInfrast
 import BlobService from "../Services/blobService.js";
 import CategoryService from "../Services/categoryService.js";
 import ElasticSearchService from "../Services/elasticSearchService.js";
-import { uuid } from "../../node_modules/uuidv4/build/lib/uuidv4.js";
-import { LinkItem, GetValueByDim, DimensionsList, StatusesList } from 'justshare-shared'
-import fs from 'fs';
 import ItemService from "../Services/itemService.js";
-import BaseProcess from "../Architecture/baseProcess.js";
-import updateIUA from "./commonFunctions/updateIUA.js";
+import createConversation from "./commonFunctions/createConversation.js";
 import initIUAProcess from "./commonFunctions/initIUAProcess.js";
 
+
+
+
 ("use strict");
-export default class IUA_RejectProcess extends BaseProcess {
+export default class iua_CreateChatProcess extends BaseProcess {
   /**
-    * Creates an instance of CreateItemCommand.
-    * @param   {{ logFileInfrastructureDI:LogFileInfrastructure ,
-      * authInfrastructureDI:AuthInfrastucture,
-      * dbTransactionInfrastuctureDI:DbTransactionInfrastucture,
-      * itemServiceDI:ItemService,
-      * blobServiceDI:BlobService,
-      * categoryServiceDI:CategoryService,
-      * elasticSearchServiceDI:ElasticSearchService,
-      * tagServiceDI:TagService,
-      * closingInfrastructureDI:ClosingInfrastructure}}
-      * @memberof CreateItemCommand
-      */
+   * Creates an instance of CreateItemCommand.
+   * @param   {{ logFileInfrastructureDI:LogFileInfrastructure ,
+    * authInfrastructureDI:AuthInfrastucture,
+    * dbTransactionInfrastuctureDI:DbTransactionInfrastucture,
+    * itemServiceDI:ItemService,
+    * blobServiceDI:BlobService,
+    * categoryServiceDI:CategoryService,
+    * elasticSearchServiceDI:ElasticSearchService,
+    * tagServiceDI:TagService,
+    * closingInfrastructureDI:ClosingInfrastructure}}
+    * @memberof CreateItemCommand
+    */
   constructor({
     logFileInfrastructureDI,
     authInfrastructureDI,
@@ -47,6 +46,7 @@ export default class IUA_RejectProcess extends BaseProcess {
     dimensionsProjectServiceDI,
     itemServiceDI,
     invoiceServiceDI,
+    itemTransactionCategoryOptionsServiceDI,
     blobServiceDI
 
   }) {
@@ -71,6 +71,7 @@ export default class IUA_RejectProcess extends BaseProcess {
     this.itemServiceDI = itemServiceDI;
     this.invoiceServiceDI = invoiceServiceDI;
     this.blobServiceDI = blobServiceDI;
+    this.itemTransactionCategoryOptionsServiceDI = itemTransactionCategoryOptionsServiceDI;
 
   }
 
@@ -85,31 +86,20 @@ export default class IUA_RejectProcess extends BaseProcess {
   }
 
 
-
-
   async action() {
-    try {
+   
+    const { IUA, itemTransaction } = await initIUAProcess.bind(this)()
 
-    //  await this.initIUAProcess();
-      await initIUAProcess.bind(this)()
-      let dest_user = await this.userServiceDI.setContext(this.context).getById({ id: this.IUA.user_id, project: this.context.project.id });
-      // await this.updateIUA(this.context.user.id, this.context.user, dest_user)
+    let user = await this.userServiceDI.setContext(this.context).getUserInfo({ user_id: itemTransaction.user_id });
+    console.log(user)
+    await createConversation.bind(this)(IUA.id, IUA.uniq_number, user, IUA.comment);
 
-      await updateIUA.bind(this)(this.context.user.id, this.context.user, dest_user)
-    } catch (err) {
-      console.log(err)
-      throw err;
+    return {
+      iua_id: this.model.id,
+      item_id: this.model.item_id
     }
-
   }
 }
-    //  let prom = diff.map(i => {
-
-    //  })
-    //  throw 'dupa'
-
-
-
 
 
 

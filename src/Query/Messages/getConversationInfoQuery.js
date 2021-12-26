@@ -8,13 +8,13 @@ import BlobService from "../../Services/blobService.js";
 import CategoryService from "../../Services/categoryService.js";
 import Promise from "bluebird";
 import ElasticSearchService from "../../Services/elasticSearchService.js";
-import TagService from './../../Services/tagService.js'
+import TagService from '../../Services/tagService.js'
 import ClosingInfrastructure from "../../Architecture/Infrastructure/closingInfrastructure.js";
 import { uuid, isUuid } from "../../../node_modules/uuidv4/build/lib/uuidv4.js";
 import CONFIG from "../../config.js";
 import BaseQuery from "../../Architecture/baseQuery.js";
 
-export default class GetConversationQuery extends BaseQuery {
+export default class GetConversationInfoQuery extends BaseQuery {
   /**
    * Creates an instance of CreateItemCommand.
    * @param   {{ logFileInfrastructureDI:LogFileInfrastructure ,
@@ -68,7 +68,7 @@ export default class GetConversationQuery extends BaseQuery {
 
 
   async action() {
-    return await this.conversationServiceDI.setContext(this.context).getUserConversation({ conv_id: this.model.conversation_id, last_msg: this.model.last_msg_id, size: this.model.size })
+    return await this.conversationServiceDI.setContext(this.context).getUserConversationInfo({ conversation_id: this.model.conversation_id })
   }
 
 

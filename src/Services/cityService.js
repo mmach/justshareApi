@@ -63,10 +63,7 @@ export default class CityService extends BaseService {
     console.log(country_code)
     let result = await new Promise((resolve, rej) => {
      axios.get(`https://api.locationiq.com/v1/autocomplete.php?key=${ CONFIG.LOCATION_IQ}&format=json&q=${encodeURI(address)}&countrycodes=${country_code}&limit=5&normalizeaddress=1`).then(succ=>{
-
       resolve(succ.data);
-
-
      })
      // geocoder.geocode({ q: address, country: country, city: city, limit: 5,"accept-language":this.context.language }, function (err, res) {
      //   console.log(res)

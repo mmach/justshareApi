@@ -25,16 +25,12 @@ const onSendMessage = async data => {
     })
     await Promise.all(prom);
     try {
-      //global.socket.to('join-room', new Date());
 
-      global.socket.of(obj.project_socket).to('USER-'+obj.user_id).emit('msg-saved',
+      global.socket.of(obj.project_socket).to('USER-' + obj.user_id).emit('msg-saved',
         {
           conversation_id: obj.conversation_id,
           message_id: obj.id
         })
-  
-      //console.log(tmp)
-
 
     } catch (er) {
       console.log(er)

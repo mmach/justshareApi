@@ -108,11 +108,7 @@ export default class IUA_ReservationAcceptProcess extends BaseProcess {
 
   }
 }
-    //  let prom = diff.map(i => {
-
-    //  })
-    //  throw 'dupa'
-
+   
 
 
 

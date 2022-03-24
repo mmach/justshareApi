@@ -205,13 +205,32 @@ export default class ConversationService extends BaseService {
         conversation_id: obj.conversation_id,
         conversation: obj
       });
-
-
     })
+  }
+  async iuaSetProcessChainId({ iua_id, process_chain_id }) {
+
+    let proj = await this.projectServiceDI.getProjectsSockets({})
+    proj = proj.filter(item => { return item.id == this.context.project.id })[0]
+
+    let hash = Buffer.from(proj.socket).toString('base64').replace(/=/g, '');
+    // console.log(conv.messages[0].id);
+    let obj = {
+      iua_id: iua_id,
+      process_chain_id: process_chain_id,
+      project_hash: '/socket_' + hash,
+      //participant_user_id: user.user_id,
+      //participant_name: user.name,
+      //participant_blob_id: user.blob_profile ? user.blob_profile.blob_min_id : '',
+
+    }
+    console.log('wtf whyyy')
+    console.log('NEW IUA ')
+    console.log(obj)
+    global.socket.of(obj.project_hash).emit('iua_process_chain', obj);
+
 
 
   }
-
 
   async closeConversation({ id, iua_id }) {
     return await this.unitOfWorkDI.conversationRepository.closeConversation({ id, iua_id })

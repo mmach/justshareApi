@@ -25,10 +25,12 @@ const { Emitter } = require("@socket.io/redis-emitter");
 //global.ioredis = new Redis({ host: process.env.REDIS_HOST || 'soapfish.redistogo.com', port: process.env.REDIS_PORT || 11656, auth_pass: process.env.REDIS_PASSWORD || "fc3881610ce65a10691e43ea92b2c7bb" })
 //global.ioredis = new Redis({ host: process.env.REDIS_HOST || 'redis-13184.c78.eu-west-1-2.ec2.cloud.redislabs.com', port: process.env.REDIS_PORT || 13184, password: process.env.REDIS_PASSWORD || "oERk63TBgqihQWMYHakRnyCQoi0MSni7" })
 const client = require('redis').createClient({
-  host: process.env.REDIS_HOST || 'redis-18388.c243.eu-west-1-3.ec2.cloud.redislabs.com',
-  port: process.env.REDIS_PORT || 18388,
-  password: process.env.REDIS_PASSWORD || 'eFpYn6jmtNf8pDlLM60607S6BjIdMqLH',
-});
+  //host: process.env.REDIS_HOST || 'redis-16920.c233.eu-west-1-1.ec2.cloud.redislabs.com',
+  //port: process.env.REDIS_PORT || 16920,
+  //password: process.env.REDIS_PASSWORD || '9GP9aoV3BrtzyRu61ovBVnCmmiw1DKkE',
+  url: 'redis://default:9GP9aoV3BrtzyRu61ovBVnCmmiw1DKkE@redis-16920.c233.eu-west-1-1.ec2.cloud.redislabs.com:16920'
+})
+client.connect()
 const io = new Emitter(client);
 
 //global.socket = io(ioredis);

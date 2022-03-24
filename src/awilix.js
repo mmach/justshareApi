@@ -738,7 +738,7 @@ exporter[QueryList.Process.GET_PROCESS] = asClass(GetProcessQuery);
 //////////////////PROCESSES_TYPE////////////
 exporter[ProcessList.Item.IUA_NEW] = asClass(IUA_NewProcess);
 exporter[ProcessList.Item.IUA_RESERVATION_ACCEPT] = asClass(IUA_ReservationAcceptProcess);
-exporter[ProcessList.Item.IUA_WAITING_FOR_PAY] = asClass(IUA_WaitingForPayProcess);
+//exporter[ProcessList.Item.IUA_WAITING_FOR_PAY] = asClass(IUA_WaitingForPayProcess);
 
 exporter[ProcessList.Item.IUA_READY] = asClass(IUA_ReadyProcess);
 exporter[ProcessList.Item.IUA_START] = asClass(IUA_StartProcess);
@@ -755,6 +755,7 @@ exporter['item_cron_reminderDaysProcess'] = asClass(Item_Cron_ReminderDaysProces
 exporter['item_SetExpiredProcess'] = asClass(Item_SetExpiredProcess)
 exporter['iua_CreateChatProcess'] = asClass(IUA_CreateChatProcess)
 exporter['iua_GoToStepProcess'] = asClass(IUA_GoToStepProcess)
+exporter['iua_WaitingForPayProcess'] = asClass(IUA_WaitingForPayProcess)
 
 
 

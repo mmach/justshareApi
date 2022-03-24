@@ -3,7 +3,7 @@ import BaseCommand from "./../../Architecture/baseCommand.js";
 import LogFileInfrastructure from "../../Architecture/Infrastructure/logFileInfrastructure.js";
 import UserService from "../../Services/userService.js";
 import AuthInfrastucture from "../../Architecture/Infrastructure/authInfrastucture.js";
-import {UserDTO} from "justshare-shared";
+import { UserDTO } from "justshare-shared";
 
 /**
  *
@@ -40,16 +40,17 @@ export default class SetCoordinatesCommand extends BaseCommand {
   }
 
   async action() {
+    console.log(this.model);
     await this.userServiceDI
       .setContext(this.context)
       .setCoordinates({
         longitude: this.model.longitude,
         latitude: this.model.latitude,
-        zipcode:this.model.zipcode,
-        address:this.model.address,
-        city_id:this.model.city_id,
+        zipcode: this.model.zipcode,
+        address: this.model.address,
+        city_id: this.model.city_id,
         city: this.model.city,
-        country_id:this.model.country_id
+        country_id: this.model.country_id
       });
   }
 }

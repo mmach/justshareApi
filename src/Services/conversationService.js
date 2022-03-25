@@ -226,7 +226,8 @@ export default class ConversationService extends BaseService {
     console.log('wtf whyyy')
     console.log('NEW IUA ')
     console.log(obj)
-    global.socket.of(obj.project_hash).emit('iua_process_chain', obj);
+   // global.socket.of(obj.project_hash).emit('iua_process_chain', obj);
+    global.socket.of(obj.project_hash).to('IUA-' + u.iua_id).emit('iua_process_chain', obj);
 
 
 

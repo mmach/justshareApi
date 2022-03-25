@@ -180,3 +180,5 @@ src/Architecture/logs/error/filelog-error.log.2022-03-21
 src/Architecture/logs/error/filelog-error.log.2022-03-22
 src/Architecture/logs/error/filelog-error.log.2022-03-23
 src/Architecture/logs/error/filelog-error.log.2022-03-24
+src/Architecture/logs/filelog-info.log.2022-03-25
+src/Architecture/logs/error/filelog-error.log.2022-03-25

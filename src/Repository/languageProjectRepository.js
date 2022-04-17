@@ -43,18 +43,14 @@ export default class LanguageProjectRepository extends BaseRepository {
   async setAsMainLang({ model, transaction }) {
     let where = {}
     where.project_id = this.context.project.id
-
     await this.entityDAO.update({ is_main: false }, {
       where: where,
-      transaction: this.getTran({ transaction }),
-      individualHooks: true
+      transaction: this.getTran({ transaction })
     });
-    where.id = model.id;
+    where.language_id = model.id;
     await this.entityDAO.update({ is_main: true }, {
       where: where,
       transaction: this.getTran({ transaction }),
-
-      individualHooks: true
     });
   }
   /* getPrivByName({ name, transaction }) {

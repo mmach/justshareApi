@@ -282,7 +282,6 @@ export default class UserService extends BaseService {
 
   async loginByExternalUserId({ email, externalUserId, provider }) {
     let result = await this.toJsonParse(this.checkMailInDb({ email: email }))
-    console.log(result);
     let extCred = undefined;
     if (result == null) {
       throw new ServerException().throw({
@@ -337,7 +336,6 @@ export default class UserService extends BaseService {
 
   async grantPrivByName({ user_id, project_id, name }) {
     let priv = await this.toJsonParse(this.unitOfWorkDI.privilegeRepository.getPrivByName({ name }));
-    console.log(priv)
     return await this.toJsonParse(this.unitOfWorkDI.userProjectPrivilegesRepository.insert({
       model: {
         project_id: project_id,

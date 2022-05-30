@@ -38,7 +38,8 @@ export default class ProcessChainActionInjection extends Model {
         external_process_id:DataTypes.UUID,
         external_process_chain_id:DataTypes.UUID,
         ref_key:DataTypes.STRING,
-
+        on_before_hook:DataTypes.BOOLEAN,
+        on_after_hook:DataTypes.BOOLEAN,
       },
       { sequelize ,
         tableName: 'ProcessChainActionInjections'

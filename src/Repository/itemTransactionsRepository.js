@@ -22,6 +22,83 @@ export default class ItemTransactionsRepository extends BaseRepository {
 
 
 
+  getRootIuaIds({ iua_ids, transaction }) {
+    console.log(iua_ids)
+    return this.sequelizeDI.sequelize.query(
+      `
+    WITH recus(iua_id, iua_grouping, step) AS (
+      SELECT ISNULL(parent_iua_id,iua_id), iua_id, 1 FROM ItemTransactions
+        WHERE iua_id IN (:id)
+          AND  ItemTransactions.project_id = :project_id
+      UNION ALL
+      SELECT  ItemTransactions.parent_iua_id, iua_grouping, step+1 FROM recus JOIN ItemTransactions ON ItemTransactions.iua_id = recus.iua_id
+        WHERE ItemTransactions.iua_id != ItemTransactions.parent_iua_id AND ItemTransactions.parent_iua_id IS NOT NULL
+      ),
+      union_recus AS (
+        SELECT iua_id,iua_grouping,step, MAX(step) OVER(PARTITION BY iua_grouping) as max_step FROM recus 
+      )
+      SELECT iua_id FROM union_recus 
+        WHERE max_step=step  `,
+      {
+        replacements: { id: iua_ids.length > 0 ? iua_ids : [''], project_id: this.context.project.id },
+        transaction: this.getTran({ transaction }),
+        type: this.sequelizeDI.sequelize.QueryTypes.SELECT
+      }
+    );
+  }
+
+
+  getAllChildrenIUA({ iua_ids, transaction }) {
+    return this.sequelizeDI.sequelize.query(
+      `
+        WITH recus(iua_id,iua_grouping,step) AS (
+          SELECT id,parent_iua_id,1 FROM ItemUserActions
+          WHERE parent_iua_id IN (:id)AND ItemUserActions.iua_id IS NULL AND  ItemTransactions.project_id=:project_id
+          UNION ALL
+          SELECT ItemUserActions.id,iua_grouping,step+1 FROM recus JOIN ItemUserActions ON ItemUserActions.parent_iua_id=recus.iua_id
+        AND ItemUserActions.iua_id IS NULL
+          ),
+          union_recus AS (
+        SELECT recus.iua_id,iua_grouping,step FROM recus
+        --JOIN ItemUserActions ON ItemUserActions.id=recus.iua_id
+          )
+          SELECT * FROM union_recus 
+      ORDER BY iua_grouping, step asc
+`,
+      {
+        replacements: { id: iua_ids.length > 0 ? iua_ids : [''], project_id: this.context.project.id },
+        transaction: this.getTran({ transaction }),
+        type: this.sequelizeDI.sequelize.QueryTypes.SELECT
+      }
+    );
+  }
+
+  getFromRootIuaAllIuaIds({ iua_ids, transaction }) {
+    return this.sequelizeDI.sequelize.query(
+      `
+      WITH recus(iua_id,root_iua_id,step) AS (
+        SELECT iua_id,parent_iua_id,1 FROM ItemTransactions
+        WHERE parent_iua_id IN (:id) AND iua_id!=parent_iua_id AND  ItemTransactions.project_id=:project_id
+        UNION ALL
+        SELECT ItemTransactions.parent_iua_id,root_iua_id,step+1 FROM recus JOIN ItemTransactions ON ItemTransactions.parent_iua_id=recus.iua_id
+    WHERE ItemTransactions.iua_id!=ItemTransactions.parent_iua_id
+        ),
+        union_recus AS (
+      SELECT recus.iua_id,root_iua_id,step FROM recus
+      UNION ALL
+      SELECT id,id,0 FROM ItemUserActions
+      WHERE id in (:id)
+        )
+        SELECT * FROM union_recus 
+    ORDER BY root_iua_id, step asc
+  `,
+      {
+        replacements: { id: iua_ids.length > 0 ? iua_ids : [''], project_id: this.context.project.id },
+        transaction: this.getTran({ transaction }),
+        type: this.sequelizeDI.sequelize.QueryTypes.SELECT
+      }
+    );
+  }
 
 
   getItemTransaction({ iua_id, status_id, transaction }) {
@@ -60,13 +137,13 @@ export default class ItemTransactionsRepository extends BaseRepository {
             }
           ]
         },
- 
+
         {
           model: this.sequelizeDI.ItemTransactionCategoryOptions,
           required: true,
           as: "itemCategoryOption",
-
         },
+
         {
           model: this.sequelizeDI.V_User,
           attributes: ['id', 'name'],
@@ -74,6 +151,7 @@ export default class ItemTransactionsRepository extends BaseRepository {
           as: "user"
 
         },
+
         {
           model: this.sequelizeDI.Blob,
           as: "blobs",

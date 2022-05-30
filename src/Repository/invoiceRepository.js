@@ -65,7 +65,8 @@ export default class InvoiceRepository extends BaseRepository {
         ${asAdmin == true && this.context.user.is_admin == true ? ' 1=1 ' : `user_id = :user_id`}
         AND project_id= :project_id
         )SELECT* FROM (
-        SELECT Invoices.*  FROM Invoices JOIN getUserInvoice ON Invoices.invoice_user_src_id = getUserInvoice.id
+        SELECT Invoices.*  FROM Invoices 
+        JOIN getUserInvoice ON Invoices.invoice_user_src_id = getUserInvoice.id
         WHERE 1=1
         ${iua_id ? ` AND iua_id=:iua_id` : ''}
         ${status ? ` AND status_id=:status` : ''}
@@ -127,6 +128,12 @@ export default class InvoiceRepository extends BaseRepository {
           model: this.sequelizeDI.Blob,
           required: true,
           as: "blob"
+
+        },
+        {
+          model: this.sequelizeDI.ItemUserAction,
+          required: true,
+          as: "iua"
 
         }
       ],

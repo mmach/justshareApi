@@ -17,7 +17,7 @@ module.exports = {
           is_reminder bit,
           x float,
           y float,
-          days_before int,
+          in_days int,
           [created_at] [datetimeoffset](7) NOT NULL,
           [updated_at] [datetimeoffset](7) NOT NULL
         ) ON [PRIMARY] 

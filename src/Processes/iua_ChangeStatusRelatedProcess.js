@@ -21,7 +21,7 @@ import initCreateIUAProcess from "./commonFunctions/initCreateIUAProcess.js";
 
 
 ("use strict");
-export default class IUA_NewProcess extends BaseProcess {
+export default class IUA_ChangeStatusRelatedProcess extends BaseProcess {
   /**
    * Creates an instance of CreateItemCommand.
    * @param   {{ logFileInfrastructureDI:LogFileInfrastructure ,
@@ -94,27 +94,25 @@ export default class IUA_NewProcess extends BaseProcess {
 
   async action() {
 
-    console.log(this.model)
-    let newItem={}
-    if (!this.model.parent_iua_id) {
-      let { item, esItem } = await initCreateIUAProcess.bind(this)(this.model.item)
-      if (!checkSum.bind(this)(item, esItem)) {
-        throw 'CHECKSUM is not OK'
-      }
-      newItem=item;
-    }
-
-    let { iua_id, uniq_number } = await createIUA.bind(this)(this.model.id, newItem, this.model.message)
 
 
+    const parent = await this.itemTransactionsServiceDI.setContext(this.context).getIuaParent({ iua_id: this.model.iua_id })
+
+    console.log(parent)
 
     // let user = await this.userServiceDI.setContext(this.context).getUserInfo({ user_id: item.user_id });
 
     // await createConversation.bind(this)(iua_id, uniq_number, user);
 
     return {
-      iua_id: iua_id,
-      item_id: this.model.item_id
+      invoke: [
+        {
+          iua_id: parent.id,
+          process_chain_id: parent.process_chain_id,
+          process_id: parent.process_id
+        }
+      ],
+      edge_path: false
     }
   }
 }

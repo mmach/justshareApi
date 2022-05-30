@@ -261,7 +261,6 @@ export default class ElasticSearchService extends BaseService {
         "id": category,
       }
     };
-    console.log(JSON.stringify(data))
     let result = await axios({
       method: 'post',
       url: CONFIG.ELASTIC_SEARCH[process.env.NODE_ENV ? process.env.NODE_ENV : 'development'] + `items/_doc/${item_id}?refresh`,
@@ -424,7 +423,6 @@ export default class ElasticSearchService extends BaseService {
     })
 
 
-    console.log(termsObj)
     let categoriesArray = categories.map(item => {
       return {
         id: item.id, category: {
@@ -459,7 +457,6 @@ export default class ElasticSearchService extends BaseService {
     }).forEach(i => {
       cleanItem[i] = undefined
     });
-    console.log(cleanItem)
 
     let data = {
       "location": [longitude, latitude],
@@ -511,7 +508,6 @@ export default class ElasticSearchService extends BaseService {
   async searchDoc({ latitude, user_id, longitude, text, distance, tags, select, categories, itemType, expired_at, startDate, endDate, createdInterval, catoptions, catOptionsFilter, size, item_id, page, onlyExpired, catoptionsAll }) {
 
     let fullText = text ? text : "";
-    // console.log(fullText);
     let userGuid = user_id;
     let radius = distance;
     if (distance == 'all') {
@@ -537,11 +533,9 @@ export default class ElasticSearchService extends BaseService {
 
     if (catOptionsFilter != undefined && catOptionsFilter != '') {
       try {
-        console.log(catOptionsFilter)
 
         Object.keys(catOptionsFilter).map(item => {
           if (item.endsWith("_SELECT") == true || item.endsWith("_MULTI_SELECT") == true) {
-            console.log(item)
             if (catOptionsFilter[item][0] != undefined) {
               catOptionsFilter[item].forEach(ids => {
                 selectOptionsList.push(ids.id)
@@ -572,7 +566,6 @@ export default class ElasticSearchService extends BaseService {
       try {
 
         Object.keys(catOptionsFilter).map(item => {
-          console.log(item)
           if (item.endsWith("_SINGLE") == true) {
             if (catOptionsFilter[item][0] != undefined) {
               catOptionsFilter[item].forEach(element => {
@@ -643,9 +636,7 @@ export default class ElasticSearchService extends BaseService {
           }
           if (item.endsWith("_NOT_BETWEEN") == true) {
             if (catOptionsFilter[item][0] != undefined) {
-              console.log(item)
               catOptionsFilter[item].forEach(element => {
-                console.log(element)
 
                 singleOptionsList.push(
                   {
@@ -1051,10 +1042,8 @@ export default class ElasticSearchService extends BaseService {
 
 
   async addToQueue({ item_id, operation }) {
-    console.log(item_id)
     let item = await this.itemServiceDI.setContext(this.context).getItem({ uids: [item_id] })
     item = item[0];
-    console.log(item)
     let categories = await this.categoryServiceDI.setContext(this.context).getCategoriesParents({ ids: item.category_id })
     categories = [...categories];
     item = {
@@ -1120,7 +1109,6 @@ export default class ElasticSearchService extends BaseService {
         es_operations: operation ? operation : item.es_operations,
         external_id: item.external_id
       });
-      //   console.log(newItem)
       global.queueChannel.publish(CONFIG.ITEM_ES_QUEUE, this.context.project.id,
         newItem
         , {

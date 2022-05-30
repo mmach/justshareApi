@@ -65,16 +65,45 @@ export default class ProcessRepository extends BaseRepository {
     });
   }
 
-  getItemReminder({ transaction }) {
+  getItemReminder({reminder_cron,project_id ,transaction }) {
     return this.sequelizeDI.sequelize.query(
-      `SELECT pcsp.id as process_chain_id,pcsp.process_id, Items.id as item_id , Items.project_id as project_id  FROM Items
-          JOIN ItemProcessStates ON item_process_Id = ItemProcessStates.id
-          JOIN ProcessChainStates pccs ON  pccs.process_chain_id = ItemProcessStates.process_chain_Id
-          JOIN ProcessChains pcp ON pccs.next_process_chain_id = pcp.id
-          JOIN ProcessChainStates pcs ON pcs.next_process_chain_id=pcp.id
-          JOIN ProcessChains pcsp ON pcs.process_chain_Id = pcsp.id
-          WHERE pcp.has_reminder=1
-          AND pcsp.is_reminder=1`
+      `SELECT pcsp.id as process_chain_id,pcsp.process_id, ItemUserActions.id as item_id , ItemUserActions.project_id as project_id, 'IUA' as type  FROM 
+      ItemUserActions 
+            JOIN ProcessChainStates pccs ON  pccs.process_chain_id = ItemUserActions.process_chain_Id
+            JOIN ProcessChains pcp ON pccs.next_process_chain_id = pcp.id
+            JOIN ProcessChainStates pcs ON pcs.next_process_chain_id=pcp.id
+            JOIN ProcessChains pcsp ON pcs.process_chain_Id = pcsp.id
+            WHERE pcp.has_reminder=1
+            AND pcsp.is_reminder=1
+        and ItemUserActions.iua_id is null
+        AND pcsp.reminder_cron=:reminder_cron
+        UNION ALL
+        SELECT pcsp.id as process_chain_id,pcsp.process_id, Items.id as item_id , Items.project_id as project_id ,'ITEM' FROM Items
+            JOIN ItemProcessStates ON item_process_Id = ItemProcessStates.id
+            JOIN ProcessChainStates pccs ON  pccs.process_chain_id = ItemProcessStates.process_chain_Id
+            JOIN ProcessChains pcp ON pccs.next_process_chain_id = pcp.id
+            JOIN ProcessChainStates pcs ON pcs.next_process_chain_id=pcp.id
+            JOIN ProcessChains pcsp ON pcs.process_chain_Id = pcsp.id
+            WHERE pcp.has_reminder=1
+            AND pcsp.is_reminder=1
+        AND pcsp.reminder_cron=:reminder_cron
+  `
+      ,
+      {
+        replacements: { reminder_cron: reminder_cron, project_id: project_id },
+
+        transaction: this.getTran({ transaction }),
+        type: this.sequelizeDI.sequelize.QueryTypes.SELECT
+      });
+  }
+
+  getProcessCrons({ transaction }) {
+    return this.sequelizeDI.sequelize.query(
+      `	  SELECT project_id,reminder_cron FROM ProcessChains
+          WHERE is_reminder =1 
+            AND reminder_cron IS NOT NULL
+          GROUP BY project_id,reminder_cron
+      `
       ,
       {
         transaction: this.getTran({ transaction }),

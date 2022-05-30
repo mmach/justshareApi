@@ -51,12 +51,10 @@ export default class InvoiceService extends BaseService {
       invoice_user_src_id: src.id,
       invoice_user_dest_id: dest.id,
     }
-    console.log('co_tu_sie_dzieje')
 
     await this.unitOfWorkDI.invoiceRepository.insert({
       model: obj, withProject: true
     })
-    console.log('to jest kruwa tu')
     let bi = model.items.map(i => {
       return {
         ...i,
@@ -65,10 +63,8 @@ export default class InvoiceService extends BaseService {
         invoice_id: invocie_id
       }
     })
-    console.log(bi)
     await this.unitOfWorkDI.invoiceItemRepository.bulkInsert({ model: bi, withProject: true })
 
-    console.log('wtef')
     return invocie_id
   }
 
@@ -85,13 +81,9 @@ export default class InvoiceService extends BaseService {
   async genInvoicePDF({ invoice_id }) {
 
     let invoice = await this.toJsonParse(this.unitOfWorkDI.invoiceRepository.getByInvoiceById({ id: invoice_id, withProject: true }))
-    console.log(invoice)
-    //console.log(this.context.project)
     let blob = await this.blobServiceDI.setContext(this.context).getById({ id: this.context.project.blob_logo_ver_id, withProjct: true })
     let img = await Axios.get(`https://api.mapps.io/blob/` + blob.blob_id)
-    //console.log(img.data)
-    //console.log(img)
-    //console.log(img)
+  
     let model = {
       ...invoice,
       project: {
@@ -135,7 +127,6 @@ export default class InvoiceService extends BaseService {
 
 
     let invoice = await this.toJsonParse(this.unitOfWorkDI.invoiceRepository.getUserInvoices({ iua_id, status, page, size, month, year, asAdmin }))
-    console.log(invoice)
     //console.log(this.context.project)
     return invoice
 

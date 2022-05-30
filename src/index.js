@@ -110,6 +110,7 @@ app.use((ctx, next) => {
 const cqrsPreprocess = () => {
   const commandExec = async ctx => {
     const body = ctx.request.body;
+    console.log()
     const action = ctx.state.container.resolve(body.action);
     action.container = ctx.state.container;
 

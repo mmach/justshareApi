@@ -31,7 +31,6 @@ export default class ItemUserActionService extends BaseService {
 
   async getItemUserActionHistory({ iua_id }) {
     let hist = await this.unitOfWorkDI.itemUserActionRepository.getItemUserActionHistory({ iua_id })
-    console.log(hist)
     return await this.unitOfWorkDI.itemUserActionRepository.getItemUserActions({ iua_id: [iua_id,...hist.map(i => { return i.iua_id })] })
 
   }

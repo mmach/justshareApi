@@ -4,7 +4,7 @@ import { uuid } from "../../../node_modules/uuidv4/build/lib/uuidv4.js";
 import updateWithoutStatusIUA from "./updateWithoutStatusIUA.js";
 
 
-let updateIUA = async function (user_id, user_src, user_dest) {
+let updateIUA = async function (user_id, user_src, user_dest,destination_date) {
     // if (!this.process_chain.with_iua_status_change) {
     //     await updateWithoutStatusIUA.bind(this)(this.IUA.id)
     //     return
@@ -24,7 +24,7 @@ let updateIUA = async function (user_id, user_src, user_dest) {
                 model: {
                     ...this.IUA,
                     id: id,
-                    iua_id: this.IUA.id,
+                    iua_id: this.IUA.id
                 }, withProject: true,
             })
 

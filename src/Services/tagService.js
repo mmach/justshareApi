@@ -19,7 +19,6 @@ export default class TagService extends BaseService {
       return await this.unitOfWorkDI.tagRepository.insertUniq({ tag: item.label, id: item.id })
     })
     let result = await Promise.all(inserted);
-    console.log(result);
     return result;
   }
 

@@ -17,8 +17,8 @@ export default class UpsertStatusGlobalCommand extends BaseQuery {
      * @param  {{ logFileInfrastructureDI:LogFileInfrastructure,  dictionaryDI,userServiceDI:UserService,authInfrastructureDI:AuthInfrastucture }}
      * @memberof UserLogInInternalQuery
      */
-    constructor({ logFileInfrastructureDI, userServiceDI, authInfrastructureDI, statusProjectServiceDI }) {
-        super({ logFileInfrastructureDI ,authInfrastructureDI});
+    constructor({ logFileInfrastructureDI, userServiceDI, statusProjectServiceDI }) {
+        super({ logFileInfrastructureDI});
         this.statusProjectServiceDI = statusProjectServiceDI;
     };
     init(dto) {

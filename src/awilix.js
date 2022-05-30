@@ -300,7 +300,13 @@ import UserService from "./Services/userService.js";
 import UserTypesRolesService from "./Services/userTypesRolesService.js";
 import UserTypesService from "./Services/userTypesService.js";
 import UnitOfWork from "./unitOfWork.js";
-
+import IUA_GenerateInvocieProcess from './Processes/iua_GenerateInvocieProcess.js'
+import IUA_ChangeStatusRelatedProcess from "./Processes/iua_ChangeStatusRelatedProcess.js";
+import IUA_CloseAllChildrenIUAProcess from "./Processes/iua_CloseAllChildrenIUAProcess.js";
+import IUA_Cron_ReminderDaysIUACounterProcess from "./Processes/iua_cron_reminderDaysCounter.js";
+import GetProcessCronsQuery from "./Query/Process/getProcessCronsQuery.js";
+import IUA_SetDestinationDateProcess from './Processes/iua_SetDestinationDateProcess'
+import IUA_Cron_reminderDaysToDestDateCounterProcess from './Processes/iua_cron_reminderDaysToDestDateCounterProcess'
 /**
  * 
  */
@@ -729,6 +735,8 @@ exporter[CommandList.Process.DELETE_CHAIN_ACTION] = asClass(DeleteProcessElement
 
 
 exporter[QueryList.Process.GET_PROCESS] = asClass(GetProcessQuery);
+exporter['getProcessCronsQuery'] = asClass(GetProcessCronsQuery);
+
 
 
 ///////////////////////////////////////////////////////////
@@ -747,6 +755,7 @@ exporter[ProcessList.Item.IUA_UNBLOCK_CHAT] = asClass(IUA_UnblockChatProcess);
 exporter[ProcessList.Item.IUA_SET_TO_ITEM_COMMENT] = asClass(IUA_SetToItemCommentProcess);
 
 exporter[ProcessList.Item.ITEM_CREATE_ITEM] = asClass(Item_CreateItemProcess);
+
 exporter['item_ESSyncProcess'] = asClass(Item_ESSyncProcess);
 exporter['item_GoToStepProcess'] = asClass(Item_GoToStepProcess);
 exporter['item_VerificationProcess'] = asClass(Item_VerificationProcess)
@@ -756,6 +765,16 @@ exporter['item_SetExpiredProcess'] = asClass(Item_SetExpiredProcess)
 exporter['iua_CreateChatProcess'] = asClass(IUA_CreateChatProcess)
 exporter['iua_GoToStepProcess'] = asClass(IUA_GoToStepProcess)
 exporter['iua_WaitingForPayProcess'] = asClass(IUA_WaitingForPayProcess)
+exporter['iua_GenerateInvocieProcess'] = asClass(IUA_GenerateInvocieProcess)
+exporter['iua_ChangeStatusRelatedProcess'] = asClass(IUA_ChangeStatusRelatedProcess)
+exporter['iua_CloseAllChildrenIUAProcess'] = asClass(IUA_CloseAllChildrenIUAProcess)
+exporter['iua_Cron_ReminderDaysIUACounterProcess'] = asClass(IUA_Cron_ReminderDaysIUACounterProcess)
+exporter['iua_cron_reminderDaysCounter'] = asClass(IUA_Cron_ReminderDaysIUACounterProcess)
+exporter['iua_SetDestinationDateProcess'] = asClass(IUA_SetDestinationDateProcess)
+exporter['iua_cron_reminderDaysToDestDateCounterProcess'] = asClass(IUA_Cron_reminderDaysToDestDateCounterProcess)
+
+
+
 
 
 

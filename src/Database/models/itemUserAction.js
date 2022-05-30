@@ -37,8 +37,11 @@ export default class ItemUserAction extends Model {
         uniq_number: DataTypes.STRING,
         created_date: DataTypes.DATE,
         process_id: DataTypes.UUID,
-        process_chain_id: DataTypes.UUID
-
+        process_chain_id: DataTypes.UUID,
+        parent_process_id:DataTypes.UUID,
+        parent_process_chain_id:DataTypes.UUID,
+        parent_iua_id:DataTypes.UUID,
+        destination_date: DataTypes.DATE
       },
       { sequelize ,
         tableName: 'ItemUserActions'

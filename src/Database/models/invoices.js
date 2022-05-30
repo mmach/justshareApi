@@ -128,5 +128,10 @@ export default class Invoice extends Model {
       targetKey: "id",
       foreignKey: "blob_id"
     });
+    Invoice.belongsTo(models.ItemUserAction, {
+      as: "iua",
+      targetKey: "id",
+      foreignKey: "iua_id"
+    });
   }
 }

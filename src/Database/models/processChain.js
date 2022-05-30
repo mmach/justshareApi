@@ -31,7 +31,7 @@ export default class ProcessChain extends Model {
         project_id: DataTypes.UUID,
         process_id: DataTypes.UUID,
         is_reminder: DataTypes.BOOLEAN,
-        days_before: DataTypes.INTEGER,
+        in_days: DataTypes.INTEGER,
         x: DataTypes.FLOAT,
         y: DataTypes.FLOAT,
         autorun: DataTypes.BOOLEAN,
@@ -44,6 +44,7 @@ export default class ProcessChain extends Model {
         reminder_cron: DataTypes.STRING,
         invoke_only:DataTypes.BOOLEAN,
         is_condition: DataTypes.BOOLEAN,
+        is_autoclose_state:DataTypes.BOOLEAN
         
       },
       {

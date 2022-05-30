@@ -21,6 +21,8 @@ export default class ProcessService extends BaseService {
     super({ unitOfWorkDI, repository: 'processRepository' });
   }
 
+
+
   async upsertChain({ model }) {
     await this.unitOfWorkDI.processChainRepository.upsert({ model, withProject: true })
     let actions = model.process_chain_actions.map(i => this.upsertChainAction({ model: i, withProject: true }))
@@ -31,7 +33,6 @@ export default class ProcessService extends BaseService {
     return await this.unitOfWorkDI.processChainStateRepository.upsert({ model, withProject: true })
   }
   async upsertChainAction({ model }) {
-    console.log(model)
     return await this.unitOfWorkDI.processChainActionInjectionRepository.upsert({ model, withProject: true })
   }
   async upsertChainActionPrivilege({ model }) {
@@ -55,14 +56,14 @@ export default class ProcessService extends BaseService {
 
   async getProcess({ id }) {
     return await this.toJsonParse(this.unitOfWorkDI.processRepository.getProcess({ id, withProject: true }));
-
   }
 
+  async getProcessCrons({ id }) {
+    return await this.unitOfWorkDI.processRepository.getProcessCrons({  });
+  }
 
-
-  async getItemReminder({ id }) {
-    return await this.unitOfWorkDI.processRepository.getItemReminder({});
-
+  async getItemReminder({  reminder_cron, project_id }) {
+    return await this.unitOfWorkDI.processRepository.getItemReminder({reminder_cron, project_id});
   }
 
 }

@@ -44,7 +44,8 @@ const processReminder = async (msg) => {
           chain_id: obj.process_chain_id,
           process_model: {
             item_id: obj.item_id,
-            id: obj.item_id
+            id: obj.item_id,
+            iua_id:obj.iua_id
 
           }
         }

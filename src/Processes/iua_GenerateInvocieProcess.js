@@ -7,34 +7,29 @@ import BlobService from "../Services/blobService.js";
 import CategoryService from "../Services/categoryService.js";
 import ElasticSearchService from "../Services/elasticSearchService.js";
 import { uuid } from "../../node_modules/uuidv4/build/lib/uuidv4.js";
+import { LinkItem, GetValueByDim, DimensionsList, StatusesList } from 'justshare-shared'
 import fs from 'fs';
 import ItemService from "../Services/itemService.js";
 import BaseProcess from "../Architecture/baseProcess.js";
-import { ItemDTO, BuildItem, ShowOptionValue, StatusesList } from "justshare-shared";
-import CONFIG from "../config.js";
-import checkSum from "./commonFunctions/checkSum.js";
-import createConversation from "./commonFunctions/createConversation.js";
-import createIUA from "./commonFunctions/createIUA.js";
-import initCreateIUAProcess from "./commonFunctions/initCreateIUAProcess.js";
-
-
-
+import initIUAProcess from "./commonFunctions/initIUAProcess.js";
+import genInvoice from "./commonFunctions/genInvoices.js";
+import updateIUA from "./commonFunctions/updateIUA.js";
 
 ("use strict");
-export default class IUA_NewProcess extends BaseProcess {
+export default class IUA_GenerateInvocieProcess extends BaseProcess {
   /**
-   * Creates an instance of CreateItemCommand.
-   * @param   {{ logFileInfrastructureDI:LogFileInfrastructure ,
-    * authInfrastructureDI:AuthInfrastucture,
-    * dbTransactionInfrastuctureDI:DbTransactionInfrastucture,
-    * itemServiceDI:ItemService,
-    * blobServiceDI:BlobService,
-    * categoryServiceDI:CategoryService,
-    * elasticSearchServiceDI:ElasticSearchService,
-    * tagServiceDI:TagService,
-    * closingInfrastructureDI:ClosingInfrastructure}}
-    * @memberof CreateItemCommand
-    */
+    * Creates an instance of CreateItemCommand.
+    * @param   {{ logFileInfrastructureDI:LogFileInfrastructure ,
+      * authInfrastructureDI:AuthInfrastucture,
+      * dbTransactionInfrastuctureDI:DbTransactionInfrastucture,
+      * itemServiceDI:ItemService,
+      * blobServiceDI:BlobService,
+      * categoryServiceDI:CategoryService,
+      * elasticSearchServiceDI:ElasticSearchService,
+      * tagServiceDI:TagService,
+      * closingInfrastructureDI:ClosingInfrastructure}}
+      * @memberof CreateItemCommand
+      */
   constructor({
     logFileInfrastructureDI,
     authInfrastructureDI,
@@ -53,7 +48,6 @@ export default class IUA_NewProcess extends BaseProcess {
     dimensionsProjectServiceDI,
     itemServiceDI,
     invoiceServiceDI,
-    itemTransactionCategoryOptionsServiceDI,
     blobServiceDI
 
   }) {
@@ -78,7 +72,6 @@ export default class IUA_NewProcess extends BaseProcess {
     this.itemServiceDI = itemServiceDI;
     this.invoiceServiceDI = invoiceServiceDI;
     this.blobServiceDI = blobServiceDI;
-    this.itemTransactionCategoryOptionsServiceDI = itemTransactionCategoryOptionsServiceDI;
 
   }
 
@@ -93,31 +86,30 @@ export default class IUA_NewProcess extends BaseProcess {
   }
 
   async action() {
+    try {
 
-    console.log(this.model)
-    let newItem={}
-    if (!this.model.parent_iua_id) {
-      let { item, esItem } = await initCreateIUAProcess.bind(this)(this.model.item)
-      if (!checkSum.bind(this)(item, esItem)) {
-        throw 'CHECKSUM is not OK'
+      await initIUAProcess.bind(this)();
+      await genInvoice.bind(this)(this.IUA.user_id, this.context.project.user_id)
+
+      return {
+        iua_id: this.model.iua_id,
+        item_id: this.IUA.item_id
       }
-      newItem=item;
+
+    } catch (err) {
+      console.log(err)
+      throw err;
     }
 
-    let { iua_id, uniq_number } = await createIUA.bind(this)(this.model.id, newItem, this.model.message)
-
-
-
-    // let user = await this.userServiceDI.setContext(this.context).getUserInfo({ user_id: item.user_id });
-
-    // await createConversation.bind(this)(iua_id, uniq_number, user);
-
-    return {
-      iua_id: iua_id,
-      item_id: this.model.item_id
-    }
   }
 }
+    //  let prom = diff.map(i => {
+
+    //  })
+    //  throw 'dupa'
+
+
+
 
 
 

@@ -35,6 +35,7 @@ export default class UpsertProcessElementActionCommand extends BaseCommand {
         this.model = { ...dto };
     }
     async action() {
+        console.log(this.model)
         await this.processServiceDI.setContext(this.context).upsertChainAction({ model: this.model, withProject: true });
     }
 };

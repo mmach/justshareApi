@@ -53,6 +53,10 @@ export default class ItemTransaction extends Model {
           type: DataTypes.UUID,
           allowNull: false
         },
+        parent_iua_id: {
+          type: DataTypes.UUID,
+          allowNull: false
+        },
         item_id: {
           type: DataTypes.UUID,
           allowNull: false
@@ -90,6 +94,12 @@ export default class ItemTransaction extends Model {
       targetKey: "id",
       foreignKey: "project_id"
     });
+    ItemTransaction.belongsTo(models.ItemUserAction, {
+      as: "iua_main",
+      targetKey: "id",
+      foreignKey: "parent_iua_id"
+    });
+    
     ItemTransaction.hasMany(models.Blob, {
       as: "blobs",
       targetKey: "item_id",
@@ -105,12 +115,12 @@ export default class ItemTransaction extends Model {
       targetKey: "id",
       foreignKey: "itemTransaction_id"
     });
+    
     ItemTransaction.belongsToMany(models.Tag, {
       through: { model: models.ItemTag },
       as: 'tags',
       targetKey: 'id',
       foreignKey: "item_id"
     });
-
   }
 }

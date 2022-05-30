@@ -25,7 +25,10 @@ export default class GetItemTransactionQuery extends BaseQuery {
     async action() {
 
 
-        let resultList = await this.itemTransactionsServiceDI.setContext(this.context).getItemTransaction({ iua_id: [this.model.iua_id], status_id: undefined, conversation_id: [this.model.conversation_id] });
+        let resultList = await this.itemTransactionsServiceDI.setContext(this.context).getItemTransaction({ iua_id: 
+            this.model.iua_ids?this.model.iua_ids:[this.model.iua_id],
+             status_id: undefined,
+              conversation_id: [this.model.conversation_id] });
 
         return resultList
 

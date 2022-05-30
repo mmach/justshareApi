@@ -56,8 +56,6 @@ export default class ItemUserActionRepository extends BaseRepository {
             },
           ]
         }
-
-
       ],
       transaction: this.getTran({ transaction })
 

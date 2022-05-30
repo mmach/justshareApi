@@ -32,24 +32,25 @@ export default class RunCronQueueCommand extends BaseCommand {
 
     };
     init(dto) {
-
+        this.model = { ...dto }
 
     }
 
     async action() {
-        let processList = await this.processServiceDI.setContext(this.context).getItemReminder({});
+        let processList = await this.processServiceDI.setContext(this.context).getItemReminder({ reminder_cron: this.model.reminder_cron, project_id: this.model.project_id });
         await Promise.mapSeries(processList, async (item) => {
             console.log(item)
             try {
                 global.queueChannel.publish(CONFIG.REMINDER_QUEUE, item.project_id,
                     {
-                        id:item.item_id,
+                        id: item.item_id,
                         item_id: item.item_id,
+                        iua_id: item.item_id,
                         project_id: item.project_id,
                         process_id: item.process_id,
                         process_chain_id: item.process_chain_id
                     }, {
-                    contentType: 'application/json', persistent: true, expiration: 20 * 1000, messageId:  item.item_id + item.process_chain_id, headers: {
+                    contentType: 'application/json', persistent: true, expiration: 1200 * 1000, messageId: item.item_id + item.process_chain_id, headers: {
 
                     }
                 })

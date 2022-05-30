@@ -5,27 +5,24 @@ import { BlobBase64DTO, ItemDTO } from 'justshare-shared';
 import ItemTransactionService from '../../Services/itemTransactionsService.js';
 
 
-export default class GetItemUserActionsQuery extends BaseQuery {
+export default class GetProcessCronsQuery extends BaseQuery {
     /**
      * Creates an instance of GetDictionariesQuery.
      * @param  {{ logFileInfrastructureDI:LogFileInfrastructure, itemTransactionsServiceDI:ItemTransactionService }}
      * @memberof GetItemQuery
      */
-    constructor({ logFileInfrastructureDI, itemUserActionServiceDI, authInfrastructureDI, projectInfrastructureDI }) {
-        super({ logFileInfrastructureDI, authInfrastructureDI, projectInfrastructureDI });
-        this.itemUserActionServiceDI = itemUserActionServiceDI;
+    constructor({ logFileInfrastructureDI, processServiceDI }) {
+        super({ logFileInfrastructureDI });
+        this.processServiceDI = processServiceDI;
 
     };
 
     init(dto) {
-        this.model = Object.assign(new ItemDTO(), dto);
+        this.model = { ...dto };
     }
 
     async action() {
-
-        let resultList = await this.itemUserActionServiceDI.setContext(this.context).getItemUserActions({ iua_id: this.model.iua_ids ? this.model.iua_ids : [this.model.iua_id] });
-
+        let resultList = await this.processServiceDI.setContext(this.context).getProcessCrons({})
         return resultList
-
     }
 };

@@ -4,6 +4,7 @@ import ServerException from "../Architecture/Exceptions/serverException.js";
 import CONFIG from "../config.js";
 import uuidv4 from "uuid/v4";
 import { uuid } from "../../node_modules/uuidv4/build/lib/uuidv4.js";
+import * as useSockets from "../WebsocketMessages/index.js";
 
 
 
@@ -117,41 +118,28 @@ export default class ConversationService extends BaseService {
     })
     let proj = await this.projectServiceDI.getProjectsSockets({})
     proj = proj.filter(item => { return item.id == this.context.project.id })[0]
-    console.log(proj)
 
     let hash = Buffer.from(proj.socket).toString('base64').replace(/=/g, '');
-    console.log(hash)
     let obj = {
       id: msg_id,
       project_id: this.context.project.id,
       user_id: this.context.user.id,
+      iua_id: iua_id,
       conversation_id: conversation.id,
-      //  conv_id: conv.id,
       conversation_title: conversation.title,
       conversation_status: conversation.status,
       number_of_unreaded: 1,
       message: message,
-      //is_newest: true,
       message_triggered_id: conversation.messages[0].id,
       created_at: new Date(),
       project_hash: '/socket_' + hash,
-      //participant_user_id: user.user_id,
-      //participant_name: user.name,
-      //participant_blob_id: user.blob_profile ? user.blob_profile.blob_min_id : '',
       conv_members_count: conversation.users.length,
       users: conversation.users.map(i => { return { ...i.user_details } }),
     }
-    global.socket.of("/socket_" + hash).to('USER-' + user_owner.id).emit('invite',
-      {
-        conversation_id: obj.conversation_id,
-        conversation: obj
-      })
-    global.socket.of("/socket_" + hash).to('USER-' + user_dest[0].id).emit('invite',
-      {
-        conversation_id: obj.conversation_id,
-        conversation: obj
+    useSockets.chatUserInvite({ project_socket: obj.project_hash, user_id: user_owner.id, conversation_id: obj.conversation_id, conversation: obj })
+    useSockets.chatUserInvite({ project_socket: obj.project_hash, user_id: user_dest[0].id, conversation_id: obj.conversation_id, conversation: obj })
 
-      })
+
   }
 
   async sendMessageToUser({ iua_id, msg_id, msg, syncSocket }) {
@@ -178,6 +166,7 @@ export default class ConversationService extends BaseService {
       project_id: this.context.project.id,
       user_id: this.context.user.id,
       conversation_id: conv.id,
+      iua_id: conv.iua_id,
       //  conv_id: conv.id,
       conversation_title: conv.title,
       conversation_status: conv.status,
@@ -201,10 +190,7 @@ export default class ConversationService extends BaseService {
       }
     })
     conv.users.forEach(u => {
-      global.socket.of("/socket_" + hash).to('USER-' + u.id).to('invite', {
-        conversation_id: obj.conversation_id,
-        conversation: obj
-      });
+      useSockets.chatUserInvite({ project_socket: obj.project_hash, user_id: u.id, conversation_id: obj.conversation_id, conversation: obj })
     })
   }
   async iuaSetProcessChainId({ iua_id, process_chain_id }) {
@@ -218,18 +204,11 @@ export default class ConversationService extends BaseService {
       iua_id: iua_id,
       process_chain_id: process_chain_id,
       project_hash: '/socket_' + hash,
-      //participant_user_id: user.user_id,
-      //participant_name: user.name,
-      //participant_blob_id: user.blob_profile ? user.blob_profile.blob_min_id : '',
-
     }
     console.log('wtf whyyy')
     console.log('NEW IUA ')
     console.log(obj)
-   // global.socket.of(obj.project_hash).emit('iua_process_chain', obj);
-    global.socket.of(obj.project_hash).to('IUA-' + obj.iua_id).emit('iua_process_chain', obj);
-
-
+    useSockets.syncIuaProcessChain({ project_socket: obj.project_hash, iua_id: obj.iua_id, iua_process_obj: obj })
 
   }
 

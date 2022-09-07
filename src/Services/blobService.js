@@ -9,6 +9,9 @@ import Jimp from "jimp";
 let upload_path = process.env.UPLOAD_PATH || CONFIG.UPLOAD_PATH
 let saveBlobToFile = async ({ blob }) => {
   let newUid = uuidv4();
+  if (blob.blob.indexOf("base64,") > 0) {
+    blob.blob = blob.blob.split("base64,")[1];
+  }
   switch (blob.type) {
     case "image/jpeg": {
       let fd = await fs.open(`${upload_path}/${newUid}.jpg`, "w+");
@@ -122,19 +125,16 @@ export default class BlobService extends BaseService {
     let newBlob = {};
     try {
       newBlob = await saveBlobToFile.bind(this)({ blob });
-      console.log(newBlob)
       if (newBlob.type != 'svg' && newBlob.type != 'webp' && newBlob.type != 'pdf') {
         let imgNormal = await Jimp.read(newBlob.path);
-        let height = imgNormal.bitmap.height;
-        let width = 
-        
+
         await imgNormal
-          .contain(800,800*imgNormal.bitmap.height/imgNormal.bitmap.width)//300, 300) // resize
+          .contain(800, 800 * imgNormal.bitmap.height / imgNormal.bitmap.width)//300, 300) // resize
           .quality(100) // set JPEG quality
           .writeAsync(`${upload_path}/${newBlob.id}-thumb.` + newBlob.type); // save
 
         await imgNormal
-        .contain(300,300*imgNormal.bitmap.height/imgNormal.bitmap.width) // resize
+          .contain(300, 300 * imgNormal.bitmap.height / imgNormal.bitmap.width) // resize
           .quality(100) // set JPEG quality
           .writeAsync(`${upload_path}/${newBlob.id}-min.` + newBlob.type); // save
 
@@ -269,14 +269,6 @@ export default class BlobService extends BaseService {
       userId: this.userId,
       itemId: itemId
     });
-
-    /*  if (getUsersBlob.length > 0) {
-        let delItems = getUsersBlob.map(async item => {
-          await this.delete({ model: item });
-        });
-        await Promise.all(delItems);
-      }*/
-
     let newImages = await this.uploadImage({ blob });
     let result = {
       blob_id: newImages.blob_id,

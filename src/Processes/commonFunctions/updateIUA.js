@@ -47,7 +47,7 @@ let updateIUA = async function (user_id, user_src, user_dest,destination_date) {
     let status = await this.statusProjectServiceDI.setContext(this.context).getByStatusId({ id: this.process_chain.status_id })
     try {
         const val = JSON.parse(this.process_chain.params)
-        /* if (val.api.mail) {
+        /* if (val.api.mail) {is_main_iua
              if (val.api.mail.dest) {
                  await this.mailSenderDI.setContext(this.context).mailSend({
                      type: val.api.mail.dest.mail_template,

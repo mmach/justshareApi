@@ -25,7 +25,9 @@ export default class ProcessRepository extends BaseRepository {
 
     };
     if (id) {
-      where.id = id;
+      where.id = Array.isArray(id) ? {
+        [SequelizeDB.Sequelize.Op.in]: id
+      } : id;;
     }
 
 

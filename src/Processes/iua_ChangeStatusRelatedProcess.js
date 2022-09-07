@@ -16,6 +16,7 @@ import checkSum from "./commonFunctions/checkSum.js";
 import createConversation from "./commonFunctions/createConversation.js";
 import createIUA from "./commonFunctions/createIUA.js";
 import initCreateIUAProcess from "./commonFunctions/initCreateIUAProcess.js";
+import initIUAProcess from "./commonFunctions/initIUAProcess.js";
 
 
 
@@ -54,7 +55,8 @@ export default class IUA_ChangeStatusRelatedProcess extends BaseProcess {
     itemServiceDI,
     invoiceServiceDI,
     itemTransactionCategoryOptionsServiceDI,
-    blobServiceDI
+    blobServiceDI,
+    processServiceDI
 
   }) {
     // @ts-ignore
@@ -79,6 +81,7 @@ export default class IUA_ChangeStatusRelatedProcess extends BaseProcess {
     this.invoiceServiceDI = invoiceServiceDI;
     this.blobServiceDI = blobServiceDI;
     this.itemTransactionCategoryOptionsServiceDI = itemTransactionCategoryOptionsServiceDI;
+    this.processServiceDI = processServiceDI
 
   }
 
@@ -93,26 +96,56 @@ export default class IUA_ChangeStatusRelatedProcess extends BaseProcess {
   }
 
   async action() {
+    const { IUA, itemTransaction } = await initIUAProcess.bind(this)()
 
+    const item = itemTransaction.iua_context_list.find(i => i.is_main_iua == true)
+    let processes = await this.processServiceDI.setContext(this.context).getProcess({ id: itemTransaction.iua_context_list.map(i => i.process_id) });
+    const main_chain_action_process = processes.find(i => i.id == item.process_id).process_chain.find(i => i.id == item.process_chain_id).process_chain_actions.filter(i => i.action_type == 'PROCESS')
+    // processes.filter()
+    processes.filter(i => i.id == main_chain_action_process.map(i => i.external_process_id))
+   // itemTransaction.iua_context_list.filter(i => main_chain_action_process.map(i => i.external_process_id))
 
-
+    //itemTransaction.iua_context_list.filter(i=>main_chain_action_process.filter(action=>action.external_process_id==i.process_id).length>0).map(i=>{
+    let has_closed =     itemTransaction.iua_context_list.filter(i=>main_chain_action_process.filter(action=>action.external_process_id==i.process_id).length>0).map(i => {
+      let result = { process_chain_id: i.process_chain_id, is_last: false }
+      processes.find(element => element.id == i.process_id).process_chain.forEach(process_children => {
+        if (process_children.id == i.process_chain_id) {
+          result.is_last = process_children.is_last == true
+        }
+      })
+      return result
+    })
+    console.log(has_closed);
+    console.log(this)
+    //.filter(i =>i.process_chain_id!=)
     const parent = await this.itemTransactionsServiceDI.setContext(this.context).getIuaParent({ iua_id: this.model.iua_id })
 
+   // throw 'dupa'
     console.log(parent)
 
     // let user = await this.userServiceDI.setContext(this.context).getUserInfo({ user_id: item.user_id });
 
     // await createConversation.bind(this)(iua_id, uniq_number, user);
+    if (has_closed.filter(i => i.is_last == false).length == 0) {
+      return {
+        invoke: [
+          {
+            iua_id: parent.id,
+            process_chain_id: parent.process_chain_id,
+            process_id: parent.process_id
+          }
+        ],
+        edge_path: false
+      }
+    }
+    else {
+      return {
+        invoke: [
+          
+        ],
+        edge_path: false
+      }
 
-    return {
-      invoke: [
-        {
-          iua_id: parent.id,
-          process_chain_id: parent.process_chain_id,
-          process_id: parent.process_id
-        }
-      ],
-      edge_path: false
     }
   }
 }

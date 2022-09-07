@@ -25,7 +25,9 @@ export default class ItemUserActionRepository extends BaseRepository {
 
   getItemUserActions({ item_id, iua_id, status, transaction }) {
     let where = { project_id: this.context.project.id }
-    where.id = iua_id
+    where.id = Array.isArray(iua_id) ? {
+      [SequelizeDB.Sequelize.Op.in]: iua_id
+    } : iua_id;
     where.project_id = this.context.project.id;
     return this.entityDAO.findAll({
       where: where,
@@ -45,7 +47,7 @@ export default class ItemUserActionRepository extends BaseRepository {
 
         {
           model: this.sequelizeDI.V_User,
-          required: true,
+          required: false,
           as: "users",
           include: [
             {
@@ -137,8 +139,8 @@ export default class ItemUserActionRepository extends BaseRepository {
       });
   }
 
-  
- 
+
+
 
   getItem({ uids, toSync, transaction }) {
     //  console.log('this.userId')

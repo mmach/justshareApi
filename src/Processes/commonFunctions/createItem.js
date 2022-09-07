@@ -13,15 +13,9 @@ function createSearchClob(newItem, itemId) {
     zh_cn: ""
   }
   Object.keys(clobs).forEach(item => {
-    //clobs[item] += this.model.name + ";";
-    // clobs[item] += this.model.description + ";";;
     newItem.catOptions.filter(cat => {
-      // console.log(this.model.catOptions);
-      // console.log(cat);
       return ['SINGLE', 'SELECT', 'MULTISELECT', 'GEO'].includes(cat.type)
     }).forEach(cat => {
-      //console.log(cat)
-      //console.log(cat.catOption);
       if ((cat.catOption ? cat.catOption.is_not_in_clob : false) != true) {
         clobs[item] += (cat.select ? cat.select["value_" + item] : cat.val) + " ; "
 
@@ -31,38 +25,37 @@ function createSearchClob(newItem, itemId) {
       clobs[item] += tag.label + ' ; ';
     })
   })
-  //console.log(clobs)
   Object.keys(clobs).forEach(item => {
     newItem["clobSearch_" + item] = clobs[item];
   })
-  //console.log(clobs)
-  //this.model.clobSearch_us = clob_us;
-  //this.model.clobSearch_pl = clob_pl;
+
   return { ...newItem };
-  //ADD CATEGORIES NAME TOO
-  //ADD HASH TAGS
+
 }
 function getCategoriesValue(newItem) {
   let catOptions = newItem.catOptions.filter(cat => {
     return cat.type == 'GEO';
   });
-  if (catOptions) {
-    newItem.latitude = catOptions.length > 0 ? catOptions.filter(item => { return item.catOption.order == 2 })[0].val : null
-    newItem.longitude = catOptions.length > 0 ? catOptions.filter(item => { return item.catOption.order == 1 })[0].val : null
+  if (catOptions.length > 0) {
+    newItem.latitude = catOptions.find(item => { return item.catOption.order == 2 }).value
+    newItem.longitude = catOptions.find(item => { return item.catOption.order == 1 }).value
   }
-  newItem.blobs = newItem.catOptions.filter(cat => {
-    return cat.type == 'IMAGE';
-  }).map(item => { return item.content });
 
   return { ...newItem };
 }
 
 async function insertBlobs(newItem, itemId) {
-  await Promise.mapSeries(newItem.blobs, item => {
-    return this.blobServiceDI.setContext(this.context).uploadImageAndSave({
-      blob: item,
+  let blobs = newItem.catOptions.filter(cat => {
+    return cat.type == 'IMAGE' && cat.content
+  })
+
+  await Promise.mapSeries(blobs, async item => {
+    let resulsts = await this.blobServiceDI.setContext(this.context).uploadImageAndSave({
+      blob: item.content,
       itemId: itemId
     });
+    item.value = resulsts.dataValues.id;
+    return resulsts
   });
 }
 
@@ -81,12 +74,9 @@ async function tagsInsert(newItem, itemId) {
   let idNewTagsArray = await this.tagServiceDI.setContext(this.context).insertUniq({ newTags: newTags });
   let tagsId = [];
   idNewTagsArray.forEach(item => {
-
-
     tagsId.push(item);
   })
   existTagsArray.forEach(item => {
-
     tagsId.push(item.id);
   })
 
@@ -113,15 +103,17 @@ export async function createItem(newItemParam) {
   newItem.es_operations = 'I';
   let createdItem = await this.itemServiceDI.setContext(this.context).upsert({ model: newItem, withProject: true });
   let newCreatedItem = createdItem[0].dataValues;
-  let array = this.model.catOptions.map(coItem => {
+ 
+  await Promise.all([
+    tagsInsert.bind(this)(newItem, newCreatedItem.id),
+    insertBlobs.bind(this)(newItem, newCreatedItem.id)])
+  let array = newItem.catOptions.map(coItem => {
     return this.itemServiceDI.setContext(this.context).upsertCategoryOption({ model: coItem, item_id: newCreatedItem.id })
   })
-
-  await Promise.all([...array,
-  tagsInsert.bind(this)(newItem, newCreatedItem.id),
-  insertBlobs.bind(this)(newItem, newCreatedItem.id)])
+ 
+  await Promise.all(array)
   this.ITEM = newItem;
-  this.model=newItem;
+  this.model = newItem;
   return newItem;
 }
 

@@ -135,6 +135,15 @@ export default class CategoryOption extends Model {
         dim_id: DataTypes.UUID,
         order_search: DataTypes.INTEGER,
 
+        is_required: DataTypes.INTEGER,
+        is_required_message: DataTypes.STRING,
+        min_selected: DataTypes.INTEGER,
+        min_selected_dim_id_ref: DataTypes.UUID,
+        min_selected_message: DataTypes.STRING,
+        max_selected: DataTypes.INTEGER,
+        max_selected_dim_id_ref: DataTypes.UUID,
+        max_selected_message: DataTypes.STRING,
+        is_form_rendered:DataTypes.BOOLEAN
       },
       { sequelize,
         tableName: 'CategoryOptions'

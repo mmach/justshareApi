@@ -1,5 +1,6 @@
 
 import SequelizeDB from '../../Database/models/index.js';
+import * as useSockets from '../../WebsocketMessages/index.js';
 
 
 const onSendMessage = async data => {
@@ -25,13 +26,7 @@ const onSendMessage = async data => {
     })
     await Promise.all(prom);
     try {
-
-      global.socket.of(obj.project_socket).to('USER-' + obj.user_id).emit('msg-saved',
-        {
-          conversation_id: obj.conversation_id,
-          message_id: obj.id
-        })
-
+      useSockets.chatMessageSaved({ project_socket: obj.project_socket, user_id: obj.user_id, conversation_id: obj.conversation_id, message_id: obj.id })
     } catch (er) {
       console.log(er)
     }

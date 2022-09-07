@@ -73,11 +73,11 @@ export default class IUA_Cron_reminderDaysToDestDateCounterProcess extends BaseP
       if (new Date().setHours(0, 0, 0, 0) < (new Date(item.destination_date).addDays(-1 * this.process_chain.in_days).setHours(0, 0, 0, 0))) {
         console.log('return true')
 
-        return true
-      }
-      if (new Date().setHours(0, 0, 0, 0) >= (new Date(item.destination_date).addDays(-1 * this.process_chain.in_days).setHours(0, 0, 0, 0))) {
-        console.log('return false')
         return false
+      }
+      if (new Date().setHours(0, 0, 0, 0) >= (new Date(item.destination_date).setHours(0, 0, 0, 0))) {
+        console.log('return false')
+        return true
       }
       console.log('return null')
       return null

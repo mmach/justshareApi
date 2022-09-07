@@ -111,6 +111,7 @@ export default class ConversationMessagesMembersRepository extends BaseRepositor
             MAX(Conversations.status ) as conversation_status ,
             MAX([UserConversations].id ) as message_member_id, 
             MAX([UserConversations].user_id ) as user_id, 
+            MAX([Conversations].iua_id ) as iua_id, 
             0 as NumberOfUnreaded,
           MAX([UserConversations].created_at) as created_at
           FROM Conversations
@@ -136,6 +137,7 @@ export default class ConversationMessagesMembersRepository extends BaseRepositor
           results.conversation_title,
           results.conversation_status,
           results.message_member_id,
+          results.iua_id,
           unreadConvs.NumberOfUnreaded as number_of_unreaded,
           cm.message,
           cm.message_user_id as message_owner_user_id,

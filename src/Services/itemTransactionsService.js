@@ -2,6 +2,9 @@ import BaseService from "../Architecture/baseService.js";
 import { SearchItemDTO } from 'justshare-shared';
 import CONFIG from "../config.js";
 import { uuid } from "../../node_modules/uuidv4/build/lib/uuidv4.js";
+import * as useSockets from '../WebsocketMessages/index.js';
+
+
 
 
 /**
@@ -30,7 +33,7 @@ export default class ItemTransactionService extends BaseService {
    * @returns
    * @memberof CategoryService
    */
-   async getIuaParent({ iua_id }) {
+  async getIuaParent({ iua_id }) {
     let root_iua_ids = await this.unitOfWorkDI.itemTransactionRepository.getRootIuaIds({ iua_ids: [iua_id] })
 
     let allGroupedIUAIds = await this.unitOfWorkDI.itemTransactionRepository.getFromRootIuaAllIuaIds({ iua_ids: root_iua_ids.map(i => i.iua_id) })
@@ -47,7 +50,7 @@ export default class ItemTransactionService extends BaseService {
     const iuaList = await this.itemUserActionServiceDI.setContext(this.context).getItemUserActions({ iua_id: root_iua_ids.map(i => i.iua_id) })
     return iuaList;
   }
-  
+
   async getItemTransaction({ iua_id, status_id, conversation_id }) {
     if (conversation_id && conversation_id[0]) {
       let obj = await this.conversationServiceDI.setContext(this.context).getById({ id: conversation_id })
@@ -89,10 +92,7 @@ export default class ItemTransactionService extends BaseService {
       users: conv.users.map(i => { return { ...i, id: uuid() } }),
     }
 
-    conv.users.forEach(i => {
-      global.socket.of("/socket_" + hash).emit(i.user_id + '-iua_status',
-        obj)
-    })
+    useSockets.setIuaStatus({ project_socket: obj.socket_user_id, users: conv.user, iua_socket_obj: obj })
 
   }
 }

@@ -59,6 +59,7 @@
     "d3-format": "^1.4.1",
     "d3-scale": "^3.1.0",
     "find": "^0.3.0",
+    "flatted": "^3.2.7",
     "fs": "0.0.1-security",
     "fs-extra": "^7.0.0",
     "geocoder": "^0.2.3",

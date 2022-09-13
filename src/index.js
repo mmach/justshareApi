@@ -17,6 +17,8 @@ import CONFIG from './config.js';
 import { uuid } from '../node_modules/uuidv4/build/lib/uuidv4.js';
 import { amqpFunc } from './Queues/index.js'
 const { Emitter } = require("@socket.io/redis-emitter");
+import {parse, stringify, toJSON, fromJSON} from 'flatted';
+
 //const { createClient } = require("redis"); // not included, needs to be explicitly installed
 //const redisAdapter = require('socket.io-redis');
 
@@ -118,21 +120,21 @@ const cqrsPreprocess = () => {
     if (typeof (body.model) == "object") {
       model = body.model
     } else {
-      model = JSON.parse(decodeURIComponent(body.model));
+      model = parse(decodeURIComponent(body.model));
     }
     action.init(model);
     await cqrsHandler(action, ctx);
   };
   const queryExec = async ctx => {
 
-    const query = JSON.parse(ctx.request.query.action);
+    const query = parse(ctx.request.query.action);
     const action = ctx.state.container.resolve(query.action);
     action.container = ctx.state.container;
     let model = {};
     if (typeof (query.model) == "object") {
       model = query.model
     } else {
-      model = JSON.parse(decodeURIComponent(query.model));
+      model = parse(decodeURIComponent(query.model));
     }
     action.init(model);
     return await cqrsHandler(action, ctx);

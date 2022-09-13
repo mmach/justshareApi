@@ -13,7 +13,7 @@ function createSearchClob(newItem, itemId) {
     zh_cn: ""
   }
   Object.keys(clobs).forEach(item => {
-    newItem.catOptions.filter(cat => {
+    newItem.itemCategoryOption.filter(cat => {
       return ['SINGLE', 'SELECT', 'MULTISELECT', 'GEO'].includes(cat.type)
     }).forEach(cat => {
       if ((cat.catOption ? cat.catOption.is_not_in_clob : false) != true) {
@@ -33,19 +33,19 @@ function createSearchClob(newItem, itemId) {
 
 }
 function getCategoriesValue(newItem) {
-  let catOptions = newItem.catOptions.filter(cat => {
+  let catOptions = newItem.itemCategoryOption.filter(cat => {
     return cat.type == 'GEO';
   });
   if (catOptions.length > 0) {
-    newItem.latitude = catOptions.find(item => { return item.catOption.order == 2 }).value
-    newItem.longitude = catOptions.find(item => { return item.catOption.order == 1 }).value
+    newItem.latitude = catOptions.find(item => { return item.cat_opt_temp.order == 2 }).value
+    newItem.longitude = catOptions.find(item => { return item.cat_opt_temp.order == 1 }).value
   }
 
   return { ...newItem };
 }
 
 async function insertBlobs(newItem, itemId) {
-  let blobs = newItem.catOptions.filter(cat => {
+  let blobs = newItem.itemCategoryOption.filter(cat => {
     return cat.type == 'IMAGE' && cat.content
   })
 
@@ -107,7 +107,7 @@ export async function createItem(newItemParam) {
   await Promise.all([
     tagsInsert.bind(this)(newItem, newCreatedItem.id),
     insertBlobs.bind(this)(newItem, newCreatedItem.id)])
-  let array = newItem.catOptions.map(coItem => {
+  let array = newItem.itemCategoryOption.map(coItem => {
     return this.itemServiceDI.setContext(this.context).upsertCategoryOption({ model: coItem, item_id: newCreatedItem.id })
   })
  

@@ -59,6 +59,7 @@ import ProcessChainRepository from "./Repository/processChainRepository.js";
 import ProcessChainStateRepository from "./Repository/processChainStateRepository.js";
 import ProcessChainPrivilegesRepository from "./Repository/processChainPrivilegesRepository.js";
 import ProcessChainActionInjectionRepository from "./Repository/processChainActionInjectionRepository.js";
+import CmsElementsProjectRepository from "./Repository/cmsElementsProjectRepository.js";
 
 
 
@@ -136,7 +137,8 @@ export default class UnitOfWork extends BaseUnitOfWork {
         processRepositoryDI,
         processChainStateRepositoryDI,
         processChainPrivilegesRepositoryDI,
-        processChainActionInjectionRepositoryDI
+        processChainActionInjectionRepositoryDI,
+        cmsElementsProjectRepositoryDI
     }) {
         super()
 
@@ -198,9 +200,21 @@ export default class UnitOfWork extends BaseUnitOfWork {
             processRepositoryDI,
             processChainStateRepositoryDI,
             processChainPrivilegesRepositoryDI,
-            processChainActionInjectionRepositoryDI
+            processChainActionInjectionRepositoryDI,
+            cmsElementsProjectRepositoryDI
         }
     };
+
+    /**
+         * 
+         * @return {CmsElementsProjectRepository}
+         * @readonly
+         * @memberof UnitOfWork
+         */
+    get cmsElementsProjectRepository() {
+        return this.repositories.cmsElementsProjectRepositoryDI;
+    }
+
     /**
              * 
              * @return {ProcessChainActionInjectionRepository}

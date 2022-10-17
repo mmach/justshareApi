@@ -104,7 +104,10 @@ export default class CategoryOptionsLink extends Model {
           type: DataTypes.UUID,
           allowNull: true
         },
-        is_form_rendered:DataTypes.BOOLEAN
+        is_form_rendered:DataTypes.BOOLEAN,
+        search_params:DataTypes.TEXT,
+        preview_params:DataTypes.TEXT,
+        create_params:DataTypes.TEXT
       },
       { sequelize ,
         tableName: 'CategoryOptionsLinks'

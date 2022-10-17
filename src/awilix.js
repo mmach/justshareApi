@@ -307,6 +307,9 @@ import IUA_Cron_ReminderDaysIUACounterProcess from "./Processes/iua_cron_reminde
 import GetProcessCronsQuery from "./Query/Process/getProcessCronsQuery.js";
 import IUA_SetDestinationDateProcess from './Processes/iua_SetDestinationDateProcess'
 import IUA_Cron_reminderDaysToDestDateCounterProcess from './Processes/iua_cron_reminderDaysToDestDateCounterProcess'
+import CmsElementsProjectRepository from "./Repository/cmsElementsProjectRepository.js";
+import CmsElementsProjectService from "./Services/cmsElementsProjectService.js";
+
 /**
  * 
  */
@@ -319,6 +322,8 @@ let exporter = {
   userServiceDI: asClass(UserService),
   blobRepositoryDI: asClass(BlobRepository),
   blobServiceDI: asClass(BlobService),
+  cmsElementsProjectRepositoryDI: asClass(CmsElementsProjectRepository),
+  cmsElementsProjectServiceDI: asClass(CmsElementsProjectService),
   blobMapperRepositoryDI: asClass(BlobMapperRepository),
   categoryHierarchyRepositoryDI: asClass(CategoryHierarchyRepository),
   itemCategoryRepositoryDI: asClass(ItemCategoryRepository),

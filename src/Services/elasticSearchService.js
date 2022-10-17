@@ -59,9 +59,9 @@ for (def i = 0; i < arrays.length; i++) {
     }
 }
 return buckets`
-value=value.replace(/\n/g,'');
-value=value.replace(/\r/g,'');
-value=value.replace(String.fromCharCode(10),'');
+value = value.replace(/\n/g, '');
+value = value.replace(/\r/g, '');
+value = value.replace(String.fromCharCode(10), '');
 
 let scriptAgg = value
 
@@ -117,9 +117,9 @@ let value2 = `
             }
             return state`
 
-value2=value2.replace(/\n/g,'');
-value2=value2.replace(/\r/g,'');
-value2=value2.replace(String.fromCharCode(10),'');
+value2 = value2.replace(/\n/g, '');
+value2 = value2.replace(/\r/g, '');
+value2 = value2.replace(String.fromCharCode(10), '');
 
 let scriptDeppAgg = value2
 
@@ -513,7 +513,7 @@ export default class ElasticSearchService extends BaseService {
     if (distance == 'all') {
       radius = '5000km'
     }
-    let tagsTerms = null;
+    let tagsTerms = [];
     if (tags != undefined) {
       tagsTerms = tags.length > 0 ? (tags.map(item => {
         return {
@@ -524,7 +524,7 @@ export default class ElasticSearchService extends BaseService {
           }
 
         };
-      })) : null;
+      })) : [];
     }
 
     let selectOptionsList = [];
@@ -926,7 +926,7 @@ export default class ElasticSearchService extends BaseService {
         "bool": {
           "must": [
             textArray,
-            tagsTerms,
+            ...tagsTerms,
             selectOptions,
             categoriesJson,
             userJson,
@@ -1174,12 +1174,12 @@ export default class ElasticSearchService extends BaseService {
           },
           "aggregations": {
             "test": {
-            	  "scripted_metric": {
-            		  "init_script": "state.value = []",
-            		  "map_script": "state.value.add(doc['single.value.long'].value)",
-			         "combine_script":"def score_min = -1; def score_max = 0; def interval=8;def bucket=40;def size=0;for (el in state.value) {if (score_min == -1) {score_min = el} else if (el < score_min) {score_min = el}} for (el in state.value) {if (el > score_max) {score_max = el}} state.buckets=[];state.size=state.value.length; if(state.size<bucket){bucket=state.size} if(bucket==0){bucket=-1;}interval=score_max-score_min;interval=interval/bucket;if(interval==0){interval=1} state.score_min=score_min;state.interval=interval;state.score_max=score_max;for(def i=0;i<bucket;i++){state.buckets.add([i,0,state.score_min+(i*state.interval)])}state.buckets.add([state.buckets.length,0,score_max]);for(el in state.value){def i=Math.floor((el-state.score_min)/interval); state.buckets[(int)i]=[(int)i,++state.buckets[(int)i][1],state.buckets[(int)i][2]] } state.value=null;return state",
-			          "reduce_script":" return states"
-            	  }
+                "scripted_metric": {
+                  "init_script": "state.value = []",
+                  "map_script": "state.value.add(doc['single.value.long'].value)",
+               "combine_script":"def score_min = -1; def score_max = 0; def interval=8;def bucket=40;def size=0;for (el in state.value) {if (score_min == -1) {score_min = el} else if (el < score_min) {score_min = el}} for (el in state.value) {if (el > score_max) {score_max = el}} state.buckets=[];state.size=state.value.length; if(state.size<bucket){bucket=state.size} if(bucket==0){bucket=-1;}interval=score_max-score_min;interval=interval/bucket;if(interval==0){interval=1} state.score_min=score_min;state.interval=interval;state.score_max=score_max;for(def i=0;i<bucket;i++){state.buckets.add([i,0,state.score_min+(i*state.interval)])}state.buckets.add([state.buckets.length,0,score_max]);for(el in state.value){def i=Math.floor((el-state.score_min)/interval); state.buckets[(int)i]=[(int)i,++state.buckets[(int)i][1],state.buckets[(int)i][2]] } state.value=null;return state",
+                "reduce_script":" return states"
+                }
 
             }
 

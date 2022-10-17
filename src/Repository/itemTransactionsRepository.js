@@ -23,7 +23,6 @@ export default class ItemTransactionsRepository extends BaseRepository {
 
 
   getRootIuaIds({ iua_ids, transaction }) {
-    console.log(iua_ids)
     return this.sequelizeDI.sequelize.query(
       `
     WITH recus(iua_id, iua_grouping, step) AS (

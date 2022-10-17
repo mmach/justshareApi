@@ -73,6 +73,7 @@ import ProcessChainState from "./processChainState";
 import ItemProcessState from "./itemProcessState";
 import ProcessChainPrivilege from "./processChainPrivilege";
 import ProcessChainActionInjection from "./processChainActionInjection";
+import CmsElementsProject from "./cmsElementsProjects";
 
 var env = process.env.NODE_ENV || "development";
 var config = configJSON[env];
@@ -171,7 +172,8 @@ let models = {
   ProcessChainState: ProcessChainState.init(sequelize, Sequelize),
   ItemProcessState: ItemProcessState.init(sequelize, Sequelize),
   ProcessChainActionInjection: ProcessChainActionInjection.init(sequelize, Sequelize),
-  ProcessChainPrivilege: ProcessChainPrivilege.init(sequelize, Sequelize)
+  ProcessChainPrivilege: ProcessChainPrivilege.init(sequelize, Sequelize),
+  CmsElementsProject:CmsElementsProject.init(sequelize, Sequelize)
 };
 
 

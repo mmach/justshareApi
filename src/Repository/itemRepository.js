@@ -443,7 +443,6 @@ export default class ItemRepository extends BaseRepository {
   }
   insertTag({ tag_id, item_id, transaction }) {
 
-    console.log(tag_id)
     return this.sequelizeDI.ItemTag.create(
       {
         id: uuidv4(),

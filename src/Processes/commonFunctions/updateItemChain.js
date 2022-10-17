@@ -24,7 +24,7 @@ let updateItemChain = async function (item, process_id, process_chain_id) {
     
     try {
         const val = JSON.parse(this.process_chain.params)
-        if (val.api.mail) {
+        if (val.api && val.api.mail) {
             if (val.api.mail.dest) {
                 await this.mailSenderDI.setContext(this.context).mailSend({
                     type: val.api.mail.dest.mail_template,

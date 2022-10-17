@@ -37,8 +37,10 @@ function getCategoriesValue(newItem) {
     return cat.type == 'GEO';
   });
   if (catOptions.length > 0) {
-    newItem.latitude = catOptions.find(item => { return item.cat_opt_temp.order == 2 }).value
-    newItem.longitude = catOptions.find(item => { return item.cat_opt_temp.order == 1 }).value
+    const latitude = catOptions.find(item => { return item.cat_opt_temp.order == 2 })
+    newItem.latitude = latitude && latitude.value
+    const longitude = catOptions.find(item => { return item.cat_opt_temp.order == 1 })
+    newItem.longitude = longitude && longitude.value
   }
 
   return { ...newItem };
@@ -89,6 +91,7 @@ async function tagsInsert(newItem, itemId) {
 }
 export async function createItem(newItemParam) {
   let newItem = { ...newItemParam };
+  console.log(newItemParam)
   newItem.user_id = this.context.user.id;
   newItem = createSearchClob.bind(this)(newItem);
   newItem = getCategoriesValue.bind(this)(newItem);
@@ -103,14 +106,14 @@ export async function createItem(newItemParam) {
   newItem.es_operations = 'I';
   let createdItem = await this.itemServiceDI.setContext(this.context).upsert({ model: newItem, withProject: true });
   let newCreatedItem = createdItem[0].dataValues;
- 
+
   await Promise.all([
     tagsInsert.bind(this)(newItem, newCreatedItem.id),
     insertBlobs.bind(this)(newItem, newCreatedItem.id)])
   let array = newItem.itemCategoryOption.map(coItem => {
     return this.itemServiceDI.setContext(this.context).upsertCategoryOption({ model: coItem, item_id: newCreatedItem.id })
   })
- 
+
   await Promise.all(array)
   this.ITEM = newItem;
   this.model = newItem;

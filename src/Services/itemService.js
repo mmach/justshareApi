@@ -48,8 +48,6 @@ export default class ItemService extends BaseService {
         co_id: model.element ? model.element : model.co_id,
         co_temp_id: model.cat_opt_id ? model.cat_opt_id : model.co_temp_id
       }
-
-
     });
   }
 
@@ -99,9 +97,11 @@ export default class ItemService extends BaseService {
     return await this.unitOfWorkDI.itemRepository.isFreeTerm({ model })
 
   }
-  async setItemProcessChain({ id,item_id, process_id, process_chain_id }) {
-    return await this.unitOfWorkDI.itemRepository.setItemProcessChain({ id,item_id, process_id, process_chain_id })
+  async setItemProcessChain({ id, item_id, process_id, process_chain_id }) {
+    return await this.unitOfWorkDI.itemRepository.setItemProcessChain({ id, item_id, process_id, process_chain_id })
+  }
 
-
+  async searchItemCategoryByValueAndDimQuery({ value, dim_name }) {
+    return await this.unitOfWorkDI.itemRepository.searchItemCategoryByValueAndDimQuery({ value, dim_name })
   }
 }

@@ -6238,10 +6238,10 @@ juice@^7.0.0:
     slick "^1.12.2"
     web-resource-inliner "^5.0.0"
 
-justshare-shared@1.0.189:
-  version "1.0.189"
-  resolved "https://registry.yarnpkg.com/justshare-shared/-/justshare-shared-1.0.189.tgz#3b46c14e76cd643d58d8efe7747a68ad8c88ad82"
-  integrity sha512-7CA3Jkw4s/Q/MSP5JxwwWC6E61FkoHLQ2ygb/fhYBfVP0Sbq0Te0s8m/qXRbfLIzzUB23aV8n9nQIBqX74ggAg==
+justshare-shared@^1.0.194:
+  version "1.0.194"
+  resolved "https://registry.yarnpkg.com/justshare-shared/-/justshare-shared-1.0.194.tgz#ff8681b77a22f48b6c3aef11c41f7ee5d59da715"
+  integrity sha512-Lb3nuPlymF+n8ehjPWeXYbXNuDG1Z3jqeWnlEUg0oksabfKYuXbkeuk+7mOA9FU4sht00TZr0KwYFXc3UiIaeA==
   dependencies:
     "@babel/cli" "^7.12.10"
     "@babel/core" "^7.8.3"

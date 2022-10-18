@@ -309,7 +309,7 @@ import IUA_SetDestinationDateProcess from './Processes/iua_SetDestinationDatePro
 import IUA_Cron_reminderDaysToDestDateCounterProcess from './Processes/iua_cron_reminderDaysToDestDateCounterProcess'
 import CmsElementsProjectRepository from "./Repository/cmsElementsProjectRepository.js";
 import CmsElementsProjectService from "./Services/cmsElementsProjectService.js";
-
+import GetItemSensorByValueAndMacDimQuery from "./Query/Item/getItemSensorByValueAndMacDimQuery.js";
 /**
  * 
  */
@@ -621,6 +621,7 @@ exporter[QueryList.Item.GET_ITEM_BY_ID] = asClass(GetItemByIdQuery);
 exporter[QueryList.Item.GET_USER_ITEMS] = asClass(GetUserItemQuery);
 exporter[QueryList.Item.GET_USER_ITEMS_TO_SYNC] = asClass(GetUserItemToSyncQuery);
 exporter[QueryList.Item.GET_USER_TRANSACTIONS] = asClass(GetItemTransactionQuery);
+exporter[QueryList.Item.GET_ITEM_SENSORS_BY_VALUE_AND_MAC_DIM] = asClass(GetItemSensorByValueAndMacDimQuery);
 
 
 exporter[QueryList.Item.GET_ITEM_USER_ACTIONS] = asClass(GetItemUserActionsQuery)

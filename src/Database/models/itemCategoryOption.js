@@ -30,7 +30,8 @@ export default class ItemCategoryOption extends Model {
         value: DataTypes.TEXT,
         status: DataTypes.STRING,
         iua_id: DataTypes.UUID,
-        dim_id: DataTypes.UUID
+        dim_id: DataTypes.UUID,
+        project_id:DataTypes.UUID
 
       },
       { sequelize,

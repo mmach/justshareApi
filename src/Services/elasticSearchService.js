@@ -1087,8 +1087,8 @@ export default class ElasticSearchService extends BaseService {
     try {
       let newItem = await this.toQueueItemDoc({
         item_id: item.id,
-        longitude: item.longitude,
-        latitude: item.latitude,
+        longitude: item.longitude || 0,
+        latitude: item.latitude || 0,
         user_id: item.user_id,
         clobs: clobs,
         title: item.name,

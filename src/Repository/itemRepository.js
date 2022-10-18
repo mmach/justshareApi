@@ -547,4 +547,28 @@ export default class ItemRepository extends BaseRepository {
 
   }
 
+  searchItemCategoryByValueAndDimQuery({value,dim_name,transaction})
+  {
+    const project_id = this.context.project &&  this.context.project.id
+    return this.sequelizeDI.sequelize.query(
+      `  WITH find_dimension as (
+            SELECT DimensionsProjects.id,DimensionsProjects.project_id FROM Dimensions
+              JOIN DimensionsProjects ON DimensionsProjects .dimension_id=dimensions.id
+              WHERE  name=:dim_name
+                ${project_id?`AND ${project_id} = DimensionsProjects.project_id `:''}
+          )
+        SELECT ico.* FROM ItemCategoryOptions  ico
+        JOIN find_dimension ON ico.dim_id=find_dimension.id
+        WHERE ico.value=:value
+          `
+      ,
+      {
+        replacements: {
+          value: value
+          ,dim_name: dim_name
+        },
+        transaction: this.getTran({ transaction }),
+        type: this.sequelizeDI.sequelize.QueryTypes.SELECT
+      });
+  }
 }

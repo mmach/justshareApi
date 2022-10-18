@@ -14,8 +14,8 @@ export default class GetItemSensorByValueAndMacDimQuery extends BaseQuery {
      * @param  {{ logFileInfrastructureDI:LogFileInfrastructure, itemServiceDI:ItemService ,elasticSearchServiceDI:ElasticSearchService,blobServiceDI:BlobService,categoryOptionServiceDI:CategoryOptionService,CategoryService,categoryServiceDI:CategoryService}}
      * @memberof GetItemByIdQuery
      */
-    constructor({ logFileInfrastructureDI, itemServiceDI, elasticSearchServiceDI, blobServiceDI, categoryOptionServiceDI, categoryServiceDI }) {
-        super({ logFileInfrastructureDI });
+    constructor({ logFileInfrastructureDI, itemServiceDI, projectInfrastructureDI, elasticSearchServiceDI, blobServiceDI, categoryOptionServiceDI, categoryServiceDI }) {
+        super({ logFileInfrastructureDI, projectInfrastructureDI });
         this.categoryOptionServiceDI = categoryOptionServiceDI;
         this.itemServiceDI = itemServiceDI;
         this.elasticSearchServiceDI = elasticSearchServiceDI;
@@ -37,7 +37,7 @@ export default class GetItemSensorByValueAndMacDimQuery extends BaseQuery {
             dim_name: this.model.dim
         })
 
-        if (itemCategorytion.length == 1) {
+        if (itemCategorytion.length == this.model.value.length && this.model.value.length > 0) {
             this.context.project = {
                 id: itemCategorytion[0].project_id
             }

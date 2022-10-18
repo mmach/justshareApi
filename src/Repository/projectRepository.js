@@ -88,14 +88,17 @@ export default class ProjectRepository extends BaseRepository {
       transaction: this.getTran({ transaction })
     })
   }
-  authProject({ project_id, secretKey, transaction }) {
+  authProject({ project_id, secretKey, authBySensorMac, transaction }) {
+    let where = {
+      id: this.toStr(project_id),
+    }
+    if (!authBySensorMac) {
+      where.secretKey = this.toStr(secretKey)
+    }
     return this.entityDAO.findOne(
 
       {
-        where: {
-          id: this.toStr(project_id),
-          secretKey: this.toStr(secretKey)
-        },
+        where: where,
         transaction: this.getTran({ transaction })
       }
     );

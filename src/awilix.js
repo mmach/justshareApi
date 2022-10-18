@@ -310,6 +310,7 @@ import IUA_Cron_reminderDaysToDestDateCounterProcess from './Processes/iua_cron_
 import CmsElementsProjectRepository from "./Repository/cmsElementsProjectRepository.js";
 import CmsElementsProjectService from "./Services/cmsElementsProjectService.js";
 import GetItemSensorByValueAndMacDimQuery from "./Query/Item/getItemSensorByValueAndMacDimQuery.js";
+import LoginToProjectBySensorMACQuery from "./Query/Project/loginToProjectBySensorMACQuery.js";
 /**
  * 
  */
@@ -675,6 +676,9 @@ exporter[CommandList.Project.UPDATE_PROJECT] = asClass(UpdateProjectCommand);
 exporter[CommandList.Project.UPLOAD_BLOB] = asClass(UploadBlobProjectCommand);
 
 exporter[QueryList.Project.LOGIN] = asClass(LoginProjectQuery);
+exporter[QueryList.Project.LOGIN_BY_MAC] = asClass(LoginToProjectBySensorMACQuery);
+
+   
 exporter[QueryList.Project.LOGIN_JS] = asClass(LoginJustshareProjectQuery)
 exporter[QueryList.Project.LOGIN_LOGISTIC] = asClass(LoginLogisticProjectQuery)
 exporter[QueryList.Project.LOGIN_BLISKO_NAS] = asClass(LoginBliskonasProjectQuery)

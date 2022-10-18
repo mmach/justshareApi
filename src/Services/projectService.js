@@ -45,8 +45,9 @@ export default class ProjectService extends BaseService {
     * @returns UserDTO
     * @memberof ProjectService
     */
-  async authProject({ project_id, secretKey }) {
-    let result = await this.toJsonParse(this.unitOfWorkDI.projectRepository.authProject({ project_id, secretKey }));
+  async authProject({ project_id, secretKey, authBySensorMac }) {
+    
+    let result = await this.toJsonParse(this.unitOfWorkDI.projectRepository.authProject({ project_id, secretKey,authBySensorMac }));
     if (result) {
       var expiresDate = new Date();
       expiresDate.setDate(expiresDate.getDate() + 1);

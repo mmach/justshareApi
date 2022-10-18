@@ -553,12 +553,12 @@ export default class ItemRepository extends BaseRepository {
       `  WITH find_dimension as (
             SELECT DimensionsProjects.id,DimensionsProjects.project_id FROM Dimensions
               JOIN DimensionsProjects ON DimensionsProjects .dimension_id=dimensions.id
-              WHERE  name IN (:dim_name)
+              WHERE  name = :dim_name
                 ${project_id ? `AND ${project_id} = DimensionsProjects.project_id ` : ''}
           )
         SELECT ico.* FROM ItemCategoryOptions  ico
         JOIN find_dimension ON ico.dim_id=find_dimension.id
-        WHERE ico.value=:value
+        WHERE ico.value IN (:value)
           `
       ,
       {

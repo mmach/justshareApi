@@ -554,7 +554,7 @@ export default class ItemRepository extends BaseRepository {
             SELECT DimensionsProjects.id,DimensionsProjects.project_id FROM Dimensions
               JOIN DimensionsProjects ON DimensionsProjects .dimension_id=dimensions.id
               WHERE  name = :dim_name
-                ${project_id ? `AND ${project_id} = DimensionsProjects.project_id ` : ''}
+                ${project_id ? `AND :project_id = DimensionsProjects.project_id ` : ''}
           )
         SELECT ico.* FROM ItemCategoryOptions  ico
         JOIN find_dimension ON ico.dim_id=find_dimension.id
@@ -563,8 +563,9 @@ export default class ItemRepository extends BaseRepository {
       ,
       {
         replacements: {
-          value: value
-          , dim_name: dim_name
+          value: value,
+          dim_name: dim_name,
+          project_id: project_id
         },
         transaction: this.getTran({ transaction }),
         type: this.sequelizeDI.sequelize.QueryTypes.SELECT

@@ -311,6 +311,7 @@ import CmsElementsProjectRepository from "./Repository/cmsElementsProjectReposit
 import CmsElementsProjectService from "./Services/cmsElementsProjectService.js";
 import GetItemSensorByValueAndMacDimQuery from "./Query/Item/getItemSensorByValueAndMacDimQuery.js";
 import LoginToProjectBySensorMACQuery from "./Query/Project/loginToProjectBySensorMACQuery.js";
+import Item_GoToStepWithEsSyncProcess from "./Processes/item_GoToStepWithEsSyncProcess.js";
 /**
  * 
  */
@@ -768,6 +769,7 @@ exporter[ProcessList.Item.ITEM_CREATE_ITEM] = asClass(Item_CreateItemProcess);
 
 exporter['item_ESSyncProcess'] = asClass(Item_ESSyncProcess);
 exporter['item_GoToStepProcess'] = asClass(Item_GoToStepProcess);
+exporter['item_GoToStepWithEsSyncProcess'] = asClass(Item_GoToStepWithEsSyncProcess);
 exporter['item_VerificationProcess'] = asClass(Item_VerificationProcess)
 exporter['item_UpdateExpiredItemProcess'] = asClass(Item_UpdateExpiredItemProcess)
 exporter['item_cron_reminderDaysProcess'] = asClass(Item_Cron_ReminderDaysProcess)
@@ -782,7 +784,7 @@ exporter['iua_Cron_ReminderDaysIUACounterProcess'] = asClass(IUA_Cron_ReminderDa
 exporter['iua_cron_reminderDaysCounter'] = asClass(IUA_Cron_ReminderDaysIUACounterProcess)
 exporter['iua_SetDestinationDateProcess'] = asClass(IUA_SetDestinationDateProcess)
 exporter['iua_cron_reminderDaysToDestDateCounterProcess'] = asClass(IUA_Cron_reminderDaysToDestDateCounterProcess)
-
+exporter['item_UpdateItemProcess'] = asClass(Item_UpdateItemProcess)
 
 
 

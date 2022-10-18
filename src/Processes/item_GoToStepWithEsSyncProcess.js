@@ -7,11 +7,12 @@ import BlobService from "../Services/blobService.js";
 import CategoryService from "../Services/categoryService.js";
 import ElasticSearchService from "../Services/elasticSearchService.js";
 import ItemService from "../Services/itemService.js";
+import { getItem } from "./commonFunctions/getItem.js";
 import { updateItemChain } from "./commonFunctions/updateItemChain.js";
 
 
 ("use strict");
-export default class Item_ESSyncProcess extends BaseProcess {
+export default class Item_GoToStepWithEsSyncProcess extends BaseProcess {
   /**
     * Creates an instance of CreateItemCommand.
     * @param   {{ logFileInfrastructureDI:LogFileInfrastructure ,
@@ -33,6 +34,7 @@ export default class Item_ESSyncProcess extends BaseProcess {
     elasticSearchServiceDI,
     closingInfrastructureDI,
     projectInfrastructureDI,
+    mailSenderDI,
     itemServiceDI
   }) {
     // @ts-ignore
@@ -44,8 +46,10 @@ export default class Item_ESSyncProcess extends BaseProcess {
       closingInfrastructureDI,
       projectInfrastructureDI
     });
-    this.itemServiceDI = itemServiceDI
     this.elasticSearchServiceDI = elasticSearchServiceDI;
+    this.itemServiceDI = itemServiceDI
+    this.mailSenderDI = mailSenderDI
+
   }
 
   get validation() {
@@ -62,8 +66,8 @@ export default class Item_ESSyncProcess extends BaseProcess {
 
   async action() {
     try {
-      let obj = JSON.parse(this.process_chain.params)
-      await updateItemChain.bind(this)(this.model, this.process_chain.process_id, this.process_chain.id)
+      let item = await getItem.bind(this)(this.model.id,this.process_chain.use_es)
+      await updateItemChain.bind(this)(item, this.process_chain.process_id, this.process_chain.id)
       await this.elasticSearchServiceDI.setContext(this.context).addToQueue({ item_id: this.model.id, operation: obj.api.params.operation })
 
     } catch (err) {

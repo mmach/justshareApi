@@ -3,7 +3,7 @@ import LogFileInfrastructure from '../../Architecture/Infrastructure/logFileInfr
 import ItemService from '../../Services/itemService.js';
 import {BlobBase64DTO,ItemDTO} from 'justshare-shared';
 
-
+ 
 export default class GetItemQuery extends BaseQuery {
     /**
      * Creates an instance of GetDictionariesQuery.

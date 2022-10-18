@@ -312,6 +312,7 @@ import CmsElementsProjectService from "./Services/cmsElementsProjectService.js";
 import GetItemSensorByValueAndMacDimQuery from "./Query/Item/getItemSensorByValueAndMacDimQuery.js";
 import LoginToProjectBySensorMACQuery from "./Query/Project/loginToProjectBySensorMACQuery.js";
 import Item_GoToStepWithEsSyncProcess from "./Processes/item_GoToStepWithEsSyncProcess.js";
+import Item_UpdateItemProcess from "./Processes/item_UpdateItemProcess.js";
 /**
  * 
  */

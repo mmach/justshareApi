@@ -1071,17 +1071,18 @@ export default class ElasticSearchService extends BaseService {
     let catOptions = item.itemCategoryOption.map(catValue => {
 
       return {
+        id:catValue.id,
         cat_opt_id: catValue.cat_opt_temp.id,
         type: catValue.category_link.catOption.cat_opt.type,
         dataType: catValue.cat_opt_temp.cat_opt_type_template.type,
         order: catValue.cat_opt_temp.order,
         cat_opt_temp_id: catValue.co_temp_id,
         co_id: catValue.cat_opt_temp.co_id,
-        val: catValue.value,
+        val: catValue.value,//TO REMOVE
+        value: catValue.value,
         conc: catValue.cat_opt_temp.co_id + ";" + String(catValue.value),
         select: catValue.cat_opt_temp,
         catOption: catValue.cat_opt_temp
-
       }
     })
     try {

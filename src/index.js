@@ -179,7 +179,7 @@ const api = makeInvoker(cqrsPreprocess);
 router.get("/query", api("queryExecAsync"));
 router.post("/command", koaBody, api("commandExecAsync"));
 app.use(router.routes());
-app.listen(process.env.PORT || 1337);
+app.listen(process.env.PORT || 8080);
 
 
 

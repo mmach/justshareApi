@@ -68,7 +68,7 @@ export default class Item_GoToStepWithEsSyncProcess extends BaseProcess {
     try {
       let item = await getItem.bind(this)(this.model.id,this.process_chain.use_es)
       await updateItemChain.bind(this)(item, this.process_chain.process_id, this.process_chain.id)
-      await this.elasticSearchServiceDI.setContext(this.context).addToQueue({ item_id: this.model.id, operation: obj.api.params.operation })
+      await this.elasticSearchServiceDI.setContext(this.context).addToQueue({ item_id: this.model.id, operation: 'I' })
 
     } catch (err) {
       console.log(err)

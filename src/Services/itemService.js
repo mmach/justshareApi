@@ -47,7 +47,8 @@ export default class ItemService extends BaseService {
         value: model.value ? model.value : model.val,
         co_id: model.element ? model.element : model.co_id,
         co_temp_id: model.cat_opt_id ? model.cat_opt_id : model.co_temp_id
-      }
+      },
+      withProject:true
     });
   }
 

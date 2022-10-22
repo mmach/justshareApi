@@ -1,4 +1,6 @@
-import BaseCommand from "../Architecture/baseCommand.js";
+import { LinkItem } from 'justshare-shared';
+import { v4 } from "uuid";
+import BaseProcess from "../Architecture/baseProcess.js";
 import AuthInfrastucture from "../Architecture/Infrastructure/authInfrastucture.js";
 import ClosingInfrastructure from "../Architecture/Infrastructure/closingInfrastructure.js";
 import DbTransactionInfrastucture from "../Architecture/Infrastructure/dbTransactionInfrastucture.js";
@@ -6,11 +8,7 @@ import LogFileInfrastructure from "../Architecture/Infrastructure/logFileInfrast
 import BlobService from "../Services/blobService.js";
 import CategoryService from "../Services/categoryService.js";
 import ElasticSearchService from "../Services/elasticSearchService.js";
-import { uuid } from "../../node_modules/uuidv4/build/lib/uuidv4.js";
-import { LinkItem, GetValueByDim, DimensionsList, StatusesList } from 'justshare-shared'
-import fs from 'fs';
 import ItemService from "../Services/itemService.js";
-import BaseProcess from "../Architecture/baseProcess.js";
 import initIUAProcess from "./commonFunctions/initIUAProcess.js";
 import updateIUA from "./commonFunctions/updateIUA.js";
 
@@ -98,7 +96,7 @@ export default class IUA_ReadyProcess extends BaseProcess {
   }
 
   async updateIUA(user_id, user_src, user_dest) {
-    let id = uuid();
+    let id = v4();
     await this.itemUserActionServiceDI.setContext(this.context).insert({
       model: {
         ...this.IUA,
@@ -121,7 +119,7 @@ export default class IUA_ReadyProcess extends BaseProcess {
       }, withProject: true
     })
 
-    await this.conversationServiceDI.setContext(this.context).sendMessageToUser({ iua_id: this.IUA.id, msg_id: uuid(), msg: this.model.message, syncSocket: true });
+    await this.conversationServiceDI.setContext(this.context).sendMessageToUser({ iua_id: this.IUA.id, msg_id: v4(), msg: this.model.message, syncSocket: true });
 
     let status = await this.statusProjectServiceDI.setContext(this.context).getByStatusId({ id: this.process_chain.status_id })
     if (this.process_chain.with_notification == true) {

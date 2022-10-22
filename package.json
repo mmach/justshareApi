@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start":"node --experimental-json-modules ./src/index.js",
+    "start": "node --experimental-json-modules ./src/index.js",
     "start_old": "babel-node --presets es2017,stage-2 ./src/index.js ",
     "server": "babel ./src  -d ./.compiled/src --source-maps --copy-files    --exec babel-node --presets es2017,stage-2 ./src/index.js ",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -101,7 +101,7 @@
     "socket.io-redis": "6.1.1",
     "tedious": "9.2.1",
     "translate": "^1.1.2",
-    "uuid": "^3.3.2",
+    "uuid": "9.0.0",
     "uuidv4": "^6.1.1",
     "validator": "^7.0.0",
     "winston": "^2.3.1",

@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs";
 import fs from "fs";
 import jwt from "jsonwebtoken";
 import { UserDTO, UserLoginInternalDTO, UserRegisterInternalDTO } from "justshare-shared";
-import v4 from "uuid";
+import {v4} from "uuid";
 import BaseService from "../Architecture/baseService.js";
 import ServerException from "../Architecture/Exceptions/serverException.js";
 import CONFIG from "../config.js";

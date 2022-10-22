@@ -1,4 +1,4 @@
-import v4 from "uuid";
+import {v4} from "uuid";
 import { LinkItem, GetValueByDim, DimensionsList, StatusesList } from 'justshare-shared'
 import fs from 'fs'
 

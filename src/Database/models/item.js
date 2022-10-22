@@ -1,6 +1,6 @@
 "use strict";
 import { Model } from "sequelize";
-import v4 from "uuid";
+import {v4} from "uuid";
 
 
 

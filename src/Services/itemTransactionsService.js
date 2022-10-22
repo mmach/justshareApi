@@ -1,7 +1,4 @@
 import BaseService from "../Architecture/baseService.js";
-import { SearchItemDTO } from 'justshare-shared';
-import CONFIG from "../config.js";
-import { uuid } from "../../node_modules/uuidv4/build/lib/uuidv4.js";
 import * as useSockets from '../WebsocketMessages/index.js';
 
 
@@ -89,7 +86,7 @@ export default class ItemTransactionService extends BaseService {
       iua_id: iua_id,
       createdAt: new Date(),
       socket_user_id: '/socket_' + hash,
-      users: conv.users.map(i => { return { ...i, id: uuid() } }),
+      users: conv.users.map(i => { return { ...i, id: v4() } }),
     }
 
     useSockets.setIuaStatus({ project_socket: obj.socket_user_id, users: conv.user, iua_socket_obj: obj })

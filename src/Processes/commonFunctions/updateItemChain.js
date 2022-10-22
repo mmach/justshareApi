@@ -1,11 +1,10 @@
 
-import { ItemDTO, BuildItem, ShowOptionValue, StatusesList, GetValueByDim, DimensionsList } from "justshare-shared";
-import { uuid } from "../../../node_modules/uuidv4/build/lib/uuidv4.js";
+import { v4 } from "uuid";
 
 
 let updateItemChain = async function (item, process_id, process_chain_id) {
     
-    let id = uuid();
+    let id = v4();
     item.process_chain_id = process_chain_id;
     item.process_id = process_id;
     item.item_process_id = id;
@@ -39,4 +38,4 @@ let updateItemChain = async function (item, process_id, process_chain_id) {
     }
 }
 
-export { updateItemChain }
+export { updateItemChain };

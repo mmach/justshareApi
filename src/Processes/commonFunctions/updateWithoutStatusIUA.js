@@ -1,6 +1,4 @@
 
-import { ItemDTO, BuildItem, ShowOptionValue, StatusesList, GetValueByDim, DimensionsList } from "justshare-shared";
-import { uuid } from "../../../node_modules/uuidv4/build/lib/uuidv4.js";
 
 
 let updateWithoutStatusIUA = async function (iua_id) {

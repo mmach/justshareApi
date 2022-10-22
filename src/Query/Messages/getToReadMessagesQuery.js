@@ -1,18 +1,13 @@
-import BaseCommand from "../../Architecture/baseCommand.js";
-import LogFileInfrastructure from "../../Architecture/Infrastructure/logFileInfrastructure.js";
+import BaseQuery from "../../Architecture/baseQuery.js";
 import AuthInfrastucture from "../../Architecture/Infrastructure/authInfrastucture.js";
+import ClosingInfrastructure from "../../Architecture/Infrastructure/closingInfrastructure.js";
 import DbTransactionInfrastucture from "../../Architecture/Infrastructure/dbTransactionInfrastucture.js";
-import ItemService from "../../Services/itemService.js";
-import { ItemDTO, BuildItem, ShowOptionValue } from "justshare-shared";
+import LogFileInfrastructure from "../../Architecture/Infrastructure/logFileInfrastructure.js";
 import BlobService from "../../Services/blobService.js";
 import CategoryService from "../../Services/categoryService.js";
-import Promise from "bluebird";
 import ElasticSearchService from "../../Services/elasticSearchService.js";
-import TagService from './../../Services/tagService.js'
-import ClosingInfrastructure from "../../Architecture/Infrastructure/closingInfrastructure.js";
-import { uuid, isUuid } from "../../../node_modules/uuidv4/build/lib/uuidv4.js";
-import CONFIG from "../../config.js";
-import BaseQuery from "../../Architecture/baseQuery.js";
+import ItemService from "../../Services/itemService.js";
+import TagService from './../../Services/tagService.js';
 
 export default class GetToReadMessagesQuery extends BaseQuery {
   /**

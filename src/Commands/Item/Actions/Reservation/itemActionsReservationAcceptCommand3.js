@@ -1,3 +1,6 @@
+import fs from 'fs';
+import { DimensionsList, GetValueByDim, LinkItem, StatusesList } from 'justshare-shared';
+import { v4 } from "uuid";
 import BaseCommand from "../../../../Architecture/baseCommand.js";
 import AuthInfrastucture from "../../../../Architecture/Infrastructure/authInfrastucture.js";
 import ClosingInfrastructure from "../../../../Architecture/Infrastructure/closingInfrastructure.js";
@@ -7,9 +10,6 @@ import BlobService from "../../../../Services/blobService.js";
 import CategoryService from "../../../../Services/categoryService.js";
 import ElasticSearchService from "../../../../Services/elasticSearchService.js";
 import ItemService from "../../../../Services/itemService.js";
-import { uuid } from "../../../../../node_modules/uuidv4/build/lib/uuidv4.js";
-import { LinkItem, GetValueByDim, DimensionsList, StatusesList } from 'justshare-shared'
-import fs from 'fs';
 
 ("use strict");
 export default class ItemActionsReservationAcceptCommand extends BaseCommand {
@@ -150,7 +150,7 @@ export default class ItemActionsReservationAcceptCommand extends BaseCommand {
       })
 
       let invoice = await this.invoiceServiceDI.setContext(this.context).genInvoicePDF({ invoice_id: invoice_id })
-      let blob_id = uuid();
+      let blob_id = v4();
 
       //#endregion
       //#region set new reservation terms 
@@ -170,7 +170,7 @@ export default class ItemActionsReservationAcceptCommand extends BaseCommand {
 
       await this.itemServiceDI.setContext(this.context).addCategoryOptionTerm({
         model: {
-          id: uuid(),
+          id: v4(),
           iua_id: IUA.id,
           item_id: IUA.item_id,
           start_date: start,
@@ -185,7 +185,7 @@ export default class ItemActionsReservationAcceptCommand extends BaseCommand {
 
       //#endregion
       //#region set acceptd status
-      /*let id = uuid();
+      /*let id = v4();
       await this.itemUserActionServiceDI.setContext(this.context).insert({
         model: {
           ...IUA,
@@ -211,7 +211,7 @@ export default class ItemActionsReservationAcceptCommand extends BaseCommand {
 
       //#region udpate for WAIT_FOR_PAY status
       status = await this.statusProjectServiceDI.setContext(this.context).getByToken({ name: StatusesList.WAITING_FOR_PAY })
-      let id = uuid();
+      let id = v4();
       await this.itemUserActionServiceDI.setContext(this.context).insert({
         model: {
           ...IUA,

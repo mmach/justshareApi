@@ -1,3 +1,5 @@
+import { StatusesList } from 'justshare-shared';
+import { v4 } from "uuid";
 import BaseCommand from "../../../../Architecture/baseCommand.js";
 import AuthInfrastucture from "../../../../Architecture/Infrastructure/authInfrastucture.js";
 import ClosingInfrastructure from "../../../../Architecture/Infrastructure/closingInfrastructure.js";
@@ -7,8 +9,6 @@ import BlobService from "../../../../Services/blobService.js";
 import CategoryService from "../../../../Services/categoryService.js";
 import ElasticSearchService from "../../../../Services/elasticSearchService.js";
 import ItemService from "../../../../Services/itemService.js";
-import { uuid } from "../../../../../node_modules/uuidv4/build/lib/uuidv4.js";
-import { LinkItem, GetValueByDim, DimensionsList, StatusesList } from 'justshare-shared'
 
 
 
@@ -94,7 +94,7 @@ export default class ItemActionsReservationWaitingForCustomerCommand extends Bas
 
   
 
-      let id = uuid();
+      let id = v4();
       await this.itemUserActionServiceDI.setContext(this.context).insert({
         model: {
           ...IUA,
@@ -130,7 +130,7 @@ export default class ItemActionsReservationWaitingForCustomerCommand extends Bas
       })
       await this.commentServiceDI.setContext(this.context).insert({
         model: {
-          id: uuid(),
+          id: v4(),
           user_src_id: this.context.user.id,
           iua_id: IUA.id,
           user_id: IUA.user_id,

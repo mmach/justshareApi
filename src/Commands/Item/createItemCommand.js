@@ -9,7 +9,7 @@ import CategoryService from "../../Services/categoryService.js";
 import Promise from "bluebird";
 import ElasticSearchService from "../../Services/elasticSearchService.js";
 import TagService from './../../Services/tagService.js'
-import v4 from "uuid";
+import {v4} from "uuid";
 import ClosingInfrastructure from "../../Architecture/Infrastructure/closingInfrastructure.js";
 import CONFIG from "../../config.js";
 

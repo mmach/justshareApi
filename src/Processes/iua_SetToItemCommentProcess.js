@@ -1,4 +1,5 @@
-import BaseCommand from "../Architecture/baseCommand.js";
+import { v4 } from "uuid";
+import BaseProcess from "../Architecture/baseProcess.js";
 import AuthInfrastucture from "../Architecture/Infrastructure/authInfrastucture.js";
 import ClosingInfrastructure from "../Architecture/Infrastructure/closingInfrastructure.js";
 import DbTransactionInfrastucture from "../Architecture/Infrastructure/dbTransactionInfrastucture.js";
@@ -6,11 +7,7 @@ import LogFileInfrastructure from "../Architecture/Infrastructure/logFileInfrast
 import BlobService from "../Services/blobService.js";
 import CategoryService from "../Services/categoryService.js";
 import ElasticSearchService from "../Services/elasticSearchService.js";
-import { uuid } from "../../node_modules/uuidv4/build/lib/uuidv4.js";
-import { LinkItem, GetValueByDim, DimensionsList, StatusesList } from 'justshare-shared'
-import fs from 'fs';
 import ItemService from "../Services/itemService.js";
-import BaseProcess from "../Architecture/baseProcess.js";
 import initIUAProcess from "./commonFunctions/initIUAProcess.js";
 import updateIUA from "./commonFunctions/updateIUA.js";
 
@@ -96,7 +93,7 @@ export default class IUA_SetToItemCommentProcess extends BaseProcess {
 
       await this.commentServiceDI.setContext(this.context).insert({
         model: {
-          id: uuid(),
+          id: v4(),
           user_src_id: this.context.user.id,
           iua_id: this.IUA.id,
           item_id: this.IUA.item_id,

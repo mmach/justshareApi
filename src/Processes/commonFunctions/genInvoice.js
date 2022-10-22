@@ -1,7 +1,6 @@
 
-import { ItemDTO, BuildItem, ShowOptionValue, StatusesList, GetValueByDim, DimensionsList } from "justshare-shared";
-import { uuid } from "../../../node_modules/uuidv4/build/lib/uuidv4.js";
-import updateWithoutStatusIUA from "./updateWithoutStatusIUA.js";
+import { DimensionsList, GetValueByDim, StatusesList } from "justshare-shared";
+import { v4 } from "uuid";
 
 const genInvoice = async function (user_src_id, dest_user_id) {
     let cur = GetValueByDim(DimensionsList.FINAL_PRICE_VALUE, this.itemTransaction, this.context.language).split(' ');
@@ -48,7 +47,7 @@ const genInvoice = async function (user_src_id, dest_user_id) {
     })
 
     let invoice = await this.invoiceServiceDI.setContext(this.context).genInvoicePDF({ invoice_id: invoice_id })
-    let blob_id = uuid();
+    let blob_id = v4();
     let content = await fs.readFileSync(invoice.invoicePath, { encoding: 'base64' });
 
     let createBlobResult = await this.blobServiceDI.setContext(this.context).uploadUserProject({

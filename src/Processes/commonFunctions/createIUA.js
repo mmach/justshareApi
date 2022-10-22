@@ -1,4 +1,4 @@
-import v4 from "uuid";
+import {v4} from "uuid";
 
 
 
@@ -10,7 +10,7 @@ let createIUA = async function (iua_id, item, message) {
         itemResult = await this.itemTransactionsServiceDI.setContext(this.context).getItemTransaction({iua_id:[this.model.parent_iua_id]})
         itemResult=itemResult[0]
     }
-    //let iua_id = uuid()
+    //let iua_id = v4()
     //   let status = await this.statusProjectServiceDI.setContext(this.context).getByToken({ name: StatusesList.NEW })
     await this.itemUserActionServiceDI.setContext(this.context).upsert({
         model: {

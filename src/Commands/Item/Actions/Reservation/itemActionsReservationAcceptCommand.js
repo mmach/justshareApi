@@ -1,3 +1,6 @@
+import fs from 'fs';
+import { DimensionsList, GetValueByDim, LinkItem, StatusesList } from 'justshare-shared';
+import { v4 } from "uuid";
 import BaseCommand from "../../../../Architecture/baseCommand.js";
 import AuthInfrastucture from "../../../../Architecture/Infrastructure/authInfrastucture.js";
 import ClosingInfrastructure from "../../../../Architecture/Infrastructure/closingInfrastructure.js";
@@ -7,9 +10,6 @@ import BlobService from "../../../../Services/blobService.js";
 import CategoryService from "../../../../Services/categoryService.js";
 import ElasticSearchService from "../../../../Services/elasticSearchService.js";
 import ItemService from "../../../../Services/itemService.js";
-import { uuid } from "../../../../../node_modules/uuidv4/build/lib/uuidv4.js";
-import { LinkItem, GetValueByDim, DimensionsList, StatusesList } from 'justshare-shared'
-import fs from 'fs';
 
 ("use strict");
 export default class ItemActionsReservationAcceptCommand extends BaseCommand {
@@ -128,7 +128,7 @@ export default class ItemActionsReservationAcceptCommand extends BaseCommand {
     })
 
     let invoice = await this.invoiceServiceDI.setContext(this.context).genInvoicePDF({ invoice_id: invoice_id })
-    let blob_id = uuid();
+    let blob_id = v4();
     let content = await fs.readFileSync(invoice.invoicePath, { encoding: 'base64' });
 
     let createBlobResult = await this.blobServiceDI.setContext(this.context).uploadUserProject({
@@ -201,7 +201,7 @@ export default class ItemActionsReservationAcceptCommand extends BaseCommand {
 
     await this.itemServiceDI.setContext(this.context).addCategoryOptionTerm({
       model: {
-        id: uuid(),
+        id: v4(),
         iua_id: this.IUA.id,
         item_id: this.IUA.item_id,
         start_date: start,
@@ -229,7 +229,7 @@ export default class ItemActionsReservationAcceptCommand extends BaseCommand {
 
   async updateIUA(user_id, satusName, user_src, user_dest) {
     let status = await this.statusProjectServiceDI.setContext(this.context).getByToken({ name: satusName })
-    let id = uuid();
+    let id = v4();
     await this.itemUserActionServiceDI.setContext(this.context).insert({
       model: {
         ...this.IUA,

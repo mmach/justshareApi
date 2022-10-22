@@ -1,11 +1,10 @@
 // @ts-nocheck
+import { v4 } from "uuid";
 import BaseCommand from "../../Architecture/baseCommand.js";
-import { PrivilegesDTO } from "justshare-shared";
+import AuthInfrastucture from "../../Architecture/Infrastructure/authInfrastucture.js";
+import DbTransactionInfrastucture from "../../Architecture/Infrastructure/dbTransactionInfrastucture.js";
 import LogFileInfrastructure from "../../Architecture/Infrastructure/logFileInfrastructure.js";
 import CategoryService from "../../Services/categoryService.js";
-import DbTransactionInfrastucture from "../../Architecture/Infrastructure/dbTransactionInfrastucture.js";
-import AuthInfrastucture from "../../Architecture/Infrastructure/authInfrastucture.js";
-import { uuid } from "../../../node_modules/uuidv4/build/lib/uuidv4.js";
 
 "use strict";
 
@@ -140,7 +139,7 @@ export default class InvokeProcessCommand extends BaseCommand {
         let process = processList[0]
         let autorun_loop = true;
         let result_process = {}
-        const uuidNew = uuid()
+        const uuidNew = v4()
         let newModel = {
             ...model,
             id: parent_process_chain.id ? uuidNew : model.iua_id || model.id,

@@ -1,7 +1,5 @@
 
-import { ItemDTO, BuildItem, ShowOptionValue, StatusesList, GetValueByDim, DimensionsList } from "justshare-shared";
-import { uuid } from "../../../node_modules/uuidv4/build/lib/uuidv4.js";
-import updateWithoutStatusIUA from "./updateWithoutStatusIUA.js";
+import { v4 } from "uuid";
 
 
 let updateIUA = async function (user_id, user_src, user_dest,destination_date) {
@@ -9,7 +7,7 @@ let updateIUA = async function (user_id, user_src, user_dest,destination_date) {
     //     await updateWithoutStatusIUA.bind(this)(this.IUA.id)
     //     return
     //}
-    let id = uuid();
+    let id = v4();
     if (!this.process_chain.only_invoke) {
         if (this.process_chain.change_status != true) {
             await this.itemUserActionServiceDI.setContext(this.context).update({
@@ -77,7 +75,7 @@ let updateIUA = async function (user_id, user_src, user_dest,destination_date) {
          }*/
 
         if (val.api && val.api.notification) {
-            await this.conversationServiceDI.setContext(this.context).sendMessageToUser({ iua_id: this.IUA.id, msg_id: uuid(), msg: this.model.message, syncSocket: true });
+            await this.conversationServiceDI.setContext(this.context).sendMessageToUser({ iua_id: this.IUA.id, msg_id: v4(), msg: this.model.message, syncSocket: true });
         }
 
         if (val.api && val.api.processSync) {

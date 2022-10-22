@@ -1,6 +1,6 @@
 
-import { ItemDTO, BuildItem, ShowOptionValue, StatusesList, GetValueByDim, DimensionsList } from "justshare-shared";
-import { uuid } from "../../../node_modules/uuidv4/build/lib/uuidv4.js";
+import { DimensionsList, GetValueByDim } from "justshare-shared";
+import { v4 } from "uuid";
 
 
 let reservationItemsTerms = async function () {
@@ -23,7 +23,7 @@ let reservationItemsTerms = async function () {
 
     await this.itemServiceDI.setContext(this.context).addCategoryOptionTerm({
         model: {
-            id: uuid(),
+            id: v4(),
             iua_id: this.IUA.id,
             item_id: this.IUA.item_id,
             start_date: start,

@@ -3,7 +3,7 @@ import BaseCommand from "./../../Architecture/baseCommand.js";
 
 import { UserRegisterInternalDTO, UserRolesDTO } from "justshare-shared";
 import { URL } from "url";
-import v4 from "uuid";
+import {v4} from "uuid";
 import DbTransactionInfrastucture from "../../Architecture/Infrastructure/dbTransactionInfrastucture.js";
 import LogFileInfrastructure from "../../Architecture/Infrastructure/logFileInfrastructure.js";
 import ValidatonInfrastructure from "../../Architecture/Infrastructure/validatonInfrastructure.js";

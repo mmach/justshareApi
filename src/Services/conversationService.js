@@ -1,4 +1,4 @@
-import v4 from "uuid";
+import {v4} from "uuid";
 import BaseService from "../Architecture/baseService.js";
 import CONFIG from "../config.js";
 import * as useSockets from "../WebsocketMessages/index.js";
@@ -225,7 +225,7 @@ export default class ConversationService extends BaseService {
   })*/
   /*
   conversation.messages[0].users = [{
-    id: uuid(),
+    id: v4(),
     user_id: user_dest[0].id,
     conversation_id: id,
     message_id: msg_id,

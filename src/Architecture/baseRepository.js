@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import { BaseDTO } from "justshare-shared";
-import v4 from "uuid";
+import {v4} from "uuid";
 
 /**
  *

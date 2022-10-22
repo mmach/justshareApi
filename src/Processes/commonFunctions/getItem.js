@@ -1,6 +1,4 @@
 
-import { ItemDTO, BuildItem, ShowOptionValue, StatusesList, GetValueByDim, DimensionsList } from "justshare-shared";
-import { uuid } from "../../../node_modules/uuidv4/build/lib/uuidv4.js";
 
 
 let getItem = async function (item_id, use_es) {
@@ -27,4 +25,4 @@ let getItem = async function (item_id, use_es) {
     
 }
 
-export { getItem }
+export { getItem };

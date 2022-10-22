@@ -1,18 +1,16 @@
+import { BuildItem, ShowOptionValue, StatusesList } from "justshare-shared";
+import { v4 } from "uuid";
 import BaseCommand from "../../Architecture/baseCommand.js";
-import LogFileInfrastructure from "../../Architecture/Infrastructure/logFileInfrastructure.js";
 import AuthInfrastucture from "../../Architecture/Infrastructure/authInfrastucture.js";
+import ClosingInfrastructure from "../../Architecture/Infrastructure/closingInfrastructure.js";
 import DbTransactionInfrastucture from "../../Architecture/Infrastructure/dbTransactionInfrastucture.js";
-import ItemService from "../../Services/itemService.js";
-import { ItemDTO, BuildItem, ShowOptionValue, StatusesList } from "justshare-shared";
+import LogFileInfrastructure from "../../Architecture/Infrastructure/logFileInfrastructure.js";
+import CONFIG from "../../config.js";
 import BlobService from "../../Services/blobService.js";
 import CategoryService from "../../Services/categoryService.js";
-import Promise from "bluebird";
 import ElasticSearchService from "../../Services/elasticSearchService.js";
-import TagService from './../../Services/tagService.js'
-import ClosingInfrastructure from "../../Architecture/Infrastructure/closingInfrastructure.js";
-import { uuid, isUuid } from "../../../node_modules/uuidv4/build/lib/uuidv4.js";
-import CONFIG from "../../config.js";
-
+import ItemService from "../../Services/itemService.js";
+import TagService from './../../Services/tagService.js';
 export default class ReservationItemCommand extends BaseCommand {
   /**
    * Creates an instance of CreateItemCommand.
@@ -102,7 +100,7 @@ export default class ReservationItemCommand extends BaseCommand {
     let user = await this.userServiceDI.setContext(this.context).getUserInfo({ user_id: this.model.item.user_id });
     let uniq_number = new Date().getTime()
     if (r.length == res.itemCategoryOption.length) {
-      let uai_id = uuid()
+      let uai_id = v4()
       let status = await this.statusProjectServiceDI.setContext(this.context).getByToken({ name: StatusesList.NEW })
       await this.itemUserActionServiceDI.upsert({
         model: {
@@ -114,13 +112,13 @@ export default class ReservationItemCommand extends BaseCommand {
           comment: this.model.message,
           uniq_number: uniq_number,
           status_id: status.id,
-          created_date: new Date() 
+          created_date: new Date()
 
         },
         withProject: true
 
       })
-      let transaction_id = uuid()
+      let transaction_id = v4()
 
       await this.itemTransactionsServiceDI.upsert({
         model: {
@@ -142,7 +140,7 @@ export default class ReservationItemCommand extends BaseCommand {
           return {
 
             ...i,
-            id: uuid(),
+            id: v4(),
             itemTransaction_id: transaction_id,
             item_id: this.model.item.id,
             iua_id: uai_id
@@ -240,16 +238,16 @@ export default class ReservationItemCommand extends BaseCommand {
 
       }
       //TO UNCOMMENT
-       await this.mailSenderDI.setContext(this.context).mailSend({
-         type: 'RESERVATION_SOURCE_MAIL',
-         model: model,
-         email_to: this.context.user.email,
-         language: this.context.language
-       });
+      await this.mailSenderDI.setContext(this.context).mailSend({
+        type: 'RESERVATION_SOURCE_MAIL',
+        model: model,
+        email_to: this.context.user.email,
+        language: this.context.language
+      });
       //let transalte = await this.translationServiceDI.setContext(this.context).getTokens({ code: 'LABEL', token: 'RESERVATION_MESSAGE_TITLE' })
 
       await this.conversationServiceDI.setContext(this.context).createConversation({
-        id: uuid(),
+        id: v4(),
         user_owner: this.context.user,
         message: this.model.message,
         user_dest: [user],

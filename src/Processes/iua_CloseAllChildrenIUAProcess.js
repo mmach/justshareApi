@@ -1,4 +1,4 @@
-import BaseCommand from "../Architecture/baseCommand.js";
+import BaseProcess from "../Architecture/baseProcess.js";
 import AuthInfrastucture from "../Architecture/Infrastructure/authInfrastucture.js";
 import ClosingInfrastructure from "../Architecture/Infrastructure/closingInfrastructure.js";
 import DbTransactionInfrastucture from "../Architecture/Infrastructure/dbTransactionInfrastucture.js";
@@ -6,16 +6,7 @@ import LogFileInfrastructure from "../Architecture/Infrastructure/logFileInfrast
 import BlobService from "../Services/blobService.js";
 import CategoryService from "../Services/categoryService.js";
 import ElasticSearchService from "../Services/elasticSearchService.js";
-import { uuid } from "../../node_modules/uuidv4/build/lib/uuidv4.js";
-import fs from 'fs';
 import ItemService from "../Services/itemService.js";
-import BaseProcess from "../Architecture/baseProcess.js";
-import { ItemDTO, BuildItem, ShowOptionValue, StatusesList } from "justshare-shared";
-import CONFIG from "../config.js";
-import checkSum from "./commonFunctions/checkSum.js";
-import createConversation from "./commonFunctions/createConversation.js";
-import createIUA from "./commonFunctions/createIUA.js";
-import initCreateIUAProcess from "./commonFunctions/initCreateIUAProcess.js";
 
 
 

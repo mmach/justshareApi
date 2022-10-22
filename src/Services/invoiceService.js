@@ -1,4 +1,4 @@
-import v4 from "uuid";
+import {v4} from "uuid";
 import Axios from "../../node_modules/axios/index.js";
 import BaseService from "../Architecture/baseService.js";
 import { genInvoice } from './../Static/Invoice/invoice.js';

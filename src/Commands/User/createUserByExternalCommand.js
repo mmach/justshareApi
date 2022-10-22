@@ -1,7 +1,7 @@
 "use strict";
 import axios from 'axios';
 import { BlobBase64DTO, ExternalCredentialsDTO, UserRegisterInternalDTO } from "justshare-shared";
-import v4 from "uuid";
+import {v4} from "uuid";
 import LogFileInfrastructure from "../../Architecture/Infrastructure/logFileInfrastructure.js";
 import CONFIG from "../../config.js";
 import BlobService from "../../Services/blobService.js";

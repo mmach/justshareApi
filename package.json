@@ -95,7 +95,7 @@
     "query-string": "^6.8.3",
     "redis": "4.0.4",
     "sendmail": "^1.6.1",
-    "sequelize": "6.25.3",
+    "sequelize": "6.1.0",
     "sequelize-cli": "6.0.0",
     "socket.io-emitter": "3.2.0",
     "socket.io-redis": "6.1.1",

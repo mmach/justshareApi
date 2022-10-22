@@ -2,16 +2,14 @@
 import BaseCommand from "./../../Architecture/baseCommand.js";
 
 import { UserRegisterInternalDTO, UserRolesDTO } from "justshare-shared";
-import LogFileInfrastructure from "../../Architecture/Infrastructure/logFileInfrastructure.js";
-import UserService from "../../Services/userService.js";
-import ValidatonInfrastructure from "../../Architecture/Infrastructure/validatonInfrastructure.js";
-import DbTransactionInfrastucture from "../../Architecture/Infrastructure/dbTransactionInfrastucture.js";
-import MailSender from "../../Architecture/mailSender.js";
-import CodeDictionary from "../../Architecture/Dictionary/codeDictionary.js";
-import EMAIL_TEMPLATE from "../../Static/MailsXSLT/index.js"
-import UserValidators from './../../Validators/userValidators.js';
 import { URL } from "url";
-import uuidv4 from "uuid/v4";
+import v4 from "uuid";
+import DbTransactionInfrastucture from "../../Architecture/Infrastructure/dbTransactionInfrastucture.js";
+import LogFileInfrastructure from "../../Architecture/Infrastructure/logFileInfrastructure.js";
+import ValidatonInfrastructure from "../../Architecture/Infrastructure/validatonInfrastructure.js";
+import MailSender from "../../Architecture/mailSender.js";
+import UserService from "../../Services/userService.js";
+import UserValidators from './../../Validators/userValidators.js';
 
 /**
  *
@@ -82,7 +80,7 @@ export default class CreateUserCommand extends BaseCommand {
         name: 'USER'
 
       })*/
-    this.model.id = uuidv4();
+    this.model.id = v4();
     result = await this.userServiceDI.setContext(this.context).newInternalUser({
       model: this.model
     });

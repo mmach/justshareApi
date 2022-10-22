@@ -1,4 +1,4 @@
-import { uuid } from "../../../node_modules/uuidv4/build/lib/uuidv4"
+import v4 from "uuid";
 
 
 
@@ -31,7 +31,7 @@ let createIUA = async function (iua_id, item, message) {
         },
         withProject: true
     })
-    let transaction_id = uuid()
+    let transaction_id = v4()
    
     await this.itemTransactionsServiceDI.setContext(this.context).upsert({
         model: {
@@ -48,7 +48,7 @@ let createIUA = async function (iua_id, item, message) {
             model: item.itemCategoryOption.map(i => {
                 return {
                     ...i,
-                    id: uuid(),
+                    id: v4(),
                     itemTransaction_id: transaction_id,
                     item_id: item.id,
                     iua_id: iua_id

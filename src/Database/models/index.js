@@ -5,7 +5,7 @@
 
 //var basename = path.basename(__filename);
 import Sequelize from "sequelize";
-import * as configJSON from "./../config/config.json";
+import configJSON from "./../config/config.json";
 import Users from "./user.js";
 import Category from "./category.js";
 import CategoryHierarchy from "./categoryhierarchy.js";
@@ -45,35 +45,35 @@ import UserTypeRoles from "./userTypeRoles.js";
 import Dimensions from "./dimensions.js";
 import DimensionsProject from './dimensionsProject.js'
 import vProject from "./v_project.js";
-import MailParts from "./mailParts";
-import MailSenders from "./mailSenders";
-import MailTypes from "./mailTypes";
-import MailTypesProjects from "./mailTypesProject";
-import Seos from "./seos";
-import V_Category from "./v_category";
-import ItemUserAction from "./itemUserAction";
-import ItemTransactionCategoryOptions from "./itemTransactionCategoryOptions";
-import ItemTransaction from './itemTransaction'
-import Conversation from "./conversation";
-import UserConversation from "./userconversation";
-import ConversationMessages from "./conversationmessages";
-import ConversationMessageMembers from "./conversationmessagesmembers";
-import Status from "./status";
-import StatusActions from "./statusActions";
-import StatusProjects from "./statusProjects";
+import MailParts from "./mailParts.js";
+import MailSenders from "./mailSenders.js";
+import MailTypes from "./mailTypes.js";
+import MailTypesProjects from "./mailTypesProject.js";
+import Seos from "./seos.js";
+import V_Category from "./v_category.js";
+import ItemUserAction from "./itemUserAction.js";
+import ItemTransactionCategoryOptions from "./itemTransactionCategoryOptions.js";
+import ItemTransaction from './itemTransaction.js'
+import Conversation from "./conversation.js";
+import UserConversation from "./userconversation.js";
+import ConversationMessages from "./conversationmessages.js";
+import ConversationMessageMembers from "./conversationmessagesmembers.js";
+import Status from "./status.js";
+import StatusActions from "./statusActions.js";
+import StatusProjects from "./statusProjects.js";
 import ItemCategoryOptionTerm from "./itemCategoryOptionTerm.js";
-import Comment from "./comments";
+import Comment from "./comments.js";
 import Invoice from './invoices.js'
-import InvoiceUser from "./invoicesUsers";
-import InvoiceItem from "./invoicesItems";
-import UserInvoiceValue from "./userInvoicesValue";
-import ProcessChain from "./processChain";
-import Process from "./process";
-import ProcessChainState from "./processChainState";
-import ItemProcessState from "./itemProcessState";
-import ProcessChainPrivilege from "./processChainPrivilege";
-import ProcessChainActionInjection from "./processChainActionInjection";
-import CmsElementsProject from "./cmsElementsProjects";
+import InvoiceUser from "./invoicesUsers.js";
+import InvoiceItem from "./invoicesItems.js";
+import UserInvoiceValue from "./userInvoicesValue.js";
+import ProcessChain from "./processChain.js";
+import Process from "./process.js";
+import ProcessChainState from "./processChainState.js";
+import ItemProcessState from "./itemProcessState.js";
+import ProcessChainPrivilege from "./processChainPrivilege.js";
+import ProcessChainActionInjection from "./processChainActionInjection.js";
+import CmsElementsProject from "./cmsElementsProjects.js";
 
 var env = process.env.NODE_ENV || "development";
 var config = configJSON[env];
@@ -173,7 +173,7 @@ let models = {
   ItemProcessState: ItemProcessState.init(sequelize, Sequelize),
   ProcessChainActionInjection: ProcessChainActionInjection.init(sequelize, Sequelize),
   ProcessChainPrivilege: ProcessChainPrivilege.init(sequelize, Sequelize),
-  CmsElementsProject:CmsElementsProject.init(sequelize, Sequelize)
+  CmsElementsProject: CmsElementsProject.init(sequelize, Sequelize)
 };
 
 

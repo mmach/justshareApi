@@ -1,5 +1,4 @@
-import ServerException from "./Exceptions/serverException";
-import { inspect } from 'util' // or directly
+import ServerException from "./Exceptions/serverException.js";
 
 "use strict";
 

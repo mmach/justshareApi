@@ -1,14 +1,14 @@
-import BaseService from "../Architecture/baseService.js";
-import BlobRepository from "../Repository/blobRepository.js";
 import fs from "fs-extra";
+import Jimp from "jimp";
+import v4 from "uuid";
+import BaseService from "../Architecture/baseService.js";
 import ServerException from "../Architecture/Exceptions/serverException.js";
 import CONFIG from "../config.js";
-import uuidv4 from "uuid/v4";
-import Jimp from "jimp";
+import BlobRepository from "../Repository/blobRepository.js";
 
 let upload_path = process.env.UPLOAD_PATH || CONFIG.UPLOAD_PATH
 let saveBlobToFile = async ({ blob }) => {
-  let newUid = uuidv4();
+  let newUid = v4();
   if (blob.blob.indexOf("base64,") > 0) {
     blob.blob = blob.blob.split("base64,")[1];
   }
@@ -145,13 +145,13 @@ export default class BlobService extends BaseService {
         fileName: newBlob.filename
       });
       if (newBlob.type != 'svg' && newBlob.type != 'webp' && newBlob.type != 'pdf') {
-        let uid_min = uuidv4()
+        let uid_min = v4()
         let blob_min_id = await this.insertFile({
           id: uid_min,
           path: `${upload_path}/${newBlob.id}-min.` + newBlob.type,
           fileName: `${newBlob.id}-min.` + newBlob.type
         });
-        let uid_thumb = uuidv4()
+        let uid_thumb = v4()
         let blob_thumb_id = await this.insertFile({
           id: uid_thumb,
           path: `${upload_path}/${newBlob.id}-thumb.` + newBlob.type,
@@ -289,7 +289,7 @@ export default class BlobService extends BaseService {
     });
     let newImages = await this.uploadImage({ blob });
     let result = {
-      id: uuidv4(),
+      id: v4(),
       blob_id: newImages.blob_id,
       blob_thumbmail_id: newImages.blob_id,
       blob_min_id: newImages.blob_id,
@@ -318,7 +318,7 @@ export default class BlobService extends BaseService {
     let blob_id = this.context.project[blob.dest];
     let newImages = await this.uploadImage({ blob });
     let result = {
-      id: uuidv4(),
+      id: v4(),
       blob_id: newImages.blob_id,
       blob_thumbmail_id: newImages.blob_id,
       blob_min_id: newImages.blob_id,

@@ -1,10 +1,5 @@
 import BaseService from "../Architecture/baseService.js";
 import BlobRepository from "../Repository/blobRepository.js";
-import fs from "fs-extra";
-import ServerException from "../Architecture/Exceptions/serverException.js";
-import CONFIG from "../config.js";
-import uuidv4 from "uuid/v4";
-import Jimp from "jimp";
 
 /**
  *

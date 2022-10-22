@@ -1,6 +1,11 @@
 import winston  from 'winston';
 import path  from 'path';
 import 'winston-daily-rotate-file';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 
 
 const Logger = new(winston.Logger)({

@@ -1,6 +1,6 @@
 'use strict';
 import { Model } from 'sequelize';
-import uuidv4 from "uuid/v4";
+import v4 from "uuid";
 
 /**
  * 
@@ -70,7 +70,7 @@ export default class CategoryHierarchy extends Model {
       console.log(results);
       await Promise.all(results.map(el => {
         return models.EsItemSync.create({
-          id: uuidv4(),
+          id: v4(),
           item_id: el.id,
           project_id: el.project_id,
           operation: 'U'

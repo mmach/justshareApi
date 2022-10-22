@@ -1,4 +1,4 @@
-import { uuid } from "../../../node_modules/uuidv4/build/lib/uuidv4"
+import v4 from "uuid";
 import { LinkItem, GetValueByDim, DimensionsList, StatusesList } from 'justshare-shared'
 import fs from 'fs'
 
@@ -47,7 +47,7 @@ let genInvoice = async function (user_src_id, dest_user_id) {
     })
 
     let invoice = await this.invoiceServiceDI.setContext(this.context).genInvoicePDF({ invoice_id: invoice_id })
-    let blob_id = uuid();
+    let blob_id = v4();
     let content = await fs.readFileSync(invoice.invoicePath, { encoding: 'base64' });
 
     let createBlobResult = await this.blobServiceDI.setContext(this.context).uploadUserProject({

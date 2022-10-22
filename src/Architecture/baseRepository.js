@@ -1,9 +1,7 @@
 // @ts-nocheck
 
-import ServerException from "./Exceptions/serverException.js";
-import { Model } from "sequelize";
 import { BaseDTO } from "justshare-shared";
-import uuidv4 from "uuid/v4";
+import v4 from "uuid";
 
 /**
  *
@@ -135,7 +133,7 @@ export default class BaseRepository {
   insert({ model, withProject, transaction }) {
     let item = model;
     if (!model.id) {
-      item.id = uuidv4();
+      item.id = v4();
     }
     if (withProject) {
       item.project_id = this.context.project.id;
@@ -152,7 +150,7 @@ export default class BaseRepository {
     item = item.map(i => {
       return {
         ...i,
-        id: i.id ? i.id : uuidv4(),
+        id: i.id ? i.id : v4(),
         project_id: withProject ? this.context.project.id : undefined
       }
     })

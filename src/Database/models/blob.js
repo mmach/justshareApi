@@ -1,7 +1,7 @@
 
 'use strict';
 import { Model } from 'sequelize';
-import uuidv4 from "uuid/v4";
+import v4 from "uuid";
 
 /**
  * 
@@ -61,7 +61,7 @@ export default class Blob extends Model {
       console.log('afterUpdate')
       if (item.item_id) {
         models.EsItemSync.create({
-          id: uuidv4(),
+          id: v4(),
           item_id: item.item_id,
           operation: 'U'
         },

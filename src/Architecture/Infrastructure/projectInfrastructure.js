@@ -31,6 +31,7 @@ export default class ProjectInfrastructure extends BaseInfrastracture {
         else {
             throw 'AUTHORIZATION_PROJECT_ERROR'
         }
+        console.log(token)
         let cert = fs.readFileSync('./cert.key');
         let decoded = jwt.verify(token, cert.toString('utf8'));
         return decoded

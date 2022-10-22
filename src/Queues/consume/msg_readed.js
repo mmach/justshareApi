@@ -4,7 +4,7 @@ import SequelizeDB from '../../Database/models/index.js';
 import * as useSockets from '../../WebsocketMessages/index.js';
 
 
-const onReadMessage = async data => {
+export const onReadMessage = async data => {
   let obj = JSON.parse(data.content.toString())
   await SequelizeDB.ConversationMessageMembers.update({
     status: 'R'
@@ -28,4 +28,3 @@ const onReadMessage = async data => {
   global.queueChannel.ack(data);
 }
 
-module.exports = { onReadMessage }

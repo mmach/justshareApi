@@ -4,7 +4,8 @@ import Axios from 'axios';
 import CONFIG from '../../config.js';
 import jwt from "jsonwebtoken";
 import fs from 'fs'
-const processReminder = async (msg) => {
+
+export const processReminder = async (msg) => {
   // throw msg;
   //   var secs = msg.content.toString().split('.').length - 1;
   let obj = JSON.parse(msg.content.toString());
@@ -86,4 +87,3 @@ const processReminder = async (msg) => {
 
 
 
-module.exports = { processReminder }

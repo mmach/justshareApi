@@ -305,8 +305,8 @@ import IUA_ChangeStatusRelatedProcess from "./Processes/iua_ChangeStatusRelatedP
 import IUA_CloseAllChildrenIUAProcess from "./Processes/iua_CloseAllChildrenIUAProcess.js";
 import IUA_Cron_ReminderDaysIUACounterProcess from "./Processes/iua_cron_reminderDaysCounter.js";
 import GetProcessCronsQuery from "./Query/Process/getProcessCronsQuery.js";
-import IUA_SetDestinationDateProcess from './Processes/iua_SetDestinationDateProcess'
-import IUA_Cron_reminderDaysToDestDateCounterProcess from './Processes/iua_cron_reminderDaysToDestDateCounterProcess'
+import IUA_SetDestinationDateProcess from './Processes/iua_SetDestinationDateProcess.js'
+import IUA_Cron_reminderDaysToDestDateCounterProcess from './Processes/iua_cron_reminderDaysToDestDateCounterProcess.js'
 import CmsElementsProjectRepository from "./Repository/cmsElementsProjectRepository.js";
 import CmsElementsProjectService from "./Services/cmsElementsProjectService.js";
 import GetItemSensorByValueAndMacDimQuery from "./Query/Item/getItemSensorByValueAndMacDimQuery.js";

@@ -1,15 +1,14 @@
 // @ts-nocheck
 
 import bcrypt from "bcryptjs";
-import uuidv4 from "uuid/v4";
-import BaseService from "../Architecture/baseService.js";
-import { UserDTO, UserLoginInternalDTO, UserRegisterInternalDTO } from "justshare-shared";
-import UnitOfWork from "../unitOfWork.js";
-import ServerException from "../Architecture/Exceptions/serverException.js";
-import UserRepository from "../Repository/userRepository.js";
-import jwt from "jsonwebtoken";
 import fs from "fs";
+import jwt from "jsonwebtoken";
+import { UserDTO, UserLoginInternalDTO, UserRegisterInternalDTO } from "justshare-shared";
+import v4 from "uuid";
+import BaseService from "../Architecture/baseService.js";
+import ServerException from "../Architecture/Exceptions/serverException.js";
 import CONFIG from "../config.js";
+import UnitOfWork from "../unitOfWork.js";
 
 /**
  *
@@ -85,7 +84,7 @@ export default class UserService extends BaseService {
     }
 
     if (hash == user.passwordHash) {
-      let refresh_token = uuidv4();
+      let refresh_token = v4();
       var expiresDate = new Date();
       expiresDate.setDate(expiresDate.getDate() + 1);
 
@@ -118,7 +117,7 @@ export default class UserService extends BaseService {
 
   async genRefreshToken({ guid }) {
     let user = await this.getByGuid({ uid: guid });
-    let refresh_token = uuidv4();
+    let refresh_token = v4();
 
     await this.unitOfWorkDI.userRepository.updateRefreshToken({
       id: user.id,

@@ -1,9 +1,6 @@
+import v4 from "uuid";
 import BaseService from "../Architecture/baseService.js";
-import fs from "fs-extra";
-import ServerException from "../Architecture/Exceptions/serverException.js";
 import CONFIG from "../config.js";
-import uuidv4 from "uuid/v4";
-import { uuid } from "../../node_modules/uuidv4/build/lib/uuidv4.js";
 import * as useSockets from "../WebsocketMessages/index.js";
 
 
@@ -63,7 +60,7 @@ export default class ConversationService extends BaseService {
 
     conversation.users = [
       {
-        id: uuidv4(),
+        id: v4(),
         user_id: user_owner.id,
         conversation_id: id,
         project_id: this.context.project.id,
@@ -71,7 +68,7 @@ export default class ConversationService extends BaseService {
       }
       ,
       {
-        id: uuidv4(),
+        id: v4(),
         user_id: user_dest[0].id,
         conversation_id: id,
         project_id: this.context.project.id,
@@ -88,7 +85,7 @@ export default class ConversationService extends BaseService {
       model: conversation.users[1]
       , withProject: true
     })
-    let msg_id = uuidv4()
+    let msg_id = v4()
     conversation.messages = [{
       id: msg_id,
       user_id: user_owner.id,
@@ -106,7 +103,7 @@ export default class ConversationService extends BaseService {
       , withProject: true
     })
     conversation.messages[0].users = [{
-      id: uuid(),
+      id: v4(),
       user_id: user_dest[0].id,
       conversation_id: id,
       message_id: msg_id,

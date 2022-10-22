@@ -1,5 +1,5 @@
 import { ProjectDTO } from 'justshare-shared'
-import BaseQuery from '../../Architecture/baseQuery';
+import BaseQuery from '../../Architecture/baseQuery.js';
 
 
 export default class GetProjectSocketsQuery extends BaseQuery {

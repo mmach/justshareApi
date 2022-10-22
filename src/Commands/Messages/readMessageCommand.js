@@ -1,8 +1,6 @@
 import BaseCommand from "../../Architecture/baseCommand.js";
 
-import Promise from "bluebird";
 import CONFIG from "../../config.js";
-import uuidv4 from "uuid/v4";
 
 export default class ReadMessageCommand extends BaseCommand {
 

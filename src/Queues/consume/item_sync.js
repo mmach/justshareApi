@@ -3,7 +3,7 @@ import SequelizeDB from '../../Database/models/index.js';
 import Axios from 'axios';
 import CONFIG from '../../config.js';
 
-const itemSync = async (msg) => {
+export const itemSync = async (msg) => {
   // throw msg;
   //   var secs = msg.content.toString().split('.').length - 1;
   let obj = JSON.parse(msg.content.toString());
@@ -105,4 +105,3 @@ const itemSync = async (msg) => {
 
 
 
-module.exports = { itemSync }

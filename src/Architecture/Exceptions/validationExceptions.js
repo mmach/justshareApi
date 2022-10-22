@@ -1,4 +1,4 @@
-import CodeDictionary from "../Dictionary/codeDictionary";
+import CodeDictionary from "../Dictionary/codeDictionary.js";
 
 "use strict";
 

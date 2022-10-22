@@ -1,12 +1,12 @@
 "use strict";
-import { Model } from "sequelize";
+import Sequelize from "sequelize";
 /**
  *
  * @export
  * @class Users
  * @extends Sequelize.Model
  */
-export default class Users extends Model {
+export default class Users extends Sequelize.Model {
   /**
    *
    * @static

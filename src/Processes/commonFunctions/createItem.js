@@ -1,4 +1,4 @@
-import { uuid } from "../../../node_modules/uuidv4/build/lib/uuidv4"
+import v4 from "uuid";
 import Promise from "bluebird";
 
 function createSearchClob(newItem, itemId) {
@@ -70,7 +70,7 @@ async function tagsInsert(newItem, itemId) {
     return item.id == undefined
   })
   newTags = newTags.map(item => {
-    item.id = uuid()
+    item.id = v4()
     return item
   })
   let idNewTagsArray = await this.tagServiceDI.setContext(this.context).insertUniq({ newTags: newTags });

@@ -1,8 +1,12 @@
 
 
 import PdfPrinter from 'pdfmake';
+import  fs from 'fs';
+import path  from 'path';
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-var fs = require('fs');
 
 let fonts = {
     // Default font should still be available
@@ -16,7 +20,7 @@ let fonts = {
 
 };
 var printer = new PdfPrinter(fonts);
-let genInvoice = async (model) => {
+export const genInvoice = async (model) => {
 
     let docDefinition = {
 
@@ -472,4 +476,3 @@ let genInvoice = async (model) => {
     }
 }
 
-module.exports = { genInvoice }

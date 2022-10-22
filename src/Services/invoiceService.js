@@ -1,12 +1,7 @@
-import BaseService from "../Architecture/baseService.js";
-import fs from "fs-extra";
-import ServerException from "../Architecture/Exceptions/serverException.js";
-import CONFIG from "../config.js";
-import uuidv4 from "uuid/v4";
-import { genInvoice } from './../Static/Invoice/invoice.js'
+import v4 from "uuid";
 import Axios from "../../node_modules/axios/index.js";
-import btoa from 'btoa'
-import { uuid } from "uuidv4";
+import BaseService from "../Architecture/baseService.js";
+import { genInvoice } from './../Static/Invoice/invoice.js';
 
 
 /**
@@ -26,15 +21,15 @@ export default class InvoiceService extends BaseService {
   }
   async createInvoice({ model }) {
     let src = model.users.filter(i => { return i.user_type == 'S' })[0]
-    src.id = uuid()
+    src.id = v4()
     let dest = model.users.filter(i => { return i.user_type == 'D' })[0]
-    dest.id = uuid()
+    dest.id = v4()
     await this.createInvoiceUser({ model: src })
 
     await this.createInvoiceUser({ model: dest })
 
 
-    let invocie_id = uuid()
+    let invocie_id = v4()
     let obj = {
       ...model,
       price_net: model.items.reduce(function (a, b) {
@@ -58,7 +53,7 @@ export default class InvoiceService extends BaseService {
     let bi = model.items.map(i => {
       return {
         ...i,
-        id: uuid(),
+        id: v4(),
         price: i.price_full_tax,
         invoice_id: invocie_id
       }

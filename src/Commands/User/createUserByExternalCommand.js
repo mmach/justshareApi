@@ -1,14 +1,12 @@
 "use strict";
-import BaseCommand from "./../../Architecture/baseCommand.js";
+import axios from 'axios';
+import { BlobBase64DTO, ExternalCredentialsDTO, UserRegisterInternalDTO } from "justshare-shared";
+import v4 from "uuid";
 import LogFileInfrastructure from "../../Architecture/Infrastructure/logFileInfrastructure.js";
-import UserService from "../../Services/userService.js";
-import axios from 'axios'
-import BlobService from "../../Services/blobService.js";
-import uuidv4 from 'uuid/v4';
 import CONFIG from "../../config.js";
-import { BlobBase64DTO, UserRegisterInternalDTO, ExternalCredentialsDTO } from "justshare-shared";
-import EMAIL_TEMPLATE from "./../../Static/MailsXSLT/index.js";
-import CodeDictionary from "../../Architecture/Dictionary/codeDictionary.js";
+import BlobService from "../../Services/blobService.js";
+import UserService from "../../Services/userService.js";
+import BaseCommand from "./../../Architecture/baseCommand.js";
 
 /**
  * 
@@ -77,7 +75,7 @@ export default class CreateUserByExternalCommand extends BaseCommand {
     let blob = new BlobBase64DTO();
     blob.blob = img.data;
     blob.type = img.headers["content-type"];
-    blob.uid = uuidv4();
+    blob.uid = v4();
     let result = await this.blobServiceDI.setContext(this.context).setContext(this.context).uploadUserImage({ blob: blob });
 
     await this.blobServiceDI.setContext(this.context).verifyImage({ blob: result.dataValues });
@@ -167,7 +165,7 @@ export default class CreateUserByExternalCommand extends BaseCommand {
         name: result.name,
         phone: '',
         birthDate: Date.now(),
-        password: uuidv4(),
+        password: v4(),
         city: null,
         city_id: null,
         address: null,
@@ -175,7 +173,7 @@ export default class CreateUserByExternalCommand extends BaseCommand {
         country_id: null,
         longitude: 0,
         latitude: 0,
-        uid: uuidv4(),
+        uid: v4(),
         language: this.language,
         blob_id: null
 

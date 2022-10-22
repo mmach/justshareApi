@@ -6,7 +6,7 @@ import SequelizeDB from '../Database/models/index.js';
 import {itemSync} from './consume/item_sync.js'
 import {processReminder} from './consume/process_reminder.js'
 
-let amqpFunc = async () => {
+export const  amqpFunc = async () => {
     console.log(process.env.amqp)
     var connection = amqp.connect([process.env.AMQP ? process.env.AMQP : CONFIG.MQRABBIT.link]);
 
@@ -83,4 +83,3 @@ let amqpFunc = async () => {
     //sendMessage()
 }
 
-module.exports = { amqpFunc }

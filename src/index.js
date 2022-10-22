@@ -1,5 +1,5 @@
 "use strict";
-import { makeInvoker, scopePerRequest } from "awilix-koa";
+import awlixKoa from "awilix-koa";
 import CircularJSON from 'circular-json';
 import fs from 'fs';
 import Koa from "koa";
@@ -11,14 +11,13 @@ import KoaRouter from "koa-router";
 import cors from "koa2-cors";
 import { URL } from "url";
 import container from "./awilix.js";
-import SequelizeDB from "./Database/models/index.js";
-import CONFIG from './config.js';
 //import io from 'socket.io-emitter'
-import { uuid } from '../node_modules/uuidv4/build/lib/uuidv4.js';
-import { amqpFunc } from './Queues/index.js'
-const { Emitter } = require("@socket.io/redis-emitter");
-import {parse, stringify, toJSON, fromJSON} from 'flatted';
-
+import { parse } from 'flatted';
+import { amqpFunc } from './Queues/index.js';
+import {Emitter} from '@socket.io/redis-emitter'
+import redis from 'redis'
+import zlib from  'zlib'
+const { makeInvoker, scopePerRequest } = awlixKoa
 //const { createClient } = require("redis"); // not included, needs to be explicitly installed
 //const redisAdapter = require('socket.io-redis');
 
@@ -26,7 +25,7 @@ import {parse, stringify, toJSON, fromJSON} from 'flatted';
 //const io = new Emitter(redisClient);
 //global.ioredis = new Redis({ host: process.env.REDIS_HOST || 'soapfish.redistogo.com', port: process.env.REDIS_PORT || 11656, auth_pass: process.env.REDIS_PASSWORD || "fc3881610ce65a10691e43ea92b2c7bb" })
 //global.ioredis = new Redis({ host: process.env.REDIS_HOST || 'redis-13184.c78.eu-west-1-2.ec2.cloud.redislabs.com', port: process.env.REDIS_PORT || 13184, password: process.env.REDIS_PASSWORD || "oERk63TBgqihQWMYHakRnyCQoi0MSni7" })
-const client = require('redis').createClient({
+const client = redis.createClient({
   //host: process.env.REDIS_HOST || 'redis-16920.c233.eu-west-1-1.ec2.cloud.redislabs.com',
   //port: process.env.REDIS_PORT || 16920,
   //password: process.env.REDIS_PASSWORD || '9GP9aoV3BrtzyRu61ovBVnCmmiw1DKkE',
@@ -92,7 +91,7 @@ app.use(compress({
     return /text/i.test(content_type)
   },
   threshold: 2048,
-  flush: require('zlib').Z_SYNC_FLUSH
+  flush: zlib.Z_SYNC_FLUSH
 }))
 
 // This installs a scoped container into our
@@ -109,7 +108,7 @@ app.use((ctx, next) => {
   return next();
 });
 
-const cqrsPreprocess = () => {
+export const cqrsPreprocess = () => {
   const commandExec = async ctx => {
     const body = ctx.request.body;
     console.log()
@@ -185,4 +184,3 @@ app.listen(process.env.PORT || 8080);
 
 // Create a new connection manager
 
-module.exports = cqrsPreprocess;

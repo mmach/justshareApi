@@ -3,7 +3,7 @@ import SequelizeDB from '../../Database/models/index.js';
 import * as useSockets from '../../WebsocketMessages/index.js';
 
 
-const onSendMessage = async data => {
+export const onSendMessage = async data => {
   try {
     let obj = JSON.parse(data.content.toString())
     obj.message = obj.message.substring(0, 8000);
@@ -35,4 +35,3 @@ const onSendMessage = async data => {
   }
   global.queueChannel.ack(data);
 }
-module.exports = { onSendMessage }

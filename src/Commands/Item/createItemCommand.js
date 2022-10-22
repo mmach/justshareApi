@@ -9,7 +9,7 @@ import CategoryService from "../../Services/categoryService.js";
 import Promise from "bluebird";
 import ElasticSearchService from "../../Services/elasticSearchService.js";
 import TagService from './../../Services/tagService.js'
-import uuidv4 from "uuid/v4";
+import v4 from "uuid";
 import ClosingInfrastructure from "../../Architecture/Infrastructure/closingInfrastructure.js";
 import CONFIG from "../../config.js";
 
@@ -209,7 +209,7 @@ export default class CreateItemCommand extends BaseCommand {
       return item.id == undefined
     })
     newTags = newTags.map(item => {
-      item.id = uuidv4()
+      item.id = v4()
       return item
     })
     let idNewTagsArray = await this.tagServiceDI.setContext(this.context).insertUniq({ newTags: newTags });

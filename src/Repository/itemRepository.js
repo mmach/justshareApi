@@ -1,7 +1,7 @@
 import BaseRepository from "../Architecture/baseRepository.js";
 import SequelizeDB from "../Database/models/index.js";
 import { SearchItemDTO } from 'justshare-shared';
-import uuidv4 from "uuid/v4";
+import v4 from "uuid";
 
 /**
  *
@@ -445,7 +445,7 @@ export default class ItemRepository extends BaseRepository {
 
     return this.sequelizeDI.ItemTag.create(
       {
-        id: uuidv4(),
+        id: v4(),
         item_id: item_id,
         tag_id: tag_id,
         project_id: this.context.project.id

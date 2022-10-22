@@ -1,6 +1,6 @@
 "use strict";
 import { Model } from "sequelize";
-import uuidv4 from "uuid/v4";
+import v4 from "uuid";
 
 
 
@@ -112,7 +112,7 @@ export default class Item extends Model {
     Item.afterUpsert(async (item, options) => {
 
       await models.EsItemSync.create({
-        id: uuidv4(),
+        id: v4(),
         item_id: item[0].dataValues.id,
         project_id: item[0].dataValues.project_id,
         operation: 'I'
@@ -148,7 +148,7 @@ export default class Item extends Model {
       })
 
       await models.EsItemSync.create({
-        id: uuidv4(),
+        id: v4(),
         item_id: item.id,
         project_id: '',
         operation: 'D'

@@ -20,16 +20,19 @@ export default class UpsertCategoryOptionsCommand extends BaseCommand {
      * @param  {{logFileInfrastructureDI : LogFileInfrastructure,  categoryOptionServiceDI:CategoryOptionService ,authInfrastructureDI:AuthInfrastucture}}
      * @memberof InsertCategoryCommand
      */
-    constructor({ logFileInfrastructureDI, categoryOptionServiceDI, authInfrastructureDI, projectInfrastructureDI }) {
+    constructor({ logFileInfrastructureDI, translationServiceDI, categoryOptionServiceDI, authInfrastructureDI, projectInfrastructureDI }) {
         super({ logFileInfrastructureDI, authInfrastructureDI, projectInfrastructureDI });
         this.categoryOptionServiceDI = categoryOptionServiceDI
+        this.translationServiceDI = translationServiceDI
 
     };
     init(dto) {
         this.model = Object.assign(new CategoryOptionsDTO(), dto);
     }
     async action() {
-
+        if (this.model.translation_id) {
+            await this.translationServiceDI.setContext(this.context).upsert({ model: this.model.translation, withProject: true });
+        }
         await this.categoryOptionServiceDI.setContext(this.context).upsert({ model: this.model, withProject: true });
         //await this.categoryOptionServiceDI.setContext(this.context).upsertToCategory({model:this.model.category_link})
     }

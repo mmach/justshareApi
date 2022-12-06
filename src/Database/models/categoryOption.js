@@ -146,7 +146,8 @@ export default class CategoryOption extends Model {
         is_form_rendered:DataTypes.BOOLEAN,
         search_params:DataTypes.TEXT,
         preview_params:DataTypes.TEXT,
-        create_params:DataTypes.TEXT
+        create_params:DataTypes.TEXT,
+        translation_id:DataTypes.UUID
 
       },
       { sequelize,
@@ -161,6 +162,7 @@ export default class CategoryOption extends Model {
     CategoryOption.belongsTo(models.CategoryOptionsType, { as: "cat_opt", targetKey: 'id', foreignKey: "cot_id" });
     CategoryOption.hasMany(models.CategoryOptionsTemplate, { as: "cat_opt_temp", targetKey: 'co_id', foreignKey: "co_id" });
     CategoryOption.hasMany(models.CategoryOptionsLink, { as: "category_link", targetKey: 'co_id', foreignKey: "co_id" });
+    CategoryOption.belongsTo(models.Translations, { as: "translation", targetKey: 'id', foreignKey: "translation_id" });
 
 
     /* Item.belongsToMany(models.Category, {

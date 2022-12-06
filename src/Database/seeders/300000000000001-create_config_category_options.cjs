@@ -6,7 +6,7 @@ let fs = require('fs');
 
 let Promise = require('bluebird');
 let readline = require('readline')
-const uuidv4 = require("uuid/v4");
+const v4 = require("uuid").v4;
 
 
 // create instance of readline
@@ -42,7 +42,7 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
 
     let date = new Date().toISOString()
-    let id = uuidv4();
+    let id = v4();
     let category = {
       id: id,
       name: "NUMBER",
@@ -54,7 +54,7 @@ module.exports = {
     };
 
     let template = [{
-      id: uuidv4(),
+      id: v4(),
       cot_id: id,
       type: "long",
       status: true,
@@ -68,7 +68,7 @@ module.exports = {
     //await queryInterface.bulkInsert('CategoryOptionsType', [category]);
     //await queryInterface.bulkInsert('CategoryOptionsTypeTemplate', [template]);
 
-    id = uuidv4();
+    id = v4();
     category = {
       id: id,
       name: "FLOAT",
@@ -80,7 +80,7 @@ module.exports = {
 
     }
     template = [{
-      id: uuidv4(),
+      id: v4(),
       cot_id: id,
       type: "float",
       status: 1,
@@ -91,7 +91,7 @@ module.exports = {
     }]
     await save(queryInterface, category, template);
 
-    id = uuidv4();
+    id = v4();
     category = {
       id: id,
       name: "DATE",
@@ -101,7 +101,7 @@ module.exports = {
       updated_at: date,
     }
     template = [{
-      id: uuidv4(),
+      id: v4(),
       cot_id: id,
       type: "datetime",
       status: 1,
@@ -113,7 +113,7 @@ module.exports = {
     await save(queryInterface, category, template);
 
 
-    id = uuidv4();
+    id = v4();
     category = {
       id: id,
       name: "STRING",
@@ -123,7 +123,7 @@ module.exports = {
       updated_at: date,
     }
     template = [{
-      id: uuidv4(),
+      id: v4(),
       cot_id: id,
       type: "nvarchar",
       status: 1,
@@ -134,7 +134,7 @@ module.exports = {
     }]
     await save(queryInterface, category, template);
 
-    id = uuidv4();
+    id = v4();
     category = {
       id: id,
       name: "BOOLEAN",
@@ -144,7 +144,7 @@ module.exports = {
       updated_at: date,
     }
     template = [{
-      id: uuidv4(),
+      id: v4(),
       cot_id: id,
       type: "bit",
       status: 1,
@@ -156,7 +156,7 @@ module.exports = {
     await save(queryInterface, category, template);
 
 
-    id = uuidv4();
+    id = v4();
     category = {
       id: id,
       name: "BETWEEN NUMBERS",
@@ -166,7 +166,7 @@ module.exports = {
       updated_at: date,
     }
     template = [{
-      id: uuidv4(),
+      id: v4(),
       cot_id: id,
       type: "long",
       status: 1,
@@ -175,7 +175,7 @@ module.exports = {
       updated_at: date
 
     }, {
-      id: uuidv4(),
+      id: v4(),
       cot_id: id,
       type: "long",
       status: 1,
@@ -187,7 +187,7 @@ module.exports = {
 
     await save(queryInterface, category, template);
 
-    id = uuidv4();
+    id = v4();
     category = {
       id: id,
       name: "BETWEEN FLOAT",
@@ -197,7 +197,7 @@ module.exports = {
       updated_at: date,
     }
     template = [{
-      id: uuidv4(),
+      id: v4(),
       cot_id: id,
       type: "float",
       status: 1,
@@ -206,7 +206,7 @@ module.exports = {
       updated_at: date
 
     }, {
-      id: uuidv4(),
+      id: v4(),
       cot_id: id,
       type: "float",
       status: 1,
@@ -217,7 +217,7 @@ module.exports = {
     }]
     await save(queryInterface, category, template);
 
-    id = uuidv4();
+    id = v4();
     category = {
       id: id,
       name: "SELECT NUMBERS",
@@ -227,7 +227,7 @@ module.exports = {
       updated_at: date,
     }
     template = [{
-      id: uuidv4(),
+      id: v4(),
       cot_id: id,
       type: "long",
       status: 1,
@@ -239,7 +239,7 @@ module.exports = {
 
     await save(queryInterface, category, template);
 
-    id = uuidv4();
+    id = v4();
     category = {
       id: id,
       name: "SELECT VARCHARS",
@@ -249,7 +249,7 @@ module.exports = {
       updated_at: date,
     }
     template = [{
-      id: uuidv4(),
+      id: v4(),
       cot_id: id,
       type: "nvarchar",
       status: 1,
@@ -262,7 +262,7 @@ module.exports = {
 
 
 
-    id = uuidv4();
+    id = v4();
     category = {
       id: id,
       name: "MULTISELECT VARCHARS",
@@ -272,7 +272,7 @@ module.exports = {
       updated_at: date,
     }
     template = [{
-      id: uuidv4(),
+      id: v4(),
       cot_id: id,
       type: "nvarchar",
       status: 1,
@@ -283,7 +283,7 @@ module.exports = {
     }]
     await save(queryInterface, category, template);
 
-    id = uuidv4();
+    id = v4();
     category = {
       id: id,
       name: "MULTISELECT NUMBER",
@@ -293,7 +293,7 @@ module.exports = {
       updated_at: date,
     }
     template = [{
-      id: uuidv4(),
+      id: v4(),
       cot_id: id,
       type: "float",
       status: 1,
@@ -308,7 +308,7 @@ module.exports = {
 
 
 
-    id = uuidv4();
+    id = v4();
     category = {
       id: id,
       name: "BETWEEN DATE",
@@ -318,7 +318,7 @@ module.exports = {
       updated_at: date,
     }
     template = [{
-      id: uuidv4(),
+      id: v4(),
       cot_id: id,
       type: "datetime",
       status: 1,
@@ -327,7 +327,7 @@ module.exports = {
       updated_at: date
 
     }, {
-      id: uuidv4(),
+      id: v4(),
       cot_id: id,
       type: "datetime",
       status: 1,
@@ -338,7 +338,7 @@ module.exports = {
     }]
 
 
-    id = uuidv4();
+    id = v4();
     category = {
       id: id,
       name: "NOT BETWEEN DATE",
@@ -348,7 +348,7 @@ module.exports = {
       updated_at: date,
     }
     template = [{
-      id: uuidv4(),
+      id: v4(),
       cot_id: id,
       type: "datetime",
       status: 1,
@@ -357,7 +357,7 @@ module.exports = {
       updated_at: date
 
     }, {
-      id: uuidv4(),
+      id: v4(),
       cot_id: id,
       type: "datetime",
       status: 1,
@@ -369,7 +369,7 @@ module.exports = {
 
     await save(queryInterface, category, template);
 
-    id = uuidv4();
+    id = v4();
     category = {
       id: id,
       name: "FUNC LONG",
@@ -379,7 +379,7 @@ module.exports = {
       updated_at: date,
     }
     template = [{
-      id: uuidv4(),
+      id: v4(),
       cot_id: id,
       type: "long",
       is_func: 1,
@@ -391,7 +391,7 @@ module.exports = {
     }]
     await save(queryInterface, category, template);
 
-    id = uuidv4();
+    id = v4();
     category = {
       id: id,
       name: "FUNC FLOAT",
@@ -401,7 +401,7 @@ module.exports = {
       updated_at: date,
     }
     template = [{
-      id: uuidv4(),
+      id: v4(),
       cot_id: id,
       type: "float",
       is_func: 1,
@@ -414,7 +414,7 @@ module.exports = {
     await save(queryInterface, category, template);
 
 
-    id = uuidv4();
+    id = v4();
     category = {
       id: id,
       name: "URL_SINGLE",
@@ -425,7 +425,7 @@ module.exports = {
     }
     template = [
       {
-        id: uuidv4(),
+        id: v4(),
         cot_id: id,
         type: "nvarchar",
         is_func: 0,
@@ -436,7 +436,7 @@ module.exports = {
 
       },
       {
-        id: uuidv4(),
+        id: v4(),
         cot_id: id,
         type: "nvarchar",
         is_func: 0,
@@ -448,7 +448,7 @@ module.exports = {
       }
       ,
       {
-        id: uuidv4(),
+        id: v4(),
         cot_id: id,
         type: "bit",
         is_func: 0,
@@ -460,7 +460,7 @@ module.exports = {
       }
       ,
       {
-        id: uuidv4(),
+        id: v4(),
         cot_id: id,
         type: "nvarchar",
         is_func: 0,
@@ -472,7 +472,7 @@ module.exports = {
       }
       ,
       {
-        id: uuidv4(),
+        id: v4(),
         cot_id: id,
         type: "nvarchar",
         is_func: 1,
@@ -485,7 +485,7 @@ module.exports = {
     await save(queryInterface, category, template);
 
 
-    id = uuidv4();
+    id = v4();
     category = {
       id: id,
       name: "URL_ARRAY",
@@ -496,7 +496,7 @@ module.exports = {
     }
     template = [
       {
-        id: uuidv4(),
+        id: v4(),
         cot_id: id,
         type: "nvarchar",
         is_func: 0,
@@ -507,7 +507,7 @@ module.exports = {
 
       },
       {
-        id: uuidv4(),
+        id: v4(),
         cot_id: id,
         type: "nvarchar",
         is_func: 0,
@@ -519,7 +519,7 @@ module.exports = {
       }
       ,
       {
-        id: uuidv4(),
+        id: v4(),
         cot_id: id,
         type: "bit",
         is_func: 0,
@@ -530,7 +530,7 @@ module.exports = {
       }
       ,
       {
-        id: uuidv4(),
+        id: v4(),
         cot_id: id,
         type: "nvarchar",
         is_func: 0,
@@ -542,7 +542,7 @@ module.exports = {
       }
       ,
       {
-        id: uuidv4(),
+        id: v4(),
         cot_id: id,
         type: "nvarchar",
         is_func: 1,
@@ -556,7 +556,7 @@ module.exports = {
 
 
 
-    id = uuidv4();
+    id = v4();
     category = {
       id: id,
       name: "GEOCOORDINATE",
@@ -566,7 +566,7 @@ module.exports = {
       updated_at: date,
     }
     template = [{
-      id: uuidv4(),
+      id: v4(),
       cot_id: id,
       type: "float",
       status: 1,
@@ -575,7 +575,7 @@ module.exports = {
       updated_at: date
 
     }, {
-      id: uuidv4(),
+      id: v4(),
       cot_id: id,
       type: "float",
       status: 1,
@@ -585,7 +585,7 @@ module.exports = {
 
     },
       , {
-      id: uuidv4(),
+      id: v4(),
       cot_id: id,
       type: "nvarchar",
       status: 1,
@@ -595,7 +595,7 @@ module.exports = {
 
     }
       , {
-      id: uuidv4(),
+      id: v4(),
       cot_id: id,
       type: "nvarchar",
       status: 1,
@@ -605,7 +605,7 @@ module.exports = {
 
     }
       , {
-      id: uuidv4(),
+      id: v4(),
       cot_id: id,
       type: "nvarchar",
       status: 1,
@@ -615,7 +615,7 @@ module.exports = {
 
     },
     {
-      id: uuidv4(),
+      id: v4(),
       cot_id: id,
       type: "nvarchar",
       status: 1,
@@ -625,7 +625,7 @@ module.exports = {
 
     },
     {
-      id: uuidv4(),
+      id: v4(),
       cot_id: id,
       type: "nvarchar",
       status: 1,
@@ -635,7 +635,7 @@ module.exports = {
 
     },
   {
-      id: uuidv4(),
+      id: v4(),
       cot_id: id,
       type: "nvarchar",
       status: 1,
@@ -645,7 +645,7 @@ module.exports = {
 
     },
   {
-      id: uuidv4(),
+      id: v4(),
       cot_id: id,
       type: "nvarchar",
       status: 1,
@@ -655,7 +655,7 @@ module.exports = {
 
     },
     {
-      id: uuidv4(),
+      id: v4(),
       cot_id: id,
       type: "nvarchar",
       status: 1,
@@ -665,7 +665,7 @@ module.exports = {
 
     },
     {
-      id: uuidv4(),
+      id: v4(),
       cot_id: id,
       type: "nvarchar",
       status: 1,
@@ -675,7 +675,7 @@ module.exports = {
 
     },
     {
-      id: uuidv4(),
+      id: v4(),
       cot_id: id,
       type: "nvarchar",
       status: 1,
@@ -685,7 +685,7 @@ module.exports = {
 
     },
     {
-      id: uuidv4(),
+      id: v4(),
       cot_id: id,
       type: "nvarchar",
       status: 1,
@@ -695,7 +695,7 @@ module.exports = {
 
     },
     {
-      id: uuidv4(),
+      id: v4(),
       cot_id: id,
       type: "nvarchar",
       status: 1,
@@ -706,7 +706,7 @@ module.exports = {
     }]
     await save(queryInterface, category, template);
 
-    id = uuidv4();
+    id = v4();
     category = {
       id: id,
       name: "IMAGES",
@@ -716,7 +716,7 @@ module.exports = {
       updated_at: date,
     }
     template = [{
-      id: uuidv4(),
+      id: v4(),
       cot_id: id,
       type: "nvarchar",
       status: 1,
@@ -725,7 +725,7 @@ module.exports = {
       updated_at: date
 
     }, {
-      id: uuidv4(),
+      id: v4(),
       cot_id: id,
       type: "bit",
       status: 1,
@@ -736,7 +736,69 @@ module.exports = {
     }]
     await save(queryInterface, category, template);
 
-    id = uuidv4();
+    id = v4();
+    category = {
+      id: id,
+      name: "IMAGES_BOUNCE",
+      type: "IMAGES_BOUNCE",
+      status: 1,
+      created_at: date,
+      updated_at: date,
+    }
+    template = [{
+      id: v4(),
+      cot_id: id,
+      type: "nvarchar",
+      status: 1,
+      order: "1",
+      created_at: date,
+      updated_at: date
+
+    }, {
+      id: v4(),
+      cot_id: id,
+      type: "float",
+      status: 1,
+      order: "2",
+      created_at: date,
+      updated_at: date
+
+    },
+    {
+      id: v4(),
+      cot_id: id,
+      type: "float",
+      status: 1,
+      order: "3",
+      created_at: date,
+      updated_at: date
+
+    },
+    {
+      id: v4(),
+      cot_id: id,
+      type: "float",
+      status: 1,
+      order: "4",
+      created_at: date,
+      updated_at: date
+
+    },
+    {
+      id: v4(),
+      cot_id: id,
+      type: "float",
+      status: 1,
+      order: "5",
+      created_at: date,
+      updated_at: date
+
+    }]
+    await save(queryInterface, category, template);
+
+
+
+    id = v4();
     category = {
       id: id,
       name: "SINGLE_DEPENDENCY",
@@ -746,7 +808,7 @@ module.exports = {
       updated_at: date,
     }
     template = [{
-      id: uuidv4(),
+      id: v4(),
       cot_id: id,
       type: "float",
       status: 1,
@@ -755,7 +817,7 @@ module.exports = {
       updated_at: date
 
     }, {
-      id: uuidv4(),
+      id: v4(),
       cot_id: id,
       type: "nvarchar",
       status: 1,
@@ -765,7 +827,7 @@ module.exports = {
 
     }
     , {
-      id: uuidv4(),
+      id: v4(),
       cot_id: id,
       type: "nvarchar",
       status: 1,
@@ -777,7 +839,7 @@ module.exports = {
 
     await save(queryInterface, category, template);
 
-    id = uuidv4();
+    id = v4();
     category = {
       id: id,
       name: "CASE",
@@ -787,7 +849,7 @@ module.exports = {
       updated_at: date,
     }
     template = [{
-      id: uuidv4(),
+      id: v4(),
       cot_id: id,
       type: "long",
       status: 1,

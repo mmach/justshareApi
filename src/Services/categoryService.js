@@ -53,7 +53,6 @@ export default class CategoryService extends BaseService {
    */
   async getCategoryFreetext({ search, isFor }) {
     let result = await this.unitOfWorkDI.categoryRepository.getCategoryFreetext({ search, isFor })
-
     return result;
   }
 

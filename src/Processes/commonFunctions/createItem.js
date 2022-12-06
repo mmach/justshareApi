@@ -1,4 +1,4 @@
-import {v4} from "uuid";
+import { v4 } from "uuid";
 import Promise from "bluebird";
 
 function createSearchClob(newItem, itemId) {
@@ -17,7 +17,7 @@ function createSearchClob(newItem, itemId) {
       return ['SINGLE', 'SELECT', 'MULTISELECT', 'GEO'].includes(cat.type)
     }).forEach(cat => {
       if ((cat.catOption ? cat.catOption.is_not_in_clob : false) != true) {
-        clobs[item] += (cat.select ? cat.select["value_" + item] : cat.val) + " ; "
+        clobs[item] += (cat.select ? cat.select.value_translation[item] : cat.val) + " ; "
 
       }
     })
@@ -48,7 +48,7 @@ function getCategoriesValue(newItem) {
 
 async function insertBlobs(newItem, itemId) {
   let blobs = newItem.itemCategoryOption.filter(cat => {
-    return cat.type == 'IMAGE' && cat.content
+    return ['IMAGES_BOUNCE', 'IMAGE'].includes(cat.type) && cat.content
   })
 
   await Promise.mapSeries(blobs, async item => {

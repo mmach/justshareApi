@@ -313,6 +313,7 @@ import GetItemSensorByValueAndMacDimQuery from "./Query/Item/getItemSensorByValu
 import LoginToProjectBySensorMACQuery from "./Query/Project/loginToProjectBySensorMACQuery.js";
 import Item_GoToStepWithEsSyncProcess from "./Processes/item_GoToStepWithEsSyncProcess.js";
 import Item_UpdateItemProcess from "./Processes/item_UpdateItemProcess.js";
+import ItemCategoryOptionsService from "./Services/itemCategoryOptionsService.js";
 /**
  * 
  */
@@ -350,6 +351,7 @@ let exporter = {
   configRepositoryDI: asClass(ConfigRepository),
   configServiceDI: asClass(ConfigService),
   sequelizeDI: asValue(SequelizeDB),
+  itemCategoryOptionsServiceDI:asClass(ItemCategoryOptionsService),
   userProjectPrivilegesRepositoryDI: asClass(UserProjectPrivilegesRepository),
   privilegeRepositoryDI: asClass(PrivilegeRepository),
   actionPrivilegesRepositoryDI: asClass(ActionPrivilegesRepository),

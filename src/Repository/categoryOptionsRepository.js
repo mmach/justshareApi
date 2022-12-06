@@ -88,14 +88,25 @@ export default class CategoryOptionsRepository extends BaseRepository {
         {
           model: this.sequelizeDI.CategoryOptionsTemplate,
           as: "cat_opt_temp",
-
+         
           include: [{
             model: this.sequelizeDI.CategoryOptionsTypeTemplate,
             as: "cat_opt_type_template"
-          }
+          },
+          {
+            model: this.sequelizeDI.Translations,
+            as: "value_translation",
+            required: false,
+
+
+          },
           ]
         },
-
+        {
+          model: this.sequelizeDI.Translations,
+          as: "translation",
+          required: false,
+        },
       ],
       transaction: this.getTran({ transaction })
     });
@@ -132,7 +143,7 @@ export default class CategoryOptionsRepository extends BaseRepository {
 
   upsertToCategory({ model, transaction }) {
     model.project_id = this.context.project.id;
-    
+
     return this.sequelizeDI.CategoryOptionsLink.upsert(model, {
 
       transaction: this.getTran({ transaction }),
@@ -147,7 +158,7 @@ export default class CategoryOptionsRepository extends BaseRepository {
 
     return this.categoryOptionDB.findAll({
       where: whereClaus,
-      order: [['name', 'ASC'], ['cat_opt_temp', 'value', 'ASC']],
+      //order: [['name', 'ASC'], ['cat_opt_temp', 'value', 'ASC']],
       include: [
         {
           model: this.sequelizeDI.CategoryOptionsLink,
@@ -185,10 +196,18 @@ export default class CategoryOptionsRepository extends BaseRepository {
           include: [{
             model: this.sequelizeDI.CategoryOptionsTypeTemplate,
             as: "cat_opt_type_template"
-          }
+          },
+          {
+            model: this.sequelizeDI.Translations,
+            as: "value_translation",
+          },
           ]
         },
-
+        {
+          model: this.sequelizeDI.Translations,
+          as: "translation",
+          required: false,
+        },
       ],
       transaction: this.getTran({ transaction })
     });
@@ -221,7 +240,6 @@ export default class CategoryOptionsRepository extends BaseRepository {
     });
   }
   getCategoryLinkQuery({ id, transaction }) {
-    console.log(this.sequelizeDI.CategoryOptionsLink)
     return this.sequelizeDI.CategoryOptionsLink.findOne({
       where: { id: this.toStr(id), project_id: this.context.project.id },
       transaction: this.getTran({ transaction }),

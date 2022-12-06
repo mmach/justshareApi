@@ -19,7 +19,6 @@ let getItem = async function (item_id, use_es) {
         return resultDB
     } else {
         let item = await this.itemServiceDI.setContext(this.context).getItem({ uids: [item_id] })
-        console.log(item)
         return item[0];
     }
     

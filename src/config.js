@@ -4,6 +4,10 @@ let CONFIG = {
   PATH: {
     mails: "./Static/MailsXSLT/"
   },
+  TRANSLATE:{
+    engine:'deepl',
+    key:'9f3f14a8-919f-18d9-55bb-1b5ee846062d:fx'
+  },
   ITEM_ES_QUEUE: 'elasticsearch-items',
   CHAT_QUEUE: 'chat-messages',
   CHAT_READ_QUEUE: 'chat-read-message',

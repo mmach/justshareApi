@@ -9,7 +9,7 @@ import ElasticSearchService from "../Services/elasticSearchService.js";
 import ItemService from "../Services/itemService.js";
 import { getItem } from "./commonFunctions/getItem.js";
 import { updateItemChain } from "./commonFunctions/updateItemChain.js";
-
+import minimatch from 'minimatch'
 
 ("use strict");
 export default class Item_UpdateItemProcess extends BaseProcess {
@@ -29,7 +29,7 @@ export default class Item_UpdateItemProcess extends BaseProcess {
   constructor({
     logFileInfrastructureDI,
     authInfrastructureDI,
-    //   dbTransactionInfrastuctureDI,
+    itemCategoryOptionsServiceDI,
     validationInfrastructureDI,
     elasticSearchServiceDI,
     closingInfrastructureDI,
@@ -47,8 +47,9 @@ export default class Item_UpdateItemProcess extends BaseProcess {
       projectInfrastructureDI
     });
     this.elasticSearchServiceDI = elasticSearchServiceDI;
-    this.itemServiceDI = itemServiceDI
-    this.mailSenderDI = mailSenderDI
+    this.itemServiceDI = itemServiceDI,
+      this.mailSenderDI = mailSenderDI
+    this.itemCategoryOptionsServiceDI = itemCategoryOptionsServiceDI
 
   }
 
@@ -58,7 +59,7 @@ export default class Item_UpdateItemProcess extends BaseProcess {
   }
 
   init(dto) {
-    this.model = { ...dto };
+    this.model = dto;
   }
 
 
@@ -66,8 +67,34 @@ export default class Item_UpdateItemProcess extends BaseProcess {
 
   async action() {
     try {
-      console.log(this.model)
-      throw err
+      this.model.itemPatch.forEach(patch => {
+        if (minimatch(patch.path, '/itemCategoryOption/**',{matchBase: true})) {
+         
+          const itemCategoryOptionId = patch.path.split('/')[2]
+          console.log(patch)
+          console.log(itemCategoryOptionId)
+          if (patch.op == 'add') {
+            this.itemCategoryOptionsServiceDI.setContext(this.context).upsertCategoryOption({
+              model: patch.value,
+              id: itemCategoryOptionId
+            })
+          } else if (patch.op == 'remove') {
+            console.log('WTFF')
+
+          } else if (patch.op == 'replace') {
+            const valueToReplace = patch.path.split('/')[3]
+            this.itemCategoryOptionsServiceDI.setContext(this.context).upsertCategoryOption({
+              model: {
+                [valueToReplace]: patch.value
+              },
+              id: itemCategoryOptionId
+            })
+          }
+
+        } else {
+          console.log(patch)
+        }
+      })
     } catch (err) {
       console.log(err)
       throw err;

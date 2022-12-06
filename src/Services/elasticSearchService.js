@@ -195,14 +195,7 @@ export default class ElasticSearchService extends BaseService {
     }).map(item => {
       var value = {};
       value = {
-        "pl": item.select["value_pl"],
-        "us": item.select["value_us"],
-        "no": item.select["value_no"],
-        "es": item.select["value_es"],
-        "ru": item.select["value_ru"],
-        "fr": item.select["value_fr"],
-        "zh_cn": item.select["value_zh_cn"],
-        "de": item.select["value_de"]
+        ...item.select.value_translation,
       }
       return {
 
@@ -219,18 +212,7 @@ export default class ElasticSearchService extends BaseService {
 
     let categoriesArray = categories.map(item => {
       return {
-        id: item.id, category: {
-          "pl": item.category_pl,
-          "us": item.category_us,
-          "no": item.category_no,
-          "es": item.category_es,
-          "ru": item.category_ru,
-          "fr": item.category_zh_cn,
-          "zh_cn": item.category_zh_cn,
-          "de": item.category_de
-
-
-        }
+        id: item.id, category: { ...item.translation }
       }
     });
     // console.log(tags);
@@ -323,14 +305,7 @@ export default class ElasticSearchService extends BaseService {
     }).map(item => {
       var value = {};
       value = {
-        "pl": item.select["value_pl"],
-        "us": item.select["value_us"],
-        "no": item.select["value_no"],
-        "es": item.select["value_es"],
-        "ru": item.select["value_ru"],
-        "fr": item.select["value_fr"],
-        "zh_cn": item.select["value_zh_cn"],
-        "de": item.select["value_de"]
+        ...item.select.value_translation
       }
       return {
 
@@ -426,16 +401,7 @@ export default class ElasticSearchService extends BaseService {
     let categoriesArray = categories.map(item => {
       return {
         id: item.id, category: {
-          "pl": item.category_pl,
-          "us": item.category_us,
-          "no": item.category_no,
-          "es": item.category_es,
-          "ru": item.category_ru,
-          "fr": item.category_zh_cn,
-          "zh_cn": item.category_zh_cn,
-          "de": item.category_de
-
-
+          ...item.translation
         }
       }
     });
@@ -1071,7 +1037,7 @@ export default class ElasticSearchService extends BaseService {
     let catOptions = item.itemCategoryOption.map(catValue => {
 
       return {
-        id:catValue.id,
+        id: catValue.id,
         cat_opt_id: catValue.cat_opt_temp.id,
         type: catValue.category_link.catOption.cat_opt.type,
         dataType: catValue.cat_opt_temp.cat_opt_type_template.type,

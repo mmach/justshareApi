@@ -95,6 +95,9 @@ export default class CategoryOptionsTemplate extends Model {
         },
         placeholder_zh_cn: {
           type: DataTypes.STRING,
+        },
+        token: {
+          type: DataTypes.STRING,
         }
         , status: {
           type: DataTypes.BOOLEAN,
@@ -158,7 +161,7 @@ export default class CategoryOptionsTemplate extends Model {
         decimal_scale: DataTypes.INTEGER,
         is_prefix: DataTypes.BOOLEAN,
         is_suffix: DataTypes.BOOLEAN,
-
+        value_translation_id: DataTypes.UUID,
       },
       {
         sequelize,
@@ -168,6 +171,7 @@ export default class CategoryOptionsTemplate extends Model {
   }
   static associate(models) {
     CategoryOptionsTemplate.belongsTo(models.CategoryOptionsTypeTemplate, { as: "cat_opt_type_template", targetKey: 'id', foreignKey: "cott_id" });
+    CategoryOptionsTemplate.belongsTo(models.Translations, { as: "value_translation", targetKey: 'id', foreignKey: "value_translation_id" });
 
   }
 }

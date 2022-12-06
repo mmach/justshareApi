@@ -34,7 +34,10 @@ export default class CategoryOptionsType extends Model {
         },
         status: {
           type: DataTypes.BOOLEAN,
-        }
+        },
+        is_strict:{
+          type: DataTypes.BOOLEAN,
+        },
    
         
       },

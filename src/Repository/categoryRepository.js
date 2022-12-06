@@ -180,6 +180,7 @@ export default class CategoryRepository extends BaseRepository {
       transaction: this.getTran({ transaction })
     });
   }
+  
   removeCategory({ id, transaction }) {
     return this.entityDAO.destroy({
       where: { id: id, project_id: this.context.project.id },

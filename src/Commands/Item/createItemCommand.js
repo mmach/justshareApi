@@ -9,7 +9,7 @@ import CategoryService from "../../Services/categoryService.js";
 import Promise from "bluebird";
 import ElasticSearchService from "../../Services/elasticSearchService.js";
 import TagService from './../../Services/tagService.js'
-import {v4} from "uuid";
+import { v4 } from "uuid";
 import ClosingInfrastructure from "../../Architecture/Infrastructure/closingInfrastructure.js";
 import CONFIG from "../../config.js";
 
@@ -135,7 +135,7 @@ export default class CreateItemCommand extends BaseCommand {
         //console.log(cat)
         //console.log(cat.catOption);
         if ((cat.catOption ? cat.catOption.is_not_in_clob : false) != true) {
-          clobs[item] += (cat.select ? cat.select["value_" + item] : cat.val) + " ; "
+          clobs[item] += (cat.select ? cat.select.value_translation[item] : cat.val) + " ; "
 
         }
       })
@@ -315,7 +315,7 @@ export default class CreateItemCommand extends BaseCommand {
     this.clobs = this.createSearchClob.bind(this)();
     this.getCategoriesValue.bind(this)();
     this.model.categories = await this.categoryServiceDI.setContext(this.context).getCategoriesParents({ ids: this.model.category_id })
-    let categories=  [...this.model.categories];
+    let categories = [...this.model.categories];
     let cat = this.model.categories.filter(item => { return item.id == this.model.category_id })[0]
 
     var today = new Date();
@@ -333,15 +333,17 @@ export default class CreateItemCommand extends BaseCommand {
     await this.insertBlobs(this.model.id);
 
     let item = await this.itemServiceDI.setContext(this.context).getItem({ uids: [this.model.id] })
-    item=item[0]
-    this.model = { ...item,
-      categories:categories };
+    item = item[0]
+    this.model = {
+      ...item,
+      categories: categories
+    };
     await this.elasticSearchServiceDI.setContext(this.context).addToQueue({ item_id: this.model.id, operation: 'I' })
 
     // this.model.item=item[0]
-   // this.closingInfrastructureDI.addClosingFunction(
-   //   this.addToQueue.bind(this)
-  //  )
+    // this.closingInfrastructureDI.addClosingFunction(
+    //   this.addToQueue.bind(this)
+    //  )
     //await this.insertCategories(item.id);
 
     //  console.log(categories);

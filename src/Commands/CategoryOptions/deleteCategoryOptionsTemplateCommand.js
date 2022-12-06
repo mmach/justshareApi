@@ -3,7 +3,7 @@ import BaseCommand from "../../Architecture/baseCommand.js";
 import LogFileInfrastructure from "../../Architecture/Infrastructure/logFileInfrastructure.js";
 import AuthInfrastucture from "../../Architecture/Infrastructure/authInfrastucture.js";
 import CategoryOptionService from "../../Services/categoryOptionService.js";
-import {CategoryOptionsTemplateDTO} from 'justshare-shared'
+import { CategoryOptionsTemplateDTO } from 'justshare-shared'
 "use strict";
 
 
@@ -21,16 +21,18 @@ export default class DeleteCategoryOptionsTemplateCommand extends BaseCommand {
      * @param  {{logFileInfrastructureDI : LogFileInfrastructure,  categoryOptionServiceDI:CategoryOptionService ,authInfrastructureDI:AuthInfrastucture}}
      * @memberof InsertCategoryCommand
      */
-    constructor({ logFileInfrastructureDI, categoryOptionServiceDI, authInfrastructureDI,projectInfrastructureDI }) {
-        super({ logFileInfrastructureDI, authInfrastructureDI,projectInfrastructureDI });
+    constructor({ logFileInfrastructureDI, translationServiceDI, categoryOptionServiceDI, authInfrastructureDI, projectInfrastructureDI }) {
+        super({ logFileInfrastructureDI, authInfrastructureDI, projectInfrastructureDI });
         this.categoryOptionServiceDI = categoryOptionServiceDI
+        this.translationServiceDI = translationServiceDI
 
     };
     init(dto) {
         this.model = Object.assign(new CategoryOptionsTemplateDTO(), dto);
     }
     async action() {
-       await this.categoryOptionServiceDI.setContext(this.context).deleteTemplate({ model:this.model });
+       
+        await this.categoryOptionServiceDI.setContext(this.context).deleteTemplate({ model: this.model });
 
     }
 };

@@ -53,7 +53,6 @@ export default class InvokeProcessCommand extends BaseCommand {
             let next_process = chain.process_chain_state.filter(i => i.is_accept == next_chain_edge_path)[0]
             chain = process.process_chain.filter(i => i.id == next_process.next_process_chain_id)[0]
         }
-        console.log(chain)
         return chain
     }
     async runProcessChain(process, chain, result, parent_process_chain = {}, model = {}) {
@@ -62,8 +61,7 @@ export default class InvokeProcessCommand extends BaseCommand {
         const chain_action = chain.process_chain_actions.find(i => i.action_type == 'MAIN_ACTION')
         let actions = await this.actionProjectServiceDI.setContext(this.context).getActions({ id: chain_action.action_id });
         let action = actions[0]
-        console.log(actions[0])
-        console.log(chain.autorun)
+       
         let process_result = {}
         if (action.action_details.action_type == 'PROCESS' || action.action_details.as_process == true) {
             chain.action_id = chain_action.action_id

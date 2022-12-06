@@ -6,7 +6,8 @@ let fs = require('fs');
 
 let Promise = require('bluebird');
 let readline = require('readline')
-const uuidv4 = require("uuid/v4");
+const v4 = require("uuid").v4;
+
 let { CommandList, QueryList,ProcessList } = require('justshare-shared');
 const { func } = require('prop-types');
 
@@ -22,7 +23,7 @@ let save = async (queryInterface, name, type) => {
   let result = await queryInterface.sequelize.query(`SELECT * FROM Actions WHERE name='${name}'`);
   if (result[0].length == 0) {
     await queryInterface.bulkInsert('Actions', [{
-      id: uuidv4()
+      id: v4()
       , name: name,
       action_type: type
     }]);

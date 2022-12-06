@@ -25,10 +25,8 @@ export default class GetCategoryOptionsQuery extends BaseQuery {
 
     async action() {
         let categories = await this.categoryServiceDI.setContext(this.context).getCategoriesParents({ ids: this.model.id })
-        console.log(categories)
         let ids = categories.map(item => { return item.id });
         let result = await this.categoryOptionServiceDI.setContext(this.context).getRelatedOptions({ category_ids: ids });
-        //return this.list_to_tree(result)
         return result;
     }
 };

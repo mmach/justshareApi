@@ -6,9 +6,12 @@ import BlobService from '../../Services/blobService.js';
 import { ToTranslateDTO } from 'justshare-shared';
 import CategoryOptionService from '../../Services/categoryOptionService.js';
 import CategoryService from '../../Services/categoryService.js';
-import translate from 'google-translate-free';
+//import translate from 'google-translate-free';
 import CONFIG from "../../config.js";
+import translate from "translate";
 
+translate.engine = CONFIG.TRANSLATE.engine;
+translate.key = CONFIG.TRANSLATE.key;
 export default class TranslateQuery extends BaseQuery {
     /**
      * Creates an instance of GetDictionariesQuery.
@@ -38,15 +41,15 @@ export default class TranslateQuery extends BaseQuery {
         } else if (destlang == 'US') {
             destlang = 'en';
         }
-        
+
 
         let text = await translate(this.model.src,
             {
-            //    engine: CONFIG.TRANSLATE.engine, key: CONFIG.TRANSLATE.key,
+                //    engine: CONFIG.TRANSLATE.engine, key: CONFIG.TRANSLATE.key,
                 from: lang, to: destlang
             })
-
-        return text.text;
+        console.log(text)
+        return text;
         //return await this.itemServiceDI.setContext(this.context).searchItem({ search: this.model });
     }
 };

@@ -27,8 +27,11 @@ export default class UpsertStatusCommand extends BaseQuery {
     }
 
     async action() {
-        await this.translationServiceDI.setContext(this.context).upsert({ model: this.model.translation, withProject: true });
-        this.model.translation_id = this.model.translation.id;
+        if (this.model.translation_id) {
+            await this.translationServiceDI.setContext(this.context).upsert({ model: this.model.translation, withProject: true });
+        }
+        //await this.translationServiceDI.setContext(this.context).upsert({ model: this.model.translation, withProject: true });
+        //this.model.translation_id = this.model.translation.id;
         return this.statusProjectServiceDI.setContext(this.context).upsert({ model: this.model, withProject: true })
     }
 };

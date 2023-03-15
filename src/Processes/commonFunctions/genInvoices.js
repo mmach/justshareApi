@@ -7,9 +7,9 @@ let genInvoice = async function (user_src_id, dest_user_id) {
     let statusNew = await this.statusProjectServiceDI.setContext(this.context).getByToken({ name: StatusesList.NEW })
     let user_src = await this.userServiceDI.setContext(this.context).getUserInvoiceData({ user_id: user_src_id });
     let user_dest = await this.userServiceDI.setContext(this.context).getUserInvoiceData({ user_id: dest_user_id });
-    let price_net = Number(this.itemTransaction.itemCategoryOption.filter(i => { return i.dim == DimensionsList.FINAL_PRICE_VALUE })[0].value);
-    let price_full_tax = Number(this.itemTransaction.itemCategoryOption.filter(i => { return i.dim == DimensionsList.FINAL_PRICE_WITH_TAX_VALUE })[0].value)
-    let price_tax = Number(this.itemTransaction.itemCategoryOption.filter(i => { return i.dim == DimensionsList.TAX_PRICE_VALUE })[0].value)
+    let price_net = Number(this.itemTransaction.itemCategoryOption.find(i => { return i.dim == DimensionsList.FINAL_PRICE_VALUE }).value);
+    let price_full_tax = Number(this.itemTransaction.itemCategoryOption.find(i => { return i.dim == DimensionsList.FINAL_PRICE_WITH_TAX_VALUE }).value)
+    let price_tax = Number(this.itemTransaction.itemCategoryOption.find(i => { return i.dim == DimensionsList.TAX_PRICE_VALUE }).value)
     let invoice_id = await this.invoiceServiceDI.setContext(this.context).createInvoice({
         model: {
             user_src_id: user_src.id,

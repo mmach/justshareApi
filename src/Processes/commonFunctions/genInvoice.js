@@ -29,7 +29,7 @@ const genInvoice = async function (user_src_id, dest_user_id) {
                 discount: 0,
                 price_full_tax: price_full_tax,
                 price_tax: price_tax,
-                tax: this.itemTransaction.itemCategoryOption.filter(i => { return i.dim == 'TAX' })[0].value * 100,
+                tax: this.itemTransaction.itemCategoryOption.find(i => { return i.dim == 'TAX' }).value * 100,
                 amount: 1
 
             }],

@@ -219,7 +219,6 @@ export default class BlobRepository extends BaseRepository {
       where: {
         status: 0
       },
-      limit: Number(pagination.size), offset: Number(pagination.page),
       include: [
         {
           model: this.sequelizeDI.BlobMapper,

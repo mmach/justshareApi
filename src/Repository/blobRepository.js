@@ -47,8 +47,8 @@ export default class BlobRepository extends BaseRepository {
     return this.entityDAO.findAll({
       where: {
         project_id: this.context.project.id,
-        item_id :this.sequelizeDI.sequelize.literal(`item_id IS NOT NULL`),
-       
+        item_id: this.sequelizeDI.sequelize.literal(`item_id IS NOT NULL`),
+
         category_id: null
       },
       include: [
@@ -66,13 +66,13 @@ export default class BlobRepository extends BaseRepository {
       transaction: this.getTran({ transaction })
     })
   }
-  
+
   getProjectsCategoriesStorage({ model, transaction }) {
     return this.entityDAO.findAll({
       where: {
         project_id: this.context.project.id,
-        category_id :this.sequelizeDI.sequelize.literal(`category_id IS NOT NULL`),
-       
+        category_id: this.sequelizeDI.sequelize.literal(`category_id IS NOT NULL`),
+
       },
       include: [
         {
@@ -93,7 +93,7 @@ export default class BlobRepository extends BaseRepository {
     return this.entityDAO.findAll({
       where: {
         project_id: this.context.project.id,
-        user_id :this.sequelizeDI.sequelize.literal(`user_id IS NOT NULL`),
+        user_id: this.sequelizeDI.sequelize.literal(`user_id IS NOT NULL`),
         item_id: null,
         category_id: null
       },
@@ -138,8 +138,8 @@ export default class BlobRepository extends BaseRepository {
   }
   insertFile({ id, path, name, transaction }) {
     var blob = fs.readFileSync(path);
-    let file_type = name.split('.')[name.split('.').length-1]
-    let size =  stringToBytesFaster(blob.toString('base64')).length;
+    let file_type = name.split('.')[name.split('.').length - 1]
+    let size = stringToBytesFaster(blob.toString('base64')).length;
     return this.sequelizeDI.sequelize.query(
       `SET NOCOUNT ON
         DECLARE @result TABLE 
@@ -180,7 +180,7 @@ export default class BlobRepository extends BaseRepository {
         SET NOCOUNT ON`,
       {
         logging: false,
-        replacements: { blob: blob,id:id,name:name ,file_type:file_type,size:size},
+        replacements: { blob: blob, id: id, name: name, file_type: file_type, size: size },
         transaction: this.getTran({ transaction }),
         type: this.sequelizeDI.sequelize.QueryTypes.SELECT,
 
@@ -212,7 +212,6 @@ export default class BlobRepository extends BaseRepository {
   }
 
   getUnverified({
-    pagination,
     transaction
   }) {
     return this.entityDAO.findAll({

@@ -378,11 +378,9 @@ export default class BlobService extends BaseService {
     );
   }
 
-  async getUnverified({ pagination }) {
+  async getUnverified({  }) {
     return await this.toJsonParse(
-      this.unitOfWorkDI.blobRepository.getUnverified({
-        pagination
-      })
+      this.unitOfWorkDI.blobRepository.getUnverified({})
     );
   }
   async verifyImage({ blob }) {

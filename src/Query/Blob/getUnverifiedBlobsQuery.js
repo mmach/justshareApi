@@ -23,24 +23,11 @@ export default class GetUnverifiedBlobsQuery extends BaseQuery {
 
     async action() {
 
-        let result = await this.blobServiceDI.setContext(this.context).getUnverified({ pagination: this.model });
-        let uidList = result.map(item => {
-            return item.blob_thumbmail.id;
-        });
-        if (uidList == null || uidList.length == 0) {
-            return result;
-        }
-        let blobsResulst = await this.blobServiceDI.setContext(this.context).getBlobsBase64ByGuids({ ids: uidList });
-        let combainBlobs = result.map(item => {
-            let blobBase64 = blobsResulst.filter(element => {
-                return item.blob_thumbmail.id == element.id
-            })[0];
-            let blobElement = Object.assign(new BlobDTO(), item)
-            blobElement.blob_thumbmail = Object.assign(new BlobBase64DTO(), blobBase64);
-            return blobElement;
-        });
+        let result = await this.blobServiceDI.setContext(this.context).getUnverified({  });
+      
+      
 
-        return combainBlobs;
+        return result;
 
 
     }

@@ -34,8 +34,11 @@ export default class UpsertDimensionProjectCommand extends BaseCommand {
         this.model = Object.assign(new DimensionsProjectDTO(), dto);
     }
     async action() {
-        await this.translationServiceDI.setContext(this.context).upsert({ model: this.model.translation, withProject: true });
-        this.model.translation_id = this.model.translation.id;
+        if (this.model.translation_id) {
+            await this.translationServiceDI.setContext(this.context).upsert({ model: this.model.translation, withProject: true });
+        }
+       // await this.translationServiceDI.setContext(this.context).upsert({ model: this.model.translation, withProject: true });
+       // this.model.translation_id = this.model.translation.id;
         await this.dimensionsProjectServiceDI.setContext(this.context).upsert({ model: this.model, withProject: true });
 
     }

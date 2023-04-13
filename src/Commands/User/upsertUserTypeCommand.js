@@ -45,9 +45,9 @@ export default class UpsertUserTypeCommand extends BaseCommand {
   }
 
   async action() {
-    console.log(this.model)
-    await this.translationServiceDI.setContext(this.context).upsert({ model: this.model.translation, withProject: true });
-    this.model.translation_id = this.model.translation.id;
+    if (this.model.translation_id) {
+      await this.translationServiceDI.setContext(this.context).upsert({ model: this.model.translation, withProject: true });
+    }
     await this.userTypesServiceDI.setContext(this.context).upsert({ model: this.model, withProject: true });
   }
 }

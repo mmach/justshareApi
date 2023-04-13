@@ -46,7 +46,7 @@ export default class UserTypes extends Model {
   }
   static hooks(models, sequelize) {
 
-    UserTypes.afterDestroy(async (item, options) => {
+    UserTypes.beforeDestroy(async (item, options) => {
       await models.Translations.destroy({
         where: { id: item.translation_id },
         transaction: options.transaction,

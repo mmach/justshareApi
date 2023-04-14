@@ -32,7 +32,8 @@ export default class UserTypes extends Model {
 
         name: DataTypes.STRING
       },
-      { sequelize ,
+      {
+        sequelize,
         tableName: 'UserTypes'
       }
     );
@@ -45,15 +46,24 @@ export default class UserTypes extends Model {
     // Users.hasMany(models.UserAuth)
   }
   static hooks(models, sequelize) {
-
     UserTypes.beforeDestroy(async (item, options) => {
-      await models.Translations.destroy({
-        where: { id: item.translation_id },
+    
+      await models.UserTypeRoles.destroy({
+        where: { usertype_id: item.dataValues.id },
         transaction: options.transaction,
         individualHooks: true
       })
+    
+    })
+    UserTypes.afterDestroy(async (item, options) => {
+      await models.Translations.destroy({
+        where: { id: item.dataValues.translation_id },
+        transaction: options.transaction,
+        individualHooks: true
+      })
+    
       await models.Blob.destroy({
-        where: { id: item.blob_id },
+        where: { id: item.dataValues.blob_id },
         transaction: options.transaction,
         individualHooks: true
       })

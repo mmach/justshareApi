@@ -5,7 +5,7 @@
 
 //var basename = path.basename(__filename);
 import Sequelize from "sequelize";
-import configJSON from "./../config/config.json";
+import configJSON from "./../config/config.json" assert { type: 'json' };;
 import Users from "./user.js";
 import Category from "./category.js";
 import CategoryHierarchy from "./categoryhierarchy.js";

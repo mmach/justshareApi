@@ -124,6 +124,23 @@ export default class ProjectRepository extends BaseRepository {
           as: "users",
           include: [
             {
+              model: this.sequelizeDI.Blob,
+              as: "blob_profile",
+              required: false,
+              include: [
+                {
+                  model: this.sequelizeDI.BlobMapper,
+                  as: "blob_item",
+                  required: true
+                },
+                {
+                  model: this.sequelizeDI.BlobMapper,
+                  as: "blob_thumbmail",
+                  required: true
+                }
+              ],
+            },
+            {
               model: this.sequelizeDI.UserTypes,
               required: false,
               as: "user_type",

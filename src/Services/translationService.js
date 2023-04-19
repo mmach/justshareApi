@@ -30,7 +30,7 @@ export default class TranslationService extends BaseService {
           "code": item.token,
           "status": item.respStatus,
           "type": item.type,
-          "created_at": item.created_at,
+          "createdAt": item.createdAt,
           "message": {
             "id":item.id,
             "pl": item.pl,

@@ -31,6 +31,7 @@ export default class TranslationService extends BaseService {
           "status": item.respStatus,
           "type": item.type,
           "message": {
+            "id":item.id,
             "pl": item.pl,
             "us": item.us,
             "de": item.de,

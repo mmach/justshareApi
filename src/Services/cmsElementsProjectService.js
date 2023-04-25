@@ -17,13 +17,17 @@ export default class CmsElementsProjectService extends BaseService {
     super({ unitOfWorkDI, repository: 'cmsElementsProjectRepository' });
   }
 
-  async getCmsElements({ }) {
-    let result = await this.toJsonParse(this.unitOfWorkDI.cmsElementsProjectRepository.getCmsElements({}))
-
+  async getCmsElementsAdmin({ }) {
+    let result = await this.toJsonParse(this.unitOfWorkDI.cmsElementsProjectRepository.getCmsElementsAdmin({}))
     return result;
   }
 
-  async getDimensionsFlat({ init, ids }) {
+  async getCmsElements({ }) {
+    let result = await this.toJsonParse(this.unitOfWorkDI.cmsElementsProjectRepository.getCmsElements({}))
+    return result;
+  }
+
+  async getCmsElementsFlat({ init, ids }) {
     let result = await this.toJsonParse(this.unitOfWorkDI.cmsElementsProjectRepository.getCmsElements({ init, ids, is_active: true }))
     result = result.map(item => {
       return {

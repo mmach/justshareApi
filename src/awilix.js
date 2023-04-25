@@ -26,6 +26,10 @@ import DeleteCategoryOptionsTemplateCommand from "./Commands/CategoryOptions/del
 import UpsertCategoryOptionsCommand from "./Commands/CategoryOptions/upsertCategoryOptionsCommand.js";
 import UpsertCategoryOptionsForCategoryCommand from "./Commands/CategoryOptions/upsertCategoryOptionsForCategoryCommand.js";
 import UpsertCategoryOptionsTemplateCommand from "./Commands/CategoryOptions/upsertCategoryOptionsTemplateCommand.js";
+import DeleteCmsElementCommand from "./Commands/CmsElement/deleteCmsElementCommand.js";
+import DeleteProjectCmsElementCommand from "./Commands/CmsElement/deleteProjectCmsElementCommand.js";
+import UpsertCmsElementCommand from "./Commands/CmsElement/upsertCmsElementCommand.js";
+import UpsertProjectCmsElementCommand from "./Commands/CmsElement/upsertProjectCmsElementCommand.js";
 import UpsertConfigCommand from "./Commands/Config/upsertConfigCommand.js";
 import AddToDictionaryCommand from "./Commands/Dictionary/addToDictionaryCommand.js";
 import RemoveDictionaryCommand from "./Commands/Dictionary/removeDictionaryCommand.js";
@@ -110,26 +114,34 @@ import SendMailForgotPasswordCommand from "./Commands/User/sendMailForgotPasswor
 import SetCoordinatesCommand from "./Commands/User/setCoordinatesCommand.js";
 import SetLanguageCommand from "./Commands/User/setLanguageCommand.js";
 import SetProfileImageCommand from "./Commands/User/setProfileImageCommand.js";
-import UpsertUsersInvoiceDataCommand from "./Commands/User/upsertUsersInvoiceDataCommand.js";
 import UpsertUserTypeCommand from "./Commands/User/upsertUserTypeCommand.js";
+import UpsertUsersInvoiceDataCommand from "./Commands/User/upsertUsersInvoiceDataCommand.js";
 import SequelizeDB from "./Database/models/index.js";
 import Item_CreateItemProcess from "./Processes/item_CreateItemProcess.js";
-import Item_Cron_ReminderDaysProcess from "./Processes/item_cron_reminderDaysProcess.js";
 import Item_ESSyncProcess from "./Processes/item_ESSyncProcess.js";
 import Item_GoToStepProcess from "./Processes/item_GoToStepProcess.js";
+import Item_GoToStepWithEsSyncProcess from "./Processes/item_GoToStepWithEsSyncProcess.js";
 import Item_SetExpiredProcess from "./Processes/item_SetExpiredProcess.js";
 import Item_UpdateExpiredItemProcess from './Processes/item_UpdateExpiredItemProcess.js';
+import Item_UpdateItemProcess from "./Processes/item_UpdateItemProcess.js";
 import Item_VerificationProcess from "./Processes/item_VerificationProcess.js";
+import Item_Cron_ReminderDaysProcess from "./Processes/item_cron_reminderDaysProcess.js";
+import IUA_ChangeStatusRelatedProcess from "./Processes/iua_ChangeStatusRelatedProcess.js";
+import IUA_CloseAllChildrenIUAProcess from "./Processes/iua_CloseAllChildrenIUAProcess.js";
 import IUA_CreateChatProcess from "./Processes/iua_CreateChatProcess.js";
+import IUA_GenerateInvocieProcess from './Processes/iua_GenerateInvocieProcess.js';
 import IUA_GoToStepProcess from "./Processes/iua_GoToStepProcess.js";
 import IUA_ItemSyncProcess from "./Processes/iua_ItemSyncProcess.js";
 import IUA_NewProcess from "./Processes/iua_NewProcess.js";
 import IUA_ReadyProcess from "./Processes/iua_ReadyProcess.js";
 import IUA_ReservationAcceptProcess from "./Processes/iua_ReservationAcceptProcess.js";
+import IUA_SetDestinationDateProcess from './Processes/iua_SetDestinationDateProcess.js';
 import IUA_SetToItemCommentProcess from "./Processes/iua_SetToItemCommentProcess.js";
 import IUA_StartProcess from "./Processes/iua_StartProcess.js";
 import IUA_UnblockChatProcess from "./Processes/iua_UnblockChatProcess.js";
 import IUA_WaitingForPayProcess from "./Processes/iua_WaitingForPayProcess.js";
+import IUA_Cron_ReminderDaysIUACounterProcess from "./Processes/iua_cron_reminderDaysCounter.js";
+import IUA_Cron_reminderDaysToDestDateCounterProcess from './Processes/iua_cron_reminderDaysToDestDateCounterProcess.js';
 import GetActionsQuery from "./Query/Actions/getActionsQuery.js";
 import GetProjectActionsQuery from "./Query/Actions/getProjectActionsQuery.js";
 import GetBlobsBase64ByGuidsQuery from "./Query/Blob/getBlobsBase64ByGuidsQuery.js";
@@ -148,6 +160,7 @@ import GetCategoryOptionsTypeQuery from "./Query/CategoryOptions/getCategoryOpti
 import GeocodeQuery from "./Query/City/geocodeQuery.js";
 import GetCitiesQuery from "./Query/City/getCitiesQuery.js";
 import ReverseGeocodeQuery from "./Query/City/reverseGeocodeQuery.js";
+import GetProjectCmsElementQuery from "./Query/CmsElement/getProjectCmsElementQuery.js";
 import MjmlCompileQuery from "./Query/Common/mjmlCompileQuery.js";
 import GetCountriesByIdQuery from "./Query/Country/getCountriesByIdQuery.js";
 import GetCountriesQuery from "./Query/Country/getCountriesQuery.js";
@@ -157,6 +170,7 @@ import GetProjectDimensiosQuery from "./Query/Dimensions/getProjectDimensiosQuer
 import GetUserInvoicesQuery from "./Query/Invoice/getUserInvoicesQuery.js";
 import GetItemByIdQuery from "./Query/Item/getItemByIdQuery.js";
 import GetItemQuery from "./Query/Item/getItemQuery.js";
+import GetItemSensorByValueAndMacDimQuery from "./Query/Item/getItemSensorByValueAndMacDimQuery.js";
 import GetItemTransactionQuery from "./Query/Item/getItemTransactionQuery.js";
 import GetItemUserActionsHistoryQuery from "./Query/Item/getItemUserActionsHistoryQuery.js";
 import GetItemUserActionsListQuery from "./Query/Item/getItemUserActionsListQuery.js";
@@ -177,15 +191,17 @@ import GetConversationsQuery from "./Query/Messages/getConversationsQuery.js";
 import GetToReadMessagesQuery from "./Query/Messages/getToReadMessagesQuery.js";
 import GetPrivilegesQuery from "./Query/Privileges/getPrivilegesQuery.js";
 import GetProjectPrivilegesQuery from "./Query/Privileges/getProjectPrivilegesQuery.js";
+import GetProcessCronsQuery from "./Query/Process/getProcessCronsQuery.js";
 import GetProcessQuery from "./Query/Process/getProcessQuery.js";
-import GetProjectQuery from "./Query/Project/getProjectQuery.js";
-import GetProjectSocketsQuery from "./Query/Project/getProjectsSocketsQuery.js";
-import GetProjectUsersQuery from "./Query/Project/getProjectUsersQuery.js";
-import GetUsersProjectsQuery from "./Query/Project/getUsersProjectsQuery.js";
 import LoginBliskonasProjectQuery from "./Query/Project/LoginBliskoNasProjectQuery/loginBliskoNasProjectQuery.js";
 import LoginJustshareProjectQuery from "./Query/Project/LoginJustshareProjectQuery/loginJustshareProjectQuery.js";
 import LoginLogisticProjectQuery from "./Query/Project/LoginLogisticProjectQuery/loginLogisticProjectQuery.js";
 import LoginProjectQuery from "./Query/Project/LoginProjectQuery/loginProjectQuery.js";
+import GetProjectQuery from "./Query/Project/getProjectQuery.js";
+import GetProjectUsersQuery from "./Query/Project/getProjectUsersQuery.js";
+import GetProjectSocketsQuery from "./Query/Project/getProjectsSocketsQuery.js";
+import GetUsersProjectsQuery from "./Query/Project/getUsersProjectsQuery.js";
+import LoginToProjectBySensorMACQuery from "./Query/Project/loginToProjectBySensorMACQuery.js";
 import GetProjectRolesQuery from "./Query/Roles/getProjectRolesQuery.js";
 import GetRolesQuery from "./Query/Roles/getRolesQuery.js";
 import GetSeoQuery from "./Query/Seo/getSeoQuery.js";
@@ -193,9 +209,9 @@ import GetStatusGlobalQuery from "./Query/Status/getStatusGlobalQuery.js";
 import GetStatusQuery from "./Query/Status/getStatusQuery.js";
 import GetRefreshTokenQuery from "./Query/User/getRefreshTokenQuery.js";
 import GetUserInfoQuery from "./Query/User/getUserInfoQuery.js";
+import GetUserTypesQuery from "./Query/User/getUserTypesQuery.js";
 import GetUsersInvoiceDataQuery from "./Query/User/getUsersInvoiceDataQuery.js";
 import GetUsersQuery from "./Query/User/getUsersQuery.js";
-import GetUserTypesQuery from "./Query/User/getUserTypesQuery.js";
 import LogInByExternalQuery from "./Query/User/logInByExternalQuery.js";
 import LogInByRefreshTokenQuery from "./Query/User/logInByRefreshTokenQuery.js";
 import UserLogInInternalQuery from "./Query/User/userLogInInternalQuery.js";
@@ -209,6 +225,7 @@ import CategoryHierarchyRepository from "./Repository/categoryHierarchyRepositor
 import CategoryOptionsRepository from "./Repository/categoryOptionsRepository.js";
 import CategoryRepository from "./Repository/categoryRepository.js";
 import CityRepository from "./Repository/cityRepository.js";
+import CmsElementsProjectRepository from "./Repository/cmsElementsProjectRepository.js";
 import CommentRepository from "./Repository/commentRepository.js";
 import ConfigRepository from "./Repository/configRepository.js";
 import ConversationMessagesMembersRepository from "./Repository/conversationMessagesMembersRepository.js";
@@ -264,6 +281,7 @@ import BlobService from "./Services/blobService.js";
 import CategoryOptionService from "./Services/categoryOptionService.js";
 import CategoryService from "./Services/categoryService.js";
 import CityService from "./Services/cityService.js";
+import CmsElementsProjectService from "./Services/cmsElementsProjectService.js";
 import CommentService from "./Services/commentService.js";
 import ConfigService from "./Services/configService.js";
 import ConversationMessageMembersService from "./Services/conversationMessagesMemberService.js";
@@ -274,6 +292,7 @@ import DimensionsProjectService from "./Services/dimensionsProjectService.js";
 import DimensionsService from "./Services/dimensionsService.js";
 import ElasticSearchService from "./Services/elasticSearchService.js";
 import InvoiceService from "./Services/invoiceService.js";
+import ItemCategoryOptionsService from "./Services/itemCategoryOptionsService.js";
 import ItemService from "./Services/itemService.js";
 import ItemTransactionCategoryOptionsService from "./Services/itemTransactionCategoryOptionsService.js";
 import ItemTransactionService from "./Services/itemTransactionsService.js";
@@ -300,20 +319,7 @@ import UserService from "./Services/userService.js";
 import UserTypesRolesService from "./Services/userTypesRolesService.js";
 import UserTypesService from "./Services/userTypesService.js";
 import UnitOfWork from "./unitOfWork.js";
-import IUA_GenerateInvocieProcess from './Processes/iua_GenerateInvocieProcess.js'
-import IUA_ChangeStatusRelatedProcess from "./Processes/iua_ChangeStatusRelatedProcess.js";
-import IUA_CloseAllChildrenIUAProcess from "./Processes/iua_CloseAllChildrenIUAProcess.js";
-import IUA_Cron_ReminderDaysIUACounterProcess from "./Processes/iua_cron_reminderDaysCounter.js";
-import GetProcessCronsQuery from "./Query/Process/getProcessCronsQuery.js";
-import IUA_SetDestinationDateProcess from './Processes/iua_SetDestinationDateProcess.js'
-import IUA_Cron_reminderDaysToDestDateCounterProcess from './Processes/iua_cron_reminderDaysToDestDateCounterProcess.js'
-import CmsElementsProjectRepository from "./Repository/cmsElementsProjectRepository.js";
-import CmsElementsProjectService from "./Services/cmsElementsProjectService.js";
-import GetItemSensorByValueAndMacDimQuery from "./Query/Item/getItemSensorByValueAndMacDimQuery.js";
-import LoginToProjectBySensorMACQuery from "./Query/Project/loginToProjectBySensorMACQuery.js";
-import Item_GoToStepWithEsSyncProcess from "./Processes/item_GoToStepWithEsSyncProcess.js";
-import Item_UpdateItemProcess from "./Processes/item_UpdateItemProcess.js";
-import ItemCategoryOptionsService from "./Services/itemCategoryOptionsService.js";
+import GetCmsElementAdminQuery from "./Query/CmsElement/getCmsElementAdminQuery.js";
 /**
  * 
  */
@@ -351,7 +357,7 @@ let exporter = {
   configRepositoryDI: asClass(ConfigRepository),
   configServiceDI: asClass(ConfigService),
   sequelizeDI: asValue(SequelizeDB),
-  itemCategoryOptionsServiceDI:asClass(ItemCategoryOptionsService),
+  itemCategoryOptionsServiceDI: asClass(ItemCategoryOptionsService),
   userProjectPrivilegesRepositoryDI: asClass(UserProjectPrivilegesRepository),
   privilegeRepositoryDI: asClass(PrivilegeRepository),
   actionPrivilegesRepositoryDI: asClass(ActionPrivilegesRepository),
@@ -682,7 +688,7 @@ exporter[CommandList.Project.UPLOAD_BLOB] = asClass(UploadBlobProjectCommand);
 exporter[QueryList.Project.LOGIN] = asClass(LoginProjectQuery);
 exporter[QueryList.Project.LOGIN_BY_MAC] = asClass(LoginToProjectBySensorMACQuery);
 
-   
+
 exporter[QueryList.Project.LOGIN_JS] = asClass(LoginJustshareProjectQuery)
 exporter[QueryList.Project.LOGIN_LOGISTIC] = asClass(LoginLogisticProjectQuery)
 exporter[QueryList.Project.LOGIN_BLISKO_NAS] = asClass(LoginBliskonasProjectQuery)
@@ -707,6 +713,17 @@ exporter['getConversationInfoQuery'] = asClass(GetConversationInfoQuery)
 
 
 ///////////////////////////////////////////////////////////
+
+//////////////CMS//////////////////////////////////////////
+exporter['getCmsElementAdminQuery'] = asClass(GetCmsElementAdminQuery);
+exporter['getProjectCmsElementQuery'] = asClass(GetProjectCmsElementQuery);
+
+
+exporter['deleteCmsElementCommand'] = asClass(DeleteCmsElementCommand);
+exporter['deleteProjectCmsElementCommand'] = asClass(DeleteProjectCmsElementCommand)
+exporter['upsertCmsElementCommand'] = asClass(UpsertCmsElementCommand)
+exporter['upsertProjectCmsElementCommand'] = asClass(UpsertProjectCmsElementCommand)
+
 
 ///////////////////CONFIG////////////////////////////////
 

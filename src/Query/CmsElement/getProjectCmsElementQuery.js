@@ -3,31 +3,27 @@ import LogFileInfrastructure from '../../Architecture/Infrastructure/logFileInfr
 import ItemService from '../../Services/itemService.js';
 import ElasticSearchService from '../../Services/elasticSearchService.js';
 import BlobService from '../../Services/blobService.js';
-import { DimensionsProjectDTO } from 'justshare-shared';
+import { DimensionsDTO } from 'justshare-shared';
 import CategoryOptionService from '../../Services/categoryOptionService.js';
 import CategoryService from '../../Services/categoryService.js';
 
 
-export default class GetProjectDimensiosQuery extends BaseQuery {
+export default class GetCmsElementQuery extends BaseQuery {
     /**
      * Creates an instance of GetDictionariesQuery.
      * @param  {{ logFileInfrastructureDI:LogFileInfrastructure, itemServiceDI:ItemService ,elasticSearchServiceDI:ElasticSearchService,blobServiceDI:BlobService,categoryOptionServiceDI:CategoryOptionService,CategoryService,categoryServiceDI:CategoryService}}
      * @memberof GetItemByIdQuery
      */
-    constructor({ logFileInfrastructureDI, dimensionsProjectServiceDI, dbTransactionInfrastuctureDI, authInfrastructureDI, projectInfrastructureDI }) {
-        super({
-            logFileInfrastructureDI, dbTransactionInfrastuctureDI,
-            //   authInfrastructureDI,
-            projectInfrastructureDI
-        });
-        this.dimensionsProjectServiceDI = dimensionsProjectServiceDI
+    constructor({ logFileInfrastructureDI, projectInfrastructureDI, cmsElementsProjectServiceDI, authInfrastructureDI }) {
+        super({ logFileInfrastructureDI, authInfrastructureDI, projectInfrastructureDI });
+        this.cmsElementsProjectServiceDI = cmsElementsProjectServiceDI
 
     };
     init(dto) {
-        this.model = Object.assign(new DimensionsProjectDTO(), dto);
+        this.model = Object.assign(new DimensionsDTO(), dto);
     }
     async action() {
-        return await this.dimensionsProjectServiceDI.setContext(this.context).getDimensions({});
-
+        console.log("TO TU")
+        return await this.cmsElementsProjectServiceDI.setContext(this.context).getCmsElementsFlat({ init: this.model.init, ids: this.model.ids });
     }
 };

@@ -51,8 +51,9 @@ export default class CmsElementsProject extends Model {
           allowNull: true
         }, 
       },
-      { sequelize }
-    );
+      { sequelize,
+        tableName: 'CmsElementsProjects'
+      }    );
   }
   static hooks(models, sequelize) {
 

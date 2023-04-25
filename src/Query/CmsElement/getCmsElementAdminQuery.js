@@ -8,7 +8,7 @@ import CategoryOptionService from '../../Services/categoryOptionService.js';
 import CategoryService from '../../Services/categoryService.js';
 
 
-export default class GetCmsElementQuery extends BaseQuery {
+export default class GetCmsElementAdminQuery extends BaseQuery {
     /**
      * Creates an instance of GetDictionariesQuery.
      * @param  {{ logFileInfrastructureDI:LogFileInfrastructure, itemServiceDI:ItemService ,elasticSearchServiceDI:ElasticSearchService,blobServiceDI:BlobService,categoryOptionServiceDI:CategoryOptionService,CategoryService,categoryServiceDI:CategoryService}}
@@ -23,6 +23,7 @@ export default class GetCmsElementQuery extends BaseQuery {
         this.model = Object.assign(new DimensionsDTO(), dto);
     }
     async action() {
-        return await this.cmsElementsProjectServiceDI.setContext(this.context).getCmsElements({});
+        console.log("TO TU")
+        return await this.cmsElementsProjectServiceDI.setContext(this.context).getCmsElementsAdmin({});
     }
 };

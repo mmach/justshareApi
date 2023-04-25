@@ -1,3 +1,4 @@
+import { Op } from "sequelize";
 import BaseRepository from "../Architecture/baseRepository.js";
 import SequelizeDB from "../Database/models/index.js";
 import { UserDTO } from "justshare-shared";
@@ -22,13 +23,16 @@ export default class CmsElementsProjectRepository extends BaseRepository {
     return this.entityDAO.findAll({
       where:
       {
-        project_id: this.sequelizeDI.sequelize.literal(`project_id IS NULL OR project_id ='${String(project_id).replace(`'`, '')}'`)
+        [Op.or]: [
+          { project_id: null },
+          { project_id: this.context.project.id }
+        ]
       },
       include: [
         {
           model: this.sequelizeDI.CmsElementsProject,
           as: "cms_element",
-          required: true
+          required: false
         }
       ],
       transaction: this.getTran({ transaction })

@@ -142,7 +142,7 @@ export default class UnitOfWork extends BaseUnitOfWork {
         processChainPrivilegesRepositoryDI,
         processChainActionInjectionRepositoryDI,
         cmsElementsProjectRepositoryDI,
-        cmsMenuItemsProjectsRepositoryDI,
+        cmsMenuItemsProjectServiceDI,
         cmsMenuProjectsRepositoryDI,
         cmsMenuItemsPrivilegesProjectRepositoryDI
     }) {
@@ -208,7 +208,7 @@ export default class UnitOfWork extends BaseUnitOfWork {
             processChainPrivilegesRepositoryDI,
             processChainActionInjectionRepositoryDI,
             cmsElementsProjectRepositoryDI,
-            cmsMenuItemsProjectsRepositoryDI,
+            cmsMenuItemsProjectServiceDI,
             cmsMenuProjectsRepositoryDI,
             cmsMenuItemsPrivilegesProjectRepositoryDI
         }
@@ -220,8 +220,8 @@ export default class UnitOfWork extends BaseUnitOfWork {
          * @readonly
          * @memberof UnitOfWork
          */
-    get cmsMenuItemsProjectsRepository() {
-        return this.repositories.cmsMenuItemsProjectsRepositoryDI;
+    get cmsMenuItemsProjectRepository() {
+        return this.repositories.cmsMenuItemsProjectServiceDI;
     }
 
     /**

@@ -142,7 +142,7 @@ export default class UnitOfWork extends BaseUnitOfWork {
         processChainPrivilegesRepositoryDI,
         processChainActionInjectionRepositoryDI,
         cmsElementsProjectRepositoryDI,
-        cmsMenuItemsProjectServiceDI,
+        cmsMenuItemsProjectRepositoryDI,
         cmsMenuProjectsRepositoryDI,
         cmsMenuItemsPrivilegesProjectRepositoryDI
     }) {

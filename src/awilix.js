@@ -320,6 +320,20 @@ import UserTypesRolesService from "./Services/userTypesRolesService.js";
 import UserTypesService from "./Services/userTypesService.js";
 import UnitOfWork from "./unitOfWork.js";
 import GetCmsElementAdminQuery from "./Query/CmsElement/getCmsElementAdminQuery.js";
+import CmsMenuProjectService from "./Services/cmsMenuProjectService.js";
+import CmsMenuItemsProjectService from "./Services/cmsMenuItemsProjectService.js";
+import CmsMenuItemsPrivilegesProjectService from "./Services/cmsMenuItemsPrivilegesProjectService.js";
+import CmsMenuProjectsRepository from "./Repository/cmsMenuProjectRepository.js";
+import CmsMenuItemsProjectsRepository from "./Repository/cmsMenuItemsProjectRepository.js";
+import CmsMenuItemsPrivilegesProjectRepository from "./Repository/cmsMenuItemsPrivilegesProjectRepository.js";
+import GetCmsMenusAdminQuery from "./Query/CmsMenu/getCmsMenusAdminQuery.js";
+import GetCmsMenusQuery from "./Query/CmsMenu/getCmsMenusQuery.js";
+import UpsertProjectCmsMenuCommand from "./Commands/CmsMenu/upsertProjectCmsMenuCommand.js";
+import UpsertProjectCmsMenuItemCommand from "./Commands/CmsMenu/upsertProjectCmsMenuItemCommand.js";
+import UpsertProjectCmsMenuItemPrivilegeCommand from "./Commands/CmsMenu/upsertProjectCmsMenuItemPrivilegeCommand.js";
+import DeleteProjectCmsMenuItemCommand from "./Commands/CmsMenu/deleteProjectCmsMenuItemCommand.js";
+import DeleteProjectCmsMenuCommand from "./Commands/CmsMenu/deleteProjectCmsMenuCommand.js";
+import DeleteProjectCmsMenuItemPrivilegeCommand from "./Commands/CmsMenu/deleteProjectCmsMenuItemPrivilegeCommand.js";
 /**
  * 
  */
@@ -431,7 +445,12 @@ let exporter = {
   processServiceDI: asClass(ProcessService),
   processChainActionInjectionRepositoryDI: asClass(ProcessChainActionInjectionRepository),
   processChainPrivilegesRepositoryDI: asClass(ProcessChainPrivilegesRepository),
-
+  cmsMenuProjectServiceDI: asClass(CmsMenuProjectService),
+  cmsMenuItemsProjectServiceDI: asClass(CmsMenuItemsProjectService),
+  cmsMenuItemsPrivilegesProjectServiceDI: asClass(CmsMenuItemsPrivilegesProjectService),
+  cmsMenuProjectsRepositoryDI: asClass(CmsMenuProjectsRepository),
+  cmsMenuItemsProjectRepositoryDI: asClass(CmsMenuItemsProjectsRepository),
+  cmsMenuItemsPrivilegesProjectRepositoryDI: asClass(CmsMenuItemsPrivilegesProjectRepository),
 
 };
 exporter[CommandList.Dictionary.ADD_DICTIONARY] = asClass(
@@ -714,7 +733,7 @@ exporter['getConversationInfoQuery'] = asClass(GetConversationInfoQuery)
 
 ///////////////////////////////////////////////////////////
 
-//////////////CMS//////////////////////////////////////////
+//////////////CMS ELEMENT//////////////////////////////////////////
 exporter['getCmsElementAdminQuery'] = asClass(GetCmsElementAdminQuery);
 exporter['getProjectCmsElementQuery'] = asClass(GetProjectCmsElementQuery);
 
@@ -723,6 +742,18 @@ exporter['deleteCmsElementCommand'] = asClass(DeleteCmsElementCommand);
 exporter['deleteProjectCmsElementCommand'] = asClass(DeleteProjectCmsElementCommand)
 exporter['upsertCmsElementCommand'] = asClass(UpsertCmsElementCommand)
 exporter['upsertProjectCmsElementCommand'] = asClass(UpsertProjectCmsElementCommand)
+
+//////////////CMS MENU//////////////////////////////////////////
+exporter['getCmsMenusAdminQuery'] = asClass(GetCmsMenusAdminQuery);
+exporter['getCmsMenusQuery'] = asClass(GetCmsMenusQuery);
+
+exporter['upsertProjectCmsMenuItemCommand'] = asClass(UpsertProjectCmsMenuItemCommand);
+exporter['upsertProjectCmsMenuCommand'] = asClass(UpsertProjectCmsMenuCommand);
+exporter['upsertProjectCmsMenuItemPrivilegeCommand'] = asClass(UpsertProjectCmsMenuItemPrivilegeCommand);
+
+exporter['deleteProjectCmsMenuItemCommand'] = asClass(DeleteProjectCmsMenuItemCommand);
+exporter['deleteProjectCmsMenuCommand'] = asClass(DeleteProjectCmsMenuCommand);
+exporter['deleteProjectCmsMenuItemPrivilegeCommand'] = asClass(DeleteProjectCmsMenuItemPrivilegeCommand);
 
 
 ///////////////////CONFIG////////////////////////////////

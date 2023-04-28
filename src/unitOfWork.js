@@ -1,65 +1,68 @@
 "use strict";
 
 import BaseUnitOfWork from "./Architecture/baseUnitOfWork.js";
-import CategoryRepository from "./Repository/categoryRepository.js";
-import UserRepository from "./Repository/userRepository.js";
-import CategoryHierarchyRepository from "./Repository/categoryHierarchyRepository.js";
-import BlobRepository from "./Repository/blobRepository.js";
-import BlobMapperRepository from "./Repository/blobMapperRepository.js";
-import ItemCategoryRepository from "./Repository/itemCategoryRepository.js";
-import ItemRepository from "./Repository/itemRepository.js";
-import TextRepository from "./Repository/textRepository.js";
-import CountryRepository from "./Repository/countryRepository.js";
-import CityRepository from "./Repository/cityRepository.js";
-import UserAuthRepository from "./Repository/userAuthRepository.js";
-import CategoryOptionsRepository from "./Repository/categoryOptionsRepository.js";
-import ItemCategoryOptionRepository from "./Repository/itemCategoryOptionRepository.js";
-import TagRepository from "./Repository/tagRepository.js";
-import ProjectRepository from "./Repository/projectRepository.js";
-import ConfigRepository from "./Repository/configRepository.js";
-import UserProjectPrivilegesRepository from "./Repository/userProjectPrivilegesRepository.js";
-import PrivilegeRepository from "./Repository/privilegeRepository.js";
 import ActionPrivilegesRepository from "./Repository/actionPrivilegesRepository.js";
 import ActionProjectRepository from "./Repository/actionProjectRepository.js";
 import ActionRepository from "./Repository/actionRepository.js";
+import BlobMapperRepository from "./Repository/blobMapperRepository.js";
+import BlobRepository from "./Repository/blobRepository.js";
 import CategoryActionsRepository from "./Repository/categoryActionsRepository.js";
-import PrivilegeProjectRepository from "./Repository/privilegeProjectRepository.js";
-import RolesProjectRepository from "./Repository/rolesProjectRepository.js";
-import UserRolesRepository from "./Repository/userRolesRepository.js";
-import UserTypesRepository from "./Repository/userTypesRepository.js";
-import UserTypesRolesRepository from "./Repository/userTypesRolesRepository.js";
-import RolesRepository from "./Repository/rolesRepository.js";
-import TranslationRepository from "./Repository/translationRepository.js";
-import LanguageProjectRepository from "./Repository/languageProjectRepository.js";
-import LanguageRepository from "./Repository/languageRepository.js";
-import DimensionsRepository from "./Repository/dimensionsRepository.js";
+import CategoryHierarchyRepository from "./Repository/categoryHierarchyRepository.js";
+import CategoryOptionsRepository from "./Repository/categoryOptionsRepository.js";
+import CategoryRepository from "./Repository/categoryRepository.js";
+import CityRepository from "./Repository/cityRepository.js";
+import CmsElementsProjectRepository from "./Repository/cmsElementsProjectRepository.js";
+import CmsMenuItemsPrivilegesProjectRepository from "./Repository/cmsMenuItemsPrivilegesProjectRepository.js";
+import CmsMenuItemsProjectsRepository from "./Repository/cmsMenuItemsProjectRepository.js";
+import CmsMenuProjectsRepository from "./Repository/cmsMenuProjectRepository.js";
+import CommentRepository from "./Repository/commentRepository.js";
+import ConfigRepository from "./Repository/configRepository.js";
+import ConversationMessagesMembersRepository from "./Repository/conversationMessagesMembersRepository.js";
+import ConversationMessagesRepository from "./Repository/conversationMessagesRepository.js";
+import ConversationRepository from "./Repository/conversationRepository.js";
+import CountryRepository from "./Repository/countryRepository.js";
 import DimensionsProjectRepository from "./Repository/dimensionsProjectRepository.js";
-import MailTypesRepository from "./Repository/mailTypesRepository.js";
-import MailPartsRepository from "./Repository/mailPartsRepository.js";
-import MailTypesProjectRepository from "./Repository/mailTypesProjectRepository.js";
-import MailSendersRepository from "./Repository/mailSendersRepository.js";
-import SeoRepository from "./Repository/seoRepository.js";
+import DimensionsRepository from "./Repository/dimensionsRepository.js";
+import InvoiceItemRepository from "./Repository/invoiceItemsRepository.js";
+import InvoiceRepository from "./Repository/invoiceRepository.js";
+import InvoiceUserRepository from "./Repository/invoiceUserRepository.js";
+import ItemCategoryOptionRepository from "./Repository/itemCategoryOptionRepository.js";
+import ItemCategoryRepository from "./Repository/itemCategoryRepository.js";
+import ItemRepository from "./Repository/itemRepository.js";
 import ItemTransactionCategoryOptionsRepository from "./Repository/itemTransactionCategoryOptionsRepository.js";
 import ItemTransactionsRepository from "./Repository/itemTransactionsRepository.js";
 import ItemUserActionRepository from "./Repository/itemUserActionRepository.js";
-import ConversationMessagesRepository from "./Repository/conversationMessagesRepository.js";
-import ConversationRepository from "./Repository/conversationRepository.js";
-import UserConversationsRepository from "./Repository/userConversationsRepository.js";
-import ConversationMessagesMembersRepository from "./Repository/conversationMessagesMembersRepository.js";
+import LanguageProjectRepository from "./Repository/languageProjectRepository.js";
+import LanguageRepository from "./Repository/languageRepository.js";
+import MailPartsRepository from "./Repository/mailPartsRepository.js";
+import MailSendersRepository from "./Repository/mailSendersRepository.js";
+import MailTypesProjectRepository from "./Repository/mailTypesProjectRepository.js";
+import MailTypesRepository from "./Repository/mailTypesRepository.js";
+import PrivilegeProjectRepository from "./Repository/privilegeProjectRepository.js";
+import PrivilegeRepository from "./Repository/privilegeRepository.js";
+import ProcessChainActionInjectionRepository from "./Repository/processChainActionInjectionRepository.js";
+import ProcessChainPrivilegesRepository from "./Repository/processChainPrivilegesRepository.js";
+import ProcessChainRepository from "./Repository/processChainRepository.js";
+import ProcessChainStateRepository from "./Repository/processChainStateRepository.js";
+import ProcessRepository from "./Repository/processRepository.js";
+import ProjectRepository from "./Repository/projectRepository.js";
+import RolesProjectRepository from "./Repository/rolesProjectRepository.js";
+import RolesRepository from "./Repository/rolesRepository.js";
+import SeoRepository from "./Repository/seoRepository.js";
 import StatusActionsRepository from "./Repository/statusActionsRepository.js";
 import StatusProjectsRepository from "./Repository/statusProjectsRepository.js";
 import StatusRepository from "./Repository/statusRepository.js";
-import CommentRepository from "./Repository/commentRepository.js";
-import InvoiceRepository from "./Repository/invoiceRepository.js";
-import InvoiceItemRepository from "./Repository/invoiceItemsRepository.js";
-import InvoiceUserRepository from "./Repository/invoiceUserRepository.js";
+import TagRepository from "./Repository/tagRepository.js";
+import TextRepository from "./Repository/textRepository.js";
+import TranslationRepository from "./Repository/translationRepository.js";
+import UserAuthRepository from "./Repository/userAuthRepository.js";
+import UserConversationsRepository from "./Repository/userConversationsRepository.js";
 import UserInvoiceValuesRepository from "./Repository/userInvoiceValuesRepository.js";
-import ProcessRepository from "./Repository/processRepository.js";
-import ProcessChainRepository from "./Repository/processChainRepository.js";
-import ProcessChainStateRepository from "./Repository/processChainStateRepository.js";
-import ProcessChainPrivilegesRepository from "./Repository/processChainPrivilegesRepository.js";
-import ProcessChainActionInjectionRepository from "./Repository/processChainActionInjectionRepository.js";
-import CmsElementsProjectRepository from "./Repository/cmsElementsProjectRepository.js";
+import UserProjectPrivilegesRepository from "./Repository/userProjectPrivilegesRepository.js";
+import UserRepository from "./Repository/userRepository.js";
+import UserRolesRepository from "./Repository/userRolesRepository.js";
+import UserTypesRepository from "./Repository/userTypesRepository.js";
+import UserTypesRolesRepository from "./Repository/userTypesRolesRepository.js";
 
 
 
@@ -138,7 +141,10 @@ export default class UnitOfWork extends BaseUnitOfWork {
         processChainStateRepositoryDI,
         processChainPrivilegesRepositoryDI,
         processChainActionInjectionRepositoryDI,
-        cmsElementsProjectRepositoryDI
+        cmsElementsProjectRepositoryDI,
+        cmsMenuItemsProjectsRepositoryDI,
+        cmsMenuProjectsRepositoryDI,
+        cmsMenuItemsPrivilegesProjectRepositoryDI
     }) {
         super()
 
@@ -201,9 +207,42 @@ export default class UnitOfWork extends BaseUnitOfWork {
             processChainStateRepositoryDI,
             processChainPrivilegesRepositoryDI,
             processChainActionInjectionRepositoryDI,
-            cmsElementsProjectRepositoryDI
+            cmsElementsProjectRepositoryDI,
+            cmsMenuItemsProjectsRepositoryDI,
+            cmsMenuProjectsRepositoryDI,
+            cmsMenuItemsPrivilegesProjectRepositoryDI
         }
     };
+
+    /**
+         * 
+         * @return {CmsMenuItemsProjectsRepository}
+         * @readonly
+         * @memberof UnitOfWork
+         */
+    get cmsMenuItemsProjectsRepository() {
+        return this.repositories.cmsMenuItemsProjectsRepositoryDI;
+    }
+
+    /**
+     * 
+     * @return {CmsMenuProjectsRepository}
+     * @readonly
+     * @memberof UnitOfWork
+     */
+    get cmsMenuProjectsRepository() {
+        return this.repositories.cmsMenuProjectsRepositoryDI;
+    }
+
+    /**
+ * 
+ * @return {CmsMenuItemsPrivilegesProjectRepository}
+ * @readonly
+ * @memberof UnitOfWork
+ */
+    get cmsMenuItemsPrivilegesProjectRepository() {
+        return this.repositories.cmsMenuItemsPrivilegesProjectRepositoryDI;
+    }
 
     /**
          * 

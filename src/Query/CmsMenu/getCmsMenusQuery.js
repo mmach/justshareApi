@@ -8,21 +8,21 @@ import CategoryOptionService from '../../Services/categoryOptionService.js';
 import CategoryService from '../../Services/categoryService.js';
 
 
-export default class GetCmsElementAdminQuery extends BaseQuery {
+export default class GetCmsMenusQuery extends BaseQuery {
     /**
      * Creates an instance of GetDictionariesQuery.
      * @param  {{ logFileInfrastructureDI:LogFileInfrastructure, itemServiceDI:ItemService ,elasticSearchServiceDI:ElasticSearchService,blobServiceDI:BlobService,categoryOptionServiceDI:CategoryOptionService,CategoryService,categoryServiceDI:CategoryService}}
      * @memberof GetItemByIdQuery
      */
-     constructor({ logFileInfrastructureDI, projectInfrastructureDI, cmsElementsProjectServiceDI, authInfrastructureDI }) {
+    constructor({ logFileInfrastructureDI, projectInfrastructureDI, cmsMenuProjectServiceDI, authInfrastructureDI }) {
         super({ logFileInfrastructureDI, authInfrastructureDI, projectInfrastructureDI });
-        this.cmsElementsProjectServiceDI = cmsElementsProjectServiceDI
+        this.cmsMenuProjectServiceDI = cmsMenuProjectServiceDI
 
     };
     init(dto) {
         this.model = Object.assign(new DimensionsDTO(), dto);
     }
     async action() {
-        return await this.cmsElementsProjectServiceDI.setContext(this.context).getCmsElementsAdmin({});
+        return await this.cmsMenuProjectServiceDI.setContext(this.context).getCmsMenu({ init: this.model.init, token: token });
     }
 };

@@ -23,7 +23,6 @@ export default class GetCmsElementQuery extends BaseQuery {
         this.model = Object.assign(new DimensionsDTO(), dto);
     }
     async action() {
-        console.log("TO TU")
         return await this.cmsElementsProjectServiceDI.setContext(this.context).getCmsElementsFlat({ init: this.model.init, ids: this.model.ids });
     }
 };

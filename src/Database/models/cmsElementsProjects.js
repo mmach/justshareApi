@@ -46,20 +46,23 @@ export default class CmsElementsProject extends Model {
           type: DataTypes.UUID,
           allowNull: true
         },
-        is_active:  {
+        is_active: {
           type: DataTypes.BOOLEAN,
           allowNull: true
-        }, 
+        },
       },
-      { sequelize,
+      {
+        sequelize,
         tableName: 'CmsElementsProjects'
-      }    );
+      });
   }
   static hooks(models, sequelize) {
 
     CmsElementsProject.beforeDestroy(async (item, options) => {
 
-      await models.CmsElementsProjects.destroy({
+      await models.CmsElementsProject.update({
+        cms_element_id: null
+      }, {
         where: { cms_element_id: item.id },
         transaction: options.transaction,
         individualHooks: true

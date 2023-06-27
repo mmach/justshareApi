@@ -60,7 +60,7 @@ export default class CmsMenuItemsProjects extends Model {
     );
   }
   static associate(models) {
-    CmsMenuItemsProjects.hasMany(models.ActionPrivileges, { as: "menu_item_privileges", targetKey: 'id', foreignKey: "cms_menu_item_id" });
+    CmsMenuItemsProjects.hasMany(models.CmsMenuItemsPrivilegesProjects, { as: "menu_item_privileges", targetKey: 'id', foreignKey: "cms_menu_item_id" });
     CmsMenuItemsProjects.belongsTo(models.Translations, { as: "translation", targetKey: 'id', foreignKey: "translation_id" });
   }
 }

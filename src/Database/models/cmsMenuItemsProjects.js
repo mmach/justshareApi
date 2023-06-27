@@ -52,6 +52,9 @@ export default class CmsMenuItemsProjects extends Model {
         is_active: {
           type: DataTypes.BOOLEAN
         },
+        sort_order: {
+          type: DataTypes.INTEGER
+        },
       },
       {
         sequelize,

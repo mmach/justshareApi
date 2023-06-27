@@ -17,9 +17,10 @@ module.exports = {
           [url]  nvarchar(max),
           [icon] nvarchar(max),
           [func] nvarchar(max),
-          [pluginName] nvarchar(max),
+          [plugin_name] nvarchar(max),
           [project_id] char(36),
           [is_active] bit,
+          [sort_order] int,
           [updated_at] [datetimeoffset](7) NULL,
           [created_at] [datetimeoffset](7) NULL  ) ON [PRIMARY] 
        `

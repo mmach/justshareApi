@@ -16,10 +16,12 @@ export default class CmsMenuProjectService extends BaseService {
     super({ unitOfWorkDI, repository: 'cmsMenuProjectRepository' });
   }
 
-  getCmsMenuAdmin({ id }) {
-
+  async getCmsMenuAdmin({  }) {
+    let result = await this.toJsonParse(this.unitOfWorkDI.cmsMenuProjectsRepository.getCmsMenuAdmin({  }))
+    return result;
   }
-  getCmsMenu({ init, token }) {
-
+  async getCmsMenu({ init, token }) {
+    let result = await this.toJsonParse(this.unitOfWorkDI.cmsMenuProjectsRepository.getCmsMenu({ init, token  }))
+    return result;
   }
 }

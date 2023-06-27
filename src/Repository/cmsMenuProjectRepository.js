@@ -20,4 +20,53 @@ export default class CmsMenuProjectsRepository extends BaseRepository {
     this.sequelizeDI = sequelizeDI;
   }
 
+  getCmsMenuAdmin({ transaction }) {
+    return this.entityDAO.findAll({
+      where:
+      {
+        [Op.or]: [
+          { project_id: null },
+          { project_id: this.context.project.id }
+        ]
+      },
+      include: [
+        {
+          model: this.sequelizeDI.CmsMenuItemsProjects,
+          as: "menu_items",
+          required: false
+        }
+      ],
+      transaction: this.getTran({ transaction })
+    });
+  }
+  getCmsMenu({ init, token, transaction }) {
+    let query = {
+
+    }
+    if (token) {
+      query.token = token
+    } else {
+      query.load_on_init = true
+    }
+    return this.entityDAO.findAll({
+      where:
+      {
+        is_active: true,
+        [Op.or]: [
+          { project_id: null },
+          { project_id: this.context.project.id }
+        ],
+        ...query
+
+      },
+      include: [
+        {
+          model: this.sequelizeDI.CmsMenuItemsProjects,
+          as: "menu_items",
+          required: false
+        }
+      ],
+      transaction: this.getTran({ transaction })
+    });
+  }
 }

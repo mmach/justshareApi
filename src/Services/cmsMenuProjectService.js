@@ -13,7 +13,7 @@ export default class CmsMenuProjectService extends BaseService {
    * @param   {{ unitOfWorkDI: UnitOfWork, actionProjectRepositoryDI:}}
    */
   constructor({ unitOfWorkDI }) {
-    super({ unitOfWorkDI, repository: 'cmsMenuProjectRepository' });
+    super({ unitOfWorkDI, repository: 'cmsMenuProjectsRepository' });
   }
 
   async getCmsMenuAdmin({  }) {

@@ -66,4 +66,29 @@ export default class CmsMenuItemsProjects extends Model {
     CmsMenuItemsProjects.hasMany(models.CmsMenuItemsPrivilegesProjects, { as: "menu_item_privileges", targetKey: 'id', foreignKey: "cms_menu_item_id" });
     CmsMenuItemsProjects.belongsTo(models.Translations, { as: "translation", targetKey: 'id', foreignKey: "translation_id" });
   }
+  static hooks(models, sequelize) {
+
+
+    CmsMenuItemsProjects.beforeDestroy(async (item, options) => {
+
+      console.log('beforeDestroy')
+
+      await models.CmsMenuItemsPrivilegesProjects.destroy({
+        where: { cms_menu_item_id: item.id },
+        transaction: options.transaction,
+        individualHooks: true
+      })
+      await models.CmsMenuItemsProjects.destroy({
+        where: { cms_menu_item_parent_id: item.id },
+        transaction: options.transaction,
+        individualHooks: true
+      })
+
+      await models.Translations.destroy({
+        where: { id: item.translation_id },
+        transaction: options.transaction,
+        individualHooks: true
+      })
+    })
+  }
 }

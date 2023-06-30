@@ -334,6 +334,11 @@ import UpsertProjectCmsMenuItemPrivilegeCommand from "./Commands/CmsMenu/upsertP
 import DeleteProjectCmsMenuItemCommand from "./Commands/CmsMenu/deleteProjectCmsMenuItemCommand.js";
 import DeleteProjectCmsMenuCommand from "./Commands/CmsMenu/deleteProjectCmsMenuCommand.js";
 import DeleteProjectCmsMenuItemPrivilegeCommand from "./Commands/CmsMenu/deleteProjectCmsMenuItemPrivilegeCommand.js";
+import CmsPageProjectsRepository from "./Repository/cmsPageProjectsRepository.js";
+import CmsPageProjectService from "./Services/cmsPageProjectService.js";
+import DeleteProjectCmsPageCommand from "./Commands/CmsPage/deleteProjectCmsPageCommand.js";
+import UpsertProjectCmsPageCommand from "./Commands/CmsPage/upsertProjectCmsPageCommand.js";
+import GetCmsPagesQuery from "./Query/CmsPage/getCmsPagesQuery.js";
 /**
  * 
  */
@@ -451,6 +456,8 @@ let exporter = {
   cmsMenuProjectsRepositoryDI: asClass(CmsMenuProjectsRepository),
   cmsMenuItemsProjectRepositoryDI: asClass(CmsMenuItemsProjectsRepository),
   cmsMenuItemsPrivilegesProjectRepositoryDI: asClass(CmsMenuItemsPrivilegesProjectRepository),
+  cmsPageProjectsRepositoryDI: asClass(CmsPageProjectsRepository),
+  cmsPageProjectServiceDI: asClass(CmsPageProjectService),
 
 };
 exporter[CommandList.Dictionary.ADD_DICTIONARY] = asClass(
@@ -754,6 +761,11 @@ exporter['upsertProjectCmsMenuItemPrivilegeCommand'] = asClass(UpsertProjectCmsM
 exporter['deleteProjectCmsMenuItemCommand'] = asClass(DeleteProjectCmsMenuItemCommand);
 exporter['deleteProjectCmsMenuCommand'] = asClass(DeleteProjectCmsMenuCommand);
 exporter['deleteProjectCmsMenuItemPrivilegeCommand'] = asClass(DeleteProjectCmsMenuItemPrivilegeCommand);
+
+exporter['deleteProjectCmsPageCommand'] = asClass(DeleteProjectCmsPageCommand);
+exporter['upsertProjectCmsPageCommand'] = asClass(UpsertProjectCmsPageCommand);
+exporter['getCmsPagesQuery'] = asClass(GetCmsPagesQuery);
+
 
 
 ///////////////////CONFIG////////////////////////////////

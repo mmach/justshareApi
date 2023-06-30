@@ -31,7 +31,7 @@ const client = redis.createClient({
   //password: process.env.REDIS_PASSWORD || '9GP9aoV3BrtzyRu61ovBVnCmmiw1DKkE',
   url: 'redis://default:9GP9aoV3BrtzyRu61ovBVnCmmiw1DKkE@redis-16920.c233.eu-west-1-1.ec2.cloud.redislabs.com:16920'
 })
-client.connect()
+//client.connect()
 const io = new Emitter(client);
 
 //global.socket = io(ioredis);

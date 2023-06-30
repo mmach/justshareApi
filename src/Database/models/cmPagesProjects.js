@@ -7,7 +7,7 @@ import { Model } from "sequelize";
  * @class Item
  * @extends Sequelize.Model
  */
-export default class CmsMenuProjects extends Model {
+export default class CmsPageProjects extends Model {
   /**
    *
    * @static
@@ -25,10 +25,10 @@ export default class CmsMenuProjects extends Model {
           autoIncrement: false,
           defaultValue: sequelize.UUIDV4
         },
-        token: {
+        title: {
           type: DataTypes.STRING
         },
-        load_on_init: {
+        url: {
           type: DataTypes.BOOLEAN
         },
         project_id: {
@@ -37,28 +37,30 @@ export default class CmsMenuProjects extends Model {
         is_active: {
           type: DataTypes.BOOLEAN
         },
+        is_active: {
+          type: DataTypes.BOOLEAN
+        },
+        url_exact: {
+          type: DataTypes.BOOLEAN
+        },
+        cms: {
+          type: DataTypes.STRING
+        },
+        layout_plugin_name: {
+          type: DataTypes.STRING
+        },
+        is_homepage: {
+          type: DataTypes.BOOLEAN
+        },
       },
       {
         sequelize,
-        tableName: 'CmsMenuProjects'
+        tableName: 'CmsPageProjects'
       }
     );
   }
   static associate(models) {
-    CmsMenuProjects.hasMany(models.CmsMenuItemsProjects, { as: "menu_items", targetKey: 'id', foreignKey: "cms_menu_id" });
 
   }
-  static hooks(models, sequelize) {
-
-    CmsMenuProjects.beforeDestroy(async (item, options) => {
-
-      console.log('beforeDestroy')
-
-      await models.CmsMenuItemsProjects.destroy({
-        where: { cms_menu_id: item.id },
-        transaction: options.transaction,
-        individualHooks: true
-      })
-    })
-  }
+ 
 }

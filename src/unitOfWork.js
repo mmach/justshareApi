@@ -225,7 +225,7 @@ export default class UnitOfWork extends BaseUnitOfWork {
              * @readonly
              * @memberof UnitOfWork
              */
-    get cmsPageProjectsRepositor() {
+    get cmsPageProjectsRepository() {
         return this.repositories.cmsPageProjectsRepositoryDI;
     }
 

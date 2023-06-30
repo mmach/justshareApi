@@ -23,6 +23,6 @@ export default class GetCmsPagesQuery extends BaseQuery {
         this.model = Object.assign(new DimensionsDTO(), dto);
     }
     async action() {
-        return await this.cmsPageProjectServiceDI.setContext(this.context).getCmsMenuAdmin({});
+        return await this.cmsPageProjectServiceDI.setContext(this.context).getByProject({});
     }
 };

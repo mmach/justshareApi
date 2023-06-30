@@ -146,7 +146,7 @@ export default class UnitOfWork extends BaseUnitOfWork {
         cmsMenuItemsProjectRepositoryDI,
         cmsMenuProjectsRepositoryDI,
         cmsMenuItemsPrivilegesProjectRepositoryDI,
-        cmsPageProjectsRepositorDI
+        cmsPageProjectsRepositoryDI
     }) {
         super()
 
@@ -213,7 +213,7 @@ export default class UnitOfWork extends BaseUnitOfWork {
             cmsMenuItemsProjectRepositoryDI,
             cmsMenuProjectsRepositoryDI,
             cmsMenuItemsPrivilegesProjectRepositoryDI,
-            cmsPageProjectsRepositorDI
+            cmsPageProjectsRepositoryDI
         }
     };
 
@@ -226,7 +226,7 @@ export default class UnitOfWork extends BaseUnitOfWork {
              * @memberof UnitOfWork
              */
     get cmsPageProjectsRepositor() {
-        return this.repositories.cmsPageProjectsRepositorDI;
+        return this.repositories.cmsPageProjectsRepositoryDI;
     }
 
     /**

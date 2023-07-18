@@ -28,14 +28,14 @@ export default class CmsPageProjects extends Model {
         title: {
           type: DataTypes.STRING
         },
+        translation_id: {
+          type: DataTypes.UUID
+        },
         url: {
           type: DataTypes.BOOLEAN
         },
         project_id: {
           type: DataTypes.UUID,
-        },
-        is_active: {
-          type: DataTypes.BOOLEAN
         },
         is_active: {
           type: DataTypes.BOOLEAN
@@ -60,7 +60,22 @@ export default class CmsPageProjects extends Model {
     );
   }
   static associate(models) {
-
+    CmsPageProjects.belongsTo(models.Translations, { as: "translation", targetKey: 'id', foreignKey: "translation_id" });
   }
  
+
+  static hooks(models, sequelize) {
+
+    CmsPageProjects.beforeDestroy(async (item, options) => {
+
+      console.log('beforeDestroy')
+
+      await models.Translations.destroy({
+        where: { id: item.translation_id },
+        transaction: options.transaction,
+        individualHooks: true
+      })
+    })
+  }
+
 }

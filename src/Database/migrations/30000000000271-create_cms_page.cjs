@@ -17,6 +17,7 @@ module.exports = {
           [cms] varchar(max),
           [is_active] bit,
           [layout_plugin_name] nvarchar(200),
+          [translation_id] char(36),
           [is_homepage] nvarchar(200),
           [project_id] [char](36),
           [updated_at] [datetimeoffset](7) NULL,

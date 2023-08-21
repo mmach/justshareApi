@@ -22,7 +22,7 @@ let CONFIG = {
     key: 'trnsl.1.1.20190525T222610Z.47a7d82b340b189e.59764ef074ae84f21bed0836d101d4743a754577'
   },
   MQRABBIT: {
-    link: 'amqps://pvbclfib:SvkjYfIIRYw1PAHYbxqKCd5BY-xK7Ok9@whale.rmq.cloudamqp.com/pvbclfib'
+    link: 'amqps://ryryeucm:DQ_S4Z6FV8IrIaZbZyFbWj6jMOwLXmX7@whale.rmq.cloudamqp.com/ryryeucm'
   },
   BLOB_LINK: "https://api.mapps.io/",
   ELASTIC_SEARCH: {

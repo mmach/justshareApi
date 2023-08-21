@@ -29,9 +29,9 @@ const client = redis.createClient({
   //host: process.env.REDIS_HOST || 'redis-16920.c233.eu-west-1-1.ec2.cloud.redislabs.com',
   //port: process.env.REDIS_PORT || 16920,
   //password: process.env.REDIS_PASSWORD || '9GP9aoV3BrtzyRu61ovBVnCmmiw1DKkE',
-  url: 'redis://default:9GP9aoV3BrtzyRu61ovBVnCmmiw1DKkE@redis-16920.c233.eu-west-1-1.ec2.cloud.redislabs.com:16920'
+  url: 'redis://default:t9IF1BRl5SIIVnMCMOdMP2gCcgAvjyeI@redis-18626.c72.eu-west-1-2.ec2.cloud.redislabs.com:18626'
 })
-//client.connect()
+client.connect()
 const io = new Emitter(client);
 
 //global.socket = io(ioredis);

@@ -36,7 +36,6 @@ export default class UpsertProjectCmsMenuItemCommand extends BaseCommand {
         if (this.model.translation_id) {
             await this.translationServiceDI.setContext(this.context).upsert({ model: this.model.translation, withProject: true });
         }
-        console.log(this.model)
         await this.cmsMenuItemsProjectServiceDI.setContext(this.context).upsert({ model: this.model, withProject: true });
 
     }

@@ -339,6 +339,11 @@ import CmsPageProjectService from "./Services/cmsPageProjectService.js";
 import DeleteProjectCmsPageCommand from "./Commands/CmsPage/deleteProjectCmsPageCommand.js";
 import UpsertProjectCmsPageCommand from "./Commands/CmsPage/upsertProjectCmsPageCommand.js";
 import GetCmsPagesQuery from "./Query/CmsPage/getCmsPagesQuery.js";
+import CmsPagePrivilegesProjectService from "./Services/cmsPagePrivilegesProjectService.js";
+import CmsPagePrivilegesProjectRepository from "./Repository/cmsPagePrivilegesProjectRepository.js";
+import DeleteProjectCmsPagePrivilegeCommand from "./Commands/CmsPage/deleteProjectCmsPagePrivilegeCommand.js";
+import UpsertProjectCmsPagePrivilegeCommand from "./Commands/CmsPage/upsertProjectCmsPagePrivilegeCommand.js";
+import GetCmsPagesAdminQuery from "./Query/CmsPage/getCmsPagesAdminQuery.js";
 /**
  * 
  */
@@ -458,6 +463,8 @@ let exporter = {
   cmsMenuItemsPrivilegesProjectRepositoryDI: asClass(CmsMenuItemsPrivilegesProjectRepository),
   cmsPageProjectsRepositoryDI: asClass(CmsPageProjectsRepository),
   cmsPageProjectServiceDI: asClass(CmsPageProjectService),
+  cmsPagePrivilegesProjectServiceDI: asClass(CmsPagePrivilegesProjectService),
+  cmsPagePrivilegesProjectRepositoryDI: asClass(CmsPagePrivilegesProjectRepository)
 
 };
 exporter[CommandList.Dictionary.ADD_DICTIONARY] = asClass(
@@ -764,6 +771,10 @@ exporter['deleteProjectCmsMenuItemPrivilegeCommand'] = asClass(DeleteProjectCmsM
 
 exporter['deleteProjectCmsPageCommand'] = asClass(DeleteProjectCmsPageCommand);
 exporter['upsertProjectCmsPageCommand'] = asClass(UpsertProjectCmsPageCommand);
+exporter['deleteProjectCmsPagePrivilegeCommand'] = asClass(DeleteProjectCmsPagePrivilegeCommand);
+exporter['upsertProjectCmsPagePrivilegeCommand'] = asClass(UpsertProjectCmsPagePrivilegeCommand);
+
+exporter['getCmsPagesAdminQuery'] = asClass(GetCmsPagesAdminQuery);
 exporter['getCmsPagesQuery'] = asClass(GetCmsPagesQuery);
 
 

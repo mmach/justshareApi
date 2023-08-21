@@ -19,9 +19,7 @@ constructor({ unitOfWorkDI }) {
     async successLayer(dtoObject) {
         return await this.unitOfWorkDI.commit({ transaction: this.transaction });
     }
-    async executeLayer(action) {
-        console.log("DB transaction")
-        
+    async executeLayer(action) {        
         this.transaction = await this.unitOfWorkDI.startTransaction();
         await this.unitOfWorkDI.setTransaction({ transaction: this.transaction });
         return await action;

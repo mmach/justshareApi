@@ -16,4 +16,14 @@ export default class CmsPageProjectService extends BaseService {
     super({ unitOfWorkDI, repository: 'cmsPageProjectsRepository' });
   }
 
+
+  async getCmsPage({ }) {
+    let result = await this.toJsonParse(this.unitOfWorkDI.cmsPageProjectsRepository.getCmsPages({}))
+    return result;
+  }
+
+  async getCmsPageAdmin({ }) {
+    let result = await this.toJsonParse(this.unitOfWorkDI.cmsPageProjectsRepository.getCmsPagesAdmin({}))
+    return result;
+  }
 }

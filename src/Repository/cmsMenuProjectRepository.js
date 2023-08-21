@@ -87,7 +87,31 @@ export default class CmsMenuProjectsRepository extends BaseRepository {
         {
           model: this.sequelizeDI.CmsMenuItemsProjects,
           as: "menu_items",
-          required: false
+          required: false,
+          order: [['sort_order', 'ASC']],
+          include: [
+            {
+              model: this.sequelizeDI.Translations,
+              as: "translation",
+              required: false,
+            },
+            {
+              model: this.sequelizeDI.CmsMenuItemsPrivilegesProjects,
+              as: "menu_item_privileges",
+              required: false,
+              include: [{
+                model: this.sequelizeDI.PrivilegesProject,
+                as: "privileges",
+                include: [{
+                  model: this.sequelizeDI.Privileges,
+                  as: "privilege_details"
+                }
+                ]
+              }
+              ]
+            }
+
+          ],
         }
       ],
       transaction: this.getTran({ transaction })

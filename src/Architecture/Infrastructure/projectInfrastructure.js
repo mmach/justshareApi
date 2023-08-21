@@ -31,7 +31,6 @@ export default class ProjectInfrastructure extends BaseInfrastracture {
         else {
             throw 'AUTHORIZATION_PROJECT_ERROR'
         }
-        console.log(token)
         let cert = fs.readFileSync('./cert.key');
         let decoded = jwt.verify(token, cert.toString('utf8'));
         return decoded
@@ -43,8 +42,6 @@ export default class ProjectInfrastructure extends BaseInfrastracture {
                 return await action
             }
             let context = this.getDecodedToken(action.projectToken);
-            console.log(action.projectToken)
-            console.log(context)
 
             let project = await this.projectRepositoryDI.getProjectInfo({ project_id: context.id })
             if (!project) {/*|| user.relogin_require == true) {*/

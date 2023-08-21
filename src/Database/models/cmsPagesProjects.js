@@ -61,14 +61,22 @@ export default class CmsPageProjects extends Model {
   }
   static associate(models) {
     CmsPageProjects.belongsTo(models.Translations, { as: "translation", targetKey: 'id', foreignKey: "translation_id" });
+    CmsPageProjects.hasMany(models.CmsPagePrivilegesProjects, { as: "page_privileges", targetKey: 'id', foreignKey: "cms_page_id" });
+
   }
- 
+
 
   static hooks(models, sequelize) {
 
     CmsPageProjects.beforeDestroy(async (item, options) => {
 
       console.log('beforeDestroy')
+
+      await models.CmsPagePrivilegesProjects.destroy({
+        where: { cms_page_id: item.id },
+        transaction: options.transaction,
+        individualHooks: true
+      })
 
       await models.Translations.destroy({
         where: { id: item.translation_id },

@@ -16,26 +16,22 @@ import AuthInfrastucture from "../../Architecture/Infrastructure/authInfrastuctu
  * @class upsertConfigCommand
  * @extends BaseCommand
  */
-export default class UpsertProjectCmsPageCommand extends BaseCommand {
+export default class DeleteProjectCmsPagePrivilegeCommand extends BaseCommand {
     /**
      * Creates an instance of upsertConfigCommand.
      * @param  {{logFileInfrastructureDI : LogFileInfrastructure,  categoryServiceDI:CategoryService ,dbTransactionInfrastuctureDI:DbTransactionInfrastucture,authInfrastructureDI:AuthInfrastucture}}
      * @memberof InsertCategoryCommand
      */
-    constructor({ logFileInfrastructureDI, projectInfrastructureDI, cmsPageProjectServiceDI, authInfrastructureDI, translationServiceDI }) {
+    constructor({ logFileInfrastructureDI, projectInfrastructureDI, cmsPagePrivilegesProjectServiceDI, authInfrastructureDI }) {
         super({ logFileInfrastructureDI, authInfrastructureDI, projectInfrastructureDI });
-        this.cmsPageProjectServiceDI = cmsPageProjectServiceDI
-        this.translationServiceDI = translationServiceDI
+        this.cmsPagePrivilegesProjectServiceDI = cmsPagePrivilegesProjectServiceDI
 
     };
     init(dto) {
         this.model = dto;
     }
     async action() {
-        if (this.model.translation_id) {
-            await this.translationServiceDI.setContext(this.context).upsert({ model: this.model.translation, withProject: true });
-        }
-        await this.cmsPageProjectServiceDI.setContext(this.context).upsert({ model: this.model, withProject: true });
+        await this.cmsPagePrivilegesProjectServiceDI.setContext(this.context).delete({ model: this.model, withProject: true });
 
     }
 };

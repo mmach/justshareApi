@@ -5,7 +5,7 @@
 
 //var basename = path.basename(__filename);
 import Sequelize from "sequelize";
-import configJSON from "./../config/config.json";// assert {type: 'json'};
+import configJSON from "./../config/config.json" assert {type: 'json'};
 import Users from "./user.js";
 import Category from "./category.js";
 import CategoryHierarchy from "./categoryhierarchy.js";
@@ -77,7 +77,9 @@ import CmsElementsProject from "./cmsElementsProjects.js";
 import CmsMenuItemsPrivilegesProjects from "./cmsMenuItemsPrivilegesProjects.js";
 import CmsMenuItemsProjects from "./cmsMenuItemsProjects.js";
 import CmsMenuProjects from "./cmsMenuProjects.js";
-import CmsPageProjects from "./cmPagesProjects.js";
+import CmsPageProjects from "./cmsPagesProjects.js";
+import CmsPagePrivilegesProjects from "./cmsPagePrivilegesProjects.js";
+
 
 var env = process.env.NODE_ENV || "development";
 var config = configJSON[env];
@@ -181,7 +183,8 @@ let models = {
   CmsMenuItemsPrivilegesProjects: CmsMenuItemsPrivilegesProjects.init(sequelize, Sequelize),
   CmsMenuItemsProjects: CmsMenuItemsProjects.init(sequelize, Sequelize),
   CmsMenuProjects: CmsMenuProjects.init(sequelize, Sequelize),
-  CmsPageProjects: CmsPageProjects.init(sequelize, Sequelize)
+  CmsPageProjects: CmsPageProjects.init(sequelize, Sequelize),
+  CmsPagePrivilegesProjects: CmsPagePrivilegesProjects.init(sequelize, Sequelize)
 };
 
 

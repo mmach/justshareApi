@@ -43,7 +43,7 @@ export default class CmsMenuItemsProjects extends Model {
         func: {
           type: DataTypes.STRING
         },
-        pluginName: {
+        plugin_name: {
           type: DataTypes.STRING
         },
         project_id: {

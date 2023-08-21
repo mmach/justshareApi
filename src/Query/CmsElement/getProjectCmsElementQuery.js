@@ -14,8 +14,8 @@ export default class GetCmsElementQuery extends BaseQuery {
      * @param  {{ logFileInfrastructureDI:LogFileInfrastructure, itemServiceDI:ItemService ,elasticSearchServiceDI:ElasticSearchService,blobServiceDI:BlobService,categoryOptionServiceDI:CategoryOptionService,CategoryService,categoryServiceDI:CategoryService}}
      * @memberof GetItemByIdQuery
      */
-    constructor({ logFileInfrastructureDI, projectInfrastructureDI, cmsElementsProjectServiceDI, authInfrastructureDI }) {
-        super({ logFileInfrastructureDI, authInfrastructureDI, projectInfrastructureDI });
+    constructor({ logFileInfrastructureDI, projectInfrastructureDI, cmsElementsProjectServiceDI }) {
+        super({ logFileInfrastructureDI, projectInfrastructureDI });
         this.cmsElementsProjectServiceDI = cmsElementsProjectServiceDI
 
     };

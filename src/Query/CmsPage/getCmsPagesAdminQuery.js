@@ -8,14 +8,14 @@ import CategoryOptionService from '../../Services/categoryOptionService.js';
 import CategoryService from '../../Services/categoryService.js';
 
 
-export default class GetCmsPagesQuery extends BaseQuery {
+export default class GetCmsPagesAdminQuery extends BaseQuery {
     /**
      * Creates an instance of GetDictionariesQuery.
      * @param  {{ logFileInfrastructureDI:LogFileInfrastructure, itemServiceDI:ItemService ,elasticSearchServiceDI:ElasticSearchService,blobServiceDI:BlobService,categoryOptionServiceDI:CategoryOptionService,CategoryService,categoryServiceDI:CategoryService}}
      * @memberof GetItemByIdQuery
      */
-    constructor({ logFileInfrastructureDI, projectInfrastructureDI, cmsPageProjectServiceDI }) {
-        super({ logFileInfrastructureDI, projectInfrastructureDI });
+    constructor({ logFileInfrastructureDI, projectInfrastructureDI, cmsPageProjectServiceDI, authInfrastructureDI }) {
+        super({ logFileInfrastructureDI, authInfrastructureDI, projectInfrastructureDI });
         this.cmsPageProjectServiceDI = cmsPageProjectServiceDI
 
     };
@@ -23,6 +23,6 @@ export default class GetCmsPagesQuery extends BaseQuery {
         this.model = Object.assign(new DimensionsDTO(), dto);
     }
     async action() {
-        return await this.cmsPageProjectServiceDI.setContext(this.context).getCmsPage({});
+        return await this.cmsPageProjectServiceDI.setContext(this.context).getCmsPageAdmin({});
     }
 };

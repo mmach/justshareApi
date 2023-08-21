@@ -14,8 +14,8 @@ export default class GetCmsMenusQuery extends BaseQuery {
      * @param  {{ logFileInfrastructureDI:LogFileInfrastructure, itemServiceDI:ItemService ,elasticSearchServiceDI:ElasticSearchService,blobServiceDI:BlobService,categoryOptionServiceDI:CategoryOptionService,CategoryService,categoryServiceDI:CategoryService}}
      * @memberof GetItemByIdQuery
      */
-    constructor({ logFileInfrastructureDI, projectInfrastructureDI, cmsMenuProjectServiceDI, authInfrastructureDI }) {
-        super({ logFileInfrastructureDI, authInfrastructureDI, projectInfrastructureDI });
+    constructor({ logFileInfrastructureDI, projectInfrastructureDI, cmsMenuProjectServiceDI }) {
+        super({ logFileInfrastructureDI,  projectInfrastructureDI });
         this.cmsMenuProjectServiceDI = cmsMenuProjectServiceDI
 
     };
@@ -23,6 +23,6 @@ export default class GetCmsMenusQuery extends BaseQuery {
         this.model = Object.assign(new DimensionsDTO(), dto);
     }
     async action() {
-        return await this.cmsMenuProjectServiceDI.setContext(this.context).getCmsMenu({ init: this.model.init, token: token });
+        return await this.cmsMenuProjectServiceDI.setContext(this.context).getCmsMenu({});
     }
 };

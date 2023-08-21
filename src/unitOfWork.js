@@ -15,6 +15,7 @@ import CmsElementsProjectRepository from "./Repository/cmsElementsProjectReposit
 import CmsMenuItemsPrivilegesProjectRepository from "./Repository/cmsMenuItemsPrivilegesProjectRepository.js";
 import CmsMenuItemsProjectsRepository from "./Repository/cmsMenuItemsProjectRepository.js";
 import CmsMenuProjectsRepository from "./Repository/cmsMenuProjectRepository.js";
+import CmsPagePrivilegesProjectRepository from "./Repository/cmsPagePrivilegesProjectRepository.js";
 import CmsPageProjectsRepository from "./Repository/cmsPageProjectsRepository.js";
 import CommentRepository from "./Repository/commentRepository.js";
 import ConfigRepository from "./Repository/configRepository.js";
@@ -146,7 +147,8 @@ export default class UnitOfWork extends BaseUnitOfWork {
         cmsMenuItemsProjectRepositoryDI,
         cmsMenuProjectsRepositoryDI,
         cmsMenuItemsPrivilegesProjectRepositoryDI,
-        cmsPageProjectsRepositoryDI
+        cmsPageProjectsRepositoryDI,
+        cmsPagePrivilegesProjectRepositoryDI
     }) {
         super()
 
@@ -213,11 +215,22 @@ export default class UnitOfWork extends BaseUnitOfWork {
             cmsMenuItemsProjectRepositoryDI,
             cmsMenuProjectsRepositoryDI,
             cmsMenuItemsPrivilegesProjectRepositoryDI,
-            cmsPageProjectsRepositoryDI
+            cmsPageProjectsRepositoryDI,
+            cmsPagePrivilegesProjectRepositoryDI
         }
     };
 
 
+    
+    /**
+             * 
+             * @return {CmsPagePrivilegesProjectRepository}
+             * @readonly
+             * @memberof UnitOfWork
+             */
+    get cmsPagePrivilegesProjectRepository() {
+        return this.repositories.cmsPagePrivilegesProjectRepositoryDI;
+    }
 
     /**
              * 

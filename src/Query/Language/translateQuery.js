@@ -34,7 +34,7 @@ export default class TranslateQuery extends BaseQuery {
         } else if (lang == 'us') {
             lang = 'en';
         }
-        let destlang = this.model.langTo.toUpperCase()
+        let destlang = this.model.langTo.toLowerCase()
 
         if (destlang == 'ZH_CN') {
             destlang = 'zh';

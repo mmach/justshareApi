@@ -40,6 +40,9 @@ export default class CmsMenuItemsProjects extends Model {
         icon: {
           type: DataTypes.STRING
         },
+        is_expanded:{
+          type: DataTypes.BOOLEAN
+        },
         func: {
           type: DataTypes.STRING
         },

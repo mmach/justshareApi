@@ -4,7 +4,7 @@ import BaseService from "../Architecture/baseService.js";
 import UnitOfWork from "../unitOfWork.js";
 
 import CONFIG from "../config.js";
-import {CityDTO} from "justshare-shared";
+import { CityDTO } from "justshare-shared";
 import NodeGeocoder from 'node-geocoder';
 import axios from 'axios'
 var options = {
@@ -41,7 +41,7 @@ export default class CityService extends BaseService {
    */
   async getCities({ city }) {
 
-  
+
     let cityList = await this.unitOfWorkDI.cityRepository.getCities({
       name_fs: city.name,
       country_id: city.country_id
@@ -62,14 +62,14 @@ export default class CityService extends BaseService {
     // Using callback
     console.log(country_code)
     let result = await new Promise((resolve, rej) => {
-     axios.get(`https://api.locationiq.com/v1/autocomplete.php?key=${ CONFIG.LOCATION_IQ}&format=json&q=${encodeURI(address)}&countrycodes=${country_code}&limit=5&normalizeaddress=1`).then(succ=>{
-      resolve(succ.data);
-     })
-     // geocoder.geocode({ q: address, country: country, city: city, limit: 5,"accept-language":this.context.language }, function (err, res) {
-     //   console.log(res)
-//
-     //   resolve(res);
-    //  });
+      axios.get(`https://api.locationiq.com/v1/autocomplete.php?key=${CONFIG.LOCATION_IQ}&format=json&q=${encodeURI(address)}&tag=place:city&countrycodes=${country_code}&limit=5&normalizeaddress=1`).then(succ => {
+        resolve(succ.data);
+      })
+      // geocoder.geocode({ q: address, country: country, city: city, limit: 5,"accept-language":this.context.language }, function (err, res) {
+      //   console.log(res)
+      //
+      //   resolve(res);
+      //  });
 
     });
     return result;
@@ -81,16 +81,16 @@ export default class CityService extends BaseService {
 
     let result = await new Promise((resolve, rej) => {
 
-      axios.get(`https://us1.locationiq.com/v1/reverse.php?key=${ CONFIG.LOCATION_IQ}&format=json&lat=${latitude}8&lon=${longitude}&normalizeaddress=1`).then(succ=>{
+      axios.get(`https://us1.locationiq.com/v1/reverse.php?key=${CONFIG.LOCATION_IQ}&format=json&lat=${latitude}8&lon=${longitude}&normalizeaddress=1`).then(succ => {
         resolve(succ.data);
       });
-/*
-      geocoder.reverse({ lat: latitude, lon: longitude,"accept-language":this.context.language }, function (err, res) {
-
-        console.log(res)
-        resolve(res);
-      });
-*/
+      /*
+            geocoder.reverse({ lat: latitude, lon: longitude,"accept-language":this.context.language }, function (err, res) {
+      
+              console.log(res)
+              resolve(res);
+            });
+      */
     });
     return result;
   }

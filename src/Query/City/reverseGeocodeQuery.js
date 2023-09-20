@@ -21,7 +21,7 @@ export default class ReverseGeocodeQuery extends BaseQuery {
     }
 
     async action() {
-        let reverseResult = await this.cityServiceDI.setContext(this.context).getReverse({ address: this.model.address, city: this.model.city, country_code: this.model.country_code });
+        let reverseResult = await this.cityServiceDI.setContext(this.context).getReverse({ address: this.model.address, city: this.model.city, country_code: this.model.country_code ,tag:this.model.tag});
         return reverseResult;
     }
 };

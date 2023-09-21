@@ -1,0 +1,155 @@
+{"id":"16B9FAF4-1E2C-482E-B48B-D7D02CF38D8E","uid":"","secretKey":"D45C24D4-8E40-4825-B4DC-B4C5DD93B17C","level":"info","message":"","timestamp":"2023-09-21T10:29:34.334Z"}
+{"id":"16B9FAF4-1E2C-482E-B48B-D7D02CF38D8E","uid":"","secretKey":"D45C24D4-8E40-4825-B4DC-B4C5DD93B17C","level":"info","message":"","timestamp":"2023-09-21T10:29:35.024Z"}
+{"id":"f2b36525-0be2-475d-845c-645957a021ca","uid":"","level":"info","message":"","timestamp":"2023-09-21T10:29:35.036Z"}
+{"id":"945a82bd-8ace-446f-88bc-c1206af631a0","uid":"","level":"info","message":"","timestamp":"2023-09-21T10:29:35.308Z"}
+{"id":"e1eb3185-d268-434f-beb5-93c199f161b9","uid":"","level":"info","message":"","timestamp":"2023-09-21T10:29:35.325Z"}
+{"id":"e9feecc2-f255-4598-9c43-c2075bc5f636","uid":"","level":"info","message":"","timestamp":"2023-09-21T10:29:35.336Z"}
+{"level":"info","message":"","timestamp":"2023-09-21T10:29:35.347Z"}
+{"id":"e9cd5e9d-c42a-4ec5-9f9d-abc43cace720","uid":"","level":"info","message":"","timestamp":"2023-09-21T10:29:35.360Z"}
+{"level":"info","message":"","timestamp":"2023-09-21T10:29:35.369Z"}
+{"id":"14bd5303-2457-4916-a8c8-4892d7648487","uid":"","level":"info","message":"","timestamp":"2023-09-21T10:29:35.591Z"}
+{"level":"info","message":"","timestamp":"2023-09-21T10:29:35.595Z"}
+{"id":"7fd30567-8068-44d9-a6da-443b38001e96","uid":"","level":"info","message":"","timestamp":"2023-09-21T10:29:35.667Z"}
+{"level":"info","message":"","timestamp":"2023-09-21T10:29:35.671Z"}
+{"id":"1757cc53-2ab2-41e6-8068-af3e6332e3e5","uid":"","level":"info","message":"","timestamp":"2023-09-21T10:29:35.702Z"}
+{"id":"970ee6b7-b404-4f45-b03f-dbf76cee2cc2","uid":"","level":"info","message":"","timestamp":"2023-09-21T10:29:35.818Z"}
+{"id":"","uid":"","category":"","category_pl":"","category_us":"","category_de":"","category_ru":"","category_fr":"","category_es":"","category_no":"","category_zh_cn":"","forThing":0,"forEvent":0,"forSell":0,"icon":"","category_children":[],"category_parent":"","status":0,"expired_day":"","project_id":"","blob_id":"","CategoryHierarchy":{"category_parent_id":""},"level":"info","message":"","timestamp":"2023-09-21T10:29:35.981Z"}
+{"id":"dce25061-52a2-44ef-b1eb-a1fd1bef54a6","uid":"","level":"info","message":"","timestamp":"2023-09-21T10:29:36.009Z"}
+{"id":"8028e6b8-73b2-42d3-bd1b-492bc29a07a6","uid":"","level":"info","message":"","timestamp":"2023-09-21T10:29:36.014Z"}
+{"id":"e735e937-58c4-4c98-bc57-7683c287d742","uid":"","level":"info","message":"","timestamp":"2023-09-21T10:29:36.022Z"}
+{"level":"info","message":"","timestamp":"2023-09-21T10:29:36.028Z"}
+{"level":"info","message":"","timestamp":"2023-09-21T10:29:36.054Z"}
+{"id":"d8619003-fbd9-4b62-802c-07e42deeb9c2","uid":"","level":"info","message":"","timestamp":"2023-09-21T10:29:36.148Z"}
+{"level":"info","message":"","timestamp":"2023-09-21T10:29:36.176Z"}
+{"level":"info","message":"","timestamp":"2023-09-21T10:29:36.184Z"}
+{"id":"e10a6ab6-6c5d-41f3-8cbb-89de38b48459","uid":"","level":"info","message":"","timestamp":"2023-09-21T10:29:36.190Z"}
+{"id":"db5775dc-a187-4cb4-b6f5-9c244a3a5c01","uid":"","level":"info","message":"","timestamp":"2023-09-21T10:29:36.196Z"}
+{"id":"8122febb-20b2-4355-8435-dc8b1ded3b38","uid":"","level":"info","message":"","timestamp":"2023-09-21T10:29:36.208Z"}
+{"id":"","uid":"","category":"","category_pl":"","category_us":"","category_de":"","category_ru":"","category_fr":"","category_es":"","category_no":"","category_zh_cn":"","forThing":0,"forEvent":0,"forSell":0,"icon":"","category_children":[],"category_parent":"","status":0,"expired_day":"","project_id":"","blob_id":"","CategoryHierarchy":{"category_parent_id":""},"level":"info","message":"","timestamp":"2023-09-21T10:29:36.383Z"}
+{"id":"","uid":"","name":"","surname":"","email":"","salt":"","phone":"","birthDate":"","is_authorized":"","passwordHash":"","city":"","city_id":"","adress":"","country":"","country_id":"","longitude":"","latitude":"","relogin_require":"","refresh_token":"1e1de0cf-aba9-47a1-b419-36beef48cfe8","language":"","blob_id":"","is_admin":"","is_root":"","address":"","zipcode":"","level":"info","message":"","timestamp":"2023-09-21T10:29:36.392Z"}
+{"id":"","uid":"","name":"","surname":"","email":"","salt":"","phone":"","birthDate":"","is_authorized":"","passwordHash":"","city":"","city_id":"","adress":"","country":"","country_id":"","longitude":"","latitude":"","relogin_require":"","refresh_token":"1e1de0cf-aba9-47a1-b419-36beef48cfe8","language":"","blob_id":"","is_admin":"","is_root":"","address":"","zipcode":"","level":"info","message":"","timestamp":"2023-09-21T10:29:36.480Z"}
+{"id":"","uid":"","name":"","surname":"","email":"","salt":"","phone":"","birthDate":"","is_authorized":"","passwordHash":"","city":"","city_id":"","adress":"","country":"","country_id":"","longitude":"","latitude":"","relogin_require":"","refresh_token":"","language":"","blob_id":"","is_admin":"","is_root":"","address":"","zipcode":"","level":"info","message":"","timestamp":"2023-09-21T10:29:36.488Z"}
+{"id":"","uid":"","name":"","surname":"","email":"","salt":"","phone":"","birthDate":"","is_authorized":"","passwordHash":"","city":"","city_id":"","adress":"","country":"","country_id":"","longitude":"","latitude":"","relogin_require":"","refresh_token":"","language":"","blob_id":"","is_admin":"","is_root":"","address":"","zipcode":"","level":"info","message":"","timestamp":"2023-09-21T10:29:36.612Z"}
+{"id":"8369090f-376c-4fba-82ef-573dc0c176e4","uid":"","code":"","status":"200","type":"INFO","message":{"pl":"","us":"","de":"","ru":"","fr":"","es":"","no":"","zh_cn":""},"field":"","level":"info","timestamp":"2023-09-21T10:29:36.622Z"}
+{"id":"c413c8f8-c033-4ae5-b818-9b2be96e8252","uid":"","code":"","status":"200","type":"INFO","message":{"pl":"","us":"","de":"","ru":"","fr":"","es":"","no":"","zh_cn":""},"field":"","level":"info","timestamp":"2023-09-21T10:29:36.796Z"}
+{"id":"b6545f2c-577b-4ca1-8c7f-141fc85deda4","uid":"","name":"","surname":"","email":"","salt":"","phone":"","birthDate":"","is_authorized":"","passwordHash":"","city":"","city_id":"","adress":"","country":"","country_id":"","longitude":"","latitude":"","relogin_require":"","refresh_token":"","language":"","blob_id":"","is_admin":"","is_root":"","address":"","zipcode":"","level":"info","message":"","timestamp":"2023-09-21T10:29:37.780Z"}
+{"id":"16B9FAF4-1E2C-482E-B48B-D7D02CF38D8E","uid":"","secretKey":"D45C24D4-8E40-4825-B4DC-B4C5DD93B17C","level":"info","message":"","timestamp":"2023-09-21T10:29:37.798Z"}
+{"id":"16B9FAF4-1E2C-482E-B48B-D7D02CF38D8E","uid":"","secretKey":"D45C24D4-8E40-4825-B4DC-B4C5DD93B17C","level":"info","message":"","timestamp":"2023-09-21T10:29:37.980Z"}
+{"id":"6f7b6967-cc94-454c-b0f7-39babe97737b","uid":"","level":"info","message":"","timestamp":"2023-09-21T10:29:37.998Z"}
+{"id":"b6545f2c-577b-4ca1-8c7f-141fc85deda4","uid":"","name":"","surname":"","email":"","salt":"","phone":"","birthDate":"","is_authorized":"","passwordHash":"","city":"","city_id":"","adress":"","country":"","country_id":"","longitude":"","latitude":"","relogin_require":"","refresh_token":"","language":"","blob_id":"","is_admin":"","is_root":"","address":"","zipcode":"","level":"info","message":"","timestamp":"2023-09-21T10:29:38.146Z"}
+{"id":"d916d2c2-c2d7-4c78-9469-c493aeed5630","uid":"","blob_id":0,"item_id":0,"blob_thumbmail_id":0,"blob_min_id":0,"user_id":"b6545f2c-577b-4ca1-8c7f-141fc85deda4","order":"1","status":"V","category_id":0,"level":"info","message":"","timestamp":"2023-09-21T10:29:38.153Z"}
+{"id":"4c82d5fa-08e5-4a4a-be73-078d8f5b9d7e","uid":"","level":"info","message":"","timestamp":"2023-09-21T10:29:38.185Z"}
+{"id":"3bac229a-5d6e-41f3-a51b-70b594346e86","uid":"","level":"info","message":"","timestamp":"2023-09-21T10:29:38.253Z"}
+{"id":"39c855b2-e46f-4696-b85e-1eb738232635","uid":"","level":"info","message":"","timestamp":"2023-09-21T10:29:38.262Z"}
+{"level":"info","message":"","timestamp":"2023-09-21T10:29:38.270Z"}
+{"id":"7688d6b2-7a05-45a8-b0b9-68fd9f4f6f90","uid":"","level":"info","message":"","timestamp":"2023-09-21T10:29:38.333Z"}
+{"level":"info","message":"","timestamp":"2023-09-21T10:29:38.342Z"}
+{"id":"b9934617-ff43-45ba-99c7-dca1e13a2b20","uid":"","level":"info","message":"","timestamp":"2023-09-21T10:29:38.360Z"}
+{"level":"info","message":"","timestamp":"2023-09-21T10:29:38.420Z"}
+{"level":"info","message":"","timestamp":"2023-09-21T10:29:38.443Z"}
+{"id":"3c82a38f-6556-452c-8187-1812e28b922f","uid":"","level":"info","message":"","timestamp":"2023-09-21T10:29:38.451Z"}
+{"id":"a68d3eea-2ca3-4879-a402-7683a1b61a01","uid":"","level":"info","message":"","timestamp":"2023-09-21T10:29:38.494Z"}
+{"id":"6b44ee05-242e-43d4-84db-6537b5cf5ae2","uid":"","level":"info","message":"","timestamp":"2023-09-21T10:29:38.551Z"}
+{"id":"","uid":"","category":"","category_pl":"","category_us":"","category_de":"","category_ru":"","category_fr":"","category_es":"","category_no":"","category_zh_cn":"","forThing":0,"forEvent":0,"forSell":0,"icon":"","category_children":[],"category_parent":"","status":0,"expired_day":"","project_id":"","blob_id":"","CategoryHierarchy":{"category_parent_id":""},"level":"info","message":"","timestamp":"2023-09-21T10:29:38.559Z"}
+{"id":"6ad798fb-354e-497d-a9e8-0bfe99b913b4","uid":"","level":"info","message":"","timestamp":"2023-09-21T10:29:38.683Z"}
+{"user_id":"b6545f2c-577b-4ca1-8c7f-141fc85deda4","level":"info","message":"","timestamp":"2023-09-21T10:29:38.694Z"}
+{"id":"7f52571e-e450-4aee-9113-636c12d5e6eb","uid":"","level":"info","message":"","timestamp":"2023-09-21T10:29:38.702Z"}
+{"level":"info","message":"","timestamp":"2023-09-21T10:29:38.709Z"}
+{"id":"8adeb946-17aa-49a7-b573-f2224da40e60","uid":"","blob_id":0,"item_id":0,"blob_thumbmail_id":0,"blob_min_id":0,"user_id":"b6545f2c-577b-4ca1-8c7f-141fc85deda4","order":"1","status":"V","category_id":0,"level":"info","message":"","timestamp":"2023-09-21T10:29:38.768Z"}
+{"id":"57102c3e-0a2b-4a98-a3fb-62701b59c12e","uid":"","level":"info","message":"","timestamp":"2023-09-21T10:29:38.783Z"}
+{"id":"2489182f-c08f-4ad4-a3a6-edaacb1b38d6","uid":"","level":"info","message":"","timestamp":"2023-09-21T10:29:38.818Z"}
+{"level":"info","message":"","timestamp":"2023-09-21T10:29:38.864Z"}
+{"level":"info","message":"","timestamp":"2023-09-21T10:29:38.873Z"}
+{"level":"info","message":"","timestamp":"2023-09-21T10:29:38.890Z"}
+{"id":"47ca02e6-f9dd-44fd-9af4-e369bd778d4c","uid":"","level":"info","message":"","timestamp":"2023-09-21T10:29:38.959Z"}
+{"id":"977e93e6-ecc4-42eb-98ab-34426d39ad0d","uid":"","level":"info","message":"","timestamp":"2023-09-21T10:29:38.966Z"}
+{"id":"3384f5ac-a09d-402d-858e-54e2d2923475","uid":"","level":"info","message":"","timestamp":"2023-09-21T10:29:38.980Z"}
+{"id":"","uid":"","category":"","category_pl":"","category_us":"","category_de":"","category_ru":"","category_fr":"","category_es":"","category_no":"","category_zh_cn":"","forThing":0,"forEvent":0,"forSell":0,"icon":"","category_children":[],"category_parent":"","status":0,"expired_day":"","project_id":"","blob_id":"","CategoryHierarchy":{"category_parent_id":""},"level":"info","message":"","timestamp":"2023-09-21T10:29:39.097Z"}
+{"user_id":"b6545f2c-577b-4ca1-8c7f-141fc85deda4","level":"info","message":"","timestamp":"2023-09-21T10:29:39.114Z"}
+{"id":"","uid":"","name":"","surname":"","email":"","salt":"","phone":"","birthDate":"","is_authorized":"","passwordHash":"","city":"","city_id":"","adress":"","country":"","country_id":"","longitude":"","latitude":"","relogin_require":"","refresh_token":"1e1de0cf-aba9-47a1-b419-36beef48cfe8","language":"","blob_id":"","is_admin":"","is_root":"","address":"","zipcode":"","level":"info","message":"","timestamp":"2023-09-21T10:29:39.120Z"}
+{"id":"","uid":"","name":"","surname":"","email":"","salt":"","phone":"","birthDate":"","is_authorized":"","passwordHash":"","city":"","city_id":"","adress":"","country":"","country_id":"","longitude":"","latitude":"","relogin_require":"","refresh_token":"1e1de0cf-aba9-47a1-b419-36beef48cfe8","language":"","blob_id":"","is_admin":"","is_root":"","address":"","zipcode":"","level":"info","message":"","timestamp":"2023-09-21T10:29:39.212Z"}
+{"id":"","uid":"","name":"","surname":"","email":"","salt":"","phone":"","birthDate":"","is_authorized":"","passwordHash":"","city":"","city_id":"","adress":"","country":"","country_id":"","longitude":"","latitude":"","relogin_require":"","refresh_token":"","language":"","blob_id":"","is_admin":"","is_root":"","address":"","zipcode":"","level":"info","message":"","timestamp":"2023-09-21T10:29:39.219Z"}
+{"id":"","uid":"","name":"","surname":"","email":"","salt":"","phone":"","birthDate":"","is_authorized":"","passwordHash":"","city":"","city_id":"","adress":"","country":"","country_id":"","longitude":"","latitude":"","relogin_require":"","refresh_token":"","language":"","blob_id":"","is_admin":"","is_root":"","address":"","zipcode":"","level":"info","message":"","timestamp":"2023-09-21T10:29:39.378Z"}
+{"id":"be969182-03e6-427e-b621-1c0af9c32797","uid":"","category":"","category_pl":"","category_us":"","category_de":"","category_ru":"","category_fr":"","category_es":"","category_no":"","category_zh_cn":"","forThing":0,"forEvent":0,"forSell":0,"icon":"","category_children":[],"category_parent":"","status":0,"expired_day":"","project_id":"","blob_id":"","CategoryHierarchy":{"category_parent_id":""},"level":"info","message":"","timestamp":"2023-09-21T10:29:39.663Z"}
+{"id":"be969182-03e6-427e-b621-1c0af9c32797","uid":"","category":"","category_pl":"","category_us":"","category_de":"","category_ru":"","category_fr":"","category_es":"","category_no":"","category_zh_cn":"","forThing":0,"forEvent":0,"forSell":0,"icon":"","category_children":[],"category_parent":"","status":0,"expired_day":"","project_id":"","blob_id":"","CategoryHierarchy":{"category_parent_id":""},"level":"info","message":"","timestamp":"2023-09-21T10:29:39.670Z"}
+{"id":"","uid":"","city":"","country":"","address":"","longitude":19.975737002489325,"latitude":50.08808161551438,"level":"info","message":"","timestamp":"2023-09-21T10:29:40.123Z"}
+{"id":"","uid":"","city":"","country":"","address":"Dobrego Pasterza 120 B","longitude":"","latitude":"","country_code":"","level":"info","message":"","timestamp":"2023-09-21T10:29:44.260Z"}
+{"id":"","uid":"","city":"","country":"","address":"Dobrego Pasterza 120b","longitude":"","latitude":"","country_code":"","level":"info","message":"","timestamp":"2023-09-21T10:29:45.505Z"}
+{"id":"","uid":"","city":"","country":"","address":"Dobrego Pasterza","longitude":"","latitude":"","country_code":"","level":"info","message":"","timestamp":"2023-09-21T10:31:45.734Z"}
+{"id":"","uid":"","city":"","country":"","address":"Dobrego","longitude":"","latitude":"","country_code":"","level":"info","message":"","timestamp":"2023-09-21T10:32:25.790Z"}
+{"id":"","uid":"","city":"","country":"","address":"Dobrego Pasterza","longitude":"","latitude":"","country_code":"","level":"info","message":"","timestamp":"2023-09-21T10:32:28.855Z"}
+{"id":"","uid":"","city":"","country":"","address":"Dobrego Pasterza 120B","longitude":"","latitude":"","country_code":"","level":"info","message":"","timestamp":"2023-09-21T10:32:33.211Z"}
+{"id":"","uid":"","city":"","country":"","address":"120B, Dobrego Pasterza, Prądnik Czerwony","longitude":"","latitude":"","country_code":"","level":"info","message":"","timestamp":"2023-09-21T10:32:37.848Z"}
+{"id":"","uid":"","city":"","country":"","address":"","longitude":"19.97844338","latitude":"50.0889816","level":"info","message":"","timestamp":"2023-09-21T10:32:37.854Z"}
+{"id":"","uid":"","city":"","country":"","address":"Do","longitude":"","latitude":"","country_code":"","level":"info","message":"","timestamp":"2023-09-21T10:32:40.647Z"}
+{"id":"","uid":"","city":"","country":"","address":"Dobrego Pasterza 120","longitude":"","latitude":"","country_code":"","level":"info","message":"","timestamp":"2023-09-21T10:32:44.991Z"}
+{"id":"","uid":"","city":"","country":"","address":"Dobrego Pasterza 120B","longitude":"","latitude":"","country_code":"","level":"info","message":"","timestamp":"2023-09-21T10:32:46.989Z"}
+{"id":"","uid":"","city":"","country":"","address":"120B, Dobrego Pasterza, Prądnik Czerwony","longitude":"","latitude":"","country_code":"","level":"info","message":"","timestamp":"2023-09-21T10:32:50.047Z"}
+{"id":"","uid":"","city":"","country":"","address":"Dobrowolskiego 24W","longitude":"","latitude":"","country_code":"","level":"info","message":"","timestamp":"2023-09-21T10:33:44.612Z"}
+{"id":"","uid":"","city":"","country":"","address":"24w, Antoniego Dobrowolskiego, Skotniki","longitude":"","latitude":"","country_code":"","level":"info","message":"","timestamp":"2023-09-21T10:33:47.439Z"}
+{"id":"","uid":"","city":"","country":"","address":"","longitude":"19.8716879","latitude":"50.0127488","level":"info","message":"","timestamp":"2023-09-21T10:33:47.455Z"}
+{"id":"","uid":"","city":"","country":"","address":"Dobrego Pasterza","longitude":"","latitude":"","country_code":"","level":"info","message":"","timestamp":"2023-09-21T10:33:51.829Z"}
+{"id":"","uid":"","city":"","country":"","address":"Parafia Dobrego Pasterza, Polska","longitude":"","latitude":"","country_code":"","level":"info","message":"","timestamp":"2023-09-21T10:33:59.096Z"}
+{"id":"","uid":"","city":"","country":"","address":"","longitude":"19.45732357","latitude":"51.78808325","level":"info","message":"","timestamp":"2023-09-21T10:33:59.104Z"}
+{"id":"","uid":"","city":"","country":"","address":"Zbyszewkiego 4/5","longitude":"","latitude":"","country_code":"","level":"info","message":"","timestamp":"2023-09-21T10:34:41.768Z"}
+{"id":"","uid":"","city":"","country":"","address":"Zbyszewkiego 4/5 Rzesz","longitude":"","latitude":"","country_code":"","level":"info","message":"","timestamp":"2023-09-21T10:34:46.049Z"}
+{"id":"","uid":"","city":"","country":"","address":"Zbyszewkiego 4/5 Rzeszów","longitude":"","latitude":"","country_code":"","level":"info","message":"","timestamp":"2023-09-21T10:34:47.832Z"}
+{"id":"","uid":"","city":"","country":"","address":"Zbyszewkiego Rzeszów","longitude":"","latitude":"","country_code":"","level":"info","message":"","timestamp":"2023-09-21T10:34:55.800Z"}
+{"id":"","uid":"","city":"","country":"","address":"Wiktora Zbyszewskiego, Krakowska-Południe, Rzeszów","longitude":"","latitude":"","country_code":"","level":"info","message":"","timestamp":"2023-09-21T10:34:58.876Z"}
+{"id":"","uid":"","city":"","country":"","address":"","longitude":"21.9737192","latitude":"50.0480711","level":"info","message":"","timestamp":"2023-09-21T10:34:58.882Z"}
+{"id":"","uid":"","city":"","country":"","address":"","longitude":21.97508800774813,"latitude":50.048633865707345,"level":"info","message":"","timestamp":"2023-09-21T10:35:14.475Z"}
+{"id":"","uid":"","city":"","country":"","address":"","longitude":21.973414309322838,"latitude":50.0476698297954,"level":"info","message":"","timestamp":"2023-09-21T10:35:15.656Z"}
+{"id":"","uid":"","city":"","country":"","address":"","longitude":21.973221190273765,"latitude":50.0466364122537,"level":"info","message":"","timestamp":"2023-09-21T10:35:17.723Z"}
+{"id":"","uid":"","city":"","country":"","address":"Piłsudskiego 144","longitude":"","latitude":"","country_code":"","level":"info","message":"","timestamp":"2023-09-21T10:35:30.879Z"}
+{"id":"","uid":"","city":"","country":"","address":"144, Józefa Piłsudskiego, Grabskie","longitude":"","latitude":"","country_code":"","level":"info","message":"","timestamp":"2023-09-21T10:35:33.048Z"}
+{"id":"","uid":"","city":"","country":"","address":"","longitude":"22.21080475","latitude":"50.06025265","level":"info","message":"","timestamp":"2023-09-21T10:35:33.055Z"}
+{"id":"","uid":"","city":"","country":"","address":"144, Józefa Piłsudskiego, Grabskie","longitude":"","latitude":"","country_code":"","level":"info","message":"","timestamp":"2023-09-21T10:36:41.855Z"}
+{"id":"","uid":"","name":"","surname":"","email":"","salt":"","phone":"","birthDate":"","is_authorized":"","passwordHash":"","city":"","city_id":"","adress":"","country":"","country_id":"","longitude":"","latitude":"","relogin_require":"","refresh_token":"","language":"us","blob_id":"","is_admin":"","is_root":"","address":"","zipcode":"","level":"info","message":"","timestamp":"2023-09-21T10:37:24.870Z"}
+{"id":"","uid":"","city":"","country":"","address":"144, Józefa New , Grabskie","longitude":"","latitude":"","country_code":"","level":"info","message":"","timestamp":"2023-09-21T10:37:28.702Z"}
+{"id":"","uid":"","city":"","country":"","address":"New york","longitude":"","latitude":"","country_code":"","level":"info","message":"","timestamp":"2023-09-21T10:37:30.373Z"}
+{"id":"","uid":"","city":"","country":"","address":"Kraków","longitude":"","latitude":"","country_code":"","level":"info","message":"","timestamp":"2023-09-21T10:37:35.246Z"}
+{"id":"","uid":"","city":"","country":"","address":"Kraków","longitude":"","latitude":"","country_code":"","level":"info","message":"","timestamp":"2023-09-21T10:37:50.002Z"}
+{"id":"","uid":"","city":"","country":"","address":"Gdańsk","longitude":"","latitude":"","country_code":"","level":"info","message":"","timestamp":"2023-09-21T10:38:00.590Z"}
+{"id":"9ed9ed65-1672-47b2-a79d-01172e346730","uid":"","level":"info","message":"","timestamp":"2023-09-21T10:38:12.339Z"}
+{"id":"16B9FAF4-1E2C-482E-B48B-D7D02CF38D8E","uid":"","secretKey":"D45C24D4-8E40-4825-B4DC-B4C5DD93B17C","level":"info","message":"","timestamp":"2023-09-21T10:38:21.405Z"}
+{"id":"16B9FAF4-1E2C-482E-B48B-D7D02CF38D8E","uid":"","secretKey":"D45C24D4-8E40-4825-B4DC-B4C5DD93B17C","level":"info","message":"","timestamp":"2023-09-21T10:38:21.609Z"}
+{"id":"c799c07e-b09b-4d20-925c-cc42641a2f5f","uid":"","level":"info","message":"","timestamp":"2023-09-21T10:38:21.615Z"}
+{"id":"115f084d-72a8-4918-a558-3b480d25e825","uid":"","level":"info","message":"","timestamp":"2023-09-21T10:38:21.803Z"}
+{"id":"c7781d3b-a3e1-42d1-afb5-e827bf62a670","uid":"","level":"info","message":"","timestamp":"2023-09-21T10:38:21.824Z"}
+{"id":"5335744b-150a-4206-8532-7037f2304f7a","uid":"","level":"info","message":"","timestamp":"2023-09-21T10:38:21.832Z"}
+{"level":"info","message":"","timestamp":"2023-09-21T10:38:21.837Z"}
+{"level":"info","message":"","timestamp":"2023-09-21T10:38:21.845Z"}
+{"id":"10ca739c-2b64-4584-b575-20ae71464813","uid":"","level":"info","message":"","timestamp":"2023-09-21T10:38:21.849Z"}
+{"level":"info","message":"","timestamp":"2023-09-21T10:38:22.035Z"}
+{"id":"677dd96a-2b0f-48ec-bb20-e8db93752620","uid":"","level":"info","message":"","timestamp":"2023-09-21T10:38:22.086Z"}
+{"level":"info","message":"","timestamp":"2023-09-21T10:38:22.092Z"}
+{"id":"40c81bd4-0117-430a-9c05-7b3aa10a955c","uid":"","level":"info","message":"","timestamp":"2023-09-21T10:38:22.126Z"}
+{"id":"efbb742d-36b9-4174-9c16-d089944c5674","uid":"","level":"info","message":"","timestamp":"2023-09-21T10:38:22.147Z"}
+{"id":"e0ee53ca-4723-49eb-925f-422496e72449","uid":"","level":"info","message":"","timestamp":"2023-09-21T10:38:22.167Z"}
+{"id":"","uid":"","category":"","category_pl":"","category_us":"","category_de":"","category_ru":"","category_fr":"","category_es":"","category_no":"","category_zh_cn":"","forThing":0,"forEvent":0,"forSell":0,"icon":"","category_children":[],"category_parent":"","status":0,"expired_day":"","project_id":"","blob_id":"","CategoryHierarchy":{"category_parent_id":""},"level":"info","message":"","timestamp":"2023-09-21T10:38:22.301Z"}
+{"id":"a0069796-0d2d-496e-951c-d3a9e6993f4f","uid":"","level":"info","message":"","timestamp":"2023-09-21T10:38:22.337Z"}
+{"id":"f0707e25-ddb3-4b8c-b9c3-79cc7a1d1079","uid":"","level":"info","message":"","timestamp":"2023-09-21T10:38:22.414Z"}
+{"level":"info","message":"","timestamp":"2023-09-21T10:38:22.420Z"}
+{"level":"info","message":"","timestamp":"2023-09-21T10:38:22.427Z"}
+{"id":"dde91dc4-f679-4cef-b283-bffa85f67484","uid":"","level":"info","message":"","timestamp":"2023-09-21T10:38:22.432Z"}
+{"level":"info","message":"","timestamp":"2023-09-21T10:38:22.482Z"}
+{"id":"d25fc1b2-a86c-48f5-90fd-351584d00d68","uid":"","level":"info","message":"","timestamp":"2023-09-21T10:38:22.489Z"}
+{"id":"3738db30-de47-4f6a-a8eb-2d43b556010e","uid":"","level":"info","message":"","timestamp":"2023-09-21T10:38:22.525Z"}
+{"id":"9498ee99-2ecc-48a5-bbae-6caed93b561f","uid":"","level":"info","message":"","timestamp":"2023-09-21T10:38:22.546Z"}
+{"level":"info","message":"","timestamp":"2023-09-21T10:38:22.628Z"}
+{"id":"5c4852e9-d1d9-4388-9547-2c8a499db06b","uid":"","level":"info","message":"","timestamp":"2023-09-21T10:38:22.655Z"}
+{"id":"","uid":"","category":"","category_pl":"","category_us":"","category_de":"","category_ru":"","category_fr":"","category_es":"","category_no":"","category_zh_cn":"","forThing":0,"forEvent":0,"forSell":0,"icon":"","category_children":[],"category_parent":"","status":0,"expired_day":"","project_id":"","blob_id":"","CategoryHierarchy":{"category_parent_id":""},"level":"info","message":"","timestamp":"2023-09-21T10:38:22.663Z"}
+{"id":"a0b3d7d5-3d3d-42da-847b-872c472386da","uid":"","password":"test","email":"m.mach.90@gmail.com","level":"info","message":"","timestamp":"2023-09-21T10:38:27.125Z"}
+{"id":"","uid":"df84bbe8-0df8-4eed-b627-a3060cc06c57","name":"","surname":"","email":"","salt":"","phone":"","birthDate":"","is_authorized":"","passwordHash":"","city":"","city_id":"","adress":"","country":"","country_id":"","longitude":"","latitude":"","relogin_require":"","refresh_token":"","language":"","blob_id":"","is_admin":"","is_root":"","address":"","zipcode":"","level":"info","message":"","timestamp":"2023-09-21T10:38:27.290Z"}
+{"id":"","uid":"df84bbe8-0df8-4eed-b627-a3060cc06c57","name":"","surname":"","email":"","salt":"","phone":"","birthDate":"","is_authorized":"","passwordHash":"","city":"","city_id":"","adress":"","country":"","country_id":"","longitude":"","latitude":"","relogin_require":"","refresh_token":"","language":"","blob_id":"","is_admin":"","is_root":"","address":"","zipcode":"","level":"info","message":"","timestamp":"2023-09-21T10:38:27.410Z"}
+{"id":"","uid":"","name":"","surname":"","email":"","salt":"","phone":"","birthDate":"","is_authorized":"","passwordHash":"","city":"","city_id":"","adress":"","country":"","country_id":"","longitude":"","latitude":"","relogin_require":"","refresh_token":"","language":"","blob_id":"","is_admin":"","is_root":"","address":"","zipcode":"","level":"info","message":"","timestamp":"2023-09-21T10:38:27.513Z"}
+{"id":"b6545f2c-577b-4ca1-8c7f-141fc85deda4","uid":"","name":"","surname":"","email":"","salt":"","phone":"","birthDate":"","is_authorized":"","passwordHash":"","city":"","city_id":"","adress":"","country":"","country_id":"","longitude":"","latitude":"","relogin_require":"","refresh_token":"","language":"","blob_id":"","is_admin":"","is_root":"","address":"","zipcode":"","level":"info","message":"","timestamp":"2023-09-21T10:38:30.206Z"}
+{"id":"b6545f2c-577b-4ca1-8c7f-141fc85deda4","uid":"","name":"","surname":"","email":"","salt":"","phone":"","birthDate":"","is_authorized":"","passwordHash":"","city":"","city_id":"","adress":"","country":"","country_id":"","longitude":"","latitude":"","relogin_require":"","refresh_token":"","language":"","blob_id":"","is_admin":"","is_root":"","address":"","zipcode":"","level":"info","message":"","timestamp":"2023-09-21T10:38:30.316Z"}
+{"id":"330ee835-c3d9-47e5-aa83-c158d51f2338","uid":"","blob_id":0,"item_id":0,"blob_thumbmail_id":0,"blob_min_id":0,"user_id":"b6545f2c-577b-4ca1-8c7f-141fc85deda4","order":"1","status":"V","category_id":0,"level":"info","message":"","timestamp":"2023-09-21T10:38:30.356Z"}
+{"id":"b19246b0-8a95-4232-9bb0-7c12e4288df6","uid":"","blob_id":0,"item_id":0,"blob_thumbmail_id":0,"blob_min_id":0,"user_id":"b6545f2c-577b-4ca1-8c7f-141fc85deda4","order":"1","status":"V","category_id":0,"level":"info","message":"","timestamp":"2023-09-21T10:38:30.466Z"}
+{"user_id":"b6545f2c-577b-4ca1-8c7f-141fc85deda4","level":"info","message":"","timestamp":"2023-09-21T10:38:30.493Z"}
+{"user_id":"b6545f2c-577b-4ca1-8c7f-141fc85deda4","level":"info","message":"","timestamp":"2023-09-21T10:38:30.607Z"}
+{"id":"","uid":"","city":"","country":"","address":"","longitude":19.975737002489325,"latitude":50.08808161551438,"level":"info","message":"","timestamp":"2023-09-21T10:38:33.850Z"}
+{"id":"","uid":"","city":"","country":"","address":"Krakó","longitude":"","latitude":"","country_code":"","level":"info","message":"","timestamp":"2023-09-21T10:38:36.277Z"}
+{"id":"","uid":"","city":"","country":"","address":"Kraków","longitude":"","latitude":"","country_code":"","level":"info","message":"","timestamp":"2023-09-21T10:38:36.810Z"}
+{"id":"","uid":"","city":"","country":"","address":"Gdańsk","longitude":"","latitude":"","country_code":"","level":"info","message":"","timestamp":"2023-09-21T10:38:40.940Z"}

@@ -58,40 +58,45 @@ export default class CityService extends BaseService {
    */
   async getReverse({ country_code, city, address, tag }) {
 
-    var geocoder = NodeGeocoder(options);
     // Using callback
-    console.log(country_code)
-    let result = await new Promise((resolve, rej) => {
-      axios.get(`https://api.locationiq.com/v1/autocomplete.php?key=${CONFIG.LOCATION_IQ}&format=json&q=${encodeURI(address)}&tag=${tag || 'place:*'}&dedupe=1&accept-language=pl&countrycodes=${country_code}&limit=5&normalizeaddress=1`).then(succ => {
-        resolve(succ.data);
-      })
-      // geocoder.geocode({ q: address, country: country, city: city, limit: 5,"accept-language":this.context.language }, function (err, res) {
-      //   console.log(res)
-      //
-      //   resolve(res);
-      //  });
+    try {
+      let result = await new Promise((resolve, rej) => {
+        axios.get(`https://api.locationiq.com/v1/autocomplete.php?key=${CONFIG.LOCATION_IQ}&format=json&q=${encodeURI(address)}${tag ? `&tag=${tag}` : ''}&dedupe=1&accept-language=${this.context.language}&countrycodes=${country_code}&limit=5&normalizeaddress=1`).then(succ => {
+          resolve(succ.data);
+        })
+        // geocoder.geocode({ q: address, country: country, city: city, limit: 5,"accept-language":this.context.language }, function (err, res) {
+        //   console.log(res)
+        //
+        //   resolve(res);
+        //  });
 
-    });
-    return result;
+      });
+
+      return result;
+    } catch (er) {
+      return []
+    }
   }
 
   async getReverseByLatLng({ longitude, latitude, address }) {
 
-    var geocoder = NodeGeocoder(options);
+    try {
+      let result = await new Promise((resolve, rej) => {
 
-    let result = await new Promise((resolve, rej) => {
-
-      axios.get(`https://us1.locationiq.com/v1/reverse.php?key=${CONFIG.LOCATION_IQ}&format=json&lat=${latitude}8&lon=${longitude}&normalizeaddress=1`).then(succ => {
-        resolve(succ.data);
+        axios.get(`https://us1.locationiq.com/v1/reverse.php?key=${CONFIG.LOCATION_IQ}&format=json&lat=${latitude}8&lon=${longitude}&normalizeaddress=1`).then(succ => {
+          resolve(succ.data);
+        });
+        /*
+              geocoder.reverse({ lat: latitude, lon: longitude,"accept-language":this.context.language }, function (err, res) {
+        
+                console.log(res)
+                resolve(res);
+              });
+        */
       });
-      /*
-            geocoder.reverse({ lat: latitude, lon: longitude,"accept-language":this.context.language }, function (err, res) {
-      
-              console.log(res)
-              resolve(res);
-            });
-      */
-    });
-    return result;
+      return result;
+    } catch (er) {
+      return []
+    }
   }
 }

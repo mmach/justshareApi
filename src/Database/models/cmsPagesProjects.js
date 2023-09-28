@@ -52,6 +52,9 @@ export default class CmsPageProjects extends Model {
         is_homepage: {
           type: DataTypes.BOOLEAN
         },
+        route_group:{
+          type: DataTypes.STRING
+        },
       },
       {
         sequelize,

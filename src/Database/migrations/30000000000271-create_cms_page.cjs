@@ -14,6 +14,7 @@ module.exports = {
           [title] nvarchar(200),
           [url]  varchar(200) ,
           [url_exact]  bit ,
+          [route_group]  nvarchar(100) ,
           [cms] varchar(max),
           [is_active] bit,
           [layout_plugin_name] nvarchar(200),

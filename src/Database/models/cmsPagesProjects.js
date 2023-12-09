@@ -55,6 +55,10 @@ export default class CmsPageProjects extends Model {
         route_group:{
           type: DataTypes.STRING
         },
+        func:{
+          type: DataTypes.STRING
+        },
+      
       },
       {
         sequelize,

@@ -22,7 +22,7 @@ export default class UpsertProjectCmsPagePrivilegeCommand extends BaseCommand {
      * @param  {{logFileInfrastructureDI : LogFileInfrastructure,  categoryServiceDI:CategoryService ,dbTransactionInfrastuctureDI:DbTransactionInfrastucture,authInfrastructureDI:AuthInfrastucture}}
      * @memberof InsertCategoryCommand
      */
-    constructor({ logFileInfrastructureDI, projectInfrastructureDI, cmsMenuItemsPrivilegesProjectServiceDI, authInfrastructureDI }) {
+    constructor({ logFileInfrastructureDI, projectInfrastructureDI, cmsPagePrivilegesProjectServiceDI, authInfrastructureDI }) {
         super({ logFileInfrastructureDI, authInfrastructureDI, projectInfrastructureDI });
         this.cmsPagePrivilegesProjectServiceDI = cmsPagePrivilegesProjectServiceDI
 

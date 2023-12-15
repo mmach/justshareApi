@@ -1,7 +1,4 @@
 
-
-
-
 "use strict";
 module.exports = {
   up: (queryInterface, Sequelize) => {
@@ -10,7 +7,7 @@ module.exports = {
       .query(
         `
         ALTER TABLE [dbo].CmsPageProjects
-          ADD  [func] [varchar(200)]
+          ADD  [func] nvarchar(200)
            
        `
       )

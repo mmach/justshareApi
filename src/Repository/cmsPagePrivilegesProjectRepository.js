@@ -16,7 +16,7 @@ export default class CmsPagePrivilegesProjectRepository extends BaseRepository {
    * @memberof CmsPagePrivilegesProjectRepository
    */
   constructor({ sequelizeDI }) {
-    super(sequelizeDI.CmsMenuItemsPrivilegesProjects);
+    super(sequelizeDI.CmsPagePrivilegesProjects);
     this.sequelizeDI = sequelizeDI;
   }
 

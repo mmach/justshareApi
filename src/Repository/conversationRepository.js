@@ -39,7 +39,7 @@ export default class ConversationRepository extends BaseRepository {
             AND project_Id=:project_id
           UNION ALL
               SELECT ConversationMessages.id,conversation_id,ConversationMessages.message_triggered_id,rn+1  FROM recus JOIN ConversationMessages ON ConversationMessages.id=recus.message_triggered_id
-            WHERE rn<:size
+            WHERE rn < :size
             AND ConversationMessages.conversation_id=recus.conv_id
               )
                 SELECT *

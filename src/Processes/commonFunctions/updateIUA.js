@@ -2,7 +2,7 @@
 import { v4 } from "uuid";
 
 
-let updateIUA = async function (user_id, user_src, user_dest,destination_date) {
+let updateIUA = async function (user_id, user_src, user_dest, destination_date) {
     // if (!this.process_chain.with_iua_status_change) {
     //     await updateWithoutStatusIUA.bind(this)(this.IUA.id)
     //     return
@@ -73,12 +73,14 @@ let updateIUA = async function (user_id, user_src, user_dest,destination_date) {
                  });
              }
          }*/
-
-        if (val.api && val.api.notification) {
+        if (!val.api) {
+            return;
+        }
+        if (val.api.notification) {
             await this.conversationServiceDI.setContext(this.context).sendMessageToUser({ iua_id: this.IUA.id, msg_id: v4(), msg: this.model.message, syncSocket: true });
         }
 
-        if (val.api && val.api.processSync) {
+        if (val.api.processSync) {
             await this.conversationServiceDI.setContext(this.context).iuaSetProcessChainId({ iua_id: this.IUA.id, process_chain_id: this.process_chain.id });
         }
 

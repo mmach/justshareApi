@@ -1,7 +1,8 @@
-import {v4} from "uuid";
+import { v4 } from "uuid";
 import Axios from "../../node_modules/axios/index.js";
 import BaseService from "../Architecture/baseService.js";
 import { genInvoice } from './../Static/Invoice/invoice.js';
+import CONFIG from "../config.js";
 
 
 /**
@@ -77,8 +78,8 @@ export default class InvoiceService extends BaseService {
 
     let invoice = await this.toJsonParse(this.unitOfWorkDI.invoiceRepository.getByInvoiceById({ id: invoice_id, withProject: true }))
     let blob = await this.blobServiceDI.setContext(this.context).getById({ id: this.context.project.blob_logo_ver_id, withProjct: true })
-    let img = await Axios.get(`https://api.mapps.io/blob/` + blob.blob_id)
-  
+    let img = await Axios.get(`${CONFIG.BLOB_LINK}/blob/` + blob.blob_id)
+
     let model = {
       ...invoice,
       project: {

@@ -78,7 +78,7 @@ export default class InvoiceService extends BaseService {
 
     let invoice = await this.toJsonParse(this.unitOfWorkDI.invoiceRepository.getByInvoiceById({ id: invoice_id, withProject: true }))
     let blob = await this.blobServiceDI.setContext(this.context).getById({ id: this.context.project.blob_logo_ver_id, withProjct: true })
-    let img = await Axios.get(`${CONFIG.BLOB_LINK}/blob/` + blob.blob_id)
+    let img = await Axios.get(`${CONFIG.BLOB_LINK}blob/` + blob.blob_id)
 
     let model = {
       ...invoice,

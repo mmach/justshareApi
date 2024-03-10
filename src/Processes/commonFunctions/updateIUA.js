@@ -73,7 +73,7 @@ let updateIUA = async function (user_id, user_src, user_dest, destination_date) 
                  });
              }
          }*/
-        if (!val.api) {
+        if (!val) {
             return;
         }
         if (val.api.notification) {

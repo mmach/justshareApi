@@ -60,15 +60,15 @@ export const processReminder = async (msg) => {
 
       console.log(obj.retry)
       obj.retry = obj.retry ? obj.retry + 1 : 1
-      global.queueChannel.publish(CONFIG.REMINDER_QUEUE, obj.project_id,
-        obj
-        , {
-          contentType: 'application/json', persistent: true, expiration: 500 * 1000, headers: {
-            //    Authorization: 'Bearer ' + this.context.token,
-            //    ProjectAuthorization: 'Bearer ' + this.context.projectToken
-          }
-        }
-      );
+      /*   global.queueChannel.publish(CONFIG.REMINDER_QUEUE, obj.project_id,
+           obj
+           , {
+             contentType: 'application/json', persistent: true, expiration: 500 * 1000, headers: {
+               //    Authorization: 'Bearer ' + this.context.token,
+               //    ProjectAuthorization: 'Bearer ' + this.context.projectToken
+             }
+           }
+         );*/
       //setInterval(()=>{
 
     }

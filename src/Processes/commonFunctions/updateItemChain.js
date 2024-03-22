@@ -10,12 +10,10 @@ let updateItemChain = async function (item, process_id, process_chain_id) {
     item.item_process_id = id;
     item.process_updated_date = new Date();
     await this.itemServiceDI.setContext(this.context).setItemProcessChain({
-
         id: id,
         item_id: item.id,
         process_chain_id,
         process_id
-
     })
     if (this.process_chain.change_status==true) {
         await this.itemServiceDI.setContext(this.context).update({ model: item })

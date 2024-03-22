@@ -29,10 +29,9 @@ export const processReminder = async (msg) => {
       cert.toString("utf8"),
       { expiresIn: CONFIG.SECURITY.TOKEN_EXPIRATION }
     )
-
     await Axios({
       method: 'post',
-      url: `http://localhost:1337/command`,
+      url: `http://localhost:${process.env.PORT || 8080}/command`,
       headers: {
         ProjectAuthorization: `Bearer ${projectToken}`,
         Authorization: `Bearer ${token}`
@@ -46,7 +45,7 @@ export const processReminder = async (msg) => {
           process_model: {
             item_id: obj.item_id,
             id: obj.item_id,
-            iua_id:obj.iua_id
+            iua_id: obj.iua_id
 
           }
         }
@@ -61,7 +60,7 @@ export const processReminder = async (msg) => {
 
       console.log(obj.retry)
       obj.retry = obj.retry ? obj.retry + 1 : 1
-      global.queueChannel.publish(CONFIG.ITEM_ES_QUEUE, obj.project_id,
+      global.queueChannel.publish(CONFIG.REMINDER_QUEUE, obj.project_id,
         obj
         , {
           contentType: 'application/json', persistent: true, expiration: 500 * 1000, headers: {

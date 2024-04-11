@@ -33,8 +33,7 @@ export const genInvoice = async (model) => {
 
 
                         svg: model.project.logo,
-                        width: 150,
-                        height: 100
+                        fit: [150, 100]
 
                     },
 

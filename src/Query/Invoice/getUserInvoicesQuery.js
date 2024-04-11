@@ -1,7 +1,5 @@
-import BaseQuery from '../../Architecture/baseQuery.js';
 import LogFileInfrastructure from '../../Architecture/Infrastructure/logFileInfrastructure.js';
-import ItemService from '../../Services/itemService.js';
-import { BlobBase64DTO, ItemDTO } from 'justshare-shared';
+import BaseQuery from '../../Architecture/baseQuery.js';
 import ItemTransactionService from '../../Services/itemTransactionsService.js';
 
 
@@ -23,7 +21,15 @@ export default class GetUserInvoicesQuery extends BaseQuery {
 
     async action() {
 
-        let resultList = await this.invoiceServiceDI.setContext(this.context).getUserInvoices({ iua_id: this.model.iua_id, status: this.model.status, page: this.model.page, size: this.model.size, asAdmin: this.model.asAdmin, month: this.model.month, year: this.model.year });
+        let resultList = await this.invoiceServiceDI.setContext(this.context).getUserInvoices({
+            iua_id: this.model.iua_id,
+            status: this.model.status,
+            page: this.model.page,
+            size: this.model.size,
+            asAdmin: this.model.asAdmin,
+            month: this.model.month,
+            year: this.model.year
+        });
         return resultList
 
     }

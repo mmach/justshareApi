@@ -937,13 +937,13 @@ export default class ElasticSearchService extends BaseService {
               "bool": {
                 "must": [
 
-                  withExpired != true && {
+                  withExpired != true ? {
                     "range": {
                       "expired_at": {
                         "gte": new Date()
                       }
                     }
-                  },
+                  } : null,
                   startDate != undefined ? {
                     "range": {
                       "created_at": {

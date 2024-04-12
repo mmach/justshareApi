@@ -218,7 +218,6 @@ export default class ElasticSearchService extends BaseService {
     // console.log(tags);
     let data = {
       "location": [longitude, latitude],
-
       "user_id": user_id,
       "title": title,
       "description": description,
@@ -471,7 +470,7 @@ export default class ElasticSearchService extends BaseService {
   async deleteDoc({ user_id }) {
 
   }
-  async searchDoc({ latitude, user_id, longitude, text, distance, tags, select, categories, itemType, expired_at, startDate, endDate, createdInterval, catoptions, catOptionsFilter, size, item_id, page, onlyExpired, catoptionsAll }) {
+  async searchDoc({ latitude, user_id, longitude, text, distance, tags, select, categories, itemType, expired_at, startDate, endDate, createdInterval, catoptions, catOptionsFilter, size, item_id, page, withExpired, catoptionsAll }) {
 
     let fullText = text ? text : "";
     let userGuid = user_id;
@@ -938,20 +937,15 @@ export default class ElasticSearchService extends BaseService {
               "bool": {
                 "must": [
 
-                  {
+                  withExpired != true && {
                     "range": {
-                      "expired_at": onlyExpired == true ?
-                        {
-                          "lte": new Date()
-                        } :
-                        {
-                          "gte": new Date()
-                        }
+                      "expired_at": {
+                        "gte": new Date()
+                      }
                     }
                   },
                   startDate != undefined ? {
                     "range": {
-
                       "created_at": {
                         "gte": startDate + (createdInterval != undefined && createdInterval != "" && createdInterval != null ?
                           createdInterval.includes("h") > 0 ? "||/h-" + (parseInt(createdInterval) > 1 ? Math.ceil(parseInt(createdInterval) / 2) : parseInt(createdInterval)) + "h" :

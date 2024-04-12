@@ -53,7 +53,7 @@ export default class GetUserItemQuery extends BaseQuery {
             itemId: this.model.item_id,
             page: this.model.page,
             user_id: this.model.user_id,
-            onlyExpired: this.model.onlyExpired
+            withExpired: this.model.withExpired
 
 
         })

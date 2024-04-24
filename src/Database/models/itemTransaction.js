@@ -71,14 +71,15 @@ export default class ItemTransaction extends Model {
         },
         external_id: DataTypes.STRING,
       },
-      { sequelize,
+      {
+        sequelize,
         tableName: 'ItemTransactions'
       }
     );
   }
   static hooks(models) {
 
-  
+
 
   }
   static associate(models) {
@@ -98,12 +99,12 @@ export default class ItemTransaction extends Model {
       targetKey: "id",
       foreignKey: "parent_iua_id"
     });
-    
-    ItemTransaction.hasMany(models.Blob, {
-      as: "blobs",
-      targetKey: "item_id",
+    ItemTransaction.belongsTo(models.Item, {
+      as: "item",
+      targetKey: "id",
       foreignKey: "item_id"
     });
+   
     ItemTransaction.belongsTo(models.V_User, {
       as: "user",
       targetKey: "id",
@@ -114,7 +115,7 @@ export default class ItemTransaction extends Model {
       targetKey: "id",
       foreignKey: "itemTransaction_id"
     });
-    
+
     ItemTransaction.belongsToMany(models.Tag, {
       through: { model: models.ItemTag },
       as: 'tags',

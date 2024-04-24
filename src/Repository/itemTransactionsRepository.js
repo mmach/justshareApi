@@ -148,21 +148,37 @@ export default class ItemTransactionsRepository extends BaseRepository {
           as: "user"
 
         },
-
         {
-          model: this.sequelizeDI.Blob,
-          as: "blobs",
+          model: this.sequelizeDI.Item,
+          as: "item",
           required: false,
-        //  where: {
-        //    status: this.sequelizeDI.sequelize.literal(`blobs.status = case when blobs.user_id='${userId ? userId : 0}' then blobs.status else 1 end`)
-        //  },
-          include: [
-            { model: this.sequelizeDI.BlobMapper, as: "blob_thumbmail" },
-            { model: this.sequelizeDI.BlobMapper, as: "blob_item" },
-            { model: this.sequelizeDI.BlobMapper, as: "blob_min" }
+          //  where: {
+          //    status: this.sequelizeDI.sequelize.literal(`blobs.status = case when blobs.user_id='${userId ? userId : 0}' then blobs.status else 1 end`)
+          //  },
+          //   include: [
+          //     { model: this.sequelizeDI.BlobMapper, as: "blob_thumbmail" },
+          //     { model: this.sequelizeDI.BlobMapper, as: "blob_item" },
+          //     { model: this.sequelizeDI.BlobMapper, as: "blob_min" }
 
+          //]
+          include: [
+            {
+              model: this.sequelizeDI.Blob,
+              as: "blobs",
+              required: false,
+              //  where: {
+              //    status: this.sequelizeDI.sequelize.literal(`blobs.status = case when blobs.user_id='${userId ? userId : 0}' then blobs.status else 1 end`)
+              //  },
+              include: [
+                { model: this.sequelizeDI.BlobMapper, as: "blob_thumbmail" },
+                { model: this.sequelizeDI.BlobMapper, as: "blob_item" },
+                { model: this.sequelizeDI.BlobMapper, as: "blob_min" }
+
+              ]
+            }
           ]
         } //,
+
         // {
         //   model: this.sequelizeDI.CategoryHierarchy,
         //   as: "category_parent"

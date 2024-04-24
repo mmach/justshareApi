@@ -139,6 +139,36 @@ export default class ItemTransactionsRepository extends BaseRepository {
           model: this.sequelizeDI.ItemTransactionCategoryOptions,
           required: true,
           as: "itemCategoryOption",
+          include: [
+            {
+              model: this.sequelizeDI.CategoryOptionsLink, as: "category_link", required: true,
+              include: [
+                {
+                  model: this.sequelizeDI.CategoryOption, as: "catOption",
+                  required: true,
+                  include: [
+                    {
+                      model: this.sequelizeDI.CategoryOptionsType,
+                      as: "cat_opt",
+                      required: false,
+                      where: {
+                        status: 1
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              model: this.sequelizeDI.CategoryOptionsTemplate, as: "cat_opt_temp", required: true,
+              include: [{
+                model: this.sequelizeDI.CategoryOptionsTypeTemplate,
+                required: true,
+                as: "cat_opt_type_template"
+              }
+              ]
+            }
+          ]
         },
 
         {

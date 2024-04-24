@@ -1,7 +1,5 @@
-import BaseQuery from '../../Architecture/baseQuery.js';
 import LogFileInfrastructure from '../../Architecture/Infrastructure/logFileInfrastructure.js';
-import ItemService from '../../Services/itemService.js';
-import { BlobBase64DTO, ItemDTO } from 'justshare-shared';
+import BaseQuery from '../../Architecture/baseQuery.js';
 import ItemTransactionService from '../../Services/itemTransactionsService.js';
 
 

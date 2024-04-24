@@ -153,9 +153,9 @@ export default class ItemTransactionsRepository extends BaseRepository {
           model: this.sequelizeDI.Blob,
           as: "blobs",
           required: false,
-          where: {
-            status: this.sequelizeDI.sequelize.literal(`blobs.status = case when blobs.user_id='${userId ? userId : 0}' then blobs.status else 1 end`)
-          },
+        //  where: {
+        //    status: this.sequelizeDI.sequelize.literal(`blobs.status = case when blobs.user_id='${userId ? userId : 0}' then blobs.status else 1 end`)
+        //  },
           include: [
             { model: this.sequelizeDI.BlobMapper, as: "blob_thumbmail" },
             { model: this.sequelizeDI.BlobMapper, as: "blob_item" },

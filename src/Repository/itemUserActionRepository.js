@@ -65,7 +65,7 @@ export default class ItemUserActionRepository extends BaseRepository {
 
 
 
-  getItemUserActionsList({ action_id, status_id, size, page, asAdmin, transaction }) {
+  getItemUserActionsList({ action_id, status_id, size, page, asAdmin, process_id, is_closed, transaction }) {
 
     //move to dynamic sql !!!
     //create new query for search by ppl
@@ -79,12 +79,16 @@ export default class ItemUserActionRepository extends BaseRepository {
        AND Conversations.project_id=:project_id
    )
    ,getIUA as ( 
-   SELECT ItemUserActions.* , conversation_id FROM ItemUserActions
-   JOIN getUsersConv ON getUsersConv.iua_id=ItemUserActions.id
-   WHERE ItemUserActions.project_id=:project_id
-    ${status_id ? ' AND status_id=:status_id ' : ''}
-    ${action_id ? ' AND action_id= :action_id ' : ''}
-   
+    SELECT ItemUserActions.* , conversation_id FROM ItemUserActions
+    JOIN getUsersConv ON getUsersConv.iua_id=ItemUserActions.id
+    WHERE ItemUserActions.project_id=:project_id
+      ${status_id ? ' AND status_id=:status_id ' : ''}
+      ${action_id ? ' AND action_id= :action_id ' : ''}
+      ${process_id ? ' AND process_id= :process_id ' : ''}
+      ${is_closed == true ? ` AND EXISTS ( SELECT * FROM ProcessChains WHERE 
+        ItemUserActions.process_chain_id = ProcessChains .id AND is_last=1) ` : ''}
+      ${is_closed == false ? ` AND NOT EXISTS ( SELECT * FROM ProcessChains WHERE 
+          ItemUserActions.process_chain_id = ProcessChains .id AND is_last=1) ` : ''}
     )
    SELECT  getIUA.updated_at as date, * ,COUNT(1) OVER(PARTITION BY NULL ) AS total FROM getIUA
    JOIN ItemTransactions ON getIUA.id=ItemTransactions.iua_Id
@@ -100,6 +104,8 @@ export default class ItemUserActionRepository extends BaseRepository {
           , action_id: action_id
           , status_id: status_id
           , user_id: this.context.user.id
+          , process_id: process_id
+
         },
         transaction: this.getTran({ transaction }),
         type: this.sequelizeDI.sequelize.QueryTypes.SELECT

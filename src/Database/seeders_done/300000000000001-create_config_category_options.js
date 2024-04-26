@@ -709,8 +709,8 @@ module.exports = {
     id = uuidv4();
     category = {
       id: id,
-      name: "IMAGES",
-      type: "IMAGES",
+      name: "IMAGE",
+      type: "IMAGE",
       status: 1,
       created_at: date,
       updated_at: date,

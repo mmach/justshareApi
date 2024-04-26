@@ -21,7 +21,7 @@ export default class GetItemUserActionsListQuery extends BaseQuery {
 
     async action() {
 
-        let resultList = await this.itemUserActionServiceDI.setContext(this.context).getItemUserActionsList({ action_id: this.model.action_id, status_id: this.model.status_id, size: this.model.size, page: this.model.page });
+        let resultList = await this.itemUserActionServiceDI.setContext(this.context).getItemUserActionsList({ ...this.model });
 
         return resultList
 

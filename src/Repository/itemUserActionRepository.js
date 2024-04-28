@@ -65,7 +65,7 @@ export default class ItemUserActionRepository extends BaseRepository {
 
 
 
-  getItemUserActionsList({ action_id, status_id, size, page, asAdmin, process_id, is_closed, transaction }) {
+  getItemUserActionsList({ action_id, status_id, size, page, asAdmin, process_id, is_closed, item_id, transaction }) {
 
     //move to dynamic sql !!!
     //create new query for search by ppl
@@ -89,10 +89,13 @@ export default class ItemUserActionRepository extends BaseRepository {
         ItemUserActions.process_chain_id = ProcessChains .id AND is_last=1) ` : ''}
       ${is_closed == false ? ` AND NOT EXISTS ( SELECT * FROM ProcessChains WHERE 
           ItemUserActions.process_chain_id = ProcessChains .id AND is_last=1) ` : ''}
+    
+          
     )
    SELECT  getIUA.updated_at as date, * ,COUNT(1) OVER(PARTITION BY NULL ) AS total FROM getIUA
    JOIN ItemTransactions ON getIUA.id=ItemTransactions.iua_Id
    AND ItemTransactions.project_Id=:project_id
+   ${item_id ? ` AND ItemTransactions.item_id==:item_id` : ''}
    ORDER BY getIUA.updated_at DESC
    OFFSET ${p_page} ROWS 
   FETCH NEXT ${Number(size)} ROWS ONLY;
@@ -105,7 +108,7 @@ export default class ItemUserActionRepository extends BaseRepository {
           , status_id: status_id
           , user_id: this.context.user.id
           , process_id: process_id
-
+          , item_id: item_id
         },
         transaction: this.getTran({ transaction }),
         type: this.sequelizeDI.sequelize.QueryTypes.SELECT

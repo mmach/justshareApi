@@ -20,11 +20,11 @@ export default class ItemUserActionService extends BaseService {
     return await this.toJsonParse(this.unitOfWorkDI.itemUserActionRepository.getItemUserActions({ item_id, iua_id, status }))
   }
 
-  async getItemUserActionsList({ action_id, status_id, page, size, process_id, is_closed }) {
+  async getItemUserActionsList({ action_id, status_id, page, size, process_id, is_closed, item_id }) {
 
     //move to dynamic sql !!!
     //create new query for search by ppl
-    return await this.unitOfWorkDI.itemUserActionRepository.getItemUserActionsList({ action_id, status_id, page, size, process_id, is_closed })
+    return await this.unitOfWorkDI.itemUserActionRepository.getItemUserActionsList({ action_id, status_id, page, size, process_id, is_closed, item_id })
 
 
   }

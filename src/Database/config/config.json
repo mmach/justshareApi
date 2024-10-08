@@ -2,7 +2,7 @@
   "development": {
     "host": "mappsdb.database.windows.net",
     "username": "mapps",
-    "password": "Passw0rd123",
+    "password": "Crunum123",
     "database": "mappsDB",
     "encrypt": true,
     "logging": false,
@@ -38,7 +38,7 @@
   "production": {
     "host": "mappsdb.database.windows.net",
     "username": "mapps",
-    "password": "Passw0rd123",
+    "password": "Crunum123",
     "database": "mappsDB",
     "encrypt": true,
     "logging": false,

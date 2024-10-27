@@ -160,7 +160,6 @@ export default class ElasticSearchService extends BaseService {
     status,
     type,
     category, categories, createdAt, expired_at, item }) {
-    //console.log(JSON.stringify(catOptions, true))
 
     let singleGeo = catOptions.filter(item => {
       return item.type == 'SINGLE'
@@ -215,7 +214,6 @@ export default class ElasticSearchService extends BaseService {
         id: item.id, category: { ...item.translation }
       }
     });
-    // console.log(tags);
     let data = {
       "location": [longitude, latitude],
       "user_id": user_id,
@@ -269,7 +267,6 @@ export default class ElasticSearchService extends BaseService {
     project_id,
     es_operations,
     external_id }) {
-    //console.log(JSON.stringify(catOptions, true))
 
     let singleGeo = catOptions.filter(item => {
       return item.type == 'SINGLE'
@@ -755,10 +752,8 @@ export default class ElasticSearchService extends BaseService {
       } : null
 
     let aggs = {};
-    console.log('CREATE AGGS')
     catoptions.filter(i => { return ['SINGLE'].includes(i.cat_opt.type) }).forEach(item => {
-      console.log(item)
-
+      
       aggs[item.id] = {
         "nested": {
           "path": "single"
@@ -976,8 +971,6 @@ export default class ElasticSearchService extends BaseService {
 
 
     }
-    console.log(CONFIG.ELASTIC_SEARCH[process.env.NODE_ENV ? process.env.NODE_ENV : 'development'] + String(this.context.project.id).toLowerCase() + `-items/_search`)
-    console.log(JSON.stringify(body));
     return await axios({
       method: 'post',
       url: CONFIG.ELASTIC_SEARCH[process.env.NODE_ENV ? process.env.NODE_ENV : 'development'] + String(this.context.project.id).toLowerCase() + `-items/_search`,

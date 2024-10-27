@@ -155,9 +155,7 @@ export default class ConversationService extends BaseService {
       users[a] > users[b] ? 1 : -1
     })[0]
     let user = conv.users.find(i => i.user_id == user_id)
-    console.log(user)
     let hash = Buffer.from(proj.socket).toString('base64').replace(/=/g, '');
-    // console.log(conv.messages[0].id);
     let obj = {
       id: msg_id,
       project_id: this.context.project.id,
@@ -196,15 +194,12 @@ export default class ConversationService extends BaseService {
     proj = proj.filter(item => { return item.id == this.context.project.id })[0]
 
     let hash = Buffer.from(proj.socket).toString('base64').replace(/=/g, '');
-    // console.log(conv.messages[0].id);
+
     let obj = {
       iua_id: iua_id,
       process_chain_id: process_chain_id,
       project_hash: '/socket_' + hash,
     }
-    console.log('wtf whyyy')
-    console.log('NEW IUA ')
-    console.log(obj)
     useSockets.syncIuaProcessChain({ project_socket: obj.project_hash, iua_id: obj.iua_id, iua_process_obj: obj })
 
   }

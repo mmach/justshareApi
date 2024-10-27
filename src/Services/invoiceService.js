@@ -123,7 +123,6 @@ export default class InvoiceService extends BaseService {
 
 
     let invoice = await this.toJsonParse(this.unitOfWorkDI.invoiceRepository.getUserInvoices({ iua_id, status, page, size, month, year, asAdmin }))
-    //console.log(this.context.project)
     return invoice
 
 

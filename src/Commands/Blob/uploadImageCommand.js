@@ -61,7 +61,6 @@ export default class UploadImageCommand extends BaseCommand {
     let result = await this.blobServiceDI.setContext(this.context).uploadUserImage({
       blob: this.model,
     });
-    console.log(result.dataValues.id);
 
     if (this.context.user.blob_id == null) {
       console.log(result.dataValues.id);

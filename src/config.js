@@ -26,8 +26,8 @@ let CONFIG = {
   },
   BLOB_LINK: "https://mapps-io-blobs-70614ccb13bf.herokuapp.com/",
   ELASTIC_SEARCH: {
-    production: "https://sktbk2743u:6hrjwg7k7b@boxwood-690045999.eu-west-1.bonsaisearch.net:443/",//"https://search-justshare-es-prpllmtm2nibj3jnky5rdtjfga.us-east-2.es.amazonaws.com/",//"https://search-justshare-elastic-duvzgnhy7vsbtdpuqtv3s2v4qa.us-east-2.es.amazonaws.com/",
-    development: "https://sktbk2743u:6hrjwg7k7b@boxwood-690045999.eu-west-1.bonsaisearch.net:443/"//"https://search-justshare-es-prpllmtm2nibj3jnky5rdtjfga.us-east-2.es.amazonaws.com/"//"http://localhost:9200/"//"https://25t337e5fo:xdrzi9s9z@oak-487876355.eu-west-1.bonsaisearch.net:443/"
+    production: "https://paas:5d4d57e6d6c6f5a4ec42a10a8702ceab@gimli-eu-west-1.searchly.com/",//"https://search-justshare-es-prpllmtm2nibj3jnky5rdtjfga.us-east-2.es.amazonaws.com/",//"https://search-justshare-elastic-duvzgnhy7vsbtdpuqtv3s2v4qa.us-east-2.es.amazonaws.com/",
+    development: "https://paas:5d4d57e6d6c6f5a4ec42a10a8702ceab@gimli-eu-west-1.searchly.com/"//"https://search-justshare-es-prpllmtm2nibj3jnky5rdtjfga.us-east-2.es.amazonaws.com/"//"http://localhost:9200/"//"https://25t337e5fo:xdrzi9s9z@oak-487876355.eu-west-1.bonsaisearch.net:443/"
   },
   JS_CRED: {
     secretKey: 'CEE71DFE-63C2-4755-B449-26355B5DBF04',

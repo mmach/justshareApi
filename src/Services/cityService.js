@@ -89,7 +89,6 @@ export default class CityService extends BaseService {
         /*
               geocoder.reverse({ lat: latitude, lon: longitude,"accept-language":this.context.language }, function (err, res) {
         
-                console.log(res)
                 resolve(res);
               });
         */

@@ -30,7 +30,6 @@ export default class CategoryService extends BaseService {
     );
   }
   async getCategoryActions({ category_id }) {
-    console.log(category_id)
     let categories = await this.getCategoriesParents({ ids: category_id })
     let ids = categories.map(item => { return item.id });
     return await this.unitOfWorkDI.categoryRepository.getAllActions({ ids: ids })
@@ -69,10 +68,8 @@ export default class CategoryService extends BaseService {
   */
   async getCategoryFreetextCategory({ model }) {
     let result = await this.getCategoryFreetext({ search: model.category });
-    console.log(result);
     if (result.length > 0) {
       let ids = result.map(item => { return item.KEY });
-      console.log(ids);
       return await this.unitOfWorkDI.categoryRepository.getCategoryTree({ ids: ids })
 
     } else {
@@ -91,7 +88,6 @@ export default class CategoryService extends BaseService {
     // if (!this.context.user.is_admin) {
     //   model.status = 0;
     //}
-    console.log(this.model);
     let result = await this.toJsonParse(
       this.unitOfWorkDI.categoryRepository.insert({ model, withProject: true })
     );

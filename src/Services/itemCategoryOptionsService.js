@@ -24,8 +24,6 @@ export default class ItemCategoryOptionsService extends BaseService {
    * @memberof CategoryService
    */
   async upsertCategoryOption({ model, id }) {
-    console.log('TO JEST TOO')
-    console.log(model)
     await this.unitOfWorkDI.itemCategoryOptionRepository.upsert({
       model: {
         ...model,

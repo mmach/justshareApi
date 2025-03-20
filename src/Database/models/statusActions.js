@@ -1,21 +1,8 @@
 'use strict';
 
 import { Model } from "sequelize";
-/**
- *
- * @export
- * @class Users
- * @extends Sequelize.Model
- */
 export default class StatusActions extends Model {
-  /**
-   *
-   * @static
-   * @param  {any} sequelize
-   * @param  {any} DataTypes
-   * @return {UserAuths|Model}
-   * @memberof UserAuths
-   */
+
   static init(sequelize, DataTypes) {
     return super.init(
       {

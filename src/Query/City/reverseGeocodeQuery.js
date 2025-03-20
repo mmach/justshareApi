@@ -1,4 +1,4 @@
-import BaseQuery from '../../Architecture/baseQuery.js';
+import {BaseQuery} from '../../Architecture/Base/baseQuery.js';
 import CityService from '../../Services/cityService.js';
 import { ReverseGeoDTO } from 'justshare-shared'
 import CountryService from '../../Services/countryService.js';

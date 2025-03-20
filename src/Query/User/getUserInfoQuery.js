@@ -1,7 +1,7 @@
-import BaseQuery from '../../Architecture/baseQuery.js';
-import LogFileInfrastructure from '../../Architecture/Infrastructure/logFileInfrastructure.js';
+import {BaseQuery} from '../../Architecture/Base/baseQuery.js';
+import {LogFileInfrastructure} from '../../Architecture/Infrastructure/logFileInfrastructure.js';
 import UserService from '../../Services/userService.js';
-import BlobService from '../../Services/blobService.js';
+import BlobService from '../../Services/Blobs/blobService.js';
 import {BlobBase64DTO,UserDTO} from 'justshare-shared';
 
 export default class GetUserInfoQuery extends BaseQuery {

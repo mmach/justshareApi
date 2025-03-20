@@ -1,10 +1,10 @@
-import BaseCommand from "../../Architecture/baseCommand.js";
-import AuthInfrastucture from "../../Architecture/Infrastructure/authInfrastucture.js";
-import ClosingInfrastructure from "../../Architecture/Infrastructure/closingInfrastructure.js";
-import DbTransactionInfrastucture from "../../Architecture/Infrastructure/dbTransactionInfrastucture.js";
-import LogFileInfrastructure from "../../Architecture/Infrastructure/logFileInfrastructure.js";
-import BlobService from "../../Services/blobService.js";
-import CategoryService from "../../Services/categoryService.js";
+import {BaseCommand} from "../../Architecture/Base/baseCommand.js";
+import {AuthInfrastucture}from "../../Architecture/Infrastructure/authInfrastucture.js";
+import {ClosingInfrastructure} from "../../Architecture/Infrastructure/closingInfrastructure.js";
+import {DbTransactionInfrastucture} from "../../Architecture/Infrastructure/dbTransactionInfrastucture.js";
+import {LogFileInfrastructure} from "../../Architecture/Infrastructure/logFileInfrastructure.js";
+import BlobService from "../../Services/Blobs/blobService.js";
+import CategoryService from "../../Services/Categories/categoryService.js";
 import ElasticSearchService from "../../Services/elasticSearchService.js";
 import ItemService from "../../Services/itemService.js";
 import TagService from './../../Services/tagService.js';

@@ -1,6 +1,6 @@
 "use strict";
-import BaseCommand from "./../../Architecture/baseCommand.js";
-import LogFileInfrastructure from "../../Architecture/Infrastructure/logFileInfrastructure.js";
+import {BaseCommand} from "../../Architecture/Base/baseCommand.js";
+import {LogFileInfrastructure} from "../../Architecture/Infrastructure/logFileInfrastructure.js";
 import UserService from "../../Services/userService.js";
 import { UserDTO } from "justshare-shared";
 

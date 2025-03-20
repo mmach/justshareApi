@@ -1,8 +1,9 @@
 "use strict";
 
-import BaseInfrastracture from './../baseInfrastructure.js';
+import { BaseInfrastracture } from "../Base/baseInfrastructure.js";
 
-export default class ClosingInfrastructure extends BaseInfrastracture {
+
+export class ClosingInfrastructure extends BaseInfrastracture {
     constructor() {
         super();
         this.funcArray = [];

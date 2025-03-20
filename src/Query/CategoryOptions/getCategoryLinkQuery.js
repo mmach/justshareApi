@@ -1,8 +1,8 @@
 "use strict";
 
-import BaseQuery from '../../Architecture/baseQuery.js';
+import {BaseQuery} from '../../Architecture/Base/baseQuery.js';
 import { CategoryDTO } from 'justshare-shared';
-import CategoryOptionService from '../../Services/categoryOptionService.js';
+import CategoryOptionService from '../../Services/Categories/categoryOptionService.js';
 
 
 

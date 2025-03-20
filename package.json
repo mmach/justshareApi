@@ -5,10 +5,15 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node --experimental-json-modules ./src/index.js",
+    "start": "npx tsc && node --experimental-specifier-resolution=node  ./dist/index.js",
+    "start_old2": "node --experimental-json-modules ./src/index.js",
     "start_old": "babel-node --presets es2017,stage-2 ./src/index.js ",
     "server": "babel ./src  -d ./.compiled/src --source-maps --copy-files    --exec babel-node --presets es2017,stage-2 ./src/index.js ",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon  --experimental-specifier-resolution=node ./src/index.js",
+    "build": "tsc",
+    "run": "node --experimental-specifier-resolution=node  ./dist/index.js ",
+    "watch": "npx tsc-watch --onSuccess \"npm run run \""
   },
   "repository": {
     "type": "git",
@@ -93,6 +98,7 @@
     "nodemailer-smtp-transport": "^2.7.4",
     "nodemon": "^1.18.4",
     "npm": "^5.2.0",
+    "openai": "^4.86.2",
     "pdfmake": "^0.1.68",
     "query-string": "^6.8.3",
     "redis": "4.0.4",
@@ -103,6 +109,9 @@
     "socket.io-redis": "6.1.1",
     "tedious": "9.2.1",
     "translate": "^1.4.1",
+    "tsc": "^2.0.4",
+    "tsc-watch": "^6.2.1",
+    "typescript": "^5.8.2",
     "uuid": "9.0.0",
     "uuidv4": "^6.1.1",
     "validator": "^7.0.0",

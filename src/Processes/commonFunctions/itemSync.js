@@ -6,7 +6,7 @@
 }
 
 export default checkSum;*/
-let itemSync = async function (item_id) {
+export const itemSync = async function (item_id) {
 
     await this.elasticSearchServiceDI.setContext(this.context).addToQueue({ item_id: item_id, operation: 'U' })
 

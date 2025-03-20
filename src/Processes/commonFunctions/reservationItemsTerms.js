@@ -3,7 +3,7 @@ import { DimensionsList, GetValueByDim } from "justshare-shared";
 import { v4 } from "uuid";
 
 
-let reservationItemsTerms = async function () {
+export const reservationItemsTerms = async function () {
     let start = GetValueByDim(DimensionsList.RESERVATION_DAYS_START, this.itemTransaction, this.context.language)
     let end = GetValueByDim(DimensionsList.RESERVATION_DAYS_END, this.itemTransaction, this.context.language)
     let ico = this.itemTransaction.itemCategoryOption.filter(i => { return i.dim == DimensionsList.RESERVATION_DAYS_START })[0]

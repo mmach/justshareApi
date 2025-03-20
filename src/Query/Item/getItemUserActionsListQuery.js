@@ -1,5 +1,5 @@
-import LogFileInfrastructure from '../../Architecture/Infrastructure/logFileInfrastructure.js';
-import BaseQuery from '../../Architecture/baseQuery.js';
+import {LogFileInfrastructure} from '../../Architecture/Infrastructure/logFileInfrastructure.js';
+import {BaseQuery} from '../../Architecture/Base/baseQuery.js';
 import ItemTransactionService from '../../Services/itemTransactionsService.js';
 
 

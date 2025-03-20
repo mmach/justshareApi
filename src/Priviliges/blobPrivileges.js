@@ -1,6 +1,6 @@
 
 
-async function checkIfUserHaveAccessToRemoveBlob() {
+export async function checkIfUserHaveAccessToRemoveBlob() {
     let blob = await this.blobServiceDI.setContext(this.context).getById({ id: this.model.id })
     if (blob == null) {
         return false;
@@ -11,8 +11,3 @@ async function checkIfUserHaveAccessToRemoveBlob() {
         return false
     }
 }
-
-let BlobPrivileges = {
-    checkIfUserHaveAccessToRemoveBlob
-}
-export default BlobPrivileges

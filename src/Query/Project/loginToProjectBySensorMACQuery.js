@@ -1,5 +1,5 @@
 import { ProjectDTO } from 'justshare-shared';
-import BaseQuery from '../../Architecture/baseQuery.js';
+import {BaseQuery} from '../../Architecture/Base/baseQuery.js';
 
 
 export default class LoginToProjectBySensorMACQuery extends BaseQuery {

@@ -2,7 +2,7 @@ import {v4} from "uuid";
 
 
 
-let createConversation = async function (iua_id, uniq_number, user,message) {
+export let createConversation = async function (iua_id, uniq_number, user,message) {
     await this.conversationServiceDI.setContext(this.context).createConversation({
         id: v4(),
         user_owner: this.context.user,

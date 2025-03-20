@@ -1,13 +1,10 @@
 "use strict";
-import BaseCommand from "./../../Architecture/baseCommand.js";
+import { BaseCommand } from "../../Architecture/Base/baseCommand.js";
 
 import { ProjectDTO } from "justshare-shared";
-import LogFileInfrastructure from "../../Architecture/Infrastructure/logFileInfrastructure.js";
-import DbTransactionInfrastucture from "../../Architecture/Infrastructure/dbTransactionInfrastucture.js";
-import MailSender from "../../Architecture/mailSender.js";
-import CodeDictionary from "../../Architecture/Dictionary/codeDictionary.js";
+import { DbTransactionInfrastucture } from "../../Architecture/Infrastructure/dbTransactionInfrastucture.js";
+import { LogFileInfrastructure } from "../../Architecture/Infrastructure/logFileInfrastructure.js";
 
-import { URL } from "url";
 
 /**
  *
@@ -43,8 +40,7 @@ export default class UpdateProjectCommand extends BaseCommand {
         return [
             async () => { await this.checkDTO.bind(this)(this.model) }
         ]
-        //async () => { await UserValidators.checkIfMailExistInDb.bind(this)() }]
-    }
+        }
 
     async action() {
         this.model.secretKey = undefined

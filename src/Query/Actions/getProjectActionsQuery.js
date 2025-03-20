@@ -1,11 +1,11 @@
-import BaseQuery from '../../Architecture/baseQuery.js';
-import LogFileInfrastructure from '../../Architecture/Infrastructure/logFileInfrastructure.js';
+import {BaseQuery} from '../../Architecture/Base/baseQuery.js';
+import {LogFileInfrastructure} from '../../Architecture/Infrastructure/logFileInfrastructure.js';
 import ItemService from '../../Services/itemService.js';
 import ElasticSearchService from '../../Services/elasticSearchService.js';
-import BlobService from '../../Services/blobService.js';
+import BlobService from '../../Services/Blobs/blobService.js';
 import {ActionsProjectDTO } from 'justshare-shared';
-import CategoryOptionService from '../../Services/categoryOptionService.js';
-import CategoryService from '../../Services/categoryService.js';
+import CategoryOptionService from '../../Services/Categories/categoryOptionService.js';
+import CategoryService from '../../Services/Categories/categoryService.js';
 
 
 export default class GetProjectActionsQuery extends BaseQuery {

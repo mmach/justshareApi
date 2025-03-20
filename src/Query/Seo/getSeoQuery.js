@@ -1,8 +1,8 @@
-import BaseQuery from '../../Architecture/baseQuery.js';
+import {BaseQuery} from '../../Architecture/Base/baseQuery.js';
 import { UserDTO } from 'justshare-shared';
-import LogFileInfrastructure from '../../Architecture/Infrastructure/logFileInfrastructure.js';
+import {LogFileInfrastructure} from '../../Architecture/Infrastructure/logFileInfrastructure.js';
 import UserService from '../../Services/userService.js';
-import AuthInfrastucture from '../../Architecture/Infrastructure/authInfrastucture.js';
+import {AuthInfrastucture}from '../../Architecture/Infrastructure/authInfrastucture.js';
 import mjml2html from 'mjml'
 import json2xml from "json2xml";
 

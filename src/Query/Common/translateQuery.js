@@ -1,6 +1,6 @@
-import BaseQuery from '../../Architecture/baseQuery.js';
-import AuthInfrastucture from '../../Architecture/Infrastructure/authInfrastucture.js';
-import LogFileInfrastructure from '../../Architecture/Infrastructure/logFileInfrastructure.js';
+import {BaseQuery} from '../../Architecture/Base/baseQuery.js';
+import {AuthInfrastucture}from '../../Architecture/Infrastructure/authInfrastucture.js';
+import {LogFileInfrastructure} from '../../Architecture/Infrastructure/logFileInfrastructure.js';
 import CONFIG from "../../config.js";
 import UserService from '../../Services/userService.js';
 

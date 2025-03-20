@@ -2,8 +2,8 @@
 import { v4 } from "uuid";
 
 
-let updateItemChain = async function (item, process_id, process_chain_id) {
-    
+export const updateItemChain = async function (item, process_id, process_chain_id) {
+
     let id = v4();
     item.process_chain_id = process_chain_id;
     item.process_id = process_id;
@@ -15,10 +15,10 @@ let updateItemChain = async function (item, process_id, process_chain_id) {
         process_chain_id,
         process_id
     })
-    if (this.process_chain.change_status==true) {
+    if (this.process_chain.change_status == true) {
         await this.itemServiceDI.setContext(this.context).update({ model: item })
     }
-    
+
     try {
         const val = JSON.parse(this.process_chain.params)
         if (val.api && val.api.mail) {
@@ -36,4 +36,3 @@ let updateItemChain = async function (item, process_id, process_chain_id) {
     }
 }
 
-export { updateItemChain };

@@ -1,8 +1,8 @@
 "use strict";
 
-import BaseQuery from '../../Architecture/baseQuery.js';
+import {BaseQuery} from '../../Architecture/Base/baseQuery.js';
 import {CategoryActionsDTO} from 'justshare-shared';
-import CategoryService from '../../Services/categoryService.js';
+import CategoryService from '../../Services/Categories/categoryService.js';
 
 
 export default class GetCategoryActionsQuery extends BaseQuery {

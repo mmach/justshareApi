@@ -1,7 +1,7 @@
 
 
 
-let updateWithoutStatusIUA = async function (iua_id) {
+export const updateWithoutStatusIUA = async function (iua_id) {
 
     await this.itemUserActionServiceDI.setContext(this.context).update({
         model: {

@@ -1,4 +1,4 @@
-import BaseService from "../Architecture/baseService.js";
+import {BaseService} from "../Architecture/Base/baseService";
 import * as useSockets from '../WebsocketMessages/index.js';
 
 

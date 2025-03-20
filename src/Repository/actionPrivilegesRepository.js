@@ -1,4 +1,4 @@
-import BaseRepository from "../Architecture/baseRepository.js";
+import {BaseRepository} from "../Architecture/Base/baseRepository.js";
 import SequelizeDB from "../Database/models/index.js";
 import { UserDTO } from "justshare-shared";
 
@@ -14,12 +14,14 @@ export default class ActionPrivilegesRepository extends BaseRepository {
    * @param   {{sequelizeDI:SequelizeDB}}
    * @memberof ActionPrivilegesRepository
    */
+  
   constructor({ sequelizeDI }) {
     super(sequelizeDI.ActionPrivileges);
     this.sequelizeDI = sequelizeDI;
   }
 
- /* getPrivByName({ name, transaction }) {
+  async getPrivByName({ name, transaction }) {
+    var value = await sequelizeDI.ActionPrivileges.findOne({});
     return this.entityDAO.findOne({
       where:
       {
@@ -28,6 +30,6 @@ export default class ActionPrivilegesRepository extends BaseRepository {
       },
       transaction: this.getTran({ transaction })
     });
-  }*/
+  }
 
 }

@@ -1,11 +1,11 @@
-import BaseQuery from '../../Architecture/baseQuery.js';
-import LogFileInfrastructure from '../../Architecture/Infrastructure/logFileInfrastructure.js';
+import {BaseQuery} from '../../Architecture/Base/baseQuery.js';
+import {LogFileInfrastructure} from '../../Architecture/Infrastructure/logFileInfrastructure.js';
 import ItemService from '../../Services/itemService.js';
 import ElasticSearchService from '../../Services/elasticSearchService.js';
-import BlobService from '../../Services/blobService.js';
+import BlobService from '../../Services/Blobs/blobService.js';
 import { RolesProjectDTO } from 'justshare-shared';
-import CategoryOptionService from '../../Services/categoryOptionService.js';
-import CategoryService from '../../Services/categoryService.js';
+import CategoryOptionService from '../../Services/Categories/categoryOptionService.js';
+import CategoryService from '../../Services/Categories/categoryService.js';
 
 
 export default class GetProjectRolesQuery extends BaseQuery {
@@ -37,8 +37,7 @@ export default class GetProjectRolesQuery extends BaseQuery {
         return [
           async () => { await this.checkDTO.bind(this)(this.model) }
         ]
-        //async () => { await UserValidators.checkIfMailExistInDb.bind(this)() }]
-      }
+          }
     
       async action() {
        return await this.roleProjectServiceDI.setContext(this.context).getRoles({ model: this.model, withProject: true })

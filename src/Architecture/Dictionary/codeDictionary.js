@@ -5,7 +5,7 @@
 import JsonDB from "node-json-db";
 //import "./../../Shared/BaseObjects/Helper/commonFunctions.js";
 
-export default class CodeDictionary {
+export class CodeDictionary {
   constructor() {
     this.db = new JsonDB("CodeDictionary", true, true);
   }

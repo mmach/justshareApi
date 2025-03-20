@@ -2,7 +2,7 @@ import {v4} from "uuid";
 
 
 
-let createIUA = async function (iua_id, item, message) {
+export const createIUA = async function (iua_id, item, message) {
 
     let uniq_number = new Date().getTime()
     let itemResult = item

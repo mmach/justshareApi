@@ -1,10 +1,11 @@
 "use strict";
 
-import BaseInfrastracture from './../baseInfrastructure.js';
+import { BaseInfrastracture } from '../Base/baseInfrastructure.js';
 import Logger from './../logConfig.js';
 import { inspect } from 'util' // or directly
 
-export default class LogFileInfrastructure extends BaseInfrastracture {
+
+export class LogFileInfrastructure extends BaseInfrastracture {
     constructor() {
         super();
 
@@ -25,7 +26,7 @@ export default class LogFileInfrastructure extends BaseInfrastracture {
 
         //Checking type of exception...
         Logger.error(err);
-        err = inspect(err,1,3);
+        err = inspect(err, 1, 3);
 
 
         //err.error.error=undefined;

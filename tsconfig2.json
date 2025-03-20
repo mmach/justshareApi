@@ -1,0 +1,31 @@
+{
+    "compileOnSave": true,
+    "files": [
+        "src/index.ts"
+    ],
+    "compilerOptions": {
+        "rootDir": "./src",
+        "outDir": "./dist",
+        "target": "ESNext",
+        "module": "CommonJS",
+        "skipLibCheck": true,
+        "sourceMap": true,
+        "allowJs": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "declaration": false,
+        "strict": true,
+        "lib": [
+            "esnext"
+        ],
+        "esModuleInterop": true
+    },
+    "include": [
+        "./src/"
+    ],
+    "exclude": [
+        "./.compiled/**/*",
+        "./node_modules",
+        "./dist/**/*",
+    ]
+}

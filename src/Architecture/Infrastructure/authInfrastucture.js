@@ -1,13 +1,13 @@
 "use strict";
 
-import BaseInfrastracture from "./../baseInfrastructure.js";
 import jwt from 'jsonwebtoken';
-import ServerException from "../Exceptions/serverException.js";
 import fs from "fs";
 import UserRepository from "../../Repository/userRepository.js";
+import { BaseInfrastracture } from '../Base/baseInfrastructure.js';
+import { ServerException } from '../Exceptions/serverException.js';
 
 
-export default class AuthInfrastucture extends BaseInfrastracture {
+export class AuthInfrastucture extends BaseInfrastracture {
 
   /**
    *Creates an instance of AuthInfrastucture.

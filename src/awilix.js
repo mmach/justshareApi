@@ -2,7 +2,7 @@
 "use strict";
 import awilix from "awilix";
 import { CommandList, ProcessList, QueryList } from "justshare-shared";
-import ContainerAwlix from "./Architecture/awilixContainer.js";
+import { ContainerAwlix } from "./Architecture/index.js";
 import DeleteActionCommand from "./Commands/Actions/deleteActionCommand.js";
 import DeleteActionPrivilegesCommand from "./Commands/Actions/deleteActionPrivilegesCommand.js";
 import DeleteActionsProjectCommand from "./Commands/Actions/deleteActionsProjectCommand.js";
@@ -274,22 +274,29 @@ import UserRepository from "./Repository/userRepository.js";
 import UserRolesRepository from "./Repository/userRolesRepository.js";
 import UserTypesRepository from "./Repository/userTypesRepository.js";
 import UserTypesRolesRepository from "./Repository/userTypesRolesRepository.js";
-import ActionPrivilegesService from "./Services/actionPrivilegesService.js";
-import ActionProjectService from "./Services/actionProjectService.js";
-import ActionService from "./Services/actionService.js";
-import BlobService from "./Services/blobService.js";
-import CategoryOptionService from "./Services/categoryOptionService.js";
-import CategoryService from "./Services/categoryService.js";
+//import ActionPrivilegesService from "./Services/Actions/actionPrivilegesService.js";
+//import ActionProjectService from "./Services/Actions/actionProjectService.js";
+//import ActionService from "./Services/Actions/actionService.js";
+import DeleteProjectCmsMenuCommand from "./Commands/CmsMenu/deleteProjectCmsMenuCommand.js";
+import DeleteProjectCmsMenuItemCommand from "./Commands/CmsMenu/deleteProjectCmsMenuItemCommand.js";
+import DeleteProjectCmsMenuItemPrivilegeCommand from "./Commands/CmsMenu/deleteProjectCmsMenuItemPrivilegeCommand.js";
+import UpsertProjectCmsMenuCommand from "./Commands/CmsMenu/upsertProjectCmsMenuCommand.js";
+import UpsertProjectCmsMenuItemCommand from "./Commands/CmsMenu/upsertProjectCmsMenuItemCommand.js";
+import UpsertProjectCmsMenuItemPrivilegeCommand from "./Commands/CmsMenu/upsertProjectCmsMenuItemPrivilegeCommand.js";
+import GetCmsElementAdminQuery from "./Query/CmsElement/getCmsElementAdminQuery.js";
+import GetCmsMenusAdminQuery from "./Query/CmsMenu/getCmsMenusAdminQuery.js";
+import GetCmsMenusQuery from "./Query/CmsMenu/getCmsMenusQuery.js";
+import CmsMenuItemsPrivilegesProjectRepository from "./Repository/cmsMenuItemsPrivilegesProjectRepository.js";
+import CmsMenuItemsProjectsRepository from "./Repository/cmsMenuItemsProjectRepository.js";
+import CmsMenuProjectsRepository from "./Repository/cmsMenuProjectRepository.js";
+import CmsPageProjectsRepository from "./Repository/cmsPageProjectsRepository.js";
+import ConversationMessageMembersService from "./Services/Conversations/conversationMessagesMemberService.js";
+import ConversationMessagesService from "./Services/Conversations/conversationMessagesService.js";
+import ConversationService from "./Services/Conversations/conversationService.js";
 import CityService from "./Services/cityService.js";
-import CmsElementsProjectService from "./Services/cmsElementsProjectService.js";
 import CommentService from "./Services/commentService.js";
 import ConfigService from "./Services/configService.js";
-import ConversationMessageMembersService from "./Services/conversationMessagesMemberService.js";
-import ConversationMessagesService from "./Services/conversationMessagesService.js";
-import ConversationService from "./Services/conversationService.js";
 import CountryService from "./Services/countryService.js";
-import DimensionsProjectService from "./Services/dimensionsProjectService.js";
-import DimensionsService from "./Services/dimensionsService.js";
 import ElasticSearchService from "./Services/elasticSearchService.js";
 import InvoiceService from "./Services/invoiceService.js";
 import ItemCategoryOptionsService from "./Services/itemCategoryOptionsService.js";
@@ -319,45 +326,39 @@ import UserService from "./Services/userService.js";
 import UserTypesRolesService from "./Services/userTypesRolesService.js";
 import UserTypesService from "./Services/userTypesService.js";
 import UnitOfWork from "./unitOfWork.js";
-import GetCmsElementAdminQuery from "./Query/CmsElement/getCmsElementAdminQuery.js";
-import CmsMenuProjectService from "./Services/cmsMenuProjectService.js";
-import CmsMenuItemsProjectService from "./Services/cmsMenuItemsProjectService.js";
-import CmsMenuItemsPrivilegesProjectService from "./Services/cmsMenuItemsPrivilegesProjectService.js";
-import CmsMenuProjectsRepository from "./Repository/cmsMenuProjectRepository.js";
-import CmsMenuItemsProjectsRepository from "./Repository/cmsMenuItemsProjectRepository.js";
-import CmsMenuItemsPrivilegesProjectRepository from "./Repository/cmsMenuItemsPrivilegesProjectRepository.js";
-import GetCmsMenusAdminQuery from "./Query/CmsMenu/getCmsMenusAdminQuery.js";
-import GetCmsMenusQuery from "./Query/CmsMenu/getCmsMenusQuery.js";
-import UpsertProjectCmsMenuCommand from "./Commands/CmsMenu/upsertProjectCmsMenuCommand.js";
-import UpsertProjectCmsMenuItemCommand from "./Commands/CmsMenu/upsertProjectCmsMenuItemCommand.js";
-import UpsertProjectCmsMenuItemPrivilegeCommand from "./Commands/CmsMenu/upsertProjectCmsMenuItemPrivilegeCommand.js";
-import DeleteProjectCmsMenuItemCommand from "./Commands/CmsMenu/deleteProjectCmsMenuItemCommand.js";
-import DeleteProjectCmsMenuCommand from "./Commands/CmsMenu/deleteProjectCmsMenuCommand.js";
-import DeleteProjectCmsMenuItemPrivilegeCommand from "./Commands/CmsMenu/deleteProjectCmsMenuItemPrivilegeCommand.js";
-import CmsPageProjectsRepository from "./Repository/cmsPageProjectsRepository.js";
-import CmsPageProjectService from "./Services/cmsPageProjectService.js";
+
 import DeleteProjectCmsPageCommand from "./Commands/CmsPage/deleteProjectCmsPageCommand.js";
-import UpsertProjectCmsPageCommand from "./Commands/CmsPage/upsertProjectCmsPageCommand.js";
-import GetCmsPagesQuery from "./Query/CmsPage/getCmsPagesQuery.js";
-import CmsPagePrivilegesProjectService from "./Services/cmsPagePrivilegesProjectService.js";
-import CmsPagePrivilegesProjectRepository from "./Repository/cmsPagePrivilegesProjectRepository.js";
 import DeleteProjectCmsPagePrivilegeCommand from "./Commands/CmsPage/deleteProjectCmsPagePrivilegeCommand.js";
+import UpsertProjectCmsPageCommand from "./Commands/CmsPage/upsertProjectCmsPageCommand.js";
 import UpsertProjectCmsPagePrivilegeCommand from "./Commands/CmsPage/upsertProjectCmsPagePrivilegeCommand.js";
 import GetCmsPagesAdminQuery from "./Query/CmsPage/getCmsPagesAdminQuery.js";
+import GetCmsPagesQuery from "./Query/CmsPage/getCmsPagesQuery.js";
+import CmsPagePrivilegesProjectRepository from "./Repository/cmsPagePrivilegesProjectRepository.js";
+
+import * as queries from './Query/index.js';
+import * as services from './Services/index.js';
+
 /**
  * 
  */
 const { asValue, asFunction, asClass } = awilix;
+let exporter = {};
+Object.keys(services).forEach(service => {
+  exporter[services[service].di] = asClass(services[service].classType);
 
-let exporter = {
+})
+Object.keys(queries).forEach(service => {
+  exporter[queries[service].di] = asClass(queries[service].classType);
+})
+
+exporter = {...exporter,
   categoryRepositoryDI: asClass(CategoryRepository),
-  categoryServiceDI: asClass(CategoryService),
   userRepositoryDI: asClass(UserRepository),
   userServiceDI: asClass(UserService),
   blobRepositoryDI: asClass(BlobRepository),
-  blobServiceDI: asClass(BlobService),
+ // blobServiceDI: asClass(BlobService),
   cmsElementsProjectRepositoryDI: asClass(CmsElementsProjectRepository),
-  cmsElementsProjectServiceDI: asClass(CmsElementsProjectService),
+  //cmsElementsProjectServiceDI: asClass(CmsElementsProjectService),
   blobMapperRepositoryDI: asClass(BlobMapperRepository),
   categoryHierarchyRepositoryDI: asClass(CategoryHierarchyRepository),
   itemCategoryRepositoryDI: asClass(ItemCategoryRepository),
@@ -370,7 +371,6 @@ let exporter = {
   cityRepositoryDI: asClass(CityRepository),
   cityServiceDI: asClass(CityService),
   categoryOptionsRepositoryDI: asClass(CategoryOptionsRepository),
-  categoryOptionServiceDI: asClass(CategoryOptionService),
   itemCategoryOptionRepositoryDI: asClass(ItemCategoryOptionRepository),
   userAuthRepositoryDI: asClass(UserAuthRepository),
   elasticSearchServiceDI: asClass(ElasticSearchService),
@@ -395,9 +395,6 @@ let exporter = {
   userTypesRolesRepositoryDI: asClass(UserTypesRolesRepository),
   rolesRepositoryDI: asClass(RolesRepository),
   translationRepositoryDI: asClass(TranslationRepository),
-  actionServiceDI: asClass(ActionService),
-  actionPrivilegesServiceDI: asClass(ActionPrivilegesService),
-  actionProjectServiceDI: asClass(ActionProjectService),
   privilegeProjectServiceDI: asClass(PrivilegeProjectService),
   privilegeServiceDI: asClass(PrivilegeService),
   languageProjectRepositoryDI: asClass(LanguageProjectRepository),
@@ -412,8 +409,6 @@ let exporter = {
   userRolesServiceDI: asClass(UserRolesService),
   dimensionsProjectRepositoryDI: asClass(DimensionsProjectRepository),
   dimensionsRepositoryDI: asClass(DimensionsRepository),
-  dimensionsProjectServiceDI: asClass(DimensionsProjectService),
-  dimensionsServiceDI: asClass(DimensionsService),
   mailTypesServiceDI: asClass(MailTypesService),
   mailTypesRepositoryDI: asClass(MailTypesRepository),
   mailSendersServiceDI: asClass(MailSendersService),
@@ -455,18 +450,17 @@ let exporter = {
   processServiceDI: asClass(ProcessService),
   processChainActionInjectionRepositoryDI: asClass(ProcessChainActionInjectionRepository),
   processChainPrivilegesRepositoryDI: asClass(ProcessChainPrivilegesRepository),
-  cmsMenuProjectServiceDI: asClass(CmsMenuProjectService),
-  cmsMenuItemsProjectServiceDI: asClass(CmsMenuItemsProjectService),
-  cmsMenuItemsPrivilegesProjectServiceDI: asClass(CmsMenuItemsPrivilegesProjectService),
   cmsMenuProjectsRepositoryDI: asClass(CmsMenuProjectsRepository),
   cmsMenuItemsProjectRepositoryDI: asClass(CmsMenuItemsProjectsRepository),
   cmsMenuItemsPrivilegesProjectRepositoryDI: asClass(CmsMenuItemsPrivilegesProjectRepository),
   cmsPageProjectsRepositoryDI: asClass(CmsPageProjectsRepository),
-  cmsPageProjectServiceDI: asClass(CmsPageProjectService),
-  cmsPagePrivilegesProjectServiceDI: asClass(CmsPagePrivilegesProjectService),
   cmsPagePrivilegesProjectRepositoryDI: asClass(CmsPagePrivilegesProjectRepository)
 
 };
+
+
+
+
 exporter[CommandList.Dictionary.ADD_DICTIONARY] = asClass(
   AddToDictionaryCommand
 );

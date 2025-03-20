@@ -1,7 +1,7 @@
 import { v4 } from "uuid";
 import Promise from "bluebird";
 
-function createSearchClob(newItem, itemId) {
+export function createSearchClob(newItem, itemId) {
   let clobs = {
     pl: "",
     us: "",

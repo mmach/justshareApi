@@ -1,4 +1,4 @@
-import BaseCommand from "../../Architecture/baseCommand.js";
+import {BaseCommand} from "../../Architecture/Base/baseCommand.js";
 
 import CONFIG from "../../config.js";
 

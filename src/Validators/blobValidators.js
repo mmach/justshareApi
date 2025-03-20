@@ -1,6 +1,5 @@
-import ValidationException from './../Architecture/Exceptions/validationExceptions.js'
 import CONFIG from '../config.js';
-import {BlobBase64DTO} from 'justshare-shared';
+import { ValidationException } from './../Architecture/Exceptions/validationExceptions.js';
 
 async function getSizeOfUplodedFile(blob) {
     if (blob.getSize(blob) > 10000) {
@@ -30,9 +29,8 @@ async function countOfUsersImages() {
     }
 }
 
-let BlobValidators = {
+export const BlobValidators = {
     countOfUsersImages,
     checkUploadedFileType,
     getSizeOfUplodedFile
 }
-export default BlobValidators

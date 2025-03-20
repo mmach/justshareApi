@@ -1,8 +1,8 @@
 
-import { ItemDTO, BuildItem, ShowOptionValue, StatusesList } from "justshare-shared";
+import { BuildItem } from "justshare-shared";
 
 
-let initCreateIUAProcess = async function (item) {
+export let initCreateIUAProcess = async function (item) {
     let result = await this.elasticSearchServiceDI.setContext(this.context).getItemById({
         item_id: item.id,
     })

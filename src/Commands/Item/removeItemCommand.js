@@ -1,13 +1,11 @@
-import BaseCommand from "../../Architecture/baseCommand.js";
-import LogFileInfrastructure from "../../Architecture/Infrastructure/logFileInfrastructure.js";
-import AuthInfrastucture from "../../Architecture/Infrastructure/authInfrastucture.js";
-import DbTransactionInfrastucture from "../../Architecture/Infrastructure/dbTransactionInfrastucture.js";
-import ItemService from "../../Services/itemService.js";
 import { ItemDTO } from "justshare-shared";
-import BlobService from "../../Services/blobService.js";
-import CategoryService from "../../Services/categoryService.js";
-import BlobValidators from "../../Validators/blobValidators.js";
-import Promise from "bluebird";
+import { BaseCommand } from "../../Architecture/Base/baseCommand.js";
+import { AuthInfrastucture } from "../../Architecture/Infrastructure/authInfrastucture.js";
+import { DbTransactionInfrastucture } from "../../Architecture/Infrastructure/dbTransactionInfrastucture.js";
+import { LogFileInfrastructure } from "../../Architecture/Infrastructure/logFileInfrastructure.js";
+import BlobService from "../../Services/Blobs/blobService.js";
+import CategoryService from "../../Services/Categories/categoryService.js";
+import ItemService from "../../Services/itemService.js";
 ("use strict");
 
 export default class RemoveItemCommand extends BaseCommand {

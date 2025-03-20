@@ -1,14 +1,10 @@
-import BaseProcess from "../Architecture/baseProcess.js";
-import AuthInfrastucture from "../Architecture/Infrastructure/authInfrastucture.js";
-import ClosingInfrastructure from "../Architecture/Infrastructure/closingInfrastructure.js";
-import DbTransactionInfrastucture from "../Architecture/Infrastructure/dbTransactionInfrastucture.js";
-import LogFileInfrastructure from "../Architecture/Infrastructure/logFileInfrastructure.js";
-import BlobService from "../Services/blobService.js";
-import CategoryService from "../Services/categoryService.js";
+import BaseProcess from "../Architecture/Base/baseProcess.js";
+import { AuthInfrastucture,ClosingInfrastructure,DbTransactionInfrastucture,LogFileInfrastructure } from "../Architecture/index.js";
+import BlobService from "../Services/Blobs/blobService.js";
+import CategoryService from "../Services/Categories/categoryService.js";
 import ElasticSearchService from "../Services/elasticSearchService.js";
 import ItemService from "../Services/itemService.js";
-import { createItem } from './commonFunctions/createItem.js';
-import { updateItemChain } from "./commonFunctions/updateItemChain.js";
+import { updateItemChain, createItem } from "./commonFunctions/index.js";
 
 
 ("use strict");
@@ -29,7 +25,7 @@ export default class Item_CreateItemProcess extends BaseProcess {
   constructor({
     logFileInfrastructureDI,
     authInfrastructureDI,
- //   dbTransactionInfrastuctureDI,
+    //   dbTransactionInfrastuctureDI,
     itemServiceDI,
     validationInfrastructureDI,
     categoryServiceDI,
@@ -43,7 +39,7 @@ export default class Item_CreateItemProcess extends BaseProcess {
     super({
       logFileInfrastructureDI,
       authInfrastructureDI,
-    //  dbTransactionInfrastuctureDI,
+      //  dbTransactionInfrastuctureDI,
       validationInfrastructureDI,
       closingInfrastructureDI,
       projectInfrastructureDI
@@ -72,7 +68,7 @@ export default class Item_CreateItemProcess extends BaseProcess {
     try {
 
       let item = await createItem.bind(this)(this.model)
-    //  console.log(item);
+      //  console.log(item);
       await updateItemChain.bind(this)(this.model, this.process_chain.process_id, this.process_chain.id)
     } catch (err) {
       console.log(err)
@@ -81,18 +77,18 @@ export default class Item_CreateItemProcess extends BaseProcess {
 
   }
 }
-    //  let prom = diff.map(i => {
+//  let prom = diff.map(i => {
 
-    //  })
-    //  throw 'dupa'
-
-
+//  })
+//  throw 'dupa'
 
 
 
 
 
-    
+
+
+
 
 
 

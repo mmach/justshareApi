@@ -1,9 +1,9 @@
 import { LinkItem, GetValueByDim, DimensionsList, StatusesList } from 'justshare-shared'
 
-let initIUAProcess = async function () {
- 
+export let initIUAProcess = async function () {
+
   this.IUA = await this.itemUserActionServiceDI.setContext(this.context).getById({ id: this.model.iua_id, withProject: true })
-  let itemTransaction = await this.itemTransactionsServiceDI.setContext(this.context).getItemTransaction({ iua_id: [this.IUA.parent_iua_id ?this.IUA.parent_iua_id: this.IUA.id], status_id: undefined });
+  let itemTransaction = await this.itemTransactionsServiceDI.setContext(this.context).getItemTransaction({ iua_id: [this.IUA.parent_iua_id ? this.IUA.parent_iua_id : this.IUA.id], status_id: undefined });
   itemTransaction[0].categories = await this.categoryServiceDI.setContext(this.context).getCategoriesParents({ ids: itemTransaction[0].category.id })
 
   this.itemTransaction = itemTransaction[0]

@@ -1,6 +1,6 @@
 
 'use strict';
-import { Model } from 'sequelize';
+import { Model, Sequelize } from 'sequelize';
 
 /**
  * 
@@ -27,13 +27,14 @@ export default class EsItemSync extends Model {
           autoIncrement: false,
           defaultValue: sequelize.UUIDV4
 
-      },
-        item_id:DataTypes.UUID,
-        project_id:DataTypes.UUID,
-        operation:DataTypes.STRING,
+        },
+        item_id: DataTypes.UUID,
+        project_id: DataTypes.UUID,
+        operation: DataTypes.STRING,
 
       },
-      { sequelize,
+      {
+        sequelize,
         tableName: 'EsItemSyncs'
       }
     );

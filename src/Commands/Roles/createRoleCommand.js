@@ -1,8 +1,8 @@
 "use strict";
 import { RolesDTO } from "justshare-shared";
-import DbTransactionInfrastucture from "../../Architecture/Infrastructure/dbTransactionInfrastucture.js";
-import LogFileInfrastructure from "../../Architecture/Infrastructure/logFileInfrastructure.js";
-import BaseCommand from "./../../Architecture/baseCommand.js";
+import {DbTransactionInfrastucture} from "../../Architecture/Infrastructure/dbTransactionInfrastucture.js";
+import {LogFileInfrastructure} from "../../Architecture/Infrastructure/logFileInfrastructure.js";
+import {BaseCommand} from "../../Architecture/Base/baseCommand.js";
 
 
 /**
@@ -41,7 +41,6 @@ export default class CreateRoleCommand extends BaseCommand {
     return [
       async () => { await this.checkDTO.bind(this)(this.model) }
     ]
-    //async () => { await UserValidators.checkIfMailExistInDb.bind(this)() }]
   }
 
   async action() {

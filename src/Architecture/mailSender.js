@@ -5,14 +5,14 @@ import fs from "fs";
 import CONFIG from "./../config.js";
 import nodemailer from "nodemailer";
 import * as xsltProcess from "xslt-processor";
-import ServerException from "./Exceptions/serverException.js";
+import { ServerException } from "./Exceptions/serverException.js";
 import mjml2html from 'mjml'
-import CodeDictionary from "./Dictionary/codeDictionary.js";
+import { CodeDictionary } from "./Dictionary/codeDictionary.js";
 import sendgridTransport from 'nodemailer-sendgrid-transport';
 import nodemailerSendgrid from 'nodemailer-sendgrid'
 import smtpTransport from "nodemailer-smtp-transport";
 
-export default class MailSender {
+export class MailSender {
   constructor({ configServiceDI, mailTypesProjectServiceDI, translationServiceDI }) {
     this.configServiceDI = configServiceDI;
     this.project_id = null;

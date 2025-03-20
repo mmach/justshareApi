@@ -1,14 +1,14 @@
 "use strict";
-import BaseCommand from "./../../Architecture/baseCommand.js";
-import LogFileInfrastructure from "../../Architecture/Infrastructure/logFileInfrastructure.js";
+import { BaseCommand } from "../../Architecture/Base/baseCommand.js";
+import { LogFileInfrastructure } from "../../Architecture/Infrastructure/logFileInfrastructure.js";
 import UserService from "../../Services/userService.js";
-import AuthInfrastucture from "../../Architecture/Infrastructure/authInfrastucture.js";
-import BlobService from "../../Services/blobService.js";
-import ValidatonInfrastructure from "../../Architecture/Infrastructure/validatonInfrastructure.js";
-import DbTransactionInfrastucture from "../../Architecture/Infrastructure/dbTransactionInfrastucture.js";
-import {BlobDTO} from "justshare-shared";
-import PrivilegesInfrastructure from "../../Architecture/Infrastructure/privilegesInfrastructure.js";
-import BlobPrivileges from "../../Priviliges/blobPrivileges.js";
+import { AuthInfrastucture } from "../../Architecture/Infrastructure/authInfrastucture.js";
+import BlobService from "../../Services/Blobs/blobService.js";
+import { ValidatonInfrastructure } from "../../Architecture/Infrastructure/validatonInfrastructure.js";
+import { DbTransactionInfrastucture } from "../../Architecture/Infrastructure/dbTransactionInfrastucture.js";
+import { BlobDTO } from "justshare-shared";
+import { PrivilegesInfrastructure } from "../../Architecture/Infrastructure/privilegesInfrastructure.js";
+import { checkIfUserHaveAccessToRemoveBlob } from "../../Priviliges/index.js";
 
 
 /**
@@ -49,11 +49,11 @@ export default class RemoveBlobCommand extends BaseCommand {
 
     get privileges() {
         return [
-            BlobPrivileges.checkIfUserHaveAccessToRemoveBlob
+            checkIfUserHaveAccessToRemoveBlob
         ]
     }
 
     async action() {
-        await this.blobServiceDI.setContext(this.context).delete({model:this.model});
+        await this.blobServiceDI.setContext(this.context).delete({ model: this.model });
     }
 }

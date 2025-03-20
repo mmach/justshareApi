@@ -1,8 +1,8 @@
 // @ts-nocheck
-import BaseCommand from "../../Architecture/baseCommand.js";
-import LogFileInfrastructure from "../../Architecture/Infrastructure/logFileInfrastructure.js";
-import AuthInfrastucture from "../../Architecture/Infrastructure/authInfrastucture.js";
-import CategoryOptionService from "../../Services/categoryOptionService.js";
+import {BaseCommand} from "../../Architecture/Base/baseCommand.js";
+import {LogFileInfrastructure} from "../../Architecture/Infrastructure/logFileInfrastructure.js";
+import {AuthInfrastucture}from "../../Architecture/Infrastructure/authInfrastucture.js";
+import CategoryOptionService from "../../Services/Categories/categoryOptionService.js";
 import {CategoryOptionsDTO} from 'justshare-shared'
 "use strict";
 

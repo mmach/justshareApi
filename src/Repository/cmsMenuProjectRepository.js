@@ -1,5 +1,5 @@
 import { Op } from "sequelize";
-import BaseRepository from "../Architecture/baseRepository.js";
+import {BaseRepository} from "../Architecture/Base/baseRepository.js";
 import SequelizeDB from "../Database/models/index.js";
 import { UserDTO } from "justshare-shared";
 

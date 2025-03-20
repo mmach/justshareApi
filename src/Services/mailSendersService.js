@@ -1,4 +1,4 @@
-import BaseService from "../Architecture/baseService.js";
+import {BaseService} from "../Architecture/Base/baseService";
 import SequelizeDB from "../Database/models/index.js";
 import { UserDTO } from "justshare-shared";
 

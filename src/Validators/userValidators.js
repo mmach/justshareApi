@@ -1,11 +1,11 @@
-import ValidationException from './../Architecture/Exceptions/validationExceptions.js'
+import { ValidationException } from './../Architecture/Exceptions/validationExceptions.js'
 
 
 
 async function checkIfMailExistInDb() {
     let validationResult = await this.userServiceDI.setContext(this.context).checkMailInDb({
         email: this.model.email,
-        withoutAuth:true
+        withoutAuth: true
     })
     if (validationResult) {
         let exception = new ValidationException();
@@ -15,7 +15,6 @@ async function checkIfMailExistInDb() {
     }
 }
 
-let UserValidators = {
+export const UserValidators = {
     checkIfMailExistInDb
 }
-export default UserValidators

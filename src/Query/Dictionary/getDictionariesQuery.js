@@ -1,6 +1,6 @@
-import BaseQuery from '../../Architecture/baseQuery.js';
+import {BaseQuery} from '../../Architecture/Base/baseQuery.js';
 import { DictionaryDTO } from 'justshare-shared';
-import CodeDictionary from '../../Architecture/Dictionary/codeDictionary.js';
+import {CodeDictionary} from '../../Architecture/Dictionary/codeDictionary.js';
 
 
 export default class GetDictionariesQuery extends BaseQuery {

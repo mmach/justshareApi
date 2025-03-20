@@ -1,4 +1,4 @@
-import BaseRepository from "../Architecture/baseRepository.js";
+import { BaseRepository } from "../Architecture/Base/baseRepository.js";
 import SequelizeDB from "../Database/models/index.js";
 import { UserDTO } from "justshare-shared";
 
@@ -42,7 +42,7 @@ export default class UserRepository extends BaseRepository {
         {
           model: this.sequelizeDI.UserRoles,
           as: "user_roles",
-         // required: true,
+          // required: true,
           include: [
             {
               model: this.sequelizeDI.RolesProject,
@@ -52,7 +52,7 @@ export default class UserRepository extends BaseRepository {
                 {
                   model: this.sequelizeDI.Roles,
                   as: "role_detail",
-                 // required: true
+                  // required: true
                 }]
             },
 

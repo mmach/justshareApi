@@ -1,16 +1,9 @@
 "use strict";
-import BaseCommand from "./../../Architecture/baseCommand.js";
+import { BaseCommand } from "../../Architecture/Base/baseCommand.js";
 
 import { MailTypesDTO } from "justshare-shared";
-import LogFileInfrastructure from "../../Architecture/Infrastructure/logFileInfrastructure.js";
-import UserService from "../../Services/userService.js";
-import ValidatonInfrastructure from "../../Architecture/Infrastructure/validatonInfrastructure.js";
-import DbTransactionInfrastucture from "../../Architecture/Infrastructure/dbTransactionInfrastucture.js";
-import MailSender from "../../Architecture/mailSender.js";
-import CodeDictionary from "../../Architecture/Dictionary/codeDictionary.js";
-import EMAIL_TEMPLATE from "../../Static/MailsXSLT/index.js"
-import UserValidators from './../../Validators/userValidators.js';
-import { URL } from "url";
+import { DbTransactionInfrastucture } from "../../Architecture/Infrastructure/dbTransactionInfrastucture.js";
+import { LogFileInfrastructure } from "../../Architecture/Infrastructure/logFileInfrastructure.js";
 
 /**
  *
@@ -45,7 +38,6 @@ export default class UpsertMailTypeCommand extends BaseCommand {
     return [
       async () => { await this.checkDTO.bind(this)(this.model) }
     ]
-    //async () => { await UserValidators.checkIfMailExistInDb.bind(this)() }]
   }
 
   async action() {

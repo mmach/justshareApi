@@ -1,7 +1,7 @@
 import { ProjectDTO } from 'justshare-shared'
 import CONFIG from '../../../config.js';
 import ProjectService from '../../../Services/projectService.js';
-import BaseQuery from '../../../Architecture/baseQuery.js';
+import {BaseQuery} from '../../../Architecture/Base/baseQuery.js';
 
 export default class LoginProjectQuery extends BaseQuery {
 

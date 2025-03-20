@@ -1,14 +1,10 @@
 "use strict";
-import BaseCommand from "./../../Architecture/baseCommand.js";
-import LogFileInfrastructure from "../../Architecture/Infrastructure/logFileInfrastructure.js";
-import UserService from "../../Services/userService.js";
-import EMAIL_TEMPLATE from "./../../Static/MailsXSLT/index.js";
-import CONFIG from "../../config.js";
-import MailSender from "../../Architecture/mailSender.js";
-import CodeDictionary from "../../Architecture/Dictionary/codeDictionary.js";
 import { UserLoginInternalDTO } from "justshare-shared";
-import DbTransactionInfrastucture from "../../Architecture/Infrastructure/dbTransactionInfrastucture.js";
 import { URL } from "url";
+import { LogFileInfrastructure } from "../../Architecture/Infrastructure/logFileInfrastructure.js";
+import { MailSender } from "../../Architecture/mailSender.js";
+import UserService from "../../Services/userService.js";
+import { BaseCommand } from "../../Architecture/Base/baseCommand.js";
 
 /**
  *

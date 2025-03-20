@@ -5,19 +5,19 @@
 
 //var basename = path.basename(__filename);
 import Sequelize from "sequelize";
-import configJSON from "./../config/config.json" assert {type: 'json'};
+import { DBConfig } from "./../config/config.js"
 import Users from "./user.js";
-import Category from "./category.js";
-import CategoryHierarchy from "./categoryhierarchy.js";
-import Blob from "./blob.js";
-import BlobMapper from "./blobMapper.js";
+import Category from "./category";
+import CategoryHierarchy from "./categoryHierarchy";
+import Blob from "./blob";
+import BlobMapper from "./blobMapper";
 import Item from "./item.js";
 import ItemCategory from "./itemcategory.js";
 import vUser from "./v_user.js";
 import Country from "./country.js";
 import City from "./city.js";
 import UserAuths from "./userauth.js";
-import CategoryOption from "./categoryOption.js";
+import CategoryOption from "./categoryOption";
 import CategoryOptionsTemplate from "./categoryOptionsTemplate.js";
 import CategoryOptionsTypeTemplate from "./categoryOptionsTypeTemplate.js";
 import CategoryOptionsType from "./categoryOptionsType.js";
@@ -31,10 +31,10 @@ import EsItemSync from './esItemSync.js'
 import Translations from "./translations.js";
 import Language from "./language.js";
 import LanguageProject from "./languageProject.js";
-import Actions from "./actions.js";
-import ActionPrivileges from "./actionPrivileges.js";
-import ActionsProject from "./actionsProject.js";
-import CategoryActions from "./categoryActions.js";
+import Actions from "./actions";
+import ActionPrivileges from "./actionPrivileges";
+import ActionsProject from "./actionsProject";
+import CategoryActions from "./categoryActions";
 import Privileges from "./privileges.js";
 import PrivilegesProject from "./privilegesProject.js";
 import UserTypes from './userTypes.js'
@@ -82,7 +82,7 @@ import CmsPagePrivilegesProjects from "./cmsPagePrivilegesProjects.js";
 
 
 var env = process.env.NODE_ENV || "development";
-var config = configJSON[env];
+var config = DBConfig[env];
 if (config.use_env_variable) {
   var sequelize = new Sequelize(process.env[config.use_env_variable], config);
 } else {
@@ -113,12 +113,12 @@ db.Sequelize = Sequelize;
 
 let models = {
   Users: Users.init(sequelize, Sequelize),
-  Category: Category.init(sequelize, Sequelize),
-  CategoryHierarchy: CategoryHierarchy.init(sequelize, Sequelize),
-  BlobMapper: BlobMapper.init(sequelize, Sequelize),
+  Category: Category.initModel(sequelize, Sequelize),
+  CategoryHierarchy: CategoryHierarchy.initModel(sequelize),
+  BlobMapper: BlobMapper.initModel(sequelize),
   Item: Item.init(sequelize, Sequelize),
   ItemCategory: ItemCategory.init(sequelize, Sequelize),
-  Blob: Blob.init(sequelize, Sequelize),
+  Blob: Blob.initModel(sequelize),
   V_User: vUser.init(sequelize, Sequelize),
   Country: Country.init(sequelize, Sequelize),
   City: City.init(sequelize, Sequelize),
@@ -126,7 +126,7 @@ let models = {
   CategoryOptionsType: CategoryOptionsType.init(sequelize, Sequelize),
   CategoryOptionsTypeTemplate: CategoryOptionsTypeTemplate.init(sequelize, Sequelize),
   CategoryOptionsTemplate: CategoryOptionsTemplate.init(sequelize, Sequelize),
-  CategoryOption: CategoryOption.init(sequelize, Sequelize),
+  CategoryOption: CategoryOption.initModel(sequelize, Sequelize),
   CategoryOptionsLink: CategoryOptionsLink.init(sequelize, Sequelize),
   ItemCategoryOption: ItemCategoryOption.init(sequelize, Sequelize),
   Tag: Tag.init(sequelize, Sequelize),
@@ -138,10 +138,10 @@ let models = {
   Translations: Translations.init(sequelize, Sequelize),
   Language: Language.init(sequelize, Sequelize),
   LanguageProject: LanguageProject.init(sequelize, Sequelize),
-  Actions: Actions.init(sequelize, Sequelize),
-  ActionPrivileges: ActionPrivileges.init(sequelize, Sequelize),
-  ActionsProject: ActionsProject.init(sequelize, Sequelize),
-  CategoryActions: CategoryActions.init(sequelize, Sequelize),
+  Actions: Actions.initModel(sequelize),
+  ActionPrivileges: ActionPrivileges.initModel(sequelize),
+  ActionsProject: ActionsProject.initModel(sequelize),
+  CategoryActions: CategoryActions.initModel(sequelize),
   Privileges: Privileges.init(sequelize, Sequelize),
   PrivilegesProject: PrivilegesProject.init(sequelize, Sequelize),
   Roles: Roles.init(sequelize, Sequelize),
@@ -196,7 +196,6 @@ Object.keys(models).forEach(modelName => {
     models[modelName].hooks(models, sequelize);
   }
 });
-
 let SequelizeDB = { ...models, ...db };
 
 export default SequelizeDB;

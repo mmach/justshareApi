@@ -1,6 +1,6 @@
 "use strict";
 
-import BaseUnitOfWork from "./Architecture/baseUnitOfWork.js";
+import {BaseUnitOfWork} from "./Architecture/Base/baseUnitOfWork.js";
 import ActionPrivilegesRepository from "./Repository/actionPrivilegesRepository.js";
 import ActionProjectRepository from "./Repository/actionProjectRepository.js";
 import ActionRepository from "./Repository/actionRepository.js";

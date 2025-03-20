@@ -1,10 +1,10 @@
 "use strict";
 
-import BaseInfrastracture from './../baseInfrastructure.js';
-import {Enums} from 'justshare-shared'
-import ServerException from '../Exceptions/serverException.js';
+import { ServerException } from '../Exceptions/serverException.js';
+import { Enums } from 'justshare-shared'
+import { BaseInfrastracture } from '../Base/baseInfrastructure.js';
 
-export default class PrivilegesInfrastructure extends BaseInfrastracture {
+export class PrivilegesInfrastructure extends BaseInfrastracture {
     constructor() {
         super();
     };

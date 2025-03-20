@@ -2,11 +2,11 @@
 import axios from 'axios';
 import { BlobBase64DTO, ExternalCredentialsDTO, UserRegisterInternalDTO } from "justshare-shared";
 import {v4} from "uuid";
-import LogFileInfrastructure from "../../Architecture/Infrastructure/logFileInfrastructure.js";
+import {LogFileInfrastructure} from "../../Architecture/Infrastructure/logFileInfrastructure.js";
 import CONFIG from "../../config.js";
-import BlobService from "../../Services/blobService.js";
+import BlobService from "../../Services/Blobs/blobService.js";
 import UserService from "../../Services/userService.js";
-import BaseCommand from "./../../Architecture/baseCommand.js";
+import {BaseCommand} from "../../Architecture/Base/baseCommand.js";
 
 /**
  * 

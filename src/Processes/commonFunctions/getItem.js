@@ -1,7 +1,7 @@
 
 
 
-let getItem = async function (item_id, use_es) {
+export let getItem = async function (item_id, use_es) {
     //  if (!this.process_chain.with_iua_status_change) {
     //     await updateWithoutStatusIUA.bind(this)(this.IUA.id)
     //     return
@@ -24,4 +24,3 @@ let getItem = async function (item_id, use_es) {
     
 }
 
-export { getItem };

@@ -2,7 +2,7 @@
 import { v4 } from "uuid";
 
 
-let updateIUA = async function (user_id, user_src, user_dest, destination_date) {
+export const updateIUA = async function (user_id, user_src, user_dest, destination_date) {
     // if (!this.process_chain.with_iua_status_change) {
     //     await updateWithoutStatusIUA.bind(this)(this.IUA.id)
     //     return

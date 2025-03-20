@@ -3,8 +3,8 @@
 import bcrypt from "bcryptjs";
 import fs from "fs";
 import jwt from "jsonwebtoken";
-import BaseService from "../Architecture/baseService.js";
-import ServerException from "../Architecture/Exceptions/serverException.js";
+import {BaseService} from "../Architecture/Base/baseService";
+import {ServerException} from "../Architecture/Exceptions/serverException.js";
 import CONFIG from "../config.js";
 import UnitOfWork from "../unitOfWork.js";
 

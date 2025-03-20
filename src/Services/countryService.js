@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import BaseService from "../Architecture/baseService.js";
+import {BaseService} from "../Architecture/Base/baseService";
 import UnitOfWork from "../unitOfWork.js";
 
 import CONFIG from "../config.js";

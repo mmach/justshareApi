@@ -1,11 +1,11 @@
 // @ts-nocheck
-import BaseCommand from "../../Architecture/baseCommand.js";
+import {BaseCommand} from "../../Architecture/Base/baseCommand.js";
 import { CategoryDTO } from "justshare-shared";
-import LogFileInfrastructure from "../../Architecture/Infrastructure/logFileInfrastructure.js";
-import CategoryService from "../../Services/categoryService.js";
-import DbTransactionInfrastucture from "../../Architecture/Infrastructure/dbTransactionInfrastucture.js";
-import AuthInfrastucture from "../../Architecture/Infrastructure/authInfrastucture.js";
-import BlobService from "../../Services/blobService.js";
+import {LogFileInfrastructure} from "../../Architecture/Infrastructure/logFileInfrastructure.js";
+import CategoryService from "../../Services/Categories/categoryService.js";
+import {DbTransactionInfrastucture} from "../../Architecture/Infrastructure/dbTransactionInfrastucture.js";
+import {AuthInfrastucture}from "../../Architecture/Infrastructure/authInfrastucture.js";
+import BlobService from "../../Services/Blobs/blobService.js";
 
 "use strict";
 

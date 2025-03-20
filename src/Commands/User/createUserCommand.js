@@ -1,15 +1,17 @@
 "use strict";
-import BaseCommand from "./../../Architecture/baseCommand.js";
+import { BaseCommand } from "../../Architecture/Base/baseCommand.js";
 
 import { UserRegisterInternalDTO, UserRolesDTO } from "justshare-shared";
 import { URL } from "url";
-import {v4} from "uuid";
-import DbTransactionInfrastucture from "../../Architecture/Infrastructure/dbTransactionInfrastucture.js";
-import LogFileInfrastructure from "../../Architecture/Infrastructure/logFileInfrastructure.js";
-import ValidatonInfrastructure from "../../Architecture/Infrastructure/validatonInfrastructure.js";
-import MailSender from "../../Architecture/mailSender.js";
+import { v4 } from "uuid";
+import { DbTransactionInfrastucture } from "../../Architecture/Infrastructure/dbTransactionInfrastucture.js";
+import { LogFileInfrastructure } from "../../Architecture/Infrastructure/logFileInfrastructure.js";
+import { ValidatonInfrastructure } from "../../Architecture/Infrastructure/validatonInfrastructure.js";
+import { MailSender } from "../../Architecture/mailSender.js";
 import UserService from "../../Services/userService.js";
-import UserValidators from './../../Validators/userValidators.js';
+import { UserValidators } from "../../Validators/index.js";
+
+
 
 /**
  *

@@ -2,7 +2,7 @@ import {v4} from "uuid";
 import { LinkItem, GetValueByDim, DimensionsList, StatusesList } from 'justshare-shared'
 import fs from 'fs'
 
-let genInvoice = async function (user_src_id, dest_user_id) {
+export let genInvoice = async function (user_src_id, dest_user_id) {
     let cur = GetValueByDim(DimensionsList.FINAL_PRICE_VALUE, this.itemTransaction, this.context.language).split(' ');
     let statusNew = await this.statusProjectServiceDI.setContext(this.context).getByToken({ name: StatusesList.NEW })
     let user_src = await this.userServiceDI.setContext(this.context).getUserInvoiceData({ user_id: user_src_id });

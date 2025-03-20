@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "npx tsc && node --experimental-specifier-resolution=node  ./dist/index.js",
+    "start": "npx tsc && node --experimental-loader ./loader.js  ./dist/index.js",
     "start_old2": "node --experimental-json-modules ./src/index.js",
     "start_old": "babel-node --presets es2017,stage-2 ./src/index.js ",
     "server": "babel ./src  -d ./.compiled/src --source-maps --copy-files    --exec babel-node --presets es2017,stage-2 ./src/index.js ",

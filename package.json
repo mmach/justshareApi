@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "npx tsc && node --experimental-loader ./loader.js  ./dist/index.js",
+    "start": "npx tsc && node --experimental-loader extensionless  ./dist/index.js",
     "start_old2": "node --experimental-json-modules ./src/index.js",
     "start_old": "babel-node --presets es2017,stage-2 ./src/index.js ",
     "server": "babel ./src  -d ./.compiled/src --source-maps --copy-files    --exec babel-node --presets es2017,stage-2 ./src/index.js ",
@@ -65,6 +65,7 @@
     "d3-array": "^2.3.1",
     "d3-format": "^1.4.1",
     "d3-scale": "^3.1.0",
+    "extensionless": "^1.9.9",
     "find": "^0.3.0",
     "flatted": "^3.2.7",
     "free-translate": "^0.6.1",

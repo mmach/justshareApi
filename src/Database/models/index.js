@@ -18,10 +18,10 @@ import Country from "./country.js";
 import City from "./city.js";
 import UserAuths from "./userauth.js";
 import CategoryOption from "./categoryOption";
-import CategoryOptionsTemplate from "./categoryOptionsTemplate.js";
+import CategoryOptionsTemplate from "./categoryOptionsTemplate";
 import CategoryOptionsTypeTemplate from "./categoryOptionsTypeTemplate.js";
-import CategoryOptionsType from "./categoryOptionsType.js";
-import CategoryOptionsLink from "./categoryOptionsLink.js";
+import CategoryOptionsType from "./categoryOptionsType";
+import CategoryOptionsLink from "./categoryOptionsLink";
 import ItemCategoryOption from "./itemCategoryOption.js";
 import Tag from "./tag.js";
 import ItemTag from "./itemTag.js";
@@ -123,11 +123,11 @@ let models = {
   Country: Country.init(sequelize, Sequelize),
   City: City.init(sequelize, Sequelize),
   UserAuths: UserAuths.init(sequelize, Sequelize),
-  CategoryOptionsType: CategoryOptionsType.init(sequelize, Sequelize),
+  CategoryOptionsType: CategoryOptionsType.initModel(sequelize, Sequelize),
   CategoryOptionsTypeTemplate: CategoryOptionsTypeTemplate.init(sequelize, Sequelize),
-  CategoryOptionsTemplate: CategoryOptionsTemplate.init(sequelize, Sequelize),
+  CategoryOptionsTemplate: CategoryOptionsTemplate.initModel(sequelize, Sequelize),
   CategoryOption: CategoryOption.initModel(sequelize, Sequelize),
-  CategoryOptionsLink: CategoryOptionsLink.init(sequelize, Sequelize),
+  CategoryOptionsLink: CategoryOptionsLink.initModel(sequelize, Sequelize),
   ItemCategoryOption: ItemCategoryOption.init(sequelize, Sequelize),
   Tag: Tag.init(sequelize, Sequelize),
   ItemTag: ItemTag.init(sequelize, Sequelize),

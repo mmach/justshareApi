@@ -1,30 +1,55 @@
-"use strict";
-import { Model } from "sequelize";
+'use strict';
+
+import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
 
 /**
- *
- * @export
- * @class Item
- * @extends Sequelize.Model
+ * Interface for CategoryOptionsLink attributes
  */
-export default class CategoryOptionsLink extends Model {
-  /**
-   *
-   * @static
-   * @param  {any} sequelize
-   * @param  {any} DataTypes
-   * @return {Region|Model}
-   * @memberof CategoryOption
-   */
-  static init(sequelize, DataTypes) {
+export interface CategoryOptionsLinkAttributesDTO {
+  id: string;
+  co_id?: string;
+  category_id?: string;
+  is_require?: boolean;
+  order?: number;
+  is_searchable?: boolean;
+  limit_of?: number;
+  order_search?: number;
+  is_on_pin_map?: boolean;
+  is_on_map?: boolean;
+  is_on_iua?: boolean;
+  is_on_main_page?: boolean;
+  is_on_iua_request?: boolean;
+  is_params?: boolean;
+  is_form_hidden?: boolean;
+  search_label?: string;
+  search_type?: string;
+  show_value?: string;
+  can_above_pin?: boolean;
+  is_visible_view?: boolean;
+  project_id?: string;
+  is_form_rendered?: boolean;
+  search_params?: string;
+  preview_params?: string;
+  create_params?: string;
+}
+
+/**
+ * Interface for CategoryOptionsLink instance
+ */
+export interface CategoryOptionsLinkInstance extends Model<CategoryOptionsLinkAttributesDTO>, CategoryOptionsLinkAttributesDTO {}
+
+/**
+ * CategoryOptionsLink model initialization
+ */
+export default class CategoryOptionsLink extends Model<CategoryOptionsLinkInstance, CategoryOptionsLinkAttributesDTO> {
+  static initModel(sequelize: Sequelize): ModelStatic<CategoryOptionsLink> {
     return super.init(
       {
         id: {
           type: DataTypes.UUID,
           primaryKey: true,
           autoIncrement: false,
-          defaultValue: sequelize.UUIDV4
-
+          defaultValue: DataTypes.UUIDV4
         },
         co_id: {
           type: DataTypes.UUID,
@@ -37,13 +62,16 @@ export default class CategoryOptionsLink extends Model {
         is_require: {
           type: DataTypes.BOOLEAN,
           allowNull: true
-        }, order: {
+        },
+        order: {
           type: DataTypes.INTEGER,
           allowNull: true
-        }, is_searchable: {
+        },
+        is_searchable: {
           type: DataTypes.BOOLEAN,
           allowNull: true
-        }, limit_of: {
+        },
+        limit_of: {
           type: DataTypes.INTEGER,
           allowNull: true
         },
@@ -103,38 +131,44 @@ export default class CategoryOptionsLink extends Model {
           type: DataTypes.UUID,
           allowNull: true
         },
-        is_form_rendered:DataTypes.BOOLEAN,
-        search_params:DataTypes.TEXT,
-        preview_params:DataTypes.TEXT,
-        create_params:DataTypes.TEXT
+        is_form_rendered: {
+          type: DataTypes.BOOLEAN,
+          allowNull: true
+        },
+        search_params: {
+          type: DataTypes.TEXT,
+          allowNull: true
+        },
+        preview_params: {
+          type: DataTypes.TEXT,
+          allowNull: true
+        },
+        create_params: {
+          type: DataTypes.TEXT,
+          allowNull: true
+        }
       },
-      { sequelize ,
+      { 
+        sequelize,
         tableName: 'CategoryOptionsLinks'
       }
     );
   }
 
-  static hooks(models, sequelize) {
-    CategoryOptionsLink.beforeDestroy(async (item, options) => {
-
-      console.log('beforeDestroy')
+  static hooks(models: any, sequelize: Sequelize) {
+    CategoryOptionsLink.beforeDestroy(async (item:any, options) => {
+      console.log('beforeDestroy');
 
       await models.ItemCategoryOption.destroy({
         where: { col_id: item.id },
         transaction: options.transaction,
         individualHooks: true,
-      })
-
-
-    })
-  
-
-
+      });
+    });
   }
-  static associate(models) {
+
+  static associate(models: any) {
     CategoryOptionsLink.belongsTo(models.V_Category, { as: "category", targetKey: 'id', foreignKey: "category_id" });
     CategoryOptionsLink.belongsTo(models.CategoryOption, { as: "catOption", targetKey: 'id', foreignKey: "co_id" });
-
-
   }
 }

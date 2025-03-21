@@ -11,7 +11,7 @@ import Category from "./category";
 import CategoryHierarchy from "./categoryHierarchy";
 import Blob from "./blob";
 import BlobMapper from "./blobMapper";
-import Item from "./item.js";
+import Item from "./item";
 import ItemCategory from "./itemcategory.js";
 import vUser from "./v_user.js";
 import Country from "./country";
@@ -63,9 +63,9 @@ import StatusActions from "./statusActions.js";
 import StatusProjects from "./statusProjects.js";
 import ItemCategoryOptionTerm from "./itemCategoryOptionTerm.js";
 import Comment from "./comments";
-import Invoice from './invoices.js'
-import InvoiceUser from "./invoicesUsers.js";
-import InvoiceItem from "./invoicesItems.js";
+import Invoice from './invoices'
+import InvoiceUser from "./invoicesUsers";
+import InvoiceItem from "./invoicesItems";
 import UserInvoiceValue from "./userInvoicesValue.js";
 import ProcessChain from "./processChain.js";
 import Process from "./process.js";
@@ -116,7 +116,7 @@ let models = {
   Category: Category.initModel(sequelize, Sequelize),
   CategoryHierarchy: CategoryHierarchy.initModel(sequelize),
   BlobMapper: BlobMapper.initModel(sequelize),
-  Item: Item.init(sequelize, Sequelize),
+  Item: Item.initModel(sequelize),
   ItemCategory: ItemCategory.init(sequelize, Sequelize),
   Blob: Blob.initModel(sequelize),
   V_User: vUser.init(sequelize, Sequelize),
@@ -169,9 +169,9 @@ let models = {
   StatusProjects: StatusProjects.init(sequelize, Sequelize),
   ItemCategoryOptionTerm: ItemCategoryOptionTerm.init(sequelize, Sequelize),
   Comment: Comment.initModel(sequelize),
-  Invoice: Invoice.init(sequelize, Sequelize),
-  InvoiceUser: InvoiceUser.init(sequelize, Sequelize),
-  InvoiceItem: InvoiceItem.init(sequelize, Sequelize),
+  Invoice: Invoice.initModel(sequelize),
+  InvoiceUser: InvoiceUser.initModel(sequelize),
+  InvoiceItem: InvoiceItem.initModel(sequelize),
   UserInvoiceValue: UserInvoiceValue.init(sequelize, Sequelize),
   ProcessChain: ProcessChain.init(sequelize, Sequelize),
   Process: Process.init(sequelize, Sequelize),

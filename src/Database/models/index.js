@@ -29,8 +29,8 @@ import Project from "./project.js";
 import Config from './config';
 import EsItemSync from './esItemSync'
 import Translations from "./translations.js";
-import Language from "./language.js";
-import LanguageProject from "./languageProject.js";
+import Language from "./language";
+import LanguageProject from "./languageProject";
 import Actions from "./actions";
 import ActionPrivileges from "./actionPrivileges";
 import ActionsProject from "./actionsProject";
@@ -45,14 +45,14 @@ import UserTypeRoles from "./userTypeRoles.js";
 import Dimensions from "./dimensions";
 import DimensionsProject from './dimensionsProject'
 import vProject from "./v_project.js";
-import MailParts from "./mailParts.js";
-import MailSenders from "./mailSenders.js";
+import MailParts from "./mailParts";
+import MailSenders from "./mailSenders";
 import MailTypes from "./mailTypes.js";
 import MailTypesProjects from "./mailTypesProject.js";
 import Seos from "./seos.js";
 import V_Category from "./v_category.js";
-import ItemUserAction from "./itemUserAction.js";
-import ItemTransactionCategoryOptions from "./itemTransactionCategoryOptions.js";
+import ItemUserAction from "./itemUserAction";
+import ItemTransactionCategoryOptions from "./itemTransactionCategoryOptions";
 import ItemTransaction from './itemTransaction'
 import Conversation from "./conversation";
 import UserConversation from "./userconversation.js";
@@ -136,8 +136,8 @@ let models = {
   UserTypes: UserTypes.init(sequelize, Sequelize),
   EsItemSync: EsItemSync.initModel(sequelize),
   Translations: Translations.init(sequelize, Sequelize),
-  Language: Language.init(sequelize, Sequelize),
-  LanguageProject: LanguageProject.init(sequelize, Sequelize),
+  Language: Language.initModel(sequelize),
+  LanguageProject: LanguageProject.initModel(sequelize),
   Actions: Actions.initModel(sequelize),
   ActionPrivileges: ActionPrivileges.initModel(sequelize),
   ActionsProject: ActionsProject.initModel(sequelize),
@@ -151,14 +151,14 @@ let models = {
   DimensionsProject: DimensionsProject.initModel(sequelize),
   Dimensions: Dimensions.initModel(sequelize),
   V_Project: vProject.init(sequelize, Sequelize),
-  MailParts: MailParts.init(sequelize, Sequelize),
-  MailSenders: MailSenders.init(sequelize, Sequelize),
+  MailParts: MailParts.initModel(sequelize),
+  MailSenders: MailSenders.initModel(sequelize),
   MailTypes: MailTypes.init(sequelize, Sequelize),
   MailTypesProjects: MailTypesProjects.init(sequelize, Sequelize),
   Seos: Seos.init(sequelize, Sequelize),
   V_Category: V_Category.init(sequelize, Sequelize),
-  ItemUserAction: ItemUserAction.init(sequelize, Sequelize),
-  ItemTransactionCategoryOptions: ItemTransactionCategoryOptions.init(sequelize, Sequelize),
+  ItemUserAction: ItemUserAction.initModel(sequelize),
+  ItemTransactionCategoryOptions: ItemTransactionCategoryOptions.initModel(sequelize),
   ItemTransaction: ItemTransaction.initModel(sequelize),
   Conversation: Conversation.initModel(sequelize, Sequelize),
   UserConversation: UserConversation.init(sequelize, Sequelize),

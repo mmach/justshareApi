@@ -14,7 +14,7 @@ import BlobMapper from "./blobMapper";
 import Item from "./item.js";
 import ItemCategory from "./itemcategory.js";
 import vUser from "./v_user.js";
-import Country from "./country.js";
+import Country from "./country";
 import City from "./city";
 import UserAuths from "./userauth.js";
 import CategoryOption from "./categoryOption";
@@ -27,7 +27,7 @@ import Tag from "./tag.js";
 import ItemTag from "./itemTag.js";
 import Project from "./project.js";
 import Config from './config';
-import EsItemSync from './esItemSync.js'
+import EsItemSync from './esItemSync'
 import Translations from "./translations.js";
 import Language from "./language.js";
 import LanguageProject from "./languageProject.js";
@@ -42,8 +42,8 @@ import Roles from "./roles.js";
 import RolesProject from "./rolesProject.js";
 import UserRoles from "./userRoles.js";
 import UserTypeRoles from "./userTypeRoles.js";
-import Dimensions from "./dimensions.js";
-import DimensionsProject from './dimensionsProject.js'
+import Dimensions from "./dimensions";
+import DimensionsProject from './dimensionsProject'
 import vProject from "./v_project.js";
 import MailParts from "./mailParts.js";
 import MailSenders from "./mailSenders.js";
@@ -120,7 +120,7 @@ let models = {
   ItemCategory: ItemCategory.init(sequelize, Sequelize),
   Blob: Blob.initModel(sequelize),
   V_User: vUser.init(sequelize, Sequelize),
-  Country: Country.init(sequelize, Sequelize),
+  Country: Country.initModel(sequelize),
   City: City.initModel(sequelize),
   UserAuths: UserAuths.init(sequelize, Sequelize),
   CategoryOptionsType: CategoryOptionsType.initModel(sequelize),
@@ -134,7 +134,7 @@ let models = {
   Project: Project.init(sequelize, Sequelize),
   Config: Config.initModel(sequelize),
   UserTypes: UserTypes.init(sequelize, Sequelize),
-  EsItemSync: EsItemSync.init(sequelize, Sequelize),
+  EsItemSync: EsItemSync.initModel(sequelize),
   Translations: Translations.init(sequelize, Sequelize),
   Language: Language.init(sequelize, Sequelize),
   LanguageProject: LanguageProject.init(sequelize, Sequelize),
@@ -148,8 +148,8 @@ let models = {
   RolesProject: RolesProject.init(sequelize, Sequelize),
   UserRoles: UserRoles.init(sequelize, Sequelize),
   UserTypeRoles: UserTypeRoles.init(sequelize, Sequelize),
-  DimensionsProject: DimensionsProject.init(sequelize, Sequelize),
-  Dimensions: Dimensions.init(sequelize, Sequelize),
+  DimensionsProject: DimensionsProject.initModel(sequelize),
+  Dimensions: Dimensions.initModel(sequelize),
   V_Project: vProject.init(sequelize, Sequelize),
   MailParts: MailParts.init(sequelize, Sequelize),
   MailSenders: MailSenders.init(sequelize, Sequelize),

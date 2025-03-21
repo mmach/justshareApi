@@ -1,4 +1,4 @@
-import {BaseRepository} from "../Architecture/Base/baseRepository.js";
+import { BaseRepository } from "../Architecture/Base/baseRepository.js";
 import SequelizeDB from "../Database/models/index.js";
 
 
@@ -18,6 +18,4 @@ export default class ConversationMessagesRepository extends BaseRepository {
     super(sequelizeDI.ConversationMessages);
     this.sequelizeDI = sequelizeDI;
   }
-
-
 }

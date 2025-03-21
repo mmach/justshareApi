@@ -56,8 +56,8 @@ import ItemTransactionCategoryOptions from "./itemTransactionCategoryOptions.js"
 import ItemTransaction from './itemTransaction.js'
 import Conversation from "./conversation";
 import UserConversation from "./userconversation.js";
-import ConversationMessages from "./conversationmessages.js";
-import ConversationMessageMembers from "./conversationmessagesmembers.js";
+import ConversationMessages from "./conversationMessages";
+import ConversationMessageMembers from "./conversationMessagesMembers";
 import Status from "./status.js";
 import StatusActions from "./statusActions.js";
 import StatusProjects from "./statusProjects.js";
@@ -162,8 +162,8 @@ let models = {
   ItemTransaction: ItemTransaction.init(sequelize, Sequelize),
   Conversation: Conversation.initModel(sequelize, Sequelize),
   UserConversation: UserConversation.init(sequelize, Sequelize),
-  ConversationMessages: ConversationMessages.init(sequelize, Sequelize),
-  ConversationMessageMembers: ConversationMessageMembers.init(sequelize, Sequelize),
+  ConversationMessages: ConversationMessages.initModel(sequelize),
+  ConversationMessageMembers: ConversationMessageMembers.initModel(sequelize),
   Status: Status.init(sequelize, Sequelize),
   StatusActions: StatusActions.init(sequelize, Sequelize),
   StatusProjects: StatusProjects.init(sequelize, Sequelize),

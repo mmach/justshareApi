@@ -1,32 +1,45 @@
-"use strict";
-import { Model } from "sequelize";
 
-
+import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
 
 /**
- *
- * @export
- * @class Item
- * @extends Sequelize.Model
+ * Interface for ItemTransaction attributes
  */
-export default class ItemTransaction extends Model {
-  /**
-   *
-   * @static
-   * @param  {any} sequelize
-   * @param  {any} DataTypes
-   * @return {Item|Model}
-   * @memberof Item
-   */
-  static init(sequelize, DataTypes) {
+export interface ItemTransactionDTO {
+  id: string;
+  name?: string;
+  description?: string;
+  user_id?: string;
+  blob_id?: string;
+  category_id?: string;
+  iua_id?: string;
+  parent_iua_id?: string;
+  item_id?: string;
+  longitude?: number;
+  latitude?: number;
+  category_type?: number;
+  expired_date?: Date;
+  status?: number;
+  project_id?: string;
+  external_id?: string;
+}
+
+/**
+ * Interface for ItemTransaction instance
+ */
+export interface ItemTransactionInstance extends Model<ItemTransactionDTO>, ItemTransactionDTO {}
+
+/**
+ * ItemTransaction model initialization
+ */
+export default class ItemTransaction extends Model<ItemTransactionInstance, ItemTransactionDTO> {
+  static initModel(sequelize: Sequelize): ModelStatic<ItemTransaction> {
     return super.init(
       {
         id: {
           type: DataTypes.UUID,
           primaryKey: true,
           autoIncrement: false,
-          defaultValue: sequelize.UUIDV4
-
+          defaultValue: DataTypes.UUIDV4
         },
         name: {
           type: DataTypes.STRING,
@@ -60,30 +73,47 @@ export default class ItemTransaction extends Model {
           type: DataTypes.UUID,
           allowNull: false
         },
-        longitude: DataTypes.FLOAT,
-        latitude: DataTypes.FLOAT,
-        category_type: DataTypes.INTEGER,
-        expired_date: DataTypes.DATEONLY,
-        status: DataTypes.INTEGER,
+        longitude: {
+          type: DataTypes.FLOAT,
+          allowNull: true
+        },
+        latitude: {
+          type: DataTypes.FLOAT,
+          allowNull: true
+        },
+        category_type: {
+          type: DataTypes.INTEGER,
+          allowNull: true
+        },
+        expired_date: {
+          type: DataTypes.DATEONLY,
+          allowNull: true
+        },
+        status: {
+          type: DataTypes.INTEGER,
+          allowNull: true
+        },
         project_id: {
           type: DataTypes.UUID,
           allowNull: false
         },
-        external_id: DataTypes.STRING,
+        external_id: {
+          type: DataTypes.STRING,
+          allowNull: true
+        }
       },
-      {
+      { 
         sequelize,
         tableName: 'ItemTransactions'
       }
     );
   }
-  static hooks(models) {
 
-
-
+  static hooks(models: any) {
+    // Define hooks here
   }
-  static associate(models) {
 
+  static associate(models: any) {
     ItemTransaction.belongsTo(models.Category, {
       as: "category",
       targetKey: "id",
@@ -104,7 +134,6 @@ export default class ItemTransaction extends Model {
       targetKey: "id",
       foreignKey: "item_id"
     });
-   
     ItemTransaction.belongsTo(models.V_User, {
       as: "user",
       targetKey: "id",
@@ -112,10 +141,8 @@ export default class ItemTransaction extends Model {
     });
     ItemTransaction.hasMany(models.ItemTransactionCategoryOptions, {
       as: "itemCategoryOption",
-      targetKey: "id",
       foreignKey: "itemTransaction_id"
     });
-
     ItemTransaction.belongsToMany(models.Tag, {
       through: { model: models.ItemTag },
       as: 'tags',

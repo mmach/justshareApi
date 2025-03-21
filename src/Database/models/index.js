@@ -12,7 +12,7 @@ import CategoryHierarchy from "./categoryHierarchy";
 import Blob from "./blob";
 import BlobMapper from "./blobMapper";
 import Item from "./item";
-import ItemCategory from "./itemcategory.js";
+import ItemCategory from "./itemCategory";
 import vUser from "./v_user.js";
 import Country from "./country";
 import City from "./city";
@@ -22,9 +22,9 @@ import CategoryOptionsTemplate from "./categoryOptionsTemplate";
 import CategoryOptionsTypeTemplate from "./categoryOptionsTypeTemplate";
 import CategoryOptionsType from "./categoryOptionsType";
 import CategoryOptionsLink from "./categoryOptionsLink";
-import ItemCategoryOption from "./itemCategoryOption.js";
+import ItemCategoryOption from "./itemCategoryOption";
 import Tag from "./tag.js";
-import ItemTag from "./itemTag.js";
+import ItemTag from "./itemTag";
 import Project from "./project.js";
 import Config from './config';
 import EsItemSync from './esItemSync'
@@ -53,7 +53,7 @@ import Seos from "./seos.js";
 import V_Category from "./v_category.js";
 import ItemUserAction from "./itemUserAction.js";
 import ItemTransactionCategoryOptions from "./itemTransactionCategoryOptions.js";
-import ItemTransaction from './itemTransaction.js'
+import ItemTransaction from './itemTransaction'
 import Conversation from "./conversation";
 import UserConversation from "./userconversation.js";
 import ConversationMessages from "./conversationMessages";
@@ -61,7 +61,7 @@ import ConversationMessageMembers from "./conversationMessagesMembers";
 import Status from "./status.js";
 import StatusActions from "./statusActions.js";
 import StatusProjects from "./statusProjects.js";
-import ItemCategoryOptionTerm from "./itemCategoryOptionTerm.js";
+import ItemCategoryOptionTerm from "./itemCategoryOptionTerm";
 import Comment from "./comments";
 import Invoice from './invoices'
 import InvoiceUser from "./invoicesUsers";
@@ -70,7 +70,7 @@ import UserInvoiceValue from "./userInvoicesValue.js";
 import ProcessChain from "./processChain.js";
 import Process from "./process.js";
 import ProcessChainState from "./processChainState.js";
-import ItemProcessState from "./itemProcessState.js";
+import ItemProcessState from "./itemProcessState";
 import ProcessChainPrivilege from "./processChainPrivilege.js";
 import ProcessChainActionInjection from "./processChainActionInjection.js";
 import CmsElementsProject from "./cmsElementsProjects";
@@ -117,7 +117,7 @@ let models = {
   CategoryHierarchy: CategoryHierarchy.initModel(sequelize),
   BlobMapper: BlobMapper.initModel(sequelize),
   Item: Item.initModel(sequelize),
-  ItemCategory: ItemCategory.init(sequelize, Sequelize),
+  ItemCategory: ItemCategory.initModel(sequelize),
   Blob: Blob.initModel(sequelize),
   V_User: vUser.init(sequelize, Sequelize),
   Country: Country.initModel(sequelize),
@@ -128,9 +128,9 @@ let models = {
   CategoryOptionsTemplate: CategoryOptionsTemplate.initModel(sequelize),
   CategoryOption: CategoryOption.initModel(sequelize),
   CategoryOptionsLink: CategoryOptionsLink.initModel(sequelize),
-  ItemCategoryOption: ItemCategoryOption.init(sequelize, Sequelize),
+  ItemCategoryOption: ItemCategoryOption.initModel(sequelize),
   Tag: Tag.init(sequelize, Sequelize),
-  ItemTag: ItemTag.init(sequelize, Sequelize),
+  ItemTag: ItemTag.initModel(sequelize),
   Project: Project.init(sequelize, Sequelize),
   Config: Config.initModel(sequelize),
   UserTypes: UserTypes.init(sequelize, Sequelize),
@@ -159,7 +159,7 @@ let models = {
   V_Category: V_Category.init(sequelize, Sequelize),
   ItemUserAction: ItemUserAction.init(sequelize, Sequelize),
   ItemTransactionCategoryOptions: ItemTransactionCategoryOptions.init(sequelize, Sequelize),
-  ItemTransaction: ItemTransaction.init(sequelize, Sequelize),
+  ItemTransaction: ItemTransaction.initModel(sequelize),
   Conversation: Conversation.initModel(sequelize, Sequelize),
   UserConversation: UserConversation.init(sequelize, Sequelize),
   ConversationMessages: ConversationMessages.initModel(sequelize),
@@ -167,7 +167,7 @@ let models = {
   Status: Status.init(sequelize, Sequelize),
   StatusActions: StatusActions.init(sequelize, Sequelize),
   StatusProjects: StatusProjects.init(sequelize, Sequelize),
-  ItemCategoryOptionTerm: ItemCategoryOptionTerm.init(sequelize, Sequelize),
+  ItemCategoryOptionTerm: ItemCategoryOptionTerm.initModel(sequelize),
   Comment: Comment.initModel(sequelize),
   Invoice: Invoice.initModel(sequelize),
   InvoiceUser: InvoiceUser.initModel(sequelize),
@@ -176,7 +176,7 @@ let models = {
   ProcessChain: ProcessChain.init(sequelize, Sequelize),
   Process: Process.init(sequelize, Sequelize),
   ProcessChainState: ProcessChainState.init(sequelize, Sequelize),
-  ItemProcessState: ItemProcessState.init(sequelize, Sequelize),
+  ItemProcessState: ItemProcessState.initModel(sequelize),
   ProcessChainActionInjection: ProcessChainActionInjection.init(sequelize, Sequelize),
   ProcessChainPrivilege: ProcessChainPrivilege.init(sequelize, Sequelize),
   CmsElementsProject: CmsElementsProject.initModel(sequelize),

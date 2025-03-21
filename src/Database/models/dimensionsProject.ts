@@ -3,29 +3,25 @@
 import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
 
 /**
- * Interface for Dimensions attributes
+ * Interface for DimensionsProject attributes
  */
-export interface DimensionsDTO {
+export interface DimensionsProjectDTO {
   id: string;
-  name?: string;
-  uniq_name?: string;
-  description?: string;
-  co_type_id?: string;
-  cott_id?: string;
-  as_cat_ref?: boolean;
+  dimension_id?: string;
   project_id?: string;
+  translation_id?: string;
 }
 
 /**
- * Interface for Dimensions instance
+ * Interface for DimensionsProject instance
  */
-export interface DimensionsInstance extends Model<DimensionsDTO>, DimensionsDTO {}
+export interface DimensionsProjectInstance extends Model<DimensionsProjectDTO>, DimensionsProjectDTO {}
 
 /**
- * Dimensions model initialization
+ * DimensionsProject model initialization
  */
-export default class Dimensions extends Model<DimensionsInstance, DimensionsDTO> {
-  static initModel(sequelize: Sequelize): ModelStatic<Dimensions> {
+export default class DimensionsProject extends Model<DimensionsProjectInstance, DimensionsProjectDTO> {
+  static initModel(sequelize: Sequelize): ModelStatic<DimensionsProject> {
     return super.init(
       {
         id: {
@@ -34,53 +30,38 @@ export default class Dimensions extends Model<DimensionsInstance, DimensionsDTO>
           autoIncrement: false,
           defaultValue: DataTypes.UUIDV4
         },
-        name: {
+        dimension_id: {
           type: DataTypes.STRING,
-          allowNull: true
-        },
-        uniq_name: {
-          type: DataTypes.STRING,
-          allowNull: true
-        },
-        description: {
-          type: DataTypes.STRING,
-          allowNull: true
-        },
-        co_type_id: {
-          type: DataTypes.UUID,
-          allowNull: true
-        },
-        cott_id: {
-          type: DataTypes.UUID,
-          allowNull: true
-        },
-        as_cat_ref: {
-          type: DataTypes.BOOLEAN,
           allowNull: true
         },
         project_id: {
+          type: DataTypes.BOOLEAN,
+          allowNull: true
+        },
+        translation_id: {
           type: DataTypes.STRING,
           allowNull: true
         }
       },
       { 
         sequelize,
-        tableName: 'Dimensions'
+        tableName: 'DimensionsProjects'
       }
     );
   }
 
+  static associate(models: any) {
+    DimensionsProject.belongsTo(models.Dimensions, { as: "dimension_details", targetKey: 'id', foreignKey: "dimension_id" });
+    DimensionsProject.belongsTo(models.Translations, { as: "translation", targetKey: 'id', foreignKey: "translation_id" });
+  }
+
   static hooks(models: any, sequelize: Sequelize) {
-    Dimensions.beforeDestroy(async (item:any, options) => {
-      await models.DimensionsProject.destroy({
-        where: { dimension_id: item.id },
+    DimensionsProject.afterDestroy(async (item:any, options) => {
+      await models.Translations.destroy({
+        where: { id: item.translation_id },
         transaction: options.transaction,
         individualHooks: true
       });
     });
-  }
-
-  static associate(models: any) {
-    // Define associations here
   }
 }

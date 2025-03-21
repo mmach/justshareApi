@@ -113,7 +113,7 @@ db.Sequelize = Sequelize;
 
 let models = {
   Users: Users.init(sequelize, Sequelize),
-  Category: Category.initModel(sequelize, Sequelize),
+  Category: Category.initModel(sequelize),
   CategoryHierarchy: CategoryHierarchy.initModel(sequelize),
   BlobMapper: BlobMapper.initModel(sequelize),
   Item: Item.initModel(sequelize),
@@ -160,7 +160,7 @@ let models = {
   ItemUserAction: ItemUserAction.initModel(sequelize),
   ItemTransactionCategoryOptions: ItemTransactionCategoryOptions.initModel(sequelize),
   ItemTransaction: ItemTransaction.initModel(sequelize),
-  Conversation: Conversation.initModel(sequelize, Sequelize),
+  Conversation: Conversation.initModel(sequelize),
   UserConversation: UserConversation.init(sequelize, Sequelize),
   ConversationMessages: ConversationMessages.initModel(sequelize),
   ConversationMessageMembers: ConversationMessageMembers.initModel(sequelize),

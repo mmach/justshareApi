@@ -1,4 +1,3 @@
-import { Model } from "sequelize";
 
 export interface CategoryOptionsTemplateDTO {
   id: string;

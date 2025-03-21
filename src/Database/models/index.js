@@ -15,11 +15,11 @@ import Item from "./item.js";
 import ItemCategory from "./itemcategory.js";
 import vUser from "./v_user.js";
 import Country from "./country.js";
-import City from "./city.js";
+import City from "./city";
 import UserAuths from "./userauth.js";
 import CategoryOption from "./categoryOption";
 import CategoryOptionsTemplate from "./categoryOptionsTemplate";
-import CategoryOptionsTypeTemplate from "./categoryOptionsTypeTemplate.js";
+import CategoryOptionsTypeTemplate from "./categoryOptionsTypeTemplate";
 import CategoryOptionsType from "./categoryOptionsType";
 import CategoryOptionsLink from "./categoryOptionsLink";
 import ItemCategoryOption from "./itemCategoryOption.js";
@@ -73,12 +73,12 @@ import ProcessChainState from "./processChainState.js";
 import ItemProcessState from "./itemProcessState.js";
 import ProcessChainPrivilege from "./processChainPrivilege.js";
 import ProcessChainActionInjection from "./processChainActionInjection.js";
-import CmsElementsProject from "./cmsElementsProjects.js";
-import CmsMenuItemsPrivilegesProjects from "./cmsMenuItemsPrivilegesProjects.js";
-import CmsMenuItemsProjects from "./cmsMenuItemsProjects.js";
-import CmsMenuProjects from "./cmsMenuProjects.js";
-import CmsPageProjects from "./cmsPagesProjects.js";
-import CmsPagePrivilegesProjects from "./cmsPagePrivilegesProjects.js";
+import CmsElementsProject from "./cmsElementsProjects";
+import CmsMenuItemsPrivilegesProjects from "./cmsMenuItemsPrivilegesProjects";
+import CmsMenuItemsProjects from "./cmsMenuItemsProjects";
+import CmsMenuProjects from "./cmsMenuProjects";
+import CmsPageProjects from "./cmsPagesProjects";
+import CmsPagePrivilegesProjects from "./cmsPagePrivilegesProjects";
 
 
 var env = process.env.NODE_ENV || "development";
@@ -121,13 +121,13 @@ let models = {
   Blob: Blob.initModel(sequelize),
   V_User: vUser.init(sequelize, Sequelize),
   Country: Country.init(sequelize, Sequelize),
-  City: City.init(sequelize, Sequelize),
+  City: City.initModel(sequelize),
   UserAuths: UserAuths.init(sequelize, Sequelize),
-  CategoryOptionsType: CategoryOptionsType.initModel(sequelize, Sequelize),
-  CategoryOptionsTypeTemplate: CategoryOptionsTypeTemplate.init(sequelize, Sequelize),
-  CategoryOptionsTemplate: CategoryOptionsTemplate.initModel(sequelize, Sequelize),
-  CategoryOption: CategoryOption.initModel(sequelize, Sequelize),
-  CategoryOptionsLink: CategoryOptionsLink.initModel(sequelize, Sequelize),
+  CategoryOptionsType: CategoryOptionsType.initModel(sequelize),
+  CategoryOptionsTypeTemplate: CategoryOptionsTypeTemplate.initModel(sequelize),
+  CategoryOptionsTemplate: CategoryOptionsTemplate.initModel(sequelize),
+  CategoryOption: CategoryOption.initModel(sequelize),
+  CategoryOptionsLink: CategoryOptionsLink.initModel(sequelize),
   ItemCategoryOption: ItemCategoryOption.init(sequelize, Sequelize),
   Tag: Tag.init(sequelize, Sequelize),
   ItemTag: ItemTag.init(sequelize, Sequelize),
@@ -179,12 +179,12 @@ let models = {
   ItemProcessState: ItemProcessState.init(sequelize, Sequelize),
   ProcessChainActionInjection: ProcessChainActionInjection.init(sequelize, Sequelize),
   ProcessChainPrivilege: ProcessChainPrivilege.init(sequelize, Sequelize),
-  CmsElementsProject: CmsElementsProject.init(sequelize, Sequelize),
-  CmsMenuItemsPrivilegesProjects: CmsMenuItemsPrivilegesProjects.init(sequelize, Sequelize),
-  CmsMenuItemsProjects: CmsMenuItemsProjects.init(sequelize, Sequelize),
-  CmsMenuProjects: CmsMenuProjects.init(sequelize, Sequelize),
-  CmsPageProjects: CmsPageProjects.init(sequelize, Sequelize),
-  CmsPagePrivilegesProjects: CmsPagePrivilegesProjects.init(sequelize, Sequelize)
+  CmsElementsProject: CmsElementsProject.initModel(sequelize),
+  CmsMenuItemsPrivilegesProjects: CmsMenuItemsPrivilegesProjects.initModel(sequelize),
+  CmsMenuItemsProjects: CmsMenuItemsProjects.initModel(sequelize),
+  CmsMenuProjects: CmsMenuProjects.initModel(sequelize),
+  CmsPageProjects: CmsPageProjects.initModel(sequelize),
+  CmsPagePrivilegesProjects: CmsPagePrivilegesProjects.initModel(sequelize)
 };
 
 

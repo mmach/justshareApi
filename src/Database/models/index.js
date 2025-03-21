@@ -26,7 +26,7 @@ import ItemCategoryOption from "./itemCategoryOption.js";
 import Tag from "./tag.js";
 import ItemTag from "./itemTag.js";
 import Project from "./project.js";
-import Config from './config.js';
+import Config from './config';
 import EsItemSync from './esItemSync.js'
 import Translations from "./translations.js";
 import Language from "./language.js";
@@ -54,7 +54,7 @@ import V_Category from "./v_category.js";
 import ItemUserAction from "./itemUserAction.js";
 import ItemTransactionCategoryOptions from "./itemTransactionCategoryOptions.js";
 import ItemTransaction from './itemTransaction.js'
-import Conversation from "./conversation.js";
+import Conversation from "./conversation";
 import UserConversation from "./userconversation.js";
 import ConversationMessages from "./conversationmessages.js";
 import ConversationMessageMembers from "./conversationmessagesmembers.js";
@@ -62,7 +62,7 @@ import Status from "./status.js";
 import StatusActions from "./statusActions.js";
 import StatusProjects from "./statusProjects.js";
 import ItemCategoryOptionTerm from "./itemCategoryOptionTerm.js";
-import Comment from "./comments.js";
+import Comment from "./comments";
 import Invoice from './invoices.js'
 import InvoiceUser from "./invoicesUsers.js";
 import InvoiceItem from "./invoicesItems.js";
@@ -132,7 +132,7 @@ let models = {
   Tag: Tag.init(sequelize, Sequelize),
   ItemTag: ItemTag.init(sequelize, Sequelize),
   Project: Project.init(sequelize, Sequelize),
-  Config: Config.init(sequelize, Sequelize),
+  Config: Config.initModel(sequelize),
   UserTypes: UserTypes.init(sequelize, Sequelize),
   EsItemSync: EsItemSync.init(sequelize, Sequelize),
   Translations: Translations.init(sequelize, Sequelize),
@@ -160,7 +160,7 @@ let models = {
   ItemUserAction: ItemUserAction.init(sequelize, Sequelize),
   ItemTransactionCategoryOptions: ItemTransactionCategoryOptions.init(sequelize, Sequelize),
   ItemTransaction: ItemTransaction.init(sequelize, Sequelize),
-  Conversation: Conversation.init(sequelize, Sequelize),
+  Conversation: Conversation.initModel(sequelize, Sequelize),
   UserConversation: UserConversation.init(sequelize, Sequelize),
   ConversationMessages: ConversationMessages.init(sequelize, Sequelize),
   ConversationMessageMembers: ConversationMessageMembers.init(sequelize, Sequelize),
@@ -168,7 +168,7 @@ let models = {
   StatusActions: StatusActions.init(sequelize, Sequelize),
   StatusProjects: StatusProjects.init(sequelize, Sequelize),
   ItemCategoryOptionTerm: ItemCategoryOptionTerm.init(sequelize, Sequelize),
-  Comment: Comment.init(sequelize, Sequelize),
+  Comment: Comment.initModel(sequelize),
   Invoice: Invoice.init(sequelize, Sequelize),
   InvoiceUser: InvoiceUser.init(sequelize, Sequelize),
   InvoiceItem: InvoiceItem.init(sequelize, Sequelize),
@@ -186,7 +186,6 @@ let models = {
   CmsPageProjects: CmsPageProjects.initModel(sequelize),
   CmsPagePrivilegesProjects: CmsPagePrivilegesProjects.initModel(sequelize)
 };
-
 
 Object.keys(models).forEach(modelName => {
   if (models[modelName].associate) {

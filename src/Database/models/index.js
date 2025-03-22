@@ -6,29 +6,29 @@
 //var basename = path.basename(__filename);
 import Sequelize from "sequelize";
 import { DBConfig } from "./../config/config.js"
-import Users from "./user.js";
+import Users from "./user";
 import Category from "./category";
 import CategoryHierarchy from "./categoryHierarchy";
 import Blob from "./blob";
 import BlobMapper from "./blobMapper";
 import Item from "./item";
 import ItemCategory from "./itemCategory";
-import vUser from "./v_user.js";
+import vUser from "./v_user";
 import Country from "./country";
 import City from "./city";
-import UserAuths from "./userauth.js";
+import UserAuths from "./userauth";
 import CategoryOption from "./categoryOption";
 import CategoryOptionsTemplate from "./categoryOptionsTemplate";
 import CategoryOptionsTypeTemplate from "./categoryOptionsTypeTemplate";
 import CategoryOptionsType from "./categoryOptionsType";
 import CategoryOptionsLink from "./categoryOptionsLink";
 import ItemCategoryOption from "./itemCategoryOption";
-import Tag from "./tag.js";
+import Tag from "./tag";
 import ItemTag from "./itemTag";
 import Project from "./project";
 import Config from './config';
 import EsItemSync from './esItemSync'
-import Translations from "./translations.js";
+import Translations from "./translations";
 import Language from "./language";
 import LanguageProject from "./languageProject";
 import Actions from "./actions";
@@ -37,25 +37,25 @@ import ActionsProject from "./actionsProject";
 import CategoryActions from "./categoryActions";
 import Privileges from "./privileges";
 import PrivilegesProject from "./privilegesProject";
-import UserTypes from './userTypes.js'
+import UserTypes from './userTypes'
 import Roles from "./roles";
 import RolesProject from "./rolesProject";
-import UserRoles from "./userRoles.js";
-import UserTypeRoles from "./userTypeRoles.js";
+import UserRoles from "./userRoles";
+import UserTypeRoles from "./userTypeRoles";
 import Dimensions from "./dimensions";
 import DimensionsProject from './dimensionsProject'
-import vProject from "./v_project.js";
+import vProject from "./v_project";
 import MailParts from "./mailParts";
 import MailSenders from "./mailSenders";
 import MailTypes from "./mailTypes";
 import MailTypesProjects from "./mailTypesProject";
 import Seos from "./seos";
-import V_Category from "./v_category.js";
+import V_Category from "./v_category";
 import ItemUserAction from "./itemUserAction";
 import ItemTransactionCategoryOptions from "./itemTransactionCategoryOptions";
 import ItemTransaction from './itemTransaction'
 import Conversation from "./conversation";
-import UserConversation from "./userconversation.js";
+import UserConversation from "./userconversation";
 import ConversationMessages from "./conversationMessages";
 import ConversationMessageMembers from "./conversationMessagesMembers";
 import Status from "./status";
@@ -66,7 +66,7 @@ import Comment from "./comments";
 import Invoice from './invoices'
 import InvoiceUser from "./invoicesUsers";
 import InvoiceItem from "./invoicesItems";
-import UserInvoiceValue from "./userInvoicesValue.js";
+import UserInvoiceValue from "./userInvoicesValue";
 import ProcessChain from "./processChain";
 import Process from "./process";
 import ProcessChainState from "./processChainState";
@@ -112,30 +112,30 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 let models = {
-  Users: Users.init(sequelize, Sequelize),
+  Users: Users.initModel(sequelize),
   Category: Category.initModel(sequelize),
   CategoryHierarchy: CategoryHierarchy.initModel(sequelize),
   BlobMapper: BlobMapper.initModel(sequelize),
   Item: Item.initModel(sequelize),
   ItemCategory: ItemCategory.initModel(sequelize),
   Blob: Blob.initModel(sequelize),
-  V_User: vUser.init(sequelize, Sequelize),
+  V_User: vUser.initModel(sequelize),
   Country: Country.initModel(sequelize),
   City: City.initModel(sequelize),
-  UserAuths: UserAuths.init(sequelize, Sequelize),
+  UserAuths: UserAuths.initModel(sequelize),
   CategoryOptionsType: CategoryOptionsType.initModel(sequelize),
   CategoryOptionsTypeTemplate: CategoryOptionsTypeTemplate.initModel(sequelize),
   CategoryOptionsTemplate: CategoryOptionsTemplate.initModel(sequelize),
   CategoryOption: CategoryOption.initModel(sequelize),
   CategoryOptionsLink: CategoryOptionsLink.initModel(sequelize),
   ItemCategoryOption: ItemCategoryOption.initModel(sequelize),
-  Tag: Tag.init(sequelize, Sequelize),
+  Tag: Tag.initModel(sequelize),
   ItemTag: ItemTag.initModel(sequelize),
   Project: Project.initModel(sequelize),
   Config: Config.initModel(sequelize),
-  UserTypes: UserTypes.init(sequelize, Sequelize),
+  UserTypes: UserTypes.initModel(sequelize),
   EsItemSync: EsItemSync.initModel(sequelize),
-  Translations: Translations.init(sequelize, Sequelize),
+  Translations: Translations.initModel(sequelize),
   Language: Language.initModel(sequelize),
   LanguageProject: LanguageProject.initModel(sequelize),
   Actions: Actions.initModel(sequelize),
@@ -146,22 +146,22 @@ let models = {
   PrivilegesProject: PrivilegesProject.initModel(sequelize),
   Roles: Roles.initModel(sequelize),
   RolesProject: RolesProject.initModel(sequelize),
-  UserRoles: UserRoles.init(sequelize, Sequelize),
-  UserTypeRoles: UserTypeRoles.init(sequelize, Sequelize),
+  UserRoles: UserRoles.initModel(sequelize),
+  UserTypeRoles: UserTypeRoles.initModel(sequelize),
   DimensionsProject: DimensionsProject.initModel(sequelize),
   Dimensions: Dimensions.initModel(sequelize),
-  V_Project: vProject.init(sequelize, Sequelize),
+  V_Project: vProject.initModel(sequelize),
   MailParts: MailParts.initModel(sequelize),
   MailSenders: MailSenders.initModel(sequelize),
   MailTypes: MailTypes.initModel(sequelize),
   MailTypesProjects: MailTypesProjects.initModel(sequelize),
   Seos: Seos.initModel(sequelize),
-  V_Category: V_Category.init(sequelize, Sequelize),
+  V_Category: V_Category.initModel(sequelize),
   ItemUserAction: ItemUserAction.initModel(sequelize),
   ItemTransactionCategoryOptions: ItemTransactionCategoryOptions.initModel(sequelize),
   ItemTransaction: ItemTransaction.initModel(sequelize),
   Conversation: Conversation.initModel(sequelize),
-  UserConversation: UserConversation.init(sequelize, Sequelize),
+  UserConversation: UserConversation.initModel(sequelize),
   ConversationMessages: ConversationMessages.initModel(sequelize),
   ConversationMessageMembers: ConversationMessageMembers.initModel(sequelize),
   Status: Status.initModel(sequelize),
@@ -172,7 +172,7 @@ let models = {
   Invoice: Invoice.initModel(sequelize),
   InvoiceUser: InvoiceUser.initModel(sequelize),
   InvoiceItem: InvoiceItem.initModel(sequelize),
-  UserInvoiceValue: UserInvoiceValue.init(sequelize, Sequelize),
+  UserInvoiceValue: UserInvoiceValue.initModel(sequelize),
   ProcessChain: ProcessChain.initModel(sequelize),
   Process: Process.initModel(sequelize),
   ProcessChainState: ProcessChainState.initModel(sequelize),
@@ -203,7 +203,7 @@ export default SequelizeDB;
 fs
   .readdirSync(__dirname)
   .filter(file => {
-    return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
+    return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '');
   })
   .forEach(file => {
     var model = sequelize['import'](path.join(__dirname, file));

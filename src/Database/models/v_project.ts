@@ -1,100 +1,120 @@
-"use strict";
-import { Model } from "sequelize";
+'use strict';
+
+import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
 
 /**
- *
- * @export
- * @class Item
- * @extends Sequelize.Model
+ * Interface for vProject attributes
  */
-export default class vProject extends Model {
-  /**
-   *
-   * @static
-   * @param  {any} sequelize
-   * @param  {any} DataTypes
-   * @return {Country|Model}
-   * @memberof Project
-   */
-  static init(sequelize, DataTypes) {
+export interface vProjectDTO {
+  id: string;
+  name?: string;
+  project_id?: string;
+  categories_from_parent?: boolean;
+  theme_color?: string;
+  root_category_id?: string;
+  item_to_parent?: boolean;
+  logo_url?: string;
+  status?: boolean;
+  base_url?: string;
+  contact_mail?: string;
+  blob_logo_id?: string;
+  blob_logo_hor_id?: string;
+  blob_logo_ver_id?: string;
+  blob_main_id?: string;
+  description?: string;
+  user_id?: string;
+  plan_id?: string;
+  auth_url?: string;
+  blob_main_phone_id?: string;
+}
+
+/**
+ * Interface for vProject instance
+ */
+export interface vProjectInstance extends Model<vProjectDTO>, vProjectDTO {}
+
+/**
+ * vProject model initialization
+ */
+export default class vProject extends Model<vProjectInstance, vProjectDTO> {
+  static initModel(sequelize: Sequelize): ModelStatic<vProject> {
     return super.init(
       {
         id: {
           type: DataTypes.UUID,
           primaryKey: true,
           autoIncrement: false,
-          defaultValue: sequelize.UUIDV4
+          defaultValue: DataTypes.UUIDV4
         },
         name: {
           type: DataTypes.STRING,
           allowNull: true
         },
-
-      
         project_id: {
           type: DataTypes.UUID,
-          defaultValue: sequelize.UUIDV4,
+          defaultValue: DataTypes.UUIDV4,
           allowNull: true
-
-        }
-        , categories_from_parent: {
+        },
+        categories_from_parent: {
           type: DataTypes.BOOLEAN
-        }
-        , theme_color: {
+        },
+        theme_color: {
           type: DataTypes.STRING
-        }
-        , root_category_id: {
+        },
+        root_category_id: {
           type: DataTypes.UUID
-        }
-        , item_to_parent: {
+        },
+        item_to_parent: {
           type: DataTypes.BOOLEAN
-        }
-        , logo_url: {
+        },
+        logo_url: {
           type: DataTypes.STRING
-        }
-        , status: {
+        },
+        status: {
           type: DataTypes.BOOLEAN
-        }
-        , base_url: {
+        },
+        base_url: {
           type: DataTypes.STRING
-        }
-        , contact_mail: {
+        },
+        contact_mail: {
           type: DataTypes.STRING
-        }
-        , blob_logo_id: {
+        },
+        blob_logo_id: {
           type: DataTypes.UUID
-        }
-        , blob_logo_hor_id: {
+        },
+        blob_logo_hor_id: {
           type: DataTypes.UUID
-        }
-        , blob_logo_ver_id: {
+        },
+        blob_logo_ver_id: {
           type: DataTypes.UUID
-        }
-        , blob_main_id: {
+        },
+        blob_main_id: {
           type: DataTypes.UUID
-        }
-        , description: {
+        },
+        description: {
           type: DataTypes.STRING
-        }
-        , user_id: {
+        },
+        user_id: {
           type: DataTypes.UUID
-        }
-        , plan_id: {
+        },
+        plan_id: {
           type: DataTypes.UUID
-        }
-        , auth_url: {
+        },
+        auth_url: {
           type: DataTypes.STRING
-        }
-        , blob_main_phone_id: {
+        },
+        blob_main_phone_id: {
           type: DataTypes.UUID
         }
-      
-        
       },
-      { sequelize }
+      { 
+        sequelize,
+        tableName: 'vProjects'
+      }
     );
   }
-  static associate(models) {
+
+  static associate(models: any) {
     vProject.belongsTo(models.Blob, {
       as: "logo",
       targetKey: "id",
@@ -127,37 +147,7 @@ export default class vProject extends Model {
     });
     vProject.hasMany(models.V_User, {
       as: "users",
-      targetKey: "id",
       foreignKey: "project_id"
     });
   }
 }
-
-/*
-
-
-module.exports = (sequelize, DataTypes) => {
-  var Item = sequelize.define('Item', {
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    description: {
-      type: DataTypes.STRING(1024),
-      allowNull: false,
-    },
-    user_id: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    clobSearch: DataTypes.TEXT,
-    clobSearch_pl: DataTypes.TEXT,
-    clobSearch_us: DataTypes.TEXT
-  }, {underscored: true});
-  Item.associate = function(models) {
-    Item.belongsTo(models.User);
-    Item.hasMany(models.ItemCategory)
-    // associations can be defined here
-  };
-  return Item;
-};*/

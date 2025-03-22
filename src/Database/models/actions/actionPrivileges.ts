@@ -1,5 +1,6 @@
 import { Model, ModelStatic, Sequelize } from "sequelize";
 import { DataTypes } from "sequelize";
+import { MappsDbModels } from "../models";
 
 export interface ActionPrivilegesDTO {
   id: string;
@@ -43,7 +44,7 @@ export default class ActionPrivileges extends Model<ActionPrivilegesInstance, Ac
       { sequelize, tableName: 'ActionPrivileges' }
     );
   }
-  static associate(models: any) {
+  static associate(models: MappsDbModels) {
     ActionPrivileges.belongsTo(models.PrivilegesProject, { as: "privileges", targetKey: 'id', foreignKey: "privilege_id" });
   }
 }

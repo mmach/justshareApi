@@ -35,8 +35,8 @@ import Actions from "./actions";
 import ActionPrivileges from "./actionPrivileges";
 import ActionsProject from "./actionsProject";
 import CategoryActions from "./categoryActions";
-import Privileges from "./privileges.js";
-import PrivilegesProject from "./privilegesProject.js";
+import Privileges from "./privileges";
+import PrivilegesProject from "./privilegesProject";
 import UserTypes from './userTypes.js'
 import Roles from "./roles.js";
 import RolesProject from "./rolesProject.js";
@@ -47,8 +47,8 @@ import DimensionsProject from './dimensionsProject'
 import vProject from "./v_project.js";
 import MailParts from "./mailParts";
 import MailSenders from "./mailSenders";
-import MailTypes from "./mailTypes.js";
-import MailTypesProjects from "./mailTypesProject.js";
+import MailTypes from "./mailTypes";
+import MailTypesProjects from "./mailTypesProject";
 import Seos from "./seos.js";
 import V_Category from "./v_category.js";
 import ItemUserAction from "./itemUserAction";
@@ -67,8 +67,8 @@ import Invoice from './invoices'
 import InvoiceUser from "./invoicesUsers";
 import InvoiceItem from "./invoicesItems";
 import UserInvoiceValue from "./userInvoicesValue.js";
-import ProcessChain from "./processChain.js";
-import Process from "./process.js";
+import ProcessChain from "./processChain";
+import Process from "./process";
 import ProcessChainState from "./processChainState.js";
 import ItemProcessState from "./itemProcessState";
 import ProcessChainPrivilege from "./processChainPrivilege.js";
@@ -142,8 +142,8 @@ let models = {
   ActionPrivileges: ActionPrivileges.initModel(sequelize),
   ActionsProject: ActionsProject.initModel(sequelize),
   CategoryActions: CategoryActions.initModel(sequelize),
-  Privileges: Privileges.init(sequelize, Sequelize),
-  PrivilegesProject: PrivilegesProject.init(sequelize, Sequelize),
+  Privileges: Privileges.initModel(sequelize),
+  PrivilegesProject: PrivilegesProject.initModel(sequelize),
   Roles: Roles.init(sequelize, Sequelize),
   RolesProject: RolesProject.init(sequelize, Sequelize),
   UserRoles: UserRoles.init(sequelize, Sequelize),
@@ -153,8 +153,8 @@ let models = {
   V_Project: vProject.init(sequelize, Sequelize),
   MailParts: MailParts.initModel(sequelize),
   MailSenders: MailSenders.initModel(sequelize),
-  MailTypes: MailTypes.init(sequelize, Sequelize),
-  MailTypesProjects: MailTypesProjects.init(sequelize, Sequelize),
+  MailTypes: MailTypes.initModel(sequelize),
+  MailTypesProjects: MailTypesProjects.initModel(sequelize),
   Seos: Seos.init(sequelize, Sequelize),
   V_Category: V_Category.init(sequelize, Sequelize),
   ItemUserAction: ItemUserAction.initModel(sequelize),
@@ -173,8 +173,8 @@ let models = {
   InvoiceUser: InvoiceUser.initModel(sequelize),
   InvoiceItem: InvoiceItem.initModel(sequelize),
   UserInvoiceValue: UserInvoiceValue.init(sequelize, Sequelize),
-  ProcessChain: ProcessChain.init(sequelize, Sequelize),
-  Process: Process.init(sequelize, Sequelize),
+  ProcessChain: ProcessChain.initModel(sequelize),
+  Process: Process.initModel(sequelize),
   ProcessChainState: ProcessChainState.init(sequelize, Sequelize),
   ItemProcessState: ItemProcessState.initModel(sequelize),
   ProcessChainActionInjection: ProcessChainActionInjection.init(sequelize, Sequelize),

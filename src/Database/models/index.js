@@ -25,7 +25,7 @@ import CategoryOptionsLink from "./categoryOptionsLink";
 import ItemCategoryOption from "./itemCategoryOption";
 import Tag from "./tag.js";
 import ItemTag from "./itemTag";
-import Project from "./project.js";
+import Project from "./project";
 import Config from './config';
 import EsItemSync from './esItemSync'
 import Translations from "./translations.js";
@@ -38,8 +38,8 @@ import CategoryActions from "./categoryActions";
 import Privileges from "./privileges";
 import PrivilegesProject from "./privilegesProject";
 import UserTypes from './userTypes.js'
-import Roles from "./roles.js";
-import RolesProject from "./rolesProject.js";
+import Roles from "./roles";
+import RolesProject from "./rolesProject";
 import UserRoles from "./userRoles.js";
 import UserTypeRoles from "./userTypeRoles.js";
 import Dimensions from "./dimensions";
@@ -49,7 +49,7 @@ import MailParts from "./mailParts";
 import MailSenders from "./mailSenders";
 import MailTypes from "./mailTypes";
 import MailTypesProjects from "./mailTypesProject";
-import Seos from "./seos.js";
+import Seos from "./seos";
 import V_Category from "./v_category.js";
 import ItemUserAction from "./itemUserAction";
 import ItemTransactionCategoryOptions from "./itemTransactionCategoryOptions";
@@ -58,9 +58,9 @@ import Conversation from "./conversation";
 import UserConversation from "./userconversation.js";
 import ConversationMessages from "./conversationMessages";
 import ConversationMessageMembers from "./conversationMessagesMembers";
-import Status from "./status.js";
-import StatusActions from "./statusActions.js";
-import StatusProjects from "./statusProjects.js";
+import Status from "./status";
+import StatusActions from "./statusActions";
+import StatusProjects from "./statusProjects";
 import ItemCategoryOptionTerm from "./itemCategoryOptionTerm";
 import Comment from "./comments";
 import Invoice from './invoices'
@@ -69,10 +69,10 @@ import InvoiceItem from "./invoicesItems";
 import UserInvoiceValue from "./userInvoicesValue.js";
 import ProcessChain from "./processChain";
 import Process from "./process";
-import ProcessChainState from "./processChainState.js";
+import ProcessChainState from "./processChainState";
 import ItemProcessState from "./itemProcessState";
-import ProcessChainPrivilege from "./processChainPrivilege.js";
-import ProcessChainActionInjection from "./processChainActionInjection.js";
+import ProcessChainPrivilege from "./processChainPrivilege";
+import ProcessChainActionInjection from "./processChainActionInjection";
 import CmsElementsProject from "./cmsElementsProjects";
 import CmsMenuItemsPrivilegesProjects from "./cmsMenuItemsPrivilegesProjects";
 import CmsMenuItemsProjects from "./cmsMenuItemsProjects";
@@ -131,7 +131,7 @@ let models = {
   ItemCategoryOption: ItemCategoryOption.initModel(sequelize),
   Tag: Tag.init(sequelize, Sequelize),
   ItemTag: ItemTag.initModel(sequelize),
-  Project: Project.init(sequelize, Sequelize),
+  Project: Project.initModel(sequelize),
   Config: Config.initModel(sequelize),
   UserTypes: UserTypes.init(sequelize, Sequelize),
   EsItemSync: EsItemSync.initModel(sequelize),
@@ -144,8 +144,8 @@ let models = {
   CategoryActions: CategoryActions.initModel(sequelize),
   Privileges: Privileges.initModel(sequelize),
   PrivilegesProject: PrivilegesProject.initModel(sequelize),
-  Roles: Roles.init(sequelize, Sequelize),
-  RolesProject: RolesProject.init(sequelize, Sequelize),
+  Roles: Roles.initModel(sequelize),
+  RolesProject: RolesProject.initModel(sequelize),
   UserRoles: UserRoles.init(sequelize, Sequelize),
   UserTypeRoles: UserTypeRoles.init(sequelize, Sequelize),
   DimensionsProject: DimensionsProject.initModel(sequelize),
@@ -155,7 +155,7 @@ let models = {
   MailSenders: MailSenders.initModel(sequelize),
   MailTypes: MailTypes.initModel(sequelize),
   MailTypesProjects: MailTypesProjects.initModel(sequelize),
-  Seos: Seos.init(sequelize, Sequelize),
+  Seos: Seos.initModel(sequelize),
   V_Category: V_Category.init(sequelize, Sequelize),
   ItemUserAction: ItemUserAction.initModel(sequelize),
   ItemTransactionCategoryOptions: ItemTransactionCategoryOptions.initModel(sequelize),
@@ -164,9 +164,9 @@ let models = {
   UserConversation: UserConversation.init(sequelize, Sequelize),
   ConversationMessages: ConversationMessages.initModel(sequelize),
   ConversationMessageMembers: ConversationMessageMembers.initModel(sequelize),
-  Status: Status.init(sequelize, Sequelize),
-  StatusActions: StatusActions.init(sequelize, Sequelize),
-  StatusProjects: StatusProjects.init(sequelize, Sequelize),
+  Status: Status.initModel(sequelize),
+  StatusActions: StatusActions.initModel(sequelize),
+  StatusProjects: StatusProjects.initModel(sequelize),
   ItemCategoryOptionTerm: ItemCategoryOptionTerm.initModel(sequelize),
   Comment: Comment.initModel(sequelize),
   Invoice: Invoice.initModel(sequelize),
@@ -175,10 +175,10 @@ let models = {
   UserInvoiceValue: UserInvoiceValue.init(sequelize, Sequelize),
   ProcessChain: ProcessChain.initModel(sequelize),
   Process: Process.initModel(sequelize),
-  ProcessChainState: ProcessChainState.init(sequelize, Sequelize),
+  ProcessChainState: ProcessChainState.initModel(sequelize),
   ItemProcessState: ItemProcessState.initModel(sequelize),
-  ProcessChainActionInjection: ProcessChainActionInjection.init(sequelize, Sequelize),
-  ProcessChainPrivilege: ProcessChainPrivilege.init(sequelize, Sequelize),
+  ProcessChainActionInjection: ProcessChainActionInjection.initModel(sequelize),
+  ProcessChainPrivilege: ProcessChainPrivilege.initModel(sequelize),
   CmsElementsProject: CmsElementsProject.initModel(sequelize),
   CmsMenuItemsPrivilegesProjects: CmsMenuItemsPrivilegesProjects.initModel(sequelize),
   CmsMenuItemsProjects: CmsMenuItemsProjects.initModel(sequelize),

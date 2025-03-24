@@ -44,6 +44,7 @@ export class ProjectInfrastructure extends BaseInfrastracture {
             let context = this.getDecodedToken(action.projectToken);
 
             let project = await this.projectRepositoryDI.getProjectInfo({ project_id: context.id })
+            console.log(project)
             if (!project) {/*|| user.relogin_require == true) {*/
                 throw 'AUTHORIZATION_PROJECT_ERROR'
             }
@@ -52,6 +53,7 @@ export class ProjectInfrastructure extends BaseInfrastracture {
 
             return await action;
         } catch (ex) {
+            console.log(ex)
             if (this.allowForAll) {
                 action.context.project = {}
                 action.context.project.allowForAll = true;

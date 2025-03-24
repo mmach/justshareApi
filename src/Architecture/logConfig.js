@@ -6,8 +6,8 @@ import fs from 'fs'
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 if (!process.env.LOGS_PATH) {
-    var dir = path.join(__dirname,'./logs');
-    var error = path.join(__dirname,'/logs/error');
+    var dir = path.join(__dirname, './logs');
+    var error = path.join(__dirname, '/logs/error');
 
     if (!fs.existsSync(dir)) {
         fs.mkdirSync(dir);

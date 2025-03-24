@@ -25,8 +25,8 @@ import Project from "./project";
 import Config from './config/config';
 import EsItemSync from './sync/esItemSync';
 import Translations from "./translations";
-import Language from "./language";
-import LanguageProject from "./languageProject";
+import Language from "./language/language";
+import LanguageProject from "./language/languageProject";
 import Actions from "./actions/actions";
 import ActionPrivileges from "./actions/actionPrivileges";
 import ActionsProject from "./actions/actionsProject";
@@ -41,10 +41,10 @@ import UserTypeRoles from "./userTypeRoles";
 import Dimensions from "./dimensions/dimensions";
 import DimensionsProject from './dimensions/dimensionsProject';
 import vProject from "./v_project";
-import MailParts from "./mailParts";
-import MailSenders from "./mailSenders";
-import MailTypes from "./mailTypes";
-import MailTypesProjects from "./mailTypesProject";
+import MailParts from "./mail/mailParts";
+import MailSenders from "./mail/mailSenders";
+import MailTypes from "./mail/mailTypes";
+import MailTypesProjects from "./mail/mailTypesProject";
 import Seos from "./seos";
 import V_Category from "./v_category";
 import ItemUserAction from "./item/itemUserAction";
@@ -164,12 +164,15 @@ const models: MappsDbModels = {
   CmsPagePrivilegesProjects: CmsPagePrivilegesProjects.initModel(sequelize),
 };
 
+
 Object.keys(models).forEach(modelName => {
-  const model = (models as any)[modelName];
+  const model: any = models[modelName as keyof MappsDbModels];
   if (model.associate) {
+    //ts-disable
     model.associate(models);
   }
   if (model.hooks) {
+    //ts-disable
     model.hooks(models, sequelize);
   }
 });

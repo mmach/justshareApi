@@ -9,7 +9,6 @@ export interface ActionPrivilegesDTO {
   action_id: string;
   logical_op: string;
   status: boolean;
-
 }
 
 export interface ActionPrivilegesInstance extends Model<ActionPrivilegesDTO>, ActionPrivilegesDTO { }

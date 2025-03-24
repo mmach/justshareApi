@@ -109,7 +109,7 @@ export default class vProject extends Model<vProjectInstance, vProjectDTO> {
       },
       { 
         sequelize,
-        tableName: 'vProjects'
+        tableName: 'V_Projects'
       }
     );
   }

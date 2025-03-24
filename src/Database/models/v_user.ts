@@ -91,7 +91,7 @@ export default class vUser extends Model<vUserInstance, vUserDTO> {
       },
       {
         sequelize,
-        tableName: 'vUsers'
+        tableName: 'V_Users'
       }
     );
   }

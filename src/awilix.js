@@ -116,7 +116,7 @@ import SetLanguageCommand from "./Commands/User/setLanguageCommand.js";
 import SetProfileImageCommand from "./Commands/User/setProfileImageCommand.js";
 import UpsertUserTypeCommand from "./Commands/User/upsertUserTypeCommand.js";
 import UpsertUsersInvoiceDataCommand from "./Commands/User/upsertUsersInvoiceDataCommand.js";
-import SequelizeDB from "./Database/models/index.js";
+import SequelizeDB from "./Database/models/index";
 import Item_CreateItemProcess from "./Processes/item_CreateItemProcess.js";
 import Item_ESSyncProcess from "./Processes/item_ESSyncProcess.js";
 import Item_GoToStepProcess from "./Processes/item_GoToStepProcess.js";

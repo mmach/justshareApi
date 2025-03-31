@@ -2,6 +2,7 @@
 import { BaseDTO } from "justshare-shared";
 import UnitOfWork from "../../unitOfWork.js";
 
+
 export class BaseService {
 
   constructor({ unitOfWorkDI, repository }: { unitOfWorkDI: UnitOfWork, repository: string }) {

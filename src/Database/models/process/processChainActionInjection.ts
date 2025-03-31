@@ -1,6 +1,7 @@
 'use strict';
 
 import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
+import { ProcessChainPrivilegeDTO } from "./processChainPrivilege";
 
 /**
  * Interface for ProcessChainActionInjection attributes
@@ -21,6 +22,9 @@ export interface ProcessChainActionInjectionDTO {
   ref_key?: string;
   on_before_hook?: boolean;
   on_after_hook?: boolean;
+
+  action_privileges?: ProcessChainPrivilegeDTO[];
+
 }
 
 /**

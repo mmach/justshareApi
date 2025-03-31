@@ -12,6 +12,9 @@ export interface CmsElementsProjectsDTO {
   project_id?: string;
   cms_element_id?: string;
   is_active?: boolean;
+
+  cms_element?: CmsElementsProjectsDTO;
+
 }
 
 /**

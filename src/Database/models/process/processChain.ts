@@ -1,6 +1,8 @@
 'use strict';
 
 import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
+import { ProcessChainStateDTO } from "./processChainState";
+import { ProcessChainActionInjectionDTO } from "./processChainActionInjection";
 
 /**
  * Interface for ProcessChain attributes
@@ -26,6 +28,9 @@ export interface ProcessChainDTO {
   invoke_only?: boolean;
   is_condition?: boolean;
   is_autoclose_state?: boolean;
+
+  process_chain_state?: ProcessChainStateDTO[];
+  process_chain_actions?: ProcessChainActionInjectionDTO[];
 }
 
 /**

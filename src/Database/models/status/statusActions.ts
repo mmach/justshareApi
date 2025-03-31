@@ -1,6 +1,8 @@
 'use strict';
 
 import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
+import { ActionsDTO } from "../actions";
+import { StatusProjectsDTO } from "./statusProjects";
 
 /**
  * Interface for StatusActions attributes
@@ -9,6 +11,8 @@ export interface StatusActionsDTO {
   id: string;
   status_id?: string;
   action_id?: string;
+
+  status?: StatusProjectsDTO;
 }
 
 /**

@@ -1,5 +1,12 @@
 
 import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
+import { CategoryDTO } from "../category/category";
+import { ProjectDTO } from "../project/project";
+import { TagDTO } from "../tag/tag";
+import { ItemDTO } from "./item";
+import { ItemTransactionCategoryOptionsDTO } from "./itemTransactionCategoryOptions";
+import { ItemUserActionDTO } from "./itemUserAction";
+import { vUserDTO } from "../user/v_user";
 
 /**
  * Interface for ItemTransaction attributes
@@ -21,6 +28,13 @@ export interface ItemTransactionDTO {
   status?: number;
   project_id?: string;
   external_id?: string;
+  category?: CategoryDTO;
+  project?: ProjectDTO;
+  iua_main?: ItemUserActionDTO;
+  item?: ItemDTO;
+  user?: vUserDTO;
+  itemCategoryOption?: ItemTransactionCategoryOptionsDTO[];
+  tags?: TagDTO[];
 }
 
 /**

@@ -1,11 +1,13 @@
 'use strict';
 
 import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
+import { V_CategoryDTO } from "./v_category";
+import { CategoryOptionAttributesDTO } from "./categoryOption";
 
 /**
  * Interface for CategoryOptionsLink attributes
  */
-export interface CategoryOptionsLinkAttributesDTO {
+export interface CategoryOptionsLinkDTO {
   id: string;
   co_id?: string;
   category_id?: string;
@@ -31,17 +33,21 @@ export interface CategoryOptionsLinkAttributesDTO {
   search_params?: string;
   preview_params?: string;
   create_params?: string;
+
+  category?: V_CategoryDTO;
+  catOption?: CategoryOptionAttributesDTO;
 }
+
 
 /**
  * Interface for CategoryOptionsLink instance
  */
-export interface CategoryOptionsLinkInstance extends Model<CategoryOptionsLinkAttributesDTO>, CategoryOptionsLinkAttributesDTO {}
+export interface CategoryOptionsLinkInstance extends Model<CategoryOptionsLinkDTO>, CategoryOptionsLinkDTO {}
 
 /**
  * CategoryOptionsLink model initialization
  */
-export default class CategoryOptionsLink extends Model<CategoryOptionsLinkInstance, CategoryOptionsLinkAttributesDTO> {
+export default class CategoryOptionsLink extends Model<CategoryOptionsLinkInstance, CategoryOptionsLinkDTO> {
   static initModel(sequelize: Sequelize): ModelStatic<CategoryOptionsLink> {
     return super.init(
       {

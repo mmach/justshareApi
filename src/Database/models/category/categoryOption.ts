@@ -1,5 +1,9 @@
 
 import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
+import { CategoryOptionsTemplateDTO } from "../../../Dto";
+import { TranslationsDTO } from "../translations/translations";
+import { CategoryOptionsLinkDTO } from "./categoryOptionsLink";
+import { CategoryOptionsTypeDTO } from "./categoryOptionsType";
 
 /**
  * Interface for CategoryOption attributes
@@ -49,6 +53,12 @@ export interface CategoryOptionAttributesDTO {
   preview_params?: string;
   create_params?: string;
   translation_id?: string;
+
+  cat_opt?: CategoryOptionsTypeDTO;
+  cat_opt_temp?: CategoryOptionsTemplateDTO[];
+  category_link?: CategoryOptionsLinkDTO[];
+  translation?: TranslationsDTO;
+
 }
 
 /**

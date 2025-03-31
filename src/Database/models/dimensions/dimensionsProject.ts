@@ -1,6 +1,8 @@
 'use strict';
 
 import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
+import { DimensionsDTO } from "./dimensions";
+import { TranslationsDTO } from "../translations/translations";
 
 /**
  * Interface for DimensionsProject attributes
@@ -10,6 +12,9 @@ export interface DimensionsProjectDTO {
   dimension_id?: string;
   project_id?: string;
   translation_id?: string;
+
+  dimension_details?: DimensionsDTO;
+  translation?: TranslationsDTO;
 }
 
 /**

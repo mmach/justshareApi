@@ -1,6 +1,10 @@
 'use strict';
 
 import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
+import { TranslationsDTO } from "../translations/translations";
+import { MailPartsDTO } from "./mailParts";
+import { MailSendersDTO } from "./mailSenders";
+import { MailTypesDTO } from "./mailTypes";
 
 /**
  * Interface for MailTypesProjects attributes
@@ -13,6 +17,12 @@ export interface MailTypesProjectsDTO {
   mail_template_id?: string;
   mailtype_id?: string;
   project_id?: string;
+
+  translation?: TranslationsDTO;
+  mailsender?: MailSendersDTO;
+  body?: MailPartsDTO;
+  template?: MailPartsDTO;
+  mailtype?: MailTypesDTO;
 }
 
 /**

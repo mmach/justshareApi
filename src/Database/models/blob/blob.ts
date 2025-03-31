@@ -2,6 +2,7 @@
 
 import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
 import { v4 as uuidv4 } from "uuid";
+import { BlobMapperDTO } from "./blobMapper";
 
 /**
  * Interface for Blob attributes
@@ -17,6 +18,10 @@ export interface BlobDTO {
   status?: number;
   category_id?: string;
   project_id?: string;
+  
+  blob_item:BlobMapperDTO,
+  blob_thumbmail:BlobMapperDTO,
+  blob_min:BlobMapperDTO
 }
 
 /**

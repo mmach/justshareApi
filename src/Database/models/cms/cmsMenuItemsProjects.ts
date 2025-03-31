@@ -1,6 +1,8 @@
 'use strict';
 
 import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
+import { CmsMenuItemsPrivilegesProjectsDTO } from "./cmsMenuItemsPrivilegesProjects";
+import { TranslationsDTO } from "../translations/translations";
 
 /**
  * Interface for CmsMenuItemsProjects attributes
@@ -18,6 +20,9 @@ export interface CmsMenuItemsProjectsDTO {
   project_id?: string;
   is_active?: boolean;
   sort_order?: number;
+
+  menu_item_privileges?: CmsMenuItemsPrivilegesProjectsDTO[];
+  translation?: TranslationsDTO;
 }
 
 /**

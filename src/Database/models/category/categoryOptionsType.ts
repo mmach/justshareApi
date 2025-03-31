@@ -1,26 +1,29 @@
 
 import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
+import { CategoryOptionsTypeTemplateDTO } from "./categoryOptionsTypeTemplate";
 
 /**
  * Interface for CategoryOptionsType attributes
  */
-export interface CategoryOptionsTypeAttributesDTO {
+export interface CategoryOptionsTypeDTO {
   id: string;
   name?: string;
   type?: string;
   status?: boolean;
   is_strict?: boolean;
+
+  cat_options_type_temp?: CategoryOptionsTypeTemplateDTO[];
 }
 
 /**
  * Interface for CategoryOptionsType instance
  */
-export interface CategoryOptionsTypeInstance extends Model<CategoryOptionsTypeAttributesDTO>, CategoryOptionsTypeAttributesDTO {}
+export interface CategoryOptionsTypeInstance extends Model<CategoryOptionsTypeDTO>, CategoryOptionsTypeDTO {}
 
 /**
  * CategoryOptionsType model initialization
  */
-export default class CategoryOptionsType extends Model<CategoryOptionsTypeInstance, CategoryOptionsTypeAttributesDTO> {
+export default class CategoryOptionsType extends Model<CategoryOptionsTypeInstance, CategoryOptionsTypeDTO> {
   static initModel(sequelize: Sequelize): ModelStatic<CategoryOptionsType> {
     return super.init(
       {

@@ -1,6 +1,8 @@
 'use strict';
 
 import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
+import { CategoryOptionsTemplateDTO } from "../../../Dto";
+import { CategoryOptionsLinkDTO } from "../category/categoryOptionsLink";
 
 /**
  * Interface for ItemCategoryOption attributes
@@ -15,6 +17,9 @@ export interface ItemCategoryOptionDTO {
   iua_id?: string;
   dim_id?: string;
   project_id?: string;
+
+  category_link?: CategoryOptionsLinkDTO;
+  cat_opt_temp?: CategoryOptionsTemplateDTO;
 }
 
 /**

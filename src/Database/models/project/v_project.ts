@@ -1,6 +1,8 @@
 'use strict';
 
 import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
+import { BlobDTO } from "../blob/blob";
+import { vUserDTO } from "../user/v_user";
 
 /**
  * Interface for vProject attributes
@@ -26,6 +28,14 @@ export interface vProjectDTO {
   plan_id?: string;
   auth_url?: string;
   blob_main_phone_id?: string;
+
+  logo?: BlobDTO;
+  logo_hor?: BlobDTO;
+  logo_ver?: BlobDTO;
+  img_main?: BlobDTO;
+  img_main_phone?: BlobDTO;
+  owner?: vUserDTO;
+  users?: vUserDTO[];
 }
 
 /**

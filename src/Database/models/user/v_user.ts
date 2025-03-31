@@ -1,6 +1,10 @@
 'use strict';
 
 import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
+import { BlobDTO } from "../blob/blob";
+import { vProjectDTO } from "../project/v_project";
+import { UserRolesDTO } from "./userRoles";
+import { UserTypesDTO } from "./userTypes";
 
 /**
  * Interface for vUser attributes
@@ -28,6 +32,11 @@ export interface vUserDTO {
   project_id?: string;
   usertype_id?: string;
   user_invoice_data_id?: string;
+
+  blob_profile?: BlobDTO;
+  user_type?: UserTypesDTO;
+  user_roles?: UserRolesDTO[];
+  project?: vProjectDTO;
 }
 
 /**

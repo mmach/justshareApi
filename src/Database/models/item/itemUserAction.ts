@@ -1,6 +1,10 @@
 'use strict';
 
 import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
+import { ActionPrivilegesDTO } from "../actions";
+import { ConversationDTO } from "../conversation/conversation";
+import { ItemDTO } from "./item";
+import { vUserDTO } from "../user/v_user";
 
 /**
  * Interface for ItemUserAction attributes
@@ -25,6 +29,11 @@ export interface ItemUserActionDTO {
   parent_process_chain_id?: string;
   parent_iua_id?: string;
   destination_date?: Date;
+
+  conversation?: ConversationDTO;
+  users?: vUserDTO;
+  item?: ItemDTO;
+  action_privileges?: ActionPrivilegesDTO[];
 }
 
 /**

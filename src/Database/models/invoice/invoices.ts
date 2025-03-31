@@ -1,6 +1,10 @@
 
 
 import { DataTypes, Model, ModelStatic, QueryTypes, Sequelize } from "sequelize";
+import { BlobDTO } from "../blob/blob";
+import { ItemUserActionDTO } from "../item/itemUserAction";
+import { InvoiceItemDTO } from "./invoicesItems";
+import { InvoiceUserDTO } from "./invoicesUsers";
 
 /**
  * Interface for Invoice attributes
@@ -26,6 +30,12 @@ export interface InvoiceDTO {
   status_id?: string;
   project_id?: string;
   action_id?: string;
+
+  items?: InvoiceItemDTO[];
+  user_src?: InvoiceUserDTO;
+  user_dest?: InvoiceUserDTO;
+  blob?: BlobDTO;
+  iua?: ItemUserActionDTO;
 }
 
 /**

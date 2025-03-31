@@ -1,6 +1,9 @@
 'use strict';
 
 import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
+import { BlobDTO } from "../blob/blob";
+import { TranslationsDTO } from "../translations/translations";
+import { CategoryActionsDTO } from "./categoryActions";
 
 /**
  * Interface for Category attributes
@@ -23,6 +26,12 @@ export interface CategoryDTO {
   cms_create?: string;
   cms_edit?: string;
   cms_search?: string;
+
+  category_children?: CategoryDTO[];
+  icon_blob?: BlobDTO;
+  actions?: CategoryActionsDTO[];
+  category_parent?: CategoryDTO[];
+  translation?: TranslationsDTO;
 }
 
 /**

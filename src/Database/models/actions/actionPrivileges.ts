@@ -1,6 +1,7 @@
 import { Model, ModelStatic, Sequelize } from "sequelize";
 import { DataTypes } from "sequelize";
 import { MappsDbModels } from "../models";
+import { PrivilegesDTO } from "../privileges/privileges";
 
 export interface ActionPrivilegesDTO {
   id: string;
@@ -9,6 +10,8 @@ export interface ActionPrivilegesDTO {
   action_id: string;
   logical_op: string;
   status: boolean;
+  
+  privileges:PrivilegesDTO
 }
 
 export interface ActionPrivilegesInstance extends Model<ActionPrivilegesDTO>, ActionPrivilegesDTO { }

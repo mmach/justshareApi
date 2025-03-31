@@ -1,5 +1,9 @@
 
 import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
+import { ActionsDTO } from "./actions";
+import { ActionPrivilegesDTO } from "./actionPrivileges";
+import { StatusActionsDTO } from "../status/statusActions";
+import { ProcessDTO } from "../process/process";
 
 
 export interface ActionsProjectDTO {
@@ -9,10 +13,15 @@ export interface ActionsProjectDTO {
   status?: string;
   func?: string;
   process_id?: string;
+  
+  action_details: ActionsDTO
+  action_privileges: ActionPrivilegesDTO[]
+  statuses: StatusActionsDTO[]
+  process?: ProcessDTO
 }
 
 
-export interface ActionsProjectInstance extends Model<ActionsProjectDTO>, ActionsProjectDTO {}
+export interface ActionsProjectInstance extends Model<ActionsProjectDTO>, ActionsProjectDTO { }
 
 
 export default class ActionsProject extends Model<ActionsProjectInstance, ActionsProjectDTO> {
@@ -46,7 +55,7 @@ export default class ActionsProject extends Model<ActionsProjectInstance, Action
           allowNull: true
         }
       },
-      { 
+      {
         sequelize,
         tableName: 'ActionsProjects'
       }
@@ -56,7 +65,7 @@ export default class ActionsProject extends Model<ActionsProjectInstance, Action
   static associate(models: any) {
     ActionsProject.belongsTo(models.Actions, { as: "action_details", targetKey: 'id', foreignKey: "action_id" });
     ActionsProject.hasMany(models.ActionPrivileges, { as: "action_privileges", foreignKey: "action_id" });
-    ActionsProject.hasMany(models.StatusActions, { as: "statuses",  foreignKey: "action_id" });
+    ActionsProject.hasMany(models.StatusActions, { as: "statuses", foreignKey: "action_id" });
     ActionsProject.belongsTo(models.Process, { as: "process", targetKey: 'id', foreignKey: "process_id" });
   }
 }

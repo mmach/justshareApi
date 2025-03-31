@@ -1,4 +1,6 @@
 import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
+import { TranslationsDTO } from "../translations/translations";
+import { CmsPagePrivilegesProjectsDTO } from "./cmsPagePrivilegesProjects";
 
 /**
  * Interface for CmsPagesProjects attributes
@@ -16,6 +18,9 @@ export interface CmsPagesProjectsDTO {
   is_homepage?: boolean;
   route_group?: string;
   func?: string;
+
+  translation?: TranslationsDTO;
+  page_privileges?: CmsPagePrivilegesProjectsDTO[];
 }
 
 /**

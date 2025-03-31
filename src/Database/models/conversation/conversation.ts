@@ -1,5 +1,7 @@
 
 import { DataTypes, Model, ModelStatic, Sequelize } from "sequelize";
+import { UserConversationDTO } from "../user/userconversation";
+import { ConversationMessagesDTO } from "./conversationMessages";
 
 /**
  * Interface for Conversation attributes
@@ -11,6 +13,10 @@ export interface ConversationDTO {
   iua_id?: string;
   status?: string;
   project_id?: string;
+  
+  users?: UserConversationDTO[];
+  messages?: ConversationMessagesDTO[];
+  user_filter?: UserConversationDTO[];
 }
 
 /**

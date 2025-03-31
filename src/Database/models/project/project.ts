@@ -1,6 +1,8 @@
 'use strict';
 
 import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
+import { BlobDTO } from "../blob/blob";
+import { vUserDTO } from "../user/v_user";
 
 /**
  * Interface for Project attributes
@@ -28,12 +30,20 @@ export interface ProjectDTO {
   auth_url?: string;
   blob_main_phone_id?: string;
   salt?: string;
+
+
+  logo?: BlobDTO;
+  logo_hor?: BlobDTO;
+  img_main_phone?: BlobDTO;
+  logo_ver?: BlobDTO;
+  img_main?: BlobDTO;
+  users?: vUserDTO[];
 }
 
 /**
  * Interface for Project instance
  */
-export interface ProjectInstance extends Model<ProjectDTO>, ProjectDTO {}
+export interface ProjectInstance extends Model<ProjectDTO>, ProjectDTO { }
 
 /**
  * Project model initialization
@@ -115,7 +125,7 @@ export default class Project extends Model<ProjectInstance, ProjectDTO> {
           type: DataTypes.STRING
         }
       },
-      { 
+      {
         sequelize,
         tableName: 'Projects'
       }

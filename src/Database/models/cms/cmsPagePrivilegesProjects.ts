@@ -1,4 +1,5 @@
 import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
+import { PrivilegesProjectDTO } from "../privileges/privilegesProject";
 
 /**
  * Interface for CmsPagePrivilegesProjects attributes
@@ -9,6 +10,9 @@ export interface CmsPagePrivilegesProjectsDTO {
   cms_page_id?: string;
   status?: string;
   project_id?: string;
+
+
+  privileges?: PrivilegesProjectDTO;
 }
 
 /**

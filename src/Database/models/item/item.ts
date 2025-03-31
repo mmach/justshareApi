@@ -2,6 +2,13 @@
 
 import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
 import { v4 as uuidv4 } from "uuid";
+import { BlobDTO } from "../blob/blob";
+import { CategoryDTO } from "../category/category";
+import { ProjectDTO } from "../project/project";
+import { TagDTO } from "../tag/tag";
+import { ItemCategoryOptionDTO } from "./itemCategoryOption";
+import { ItemCategoryOptionTermDTO } from "./itemCategoryOptionTerm";
+import { vUserDTO } from "../user/v_user";
 
 /**
  * Interface for Item attributes
@@ -33,6 +40,14 @@ export interface ItemDTO {
   es_operations?: string;
   external_id?: string;
   item_process_id?: string;
+
+  category?: CategoryDTO;
+  project?: ProjectDTO;
+  blobs?: BlobDTO[];
+  user?: vUserDTO;
+  itemCategoryOption?: ItemCategoryOptionDTO[];
+  tags?: TagDTO[];
+  itemCategoryOptionTerms?: ItemCategoryOptionTermDTO[];
 }
 
 /**

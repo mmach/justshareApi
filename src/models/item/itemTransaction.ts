@@ -1,8 +1,8 @@
 
-import { CategoryDTO } from "../category/category";
-import { ProjectDTO } from "../project/project";
-import { TagDTO } from "../tag/tag";
-import { vUserDTO } from "../user/v_user";
+import { CategoryDTO } from "../category";
+import { ProjectDTO } from "../project";
+import { TagDTO } from "../tag";
+import { vUserDTO } from "../user";
 import { ItemDTO } from "./item";
 import { ItemTransactionCategoryOptionsDTO } from "./itemTransactionCategoryOptions";
 import { ItemUserActionDTO } from "./itemUserAction";

@@ -1,6 +1,6 @@
 'use strict';
 
-import { PrivilegesDTO } from "../privileges/privileges";
+import { PrivilegesDTO } from "../privileges";
 
 /**
  * Interface for ProcessChainPrivilege attributes

@@ -1,7 +1,7 @@
 
 
-import { BlobDTO } from "../blob/blob";
-import { ItemUserActionDTO } from "../item/itemUserAction";
+import { BlobDTO } from "../blob";
+import { ItemUserActionDTO } from "../item";
 import { InvoiceItemDTO } from "./invoicesItems";
 import { InvoiceUserDTO } from "./invoicesUsers";
 

@@ -1,7 +1,7 @@
 'use strict';
 
-import { BlobDTO } from "../blob/blob";
-import { vUserDTO } from "../user/v_user";
+import { BlobDTO } from "../blob";
+import { vUserDTO } from "../user";
 
 /**
  * Interface for Project attributes

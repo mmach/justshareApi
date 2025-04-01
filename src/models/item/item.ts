@@ -1,10 +1,10 @@
 'use strict';
 
-import { BlobDTO } from "../blob/blob";
-import { CategoryDTO } from "../category/category";
-import { ProjectDTO } from "../project/project";
-import { TagDTO } from "../tag/tag";
-import { vUserDTO } from "../user/v_user";
+import { BlobDTO } from "../blob";
+import { CategoryDTO } from "../category";
+import { ProjectDTO } from "../project";
+import { TagDTO } from "../tag";
+import { vUserDTO } from "../user";
 import { ItemCategoryOptionDTO } from "./itemCategoryOption";
 import { ItemCategoryOptionTermDTO } from "./itemCategoryOptionTerm";
 

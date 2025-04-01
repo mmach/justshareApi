@@ -1,6 +1,6 @@
 'use strict';
 
-import { TranslationsDTO } from "../translations/translations";
+import { TranslationsDTO } from "../translations";
 import { MailPartsDTO } from "./mailParts";
 import { MailSendersDTO } from "./mailSenders";
 import { MailTypesDTO } from "./mailTypes";

@@ -1,6 +1,6 @@
 'use strict';
 
-import { TranslationsDTO } from "../translations/translations";
+import { TranslationsDTO } from "../translations";
 
 /**
  * Interface for MailSenders attributes

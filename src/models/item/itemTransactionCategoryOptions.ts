@@ -1,7 +1,6 @@
 'use strict';
 
-import { CategoryOptionsTemplateDTO } from "../../Dto";
-import { CategoryOptionsLinkDTO } from "../category/categoryOptionsLink";
+import { CategoryOptionsLinkDTO, CategoryOptionsTemplateDTO } from "../category";
 
 /**
  * Interface for ItemTransactionCategoryOptions attributes

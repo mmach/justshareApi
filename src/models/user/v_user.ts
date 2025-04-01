@@ -1,7 +1,7 @@
 'use strict';
 
-import { BlobDTO } from "../blob/blob";
-import { vProjectDTO } from "../project/v_project";
+import { BlobDTO } from "../blob";
+import { vProjectDTO } from "../project";
 import { UserRolesDTO } from "./userRoles";
 import { UserTypesDTO } from "./userTypes";
 

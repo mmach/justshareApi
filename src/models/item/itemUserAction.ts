@@ -1,8 +1,8 @@
 'use strict';
 
 import { ActionPrivilegesDTO } from "../actions";
-import { ConversationDTO } from "../conversation/conversation";
-import { vUserDTO } from "../user/v_user";
+import { ConversationDTO } from "../conversation";
+import { vUserDTO } from "../user";
 import { ItemDTO } from "./item";
 
 /**

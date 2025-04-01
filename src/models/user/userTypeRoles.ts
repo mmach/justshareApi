@@ -1,7 +1,7 @@
 'use strict';
 
-import { ProjectDTO } from "../project/project";
-import { RolesProjectDTO } from "../roles/rolesProject";
+import { ProjectDTO } from "../project";
+import { RolesProjectDTO } from "../roles";
 import { UserTypesDTO } from "./userTypes";
 
 /**

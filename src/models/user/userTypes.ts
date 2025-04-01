@@ -1,8 +1,8 @@
 'use strict';
 
-import { BlobDTO } from "../blob/blob";
-import { ProjectDTO } from "../project/project";
-import { TranslationsDTO } from "../translations/translations";
+import { BlobDTO } from "../blob";
+import { ProjectDTO } from "../project";
+import { TranslationsDTO } from "../translations";
 
 /**
  * Interface for UserTypes attributes

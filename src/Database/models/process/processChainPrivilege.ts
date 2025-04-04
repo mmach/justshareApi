@@ -1,21 +1,7 @@
 'use strict';
 
-import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
-import { PrivilegesDTO } from "../privileges/privileges";
-
-/**
- * Interface for ProcessChainPrivilege attributes
- */
-export interface ProcessChainPrivilegeDTO {
-  id: string;
-  process_chain_action_id?: string;
-  process_chain_id?: string;
-  privilege_id?: string;
-  project_id?: string;
-
-  privilege_details?: PrivilegesDTO;
-
-}
+import { DataTypes, Model, ModelStatic, Sequelize } from "sequelize";
+import { ProcessChainPrivilegeDTO } from "../../../Models/process";
 
 /**
  * Interface for ProcessChainPrivilege instance

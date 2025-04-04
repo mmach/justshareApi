@@ -2,17 +2,7 @@
 
 import { Model, ModelStatic, Sequelize } from "sequelize";
 import { DataTypes, } from "sequelize";
-
-export interface ActionsDTO {
-  id: string;
-  name?: string;
-  status?: boolean;
-  description?: string;
-  for_category?: boolean;
-  action_type?: string;
-  is_process_start?: boolean;
-  project_id?: string;
-}
+import { ActionsDTO } from "../../../Models/actions";
 
 export interface ActionsInstance extends Model<ActionsDTO>, ActionsDTO { }
 

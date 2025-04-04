@@ -1,17 +1,7 @@
 'use strict';
 
-import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
-
-/**
- * Interface for Language attributes
- */
-export interface LanguageDTO {
-  id: string;
-  name?: string;
-  code?: string;
-  project_id?: string;
-}
-
+import { DataTypes, Model, ModelStatic, Sequelize } from "sequelize";
+import { LanguageDTO } from "../../../Models/language";
 /**
  * Interface for Language instance
  */

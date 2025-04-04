@@ -1,15 +1,6 @@
 
-import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
-
-/**
- * Interface for ItemCategory attributes
- */
-export interface ItemCategoryDTO {
-  id: string;
-  item_id?: string;
-  category_id?: string;
-  is_visible?: number;
-}
+import { DataTypes, Model, ModelStatic, Sequelize } from "sequelize";
+import { ItemCategoryDTO } from "../../../Models/item";
 
 /**
  * Interface for ItemCategory instance

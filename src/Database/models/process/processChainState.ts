@@ -1,19 +1,7 @@
 'use strict';
 
-import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
-
-/**
- * Interface for ProcessChainState attributes
- */
-export interface ProcessChainStateDTO {
-  id: string;
-  next_process_chain_id?: string;
-  process_chain_id?: string;
-  project_id?: string;
-  process_id?: string;
-  is_accept?: boolean;
-}
-
+import { DataTypes, Model, ModelStatic, Sequelize } from "sequelize";
+import { ProcessChainStateDTO } from "../../../Models/process";
 /**
  * Interface for ProcessChainState instance
  */

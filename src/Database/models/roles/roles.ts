@@ -1,18 +1,8 @@
 'use strict';
 
-import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
+import { DataTypes, Model, ModelStatic, Sequelize } from "sequelize";
 
-/**
- * Interface for Roles attributes
- */
-export interface RolesDTO {
-  id: string;
-  name?: string;
-  status?: boolean;
-  description?: string;
-  project_id?: string;
-}
-
+import { RolesDTO } from "../../../Models/roles";
 /**
  * Interface for Roles instance
  */

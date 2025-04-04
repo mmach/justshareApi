@@ -1,15 +1,8 @@
 'use strict';
 
-import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
+import { DataTypes, Model, ModelStatic, Sequelize } from "sequelize";
+import { CategoryActionsDTO } from "../../../Models/category";
 
-/**
- * Interface for CategoryActions attributes
- */
-export interface CategoryActionsDTO {
-  id: string;
-  action_id?: string;
-  category_id?: string;
-}
 
 /**
  * Interface for CategoryActions instance

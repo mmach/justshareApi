@@ -1,28 +1,10 @@
 'use strict';
 
-import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
+import { DataTypes, Model, ModelStatic, Sequelize } from "sequelize";
 import { v4 as uuidv4 } from "uuid";
-import { BlobMapperDTO } from "./blobMapper";
+import { BlobDTO } from "../../../Models/blob";
 
-/**
- * Interface for Blob attributes
- */
-export interface BlobDTO {
-  id: string;
-  blob_id?: string;
-  item_id?: string;
-  blob_thumbmail_id?: string;
-  blob_min_id?: string;
-  user_id?: string;
-  order?: number;
-  status?: number;
-  category_id?: string;
-  project_id?: string;
-  
-  blob_item:BlobMapperDTO,
-  blob_thumbmail:BlobMapperDTO,
-  blob_min:BlobMapperDTO
-}
+
 
 /**
  * Interface for Blob instance

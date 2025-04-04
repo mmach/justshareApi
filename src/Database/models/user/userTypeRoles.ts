@@ -1,24 +1,7 @@
 'use strict';
 
-import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
-import { UserTypesDTO } from "./userTypes";
-import { ProjectDTO } from "../project/project";
-import { RolesProjectDTO } from "../roles/rolesProject";
-
-/**
- * Interface for UserTypeRoles attributes
- */
-export interface UserTypeRolesDTO {
-  id: string;
-  usertype_id?: string;
-  project_id?: string;
-  role_id?: string;
-  name?: string;
-
-  type?: UserTypesDTO;
-  project?: ProjectDTO;
-  roles?: RolesProjectDTO;
-}
+import { DataTypes, Model, ModelStatic, Sequelize } from "sequelize";
+import { UserTypeRolesDTO } from "../../../Models/user";
 
 /**
  * Interface for UserTypeRoles instance

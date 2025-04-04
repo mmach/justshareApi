@@ -1,19 +1,7 @@
 'use strict';
 
-import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
-import { vUserDTO } from "./v_user";
-
-/**
- * Interface for UserConversation attributes
- */
-export interface UserConversationDTO {
-  id: string;
-  user_id?: string;
-  conversation_id?: string;
-  project_id?: string;
-
-  user_detail?: vUserDTO;
-}
+import { DataTypes, Model, ModelStatic, Sequelize } from "sequelize";
+import { UserConversationDTO } from "../../../Models/user";
 
 /**
  * Interface for UserConversation instance

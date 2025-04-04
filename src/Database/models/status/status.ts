@@ -1,16 +1,7 @@
 'use strict';
 
-import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
-
-/**
- * Interface for Status attributes
- */
-export interface StatusDTO {
-  id: string;
-  token?: string;
-  project_id?: string;
-}
-
+import { DataTypes, Model, ModelStatic, Sequelize } from "sequelize";
+import { StatusDTO } from "../../../Models/status";
 /**
  * Interface for Status instance
  */

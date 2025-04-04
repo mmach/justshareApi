@@ -1,14 +1,6 @@
 
 import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
-
-/**
- * Interface for ItemTag attributes
- */
-export interface ItemTagDTO {
-  id: string;
-  tag_id?: string;
-  item_id?: string;
-}
+import { ItemTagDTO } from "../../../Models/item";
 
 /**
  * Interface for ItemTag instance

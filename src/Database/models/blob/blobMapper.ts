@@ -1,12 +1,7 @@
 
 import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
+import { BlobMapperDTO } from "../../../Models/blob";
 
-/**
- * Interface for BlobMapper attributes
- */
-export interface BlobMapperDTO {
-  id: string;
-}
 
 /**
  * Interface for BlobMapper instance

@@ -1,15 +1,6 @@
 
 import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
-
-/**
- * Interface for EsItemSync attributes
- */
-export interface EsItemSyncDTO {
-  id: string;
-  item_id?: string;
-  project_id?: string;
-  operation?: string;
-}
+import { EsItemSyncDTO } from "../../../Models/sync/esItemSync";
 
 /**
  * Interface for EsItemSync instance

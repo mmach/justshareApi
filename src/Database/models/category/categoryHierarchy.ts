@@ -1,15 +1,7 @@
 
-import { Model, ModelStatic, Sequelize, DataTypes, QueryTypes } from "sequelize";
+import { DataTypes, Model, ModelStatic, QueryTypes, Sequelize } from "sequelize";
 import { v4 as uuidv4 } from "uuid";
-
-/**
- * Interface for CategoryHierarchy attributes
- */
-export interface CategoryHierarchyAttributesDTO {
-  id: string;
-  category_child_id?: string;
-  category_parent_id?: string;
-}
+import { CategoryHierarchyAttributesDTO } from "../../../Models/category";
 
 /**
  * Interface for CategoryHierarchy instance

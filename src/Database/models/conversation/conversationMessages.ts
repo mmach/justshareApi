@@ -1,24 +1,6 @@
 
-import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
-import { vUserDTO } from "../user/v_user";
-import { ConversationMessageMembersDTO } from "./conversationMessagesMembers";
-
-/**
- * Interface for ConversationMessages attributes
- */
-export interface ConversationMessagesDTO {
-  id: string;
-  user_id?: string;
-  message_triggered_id?: string;
-  conversation_id?: string;
-  message?: string;
-  project_id?: string;
-  is_newest?: boolean;
-
-  user_detail?: vUserDTO;
-  users?: ConversationMessageMembersDTO[];
-}
-
+import { DataTypes, Model, ModelStatic, Sequelize } from "sequelize";
+import { ConversationMessagesDTO } from "../../../Models/conversation/conversationMessages";
 /**
  * Interface for ConversationMessages instance
  */

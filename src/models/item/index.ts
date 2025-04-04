@@ -1,5 +1,6 @@
 export * from './item'
 export * from './itemCategory'
+export * from './itemCategoryOption'
 export * from './itemCategoryOptionTerm'
 export * from './itemProcessState'
 export * from './itemTag'

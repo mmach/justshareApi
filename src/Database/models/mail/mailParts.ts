@@ -1,18 +1,7 @@
 'use strict';
 
 import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
-
-/**
- * Interface for MailParts attributes
- */
-export interface MailPartsDTO {
-  id: string;
-  project_id?: string;
-  name?: string;
-  type?: string;
-  body?: string;
-}
-
+import { MailPartsDTO } from "../../../Models/mail";
 /**
  * Interface for MailParts instance
  */

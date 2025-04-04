@@ -1,20 +1,6 @@
 
-import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
-
-/**
- * Interface for InvoiceItem attributes
- */
-export interface InvoiceItemDTO {
-  id: string;
-  price?: number;
-  price_net?: number;
-  price_tax?: number;
-  tax?: number;
-  amount?: number;
-  currency?: string;
-  title?: string;
-  project_id?: string;
-}
+import { DataTypes, Model, ModelStatic, Sequelize } from "sequelize";
+import { InvoiceItemDTO } from "../../../Models/invoice";
 
 /**
  * Interface for InvoiceItem instance

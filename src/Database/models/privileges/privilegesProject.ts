@@ -1,20 +1,7 @@
 'use strict';
 
-import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
-import { PrivilegesDTO } from "./privileges";
-
-/**
- * Interface for PrivilegesProject attributes
- */
-export interface PrivilegesProjectDTO {
-  id: string;
-  privilege_id?: string;
-  project_id?: string;
-  status?: boolean;
-
-  privilege_details?: PrivilegesDTO;
-
-}
+import { DataTypes, Model, ModelStatic, Sequelize } from "sequelize";
+import { PrivilegesProjectDTO } from "../../../Models/privileges";
 
 /**
  * Interface for PrivilegesProject instance

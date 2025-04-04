@@ -1,20 +1,7 @@
 'use strict';
 
 import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
-
-/**
- * Interface for MailTypes attributes
- */
-export interface MailTypesDTO {
-  id: string;
-  token?: string;
-  description?: string;
-  bodyPayload?: string;
-  templatePayload?: string;
-  body?: string;
-  templateBody?: string;
-}
-
+import { MailTypesDTO } from "../../../Models/mail";
 /**
  * Interface for MailTypes instance
  */

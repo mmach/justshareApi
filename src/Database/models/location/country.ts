@@ -1,19 +1,6 @@
 
 import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
-
-/**
- * Interface for Country attributes
- */
-export interface CountryDTO {
-  id: string;
-  name?: string;
-  status?: string;
-  uid?: string;
-  name_clob?: string;
-  name_clear?: string;
-  longitude?: number;
-  latitude?: number;
-}
+import { CountryDTO } from "../../../Models/location";
 
 /**
  * Interface for Country instance

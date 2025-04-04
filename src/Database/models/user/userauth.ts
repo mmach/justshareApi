@@ -1,17 +1,7 @@
 'use strict';
 
-import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
-
-/**
- * Interface for UserAuths attributes
- */
-export interface UserAuthsDTO {
-  id: string;
-  user_id?: string;
-  socialUser_id?: number;
-  socialType?: number;
-}
-
+import { DataTypes, Model, ModelStatic, Sequelize } from "sequelize";
+import { UserAuthsDTO } from "../../../Models/user/userauth";
 /**
  * Interface for UserAuths instance
  */

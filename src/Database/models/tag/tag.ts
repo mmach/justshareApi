@@ -1,16 +1,7 @@
 'use strict';
 
 import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
-
-/**
- * Interface for Tag attributes
- */
-export interface TagDTO {
-  id: string;
-  tag?: string;
-  project_id?: string;
-}
-
+import { TagDTO } from "../../../Models/tag";
 /**
  * Interface for Tag instance
  */

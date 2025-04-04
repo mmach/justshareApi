@@ -1,19 +1,5 @@
-import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
-import { PrivilegesProjectDTO } from "../privileges/privilegesProject";
-
-/**
- * Interface for CmsPagePrivilegesProjects attributes
- */
-export interface CmsPagePrivilegesProjectsDTO {
-  id: string;
-  privilege_id?: string;
-  cms_page_id?: string;
-  status?: string;
-  project_id?: string;
-
-
-  privileges?: PrivilegesProjectDTO;
-}
+import { DataTypes, Model, ModelStatic, Sequelize } from "sequelize";
+import { CmsPagePrivilegesProjectsDTO } from "../../../Models/cms/cmsPagePrivilegesProjects";
 
 /**
  * Interface for CmsPagePrivilegesProjects instance

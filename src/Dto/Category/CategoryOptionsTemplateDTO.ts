@@ -1,5 +1,5 @@
-import { CategoryOptionsTypeTemplateDTO } from "../../Database/models/category/categoryOptionsTypeTemplate";
-import { TranslationsDTO } from "../../Database/models/translations/translations";
+import { CategoryOptionsTypeTemplateDTO } from "../../Models/category";
+import { TranslationsDTO } from "../../Models/translations";
 
 export interface CategoryOptionsTemplateDTO {
     id: string;

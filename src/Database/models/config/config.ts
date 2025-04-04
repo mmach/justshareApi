@@ -1,15 +1,5 @@
 import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
-
-/**
- * Interface for Config attributes
- */
-export interface ConfigDTO {
-  id: string;
-  project_id?: string;
-  type?: string;
-  lang?: string;
-  body?: string;
-}
+import { ConfigDTO } from "../../../Models/config";
 
 /**
  * Interface for Config instance

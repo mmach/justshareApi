@@ -1,6 +1,6 @@
 'use strict';
 import { DataTypes, Model, ModelStatic, Sequelize } from "sequelize";
-import { CategoryOptionsTemplateDTO } from "../../../Dto/Category/CategoryOptionsTemplateDTO";
+import { CategoryOptionsTemplateDTO } from "../../../Models/category";
 
 export interface CategoryOptionsTemplateInstance extends Model<CategoryOptionsTemplateDTO>, CategoryOptionsTemplateDTO { }
 

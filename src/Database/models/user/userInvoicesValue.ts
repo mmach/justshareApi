@@ -1,27 +1,7 @@
 'use strict';
 
-import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
-import { UsersDTO } from "./user";
-
-/**
- * Interface for UserInvoiceValue attributes
- */
-export interface UserInvoiceValueDTO {
-  id: string;
-  name?: string;
-  address?: string;
-  tax_number?: string;
-  country?: string;
-  city?: string;
-  zip_code?: string;
-  user_name?: string;
-  bank_account_nr?: string;
-  project_id?: string;
-
-  user?: UsersDTO;
-
-}
-
+import { DataTypes, Model, ModelStatic, Sequelize } from "sequelize";
+import { UserInvoiceValueDTO } from "../../../Models/user";
 /**
  * Interface for UserInvoiceValue instance
  */

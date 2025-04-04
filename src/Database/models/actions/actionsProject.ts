@@ -1,24 +1,7 @@
 
-import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
-import { ActionsDTO } from "./actions";
-import { ActionPrivilegesDTO } from "./actionPrivileges";
-import { StatusActionsDTO } from "../status/statusActions";
-import { ProcessDTO } from "../process/process";
+import { DataTypes, Model, ModelStatic, Sequelize } from "sequelize";
+import { ActionsProjectDTO } from "../../../Models/actions";
 
-
-export interface ActionsProjectDTO {
-  id: string;
-  action_id?: string;
-  project_id?: boolean;
-  status?: string;
-  func?: string;
-  process_id?: string;
-  
-  action_details: ActionsDTO
-  action_privileges: ActionPrivilegesDTO[]
-  statuses: StatusActionsDTO[]
-  process?: ProcessDTO
-}
 
 
 export interface ActionsProjectInstance extends Model<ActionsProjectDTO>, ActionsProjectDTO { }

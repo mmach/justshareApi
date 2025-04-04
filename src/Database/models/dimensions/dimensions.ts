@@ -1,21 +1,7 @@
 'use strict';
 
 import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
-
-/**
- * Interface for Dimensions attributes
- */
-export interface DimensionsDTO {
-  id: string;
-  name?: string;
-  uniq_name?: string;
-  description?: string;
-  co_type_id?: string;
-  cott_id?: string;
-  as_cat_ref?: boolean;
-  project_id?: string;
-}
-
+import { DimensionsDTO } from "../../../Models/dimensions";
 /**
  * Interface for Dimensions instance
  */

@@ -1,26 +1,7 @@
 'use strict';
 
-import { Model, ModelStatic, Sequelize, DataTypes } from "sequelize";
-import { TranslationsDTO } from "../translations/translations";
-
-/**
- * Interface for MailSenders attributes
- */
-export interface MailSendersDTO {
-  id: string;
-  translation_id?: string;
-  email?: string;
-  password?: string;
-  sendgrid_key?: string;
-  smtp_host?: string;
-  smtp_port?: string;
-  smtp_security?: boolean;
-  project_id?: string;
-
-  translation?: TranslationsDTO;
-
-}
-
+import { DataTypes, Model, ModelStatic, Sequelize } from "sequelize";
+import { MailSendersDTO } from "../../../Models/mail";
 /**
  * Interface for MailSenders instance
  */

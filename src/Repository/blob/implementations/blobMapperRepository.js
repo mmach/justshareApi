@@ -1,5 +1,5 @@
-import {BaseRepository} from "../../Architecture/Base/baseRepository.js";
-import SequelizeDB from "../../Database/models/index.js";
+import {BaseRepository} from "../../../Architecture/Base/baseRepository.js";
+import SequelizeDB from "../../../Database/models/index.js";
 
 /**
  *

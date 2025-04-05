@@ -63,7 +63,7 @@ export class BaseRepositoryType<T extends BaseDBO, DAL extends Model> implements
     this.transaction = transaction;
   }
 
-  getTran({ transaction }: { transaction?: number }): number | null {
+  getTran({ transaction }: { transaction?: number }): any {
     if (transaction != null) {
       return transaction;
     } else if (this.transaction != 0) {

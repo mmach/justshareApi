@@ -1,5 +1,5 @@
 import {BaseService} from "../Architecture/Base/baseService";
-import BlobRepository from "../Repository/blob/blobRepository.js";
+import BlobRepository from "../Repository/blob/implementations/blobRepository.js";
 
 /**
  *

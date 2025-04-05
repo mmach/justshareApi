@@ -1,24 +1,19 @@
-import {BaseRepository} from "../../Architecture/Base/baseRepository.js";
-import SequelizeDB from "../../Database/models/index.js";
 import fs from 'fs';
-/**
- *
- * @export
- * @class BlobRepository
- * @extends BaseRepository
- */
-export default class BlobRepository extends BaseRepository {
-  /**
-   *Creates an instance of CategoryRepository.
-   * @param {{sequelizeDI:SequelizeDB}}
-   * @memberof BlobRepository
-   */
-  constructor({ sequelizeDI }) {
+import { QueryTypes, Sequelize } from "sequelize";
+import { IMappsDbModels } from "../../../Domain/models.js";
+import { BlobDBO } from '../../../DBO/index.js';
+import { BaseRepositoryType } from '../../../Architecture/Base/baseRepositoryType.js';
+import { Blob } from '../../../Domain/index.js';
+
+export default class BlobRepository extends BaseRepositoryType<BlobDBO, Blob> {
+  sequelizeDI: IMappsDbModels & { sequelize: Sequelize };
+
+  constructor({ sequelizeDI }: { sequelizeDI: IMappsDbModels & { sequelize: Sequelize } }) {
     super(sequelizeDI.Blob);
     this.sequelizeDI = sequelizeDI;
   }
 
-  getByGuids({ ids, transaction }) {
+  getByGuids({ ids, transaction }: { ids: string[], transaction?: number }) {
     console.log('getByGuids')
     return this.sequelizeDI.sequelize.query(
       `
@@ -36,19 +31,18 @@ export default class BlobRepository extends BaseRepository {
     `,
       {
         replacements: { ids: ids },
-        transaction: this.getTran({ transaction }),
-        type: this.sequelizeDI.sequelize.QueryTypes.SELECT
+        transaction: this.getTran({ transaction }) as any,
+        type: QueryTypes.SELECT
       }
     );
 
   }
 
-  getProjectsItemsStorage({ model, transaction }) {
+  getProjectsItemsStorage({ transaction }: { transaction?: number }) {
     return this.entityDAO.findAll({
       where: {
         project_id: this.context.project.id,
         item_id: this.sequelizeDI.sequelize.literal(`item_id IS NOT NULL`),
-
         category_id: null
       },
       include: [
@@ -63,16 +57,15 @@ export default class BlobRepository extends BaseRepository {
           required: true
         }
       ],
-      transaction: this.getTran({ transaction })
+      transaction: this.getTran({ transaction }) as any
     })
   }
 
-  getProjectsCategoriesStorage({ model, transaction }) {
+  getProjectsCategoriesStorage({ transaction }: { transaction?: number }) {
     return this.entityDAO.findAll({
       where: {
         project_id: this.context.project.id,
         category_id: this.sequelizeDI.sequelize.literal(`category_id IS NOT NULL`),
-
       },
       include: [
         {
@@ -86,10 +79,10 @@ export default class BlobRepository extends BaseRepository {
           required: true
         }
       ],
-      transaction: this.getTran({ transaction })
+      transaction: this.getTran({ transaction }) as any
     })
   }
-  getProjectsUsersStorage({ model, transaction }) {
+  getProjectsUsersStorage({ transaction }: { transaction?: number }) {
     return this.entityDAO.findAll({
       where: {
         project_id: this.context.project.id,
@@ -113,7 +106,7 @@ export default class BlobRepository extends BaseRepository {
     })
   }
 
-  getProjectsStorage({ model, transaction }) {
+  getProjectsStorage({ transaction }: { transaction?: number }) {
     return this.entityDAO.findAll({
       where: {
         project_id: this.context.project.id,
@@ -136,10 +129,17 @@ export default class BlobRepository extends BaseRepository {
       transaction: this.getTran({ transaction })
     })
   }
-  insertFile({ id, path, name, transaction }) {
+
+  insertFile({ id, path, name, transaction }: { id: string, path: string, name: string, transaction?: number }) {
     var blob = fs.readFileSync(path);
     let file_type = name.split('.')[name.split('.').length - 1]
-    let size = stringToBytesFaster(blob.toString('base64')).length;
+    //let size = stringToBytesFaster(blob.toString('base64')).length;
+    const base64Size = (base64String: string): number => {
+      const padding = (base64String.match(/=/g) || []).length;
+      const base64Length = base64String.length;
+      return (base64Length * 3) / 4 - padding;
+    };
+    let size = base64Size(blob.toString('base64'));
     return this.sequelizeDI.sequelize.query(
       `SET NOCOUNT ON
         DECLARE @result TABLE 
@@ -182,13 +182,14 @@ export default class BlobRepository extends BaseRepository {
         logging: false,
         replacements: { blob: blob, id: id, name: name, file_type: file_type, size: size },
         transaction: this.getTran({ transaction }),
-        type: this.sequelizeDI.sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
 
       }
     );
 
+
   }
-  getBlobs({ userId, itemId, transaction }) {
+  getBlobs({ userId, itemId, transaction }: { userId: string | null | undefined, itemId: string | null | undefined, transaction?: number }) {
     return this.entityDAO.findAll({
       where: {
         user_id: this.toStr(userId),
@@ -213,7 +214,7 @@ export default class BlobRepository extends BaseRepository {
 
   getUnverified({
     transaction
-  }) {
+  }: { transaction?: number }) {
     return this.entityDAO.findAll({
       where: {
         status: 0
@@ -236,7 +237,7 @@ export default class BlobRepository extends BaseRepository {
 
   verifyImage({
     blob, transaction
-  }) {
+  }: { blob: BlobDBO, transaction?: number }) {
     return this.entityDAO.update(
       {
         status: 1
@@ -251,10 +252,9 @@ export default class BlobRepository extends BaseRepository {
   }
   getBlobsCategory({
     category_id, transaction
-  }) {
+  }: { category_id: string, transaction?: number }) {
     return this.entityDAO.findAll(
       {
-
         where: { category_id: this.toStr(category_id) },
         transaction: this.getTran({ transaction })
       }

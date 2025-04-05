@@ -4,7 +4,7 @@ import {v4} from "uuid";
 import {BaseService} from "../../Architecture/Base/baseService";
 import {ServerException} from "../../Architecture/Exceptions/serverException.js";
 import CONFIG from "../../config.js";
-import BlobRepository from "../../Repository/blob/blobRepository.js";
+import BlobRepository from "../../Repository/blob/implementations/blobRepository.js";
 
 let upload_path = process.env.UPLOAD_PATH || CONFIG.UPLOAD_PATH
 let saveBlobToFile = async ({ blob }) => {

@@ -14,7 +14,7 @@ export class BaseUnitOfWork {
             this.repositories[String(item)].setContext({ context });
         })
     }
-    async setTransaction({ transaction }: { transaction: Transaction }) {
+    setTransaction({ transaction }: { transaction: Transaction }) {
         this.transaction = transaction;
         Object.keys(this.repositories).map(item => {
             this.repositories[String(item)].setTransaction({ transaction: transaction });

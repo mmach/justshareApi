@@ -21,7 +21,7 @@ export class DbTransactionInfrastucture extends BaseInfrastracture {
     }
     async executeLayer(action) {
         this.transaction = await this.unitOfWorkDI.startTransaction();
-        await this.unitOfWorkDI.setTransaction({ transaction: this.transaction });
+        this.unitOfWorkDI.setTransaction({ transaction: this.transaction });
         return await action;
 
     }

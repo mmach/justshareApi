@@ -6,6 +6,6 @@ export type AuthContextDTO = {
         uid: string | undefined
     }
     project: any | undefined
-    allowForAll: boolean | undefined
+    allowForAll?: boolean | undefined
 }
 

@@ -1,5 +1,5 @@
 import { BaseService } from "../../Architecture/Base/baseService";
-import CategoryRepository from "../../Repository/categoryRepository.js";
+import CategoryRepository from "../../Repository/category/categoryRepository.js";
 import { CategoryHierarchyDTO, CategoryDTO } from "justshare-shared";
 
 /**

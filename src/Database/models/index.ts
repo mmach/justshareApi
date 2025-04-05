@@ -2,80 +2,8 @@
 
 import { Sequelize } from "sequelize";
 import { DBConfig } from "../config/config";
-import Users from "./user/user";
-import Category from "./category/category";
-import CategoryHierarchy from "./category/categoryHierarchy";
-import Blob from "./blob/blob";
-import BlobMapper from "./blob/blobMapper";
-import Item from "./item/item";
-import ItemCategory from "./item/itemCategory";
-import vUser from "./user/v_user";
-import Country from "./location/country";
-import City from "./location/city";
-import UserAuths from "./user/userauth";
-import CategoryOption from "./category/categoryOption";
-import CategoryOptionsTemplate from "./category/categoryOptionsTemplate";
-import CategoryOptionsTypeTemplate from "./category/categoryOptionsTypeTemplate";
-import CategoryOptionsType from "./category/categoryOptionsType";
-import CategoryOptionsLink from "./category/categoryOptionsLink";
-import ItemCategoryOption from "./item/itemCategoryOption";
-import Tag from "./tag/tag";
-import ItemTag from "./item/itemTag";
-import Project from "./project/project";
-import Config from './config/config';
-import EsItemSync from './sync/esItemSync';
-import Translations from "./translations/translations";
-import Language from "./language/language";
-import LanguageProject from "./language/languageProject";
-import Actions from "./actions/actions";
-import ActionPrivileges from "./actions/actionPrivileges";
-import ActionsProject from "./actions/actionsProject";
-import CategoryActions from "./category/categoryActions";
-import Privileges from "./privileges/privileges";
-import PrivilegesProject from "./privileges/privilegesProject";
-import UserTypes from './user/userTypes';
-import Roles from "./roles/roles";
-import RolesProject from "./roles/rolesProject";
-import UserRoles from "./user/userRoles";
-import UserTypeRoles from "./user/userTypeRoles";
-import Dimensions from "./dimensions/dimensions";
-import DimensionsProject from './dimensions/dimensionsProject';
-import vProject from "./project/v_project";
-import MailParts from "./mail/mailParts";
-import MailSenders from "./mail/mailSenders";
-import MailTypes from "./mail/mailTypes";
-import MailTypesProjects from "./mail/mailTypesProject";
-import Seos from "./seo/seos";
-import V_Category from "./category/v_category";
-import ItemUserAction from "./item/itemUserAction";
-import ItemTransactionCategoryOptions from "./item/itemTransactionCategoryOptions";
-import ItemTransaction from './item/itemTransaction';
-import Conversation from "./conversation/conversation";
-import UserConversation from "./user/userconversation";
-import ConversationMessages from "./conversation/conversationMessages";
-import ConversationMessageMembers from "./conversation/conversationMessagesMembers";
-import Status from "./status/status";
-import StatusActions from "./status/statusActions";
-import StatusProjects from "./status/statusProjects";
-import ItemCategoryOptionTerm from "./item/itemCategoryOptionTerm";
-import Comment from "./comments/comments";
-import Invoice from './invoice/invoices';
-import InvoiceUser from "./invoice/invoicesUsers";
-import InvoiceItem from "./invoice/invoicesItems";
-import UserInvoiceValue from "./user/userInvoicesValue";
-import ProcessChain from "./process/processChain";
-import Process from "./process/process";
-import ProcessChainState from "./process/processChainState";
-import ItemProcessState from "./item/itemProcessState";
-import ProcessChainPrivilege from "./process/processChainPrivilege";
-import ProcessChainActionInjection from "./process/processChainActionInjection";
-import { MappsDbModels } from "./models";
-import CmsElementsProject from "./cms/cmsElementsProjects";
-import CmsMenuItemsPrivilegesProjects from "./cms/cmsMenuItemsPrivilegesProjects";
-import CmsMenuItemsProjects from "./cms/cmsMenuItemsProjects";
-import CmsMenuProjects from "./cms/cmsMenuProjects";
-import CmsPagePrivilegesProjects from "./cms/cmsPagePrivilegesProjects";
-import CmsPagesProjects from "./cms/cmsPagesProjects";
+import { Users, Category, CategoryHierarchy, BlobMapper, Item, ItemCategory, vUser, Country, City, UserAuths, CategoryOptionsType, CategoryOptionsTypeTemplate, CategoryOptionsTemplate, CategoryOption, CategoryOptionsLink, ItemCategoryOption, Tag, ItemTag, Project, Config, UserTypes, EsItemSync, Translations, Language, LanguageProject, Actions, ActionPrivileges, ActionsProject, CategoryActions, Privileges, PrivilegesProject, Roles, RolesProject, UserRoles, UserTypeRoles, DimensionsProject, Dimensions, vProject, MailParts, MailSenders, MailTypes, MailTypesProjects, Seos, V_Category, ItemUserAction, ItemTransactionCategoryOptions, ItemTransaction, Conversation, UserConversation, ConversationMessages, ConversationMessageMembers, Status, StatusActions, StatusProjects, ItemCategoryOptionTerm, Comment, Invoice, InvoiceUser, InvoiceItem, UserInvoiceValue, ProcessChain, Process, ProcessChainState, ItemProcessState, ProcessChainActionInjection, ProcessChainPrivilege, CmsElementsProject, CmsMenuItemsPrivilegesProjects, CmsMenuItemsProjects, CmsMenuProjects, CmsPagesProjects, CmsPagePrivilegesProjects, Blob } from "../../Domain";
+import { IMappsDbModels } from "../../Domain/models";
 
 const env = process.env.NODE_ENV || "development";
 const config = (DBConfig as any)[env];
@@ -88,7 +16,7 @@ const db = {
   Sequelize,
 };
 
-const models: MappsDbModels = {
+const models: IMappsDbModels = {
   Users: Users.initModel(sequelize),
   Category: Category.initModel(sequelize),
   CategoryHierarchy: CategoryHierarchy.initModel(sequelize),
@@ -165,7 +93,7 @@ const models: MappsDbModels = {
 };
 
 Object.keys(models).forEach(modelName => {
-  const model: any = models[modelName as keyof MappsDbModels];
+  const model: any = models[modelName as keyof IMappsDbModels];
   if (model.associate) {
     //ts-disable
     model.associate(models);

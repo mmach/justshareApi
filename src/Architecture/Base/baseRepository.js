@@ -48,7 +48,7 @@ export class BaseRepository {
     return this;
   }
 
-  async setTransaction({ transaction }) {
+  setTransaction({ transaction }) {
     this.transaction = transaction;
   }
 

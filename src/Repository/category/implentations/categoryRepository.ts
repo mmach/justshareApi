@@ -1,20 +1,17 @@
-import {BaseRepository} from "../../Architecture/Base/baseRepository.js";
-import SequelizeDB from "../../Database/models/index.js";
-import PrepareSearch from "../../Architecture/prepareSearch.js";
+import { ModelStatic, QueryTypes, Sequelize } from "sequelize";
+import { BaseRepositoryType } from "../../../Architecture";
+import PrepareSearch from "../../../Architecture/prepareSearch";
+import { CategoryActionsDBO, CategoryDBO, V_CategoryDBO } from "../../../DBO";
+import { Category, CategoryActions, V_Category } from "../../../Domain";
+import { IMappsDbModels } from "../../../Domain/models.js";
+import { ICategoryRepository } from "../categoryRepository";
 
-/**
- *
- * @export
- * @class CategoryRepository
- * @extends BaseRepository
- */
-export default class CategoryRepository extends BaseRepository {
-  /**
-   *Creates an instance of CategoryRepository.
-   * @param {{sequelizeDI:SequelizeDB}}
-   * @memberof CategoryRepository
-   */
-  constructor({ sequelizeDI }) {
+
+export default class CategoryRepository extends BaseRepositoryType<CategoryDBO, Category> implements ICategoryRepository {
+  sequelizeDI: IMappsDbModels & { sequelize: Sequelize }
+  CategoryVDB: ModelStatic<V_Category>
+  CategoryActionsDB: ModelStatic<CategoryActions>
+  constructor({ sequelizeDI }: { sequelizeDI: IMappsDbModels & { sequelize: Sequelize } }) {
     super(sequelizeDI.Category);
     this.CategoryVDB = sequelizeDI.V_Category;
     this.CategoryActionsDB = sequelizeDI.CategoryActions;
@@ -23,16 +20,15 @@ export default class CategoryRepository extends BaseRepository {
   }
 
 
-  deleteAction({ model, transaction }) {
+  deleteAction({ model, transaction }: { model: CategoryActionsDBO, transaction?: number }): Promise<number> {
     let where = { id: this.toStr(model.id) }
-
     return this.CategoryActionsDB.destroy({
       where: where,
       transaction: this.getTran({ transaction })
     });
   }
 
-  insertAction({ model, transaction }) {
+  insertAction({ model, transaction }: { model: CategoryActionsDBO, transaction?: number }): Promise<CategoryActions> {
     let item = model;
 
     return this.CategoryActionsDB.create(item, {
@@ -42,7 +38,8 @@ export default class CategoryRepository extends BaseRepository {
       plain: true
     });
   }
-  getAllCategoriesFlat({ model, transaction }) {
+
+  getAllCategoriesFlat({ model, transaction }: { model: CategoryDBO, transaction?: number }): Promise<object[]> {
     return this.sequelizeDI.sequelize.query(
       `
       SELECT
@@ -57,18 +54,16 @@ export default class CategoryRepository extends BaseRepository {
       {
         replacements: { status: model.status, project_id: this.context.project.id },
         transaction: this.getTran({ transaction }),
-        type: this.sequelizeDI.sequelize.QueryTypes.SELECT
+        type: QueryTypes.SELECT
       }
     );
   }
-  updateIcon({ category_id, old_icon_id, new_icon_id, transaction }) {
+  updateIcon({ category_id, old_icon_id, new_icon_id, transaction }: { category_id: string, old_icon_id: string, new_icon_id: string, transaction?: number }): Promise<[affectedCount: number]> | undefined {
     let where = {}
     if (old_icon_id) {
       where = { blob_id: old_icon_id }
-
     } else if (category_id) {
       where = { id: this.toStr(category_id) }
-
     } else {
       return
     }
@@ -85,7 +80,7 @@ export default class CategoryRepository extends BaseRepository {
 
   }
 
-  getAllActions({ ids, transaction }) {
+  getAllActions({ ids, transaction }: { ids: string[], transaction?: number }): Promise<CategoryActions[]> {
     return this.CategoryActionsDB.findAll({
       where: {
         category_id: ids
@@ -94,14 +89,9 @@ export default class CategoryRepository extends BaseRepository {
 
     })
   }
-  /**
-   *
-   *
-   * @param {Array} {id}
-   * @memberof CategoryRepository
-   */
-  getCategoryTree({ ids, parent, transaction }) {
-    let where = { id: ids, project_id: this.context.project.id };
+
+  getCategoryTree({ ids, parent, transaction }: { ids: string[], parent?: string, transaction?: number }): Promise<V_Category[]> {
+    let where: { id?: string[], project_id: string, category?: string, status?: number } = { id: ids, project_id: this.context.project.id };
 
     if (ids[0] == '_ROOT') {
       where = { category: "_ROOT", project_id: this.context.project.id }
@@ -128,8 +118,8 @@ export default class CategoryRepository extends BaseRepository {
            }
            ]*/
         },
-       
-      
+
+
         {
           model: this.sequelizeDI.Blob,
           as: "icon_blob"
@@ -180,8 +170,8 @@ export default class CategoryRepository extends BaseRepository {
       transaction: this.getTran({ transaction })
     });
   }
-  
-  removeCategory({ id, transaction }) {
+
+  removeCategory({ id, transaction }: { id: string, transaction?: number }): Promise<number> {
     return this.entityDAO.destroy({
       where: { id: id, project_id: this.context.project.id },
       transaction: this.getTran({ transaction }),
@@ -190,7 +180,7 @@ export default class CategoryRepository extends BaseRepository {
     });
   }
 
-  setAsVerified({ id, status, transaction }) {
+  setAsVerified({ id, status, transaction }: { id: string, status: number, transaction?: number }): Promise<[affectedCount: number]> {
     return this.entityDAO.update(
       {
         status: this.toStr(status)
@@ -202,7 +192,7 @@ export default class CategoryRepository extends BaseRepository {
     );
   }
 
-  getCategoryRelated({ id, transaction }) {
+  getCategoryRelated({ id, transaction }: { id: string, transaction?: number }): Promise<V_CategoryDBO[]> {
     return this.sequelizeDI.sequelize.query(
       `
      
@@ -224,18 +214,16 @@ export default class CategoryRepository extends BaseRepository {
       {
         replacements: { id: id, project_id: this.context.project.id },
         transaction: this.getTran({ transaction }),
-        type: this.sequelizeDI.sequelize.QueryTypes.SELECT
+        type: QueryTypes.SELECT
       }
     );
 
 
   }
 
+  getCategoriesParents({ ids, transaction }: { ids: string[], transaction?: number }): Promise<V_CategoryDBO[]> {
 
-
-  getCategoriesParents({ ids, transaction }) {
-
-    let replacements = { id: ids };
+    let replacements: { id: string[], project_id?: string } = { id: ids };
     if (!this.context.project.allowForAll) {
       replacements.project_id = this.context.project.id
     }
@@ -276,13 +264,12 @@ export default class CategoryRepository extends BaseRepository {
       {
         replacements: replacements,
         transaction: this.getTran({ transaction }),
-        type: this.sequelizeDI.sequelize.QueryTypes.SELECT
+        type: QueryTypes.SELECT
       }
     );
-
-
   }
-  getCategoryFreetext({ search, isFor, transaction }) {
+
+  getCategoryFreetext({ search, transaction }: { search: string, transaction?: number }): Promise<object[]> {
     let lang = undefined;
     let freetext = PrepareSearch.prepareSmall(search)
     freetext = freetext != undefined ? freetext : '""';
@@ -320,10 +307,17 @@ export default class CategoryRepository extends BaseRepository {
       {
         replacements: { freetext: freetext },
         transaction: this.getTran({ transaction }),
-        type: this.sequelizeDI.sequelize.QueryTypes.SELECT
+        type: QueryTypes.SELECT
       }
     );
 
 
   }
 }
+
+export const CategoryRepositoryPlugin = {
+  pluginName: "category-repository",
+  type: 'repository',
+  di: 'categoryRepositoryDI',
+  classType: CategoryRepository
+};

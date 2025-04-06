@@ -6,10 +6,10 @@ import ActionProjectRepository from "./Repository/actions/implementations/action
 import ActionRepository from "./Repository/actions/implementations/actionRepository.js";
 import BlobMapperRepository from "./Repository/blob/implementations/blobMapperRepository.js";
 import BlobRepository from "./Repository/blob/implementations/blobRepository.js";
-import CategoryActionsRepository from "./Repository/category/categoryActionsRepository.js";
-import CategoryHierarchyRepository from "./Repository/category/categoryHierarchyRepository.js";
-import CategoryOptionsRepository from "./Repository/category/categoryOptionsRepository.js";
-import CategoryRepository from "./Repository/category/categoryRepository.js";
+import CategoryActionsRepository from "./Repository/category/implentations/categoryActionsRepository.js";
+import CategoryHierarchyRepository from "./Repository/category/implentations/categoryHierarchyRepository.js";
+import CategoryOptionsRepository from "./Repository/category/implentations/categoryOptionsRepository.js";
+import CategoryRepository from "./Repository/category/implentations/categoryRepository.js";
 import CityRepository from "./Repository/location/cityRepository.js";
 import CmsElementsProjectRepository from "./Repository/cms/cmsElementsProjectRepository.js";
 import CmsMenuItemsPrivilegesProjectRepository from "./Repository/cms/cmsMenuItemsPrivilegesProjectRepository.js";

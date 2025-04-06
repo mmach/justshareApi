@@ -1,6 +1,6 @@
 
 import { DataTypes, Model, ModelStatic, Sequelize } from "sequelize";
-import { CategoryOptionDBO } from "../../DBO/category";
+import { CategoryOptionDBO } from "../../../DBO/category";
 
 /**
  * Interface for CategoryOption instance

@@ -1,4 +1,4 @@
-import { IBaseRepositoryType } from "../../Architecture/Base/baseRepositoryType";
+import { IBaseRepositoryType } from "../../Architecture";
 import { ActionsDBO } from "../../DBO";
 import { Actions } from "../../Domain";
 

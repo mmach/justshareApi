@@ -1,7 +1,7 @@
 'use strict';
 
 import { BaseDBO } from "../../Architecture/Base/baseDBO";
-import { CategoryOptionAttributesDBO } from "./categoryOption";
+import { CategoryOptionDBO } from "./categoryOption";
 import { V_CategoryDBO } from "./v_category";
 
 /**
@@ -35,5 +35,5 @@ export interface CategoryOptionsLinkDBO extends BaseDBO {
   create_params?: string;
 
   category?: V_CategoryDBO;
-  catOption?: CategoryOptionAttributesDBO;
+  catOption?: CategoryOptionDBO;
 }

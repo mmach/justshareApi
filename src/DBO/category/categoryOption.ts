@@ -7,7 +7,7 @@ import { CategoryOptionsTypeDBO } from "./categoryOptionsType";
 /**
  * Interface for CategoryOption attributes
  */
-export interface CategoryOptionAttributesDBO extends BaseDBO {
+export interface CategoryOptionDBO extends BaseDBO {
   id: string;
   cot_id?: string;
   name?: string;
@@ -39,7 +39,7 @@ export interface CategoryOptionAttributesDBO extends BaseDBO {
   project_id?: string;
   dim_id?: string;
   order_search?: number;
-  is_required?: number;
+  is_required?: boolean | undefined;
   is_required_message?: string;
   min_selected?: number;
   min_selected_dim_id_ref?: string;

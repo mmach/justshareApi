@@ -1,4 +1,4 @@
-import { BaseRepositoryType } from "../../../Architecture/Base/baseRepositoryType.js";
+import { BaseRepositoryType } from "../../../Architecture";
 import { ActionsProjectDBO } from "../../../DBO/index.js";
 import { ActionsProject } from "../../../Domain/index.js";
 import { IMappsDbModels } from "../../../Domain/models.js";

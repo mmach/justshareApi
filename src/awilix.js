@@ -215,23 +215,21 @@ import GetUsersQuery from "./Query/User/getUsersQuery.js";
 import LogInByExternalQuery from "./Query/User/logInByExternalQuery.js";
 import LogInByRefreshTokenQuery from "./Query/User/logInByRefreshTokenQuery.js";
 import UserLogInInternalQuery from "./Query/User/userLogInInternalQuery.js";
-import ActionPrivilegesRepository from "./Repository/actions/implementations/actionPrivilegesRepository.js";
-import ActionProjectRepository from "./Repository/actions/implementations/actionProjectRepository.js";
-import ActionRepository from "./Repository/actions/implementations/actionRepository.js";
-import BlobMapperRepository from "./Repository/blob/implementations/blobMapperRepository.js";
-import BlobRepository from "./Repository/blob/implementations/blobRepository.js";
-import CategoryActionsRepository from "./Repository/category/categoryActionsRepository.js";
-import CategoryHierarchyRepository from "./Repository/category/categoryHierarchyRepository.js";
-import CategoryOptionsRepository from "./Repository/category/categoryOptionsRepository.js";
-import CategoryRepository from "./Repository/category/categoryRepository.js";
-import CityRepository from "./Repository/location/cityRepository.js";
+//import ActionPrivilegesRepository from "./Repository/actions/implementations/actionPrivilegesRepository.js";
+//import ActionProjectRepository from "./Repository/actions/implementations/actionProjectRepository.js";
+//import ActionRepository from "./Repository/actions/implementations/actionRepository.js";
+//import BlobMapperRepository from "./Repository/blob/implementations/blobMapperRepository.js";
+//import BlobRepository from "./Repository/blob/implementations/blobRepository.js";
+//import CategoryActionsRepository from "./Repository/category/implentations/categoryActionsRepository.js";
+//import CategoryHierarchyRepository from "./Repository/category/implentations/categoryHierarchyRepository.js";
+//import CategoryOptionsRepository from "./Repository/category/implentations/categoryOptionsRepository.js";
+//import CategoryRepository from "./Repository/category/implentations/categoryRepository.js";
 import CmsElementsProjectRepository from "./Repository/cms/cmsElementsProjectRepository.js";
 import CommentRepository from "./Repository/comments/commentRepository.js";
 import ConfigRepository from "./Repository/config/configRepository.js";
 import ConversationMessagesMembersRepository from "./Repository/conversation/conversationMessagesMembersRepository.js";
 import ConversationMessagesRepository from "./Repository/conversation/conversationMessagesRepository.js";
 import ConversationRepository from "./Repository/conversation/conversationRepository.js";
-import CountryRepository from "./Repository/location/countryRepository.js";
 import DimensionsProjectRepository from "./Repository/dimensions/dimensionsProjectRepository.js";
 import DimensionsRepository from "./Repository/dimensions/dimensionsRepository.js";
 import InvoiceItemRepository from "./Repository/invoice/invoiceItemsRepository.js";
@@ -245,6 +243,8 @@ import ItemTransactionsRepository from "./Repository/item/itemTransactionsReposi
 import ItemUserActionRepository from "./Repository/item/itemUserActionRepository.js";
 import LanguageProjectRepository from "./Repository/language/languageProjectRepository.js";
 import LanguageRepository from "./Repository/language/languageRepository.js";
+import CityRepository from "./Repository/location/cityRepository.js";
+import CountryRepository from "./Repository/location/countryRepository.js";
 import MailPartsRepository from "./Repository/mail/mailPartsRepository.js";
 import MailSendersRepository from "./Repository/mail/mailSendersRepository.js";
 import MailTypesProjectRepository from "./Repository/mail/mailTypesProjectRepository.js";
@@ -336,6 +336,7 @@ import GetCmsPagesQuery from "./Query/CmsPage/getCmsPagesQuery.js";
 import CmsPagePrivilegesProjectRepository from "./Repository/cms/cmsPagePrivilegesProjectRepository.js";
 
 import * as queries from './Query/index.js';
+import * as repositories from './Repository/injections.js';
 import * as services from './Services/index.js';
 
 /**
@@ -350,17 +351,21 @@ Object.keys(services).forEach(service => {
 Object.keys(queries).forEach(service => {
   exporter[queries[service].di] = asClass(queries[service].classType);
 })
+Object.keys(repositories).forEach(repo => {
+  exporter[repositories[repo].di] = asClass(repositories[repo].classType);
+})
 
-exporter = {...exporter,
-  categoryRepositoryDI: asClass(CategoryRepository),
+exporter = {
+  ...exporter,
+  //categoryRepositoryDI: asClass(CategoryRepository),
   userRepositoryDI: asClass(UserRepository),
   userServiceDI: asClass(UserService),
-  blobRepositoryDI: asClass(BlobRepository),
- // blobServiceDI: asClass(BlobService),
+  // blobRepositoryDI: asClass(BlobRepository),
+  //blobServiceDI: asClass(BlobService),
   cmsElementsProjectRepositoryDI: asClass(CmsElementsProjectRepository),
   //cmsElementsProjectServiceDI: asClass(CmsElementsProjectService),
-  blobMapperRepositoryDI: asClass(BlobMapperRepository),
-  categoryHierarchyRepositoryDI: asClass(CategoryHierarchyRepository),
+  // blobMapperRepositoryDI: asClass(BlobMapperRepository),
+  //categoryHierarchyRepositoryDI: asClass(CategoryHierarchyRepository),
   itemCategoryRepositoryDI: asClass(ItemCategoryRepository),
   itemRepositoryDI: asClass(ItemRepository),
   textRepositoryDI: asClass(TextRepository),
@@ -370,7 +375,7 @@ exporter = {...exporter,
   countryServiceDI: asClass(CountryService),
   cityRepositoryDI: asClass(CityRepository),
   cityServiceDI: asClass(CityService),
-  categoryOptionsRepositoryDI: asClass(CategoryOptionsRepository),
+  //categoryOptionsRepositoryDI: asClass(CategoryOptionsRepository),
   itemCategoryOptionRepositoryDI: asClass(ItemCategoryOptionRepository),
   userAuthRepositoryDI: asClass(UserAuthRepository),
   elasticSearchServiceDI: asClass(ElasticSearchService),
@@ -384,10 +389,10 @@ exporter = {...exporter,
   itemCategoryOptionsServiceDI: asClass(ItemCategoryOptionsService),
   userProjectPrivilegesRepositoryDI: asClass(UserProjectPrivilegesRepository),
   privilegeRepositoryDI: asClass(PrivilegeRepository),
-  actionPrivilegesRepositoryDI: asClass(ActionPrivilegesRepository),
-  actionProjectRepositoryDI: asClass(ActionProjectRepository),
-  actionRepositoryDI: asClass(ActionRepository),
-  categoryActionsRepositoryDI: asClass(CategoryActionsRepository),
+  //actionPrivilegesRepositoryDI: asClass(ActionPrivilegesRepository),
+  //actionProjectRepositoryDI: asClass(ActionProjectRepository),
+  //actionRepositoryDI: asClass(ActionRepository),
+  //categoryActionsRepositoryDI: asClass(CategoryActionsRepository),
   privilegeProjectRepositoryDI: asClass(PrivilegeProjectRepository),
   rolesProjectRepositoryDI: asClass(RolesProjectRepository),
   userRolesRepositoryDI: asClass(UserRolesRepository),

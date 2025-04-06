@@ -1,11 +1,11 @@
 import fs from 'fs';
 import { QueryTypes, Sequelize } from "sequelize";
-import { IMappsDbModels } from "../../../Domain/models.js";
-import { BlobDBO } from '../../../DBO/index.js';
-import { BaseRepositoryType } from '../../../Architecture/Base/baseRepositoryType.js';
-import { Blob } from '../../../Domain/index.js';
-
-export default class BlobRepository extends BaseRepositoryType<BlobDBO, Blob> {
+import { BaseRepositoryType } from '../../../Architecture';
+import { BlobDBO } from '../../../DBO/index';
+import { Blob } from '../../../Domain/index';
+import { IMappsDbModels } from "../../../Domain/models";
+import { IBlobRepository } from '../blobRepository';
+export default class BlobRepository extends BaseRepositoryType<BlobDBO, Blob> implements IBlobRepository {
   sequelizeDI: IMappsDbModels & { sequelize: Sequelize };
 
   constructor({ sequelizeDI }: { sequelizeDI: IMappsDbModels & { sequelize: Sequelize } }) {
@@ -14,7 +14,6 @@ export default class BlobRepository extends BaseRepositoryType<BlobDBO, Blob> {
   }
 
   getByGuids({ ids, transaction }: { ids: string[], transaction?: number }) {
-    console.log('getByGuids')
     return this.sequelizeDI.sequelize.query(
       `
         select blob,type,id
@@ -261,6 +260,11 @@ export default class BlobRepository extends BaseRepositoryType<BlobDBO, Blob> {
     );
   }
 
-
-
 }
+
+export const BlobRepositoryPlugin = {
+  pluginName: "blob-repository",
+  type: 'repository',
+  di: 'blobRepositoryDI',
+  classType: BlobRepository
+};

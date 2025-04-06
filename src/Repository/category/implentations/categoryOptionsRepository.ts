@@ -1,20 +1,20 @@
-import {BaseRepository} from "../../Architecture/Base/baseRepository.js";
-import SequelizeDB from "../../Database/models/index.js";
+import { ModelStatic } from "sequelize";
+import { BaseRepositoryType } from "../../../Architecture";
+import { CategoryOptionDBO } from "../../../DBO";
+import { CategoryOption, CategoryOptionsLink, CategoryOptionsTemplate, CategoryOptionsType, CategoryOptionsTypeTemplate } from "../../../Domain";
+import { IMappsDbModels } from "../../../Domain/models";
+import { ICategoryOptionsRepository } from "..";
 
 
-/**
- *
- * @export
- * @class CategoryOptionsRepository
- * @extends BaseRepository
- */
-export default class CategoryOptionsRepository extends BaseRepository {
-  /**
-   * Creates an instance of UserRepository.
-   * @param   {{sequelizeDI:SequelizeDB}}
-   * @memberof CategoryOptionsRepository
-   */
-  constructor({ sequelizeDI }) {
+
+export default class CategoryOptionsRepository extends BaseRepositoryType<CategoryOptionDBO, CategoryOption> implements ICategoryOptionsRepository {
+  sequelizeDI: IMappsDbModels
+  categoryOptionsTypeDB: ModelStatic<CategoryOptionsType>;
+  categoryOptionsTypeTemplateDB: ModelStatic<CategoryOptionsTypeTemplate>;
+  categoryOptionDB: ModelStatic<CategoryOption>
+  categoryOptionsTemplateDB: ModelStatic<CategoryOptionsTemplate>;
+
+  constructor({ sequelizeDI }: { sequelizeDI: IMappsDbModels }) {
     super(sequelizeDI.CategoryOption);
     this.categoryOptionsTypeDB = sequelizeDI.CategoryOptionsType;
     this.categoryOptionsTypeTemplateDB = sequelizeDI.CategoryOptionsTypeTemplate;
@@ -23,7 +23,7 @@ export default class CategoryOptionsRepository extends BaseRepository {
 
     this.sequelizeDI = sequelizeDI;
   }
-  getTypes({ transaction }) {
+  getTypes({ transaction }: { transaction?: number }): Promise<CategoryOptionsType[]> {
     return this.categoryOptionsTypeDB.findAll({
       where: {
         status: 1
@@ -46,7 +46,7 @@ export default class CategoryOptionsRepository extends BaseRepository {
       transaction: this.getTran({ transaction })
     });
   }
-  getRelatedOptions({ category_ids, transaction }) {
+  getRelatedOptions({ category_ids, transaction }: { category_ids: string[]; transaction?: number }): Promise<CategoryOption[]> {
     return this.categoryOptionDB.findAll({
       where: { project_id: this.context.project.id },
       order: [['name', 'ASC'], ['cat_opt_temp', 'order', 'ASC']],
@@ -88,7 +88,7 @@ export default class CategoryOptionsRepository extends BaseRepository {
         {
           model: this.sequelizeDI.CategoryOptionsTemplate,
           as: "cat_opt_temp",
-         
+
           include: [{
             model: this.sequelizeDI.CategoryOptionsTypeTemplate,
             as: "cat_opt_type_template"
@@ -112,27 +112,13 @@ export default class CategoryOptionsRepository extends BaseRepository {
     });
   }
 
-
-  /**
-   *
-   * @param  {{ model : BaseDTO}}
-   * @return {Promise<any>}
-   * @memberof BaseRepository
-   */
-  // @ts-ignore
-  upsertTemplate({ model, transaction }) {
+  upsertTemplate({ model, transaction }: { model: CategoryOptionDBO, transaction?: number }): Promise<[CategoryOptionsTemplate, boolean | null]> {
     return this.categoryOptionsTemplateDB.upsert(model, {
       transaction: this.getTran({ transaction })
     });
   }
 
-  /**
-  *
-  * @param  {{ model : BaseDTO}}
-  * @return {Promise<any>}
-  * @memberof BaseRepository
-  */
-  deleteTemplate({ model, transaction }) {
+  deleteTemplate({ model, transaction }: { model: CategoryOptionDBO, transaction?: number }): Promise<number> {
     return this.categoryOptionsTemplateDB.destroy({
       where: { id: this.toStr(model.id) },
       transaction: this.getTran({ transaction }),
@@ -141,19 +127,18 @@ export default class CategoryOptionsRepository extends BaseRepository {
   }
 
 
-  upsertToCategory({ model, transaction }) {
+  upsertToCategory({ model, transaction }: { model: CategoryOptionDBO, transaction?: number }): Promise<[CategoryOptionsLink, boolean | null]> {
     model.project_id = this.context.project.id;
 
     return this.sequelizeDI.CategoryOptionsLink.upsert(model, {
-
       transaction: this.getTran({ transaction }),
       returning: true,
-      individualHooks: true,
-      plain: true
+      //individualHooks: true,
+      //plain: true
     });
   }
 
-  getAllCategoriesOption({ id, transaction }) {
+  getAllCategoriesOption({ id, transaction }: { id?: string, transaction?: number }): Promise<CategoryOption[]> {
     let whereClaus = id ? { id: id, project_id: this.context.project.id } : { project_id: this.context.project.id };
 
     return this.categoryOptionDB.findAll({
@@ -214,24 +199,15 @@ export default class CategoryOptionsRepository extends BaseRepository {
   }
 
 
-  /**
-   *
-   * @param  {{ model : BaseDTO}}
-   * @return {Promise<any>}
-   * @memberof BaseRepository
-   */
-  // @ts-ignore
-  upsertCategoryOptionsForCategory({ model, transaction }) {
+  upsertCategoryOptionsForCategory({ model, transaction }: { model: CategoryOptionDBO, transaction?: number }): Promise<[CategoryOptionsLink, boolean | null]> {
     model.project_id = this.context.project.id;
-
     return this.sequelizeDI.CategoryOptionsLink.upsert(model, {
       transaction: this.getTran({ transaction }),
-      individualHooks: true
-
+      //individualHooks: true
     });
   }
-  removeCategoryOptionsForCategory({ id, transaction }) {
 
+  removeCategoryOptionsForCategory({ id, transaction }: { id: string, transaction?: number }): Promise<number> {
     return this.sequelizeDI.CategoryOptionsLink.destroy({
       where: { id: this.toStr(id), project_id: this.context.project.id },
       transaction: this.getTran({ transaction }),
@@ -239,12 +215,19 @@ export default class CategoryOptionsRepository extends BaseRepository {
 
     });
   }
-  getCategoryLinkQuery({ id, transaction }) {
+
+  getCategoryLinkQuery({ id, transaction }: { id: string, transaction?: number }): Promise<CategoryOptionsLink | null> {
     return this.sequelizeDI.CategoryOptionsLink.findOne({
       where: { id: this.toStr(id), project_id: this.context.project.id },
       transaction: this.getTran({ transaction }),
-
     });
   }
 }
 
+
+export const CategoryOptionsRepositoryPlugin = {
+  pluginName: "category-options-repository",
+  type: 'repository',
+  di: 'categoryOptionsRepositoryDI',
+  classType: CategoryOptionsRepository
+};

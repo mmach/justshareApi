@@ -1,4 +1,4 @@
-import CategoryOptionsRepository from "../../Repository/category/categoryOptionsRepository.js";
+import CategoryOptionsRepository from "../../Repository/category/implentations/categoryOptionsRepository.js";
 import {BaseService} from "../../Architecture/Base/baseService";
 import UnitOfWork from "../../unitOfWork.js";
 

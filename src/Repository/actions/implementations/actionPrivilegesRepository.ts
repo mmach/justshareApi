@@ -1,5 +1,5 @@
 
-import { BaseRepositoryType } from "../../../Architecture/Base/baseRepositoryType";
+import { BaseRepositoryType } from "../../../Architecture";
 import { ActionPrivilegesDBO } from "../../../DBO";
 import { ActionPrivileges } from "../../../Domain";
 import { IMappsDbModels } from "../../../Domain/models";

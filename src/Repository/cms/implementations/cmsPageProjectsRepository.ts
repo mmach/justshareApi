@@ -1,26 +1,19 @@
 import { Op } from "sequelize";
-import {BaseRepository} from "../../Architecture/Base/baseRepository.js";
-import SequelizeDB from "../../Database/models/index.js";
-import { UserDTO } from "justshare-shared";
+import { BaseRepositoryType } from "../../../Architecture";
+import { CmsPagesProjectsDBO } from "../../../DBO";
+import { CmsPagesProjects } from "../../../Domain";
+import { IMappsDbModels } from "../../../Domain/models";
+import { ICmsPageProjectsRepository } from "../cmsPageProjectsRepository";
 
-/**
- *
- * @export
- * @class CmsPageProjectsRepository
- * @extends BaseRepository
- */
-export default class CmsPageProjectsRepository extends BaseRepository {
-  /**
-   * Creates an instance of UserRepository.
-   * @param   {{sequelizeDI:SequelizeDB}}
-   * @memberof CmsMenuProjectsRepository
-   */
-  constructor({ sequelizeDI }) {
+
+export default class CmsPageProjectsRepository extends BaseRepositoryType<CmsPagesProjectsDBO, CmsPagesProjects> implements ICmsPageProjectsRepository {
+  sequelizeDI: IMappsDbModels
+  constructor({ sequelizeDI }: { sequelizeDI: IMappsDbModels }) {
     super(sequelizeDI.CmsPageProjects);
     this.sequelizeDI = sequelizeDI;
   }
 
-  getCmsPagesAdmin({ transaction }) {
+  getCmsPagesAdmin({ transaction }: { transaction?: number }): Promise<CmsPagesProjects[]> {
     return this.entityDAO.findAll({
       where:
       {
@@ -56,7 +49,7 @@ export default class CmsPageProjectsRepository extends BaseRepository {
   }
 
 
-  getCmsPages({ transaction }) {
+  getCmsPages({ transaction }: { transaction?: number }): Promise<CmsPagesProjects[]> {
     return this.entityDAO.findAll({
       where:
       {
@@ -92,3 +85,11 @@ export default class CmsPageProjectsRepository extends BaseRepository {
     });
   }
 }
+
+
+export const CmsPageProjectsRepositoryPlugin = {
+  pluginName: "cms-page-projects-repository",
+  type: 'repository',
+  di: 'cmsPageProjectsRepositoryDI',
+  classType: CmsPageProjectsRepository
+};

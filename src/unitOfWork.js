@@ -1,28 +1,27 @@
 "use strict";
 
-import {BaseUnitOfWork} from "./Architecture/Base/baseUnitOfWork.js";
+import { BaseUnitOfWork } from "./Architecture/Base/baseUnitOfWork.js";
 import ActionPrivilegesRepository from "./Repository/actions/implementations/actionPrivilegesRepository.js";
 import ActionProjectRepository from "./Repository/actions/implementations/actionProjectRepository.js";
 import ActionRepository from "./Repository/actions/implementations/actionRepository.js";
 import BlobMapperRepository from "./Repository/blob/implementations/blobMapperRepository.js";
 import BlobRepository from "./Repository/blob/implementations/blobRepository.js";
-import CategoryActionsRepository from "./Repository/category/implentations/categoryActionsRepository.js";
-import CategoryHierarchyRepository from "./Repository/category/implentations/categoryHierarchyRepository.js";
-import CategoryOptionsRepository from "./Repository/category/implentations/categoryOptionsRepository.js";
-import CategoryRepository from "./Repository/category/implentations/categoryRepository.js";
+import CategoryActionsRepository from "./Repository/category/implementations/categoryActionsRepository.js";
+import CategoryHierarchyRepository from "./Repository/category/implementations/categoryHierarchyRepository.js";
+import CategoryOptionsRepository from "./Repository/category/implementations/categoryOptionsRepository.js";
+import CategoryRepository from "./Repository/category/implementations/categoryRepository.js";
 import CityRepository from "./Repository/location/cityRepository.js";
-import CmsElementsProjectRepository from "./Repository/cms/cmsElementsProjectRepository.js";
-import CmsMenuItemsPrivilegesProjectRepository from "./Repository/cms/cmsMenuItemsPrivilegesProjectRepository.js";
-import CmsMenuItemsProjectsRepository from "./Repository/cms/cmsMenuItemsProjectRepository.js";
-import CmsMenuProjectsRepository from "./Repository/cms/cmsMenuProjectRepository.js";
-import CmsPagePrivilegesProjectRepository from "./Repository/cms/cmsPagePrivilegesProjectRepository.js";
-import CmsPageProjectsRepository from "./Repository/cms/cmsPageProjectsRepository.js";
-import CommentRepository from "./Repository/comments/commentRepository.js";
-import ConfigRepository from "./Repository/config/configRepository.js";
+//import CmsElementsProjectRepository from "./Repository/cms/cmsElementsProjectRepository.js";
+//import CmsMenuItemsPrivilegesProjectRepository from "./Repository/cms/cmsMenuItemsPrivilegesProjectRepository.js";
+//import CmsMenuItemsProjectsRepository from "./Repository/cms/cmsMenuItemsProjectRepository.js";
+//import CmsMenuProjectsRepository from "./Repository/cms/cmsMenuProjectRepository.js";
+//import CmsPagePrivilegesProjectRepository from "./Repository/cms/cmsPagePrivilegesProjectRepository.js";
+//import CmsPageProjectsRepository from "./Repository/cms/cmsPageProjectsRepository.js";
+//import CommentRepository from "./Repository/comments/commentRepository.js";
+//import ConfigRepository from "./Repository/config/configRepository.js";
 import ConversationMessagesMembersRepository from "./Repository/conversation/conversationMessagesMembersRepository.js";
 import ConversationMessagesRepository from "./Repository/conversation/conversationMessagesRepository.js";
 import ConversationRepository from "./Repository/conversation/conversationRepository.js";
-import CountryRepository from "./Repository/location/countryRepository.js";
 import DimensionsProjectRepository from "./Repository/dimensions/dimensionsProjectRepository.js";
 import DimensionsRepository from "./Repository/dimensions/dimensionsRepository.js";
 import InvoiceItemRepository from "./Repository/invoice/invoiceItemsRepository.js";
@@ -36,6 +35,7 @@ import ItemTransactionsRepository from "./Repository/item/itemTransactionsReposi
 import ItemUserActionRepository from "./Repository/item/itemUserActionRepository.js";
 import LanguageProjectRepository from "./Repository/language/languageProjectRepository.js";
 import LanguageRepository from "./Repository/language/languageRepository.js";
+import CountryRepository from "./Repository/location/countryRepository.js";
 import MailPartsRepository from "./Repository/mail/mailPartsRepository.js";
 import MailSendersRepository from "./Repository/mail/mailSendersRepository.js";
 import MailTypesProjectRepository from "./Repository/mail/mailTypesProjectRepository.js";
@@ -221,63 +221,33 @@ export default class UnitOfWork extends BaseUnitOfWork {
     };
 
 
-    
-    /**
-             * 
-             * @return {CmsPagePrivilegesProjectRepository}
-             * @readonly
-             * @memberof UnitOfWork
-             */
+
+
     get cmsPagePrivilegesProjectRepository() {
         return this.repositories.cmsPagePrivilegesProjectRepositoryDI;
     }
 
-    /**
-             * 
-             * @return {CmsPageProjectsRepository}
-             * @readonly
-             * @memberof UnitOfWork
-             */
+
     get cmsPageProjectsRepository() {
         return this.repositories.cmsPageProjectsRepositoryDI;
     }
 
-    /**
-         * 
-         * @return {CmsMenuItemsProjectsRepository}
-         * @readonly
-         * @memberof UnitOfWork
-         */
+
     get cmsMenuItemsProjectRepository() {
         return this.repositories.cmsMenuItemsProjectRepositoryDI;
     }
 
-    /**
-     * 
-     * @return {CmsMenuProjectsRepository}
-     * @readonly
-     * @memberof UnitOfWork
-     */
+
     get cmsMenuProjectsRepository() {
         return this.repositories.cmsMenuProjectsRepositoryDI;
     }
 
-    /**
- * 
- * @return {CmsMenuItemsPrivilegesProjectRepository}
- * @readonly
- * @memberof UnitOfWork
- */
+
     get cmsMenuItemsPrivilegesProjectRepository() {
         return this.repositories.cmsMenuItemsPrivilegesProjectRepositoryDI;
     }
 
-    /**
-         * 
-         * @return {CmsElementsProjectRepository}
-         * @readonly
-         * @memberof UnitOfWork
-         */
+
     get cmsElementsProjectRepository() {
         return this.repositories.cmsElementsProjectRepositoryDI;
     }
@@ -360,12 +330,7 @@ export default class UnitOfWork extends BaseUnitOfWork {
     }
 
 
-    /**
-         * 
-         * @return {CommentRepository}
-         * @readonly
-         * @memberof UnitOfWork
-         */
+    
     get commentRepository() {
         return this.repositories.commentRepositoryDI;
     }
@@ -713,12 +678,6 @@ export default class UnitOfWork extends BaseUnitOfWork {
         return this.repositories.projectRepositoryDI;
     }
 
-    /**
-    * 
-    * @return {ConfigRepository}
-    * @readonly
-    * @memberof UnitOfWork
-    */
     get configRepository() {
         return this.repositories.configRepositoryDI;
 

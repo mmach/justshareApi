@@ -1,5 +1,5 @@
 import { ICategoryActionsRepository } from "..";
-import { BaseRepositoryType, IBaseRepositoryType } from "../../../Architecture";
+import { BaseRepositoryType } from "../../../Architecture";
 import { CategoryActionsDBO } from "../../../DBO";
 import { CategoryActions } from "../../../Domain";
 import { IMappsDbModels } from "../../../Domain/models";

@@ -224,9 +224,9 @@ import UserLogInInternalQuery from "./Query/User/userLogInInternalQuery.js";
 //import CategoryHierarchyRepository from "./Repository/category/implentations/categoryHierarchyRepository.js";
 //import CategoryOptionsRepository from "./Repository/category/implentations/categoryOptionsRepository.js";
 //import CategoryRepository from "./Repository/category/implentations/categoryRepository.js";
-import CmsElementsProjectRepository from "./Repository/cms/cmsElementsProjectRepository.js";
-import CommentRepository from "./Repository/comments/commentRepository.js";
-import ConfigRepository from "./Repository/config/configRepository.js";
+//import CmsElementsProjectRepository from "./Repository/cms/cmsElementsProjectRepository.js";
+//import CommentRepository from "./Repository/comments/commentRepository.js";
+//import ConfigRepository from "./Repository/config/configRepository.js";
 import ConversationMessagesMembersRepository from "./Repository/conversation/conversationMessagesMembersRepository.js";
 import ConversationMessagesRepository from "./Repository/conversation/conversationMessagesRepository.js";
 import ConversationRepository from "./Repository/conversation/conversationRepository.js";
@@ -286,10 +286,10 @@ import UpsertProjectCmsMenuItemPrivilegeCommand from "./Commands/CmsMenu/upsertP
 import GetCmsElementAdminQuery from "./Query/CmsElement/getCmsElementAdminQuery.js";
 import GetCmsMenusAdminQuery from "./Query/CmsMenu/getCmsMenusAdminQuery.js";
 import GetCmsMenusQuery from "./Query/CmsMenu/getCmsMenusQuery.js";
-import CmsMenuItemsPrivilegesProjectRepository from "./Repository/cms/cmsMenuItemsPrivilegesProjectRepository.js";
-import CmsMenuItemsProjectsRepository from "./Repository/cms/cmsMenuItemsProjectRepository.js";
-import CmsMenuProjectsRepository from "./Repository/cms/cmsMenuProjectRepository.js";
-import CmsPageProjectsRepository from "./Repository/cms/cmsPageProjectsRepository.js";
+//import CmsMenuItemsPrivilegesProjectRepository from "./Repository/cms/cmsMenuItemsPrivilegesProjectRepository.js";
+//import CmsMenuItemsProjectsRepository from "./Repository/cms/cmsMenuItemsProjectRepository.js";
+//import CmsMenuProjectsRepository from "./Repository/cms/cmsMenuProjectRepository.js";
+//import CmsPageProjectsRepository from "./Repository/cms/cmsPageProjectsRepository.js";
 import ConversationMessageMembersService from "./Services/Conversations/conversationMessagesMemberService.js";
 import ConversationMessagesService from "./Services/Conversations/conversationMessagesService.js";
 import ConversationService from "./Services/Conversations/conversationService.js";
@@ -333,7 +333,7 @@ import UpsertProjectCmsPageCommand from "./Commands/CmsPage/upsertProjectCmsPage
 import UpsertProjectCmsPagePrivilegeCommand from "./Commands/CmsPage/upsertProjectCmsPagePrivilegeCommand.js";
 import GetCmsPagesAdminQuery from "./Query/CmsPage/getCmsPagesAdminQuery.js";
 import GetCmsPagesQuery from "./Query/CmsPage/getCmsPagesQuery.js";
-import CmsPagePrivilegesProjectRepository from "./Repository/cms/cmsPagePrivilegesProjectRepository.js";
+//import CmsPagePrivilegesProjectRepository from "./Repository/cms/cmsPagePrivilegesProjectRepository.js";
 
 import * as queries from './Query/index.js';
 import * as repositories from './Repository/injections.js';
@@ -362,7 +362,7 @@ exporter = {
   userServiceDI: asClass(UserService),
   // blobRepositoryDI: asClass(BlobRepository),
   //blobServiceDI: asClass(BlobService),
-  cmsElementsProjectRepositoryDI: asClass(CmsElementsProjectRepository),
+ // cmsElementsProjectRepositoryDI: asClass(CmsElementsProjectRepository),
   //cmsElementsProjectServiceDI: asClass(CmsElementsProjectService),
   // blobMapperRepositoryDI: asClass(BlobMapperRepository),
   //categoryHierarchyRepositoryDI: asClass(CategoryHierarchyRepository),
@@ -383,7 +383,7 @@ exporter = {
   tagRepositoryDI: asClass(TagRepository),
   projectRepositoryDI: asClass(ProjectRepository),
   projectServiceDI: asClass(ProjectService),
-  configRepositoryDI: asClass(ConfigRepository),
+  //configRepositoryDI: asClass(ConfigRepository),
   configServiceDI: asClass(ConfigService),
   sequelizeDI: asValue(SequelizeDB),
   itemCategoryOptionsServiceDI: asClass(ItemCategoryOptionsService),
@@ -445,7 +445,7 @@ exporter = {
   invoiceServiceDI: asClass(InvoiceService),
   invoiceRepositoryDI: asClass(InvoiceRepository),
   commentServiceDI: asClass(CommentService),
-  commentRepositoryDI: asClass(CommentRepository),
+  //commentRepositoryDI: asClass(CommentRepository),
   invoiceItemRepositoryDI: asClass(InvoiceItemRepository),
   invoiceUserRepositoryDI: asClass(InvoiceUserRepository),
   userInvoiceValuesRepositoryDI: asClass(UserInvoiceValuesRepository),
@@ -455,11 +455,11 @@ exporter = {
   processServiceDI: asClass(ProcessService),
   processChainActionInjectionRepositoryDI: asClass(ProcessChainActionInjectionRepository),
   processChainPrivilegesRepositoryDI: asClass(ProcessChainPrivilegesRepository),
-  cmsMenuProjectsRepositoryDI: asClass(CmsMenuProjectsRepository),
-  cmsMenuItemsProjectRepositoryDI: asClass(CmsMenuItemsProjectsRepository),
-  cmsMenuItemsPrivilegesProjectRepositoryDI: asClass(CmsMenuItemsPrivilegesProjectRepository),
-  cmsPageProjectsRepositoryDI: asClass(CmsPageProjectsRepository),
-  cmsPagePrivilegesProjectRepositoryDI: asClass(CmsPagePrivilegesProjectRepository)
+ // cmsMenuProjectsRepositoryDI: asClass(CmsMenuProjectsRepository),
+ // cmsMenuItemsProjectRepositoryDI: asClass(CmsMenuItemsProjectsRepository),
+ // cmsMenuItemsPrivilegesProjectRepositoryDI: asClass(CmsMenuItemsPrivilegesProjectRepository),
+ // cmsPageProjectsRepositoryDI: asClass(CmsPageProjectsRepository),
+ // cmsPagePrivilegesProjectRepositoryDI: asClass(CmsPagePrivilegesProjectRepository)
 
 };
 

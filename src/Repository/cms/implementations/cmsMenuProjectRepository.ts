@@ -1,26 +1,19 @@
 import { Op } from "sequelize";
-import {BaseRepository} from "../../Architecture/Base/baseRepository.js";
-import SequelizeDB from "../../Database/models/index.js";
-import { UserDTO } from "justshare-shared";
+import { BaseRepositoryType } from "../../../Architecture";
+import { CmsMenuProjectsDBO } from "../../../DBO";
+import { CmsMenuProjects } from "../../../Domain";
+import { IMappsDbModels } from "../../../Domain/models";
+import { ICmsMenuProjectsRepository } from "../cmsMenuProjectRepository";
 
-/**
- *
- * @export
- * @class CmsMenuProjectsRepository
- * @extends BaseRepository
- */
-export default class CmsMenuProjectsRepository extends BaseRepository {
-  /**
-   * Creates an instance of UserRepository.
-   * @param   {{sequelizeDI:SequelizeDB}}
-   * @memberof CmsMenuProjectsRepository
-   */
-  constructor({ sequelizeDI }) {
+
+export default class CmsMenuProjectsRepository extends BaseRepositoryType<CmsMenuProjectsDBO, CmsMenuProjects> implements ICmsMenuProjectsRepository {
+  sequelizeDI: IMappsDbModels
+  constructor({ sequelizeDI }: { sequelizeDI: IMappsDbModels }) {
     super(sequelizeDI.CmsMenuProjects);
     this.sequelizeDI = sequelizeDI;
   }
 
-  getCmsMenuAdmin({ transaction }) {
+  getCmsMenuAdmin({ transaction }: { transaction?: number }): Promise<CmsMenuProjects[]> {
     return this.entityDAO.findAll({
       where:
       {
@@ -63,8 +56,8 @@ export default class CmsMenuProjectsRepository extends BaseRepository {
       transaction: this.getTran({ transaction })
     });
   }
-  getCmsMenu({ init, token, transaction }) {
-    let query = {
+  getCmsMenu({ token, transaction }: { token?: string; transaction?: number }): Promise<CmsMenuProjects[]> {
+    let query: { token?: string, load_on_init?: boolean } = {
 
     }
     if (token) {
@@ -118,3 +111,12 @@ export default class CmsMenuProjectsRepository extends BaseRepository {
     });
   }
 }
+
+
+
+export const CmsMenuProjectsRepositoryPlugin = {
+  pluginName: "cms-menu-projects-repository",
+  type: 'repository',
+  di: 'cmsMenuProjectsRepositoryDI',
+  classType: CmsMenuProjectsRepository
+};

@@ -1,7 +1,7 @@
 "use strict";
 
-import jwt from 'jsonwebtoken';
 import fs from "fs";
+import jwt from 'jsonwebtoken';
 import ProjectRepository from "../../Repository/project/projectRepository.js";
 import { BaseInfrastracture } from '../Base/baseInfrastructure.js';
 import { ServerException } from '../Exceptions/serverException.js';
@@ -44,7 +44,6 @@ export class ProjectInfrastructure extends BaseInfrastracture {
             let context = this.getDecodedToken(action.projectToken);
 
             let project = await this.projectRepositoryDI.getProjectInfo({ project_id: context.id })
-            console.log(project)
             if (!project) {/*|| user.relogin_require == true) {*/
                 throw 'AUTHORIZATION_PROJECT_ERROR'
             }

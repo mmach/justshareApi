@@ -1,5 +1,5 @@
 import { ICategoryHierarchyRepository } from "..";
-import { BaseRepositoryType, IBaseRepositoryType } from "../../../Architecture";
+import { BaseRepositoryType } from "../../../Architecture";
 import { CategoryHierarchyAttributesDBO } from "../../../DBO";
 import { CategoryHierarchy } from "../../../Domain";
 import { IMappsDbModels } from "../../../Domain/models.js";

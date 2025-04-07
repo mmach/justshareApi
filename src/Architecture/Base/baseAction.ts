@@ -21,11 +21,7 @@ export class BaseAction {
   privilegesInfrastructureDI: PrivilegesInfrastructure;
   authInfrastructureDI: AuthInfrastucture;
   projectInfrastructureDI: ProjectInfrastructure
-  /**
-   * Creates an instance of BaseAction.
-   * @param  {{ logFileInfrastructureDI:LogFileInfrastructure ,validationInfrastructureDI:ValidatonInfrastructure,authInfrastructureDI:AuthInfrastucture,privilegesInfrastructure:PrivilegesInfrastructure}}
-   * @memberof BaseAction
-   */
+
   constructor({
     logFileInfrastructureDI,
     validationInfrastructureDI,
@@ -60,9 +56,11 @@ export class BaseAction {
     this.authInfrastructureDI = authInfrastructureDI;
     this.projectInfrastructureDI = projectInfrastructureDI;
   }
+  
   init(dto: any) {
     this.model = dto;
   }
+
   async action() {
     throw (new ServerException()).throw({ code: "VIRTUAL" } as any);
   }

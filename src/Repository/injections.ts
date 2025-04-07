@@ -1,3 +1,6 @@
 export * from './actions/injections'
 export * from './blob/injections'
 export * from './category/injections'
+export * from './cms/injections'
+export * from './comments/injections'
+export * from './config/injections'

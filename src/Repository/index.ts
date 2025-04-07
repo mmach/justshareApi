@@ -1,3 +1,6 @@
 export * from './actions'
 export * from './blob'
 export * from './category'
+export * from './cms'
+export * from './comments'
+export * from './config'

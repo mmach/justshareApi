@@ -1,9 +1,9 @@
 import { ModelStatic } from "sequelize";
+import { ICategoryOptionsRepository } from "..";
 import { BaseRepositoryType } from "../../../Architecture";
 import { CategoryOptionDBO } from "../../../DBO";
 import { CategoryOption, CategoryOptionsLink, CategoryOptionsTemplate, CategoryOptionsType, CategoryOptionsTypeTemplate } from "../../../Domain";
 import { IMappsDbModels } from "../../../Domain/models";
-import { ICategoryOptionsRepository } from "..";
 
 
 

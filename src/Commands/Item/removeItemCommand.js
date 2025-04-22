@@ -3,7 +3,7 @@ import { BaseCommand } from "../../Architecture/Base/baseCommand.js";
 import { AuthInfrastucture } from "../../Architecture/Infrastructure/authInfrastucture.js";
 import { DbTransactionInfrastucture } from "../../Architecture/Infrastructure/dbTransactionInfrastucture.js";
 import { LogFileInfrastructure } from "../../Architecture/Infrastructure/logFileInfrastructure.js";
-import BlobService from "../../Services/Blobs/blobService.js";
+import BlobService from "../../Services/Blobs/implementations/blobService.js";
 import CategoryService from "../../Services/Categories/categoryService.js";
 import ItemService from "../../Services/itemService.js";
 ("use strict");

@@ -2,7 +2,7 @@
 
 import jwt from 'jsonwebtoken';
 import fs from "fs";
-import UserRepository from "../../Repository/user/userRepository.js";
+import UserRepository from "../../Repository/user/implementations/userRepository.js";
 import { BaseInfrastracture } from '../Base/baseInfrastructure.js';
 import { ServerException } from '../Exceptions/serverException.js';
 

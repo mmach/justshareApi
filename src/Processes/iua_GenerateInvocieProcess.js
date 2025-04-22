@@ -3,7 +3,7 @@ import {AuthInfrastucture}from "../Architecture/Infrastructure/authInfrastucture
 import {ClosingInfrastructure} from "../Architecture/Infrastructure/closingInfrastructure.js";
 import {DbTransactionInfrastucture} from "../Architecture/Infrastructure/dbTransactionInfrastucture.js";
 import {LogFileInfrastructure} from "../Architecture/Infrastructure/logFileInfrastructure.js";
-import BlobService from "../Services/Blobs/blobService.js";
+import BlobService from "../Services/Blobs/implementations/blobService.js";
 import CategoryService from "../Services/Categories/categoryService.js";
 import ElasticSearchService from "../Services/elasticSearchService.js";
 import ItemService from "../Services/itemService.js";

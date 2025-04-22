@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { BaseDTO } from "justshare-shared";
-import UnitOfWork from "../../unitOfWork.js";
+import UnitOfWork from "../../unitOfWork";
 
 
 export class BaseService {

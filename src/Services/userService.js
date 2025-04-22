@@ -8,7 +8,7 @@ import {v4} from "uuid";
 import {BaseService} from "../Architecture/Base/baseService";
 import {ServerException} from "../Architecture/Exceptions/serverException.js";
 import CONFIG from "../config.js";
-import UnitOfWork from "../unitOfWork.js";
+import UnitOfWork from "../unitOfWork";
 
 /**
  *

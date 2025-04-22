@@ -44,7 +44,10 @@ export class BaseAction {
       language: '',
       user: {
         id: undefined,
-        uid: undefined
+        uid: undefined,
+        is_admin: false,
+        is_root: false,
+        email: undefined
       },
       project: undefined,
       allowForAll: undefined

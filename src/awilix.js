@@ -116,7 +116,7 @@ import SetLanguageCommand from "./Commands/User/setLanguageCommand.js";
 import SetProfileImageCommand from "./Commands/User/setProfileImageCommand.js";
 import UpsertUserTypeCommand from "./Commands/User/upsertUserTypeCommand.js";
 import UpsertUsersInvoiceDataCommand from "./Commands/User/upsertUsersInvoiceDataCommand.js";
-import SequelizeDB from "./Database/models/index";
+import SequelizeDB from "./Database/models/index.js";
 import Item_CreateItemProcess from "./Processes/item_CreateItemProcess.js";
 import Item_ESSyncProcess from "./Processes/item_ESSyncProcess.js";
 import Item_GoToStepProcess from "./Processes/item_GoToStepProcess.js";
@@ -227,53 +227,53 @@ import UserLogInInternalQuery from "./Query/User/userLogInInternalQuery.js";
 //import CmsElementsProjectRepository from "./Repository/cms/cmsElementsProjectRepository.js";
 //import CommentRepository from "./Repository/comments/commentRepository.js";
 //import ConfigRepository from "./Repository/config/configRepository.js";
-import ConversationMessagesMembersRepository from "./Repository/conversation/conversationMessagesMembersRepository.js";
-import ConversationMessagesRepository from "./Repository/conversation/conversationMessagesRepository.js";
-import ConversationRepository from "./Repository/conversation/conversationRepository.js";
-import DimensionsProjectRepository from "./Repository/dimensions/dimensionsProjectRepository.js";
-import DimensionsRepository from "./Repository/dimensions/dimensionsRepository.js";
-import InvoiceItemRepository from "./Repository/invoice/invoiceItemsRepository.js";
-import InvoiceRepository from "./Repository/invoice/invoiceRepository.js";
-import InvoiceUserRepository from "./Repository/invoice/invoiceUserRepository.js";
-import ItemCategoryOptionRepository from "./Repository/item/itemCategoryOptionRepository.js";
-import ItemCategoryRepository from "./Repository/item/itemCategoryRepository.js";
-import ItemRepository from "./Repository/item/itemRepository.js";
-import ItemTransactionCategoryOptionsRepository from "./Repository/item/itemTransactionCategoryOptionsRepository.js";
-import ItemTransactionsRepository from "./Repository/item/itemTransactionsRepository.js";
-import ItemUserActionRepository from "./Repository/item/itemUserActionRepository.js";
-import LanguageProjectRepository from "./Repository/language/languageProjectRepository.js";
-import LanguageRepository from "./Repository/language/languageRepository.js";
-import CityRepository from "./Repository/location/cityRepository.js";
-import CountryRepository from "./Repository/location/countryRepository.js";
-import MailPartsRepository from "./Repository/mail/mailPartsRepository.js";
-import MailSendersRepository from "./Repository/mail/mailSendersRepository.js";
-import MailTypesProjectRepository from "./Repository/mail/mailTypesProjectRepository.js";
-import MailTypesRepository from "./Repository/mail/mailTypesRepository.js";
-import PrivilegeProjectRepository from "./Repository/privileges/privilegeProjectRepository.js";
-import PrivilegeRepository from "./Repository/privileges/privilegeRepository.js";
-import ProcessChainActionInjectionRepository from "./Repository/process/processChainActionInjectionRepository.js";
-import ProcessChainPrivilegesRepository from "./Repository/process/processChainPrivilegesRepository.js";
-import ProcessChainRepository from "./Repository/process/processChainRepository.js";
-import ProcessChainStateRepository from "./Repository/process/processChainStateRepository.js";
-import ProcessRepository from "./Repository/process/processRepository.js";
-import ProjectRepository from "./Repository/project/projectRepository.js";
-import RolesProjectRepository from "./Repository/roles/rolesProjectRepository.js";
-import RolesRepository from "./Repository/roles/rolesRepository.js";
-import SeoRepository from "./Repository/seoRepository.js";
-import StatusActionsRepository from "./Repository/status/statusActionsRepository.js";
-import StatusProjectsRepository from "./Repository/status/statusProjectsRepository.js";
-import StatusRepository from "./Repository/status/statusRepository.js";
-import TagRepository from "./Repository/tag/tagRepository.js";
+//import ConversationMessagesMembersRepository from "./Repository/conversation/implementations/conversationMessagesMembersRepository.js";
+//import ConversationMessagesRepository from "./Repository/conversation/implementations/conversationMessagesRepository.js";
+//import ConversationRepository from "./Repository/conversation/implementations/conversationRepository.js";
+//import DimensionsProjectRepository from "./Repository/dimensions/implementations/dimensionsProjectRepository.js";
+//import DimensionsRepository from "./Repository/dimensions/implementations/dimensionsRepository.js";
+//import InvoiceItemRepository from "./Repository/invoice/implementations/invoiceItemsRepository.js";
+//import InvoiceRepository from "./Repository/invoice/implementations/invoiceRepository.js";
+//import InvoiceUserRepository from "./Repository/invoice/implementations/invoiceUserRepository.js";
+//import ItemCategoryOptionRepository from "./Repository/item/implementations/itemCategoryOptionRepository.js";
+//import ItemCategoryRepository from "./Repository/item/implementations/itemCategoryRepository.js";
+//import ItemRepository from "./Repository/item/implementations/itemRepository.js";
+//import ItemTransactionCategoryOptionsRepository from "./Repository/item/implementations/itemTransactionCategoryOptionsRepository.js";
+//import ItemTransactionsRepository from "./Repository/item/implementations/itemTransactionsRepository.js";
+//import ItemUserActionRepository from "./Repository/item/implementations/itemUserActionRepository.js";
+//import LanguageProjectRepository from "./Repository/language/implementations/languageProjectRepository.js";
+//import LanguageRepository from "./Repository/language/implementations/languageRepository.js";
+//import CityRepository from "./Repository/location/implementations/cityRepository.js";
+//import CountryRepository from "./Repository/location/implementations/countryRepository.js";
+//import MailPartsRepository from "./Repository/mail/implementations/mailPartsRepository.js";
+//import MailSendersRepository from "./Repository/mail/implementations/mailSendersRepository.js";
+//import MailTypesProjectRepository from "./Repository/mail/implementations/mailTypesProjectRepository.js";
+//import MailTypesRepository from "./Repository/mail/implementations/mailTypesRepository.js";
+//import PrivilegeProjectRepository from "./Repository/privileges/implementations/privilegeProjectRepository.js";
+//import PrivilegeRepository from "./Repository/privileges/implementations/privilegeRepository.js";
+//import ProcessChainActionInjectionRepository from "./Repository/process/implementations/processChainActionInjectionRepository.js";
+//import ProcessChainPrivilegesRepository from "./Repository/process/implementations/processChainPrivilegesRepository.js";
+//import ProcessChainRepository from "./Repository/process/implementations/processChainRepository.js";
+//import ProcessChainStateRepository from "./Repository/process/implementations/processChainStateRepository.js";
+//import ProcessRepository from "./Repository/process/implementations/processRepository.js";
+//import ProjectRepository from "./Repository/project/implementations/projectRepository.js";
+//import RolesProjectRepository from "./Repository/roles/implementations/rolesProjectRepository.js";
+//import RolesRepository from "./Repository/roles/implementations/rolesRepository.js";
+//import SeoRepository from "./Repository/seoRepository.js";
+//import StatusActionsRepository from "./Repository/status/implementations/statusActionsRepository.js";
+//import StatusProjectsRepository from "./Repository/status/implementations/statusProjectsRepository.js";
+//import StatusRepository from "./Repository/status/implementations/statusRepository.js";
+//import TagRepository from "./Repository/tag/implementations/tagRepository.js";
 import TextRepository from './Repository/textRepository.js';
-import TranslationRepository from "./Repository/translations/translationRepository.js";
-import UserAuthRepository from "./Repository/user/userAuthRepository.js";
-import UserConversationsRepository from "./Repository/user/userConversationsRepository.js";
-import UserInvoiceValuesRepository from "./Repository/user/userInvoiceValuesRepository.js";
-import UserProjectPrivilegesRepository from "./Repository/user/userProjectPrivilegesRepository.js";
-import UserRepository from "./Repository/user/userRepository.js";
-import UserRolesRepository from "./Repository/user/userRolesRepository.js";
-import UserTypesRepository from "./Repository/user/userTypesRepository.js";
-import UserTypesRolesRepository from "./Repository/user/userTypesRolesRepository.js";
+//import TranslationRepository from "./Repository/translations/implementations/translationRepository.js";
+//import UserAuthRepository from "./Repository/user/implementations/userAuthRepository.js";
+//import UserConversationsRepository from "./Repository/user/implementations/userConversationsRepository.js";
+//import UserInvoiceValuesRepository from "./Repository/user/implementations/userInvoiceValuesRepository.js";
+//import UserProjectPrivilegesRepository from "./Repository/user/implementations/userProjectPrivilegesRepository.js";
+//import UserRepository from "./Repository/user/implementations/userRepository.js";
+//import UserRolesRepository from "./Repository/user/implementations/userRolesRepository.js";
+//import UserTypesRepository from "./Repository/user/implementations/userTypesRepository.js";
+//import UserTypesRolesRepository from "./Repository/user/implementations/userTypesRolesRepository.js";
 //import ActionPrivilegesService from "./Services/Actions/actionPrivilegesService.js";
 //import ActionProjectService from "./Services/Actions/actionProjectService.js";
 //import ActionService from "./Services/Actions/actionService.js";
@@ -325,7 +325,7 @@ import UserRolesService from "./Services/userRoleService.js";
 import UserService from "./Services/userService.js";
 import UserTypesRolesService from "./Services/userTypesRolesService.js";
 import UserTypesService from "./Services/userTypesService.js";
-import UnitOfWork from "./unitOfWork.js";
+import UnitOfWork from "./unitOfWork";
 
 import DeleteProjectCmsPageCommand from "./Commands/CmsPage/deleteProjectCmsPageCommand.js";
 import DeleteProjectCmsPagePrivilegeCommand from "./Commands/CmsPage/deleteProjectCmsPagePrivilegeCommand.js";
@@ -337,7 +337,7 @@ import GetCmsPagesQuery from "./Query/CmsPage/getCmsPagesQuery.js";
 
 import * as queries from './Query/index.js';
 import * as repositories from './Repository/injections.js';
-import * as services from './Services/index.js';
+import * as services from './Services/injections.js';
 
 /**
  * 
@@ -358,52 +358,52 @@ Object.keys(repositories).forEach(repo => {
 exporter = {
   ...exporter,
   //categoryRepositoryDI: asClass(CategoryRepository),
-  userRepositoryDI: asClass(UserRepository),
+  // userRepositoryDI: asClass(UserRepository),
   userServiceDI: asClass(UserService),
   // blobRepositoryDI: asClass(BlobRepository),
   //blobServiceDI: asClass(BlobService),
- // cmsElementsProjectRepositoryDI: asClass(CmsElementsProjectRepository),
+  // cmsElementsProjectRepositoryDI: asClass(CmsElementsProjectRepository),
   //cmsElementsProjectServiceDI: asClass(CmsElementsProjectService),
   // blobMapperRepositoryDI: asClass(BlobMapperRepository),
   //categoryHierarchyRepositoryDI: asClass(CategoryHierarchyRepository),
-  itemCategoryRepositoryDI: asClass(ItemCategoryRepository),
-  itemRepositoryDI: asClass(ItemRepository),
+  //itemCategoryRepositoryDI: asClass(ItemCategoryRepository),
+  //itemRepositoryDI: asClass(ItemRepository),
   textRepositoryDI: asClass(TextRepository),
   itemServiceDI: asClass(ItemService),
   unitOfWorkDI: asClass(UnitOfWork, { lifetime: awilix.Lifetime.SCOPED }),
-  countryRepositoryDI: asClass(CountryRepository),
+  //countryRepositoryDI: asClass(CountryRepository),
   countryServiceDI: asClass(CountryService),
-  cityRepositoryDI: asClass(CityRepository),
+  //cityRepositoryDI: asClass(CityRepository),
   cityServiceDI: asClass(CityService),
   //categoryOptionsRepositoryDI: asClass(CategoryOptionsRepository),
-  itemCategoryOptionRepositoryDI: asClass(ItemCategoryOptionRepository),
-  userAuthRepositoryDI: asClass(UserAuthRepository),
+  //itemCategoryOptionRepositoryDI: asClass(ItemCategoryOptionRepository),
+  // userAuthRepositoryDI: asClass(UserAuthRepository),
   elasticSearchServiceDI: asClass(ElasticSearchService),
   tagServiceDI: asClass(TagService),
-  tagRepositoryDI: asClass(TagRepository),
-  projectRepositoryDI: asClass(ProjectRepository),
+  //tagRepositoryDI: asClass(TagRepository),
+  //projectRepositoryDI: asClass(ProjectRepository),
   projectServiceDI: asClass(ProjectService),
   //configRepositoryDI: asClass(ConfigRepository),
   configServiceDI: asClass(ConfigService),
   sequelizeDI: asValue(SequelizeDB),
   itemCategoryOptionsServiceDI: asClass(ItemCategoryOptionsService),
-  userProjectPrivilegesRepositoryDI: asClass(UserProjectPrivilegesRepository),
-  privilegeRepositoryDI: asClass(PrivilegeRepository),
+  // userProjectPrivilegesRepositoryDI: asClass(UserProjectPrivilegesRepository),
+  //privilegeRepositoryDI: asClass(PrivilegeRepository),
   //actionPrivilegesRepositoryDI: asClass(ActionPrivilegesRepository),
   //actionProjectRepositoryDI: asClass(ActionProjectRepository),
   //actionRepositoryDI: asClass(ActionRepository),
   //categoryActionsRepositoryDI: asClass(CategoryActionsRepository),
-  privilegeProjectRepositoryDI: asClass(PrivilegeProjectRepository),
-  rolesProjectRepositoryDI: asClass(RolesProjectRepository),
-  userRolesRepositoryDI: asClass(UserRolesRepository),
-  userTypesRepositoryDI: asClass(UserTypesRepository),
-  userTypesRolesRepositoryDI: asClass(UserTypesRolesRepository),
-  rolesRepositoryDI: asClass(RolesRepository),
-  translationRepositoryDI: asClass(TranslationRepository),
+  //privilegeProjectRepositoryDI: asClass(PrivilegeProjectRepository),
+  //rolesProjectRepositoryDI: asClass(RolesProjectRepository),
+  //userRolesRepositoryDI: asClass(UserRolesRepository),
+  //userTypesRepositoryDI: asClass(UserTypesRepository),
+  //userTypesRolesRepositoryDI: asClass(UserTypesRolesRepository),
+  //rolesRepositoryDI: asClass(RolesRepository),
+  //translationRepositoryDI: asClass(TranslationRepository),
   privilegeProjectServiceDI: asClass(PrivilegeProjectService),
   privilegeServiceDI: asClass(PrivilegeService),
-  languageProjectRepositoryDI: asClass(LanguageProjectRepository),
-  languageRepositoryDI: asClass(LanguageRepository),
+  //languageProjectRepositoryDI: asClass(LanguageProjectRepository),
+  //languageRepositoryDI: asClass(LanguageRepository),
   languageServiceDI: asClass(LanguageService),
   languageProjectServiceDI: asClass(LanguageProjectService),
   translationServiceDI: asClass(TranslationService),
@@ -412,54 +412,54 @@ exporter = {
   userTypesServiceDI: asClass(UserTypesService),
   userTypesRolesServiceDI: asClass(UserTypesRolesService),
   userRolesServiceDI: asClass(UserRolesService),
-  dimensionsProjectRepositoryDI: asClass(DimensionsProjectRepository),
-  dimensionsRepositoryDI: asClass(DimensionsRepository),
+  // dimensionsProjectRepositoryDI: asClass(DimensionsProjectRepository),
+  // dimensionsRepositoryDI: asClass(DimensionsRepository),
   mailTypesServiceDI: asClass(MailTypesService),
-  mailTypesRepositoryDI: asClass(MailTypesRepository),
+  //mailTypesRepositoryDI: asClass(MailTypesRepository),
   mailSendersServiceDI: asClass(MailSendersService),
-  mailSendersRepositoryDI: asClass(MailSendersRepository),
-  mailPartsRepositoryDI: asClass(MailPartsRepository),
+  //mailSendersRepositoryDI: asClass(MailSendersRepository),
+  //mailPartsRepositoryDI: asClass(MailPartsRepository),
   mailPartsServiceDI: asClass(MailPartsService),
-  mailTypesProjectRepositoryDI: asClass(MailTypesProjectRepository),
+  //mailTypesProjectRepositoryDI: asClass(MailTypesProjectRepository),
   mailTypesProjectServiceDI: asClass(MailTypesProjectService),
   seoServiceDI: asClass(SeoService),
-  seoRepositoryDI: asClass(SeoRepository),
-  itemTransactionRepositoryDI: asClass(ItemTransactionsRepository),
-  itemUserActionRepositoryDI: asClass(ItemUserActionRepository),
-  itemTransactionCategoryOptionsRepositoryDI: asClass(ItemTransactionCategoryOptionsRepository),
+  //seoRepositoryDI: asClass(SeoRepository),
+  //itemTransactionRepositoryDI: asClass(ItemTransactionsRepository),
+  //itemUserActionRepositoryDI: asClass(ItemUserActionRepository),
+  //itemTransactionCategoryOptionsRepositoryDI: asClass(ItemTransactionCategoryOptionsRepository),
   itemTransactionsServiceDI: asClass(ItemTransactionService),
   itemUserActionServiceDI: asClass(ItemUserActionService),
   itemTransactionCategoryOptionsServiceDI: asClass(ItemTransactionCategoryOptionsService),
-  conversationMessagesRepositoryDI: asClass(ConversationMessagesRepository),
-  conversationRepositoryDI: asClass(ConversationRepository),
-  userConversationsRepositoryDI: asClass(UserConversationsRepository),
+  //conversationMessagesRepositoryDI: asClass(ConversationMessagesRepository),
+  //conversationRepositoryDI: asClass(ConversationRepository),
+  //userConversationsRepositoryDI: asClass(UserConversationsRepository),
   userConversationServiceDI: asClass(UserConversationService),
   conversationMessagesServiceDI: asClass(ConversationMessagesService),
   conversationServiceDI: asClass(ConversationService),
-  conversationMessagesMembersRepositoryDI: asClass(ConversationMessagesMembersRepository),
+  //conversationMessagesMembersRepositoryDI: asClass(ConversationMessagesMembersRepository),
   conversationMessageMembersServiceDI: asClass(ConversationMessageMembersService),
-  statusActionsRepositoryDI: asClass(StatusActionsRepository),
-  statusProjectsRepositoryDI: asClass(StatusProjectsRepository),
-  statusRepositoryDI: asClass(StatusRepository),
+  //statusActionsRepositoryDI: asClass(StatusActionsRepository),
+  //statusProjectsRepositoryDI: asClass(StatusProjectsRepository),
+  //statusRepositoryDI: asClass(StatusRepository),
   statusProjectServiceDI: asClass(StatusProjectService),
   invoiceServiceDI: asClass(InvoiceService),
-  invoiceRepositoryDI: asClass(InvoiceRepository),
+  //invoiceRepositoryDI: asClass(InvoiceRepository),
   commentServiceDI: asClass(CommentService),
   //commentRepositoryDI: asClass(CommentRepository),
-  invoiceItemRepositoryDI: asClass(InvoiceItemRepository),
-  invoiceUserRepositoryDI: asClass(InvoiceUserRepository),
-  userInvoiceValuesRepositoryDI: asClass(UserInvoiceValuesRepository),
-  processChainRepositoryDI: asClass(ProcessChainRepository),
-  processRepositoryDI: asClass(ProcessRepository),
-  processChainStateRepositoryDI: asClass(ProcessChainStateRepository),
+  //invoiceItemRepositoryDI: asClass(InvoiceItemRepository),
+  //invoiceUserRepositoryDI: asClass(InvoiceUserRepository),
+  //userInvoiceValuesRepositoryDI: asClass(UserInvoiceValuesRepository),
+  // processChainRepositoryDI: asClass(ProcessChainRepository),
+  //processRepositoryDI: asClass(ProcessRepository),
+  //processChainStateRepositoryDI: asClass(ProcessChainStateRepository),
   processServiceDI: asClass(ProcessService),
-  processChainActionInjectionRepositoryDI: asClass(ProcessChainActionInjectionRepository),
-  processChainPrivilegesRepositoryDI: asClass(ProcessChainPrivilegesRepository),
- // cmsMenuProjectsRepositoryDI: asClass(CmsMenuProjectsRepository),
- // cmsMenuItemsProjectRepositoryDI: asClass(CmsMenuItemsProjectsRepository),
- // cmsMenuItemsPrivilegesProjectRepositoryDI: asClass(CmsMenuItemsPrivilegesProjectRepository),
- // cmsPageProjectsRepositoryDI: asClass(CmsPageProjectsRepository),
- // cmsPagePrivilegesProjectRepositoryDI: asClass(CmsPagePrivilegesProjectRepository)
+  //processChainActionInjectionRepositoryDI: asClass(ProcessChainActionInjectionRepository),
+  //processChainPrivilegesRepositoryDI: asClass(ProcessChainPrivilegesRepository),
+  // cmsMenuProjectsRepositoryDI: asClass(CmsMenuProjectsRepository),
+  // cmsMenuItemsProjectRepositoryDI: asClass(CmsMenuItemsProjectsRepository),
+  // cmsMenuItemsPrivilegesProjectRepositoryDI: asClass(CmsMenuItemsPrivilegesProjectRepository),
+  // cmsPageProjectsRepositoryDI: asClass(CmsPageProjectsRepository),
+  // cmsPagePrivilegesProjectRepositoryDI: asClass(CmsPagePrivilegesProjectRepository)
 
 };
 

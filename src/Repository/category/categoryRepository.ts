@@ -8,7 +8,7 @@ export interface ICategoryRepository extends IBaseRepositoryType<CategoryDBO, Ca
   deleteAction({ model, transaction }: { model: CategoryActionsDBO; transaction?: number }): Promise<number>;
   insertAction({ model, transaction }: { model: CategoryActionsDBO; transaction?: number }): Promise<CategoryActions>;
   getAllCategoriesFlat({ model, transaction }: { model: CategoryDBO; transaction?: number }): Promise<object[]>;
-  updateIcon({ category_id, old_icon_id, new_icon_id, transaction }: { category_id: string; old_icon_id: string; new_icon_id: string; transaction?: number }): Promise<[affectedCount: number]> | undefined;
+  updateIcon({ category_id, old_icon_id, new_icon_id, transaction }: { category_id?: string, old_icon_id?: string[], new_icon_id: string, transaction?: number }): Promise<[affectedCount: number]> | undefined
   getAllActions({ ids, transaction }: { ids: string[]; transaction?: number }): Promise<CategoryActions[]>;
   getCategoryTree({ ids, parent, transaction }: { ids: string[]; parent?: string; transaction?: number }): Promise<V_Category[]>;
   removeCategory({ id, transaction }: { id: string; transaction?: number }): Promise<number>;

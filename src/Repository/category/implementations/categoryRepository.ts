@@ -58,7 +58,7 @@ export default class CategoryRepository extends BaseRepositoryType<CategoryDBO, 
       }
     );
   }
-  updateIcon({ category_id, old_icon_id, new_icon_id, transaction }: { category_id: string, old_icon_id: string, new_icon_id: string, transaction?: number }): Promise<[affectedCount: number]> | undefined {
+  updateIcon({ category_id, old_icon_id, new_icon_id, transaction }: { category_id?: string, old_icon_id?: string[], new_icon_id: string, transaction?: number }): Promise<[affectedCount: number]> | undefined {
     let where = {}
     if (old_icon_id) {
       where = { blob_id: old_icon_id }

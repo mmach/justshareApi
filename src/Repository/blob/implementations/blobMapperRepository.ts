@@ -12,7 +12,6 @@ export default class BlobMapperRepository extends BaseRepositoryType<BlobMapperD
   }
 }
 
-
 export interface IBlobMapperRepository extends IBaseRepositoryType<BlobMapperDBO, BlobMapper> { }
 
 export const BlobMapperRepositoryPlugin = {

@@ -1,15 +1,17 @@
 import { Transaction } from "sequelize";
 import SequelizeDB from "../../Database/models/index.js";
+import { AuthContextDTO } from "../../Dto/index.js";
+import { REPOSITORIES } from "../../Repository/type.js";
 
 export class BaseUnitOfWork {
     sequelize: any
-    repositories: any
-    transaction?: Transaction
+    repositories: { [key: string]: any } & REPOSITORIES
+    transaction?: Transaction | null
     constructor() {
         this.sequelize = SequelizeDB;
-        this.repositories = {};
+        this.repositories = {} as any
     }
-    setContext({ context }: any) {
+    setContext({ context }: { context: AuthContextDTO }) {
         Object.keys(this.repositories).map(item => {
             this.repositories[String(item)].setContext({ context });
         })

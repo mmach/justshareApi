@@ -13,7 +13,7 @@ export default class BlobRepository extends BaseRepositoryType<BlobDBO, Blob> im
     this.sequelizeDI = sequelizeDI;
   }
 
-  getByGuids({ ids, transaction }: { ids: string[], transaction?: number }) {
+  getByGuids({ ids, transaction }: { ids: string[], transaction?: number }): Promise<object[]> {
     return this.sequelizeDI.sequelize.query(
       `
         select blob,type,id
@@ -37,7 +37,7 @@ export default class BlobRepository extends BaseRepositoryType<BlobDBO, Blob> im
 
   }
 
-  getProjectsItemsStorage({ transaction }: { transaction?: number }) {
+  getProjectsItemsStorage({ transaction }: { transaction?: number }): Promise<Blob[]> {
     return this.entityDAO.findAll({
       where: {
         project_id: this.context.project.id,
@@ -60,7 +60,7 @@ export default class BlobRepository extends BaseRepositoryType<BlobDBO, Blob> im
     })
   }
 
-  getProjectsCategoriesStorage({ transaction }: { transaction?: number }) {
+  getProjectsCategoriesStorage({ transaction }: { transaction?: number }): Promise<Blob[]> {
     return this.entityDAO.findAll({
       where: {
         project_id: this.context.project.id,
@@ -81,7 +81,7 @@ export default class BlobRepository extends BaseRepositoryType<BlobDBO, Blob> im
       transaction: this.getTran({ transaction }) as any
     })
   }
-  getProjectsUsersStorage({ transaction }: { transaction?: number }) {
+  getProjectsUsersStorage({ transaction }: { transaction?: number }): Promise<Blob[]> {
     return this.entityDAO.findAll({
       where: {
         project_id: this.context.project.id,
@@ -105,7 +105,7 @@ export default class BlobRepository extends BaseRepositoryType<BlobDBO, Blob> im
     })
   }
 
-  getProjectsStorage({ transaction }: { transaction?: number }) {
+  getProjectsStorage({ transaction }: { transaction?: number }): Promise<Blob[]> {
     return this.entityDAO.findAll({
       where: {
         project_id: this.context.project.id,
@@ -129,7 +129,7 @@ export default class BlobRepository extends BaseRepositoryType<BlobDBO, Blob> im
     })
   }
 
-  insertFile({ id, path, name, transaction }: { id: string, path: string, name: string, transaction?: number }) {
+  insertFile({ id, path, name, transaction }: { id: string, path: string, name: string, transaction?: number }): Promise<object[]> {
     var blob = fs.readFileSync(path);
     let file_type = name.split('.')[name.split('.').length - 1]
     //let size = stringToBytesFaster(blob.toString('base64')).length;
@@ -188,7 +188,7 @@ export default class BlobRepository extends BaseRepositoryType<BlobDBO, Blob> im
 
 
   }
-  getBlobs({ userId, itemId, transaction }: { userId: string | null | undefined, itemId: string | null | undefined, transaction?: number }) {
+  getBlobs({ userId, itemId, transaction }: { userId: string | null | undefined, itemId: string | null | undefined, transaction?: number }): Promise<Blob[]> {
     return this.entityDAO.findAll({
       where: {
         user_id: this.toStr(userId),
@@ -213,7 +213,7 @@ export default class BlobRepository extends BaseRepositoryType<BlobDBO, Blob> im
 
   getUnverified({
     transaction
-  }: { transaction?: number }) {
+  }: { transaction?: number }): Promise<Blob[]> {
     return this.entityDAO.findAll({
       where: {
         status: 0
@@ -236,7 +236,7 @@ export default class BlobRepository extends BaseRepositoryType<BlobDBO, Blob> im
 
   verifyImage({
     blob, transaction
-  }: { blob: BlobDBO, transaction?: number }) {
+  }: { blob: BlobDBO, transaction?: number }): Promise<[affectedCount: number]> {
     return this.entityDAO.update(
       {
         status: 1
@@ -251,7 +251,7 @@ export default class BlobRepository extends BaseRepositoryType<BlobDBO, Blob> im
   }
   getBlobsCategory({
     category_id, transaction
-  }: { category_id: string, transaction?: number }) {
+  }: { category_id: string, transaction?: number }): Promise<Blob[]> {
     return this.entityDAO.findAll(
       {
         where: { category_id: this.toStr(category_id) },

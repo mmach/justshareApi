@@ -1,33 +1,60 @@
-// @ts-nocheck
 
-import { BaseDTO } from "justshare-shared";
-import UnitOfWork from "../../unitOfWork.js";
-import { AuthContextDTO } from "../../Dto/index.js";
-import { Transaction } from "sequelize";
+import { Model } from "sequelize";
+import { AuthContextDTO } from "../../Dto";
+import UnitOfWork from "../../unitOfWork";
+import { BaseDBO } from "./baseDBO";
+import { IBaseRepositoryType } from "./baseRepositoryType";
 
-export class BaseServiceType<DTO, DAL> {
+export interface IBaseServiceType<DBO extends BaseDBO, DAL extends Model<any, any>> {
+  setContext(context: AuthContextDTO): this;
+  toJsonParse<T>(response: any): Promise<T | null>;
+  getById({ id, withProject }: { id: string; withProject: boolean }): Promise<DBO>;
+  getByProject({ }): Promise<DBO>;
+  getByGuid({ uid, withProject }: { uid: string; withProject: boolean }): Promise<DBO>;
+  insert({ model, withProject }: { model: Partial<DBO>; withProject: boolean }): Promise<DBO>;
+  update({ model, withProject }: { model: Partial<DBO>; withProject: boolean }): Promise<DAL>;
+  upsert({ model, withProject }: { model: Partial<DBO>; withProject: boolean }): Promise<DAL>;
+  bulkInsert({ model, withProject }: { model: Partial<DBO>[]; withProject: boolean }): Promise<DAL[]>;
+  delete({ model, withProject }: { model: Partial<DBO>, withProject: boolean }): Promise<number>;
+  deleteByGuid({
+    uid,
+    withProject,
+    transaction,
+  }: {
+    uid: string;
+    withProject: boolean;
+    transaction?: number;
+  }): Promise<number>;
+}
+export class BaseServiceType<DBO extends BaseDBO, DAL extends Model<any, any>> implements IBaseServiceType<DBO, DAL> {
 
   unitOfWorkDI: UnitOfWork;
-  repository: string;
+  repository: IBaseRepositoryType<DBO, DAL>;
   context: AuthContextDTO;
 
   constructor({ unitOfWorkDI, repository }: { unitOfWorkDI: UnitOfWork, repository: string }) {
     this.unitOfWorkDI = unitOfWorkDI;
-    this.repository = repository;
+    // @ts-ignore
+    this.repository = unitOfWorkDI[repository];
     this.context = {
       user: {
         id: undefined,
-        uid: undefined
+        uid: undefined,
+        email: undefined,
+        is_admin: false,
+        is_root: false,
       },
       project: {
         id: undefined
-      }
+      },
+      allowForAll: false,
+      language: ''
     };
   }
-  async toJsonParse(response: any) {
+  async toJsonParse<T>(response: any): Promise<T | null> {
     let result = await response;
-    const flattenDataValues = ({ dataValues }) => {
-      const flattenedObject = {};
+    const flattenDataValues = ({ dataValues }: any) => {
+      const flattenedObject: any = {};
 
       Object.keys(dataValues).forEach(key => {
         const dataValue = dataValues[key];
@@ -56,7 +83,7 @@ export class BaseServiceType<DTO, DAL> {
       return null;
     }
     return Array.isArray(result)
-      ? result.map(flattenDataValues)
+      ? result.map(flattenDataValues) as T
       : flattenDataValues(result);
   }
   get userId() {
@@ -66,96 +93,48 @@ export class BaseServiceType<DTO, DAL> {
     return this.context.project.id;
 
   }
-  setContext(context: AuthContextDTO): BaseServiceType<DTO, DAL> {
+  setContext(context: AuthContextDTO): this {
     if (context) {
       this.context = context;
       this.unitOfWorkDI.setContext({ context });
     }
     return this;
   }
-
-  /**
-   *
-   * @param  {{ id:number }}
-   * @return {Promise<any>}
-   * @memberof BaseService
-   */
-  async getById({ id, withProject }): Promise<DTO> {
-    return await this.toJsonParse(this.unitOfWorkDI[this.repository].getById({ id, withProject })) as DTO;
+  async getById({ id, withProject }: { id: string, withProject: boolean }): Promise<DBO> {
+    return await this.toJsonParse(this.repository.getById({ id, withProject })) as DBO;
+  }
+  async getByProject({ }): Promise<DBO> {
+    return await this.toJsonParse(this.repository.getByProject({})) as DBO;
   }
 
-  /**
-   *
-   * @param  {{ id:number }}
-   * @return {Promise<any>}
-   * @memberof BaseService
-   */
-  async getByProject({ id }): Promise<DTO> {
-    return await this.toJsonParse(this.unitOfWorkDI[this.repository].getByProject({})) as DTO;
+  async getByGuid({ uid, withProject }: { uid: string, withProject: boolean }): Promise<DBO> {
+    return await this.toJsonParse(this.repository.getByGuid({ uid, withProject })) as DBO;
   }
 
-
-  /**
-   *
-   *
-   * @param {*} { uid }
-   * @returns
-   * @memberof BaseService
-   */
-  async getByGuid({ uid, withProject }): Promise<DTO> {
-    return await this.toJsonParse(this.unitOfWorkDI[this.repository].getByGuid({ uid, withProject })) as DTO;
-  }
-  /**
-   *
-   * @param  {{ model : BaseDTO }}
-   * @return {Promise<any>}
-   * @memberof BaseService
-   */
-  async insert({ model, withProject }): Promise<DTO> {
-    return await this.toJsonParse(this.unitOfWorkDI[this.repository].insert({ model, withProject })) as DTO;
-  }
-  /**
-   *
-   * @param  {{ model : BaseDTO }}
-   * @return {Promise<any>}
-   * @memberof BaseService
-   */
-  async update({ model, withProject }): Promise<DAL> {
-    return await this.unitOfWorkDI[this.repository].update({ model, withProject }) as DAL;
+  async insert({ model, withProject }: { model: Partial<DBO>, withProject: boolean }): Promise<DBO> {
+    return await this.toJsonParse(this.repository.insert({ model, withProject })) as DBO;
   }
 
-  /**
-     *
-     * @param  {{ model : BaseDTO }}
-     * @return {Promise<any>}
-     * @memberof BaseService
-     */
-  async upsert({ model, withProject }): Promise<DAL> {
-    return await this.unitOfWorkDI[this.repository].upsert({ model, withProject }) as DAL;
+  async update({ model, withProject }: { model: Partial<DBO>, withProject: boolean }): Promise<DAL> {
+    return await this.repository.update({ model, withProject }) as DAL;
+  }
+
+  async upsert({ model, withProject }: { model: Partial<DBO>, withProject: boolean }): Promise<DAL> {
+    return await this.repository.upsert({ model, withProject }) as DAL;
 
   }
 
-  /**
-   *
-   * @param  {{ model : BaseDTO }}
-   * @return {Promise<any>}
-   * @memberof BaseService
-   */
-  async bulkInsert({ model, withProject }): Promise<DAL[]> {
-    return await this.unitOfWorkDI[this.repository].bulkInsert({ model, withProject }) as DAL[];
+  async bulkInsert({ model, withProject }: { model: Partial<DBO>[], withProject: boolean }): Promise<DAL[]> {
+    return await this.repository.bulkInsert({ model, withProject }) as DAL[];
 
   }
-  /**
-   *
-   * @param  {{ model : BaseDTO }}
-   * @return {Promise<any>}
-   * @memberof BaseService
-   */
-  async delete({ model, withProject, transaction }: { model: DTO, withProject: boolean, transaction?: Transaction }): Promise {
-    return await this.unitOfWorkDI[this.repository].delete({ model, withProject });
+
+  async delete({ model, withProject }: { model: Partial<DBO>, withProject: boolean }): Promise<number> {
+    return await this.repository.delete({ model, withProject });
   }
 
-  async deleteByGuid({ uid, withProject, transaction }: { model: DTO, withProject: boolean, transaction?: Transaction }): Promise {
-    return await this.unitOfWorkDI[this.repository].deleteByGuid({ uid, withProject, transaction });
+  async deleteByGuid({ uid, withProject, transaction }: { uid: string, withProject: boolean, transaction?: number }): Promise<number> {
+    return await this.repository.deleteByGuid({ uid, withProject, transaction });
   }
 }
+

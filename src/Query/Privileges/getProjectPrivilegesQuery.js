@@ -2,7 +2,7 @@ import {BaseQuery} from '../../Architecture/Base/baseQuery.js';
 import {LogFileInfrastructure} from '../../Architecture/Infrastructure/logFileInfrastructure.js';
 import ItemService from '../../Services/itemService.js';
 import ElasticSearchService from '../../Services/elasticSearchService.js';
-import BlobService from '../../Services/Blobs/blobService.js';
+import BlobService from '../../Services/Blobs/implementations/blobService.js';
 import { PrivilegesProjectDTO } from 'justshare-shared';
 import CategoryOptionService from '../../Services/Categories/categoryOptionService.js';
 import CategoryService from '../../Services/Categories/categoryService.js';

@@ -1,6 +1,6 @@
 import BaseProcess from "../Architecture/Base/baseProcess.js";
 import { AuthInfrastucture,ClosingInfrastructure,DbTransactionInfrastucture,LogFileInfrastructure } from "../Architecture/index.js";
-import BlobService from "../Services/Blobs/blobService.js";
+import BlobService from "../Services/Blobs/implementations/blobService.js";
 import CategoryService from "../Services/Categories/categoryService.js";
 import ElasticSearchService from "../Services/elasticSearchService.js";
 import ItemService from "../Services/itemService.js";

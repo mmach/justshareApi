@@ -13,11 +13,11 @@ export interface IBaseRepositoryType<T extends BaseDBO, DAL extends Model> {
   getByProject(params: { transaction?: number }): Promise<DAL[]>;
   getByGuid(params: { uid: string | number; withProject?: boolean; transaction?: number }): Promise<DAL | null>;
   deleteByGuid(params: { uid: string | number; withProject?: boolean; transaction?: number }): Promise<number>;
-  insert(params: { model: T; withProject?: boolean; transaction?: number }): Promise<DAL>;
-  bulkInsert(params: { model: T[]; withProject?: boolean; transaction?: number }): Promise<DAL[]>;
-  update(params: { model: T; withProject?: boolean; transaction?: number }): any;
-  upsert(params: { model: T; withProject?: boolean; transaction?: number }): any;
-  delete(params: { model: T; withProject?: boolean; transaction?: number }): Promise<number>;
+  insert(params: { model: Partial<T>; withProject?: boolean; transaction?: number }): Promise<DAL>;
+  bulkInsert(params: { model: Partial<T>[]; withProject?: boolean; transaction?: number }): Promise<DAL[]>;
+  update(params: { model: Partial<T>; withProject?: boolean; transaction?: number }): any;
+  upsert(params: { model: Partial<T>; withProject?: boolean; transaction?: number }): any;
+  delete(params: { model: Partial<T | DAL>; withProject?: boolean; transaction?: number }): Promise<number>;
   deleteByUserId(params: { user_id: string | number; withProject?: boolean; transaction?: number }): Promise<number>;
 }
 
@@ -32,7 +32,10 @@ export class BaseRepositoryType<T extends BaseDBO, DAL extends Model> implements
       language: '',
       user: {
         id: undefined,
-        uid: undefined
+        uid: undefined,
+        is_admin: false,
+        is_root: false,
+        email: undefined
       },
       project: {
         id: undefined
@@ -120,8 +123,8 @@ export class BaseRepositoryType<T extends BaseDBO, DAL extends Model> implements
       transaction: this.getTran({ transaction }) as any
     });
   }
-  insert({ model, withProject, transaction }: { model: T, withProject?: boolean, transaction?: number }): Promise<DAL> {
-    let item: T & { project_id?: string } = model;
+  insert({ model, withProject, transaction }: { model: Partial<T>, withProject?: boolean, transaction?: number }): Promise<DAL> {
+    let item: Partial<T> & { project_id?: string } = model;
     if (!model.id) {
       item.id = v4();
     }
@@ -134,7 +137,7 @@ export class BaseRepositoryType<T extends BaseDBO, DAL extends Model> implements
       plain: true
     });
   }
-  bulkInsert({ model, withProject, transaction }: { model: T[], withProject?: boolean, transaction?: number }): Promise<DAL[]> {
+  bulkInsert({ model, withProject, transaction }: { model: Partial<T>[], withProject?: boolean, transaction?: number }): Promise<DAL[]> {
     let item = model;
     item = item.map(i => {
       return {
@@ -151,8 +154,8 @@ export class BaseRepositoryType<T extends BaseDBO, DAL extends Model> implements
     });
   }
 
-  update({ model, withProject, transaction }: { model: T, withProject?: boolean, transaction?: number }): any {
-    let where: Partial<WhereOptions<Attributes<DAL>> & { project_id?: string }> = { id: this.toStr(model.id) }
+  update({ model, withProject, transaction }: { model: Partial<T>, withProject?: boolean, transaction?: number }): any {
+    let where: Partial<WhereOptions<Attributes<DAL>> & { project_id?: string }> = { id: this.toStr((model as Partial<T>).id) }
     if (withProject) {
       where.project_id = this.context.project.id
     }
@@ -164,8 +167,8 @@ export class BaseRepositoryType<T extends BaseDBO, DAL extends Model> implements
   }
 
 
-  upsert({ model, withProject, transaction }: { model: T, withProject?: boolean, transaction?: number }): any {
-    let item: T & { project_id?: string } = { ...model };
+  upsert({ model, withProject, transaction }: { model: Partial<T>, withProject?: boolean, transaction?: number }): any {
+    let item: Partial<T> & { project_id?: string } = { ...model };
     if (withProject) {
       item.project_id = this.context.project.id
     }
@@ -179,8 +182,8 @@ export class BaseRepositoryType<T extends BaseDBO, DAL extends Model> implements
     });
   }
 
-  delete({ model, withProject, transaction }: { model: T, withProject?: boolean, transaction?: number }) {
-    let where: Partial<WhereOptions<Attributes<DAL>> & { project_id?: string }> = { id: this.toStr(model.id) }
+  delete({ model, withProject, transaction }: { model: Partial<T | DAL>, withProject?: boolean, transaction?: number }) {
+    let where: Partial<WhereOptions<Attributes<DAL>> & { project_id?: string }> = { id: this.toStr((model as any).id) }
     if (withProject) {
       where.project_id = this.context.project.id
     }

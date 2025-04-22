@@ -5,7 +5,7 @@ import {LogFileInfrastructure} from "../../Architecture/Infrastructure/logFileIn
 import CategoryService from "../../Services/Categories/categoryService.js";
 import {DbTransactionInfrastucture} from "../../Architecture/Infrastructure/dbTransactionInfrastucture.js";
 import {AuthInfrastucture}from "../../Architecture/Infrastructure/authInfrastucture.js";
-import BlobService from "../../Services/Blobs/blobService.js";
+import BlobService from "../../Services/Blobs/implementations/blobService.js";
 
 "use strict";
 

@@ -1,6 +1,6 @@
 import CategoryOptionsRepository from "../../Repository/category/implementations/categoryOptionsRepository.js";
 import {BaseService} from "../../Architecture/Base/baseService";
-import UnitOfWork from "../../unitOfWork.js";
+import UnitOfWork from "../../unitOfWork";
 
 
 /*

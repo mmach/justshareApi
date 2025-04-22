@@ -1,6 +1,6 @@
 import {BaseQuery} from '../../Architecture/Base/baseQuery.js';
 import {LogFileInfrastructure} from '../../Architecture/Infrastructure/logFileInfrastructure.js';
-import BlobService from '../../Services/Blobs/blobService.js';
+import BlobService from '../../Services/Blobs/implementations/blobService.js';
 import { BlobBase64DTO, BlobDTO } from 'justshare-shared';
 
 

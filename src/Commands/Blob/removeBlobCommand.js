@@ -3,7 +3,7 @@ import { BaseCommand } from "../../Architecture/Base/baseCommand.js";
 import { LogFileInfrastructure } from "../../Architecture/Infrastructure/logFileInfrastructure.js";
 import UserService from "../../Services/userService.js";
 import { AuthInfrastucture } from "../../Architecture/Infrastructure/authInfrastucture.js";
-import BlobService from "../../Services/Blobs/blobService.js";
+import BlobService from "../../Services/Blobs/implementations/blobService.js";
 import { ValidatonInfrastructure } from "../../Architecture/Infrastructure/validatonInfrastructure.js";
 import { DbTransactionInfrastucture } from "../../Architecture/Infrastructure/dbTransactionInfrastucture.js";
 import { BlobDTO } from "justshare-shared";

@@ -4,7 +4,7 @@ import { AuthInfrastucture } from "../../Architecture/Infrastructure/authInfrast
 import { DbTransactionInfrastucture } from "../../Architecture/Infrastructure/dbTransactionInfrastucture.js";
 import ItemService from "../../Services/itemService.js";
 import { ItemDTO, BlobBase64DTO } from "justshare-shared";
-import BlobService from "../../Services/Blobs/blobService.js";
+import BlobService from "../../Services/Blobs/implementations/blobService.js";
 import CategoryService from "../../Services/Categories/categoryService.js";
 import { BlobValidators } from "../../Validators/blobValidators.js";
 import Promise from "bluebird";

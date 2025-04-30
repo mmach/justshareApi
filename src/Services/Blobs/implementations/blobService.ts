@@ -13,6 +13,8 @@ import { UploadBlobDTO, UploadBlobIdsDTO, BlobFileDTO } from "../../../Dto/Blob/
 import packPath from "package-json-path";
 
 var dir = packPath(path.join('upload'));
+dir=dir.replace('package.json','').substring(0, dir.length-1);
+
 if (!existsSync(dir)) {
     mkdirSync(dir);
 }

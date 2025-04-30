@@ -7,8 +7,15 @@ import { DI } from "../../../diTypes";
 import { IBlobService } from "../blobService";
 import fs from "fs-extra";
 import { Blob } from "../../../Domain";
+import path from 'path';
+import {mkdirSync,existsSync} from 'fs'
+import { UploadBlobDTO, UploadBlobIdsDTO, BlobFileDTO } from "../../../Dto/Blob/UploadBlobDTO";
 
-let upload_path = process.env.UPLOAD_PATH || CONFIG.UPLOAD_PATH
+var dir = path.join('upload');
+if (!existsSync(dir)) {
+    mkdirSync(dir);
+}
+let upload_path = dir;//process.env.UPLOAD_PATH || CONFIG.UPLOAD_PATH
 let saveBlobToFile = async ({ blob }: { blob: { blob: string, type: string, } }): Promise<{
   path: string,
   id: string,
@@ -103,20 +110,6 @@ let saveBlobToFile = async ({ blob }: { blob: { blob: string, type: string, } })
 
 
 
-interface UploadBlobDTO {
-  id: string, blob: string; type: string; filename: string
-}
-interface UploadBlobIdsDTO {
-  blob_id: string,
-  blob_min_id: string,
-  blob_thumb_id: string
-}
-interface BlobFileDTO {
-  path: string,
-  id: string,
-  filename: string,
-  type?: string
-}
 export default class BlobService extends BaseServiceType<BlobDBO, Blob> implements IBlobService {
   constructor({ unitOfWorkDI }: DI) {
     super({ unitOfWorkDI, repository: 'blobRepository' });

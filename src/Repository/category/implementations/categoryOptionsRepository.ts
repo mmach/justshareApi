@@ -1,7 +1,7 @@
 import { ModelStatic } from "sequelize";
 import { ICategoryOptionsRepository } from "..";
 import { BaseRepositoryType } from "../../../Architecture";
-import { CategoryOptionDBO } from "../../../DBO";
+import { CategoryOptionDBO, CategoryOptionsLinkDBO, CategoryOptionsTemplateDBO } from "../../../DBO";
 import { CategoryOption, CategoryOptionsLink, CategoryOptionsTemplate, CategoryOptionsType, CategoryOptionsTypeTemplate } from "../../../Domain";
 import { IMappsDbModels } from "../../../Domain/models";
 
@@ -112,13 +112,13 @@ export default class CategoryOptionsRepository extends BaseRepositoryType<Catego
     });
   }
 
-  upsertTemplate({ model, transaction }: { model: CategoryOptionDBO, transaction?: number }): Promise<[CategoryOptionsTemplate, boolean | null]> {
+  upsertTemplate({ model, transaction }: { model: CategoryOptionsTemplateDBO, transaction?: number }): Promise<[CategoryOptionsTemplate, boolean | null]> {
     return this.categoryOptionsTemplateDB.upsert(model, {
       transaction: this.getTran({ transaction })
     });
   }
 
-  deleteTemplate({ model, transaction }: { model: CategoryOptionDBO, transaction?: number }): Promise<number> {
+  deleteTemplate({ model, transaction }: { model: CategoryOptionsTemplateDBO, transaction?: number }): Promise<number> {
     return this.categoryOptionsTemplateDB.destroy({
       where: { id: this.toStr(model.id) },
       transaction: this.getTran({ transaction }),
@@ -127,7 +127,7 @@ export default class CategoryOptionsRepository extends BaseRepositoryType<Catego
   }
 
 
-  upsertToCategory({ model, transaction }: { model: CategoryOptionDBO, transaction?: number }): Promise<[CategoryOptionsLink, boolean | null]> {
+  upsertToCategory({ model, transaction }: { model: CategoryOptionsLinkDBO, transaction?: number }): Promise<[CategoryOptionsLink, boolean | null]> {
     model.project_id = this.context.project.id;
 
     return this.sequelizeDI.CategoryOptionsLink.upsert(model, {

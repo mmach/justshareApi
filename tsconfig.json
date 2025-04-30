@@ -1,7 +1,8 @@
 {
   "compileOnSave": true,
   "files": [
-    "./src/index.js"
+    "./src/index.js",
+    "src/Dto/Blob/UploadBlobDTO.ts"
   ],
   "compilerOptions": {
     "rootDir": "./src",

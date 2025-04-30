@@ -4,17 +4,17 @@ import PdfPrinter from 'pdfmake';
 import  fs from 'fs';
 import path  from 'path';
 import { fileURLToPath } from 'url';
-//const __filename = fileURLToPath(import.meta.url);
-//const __dirname = path.dirname(__filename);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 
 let fonts = {
     // Default font should still be available
     Roboto: {
-     //   normal: __dirname + '/../Fonts/Roboto-Regular.ttf',
-     //   bold: __dirname + '/../Fonts/Roboto-Medium.ttf',
-     //   italics: __dirname + '/../Fonts/Roboto-Italic.ttf',
-     //   bolditalics: __dirname + '/../Fonts/Roboto-Italic.ttf'
+        normal: __dirname + '/../Fonts/Roboto-Regular.ttf',
+        bold: __dirname + '/../Fonts/Roboto-Medium.ttf',
+        italics: __dirname + '/../Fonts/Roboto-Italic.ttf',
+        bolditalics: __dirname + '/../Fonts/Roboto-Italic.ttf'
     },
     // Make sure you define all 4 components - normal, bold, italics, bolditalics - (even if they all point to the same font file)
 

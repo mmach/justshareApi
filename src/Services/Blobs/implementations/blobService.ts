@@ -12,13 +12,13 @@ import {mkdirSync,existsSync} from 'fs'
 import { UploadBlobDTO, UploadBlobIdsDTO, BlobFileDTO } from "../../../Dto/Blob/UploadBlobDTO";
 import packPath from "package-json-path";
 
-var dir = packPath(path.join('upload'));
-dir=dir.replace('package.json','').substring(0, dir.length-1);
+var dirUpload = packPath(path.join('upload'));
+dirUpload=dirUpload.replace('package.json','').substring(0, dirUpload.length-1);
 
-if (!existsSync(dir)) {
-    mkdirSync(dir);
+if (!existsSync(dirUpload)) {
+    mkdirSync(dirUpload);
 }
-let upload_path = dir;//process.env.UPLOAD_PATH || CONFIG.UPLOAD_PATH
+let upload_path = dirUpload;//process.env.UPLOAD_PATH || CONFIG.UPLOAD_PATH
 let saveBlobToFile = async ({ blob }: { blob: { blob: string, type: string, } }): Promise<{
   path: string,
   id: string,

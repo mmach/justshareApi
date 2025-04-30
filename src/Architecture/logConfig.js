@@ -4,9 +4,9 @@ import 'winston-daily-rotate-file';
 import fs from 'fs'
 import packPath from "package-json-path";
 
-var dir = packPath(path.join('app','logs', 'logs'))
+var dir = packPath(path.join('logs', 'logs'))
 dir=dir.replace('package.json','').substring(0, dir.length-1);
-var error = packPath(path.join('app','logs', 'logs', 'error')).replace('package.json','');
+var error = packPath(path.join('logs', 'logs', 'error')).replace('package.json','');
 error=error.replace('package.json','').substring(0, error.length-1);
 
 if (!fs.existsSync(dir)) {

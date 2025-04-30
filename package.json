@@ -101,6 +101,7 @@
     "nodemon": "^1.18.4",
     "npm": "^5.2.0",
     "openai": "^4.86.2",
+    "package-json-path": "^1.0.10",
     "pdfmake": "^0.1.68",
     "query-string": "^6.8.3",
     "redis": "4.0.4",

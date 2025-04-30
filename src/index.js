@@ -17,6 +17,8 @@ import { amqpFunc } from './Queues/index.js';
 import { Emitter } from '@socket.io/redis-emitter'
 import redis from 'redis'
 import zlib from 'zlib'
+import packPath from "package-json-path";
+import { createRequire } from 'module';
 const { makeInvoker, scopePerRequest } = awlixKoa
 //const { createClient } = require("redis"); // not included, needs to be explicitly installed
 //const redisAdapter = require('socket.io-redis');

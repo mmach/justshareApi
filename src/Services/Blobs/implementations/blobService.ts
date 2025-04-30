@@ -10,8 +10,9 @@ import { Blob } from "../../../Domain";
 import path from 'path';
 import {mkdirSync,existsSync} from 'fs'
 import { UploadBlobDTO, UploadBlobIdsDTO, BlobFileDTO } from "../../../Dto/Blob/UploadBlobDTO";
+import packPath from "package-json-path";
 
-var dir = path.join('upload');
+var dir = packPath(path.join('upload'));
 if (!existsSync(dir)) {
     mkdirSync(dir);
 }

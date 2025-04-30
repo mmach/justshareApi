@@ -1451,6 +1451,13 @@ abort-controller@^3.0.0:
   dependencies:
     event-target-shim "^5.0.0"
 
+abs@^1.2.1:
+  version "1.3.15"
+  resolved "https://registry.yarnpkg.com/abs/-/abs-1.3.15.tgz#1767e2426f5446a5378baea86b1d962b179bb7dc"
+  integrity sha512-bpFChpVyZ2F2ppgx7qjZ5TTEO6VVwBauUZDZibpclRGhfcXTHyj11nlqwrg5dN1knxCchssROehm76uCcCayRA==
+  dependencies:
+    ul "^5.0.0"
+
 accepts@^1.3.5:
   version "1.3.8"
   resolved "https://registry.yarnpkg.com/accepts/-/accepts-1.3.8.tgz#0bf0be125b67014adcb0b0921e62db7bffe16b2e"
@@ -4103,6 +4110,13 @@ defer-to-connect@^1.0.1:
   resolved "https://registry.yarnpkg.com/defer-to-connect/-/defer-to-connect-1.1.3.tgz#331ae050c08dcf789f8c83a7b81f0ed94f4ac591"
   integrity sha512-0ISdNousHvZT2EiFlZeZAHBUvSxmKswVCEf8hW7KWgG4a8MVEu/3Vb6uWYozkjylyCxe0JBIiRB1jV45S70WVQ==
 
+deffy@^2.2.2:
+  version "2.2.5"
+  resolved "https://registry.yarnpkg.com/deffy/-/deffy-2.2.5.tgz#6b6f4194374c5bda0840fc0d9ba3ab5def227cfd"
+  integrity sha512-6TX2cfIo97eKqWmqgMDAUulCwnveAe3K+4VGsTGPJsL3NtSEnSBFZ3sUXdS4EBhZ8GbdaZBzXQ04ton18dJrug==
+  dependencies:
+    typpy "^2.0.0"
+
 define-data-property@^1.0.1, define-data-property@^1.1.4:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/define-data-property/-/define-data-property-1.1.4.tgz#894dc141bb7d3060ae4366f6a0107e68fbe48c5e"
@@ -5451,6 +5465,13 @@ function-source@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/function-source/-/function-source-0.1.0.tgz#d9104bf3e46788b55468c02bf1b2fabcf8fc19af"
   integrity sha512-I80Bh3QAcLduCjhgkfrBnm67XwvjPSmiG3joj8GlTD8Qj4E4zkyDNjJXepbxCaCIsPJ3rwouWxAOaZfdDz5hEA==
+
+function.name@^1.0.3:
+  version "1.0.14"
+  resolved "https://registry.yarnpkg.com/function.name/-/function.name-1.0.14.tgz#76be1a4ad0dfa872d8025d55d6ca91767652bc67"
+  integrity sha512-s99L814NRuLxwF2sJMIcLhkQhueGXb3oKyvorzrUKKwlVB0SBbWrgZt4+EwKAo3ujCXnT7vshmCvXgZA09kCMw==
+  dependencies:
+    noop6 "^1.0.1"
 
 function.prototype.name@^1.1.6, function.prototype.name@^1.1.8:
   version "1.1.8"
@@ -8581,6 +8602,11 @@ nodemon@^1.18.4:
     undefsafe "^2.0.2"
     update-notifier "^2.5.0"
 
+noop6@^1.0.1:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/noop6/-/noop6-1.0.10.tgz#beb17db586b684585eb955de502506a069c817d7"
+  integrity sha512-WZvuCILZFZHK+WuqCQwxLBGllkBK1ct8s8Mu9FMDbEsBE6/bqNxyFGbX7Xky+6bYFL8X2Ou4Cis4CJyrwXLvQA==
+
 "nopt@2 || 3":
   version "3.0.6"
   resolved "https://registry.yarnpkg.com/nopt/-/nopt-3.0.6.tgz#c6465dbf08abcd4db359317f79ac68a646b28ff9"
@@ -9177,6 +9203,13 @@ package-json-from-dist@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/package-json-from-dist/-/package-json-from-dist-1.0.1.tgz#4f1471a010827a86f94cfd9b0727e36d267de505"
   integrity sha512-UEZIS3/by4OC8vL3P2dTXRETpebLI2NiI5vIrjaD/5UtrkFX/tNbwjTSRAGC/+7CAo2pIcBaRgWmcBBHcsaCIw==
+
+package-json-path@^1.0.10:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/package-json-path/-/package-json-path-1.0.10.tgz#09ae6c21a92f02bbce510bccae21f565742c4997"
+  integrity sha512-DOlmVIfx+qDHHWaaxg573brZ8mH0Nxo4ecYA4SKkrpCOhCP64NXk7VxJtWVKZQ9urfU2Ivl74HeYUO42PLCpLw==
+  dependencies:
+    abs "^1.2.1"
 
 package-json@^4.0.0:
   version "4.0.1"
@@ -11543,6 +11576,13 @@ typescript@^5.8.3:
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.8.3.tgz#92f8a3e5e3cf497356f4178c34cd65a7f5e8440e"
   integrity sha512-p1diW6TqL9L07nNxvRMM7hMMw4c5XOo/1ibL4aAIGmSAt9slTE1Xgw5KWuof2uTOvCg9BY7ZRi+GaF+7sfgPeQ==
 
+typpy@^2.0.0, typpy@^2.3.4:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/typpy/-/typpy-2.4.0.tgz#3057c4beba74b7ca8b516ef82f7f88216a64a653"
+  integrity sha512-a16Uv5doNtvHzaG4wZCHmXN+l9xxmTMpyODtPz7B3DSTsDVNXilTSJGuNw68sUh0Un4bf+ghRMbEcJCI6r06mQ==
+  dependencies:
+    function.name "^1.0.3"
+
 ua-parser-js@^0.7.30:
   version "0.7.40"
   resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.40.tgz#c87d83b7bb25822ecfa6397a0da5903934ea1562"
@@ -11570,6 +11610,14 @@ uid2@0.0.3:
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/uid2/-/uid2-0.0.3.tgz#483126e11774df2f71b8b639dcd799c376162b82"
   integrity sha512-5gSP1liv10Gjp8cMEnFd6shzkL/D6W1uhXSFNCxDC+YI8+L8wkCYCbJ7n77Ezb4wE/xzMogecE+DtamEe9PZjg==
+
+ul@^5.0.0:
+  version "5.2.16"
+  resolved "https://registry.yarnpkg.com/ul/-/ul-5.2.16.tgz#d1468cf368b2cd86d6fe7eeb513d58f3adddb77f"
+  integrity sha512-v1YrSEsJZpJsywzF/MKgsQwMdOwBlwwmNiUOJh/yX6FHrq7dYjeua1YOhLV0q0KioqEFZC4P7MsKmpEsGdZz3w==
+  dependencies:
+    deffy "^2.2.2"
+    typpy "^2.3.4"
 
 umask@^1.1.0, umask@~1.1.0:
   version "1.1.0"

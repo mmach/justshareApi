@@ -8,15 +8,15 @@ import { IBlobService } from "../blobService";
 import fs from "fs-extra";
 import { Blob } from "../../../Domain";
 import path from 'path';
-import {mkdirSync,existsSync} from 'fs'
+import { mkdirSync, existsSync } from 'fs'
 import { UploadBlobDTO, UploadBlobIdsDTO, BlobFileDTO } from "../../../Dto/Blob/UploadBlobDTO";
 import packPath from "package-json-path";
 
-var dirUpload = packPath(path.join('upload'));
-dirUpload=dirUpload.replace('package.json','').substring(0, dirUpload.length-1);
+var dirUpload = packPath(path.join('upload')).replace('package.json', '');
+dirUpload = dirUpload.substring(0, dirUpload.length - 1);
 
 if (!existsSync(dirUpload)) {
-    mkdirSync(dirUpload);
+  mkdirSync(dirUpload);
 }
 let upload_path = dirUpload;//process.env.UPLOAD_PATH || CONFIG.UPLOAD_PATH
 let saveBlobToFile = async ({ blob }: { blob: { blob: string, type: string, } }): Promise<{

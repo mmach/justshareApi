@@ -1,10 +1,8 @@
-import winston from 'winston';
+import fs from 'fs';
 import path from 'path';
+import winston from 'winston';
 import 'winston-daily-rotate-file';
-import fs from 'fs'
-import packPath from "package-json-path";
-console.log(process.env.npm_config_local_prefix)
-console.log(packPath());
+
 var dir = path.join(process.env.npm_config_local_prefix, 'logs', 'logs')
 var error = path.join(process.env.npm_config_local_prefix, 'logs', 'logs', 'error')
 

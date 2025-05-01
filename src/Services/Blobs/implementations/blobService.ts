@@ -1,19 +1,16 @@
+import { existsSync, mkdirSync } from 'fs';
+import fs from "fs-extra";
 import Jimp from "jimp";
+import path from 'path';
 import { v4 } from "uuid";
-import { ServerException, BaseServiceType } from "../../../Architecture";
-import CONFIG from "../../../config";
+import { BaseServiceType, ServerException } from "../../../Architecture";
 import { BlobDBO } from "../../../DBO";
 import { DI } from "../../../diTypes";
-import { IBlobService } from "../blobService";
-import fs from "fs-extra";
 import { Blob } from "../../../Domain";
-import path from 'path';
-import { mkdirSync, existsSync } from 'fs'
-import { UploadBlobDTO, UploadBlobIdsDTO, BlobFileDTO } from "../../../Dto/Blob/UploadBlobDTO";
-import packPath from "package-json-path";
+import { BlobFileDTO, UploadBlobDTO, UploadBlobIdsDTO } from "../../../Dto/Blob/UploadBlobDTO";
+import { IBlobService } from "../blobService";
 
-var dirUpload = packPath(path.join('upload')).replace('package.json', '');
-dirUpload = dirUpload.substring(0, dirUpload.length - 1);
+var dirUpload = path.join(process.env.npm_config_local_prefix as string,'upload')
 
 if (!existsSync(dirUpload)) {
   mkdirSync(dirUpload);

@@ -5,7 +5,7 @@ import { AuthInfrastucture } from "../../Architecture/Infrastructure/authInfrast
 import { DbTransactionInfrastucture } from "../../Architecture/Infrastructure/dbTransactionInfrastucture.js";
 import { LogFileInfrastructure } from "../../Architecture/Infrastructure/logFileInfrastructure.js";
 import { ValidatonInfrastructure } from "../../Architecture/Infrastructure/validatonInfrastructure.js";
-import BlobService from "../../Services/Blobs/implementations/blobService.js";
+import BlobService from "../../Services/blob/implementations/blobService.js";
 import UserService from "../../Services/userService.js";
 import { BlobValidators } from "../../Validators/blobValidators.js";
 

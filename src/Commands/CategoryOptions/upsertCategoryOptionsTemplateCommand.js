@@ -2,7 +2,7 @@
 import {BaseCommand} from "../../Architecture/Base/baseCommand.js";
 import {LogFileInfrastructure} from "../../Architecture/Infrastructure/logFileInfrastructure.js";
 import {AuthInfrastucture}from "../../Architecture/Infrastructure/authInfrastucture.js";
-import CategoryOptionService from "../../Services/Categories/categoryOptionService.js";
+import CategoryOptionService from "../../Services/category/implementations/categoryOptionService.js";
 import { CategoryOptionsTemplateDTO } from 'justshare-shared'
 "use strict";
 

@@ -2,10 +2,10 @@
 import {BaseCommand} from "../../Architecture/Base/baseCommand.js";
 import { CategoryDTO } from "justshare-shared";
 import {LogFileInfrastructure} from "../../Architecture/Infrastructure/logFileInfrastructure.js";
-import CategoryService from "../../Services/Categories/categoryService.js";
+import CategoryService from "../../Services/category/implementations/categoryService.js";
 import {DbTransactionInfrastucture} from "../../Architecture/Infrastructure/dbTransactionInfrastucture.js";
 import {AuthInfrastucture}from "../../Architecture/Infrastructure/authInfrastucture.js";
-import BlobService from "../../Services/Blobs/implementations/blobService.js";
+import BlobService from "../../Services/blob/implementations/blobService.js";
 
 "use strict";
 

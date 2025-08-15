@@ -1,10 +1,10 @@
 import { IBaseRepositoryType } from "../../Architecture";
-import { CategoryHierarchyAttributesDBO } from "../../DBO";
+import { CategoryHierarchyDBO } from "../../DBO";
 import { CategoryHierarchy } from "../../Domain";
 
 
 
-export interface ICategoryHierarchyRepository extends IBaseRepositoryType<CategoryHierarchyAttributesDBO, CategoryHierarchy> {
+export interface ICategoryHierarchyRepository extends IBaseRepositoryType<CategoryHierarchyDBO, CategoryHierarchy> {
   removeParent({ id, transaction }: { id: string; transaction?: number }): Promise<number>;
 }
 

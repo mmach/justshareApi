@@ -9,7 +9,7 @@ import { InvoiceUserDBO } from "./invoicesUsers";
 /**
  * Interface for Invoice attributes
  */
-export interface InvoiceDBO extends BaseDBO{
+export interface InvoiceDBO extends BaseDBO {
   id: string;
   blob_id?: string;
   invoice_user_src_id?: string;
@@ -30,6 +30,7 @@ export interface InvoiceDBO extends BaseDBO{
   status_id?: string;
   project_id?: string;
   action_id?: string;
+  createdAt?: Date;
 
   items?: InvoiceItemDBO[];
   user_src?: InvoiceUserDBO;

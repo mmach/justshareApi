@@ -1,13 +1,14 @@
 import { IBaseRepositoryType } from "../../Architecture";
 import { ConversationMessageMembersDBO } from "../../DBO";
 import { ConversationMessageMembers } from "../../Domain";
+import { ConversationMessageMemberDTO } from "../../Dto";
 
 
 
 
 export interface IConversationMessagesMembersRepository
   extends IBaseRepositoryType<ConversationMessageMembersDBO, ConversationMessageMembers> {
-  getUnreadMsg({ transaction }: { transaction?: number }): Promise<object[]>;
+  getUnreadMsg({ transaction }: { transaction?: number }): Promise<ConversationMessageMemberDTO[]>;
   getConversations({
     conv_id,
     iua_id,
@@ -22,5 +23,5 @@ export interface IConversationMessagesMembersRepository
     size?: number;
     status?: string;
     transaction?: number;
-  }): Promise<object[]>;
+  }): Promise<ConversationMessageMemberDTO[]>;
 }

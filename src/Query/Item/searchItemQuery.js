@@ -1,11 +1,11 @@
 import { SearchItemDTO } from 'justshare-shared';
 import { BaseQuery } from '../../Architecture/Base/baseQuery.js';
 import { LogFileInfrastructure } from '../../Architecture/Infrastructure/logFileInfrastructure.js';
-import BlobService from '../../Services/Blobs/implementations/blobService.js';
-import CategoryOptionService from '../../Services/Categories/categoryOptionService.js';
-import CategoryService from '../../Services/Categories/categoryService.js';
+import BlobService from '../../Services/blob/implementations/blobService.js';
+import CategoryOptionService from '../../Services/category/implementations/categoryOptionService.js';
+import CategoryService from '../../Services/category/implementations/categoryService.js';
 import ElasticSearchService from '../../Services/elasticSearchService.js';
-import ItemService from '../../Services/itemService.js';
+import ItemService from '../../Services/item/itemService.js';
 
 
 export default class SearchItemQuery extends BaseQuery {

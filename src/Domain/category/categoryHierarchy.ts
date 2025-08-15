@@ -1,17 +1,17 @@
 
 import { DataTypes, Model, ModelStatic, QueryTypes, Sequelize } from "sequelize";
 import { v4 as uuidv4 } from "uuid";
-import { CategoryHierarchyAttributesDBO } from "../../DBO/category";
+import { CategoryHierarchyDBO } from "../../DBO/category";
 
 /**
  * Interface for CategoryHierarchy instance
  */
-interface CategoryHierarchyInstance extends Model<CategoryHierarchyAttributesDBO>, CategoryHierarchyAttributesDBO { }
+interface CategoryHierarchyInstance extends Model<CategoryHierarchyDBO>, CategoryHierarchyDBO { }
 
 /**
  * CategoryHierarchy model initialization
  */
-export class CategoryHierarchy extends Model<CategoryHierarchyInstance, CategoryHierarchyAttributesDBO> {
+export class CategoryHierarchy extends Model<CategoryHierarchyInstance, CategoryHierarchyDBO> {
   static initModel(sequelize: Sequelize): ModelStatic<CategoryHierarchy> {
     return super.init(
       {

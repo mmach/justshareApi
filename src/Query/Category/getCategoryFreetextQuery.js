@@ -2,7 +2,7 @@
 
 import {BaseQuery} from '../../Architecture/Base/baseQuery.js';
 import {CategoryDTO} from 'justshare-shared';
-import CategoryService from '../../Services/Categories/categoryService.js';
+import CategoryService from '../../Services/category/implementations/categoryService.js';
 
 
 export default class GetCategoryFreetextQuery extends BaseQuery {

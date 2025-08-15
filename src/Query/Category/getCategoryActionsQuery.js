@@ -2,7 +2,7 @@
 
 import {BaseQuery} from '../../Architecture/Base/baseQuery.js';
 import {CategoryActionsDTO} from 'justshare-shared';
-import CategoryService from '../../Services/Categories/categoryService.js';
+import CategoryService from '../../Services/category/implementations/categoryService.js';
 
 
 export default class GetCategoryActionsQuery extends BaseQuery {

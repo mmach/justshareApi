@@ -1,10 +1,10 @@
 import { ICategoryHierarchyRepository } from "..";
 import { BaseRepositoryType } from "../../../Architecture";
-import { CategoryHierarchyAttributesDBO } from "../../../DBO";
+import { CategoryHierarchyDBO } from "../../../DBO";
 import { CategoryHierarchy } from "../../../Domain";
 import { IMappsDbModels } from "../../../Domain/models.js";
 
-export default class CategoryHierarchyRepository extends BaseRepositoryType<CategoryHierarchyAttributesDBO, CategoryHierarchy> implements ICategoryHierarchyRepository {
+export default class CategoryHierarchyRepository extends BaseRepositoryType<CategoryHierarchyDBO, CategoryHierarchy> implements ICategoryHierarchyRepository {
     sequelizeDI: IMappsDbModels
     constructor({ sequelizeDI }: { sequelizeDI: IMappsDbModels }) {
         super(sequelizeDI.CategoryHierarchy)

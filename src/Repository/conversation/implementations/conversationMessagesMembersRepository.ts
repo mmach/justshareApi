@@ -3,16 +3,19 @@ import { BaseRepositoryType } from "../../../Architecture";
 import { ConversationMessageMembersDBO } from "../../../DBO";
 import { ConversationMessageMembers } from "../../../Domain";
 import { IMappsDbModels } from "../../../Domain/models";
+import { IConversationMessagesMembersRepository } from "../conversationMessagesMembersRepository";
+import { ConversationMessageMemberDTO } from "../../../Dto";
 
-export default class ConversationMessagesMembersRepository extends BaseRepositoryType<ConversationMessageMembersDBO, ConversationMessageMembers> {
+
+export default class ConversationMessagesMembersRepository extends BaseRepositoryType<ConversationMessageMembersDBO, ConversationMessageMembers> implements IConversationMessagesMembersRepository {
   sequelizeDI: IMappsDbModels & { sequelize: Sequelize }
   constructor({ sequelizeDI }: { sequelizeDI: IMappsDbModels & { sequelize: Sequelize } }) {
     super(sequelizeDI.ConversationMessageMembers);
     this.sequelizeDI = sequelizeDI;
   }
 
-  getUnreadMsg({ transaction }: { transaction?: number }): Promise<object[]> {
-    return this.sequelizeDI.sequelize.query(
+  getUnreadMsg({ transaction }: { transaction?: number }): Promise<ConversationMessageMemberDTO[]> {
+    return this.sequelizeDI.sequelize.query<ConversationMessageMemberDTO>(
       `WITH getConvs as (
         SELECT  MAX(Conversations.id ) as id ,
             MAX(Conversations.title ) as conversation_title ,
@@ -93,10 +96,10 @@ export default class ConversationMessagesMembersRepository extends BaseRepositor
 
 
   }
-  getConversations({ conv_id, iua_id, page = 0, size = 20, status = 'O', transaction }: { conv_id?: string, iua_id?: string, page?: number, size?: number, status?: string, transaction?: number }): Promise<object[]> {
+  getConversations({ conv_id, iua_id, page = 0, size = 20, status = 'O', transaction }: { conv_id?: string, iua_id?: string, page?: number, size?: number, status?: string, transaction?: number }): Promise<ConversationMessageMemberDTO[]> {
     let offset = page * size;
 
-    return this.sequelizeDI.sequelize.query(
+    return this.sequelizeDI.sequelize.query<ConversationMessageMemberDTO>(
       `WITH getConvs as (
         SELECT  MAX(Conversations.id ) as id ,
             MAX(Conversations.title ) as conversation_title ,

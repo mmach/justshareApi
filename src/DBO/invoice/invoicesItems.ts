@@ -14,4 +14,6 @@ export interface InvoiceItemDBO extends BaseDBO{
   currency?: string;
   title?: string;
   project_id?: string;
+
+  price_full_tax?:number;
 }

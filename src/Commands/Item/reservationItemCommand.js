@@ -6,10 +6,10 @@ import {ClosingInfrastructure} from "../../Architecture/Infrastructure/closingIn
 import {DbTransactionInfrastucture} from "../../Architecture/Infrastructure/dbTransactionInfrastucture.js";
 import {LogFileInfrastructure} from "../../Architecture/Infrastructure/logFileInfrastructure.js";
 import CONFIG from "../../config.js";
-import BlobService from "../../Services/Blobs/implementations/blobService.js";
-import CategoryService from "../../Services/Categories/categoryService.js";
+import BlobService from "../../Services/blob/implementations/blobService.js";
+import CategoryService from "../../Services/category/implementations/categoryService.js";
 import ElasticSearchService from "../../Services/elasticSearchService.js";
-import ItemService from "../../Services/itemService.js";
+import ItemService from "../../Services/item/itemService.js";
 import TagService from './../../Services/tagService.js';
 
 export default class ReservationItemCommand extends BaseCommand {

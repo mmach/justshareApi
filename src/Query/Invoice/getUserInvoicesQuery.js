@@ -1,6 +1,6 @@
 import {LogFileInfrastructure} from '../../Architecture/Infrastructure/logFileInfrastructure.js';
 import {BaseQuery} from '../../Architecture/Base/baseQuery.js';
-import ItemTransactionService from '../../Services/itemTransactionsService.js';
+import ItemTransactionService from '../../Services/item/itemTransactionsService.js';
 
 
 export default class GetUserInvoicesQuery extends BaseQuery {

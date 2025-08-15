@@ -4,7 +4,7 @@ import { BlobBase64DTO, ExternalCredentialsDTO, UserRegisterInternalDTO } from "
 import {v4} from "uuid";
 import {LogFileInfrastructure} from "../../Architecture/Infrastructure/logFileInfrastructure.js";
 import CONFIG from "../../config.js";
-import BlobService from "../../Services/Blobs/implementations/blobService.js";
+import BlobService from "../../Services/blob/implementations/blobService.js";
 import UserService from "../../Services/userService.js";
 import {BaseCommand} from "../../Architecture/Base/baseCommand.js";
 

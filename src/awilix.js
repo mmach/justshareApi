@@ -290,20 +290,20 @@ import GetCmsMenusQuery from "./Query/CmsMenu/getCmsMenusQuery.js";
 //import CmsMenuItemsProjectsRepository from "./Repository/cms/cmsMenuItemsProjectRepository.js";
 //import CmsMenuProjectsRepository from "./Repository/cms/cmsMenuProjectRepository.js";
 //import CmsPageProjectsRepository from "./Repository/cms/cmsPageProjectsRepository.js";
-import ConversationMessageMembersService from "./Services/Conversations/conversationMessagesMemberService.js";
-import ConversationMessagesService from "./Services/Conversations/conversationMessagesService.js";
-import ConversationService from "./Services/Conversations/conversationService.js";
+import ConversationMessageMembersService from "./Services/conversations/implementations/conversationMessagesMemberService.js";
+import ConversationMessagesService from "./Services/conversations/implementations/conversationMessagesService.js";
+import ConversationService from "./Services/conversations/implementations/conversationService.js";
 import CityService from "./Services/cityService.js";
 import CommentService from "./Services/commentService.js";
 import ConfigService from "./Services/configService.js";
 import CountryService from "./Services/countryService.js";
 import ElasticSearchService from "./Services/elasticSearchService.js";
-import InvoiceService from "./Services/invoiceService.js";
-import ItemCategoryOptionsService from "./Services/itemCategoryOptionsService.js";
-import ItemService from "./Services/itemService.js";
-import ItemTransactionCategoryOptionsService from "./Services/itemTransactionCategoryOptionsService.js";
-import ItemTransactionService from "./Services/itemTransactionsService.js";
-import ItemUserActionService from "./Services/itemUserActionService.js";
+//import InvoiceService from "./Services/invoice/invoiceService.js";
+import ItemCategoryOptionsService from "./Services/item/itemCategoryOptionsService.js";
+import ItemService from "./Services/item/itemService.js";
+import ItemTransactionCategoryOptionsService from "./Services/item/itemTransactionCategoryOptionsService.js";
+import ItemTransactionService from "./Services/item/itemTransactionsService.js";
+import ItemUserActionService from "./Services/item/itemUserActionService.js";
 import LanguageProjectService from "./Services/languageProjectService.js";
 import LanguageService from "./Services/languageService.js";
 import MailPartsService from "./Services/mailPartsService.js";
@@ -442,7 +442,7 @@ exporter = {
   //statusProjectsRepositoryDI: asClass(StatusProjectsRepository),
   //statusRepositoryDI: asClass(StatusRepository),
   statusProjectServiceDI: asClass(StatusProjectService),
-  invoiceServiceDI: asClass(InvoiceService),
+  //invoiceServiceDI: asClass(InvoiceService),
   //invoiceRepositoryDI: asClass(InvoiceRepository),
   commentServiceDI: asClass(CommentService),
   //commentRepositoryDI: asClass(CommentRepository),

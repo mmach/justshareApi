@@ -2,7 +2,7 @@
 
 import {BaseQuery} from '../../Architecture/Base/baseQuery.js';
 import { CategoryDTO } from 'justshare-shared';
-import CategoryOptionService from '../../Services/Categories/categoryOptionService.js';
+import CategoryOptionService from '../../Services/category/implementations/categoryOptionService.js';
 
 
 
